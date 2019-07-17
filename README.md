@@ -1,2 +1,2 @@
 # derpsquid-dotfiles
-My dotfiles, imported with YADM https://yadm.io
+My dotfiles, uploaded to GitHub using [YADM](https://yadm.io)
