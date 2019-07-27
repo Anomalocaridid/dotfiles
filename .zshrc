@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/derpsquid/.oh-my-zsh"
@@ -71,7 +71,7 @@ zstyle ':completion:*' rehash true
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git)
+plugins=(git)
 plugins+=(zsh-completions zsh-syntax-highlighting)
 autoload -U compinit && compinit
 
@@ -109,3 +109,5 @@ autoload run-help-git
 autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
+
+echo "~/.zshrc loaded successfully"
