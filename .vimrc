@@ -72,3 +72,6 @@ call plug#end()
 
 " Set color scheme.
 color dracula
+
+" Verification that .vimrc loaded correctly.
+echo "~/.vimrc loaded successfully"
