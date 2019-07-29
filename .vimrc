@@ -68,6 +68,12 @@ call plug#begin('~/.vim/plugged')
 " Dracula theme from https://draculatheme.com/vim
 Plug 'dracula/vim',{'as':'dracula'}
 
+" Asynchronous Lint Engine
+Plug 'w0rp/ale'
+
+" Haskell IDE Plugins
+Plug 'neovimhaskell/haskell-vim'
+
 call plug#end()
 
 " Set color scheme.
