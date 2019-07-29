@@ -51,5 +51,24 @@ if has('syntax') && has('eval')
   packadd! matchit
 endif
 
-" Set line numbers
+" Sets line numbers.
 set number
+
+" Vim-Plug settings and plugins.
+" Automatically download and install Vim-Plug if not present.
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Vim-Plug plugins.
+call plug#begin('~/.vim/plugged')
+
+" Dracula theme from https://draculatheme.com/vim
+Plug 'dracula/vim',{'as':'dracula'}
+
+call plug#end()
+
+" Set color scheme.
+color dracula
