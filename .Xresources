@@ -1,3 +1,7 @@
+! After modifying, reload with:
+! xrdb ~/.Xresources
+
+
 ! Dracula Xresources Palette
 
 ! special
@@ -52,7 +56,8 @@ URxvt.saveline: 2048
 URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
-URxvt.depth: 32 
+URxvt.depth: 32
+URxvt.background: rgba:0000/0000/0200/c800
 URxvt.iso14755: false
 
 !! Common Keybinds for Navigations
