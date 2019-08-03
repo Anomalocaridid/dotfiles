@@ -110,4 +110,4 @@ autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
-echo "~/.zshrc loaded successfully"
+echo "~/.zshrc loaded successfully" | lolcat -a
