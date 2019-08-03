@@ -42,14 +42,14 @@
 *.color15:      #e6e6e6
 
 !! URxvt Appearance
-URxvt.font: xft:Source Code Pro:style=Regular:size=8
-URxvt.boldFont: xft:Source Code Pro:style=Bold:size:8
-URxvt.italicFont: xft:Source Code Pro:style=Italic:size=8
-URxvt.boldItalicfont: xft:Source Code Pro:style=Bold Italic:size=8
+URxvt.font: xft:Source Code Pro:style=Regular:size=12
+URxvt.boldFont: xft:Source Code Pro:style=Bold:size=12
+URxvt.italicFont: xft:Source Code Pro:style=Italic:size=12
+URxvt.boldItalicfont: xft:Source Code Pro:style=Bold Italic:size=12
 URxvt.letterSpace: 0
 URxvt.lineSpace: 0
 URxvt.geometry: 92x24
-URxvt.internalBorder: 24
+URxvt.internalBorder: 0
 URxvt.cursorBlink: true
 URxvt.cursorUnderline: true 
 URxvt.saveline: 2048
