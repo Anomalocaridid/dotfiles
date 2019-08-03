@@ -110,4 +110,8 @@ autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
+# Sets up ssh-agent and adds ssh key at default location
+function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
+
+# Signifies that this file loaded as planned.
 echo "~/.zshrc loaded successfully" | lolcat -a
