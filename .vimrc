@@ -78,6 +78,7 @@ call plug#end()
 
 " Set color scheme.
 color dracula
-
+" Make background transparent.
+hi Normal ctermbg=NONE
 " Verification that .vimrc loaded correctly.
 echo "~/.vimrc loaded successfully"
