@@ -1,82 +1,9 @@
 ! After modifying, reload with:
 ! xrdb ~/.Xresources
 
+#define clifont Source Code Pro
+#define clifontsize 12
+#define mybrowser vivaldi
 
-! Dracula Xresources Palette
-
-! special
-*.foreground:   #f8f8f2
-*.background:   [80]#282a36
-*.cursorColor:  #f8f8f2
-
-! black
-*.color0:       #000000
-*.color8:       #4d4d4d
-
-! red
-*.color1:       #ff5555
-*.color9:       #ff6e67
-
-! green
-*.color2:       #50fa7b
-*.color10:      #5af78e
-
-! yellow
-*.color3:       #f1fa8c
-*.color11:      #f4f99d
-
-! blue
-*.color4:       #bd93f9
-*.color12:      #caa9fa
-
-! magenta
-*.color5:       #ff79c6
-*.color13:      #ff92d0
-
-! cyan
-*.color6:       #8be9fd
-*.color14:      #9aedfe
-
-! white
-*.color7:       #bfbfbf
-*.color15:      #e6e6e6
-
-!! URxvt Appearance
-URxvt.font: xft:Source Code Pro:style=Regular:size=12
-URxvt.boldFont: xft:Source Code Pro:style=Bold:size=12
-URxvt.italicFont: xft:Source Code Pro:style=Italic:size=12
-URxvt.boldItalicfont: xft:Source Code Pro:style=Bold Italic:size=12
-URxvt.letterSpace: 0
-URxvt.lineSpace: 0
-URxvt.geometry: 92x24
-URxvt.internalBorder: 0
-URxvt.cursorBlink: true
-URxvt.cursorUnderline: true 
-URxvt.saveline: 2048
-URxvt.scrollBar: false
-URxvt.scrollBar_right: false
-URxvt.urgentOnBell: true
-URxvt.depth: 32
-URxvt.iso14755: false
-
-!! Common Keybinds for Navigations
-URxvt.keysym.Shift-Up: command:\033]720;1\007
-URxvt.keysym.Shift-Down: command:\033]721;1\007
-URxvt.keysym.Control-Up: \033[1;5A
-URxvt.keysym.Control-Down: \033[1;5B
-URxvt.keysym.Control-Right: \033[1;5C
-URxvt.keysym.Control-Left: \033[1;5D
-
-!! Copy Paste & Other Extensions
-URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
-URxvt.copyCommand: xclip -i -selection clipboard
-URxvt.pasteCommand: xclip -o -selection clipboard
-URxvt.keysym.M-c: perl:clipboard:copy
-URxvt.keysym.M-v: perl:clipboard:paste
-URxvt.keysym.M-C-v: perl:clipboard:paste_escaped
-URxvt.keysym.M-Escape: perl:keyboard-select:activate
-URxvt.keysym.M-s: perl:keyboard-select:search
-URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.urlLauncher: vivaldi 
-URxvt.underlineURLs: true
-URxvt.urlButton: 1
+#include ".xres/colors"
+#include ".xres/urxvt"
