@@ -6,7 +6,7 @@
 
 ! special
 *.foreground:   #f8f8f2
-*.background:   #282a36
+*.background:   [75]#282a36
 *.cursorColor:  #f8f8f2
 
 ! black
@@ -57,7 +57,6 @@ URxvt.scrollBar: false
 URxvt.scrollBar_right: false
 URxvt.urgentOnBell: true
 URxvt.depth: 32
-URxvt.background: [78]#282a36
 URxvt.iso14755: false
 
 !! Common Keybinds for Navigations
