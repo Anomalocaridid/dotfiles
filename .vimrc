@@ -54,6 +54,10 @@ endif
 " Sets line numbers.
 set number
 
+" Custom Keymaps
+map <F7> :tabp<CR>
+map <F8> :tabn<CR>
+
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
 if empty(glob('~/.vim/autoload/plug.vim'))
