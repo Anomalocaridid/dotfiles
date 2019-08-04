@@ -3,7 +3,7 @@
 
 #define clifont Source Code Pro
 #define clifontsize 12
-#define mybrowser vivaldi
+#define mybrowser firefox 
 
 #include ".xres/colors"
 #include ".xres/urxvt"
