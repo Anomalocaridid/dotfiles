@@ -38,6 +38,8 @@ fi
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -ga POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
       # =========================[ Line #1 ]=========================
+      user                    # username
+      host                    # host name
       dir                     # current directory
       vcs                     # git status
       # =========================[ Line #2 ]=========================
@@ -66,11 +68,12 @@ fi
       kubecontext             # current kubernetes context (https://kubernetes.io/)
       context                 # user@host
       nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+      os_icon                 # displays icon depending on the os
       # =========================[ Line #2 ]=========================
       newline
-      # public_ip             # public IP address
+      public_ip               # public IP address
       # battery               # internal battery
-      # time                  # current time
+       time                  # current time
       # example               # example user-defined segment (see prompt_example function below)
   )
 
