@@ -1,7 +1,7 @@
 ! After modifying, reload with:
 ! xrdb ~/.Xresources
 
-#define clifont Source Code Pro
+#define clifont MesloLGS NF 
 #define clifontsize 12
 #define mybrowser firefox 
 

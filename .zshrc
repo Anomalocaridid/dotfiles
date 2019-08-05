@@ -1,5 +1,11 @@
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
+# Custom Keybindings
+
+# Pressing up and down moves forward or back, respectively, in the terminal history based on what is already typed.
+bindkey '\e[A' history-beginning-search-backward
+bindkey '\e[B' history-beginning-search-forward
+
 # Persistent rehash
 zstyle ':completion:*' rehash true
 
@@ -12,7 +18,7 @@ fi
 source ~/.zplug/init.zsh
 
 # Syntax highlighting
-zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 # Extends auto completion
 zplug "zsh-users/zsh-completions"
@@ -20,8 +26,8 @@ zplug "zsh-users/zsh-completions"
 # Oh-My-Zsh's git plugin
 zplug "plugins/git", from:oh-my-zsh
 
-# Theme
-zplug "oskarkrawczyk/honukai-iterm-zsh", as:theme
+# Powerlevel10k Theme
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
 # Install packages that have not ben installed yet
 if ! zplug check --verbose; then
@@ -47,6 +53,9 @@ alias help=run-help
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # Signifies that this file loaded as planned.
 echo "~/.zshrc loaded successfully" | lolcat -a
