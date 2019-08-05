@@ -37,9 +37,17 @@ endif
 " Sets line numbers.
 set number
 
+" Tab key indents with four spaces. 
+set tabstop=4 expandtab shiftwidth=4 smarttab
+
 " Custom Keymaps
+map <F2> :NERDTreeToggle<CR>
+" Navigation
+map <F5> :bp<CR>
+map <F6> :bn<CR>
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
+
 
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
@@ -58,8 +66,23 @@ Plug 'dracula/vim',{'as':'dracula'}
 " Asynchronous Lint Engine
 Plug 'w0rp/ale'
 
-" Haskell IDE Plugins
-Plug 'neovimhaskell/haskell-vim'
+" CtrlP Fuzzy file search
+Plug 'kien/ctrlp.vim'
+
+" NERDTree file navigator
+Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}
+
+" Fugitive git wrapper
+Plug 'tpope/vim-fugitive',{'on':['Gstatus', 'Gedit', 'Gpull']}
+
+" Haskell Filetype plugin
+Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
+
+" Stylish-Haskell integration
+Plug 'alx741/vim-stylishask',{'for': 'haskell'}
+
+" Airline status bar
+Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
@@ -69,5 +92,10 @@ color dracula
 " Make background transparent.
 hi Normal ctermbg=NONE
 
-" Verification that .vimrc loaded correctly.
-echo "~/.vimrc loaded successfully"
+" Airline Settings
+" Enable Powerline font 
+let g:airline_powerline_fonts = 1
+" Enables tab line
+let g:airline#extensions#tabline#enabled = 1
+" How the tab line formats tabs' paths
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
