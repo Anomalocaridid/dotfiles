@@ -5,8 +5,8 @@ zstyle ':completion:*' rehash true
 
 # Check if zplug is installed
 if [[ ! -d ~/.zplug ]]; then
-	git clone https://github.com/zplug/zplug ~/.zplug
-	source ~/.zplug/init.zsh && zplug update --self
+    git clone https://github.com/zplug/zplug ~/.zplug
+    source ~/.zplug/init.zsh && zplug update --self
 fi
 
 source ~/.zplug/init.zsh
@@ -25,12 +25,12 @@ zplug "oskarkrawczyk/honukai-iterm-zsh", as:theme
 
 # Install packages that have not ben installed yet
 if ! zplug check --verbose; then
-	printf "Install? [y/N]: "
-	if read -q; then
-		echo; zplug install
-	else
-		echo
-	fi
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    else
+        echo
+    fi
 fi
 
 zplug load
