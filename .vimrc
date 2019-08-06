@@ -73,7 +73,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}
 
 " Fugitive git wrapper
-Plug 'tpope/vim-fugitive',{'on':['Gstatus', 'Gedit', 'Gpull']}
+Plug 'tpope/vim-fugitive'
 
 " Haskell Filetype plugin
 Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
