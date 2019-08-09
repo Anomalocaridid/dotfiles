@@ -51,6 +51,9 @@ autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
+# ll Alias
+alias ll="ls -l"
+
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
 
