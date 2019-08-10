@@ -6,4 +6,3 @@
 #define mybrowser firefox 
 
 #include ".xres/colors"
-#include ".xres/urxvt"
