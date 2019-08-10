@@ -41,13 +41,18 @@ set number
 set tabstop=4 expandtab shiftwidth=4 smarttab
 
 " Custom Keymaps
+" Toggles 
+" <F1> Brings up help
 map <F2> :NERDTreeToggle<CR>
+map <F3> :ALEToggle<CR>
 " Navigation
 map <F5> :bp<CR>
 map <F6> :bn<CR>
 map <F7> :tabp<CR>
 map <F8> :tabn<CR>
 
+map <F9> :bd<CR>
+map <F10> :xa<CR>
 
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
