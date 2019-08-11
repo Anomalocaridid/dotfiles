@@ -106,7 +106,7 @@ let g:ale_linters ={
 color dracula
 
 " Make background transparent.
-" hi Normal ctermbg=NONE
+hi Normal ctermbg=NONE
 
 " Airline Settings
 " Enable Powerline font 
