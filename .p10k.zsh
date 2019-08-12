@@ -73,7 +73,7 @@ fi
       newline
       public_ip               # public IP address
       # battery               # internal battery
-       time                  # current time
+      time                    # current time
       # example               # example user-defined segment (see prompt_example function below)
   )
 
