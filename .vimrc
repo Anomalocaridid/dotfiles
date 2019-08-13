@@ -95,6 +95,9 @@ Plug 'Shougo/vimproc.vim',{'do': 'make'}
 " Airline status bar
 Plug 'vim-airline/vim-airline'
 
+" High speed HTML/CSS coding
+Plug 'mattn/emmet-vim',{'for': 'html'}
+
 call plug#end()
 
 " ALE linters
