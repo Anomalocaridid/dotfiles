@@ -86,12 +86,6 @@ Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
 " Stylish-Haskell integration
 Plug 'alx741/vim-stylishask',{'for': 'haskell'}
 
-" ghc-mod integration
-Plug 'eagletmt/ghcmod-vim',{'for': 'haskell'}
-
-" asynchronous execution library
-Plug 'Shougo/vimproc.vim',{'do': 'make'}
-
 " Airline status bar
 Plug 'vim-airline/vim-airline'
 
