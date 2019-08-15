@@ -96,7 +96,7 @@ call plug#end()
 
 " ALE linters
 let g:ale_linters ={
-    \ 'haskell': ['hlint', 'hdevtools', 'hfmt']
+    \ 'haskell': ['hlint', 'hfmt']
     \}
 
 " Set color scheme.
