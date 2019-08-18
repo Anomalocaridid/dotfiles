@@ -29,7 +29,10 @@ zplug "plugins/git", from:oh-my-zsh
 # Powerlevel10k Theme
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
-# Install packages that have not ben installed yet
+# Colored man pages
+zplug "plugins/colored-man-pages", from:oh-my-zsh
+
+# Install packages that have not been installed yet
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
@@ -53,6 +56,9 @@ alias help=run-help
 
 # ll Alias
 alias ll="ls -l"
+
+# make ls output in color by default
+alias ls="ls --color"
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
