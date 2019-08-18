@@ -68,12 +68,13 @@ fi
       kubecontext             # current kubernetes context (https://kubernetes.io/)
       context                 # user@host
       nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+      time                    # current time
       os_icon                 # displays icon depending on the os
       # =========================[ Line #2 ]=========================
       newline
       public_ip               # public IP address
+      date                    # today's date
       # battery               # internal battery
-      time                    # current time
       # example               # example user-defined segment (see prompt_example function below)
   )
 
@@ -137,7 +138,7 @@ fi
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
   # Connect left prompt lines with these symbols. You'll probably want to use the same color
   # as POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND below.
