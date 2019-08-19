@@ -54,11 +54,17 @@ autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
-# Show all dotfiles current working directory
+# Show all files including dotfiles in directory
+alias la="ls -A"
+
+# Show only dotfiles current directory
 alias l.="ls -d .*"
 
-# ll Alias
+# Show files in directory in long format
 alias ll="ls -l"
+
+# Show all files including dotfiles in directory in long format
+alias lla="ls -lA"
 
 # Make ls output in color by default
 alias ls="ls --color"
