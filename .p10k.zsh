@@ -68,12 +68,12 @@ fi
       kubecontext             # current kubernetes context (https://kubernetes.io/)
       context                 # user@host
       nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
-      time                    # current time
       os_icon                 # displays icon depending on the os
       # =========================[ Line #2 ]=========================
       newline
-      public_ip               # public IP address
+      #public_ip               # public IP address
       date                    # today's date
+      time                    # current time
       # battery               # internal battery
       # example               # example user-defined segment (see prompt_example function below)
   )
@@ -290,7 +290,7 @@ fi
   #####################################[ vcs: git status ]######################################
   # Git status: feature:master#tag ⇣42⇡42 *42 merge ~42 +42 !42 ?42.
   #
-  # You can edit the lines below to customize how Git status looks.
+  # You can edit the lines below to custo@mize how Git status looks.
   #
   # VCS_STATUS parameters are set by gitstatus plugin. See reference:
   # https://github.com/romkatv/gitstatus/blob/master/gitstatus.plugin.zsh.
