@@ -54,10 +54,13 @@ autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
+# Show all dotfiles current working directory
+alias l.="ls -d .*"
+
 # ll Alias
 alias ll="ls -l"
 
-# make ls output in color by default
+# Make ls output in color by default
 alias ls="ls --color"
 
 # Sets up ssh-agent and adds ssh key at default location
