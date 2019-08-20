@@ -113,3 +113,6 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 " How the tab line formats tabs' paths
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+" Closes vim if the only window open is NERDtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
