@@ -83,4 +83,4 @@ autoload zmv
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # Signifies that this file loaded as planned.
-echo "~/.zshrc loaded successfully" | lolcat -a
+echo "~/.zshrc loaded successfully" | lolcat
