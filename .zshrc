@@ -32,6 +32,9 @@ zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 # Colored man pages
 zplug "plugins/colored-man-pages", from:oh-my-zsh
 
+# Change directory based on history
+zplug "plugins/z", from:oh-my-zsh
+
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -71,6 +74,10 @@ alias ls="ls --color"
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
+
+# Autoload bult in commands not enabled by default
+autoload zcalc
+autoload zmv
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
