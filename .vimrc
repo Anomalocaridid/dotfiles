@@ -96,7 +96,8 @@ call plug#end()
 
 " ALE linters
 let g:ale_linters ={
-    \ 'haskell': ['hlint', 'hfmt']
+    \ 'haskell': ['hlint', 'hfmt'],
+    \ 'bash': ['shellcheck']
     \}
 
 " Set color scheme.
