@@ -1,50 +1,54 @@
 " When started as "evim", evim.vim will already have done these settings, bail out.
 if v:progname =~? "evim"
-    finish
+	finish
 endif
 
 " Get the defaults that most users want.
 source $VIMRUNTIME/defaults.vim
 
 if has("vms")
-    set nobackup        " do not keep a backup file, use versions instead
+	set nobackup        " do not keep a backup file, use versions instead
 else
-    set backup        " keep a backup file (restore to previous version)
-    if has('persistent_undo')
-        set undofile    " keep an undo file (undo changes after closing)
-    endif
+	set backup        " keep a backup file (restore to previous version)
+	if has('persistent_undo')
+		set undofile    " keep an undo file (undo changes after closing)
+	endif
 endif
 
 if &t_Co > 2 || has("gui_running")
-    " Switch on highlighting the last used search pattern.
-    set hlsearch
+	" Switch on highlighting the last used search pattern.
+	set hlsearch
 endif
 
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
-    au!
+	au!
 
-    " For all text files set 'textwidth' to 78 characters.
-    autocmd FileType text setlocal textwidth=78
+	" For all text files set 'textwidth' to 78 characters.
+	autocmd FileType text setlocal textwidth=78
 augroup END
 
 " The matchit plugin makes the % command work better, but it is not backwards compatible.
 " The ! means the package won't be loaded right away but when plugins are loaded during initialization.
 if has('syntax') && has('eval')
-    packadd! matchit
+	packadd! matchit
 endif
 
-" Sets line numbers.
+" Sets line numbers
 set number
 
-" Tab key indents with four spaces. 
-set tabstop=4 expandtab shiftwidth=4 smarttab
+" Tab appears as four columns
+set tabstop=4 shiftwidth=4 softtabstop=4 smarttab
+
+" Tab expands to spaces only for certain programming languages
+autocmd BufRead,BufNewFile *.hs setlocal expandtab
 
 " Custom Keymaps
-" Toggles 
+" Toggles
 " <F1> Brings up help
 map <F2> :NERDTreeToggle<CR>
 map <F3> :ALEToggle<CR>
+map <F4> :UndotreeToggle<CR>
 " Navigation
 map <F5> :bp<CR>
 map <F6> :bn<CR>
@@ -52,14 +56,14 @@ map <F7> :tabp<CR>
 map <F8> :tabn<CR>
 
 map <F9> :bd<CR>
-map <F10> :xa<CR>
+map <F10> :qa<CR>
 
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
 if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Vim-Plug plugins.
@@ -75,7 +79,7 @@ Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 
 " NERDTree file navigator
-Plug 'scrooloose/nerdtree',{'on':'NERDTreeToggle'}
+Plug 'scrooloose/nerdtree',{'on': 'NERDTreeToggle'}
 
 " Fugitive git wrapper
 Plug 'tpope/vim-fugitive'
@@ -86,19 +90,25 @@ Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
 " Stylish-Haskell integration
 Plug 'alx741/vim-stylishask',{'for': 'haskell'}
 
+" hdevtools integration
+Plug 'bitc/vim-hdevtools',{'for': 'haskell'}
+
 " Airline status bar
 Plug 'vim-airline/vim-airline'
 
 " High speed HTML/CSS coding
 Plug 'mattn/emmet-vim',{'for': 'html'}
 
+" Undo Tree visualizer
+Plug 'mbbill/undotree',{'on': 'UndotreeToggle'}
+
 call plug#end()
 
 " ALE linters
 let g:ale_linters ={
-    \ 'haskell': ['hlint', 'hfmt'],
-    \ 'bash': ['shellcheck']
-    \}
+	\ 'haskell': ['hlint', 'hfmt', 'hdevtools'],
+	\ 'bash': ['shellcheck']
+	\}
 
 " Set color scheme.
 color dracula
@@ -107,7 +117,7 @@ color dracula
 hi Normal ctermbg=NONE
 
 " Airline Settings
-" Enable Powerline font 
+" Enable Powerline font
 let g:airline_powerline_fonts = 1
 " Enables tab line
 let g:airline#extensions#tabline#enabled = 1
