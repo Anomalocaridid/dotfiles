@@ -91,7 +91,7 @@ Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
 Plug 'alx741/vim-stylishask',{'for': 'haskell'}
 
 " hdevtools integration
-Plug 'bitc/vim-hdevtools',{'for': 'haskell'}
+"Plug 'bitc/vim-hdevtools',{'for': 'haskell'}
 
 " Airline status bar
 Plug 'vim-airline/vim-airline'
