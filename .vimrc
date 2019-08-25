@@ -38,7 +38,7 @@ endif
 set number
 
 " Tab appears as four columns
-set tabstop=4 shiftwidth=4 softtabstop=4 smarttab
+set tabstop=4 shiftwidth=4 softtabstop=4 smarttab autoindent
 
 " Tab expands to spaces only for certain programming languages
 autocmd BufRead,BufNewFile *.hs setlocal expandtab
@@ -57,6 +57,16 @@ map <F8> :tabn<CR>
 
 map <F9> :bd<CR>
 map <F10> :qa<CR>
+map <F11> :ALEDetail<CR>
+
+" Get rid of trailing whitespace on save
+func! DeleteTrailingWS()
+	exe "normal mz"
+	%s/\s\+$//ge
+	exe "normal `z"
+endfunc
+
+noremap <leader>w :call DeleteTrailingWS()<CR>
 
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
