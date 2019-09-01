@@ -1,4 +1,4 @@
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 
 # Custom Keybindings
 
