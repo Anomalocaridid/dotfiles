@@ -116,7 +116,7 @@ call plug#end()
 
 " ALE linters
 let g:ale_linters ={
-	\ 'haskell': ['hlint', 'hfmt', 'hdevtools'],
+	\ 'haskell': ['stack-ghc', 'hlint', 'hfmt'],
 	\ 'bash': ['shellcheck']
 	\}
 
