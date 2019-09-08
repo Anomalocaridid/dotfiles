@@ -40,8 +40,10 @@ set number
 " Tab appears as four columns
 set tabstop=4 shiftwidth=4 softtabstop=4 smarttab autoindent
 
-" Tab expands to spaces only for certain programming languages
-autocmd BufRead,BufNewFile *.hs setlocal expandtab
+" Tab expands to spaces only for certain filetypes
+autocmd BufRead,BufNewFile *.hs  setlocal expandtab
+autocmd BufRead,BufNewFile *.yaml setlocal expandtab
+autocmd BufRead,BufNewFile *.cabal setlocal expandtab
 
 " Custom Keymaps
 " Toggles
@@ -49,6 +51,7 @@ autocmd BufRead,BufNewFile *.hs setlocal expandtab
 map <F2> :NERDTreeToggle<CR>
 map <F3> :ALEToggle<CR>
 map <F4> :UndotreeToggle<CR>
+
 " Navigation
 map <F5> :bp<CR>
 map <F6> :bn<CR>
@@ -97,12 +100,6 @@ Plug 'tpope/vim-fugitive'
 " Haskell Filetype plugin
 Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
 
-" Stylish-Haskell integration
-Plug 'alx741/vim-stylishask',{'for': 'haskell'}
-
-" hdevtools integration
-"Plug 'bitc/vim-hdevtools',{'for': 'haskell'}
-
 " Airline status bar
 Plug 'vim-airline/vim-airline'
 
@@ -112,13 +109,26 @@ Plug 'mattn/emmet-vim',{'for': 'html'}
 " Undo Tree visualizer
 Plug 'mbbill/undotree',{'on': 'UndotreeToggle'}
 
+" Rust Filetype plugin
+" Uses rustfmt for formatting
+Plug 'rust-lang/rust.vim',{'for': 'rust'}
+
 call plug#end()
 
 " ALE linters
-let g:ale_linters ={
-	\ 'haskell': ['stack-ghc', 'hlint', 'hfmt'],
-	\ 'bash': ['shellcheck']
+let g:ale_linters = {
+	\ 'haskell': ['stack-ghc', 'hlint'],
+	\ 'bash': ['shellcheck'],
+	\ 'rust': ['rls', 'cargo', 'rustc'],
 	\}
+
+let g:ale_fixers = {
+	\ '*': ['remove_trailing_lines', 'trim_whitespace'],
+	\ 'haskell': ['hfmt', 'stylish-haskell'],
+	\ 'rust': ['rustfmt'],
+	\}
+
+let g:ale_fix_on_save = 1
 
 " Set color scheme.
 color dracula
@@ -129,8 +139,10 @@ hi Normal ctermbg=NONE
 " Airline Settings
 " Enable Powerline font
 let g:airline_powerline_fonts = 1
+
 " Enables tab line
 let g:airline#extensions#tabline#enabled = 1
+
 " How the tab line formats tabs' paths
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
