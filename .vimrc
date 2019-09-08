@@ -86,7 +86,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'dracula/vim',{'as':'dracula'}
 
 " Asynchronous Lint Engine
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " CtrlP Fuzzy file search
 Plug 'kien/ctrlp.vim'
