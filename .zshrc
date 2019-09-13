@@ -1,3 +1,5 @@
+#!/bin/false
+
 export PATH=$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 fpath+=$HOME/.zfunc
 
