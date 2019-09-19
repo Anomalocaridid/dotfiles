@@ -78,6 +78,9 @@ alias ls="ls --color"
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
 
+# Sets zsh as shell.
+function set-zsh() {chsh -s $(which zsh) && echo "All done! Please restart terminal."}
+
 # Autoload bult in commands not enabled by default
 autoload zcalc
 autoload zmv
