@@ -38,8 +38,9 @@ fi
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -ga POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
       # =========================[ Line #1 ]=========================
-      user                    # username
-      host                    # host name
+      #user                    # username
+      #host                    # host name
+      context                 # user@host
       dir                     # current directory
       vcs                     # git status
       # =========================[ Line #2 ]=========================
@@ -66,7 +67,6 @@ fi
       # go_version            # golang version
       # rbenv                 # ruby version from rbenv (https://github.com/rbenv/rbenv)
       kubecontext             # current kubernetes context (https://kubernetes.io/)
-      context                 # user@host
       nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
       os_icon                 # displays icon depending on the os
       # =========================[ Line #2 ]=========================
@@ -436,8 +436,7 @@ fi
   # Context format when running with privileges: %n is username, %m is hostname.
   typeset -g POWERLEVEL9K_CONTEXT_ROOT_TEMPLATE='%n@%m'
 
-  # Don't show context unless running with privileges on in SSH.
-  typeset -g POWERLEVEL9K_CONTEXT_{DEFAULT,SUDO}_{CONTENT,VISUAL_IDENTIFIER}_EXPANSION=
+  # Always show context
   typeset -g POWERLEVEL9K_ALWAYS_SHOW_CONTEXT=true
 
   # Custom icon.
