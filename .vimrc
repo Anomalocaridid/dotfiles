@@ -82,9 +82,6 @@ endif
 " Vim-Plug plugins.
 call plug#begin('~/.vim/plugged')
 
-" Dracula theme from https://draculatheme.com/vim
-Plug 'dracula/vim',{'as':'dracula'}
-
 " Asynchronous Lint Engine
 Plug 'dense-analysis/ale'
 
@@ -131,7 +128,7 @@ let g:ale_fixers = {
 let g:ale_fix_on_save = 1
 
 " Set color scheme.
-color dracula
+color cyberpunkneon
 
 " Make background transparent.
 hi Normal ctermbg=NONE
