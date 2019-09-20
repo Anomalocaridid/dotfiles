@@ -68,11 +68,12 @@ fi
       # rbenv                 # ruby version from rbenv (https://github.com/rbenv/rbenv)
       kubecontext             # current kubernetes context (https://kubernetes.io/)
       nordvpn                 # nordvpn connection status, linux only (https://nordvpn.com/)
+	  history                 # Number of commands so far
       os_icon                 # displays icon depending on the os
       # =========================[ Line #2 ]=========================
       newline
       #public_ip               # public IP address
-      date                    # today's date
+      #date                    # today's date
       time                    # current time
       # battery               # internal battery
       # example               # example user-defined segment (see prompt_example function below)

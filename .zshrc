@@ -75,6 +75,9 @@ alias lla="ls -lA"
 # Make ls output in color by default
 alias ls="ls --color"
 
+# One character ~/.zshrc sourcing
+alias .=". ~/.zshrc"
+
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
 
