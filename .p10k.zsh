@@ -199,7 +199,7 @@ fi
 
   #################################[ os_icon: os identifier ]##################################
   # Foreground color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=$NEON_WHITE
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=$NEON_DARK_PURPLE
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=$NEON_DARK_BLUE
   # Display this icon instead of the default.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
@@ -415,7 +415,8 @@ fi
   # Show this many fractional digits. Zero means round to seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=248
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$NEON_DARK_BLUE
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_DARK_PURPLE
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
