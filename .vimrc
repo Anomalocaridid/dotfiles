@@ -62,15 +62,6 @@ map <F9> :bd<CR>
 map <F10> :qa<CR>
 map <F11> :ALEDetail<CR>
 
-" Get rid of trailing whitespace on save
-func! DeleteTrailingWS()
-	exe "normal mz"
-	%s/\s\+$//ge
-	exe "normal `z"
-endfunc
-
-noremap <leader>w :call DeleteTrailingWS()<CR>
-
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -99,6 +90,9 @@ Plug 'neovimhaskell/haskell-vim',{'for': 'haskell'}
 
 " Airline status bar
 Plug 'vim-airline/vim-airline'
+
+" Airline theme
+Plug 'vim-airline/vim-airline-themes'
 
 " High speed HTML/CSS coding
 Plug 'mattn/emmet-vim',{'for': 'html'}
@@ -134,6 +128,8 @@ color cyberpunkneon
 hi Normal ctermbg=NONE
 
 " Airline Settings
+" Current Theme
+let g:airline_theme='violet'
 " Enable Powerline font
 let g:airline_powerline_fonts = 1
 
