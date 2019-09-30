@@ -24,8 +24,8 @@
 NEON_PINK=201
 NEON_DARK_BLUE=017
 NEON_LIGHT_BLUE=044
-NEON_DULL_BLUE=025
-NEON_DARK_PURPLE=013
+NEON_BLUE=025
+NEON_PURPLE=013
 NEON_WHITE=255
 
 if [[ -o 'aliases' ]]; then
@@ -199,7 +199,7 @@ fi
 
   #################################[ os_icon: os identifier ]##################################
   # Foreground color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=$NEON_DARK_PURPLE
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=$NEON_PURPLE
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=$NEON_DARK_BLUE
   # Display this icon instead of the default.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
@@ -227,7 +227,7 @@ fi
   ##################################[ dir: current directory ]##################################
   # Default current directory color.
   typeset -g POWERLEVEL9K_DIR_FOREGROUND=$NEON_LIGHT_BLUE
-  typeset -g POWERLEVEL9K_DIR_BACKGROUND=$NEON_DULL_BLUE
+  typeset -g POWERLEVEL9K_DIR_BACKGROUND=$NEON_BLUE
   # If directory is too long, shorten some of its segments to the shortest possible unique
   # prefix. The shortened directory can be tab-completed to the original.
   typeset -g POWERLEVEL9K_SHORTEN_STRATEGY=truncate_to_unique
@@ -367,7 +367,7 @@ fi
   typeset -g POWERLEVEL9K_VCS_CLEAN_FOREGROUND=76
   typeset -g POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND=76
   typeset -g POWERLEVEL9K_VCS_MODIFIED_FOREGROUND=227
-  typeset -g POWERLEVEL9K_VCS_BACKGROUND=$NEON_DARK_PURPLE
+  typeset -g POWERLEVEL9K_VCS_BACKGROUND=$NEON_PURPLE
 
   ##########################[ status: exit code of the last command ]###########################
   # Default Background Color
@@ -416,7 +416,7 @@ fi
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
   # Execution time color.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$NEON_DARK_BLUE
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_DARK_PURPLE
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_LIGHT_BLUE
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
@@ -429,7 +429,7 @@ fi
   #typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=false
   # Background jobs color.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=$NEON_LIGHT_BLUE
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=$NEON_DARK_PURPLE
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND=$NEON_PURPLE
   # Icon to show when there are background jobs.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='${P9K_VISUAL_IDENTIFIER// }'
 
@@ -649,8 +649,8 @@ fi
 
 #################################[ history ]##################################
   # Default Colors
-  typeset -g POWERLEVEL9K_HISTORY_BACKGROUND=$NEON_DULL_BLUE
-  typeset -g POWERLEVEL9K_HISTORY_FOREGROUND=$NEON_WHITE
+  typeset -g POWERLEVEL9K_HISTORY_BACKGROUND=$NEON_BLUE
+  typeset -g POWERLEVEL9K_HISTORY_FOREGROUND=$NEON_LIGHT_BLUE
 
   # Example of a user-defined prompt segment. Function prompt_example will be called on every
   # prompt if `example` prompt segment is added to POWERLEVEL9K_LEFT_PROMPT_ELEMENTS or
