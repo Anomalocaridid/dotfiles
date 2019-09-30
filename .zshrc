@@ -3,12 +3,6 @@
 export PATH=$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 fpath+=$HOME/.zfunc
 
-# Custom Keybindings
-
-# Pressing up and down moves forward or back, respectively, in the terminal history based on what is already typed.
-bindkey '\e[A' history-beginning-search-backward
-bindkey '\e[B' history-beginning-search-forward
-
 # Persistent rehash
 zstyle ':completion:*' rehash true
 
@@ -38,6 +32,9 @@ zplug "plugins/colored-man-pages", from:oh-my-zsh
 # Change directory based on history
 zplug "plugins/z", from:oh-my-zsh
 
+# Search history based on already entered text
+zplug "plugins/history-substring-search", from:oh-my-zsh
+
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
@@ -60,6 +57,16 @@ autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
+# Keybindings for history-substring-search
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# bind k and j for VI mode (not in use yet)
+#ibindkey -M vicmd 'k' history-substring-search-up
+#bindkey -M vicmd 'j' history-substring-search-down
+
 # Show all files including dotfiles in directory
 alias la="ls -A"
 
@@ -77,6 +84,13 @@ alias ls="ls --color"
 
 # One character ~/.zshrc sourcing
 alias .=". ~/.zshrc"
+
+# Aliases for kittens included with kitty terminal
+alias icat="kitty +kitten icat"          # Displays images in terminal.
+alias d="kitty +kitten diff"             # Displays diffs between two files.
+alias hints="kitty +kitten hints"        # Selects and acts on arbitrary text snippets on screen.
+alias panel="kitty +kitten panel"        # Draws a gpu accelerated panel using another program's output.
+alias clipboard"kitty +kitten clipboard" # Copy/paste to system clipboard.
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
