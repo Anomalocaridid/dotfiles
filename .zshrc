@@ -14,6 +14,9 @@ fi
 
 source ~/.zplug/init.zsh
 
+# zplug self management
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
 # Syntax highlighting
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
@@ -33,7 +36,16 @@ zplug "plugins/colored-man-pages", from:oh-my-zsh
 zplug "plugins/z", from:oh-my-zsh
 
 # Search history based on already entered text
-zplug "plugins/history-substring-search", from:oh-my-zsh
+zplug "zsh-users/zsh-history-substring-search"
+
+# Syntax highlighted file viewer
+zplug "plugins/colorize", from:oh-my-zsh
+
+# Auto-suggestions
+zplug "zsh-users/zsh-autosuggestions"
+
+# Vi-like functionality
+zplug "plugins/vi-mode", from:oh-my-zsh
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
