@@ -60,7 +60,10 @@ fi
 zplug load
 
 # Enables zsh tab-completion
-autoload -U compinit && compinit
+autoload -Uz compinit && compinit
+
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
 
 # Help Command Alias
 autoload -U run-help
@@ -107,7 +110,13 @@ alias icat="kitty +kitten icat"          # Displays images in terminal.
 alias d="kitty +kitten diff"             # Displays diffs between two files.
 alias hints="kitty +kitten hints"        # Selects and acts on arbitrary text snippets on screen.
 alias panel="kitty +kitten panel"        # Draws a gpu accelerated panel using another program's output.
-alias clipboard"kitty +kitten clipboard" # Copy/paste to system clipboard.
+alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
+
+# A helpful cow reminds you that you are not in vim.
+function not-in-vim() {cowsay "You aren't in vim, dummy!" | lolcat}
+alias :w="not-in-vim"
+alias :q="not-in-vim"
+alias :x="not-in-vim"
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}

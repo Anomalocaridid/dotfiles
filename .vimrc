@@ -108,7 +108,7 @@ call plug#end()
 
 " ALE linters
 let g:ale_linters = {
-	\ 'haskell': ['stack-ghc', 'hlint'],
+	\ 'haskell': ['ghc', 'hlint'],
 	\ 'bash': ['shellcheck'],
 	\ 'rust': ['rls', 'cargo', 'rustc'],
 	\}
