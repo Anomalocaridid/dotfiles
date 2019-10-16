@@ -131,5 +131,9 @@ autoload zmv
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
-# Signifies that this file loaded as planned.
-echo "~/.zshrc loaded successfully" | lolcat
+# Ascii Terminal greeting.
+# Shows Linux distro and version and greets the user in rainbow ascii art.
+echo -n "\033[1m"
+lsb_release --description --release | cut -f2 | tr '\n' ' ' | figlet -w $(tput cols) -f lean | lolcat
+echo "Welcome back, $USER!" | figlet -w $(tput cols) -f pepper | lolcat
+echo "\033[0m"

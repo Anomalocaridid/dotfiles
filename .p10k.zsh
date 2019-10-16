@@ -81,7 +81,7 @@ fi
       # =========================[ Line #2 ]=========================
       newline
       #public_ip               # public IP address
-      #date                    # today's date
+      date                    # today's date
       time                    # current time
       # battery               # internal battery
       # example               # example user-defined segment (see prompt_example function below)
@@ -416,7 +416,7 @@ fi
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
   # Execution time color.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$NEON_DARK_BLUE
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_LIGHT_BLUE
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_WHITE
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
@@ -646,6 +646,11 @@ fi
   # typeset -g POWERLEVEL9K_TIME_VISUAL_IDENTIFIER_EXPANSION='⭐'
   # Custom prefix.
   # typeset -g POWERLEVEL9K_TIME_PREFIX='%248Fat '
+
+ ####################################[ date: current date ]####################################
+  # Current datecolor.
+  typeset -g POWERLEVEL9K_DATE_BACKGROUND=$NEON_LIGHT_BLUE
+  typeset -g POWERLEVEL9K_DATE_FOREGROUND=$NEON_PURPLE
 
 #################################[ history ]##################################
   # Default Colors
