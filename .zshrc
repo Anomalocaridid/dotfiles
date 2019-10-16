@@ -132,8 +132,7 @@ autoload zmv
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # Ascii Terminal greeting.
-# Shows Linux distro and version and greets the user in rainbow ascii art.
+# Shows Linux distro and version in rainbow ascii art.
 echo -n "\033[1m"
-lsb_release --description --release | cut -f2 | tr '\n' ' ' | figlet -w $(tput cols) -f lean | lolcat
-echo "Welcome back, $USER!" | figlet -w $(tput cols) -f pepper | lolcat
+lsb_release --description --release | cut -f2 | tr '\n' ' ' | figlet -t -f lean | lolcat
 echo "\033[0m"

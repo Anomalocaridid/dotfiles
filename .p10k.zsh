@@ -157,7 +157,7 @@ fi
   # Connect right prompt lines with these symbols.
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_SUFFIX=
   typeset -g POWERLEVEL9K_MULTILINE_NEWLINE_PROMPT_SUFFIX=
-  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=' '
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_SUFFIX=
 
   # Filler between left and right prompt on the first prompt line. You can set it to ' ', '·' or
   # '─'. The last two make it easier to see the alignment between left and right prompt and to
