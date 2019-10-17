@@ -134,5 +134,6 @@ autoload zmv
 # Ascii Terminal greeting.
 # Shows Linux distro and version in rainbow ascii art.
 echo -n "\033[1m"
-lsb_release --description --release | cut -f2 | tr '\n' ' ' | figlet -t -f lean | lolcat
+lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
+echo "Welcome back, $USER!" | lolcat
 echo "\033[0m"
