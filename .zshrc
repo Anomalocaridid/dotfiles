@@ -124,6 +124,10 @@ function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
 # Sets zsh as shell.
 function set-zsh() {chsh -s $(which zsh) && echo "All done! Please restart terminal."}
 
+# Allows for easy display and removal of orphaned packages using yay.
+function show-orphans() {yay -Qqdt}
+function rm-orphans() {yay -Rsun $(show-orphans)}
+
 # Autoload bult in commands not enabled by default
 autoload zcalc
 autoload zmv
