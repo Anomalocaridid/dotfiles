@@ -1,6 +1,6 @@
 #!/bin/false
 
-export PATH=$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 fpath+=$HOME/.zfunc
 
 # Persistent rehash
