@@ -58,6 +58,7 @@ if ! zplug check --verbose; then
 fi
 
 zplug load
+zplug clean
 
 # Enables zsh tab-completion
 autoload -Uz compinit && compinit
