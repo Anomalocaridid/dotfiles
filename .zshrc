@@ -106,6 +106,9 @@ alias ls="ls --color"
 # One character ~/.zshrc sourcing
 alias .=". ~/.zshrc"
 
+# Command to show the main drive's space at a glance
+alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
+
 # Aliases for kittens included with kitty terminal
 alias icat="kitty +kitten icat"          # Displays images in terminal.
 alias d="kitty +kitten diff"             # Displays diffs between two files.
@@ -118,6 +121,9 @@ function not-in-vim() {cowsay "You aren't in vim, dummy!" | lolcat}
 alias :w="not-in-vim"
 alias :q="not-in-vim"
 alias :x="not-in-vim"
+
+# A fabulous quote of the day, delivered by a cow.
+alias moo="fortune | cowsay | lolcat"
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
