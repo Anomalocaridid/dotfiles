@@ -140,6 +140,6 @@ autoload zmv
 
 # Ascii Terminal greeting.
 # Shows Linux distro and version in rainbow ascii art.
-echo -n "\e[1m"
+echo -en "\e[1m"
 lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
-echo "\e[5;1mWelcome back, $USER!\e[0m\n" | lolcat
+echo -e "\e[1m Welcome back, \e[5;1m$USER\e[0;1m!\e[0m\n" | lolcat
