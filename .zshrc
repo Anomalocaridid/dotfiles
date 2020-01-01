@@ -6,6 +6,9 @@ fpath+=$HOME/.zfunc
 # Persistent rehash
 zstyle ':completion:*' rehash true
 
+# Case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}'
+
 # Check if zplug is installed
 if [[ ! -d ~/.zplug ]]; then
     git clone https://github.com/zplug/zplug ~/.zplug
@@ -142,4 +145,4 @@ autoload zmv
 # Shows Linux distro and version in rainbow ascii art.
 echo -en "\e[1m"
 lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
-echo -e "\e[1m Welcome back, \e[5;1m$USER\e[0;1m!\e[0m" | lolcat
+echo -e "\e[1m Welcome back, \e[5;1m$USER\e[0;1m!\e[0m\n" | lolcat
