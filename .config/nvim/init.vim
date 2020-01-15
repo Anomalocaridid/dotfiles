@@ -1,31 +1,13 @@
-" When started as "evim", evim.vim will already have done these settings, bail out.
-if v:progname =~? "evim"
-	finish
-endif
-
-" Get the defaults that most users want.
-source $VIMRUNTIME/defaults.vim
-
-if has("vms")
-	set nobackup        " do not keep a backup file, use versions instead
-else
-	set backup        " keep a backup file (restore to previous version)
-	if has('persistent_undo')
-		set undofile    " keep an undo file (undo changes after closing)
-	endif
-endif
-
-if &t_Co > 2 || has("gui_running")
-	" Switch on highlighting the last used search pattern.
-	set hlsearch
-endif
-
 " Put these in an autocmd group, so that we can delete them easily.
 augroup vimrcEx
 	au!
 
 	" For all text files set 'textwidth' to 78 characters.
 	autocmd FileType text setlocal textwidth=78
+
+	" Tab expands to spaces only for certain filetypes
+	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
+
 augroup END
 
 " The matchit plugin makes the % command work better, but it is not backwards compatible.
@@ -38,12 +20,7 @@ endif
 set number
 
 " Tab appears as four columns
-set tabstop=4 shiftwidth=4 softtabstop=4 smarttab autoindent
-
-" Tab expands to spaces only for certain filetypes
-autocmd BufRead,BufNewFile *.hs  setlocal expandtab
-autocmd BufRead,BufNewFile *.yaml setlocal expandtab
-autocmd BufRead,BufNewFile *.cabal setlocal expandtab
+set tabstop=4 shiftwidth=4 softtabstop=4
 
 " Custom Keymaps
 " Toggles
@@ -64,14 +41,14 @@ map <F11> :ALEDetail<CR>
 
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+	silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
 		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " Vim-Plug plugins.
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.local/share/nvim/site/plugged')
 
 " Asynchronous Lint Engine
 Plug 'dense-analysis/ale'
@@ -124,7 +101,7 @@ let g:ale_fix_on_save = 1
 " Set color scheme.
 color cyberpunkneon
 
-" Make background transparent.
+" Make background match that of the terminal emulator.
 hi Normal ctermbg=NONE
 
 " Airline Settings
