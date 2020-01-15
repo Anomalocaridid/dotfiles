@@ -91,8 +91,12 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# Aliases alternative programs to commonly used commands
+alias ls="exa"
+alias vim="nvim"
+
 # Show all files including dotfiles in directory
-alias la="ls -A"
+alias la="ls -a"
 
 # Show only dotfiles current directory
 alias l.="ls -d .*"
@@ -101,10 +105,7 @@ alias l.="ls -d .*"
 alias ll="ls -l"
 
 # Show all files including dotfiles in directory in long format
-alias lla="ls -lA"
-
-# Make ls output in color by default
-alias ls="ls --color"
+alias lla="ls -la"
 
 # One character ~/.zshrc sourcing
 alias .=". ~/.zshrc"
