@@ -106,7 +106,7 @@ hi Normal ctermbg=NONE
 
 " Airline Settings
 " Current Theme
-let g:airline_theme='violet'
+let g:airline_theme='monochrome'
 " Enable Powerline font
 let g:airline_powerline_fonts = 1
 
