@@ -81,6 +81,9 @@ Plug 'mbbill/undotree',{'on': 'UndotreeToggle'}
 " Uses rustfmt for formatting
 Plug 'rust-lang/rust.vim',{'for': 'rust'}
 
+" Syntax plugin for tridactyl config files
+Plug 'tridactyl/vim-tridactyl',{'for': 'tridactyl'}
+
 call plug#end()
 
 " ALE linters
