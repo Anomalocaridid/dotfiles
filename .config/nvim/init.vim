@@ -28,16 +28,16 @@ set tabstop=4 shiftwidth=4 softtabstop=4
 map <F2> :NERDTreeToggle<CR>
 map <F3> :ALEToggle<CR>
 map <F4> :UndotreeToggle<CR>
+map <F5> :ALEDetail<CR>
 
 " Navigation
-map <F5> :bp<CR>
-map <F6> :bn<CR>
-map <F7> :tabp<CR>
-map <F8> :tabn<CR>
+map _ :bp<CR>
+map + :bn<CR>
+map - :tabp<CR>
+map = :tabn<CR>
 
-map <F9> :bd<CR>
-map <F10> :qa<CR>
-map <F11> :ALEDetail<CR>
+"map <F9> :bd<CR>
+"map <F10> :qa<CR>
 
 " Vim-Plug settings and plugins.
 " Automatically download and install Vim-Plug if not present.

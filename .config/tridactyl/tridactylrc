@@ -54,6 +54,14 @@ command hint_focus hint -;
 " Open right click menu on links
 bind ;C composite hint_focus; !s xdotool key Menu
 
+" One-button tab navigation
+bind - tabprev
+bind = tabnext
+
+"Close all tabs to one side
+bind _ tabclosealltoleft
+bind + tabclosealltoright
+
 "
 " Misc settings
 "
