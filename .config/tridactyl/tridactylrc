@@ -84,7 +84,7 @@ command translate js let googleTranslateCallback = document.createElement('scrip
 bind <F2> composite js tri.styling.THEMES | fillcmdline
 
 " Set theme to custom color scheme in ./themes
-set colourscheme neon
+colourscheme neon
 
 " Sets the new tab to my startpage
 set newtab https://derpsquid9.github.io/startpage
