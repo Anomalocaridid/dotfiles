@@ -1,0 +1,108 @@
+# Based off of Wang Shidong's basic.toml for SpaceVim
+
+# SpaceVim Global Options {{{
+[options]
+	# Theme settings
+	colorscheme = "palenight"
+	colorscheme_bg = "dark"
+	enable_guicolors = true
+
+	# Statusline Settings
+	statusline_separator = "arrow"
+	statusline_inactive_separator = "arrow"
+	buffer_index_type = 4
+	windows_index_type = 3
+	enable_tabline_filetype_icon = true
+	enable_statusline_mode = true
+	statusline_unicode_symbols = true
+
+	# Enable vim compatible mode, avoid changing origin vim key bindings
+	vimcompatible = true
+
+	# Tab settings
+	default_indent = 4
+	expand_tab = false
+
+	# Use Ale as the checker
+	enable_neomake = false
+	enable_ale = true
+	lint_on_the_fly = true
+
+	# Bootstrap scripts
+	bootstrap_before = "bootstrap#before"
+	# bootstrap_after = "bootstrap#after"
+
+	# File manager
+	filemanager = "nerdtree"
+# }}}
+
+# Enable autocomplete layer
+[[layers]]
+	name = "autocomplete"
+	auto-completion-return-key-behavior = "complete"
+	auto-completion-tab-key-behavior = "cycle"
+
+[[layers]]
+	name = "shell"
+	default_position = "top"
+	default_height = 30
+
+[[layers]]
+	name = "colorscheme"
+
+[[layers]]
+	name = "checkers"
+
+# Layers for git
+[[layers]]
+	name = "VersionControl"
+
+[[layers]]
+	name = "git"
+	git-plugin = "fugitive"
+
+# Language layers {{{
+[[layers]]
+	name = "lang#haskell"
+
+[[layers]]
+	name = "lang#html"
+
+[[layers]]
+	name = "lang#rust"
+	recommended-style = true
+
+[[layers]]
+	name = "lang#sh"
+
+# }}}
+
+[[layers]]
+	name = "test"
+
+[[layers]]
+	name = "sudo"
+
+[[layers]]
+	name = "default"
+
+[[custom_plugins]]
+	name = "mbbill/undotree"
+	on_cmd = ["UndotreeToggle"]
+	merged = false
+
+# Syntax plugin for tridactyl config files
+[[custom_plugins]]
+	name = "tridactyl/vim-tridactyl"
+	merged = false
+
+# Fun plugins
+[[custom_plugins]]
+	name = "johngrib/vim-game-code-break"
+	on_cmd = ["VimGameCodeBreak"]
+	merged = false
+
+[[custom_plugins]]
+	name = "johngrib/vim-game-snake"
+	on_cmd = ["VimGameSnake"]
+	merged = false
