@@ -110,6 +110,9 @@ alias lla="ls -la"
 # One character ~/.zshrc sourcing
 alias .=". ~/.zshrc"
 
+# So I don't accidentally delete anything again
+alias rm="rm -i"
+
 # Command to show the main drive's space at a glance
 alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
 
@@ -123,8 +126,10 @@ alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
 # A helpful cow reminds you that you are not in vim.
 function not-in-vim() {cowsay "You aren't in vim, dummy!" | lolcat}
 alias :w="not-in-vim"
-alias :q="not-in-vim"
 alias :x="not-in-vim"
+
+# Vim style exiting.
+alias :q="exit"
 
 # A fabulous quote of the day, delivered by a cow.
 alias moo="fortune | cowsay | lolcat"
