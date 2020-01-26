@@ -106,3 +106,8 @@
 	name = "johngrib/vim-game-snake"
 	on_cmd = ["VimGameSnake"]
 	merged = false
+
+[[custom_plugins]]
+	name = "deris/vim-duzzle"
+	on_cmd = ["DuzzleStart"]
+	merged = false
