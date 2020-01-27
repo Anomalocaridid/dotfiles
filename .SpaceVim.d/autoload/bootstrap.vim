@@ -1,6 +1,10 @@
 function! bootstrap#before() abort
 	" Keybindings
 	nnoremap <F4> :UndotreeToggle<cr>
+	nnoremap <F5> :bp<cr>
+	nnoremap <F6> :bn<cr>
+	nnoremap <F7> :tabp<cr>
+	nnoremap <F8> :tabn<cr>
 	
 	"Set fold method to marker
 	set foldmethod:marker
@@ -17,7 +21,6 @@ function! bootstrap#before() abort
 		\ 'haskell': ['stylish-haskell'],
 		\ 'rust': ['rustfmt'],
 		\}
-
 endfunction
 
 "function! bootstrap#after() abort
