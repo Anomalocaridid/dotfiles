@@ -86,9 +86,18 @@
 [[layers]]
 	name = "default"
 
+[[layers]]
+	name = "games"
+
 [[custom_plugins]]
 	name = "mbbill/undotree"
 	on_cmd = ["UndotreeToggle"]
+	merged = false
+
+# Integrated Cheat Sheet
+[[custom_plugins]]
+	name = "lifepillar/vim-cheat40"
+	on_cmd = ["Cheat40"]
 	merged = false
 
 # Syntax plugin for tridactyl config files

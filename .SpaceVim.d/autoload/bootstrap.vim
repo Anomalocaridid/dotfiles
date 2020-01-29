@@ -5,10 +5,14 @@ function! bootstrap#before() abort
 	nnoremap <F6> :bn<cr>
 	nnoremap <F7> :tabp<cr>
 	nnoremap <F8> :tabn<cr>
+	nnoremap <leader>? :Cheat40<cr>
 	
-	"Set fold method to marker
-	set foldmethod:marker
+	" Set fold method to marker
+	set foldmethod=marker
 	
+	" Highlights search and replace matches as you type
+	set inccommand=nosplit
+
 	" ALE linters
 	let g:ale_linters = {
 		\ 'haskell': ['ghc', 'hlint'],
