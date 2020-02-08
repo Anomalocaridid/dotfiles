@@ -29,6 +29,9 @@ function! bootstrap#before() abort
 	let g:ale_lint_on_save = 0
 
 	let g:ale_fix_on_save = 1
+
+	" Tab expands to spaces only for certain filetypes
+	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
 endfunction
 
 "function! bootstrap#after() abort
