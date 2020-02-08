@@ -22,7 +22,7 @@ function! bootstrap#before() abort
 
 	let g:ale_fixers = {
 		\ '*': ['remove_trailing_lines', 'trim_whitespace'],
-		\ 'haskell': ['stylish-haskell'],
+		\ 'haskell': ['hindent', 'stylish-haskell'],
 		\ 'rust': ['rustfmt'],
 		\}
 
