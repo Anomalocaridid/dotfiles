@@ -3,6 +3,19 @@
 export PATH=$HOME/.cargo/bin:$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
 fpath+=$HOME/.zfunc
 
+# Ascii Terminal greeting.
+# Shows Linux distro and version in rainbow ascii art.
+echo -en "\e[1m"
+lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
+echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block, everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # Persistent rehash
 zstyle ':completion:*' rehash true
 
@@ -53,7 +66,7 @@ zplug "plugins/vi-mode", from:oh-my-zsh
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
-    if read -q; then
+    if read -rq; then
         echo; zplug install
     else
         echo
@@ -79,8 +92,8 @@ alias help=run-help
 # Keybindings for history-substring-search
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey "${terminfo[kcuu1]}" history-substring-search-up
+bindkey "${terminfo[kcud1]}" history-substring-search-down
 
 # bind UP and DOWN arrow keys (compatibility fallback
 # for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
@@ -124,7 +137,9 @@ alias panel="kitty +kitten panel"        # Draws a gpu accelerated panel using a
 alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
 
 # A helpful cow reminds you that you are not in vim.
-function not-in-vim() {cowsay "You aren't in vim, dummy!" | lolcat}
+function not-in-vim() {
+	cowsay "You aren't in vim, dummy!" | lolcat
+}
 alias :w="not-in-vim"
 alias :x="not-in-vim"
 
@@ -135,10 +150,14 @@ alias :q="exit"
 alias moo="fortune | cowsay | lolcat"
 
 # Sets up ssh-agent and adds ssh key at default location
-function ssh-setup() {eval "$(ssh-agent -s)" && ssh-add}
+function ssh-setup() {
+	eval "$(ssh-agent -s)" && ssh-add
+}
 
 # Sets zsh as shell.
-function set-zsh() {chsh -s $(which zsh) && echo "All done! Please restart terminal."}
+function set-zsh() {
+	chsh -s "$(which zsh)" && echo "All done! Please restart terminal."
+}
 
 # Autoload bult in commands not enabled by default
 autoload zcalc
@@ -149,6 +168,6 @@ autoload zmv
 
 # Ascii Terminal greeting.
 # Shows Linux distro and version in rainbow ascii art.
-echo -en "\e[1m"
-lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
-echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
+#echo -en "\e[1m"
+#lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
+#echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
