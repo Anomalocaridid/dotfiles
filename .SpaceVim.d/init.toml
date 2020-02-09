@@ -36,12 +36,15 @@
 	filemanager = "nerdtree"
 # }}}
 
-# Enable autocomplete layer
+# Installed Layers {{{
+
+# Disable autocomplete layer {{{
 [[layers]]
 	name = "autocomplete"
 	#auto-completion-return-key-behavior = "complete"
 	#auto-completion-tab-key-behavior = "cycle"
 	enable = false
+# }}}
 
 [[layers]]
 	name = "shell"
@@ -54,13 +57,26 @@
 [[layers]]
 	name = "checkers"
 
-# Layers for git
+[[layers]]
+	name = "test"
+
+[[layers]]
+	name = "sudo"
+
+[[layers]]
+	name = "default"
+
+[[layers]]
+	name = "games"
+
+# Layers for git {{{
 [[layers]]
 	name = "VersionControl"
 
 [[layers]]
 	name = "git"
 	git-plugin = "fugitive"
+# }}}
 
 # Language layers {{{
 [[layers]]
@@ -78,18 +94,9 @@
 
 # }}}
 
-[[layers]]
-	name = "test"
+# }}}
 
-[[layers]]
-	name = "sudo"
-
-[[layers]]
-	name = "default"
-
-[[layers]]
-	name = "games"
-
+# Custom Plugins {{{
 [[custom_plugins]]
 	name = "mbbill/undotree"
 	on_cmd = ["UndotreeToggle"]
@@ -104,6 +111,11 @@
 # Syntax plugin for tridactyl config files
 [[custom_plugins]]
 	name = "tridactyl/vim-tridactyl"
+	merged = false
+
+# Adds Commands for block commenting
+[[custom_plugins]]
+	name = "preservim/nerdcommenter"
 	merged = false
 
 # Fun plugins
@@ -121,3 +133,4 @@
 	name = "deris/vim-duzzle"
 	on_cmd = ["DuzzleStart"]
 	merged = false
+# }}}

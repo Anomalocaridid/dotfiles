@@ -1,16 +1,14 @@
 function! bootstrap#before() abort
-	" Keybindings
+	" Keybindings {{{
 	nnoremap <F4> :UndotreeToggle<cr>
 	nnoremap <F5> :bp<cr>
 	nnoremap <F6> :bn<cr>
 	nnoremap <F7> :tabp<cr>
 	nnoremap <F8> :tabn<cr>
 	nnoremap <leader>? :Cheat40<cr>
+	" }}}
 
-	" Highlights search and replace matches as you type
-	set inccommand=nosplit
-
-	" ALE linters
+	" ALE Settings {{{
 	let g:ale_linters = {
 		\ 'haskell': ['ghc', 'hlint'],
 		\ 'bash': ['shellcheck'],
@@ -29,9 +27,23 @@ function! bootstrap#before() abort
 	let g:ale_lint_on_save = 0
 
 	let g:ale_fix_on_save = 1
+	" }}}
+
+	" NERDCommenter Settings {{{
+	let g:NERDSpaceDelims = 1
+	let g:NERDTrimTrailingWhitespace = 1
+	" }}}
+
+	" Misc Settings {{{
+	" Highlights search and replace matches as you type
+	set inccommand=nosplit
 
 	" Tab expands to spaces only for certain filetypes
 	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
+
+	" Set fold method to marker
+	set foldmethod=marker
+	" }}}
 endfunction
 
 function! bootstrap#after() abort
