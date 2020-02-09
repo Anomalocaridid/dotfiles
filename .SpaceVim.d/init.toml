@@ -30,7 +30,7 @@
 
 	# Bootstrap scripts
 	bootstrap_before = "bootstrap#before"
-	# bootstrap_after = "bootstrap#after"
+	bootstrap_after = "bootstrap#after"
 
 	# File manager
 	filemanager = "nerdtree"

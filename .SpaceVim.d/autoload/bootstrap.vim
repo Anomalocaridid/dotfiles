@@ -7,9 +7,6 @@ function! bootstrap#before() abort
 	nnoremap <F8> :tabn<cr>
 	nnoremap <leader>? :Cheat40<cr>
 
-	" Set fold method to marker
-	set foldmethod=marker
-
 	" Highlights search and replace matches as you type
 	set inccommand=nosplit
 
@@ -18,6 +15,7 @@ function! bootstrap#before() abort
 		\ 'haskell': ['ghc', 'hlint'],
 		\ 'bash': ['shellcheck'],
 		\ 'rust': ['rls', 'cargo', 'rustc'],
+		\ 'zsh': ['shellcheck']
 		\}
 
 	let g:ale_fixers = {
@@ -36,5 +34,7 @@ function! bootstrap#before() abort
 	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
 endfunction
 
-"function! bootstrap#after() abort
-"endfunction
+function! bootstrap#after() abort
+	" Set fold method to marker
+	set foldmethod=marker
+endfunction
