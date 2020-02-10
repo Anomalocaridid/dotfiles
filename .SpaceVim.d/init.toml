@@ -113,11 +113,6 @@
 	name = "tridactyl/vim-tridactyl"
 	merged = false
 
-# Adds Commands for block commenting
-[[custom_plugins]]
-	name = "preservim/nerdcommenter"
-	merged = false
-
 # Fun plugins
 [[custom_plugins]]
 	name = "johngrib/vim-game-code-break"
