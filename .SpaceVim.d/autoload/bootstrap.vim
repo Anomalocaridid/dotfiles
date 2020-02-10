@@ -1,16 +1,29 @@
 function! bootstrap#before() abort
 	" Keybindings {{{
+	" Slready taken keys:
+	" <F1> opens the help screen
+	" <F2> opens ctags
+	" <F3> opens NERDTree
+	"
+	" Undotree
 	nnoremap <F4> :UndotreeToggle<cr>
+
+	" Misc navigation
 	nnoremap <F5> :bp<cr>
 	nnoremap <F6> :bn<cr>
 	nnoremap <F7> :tabp<cr>
 	nnoremap <F8> :tabn<cr>
+
+	" Cheatsheet
 	nnoremap <leader>? :Cheat40<cr>
+
+	" ALE
+	nnoremap <F9> :ALEDetail<cr>
 	" }}}
 
 	" ALE Settings {{{
 	let g:ale_linters = {
-		\ 'haskell': ['ghc', 'hlint'],
+		\ 'haskell': ['hlint', 'hdevtools'],
 		\ 'bash': ['shellcheck'],
 		\ 'rust': ['rls', 'cargo', 'rustc'],
 		\ 'zsh': ['shellcheck']
