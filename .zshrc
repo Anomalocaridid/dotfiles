@@ -129,6 +129,10 @@ bindkey -M vicmd 'j' history-substring-search-down
 alias ls="exa"
 alias vim="nvim"
 
+# Ohmyzsh's colorize plugin commands
+alias cat="ccat"
+alias less="cless"
+
 # One character ~/.zshrc sourcing
 alias .=". ~/.zshrc"
 
