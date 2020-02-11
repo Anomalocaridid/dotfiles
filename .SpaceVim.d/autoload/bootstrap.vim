@@ -26,7 +26,7 @@ function! bootstrap#before() abort
 		\ 'haskell': ['hlint', 'hdevtools'],
 		\ 'bash': ['shellcheck'],
 		\ 'rust': ['rls', 'cargo', 'rustc'],
-		\ 'zsh': ['shellcheck']
+		\ 'zsh': ['shellcheck'],
 		\}
 
 	let g:ale_fixers = {
@@ -62,7 +62,7 @@ endfunction
 function! bootstrap#after() abort
 	" Set fold method to marker
 	set foldmethod=marker
-	
+
 	" Show command in bottom bar
 	set showcmd
 endfunction
