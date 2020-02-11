@@ -138,6 +138,7 @@ alias .=". ~/.zshrc"
 
 # So I don't accidentally delete anything again
 alias rm="rm -i"
+alias mv="mv -i"
 
 # Command to show the main drive's space at a glance
 alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
