@@ -62,4 +62,7 @@ endfunction
 function! bootstrap#after() abort
 	" Set fold method to marker
 	set foldmethod=marker
+	
+	" Show command in bottom bar
+	set showcmd
 endfunction
