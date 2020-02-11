@@ -65,4 +65,7 @@ function! bootstrap#after() abort
 
 	" Show command in bottom bar
 	set showcmd
+
+	" Hide redundant mode line
+	set noshowmode
 endfunction
