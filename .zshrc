@@ -6,7 +6,7 @@ fpath+=$HOME/.zfunc
 # Ascii Terminal greeting. {{{
 # Shows Linux distro and version in rainbow ascii art.
 echo -en "\e[1m"
-lsb_release --description --release | cut -f2 | tr '\n' ' ' | toilet -t -f smslant -F border | lolcat
+lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat
 echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
 
 # }}}
@@ -96,15 +96,6 @@ zplug clean
 
 # }}}
 
-# Help Command Alias {{{
-autoload -U run-help
-autoload run-help-git
-autoload run-help-svn
-autoload run-help-svk
-alias help=run-help
-
-# }}}
-
 # Keybindings {{{
 
 # Keybindings for history-substring-search
@@ -125,6 +116,15 @@ bindkey -M vicmd 'j' history-substring-search-down
 # }}}
 
 # Aliases {{{
+# Help Command Alias {{{
+autoload -U run-help
+autoload run-help-git
+autoload run-help-svn
+autoload run-help-svk
+alias help=run-help
+
+# }}}
+
 # Aliases alternative programs to commonly used commands
 alias ls="exa"
 alias vim="nvim"
