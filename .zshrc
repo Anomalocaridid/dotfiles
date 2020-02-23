@@ -113,6 +113,9 @@ bindkey '^[[B' history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
 
+# Make the delete key work like a delete key
+bindkey "^[[3~" delete-char
+
 # }}}
 
 # Aliases {{{
