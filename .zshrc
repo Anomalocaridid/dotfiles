@@ -73,6 +73,7 @@ zplug "plugins/z", from:oh-my-zsh
 zplug "zsh-users/zsh-history-substring-search"
 
 # Syntax highlighted file viewer
+# Requires Pygments
 zplug "plugins/colorize", from:oh-my-zsh
 
 # Auto-suggestions
@@ -80,6 +81,19 @@ zplug "zsh-users/zsh-autosuggestions"
 
 # Vi-like functionality
 zplug "plugins/vi-mode", from:oh-my-zsh
+
+# Adds short command to reload and recompile zsh config
+zplug "plugins/zsh_reload", from:oh-my-zsh
+
+# ESC twice to prefix current or previous command with sudo
+zplug "plugins/sudo", from:oh-my-zsh
+
+# Warp to directory
+zplug "plugins/wd", from:oh-my-zsh
+
+# Fish-like interactive cd
+# requires fzf
+zplug "plugins/zsh-interactive-cd", from:oh-my-zsh
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
@@ -137,7 +151,8 @@ alias cat="ccat"
 alias less="cless"
 
 # One character ~/.zshrc sourcing
-alias .=". ~/.zshrc"
+#alias .=". ~/.zshrc"
+alias .="src"
 
 # So I don't accidentally delete anything again
 alias rm="rm -i"
