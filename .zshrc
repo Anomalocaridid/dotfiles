@@ -133,14 +133,6 @@ bindkey "^[[3~" delete-char
 # }}}
 
 # Aliases {{{
-# Help Command Alias {{{
-autoload -U run-help
-autoload run-help-git
-autoload run-help-svn
-autoload run-help-svk
-alias help=run-help
-
-# }}}
 
 # Aliases alternative programs to commonly used commands
 alias ls="exa"
@@ -157,9 +149,19 @@ alias .="src"
 # So I don't accidentally delete anything again
 alias rm="rm -i"
 alias mv="mv -i"
+alias cp="cp -i"
 
 # Command to show the main drive's space at a glance
 alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
+
+# Help Command Alias {{{
+autoload -U run-help
+autoload run-help-git
+autoload run-help-svn
+autoload run-help-svk
+alias help=run-help
+
+# }}}
 
 # Aliases for ls {{{
 # Show all files including dotfiles in directory
@@ -182,6 +184,12 @@ alias d="kitty +kitten diff"             # Displays diffs between two files.
 alias hints="kitty +kitten hints"        # Selects and acts on arbitrary text snippets on screen.
 alias panel="kitty +kitten panel"        # Draws a gpu accelerated panel using another program's output.
 alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
+
+# }}}
+
+# Aliases for quick access to frequently edited dotfiles {{{
+alias vimrc="vim -p ~/.SpaceVim.d/init.toml ~/.SpaceVim.d/autoload/bootstrap.vim"
+alias zshrc="vim ~/.zshrc"
 
 # }}}
 
@@ -216,9 +224,18 @@ function set-zsh() {
 
 # }}}
 
-# Autoload built in commands not enabled by default
+# Autoload built in commands not enabled by default {{{
+# Calculator program
 autoload zcalc
+
+# Move/rename files that match a pattern/
 autoload zmv
+
+# Tetris
+autoload -U tetriscurses
+alias tetris="tetriscurses"
+
+# }}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
