@@ -14,11 +14,15 @@ function! bootstrap#before() abort
 	nnoremap <F7> :tabp<cr>
 	nnoremap <F8> :tabn<cr>
 
+	" ALE
+	nnoremap <F9> :ALEDetail<cr>
+
 	" Cheatsheet
 	nnoremap <leader>? :Cheat40<cr>
 
-	" ALE
-	nnoremap <F9> :ALEDetail<cr>
+	" Turn off highlighting after hitting Enter
+	nnoremap <CR> :noh<CR><CR>
+
 	" }}}
 
 	" ALE Settings {{{
@@ -43,20 +47,12 @@ function! bootstrap#before() abort
 	let g:ale_fix_on_save = 1
 	" }}}
 
-	" NERDCommenter Settings {{{
-	let g:NERDSpaceDelims = 1
-	let g:NERDTrimTrailingWhitespace = 1
-	" }}}
-
 	" Misc Settings {{{
 	" Highlights search and replace matches as you type
 	set inccommand=nosplit
 
 	" Tab expands to spaces only for certain filetypes
 	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
-
-	" Set fold method to marker
-	set foldmethod=marker
 	" }}}
 endfunction
 
