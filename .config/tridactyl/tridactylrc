@@ -93,6 +93,9 @@ set newtab https://derpsquid9.github.io/startpage
 " Jumps to the first match when using :find
 set incsearch true
 
+" Shows partial command while it is typed.
+set modeindicatorshowkeys true
+
 " }}}
 
 " URL redirects {{{
