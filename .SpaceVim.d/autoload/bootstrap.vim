@@ -20,8 +20,8 @@ function! bootstrap#before() abort
 	" Cheatsheet
 	nnoremap <leader>? :Cheat40<cr>
 
-	" Turn off highlighting after hitting Enter
-	nnoremap <CR> :noh<CR><CR>
+	" Turn off highlighting after hitting Escape
+	nnoremap <ESC> :noh<CR><ESC>
 
 	" }}}
 
@@ -51,15 +51,15 @@ function! bootstrap#before() abort
 	" Highlights search and replace matches as you type
 	set inccommand=nosplit
 
+	" Set fold method to marker
+	set foldmethod=marker
+
 	" Tab expands to spaces only for certain filetypes
 	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
 	" }}}
 endfunction
 
 function! bootstrap#after() abort
-	" Set fold method to marker
-	set foldmethod=marker
-
 	" Show command in bottom bar
 	set showcmd
 
