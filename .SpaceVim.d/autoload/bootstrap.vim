@@ -1,12 +1,17 @@
 function! bootstrap#before() abort
 	" Keybindings {{{
-	" Slready taken keys:
+
+	" Function Keys {{{
+
+	" Already taken keys:
 	" <F1> opens the help screen
 	" <F2> opens ctags
-	" <F3> opens NERDTree
+	" <F3> opens file manager
 	"
 	" Undotree
-	nnoremap <F4> :UndotreeToggle<cr>
+	" nnoremap <F4> :UndotreeToggle<cr>
+	" Mundo
+	nnoremap <F4> :MundoToggle<cr>
 
 	" Misc navigation
 	nnoremap <F5> :bp<cr>
@@ -17,6 +22,11 @@ function! bootstrap#before() abort
 	" ALE
 	nnoremap <F9> :ALEDetail<cr>
 
+	" Toggle Goyo
+	nnoremap <F10> :Goyo<cr>
+
+	" }}}
+
 	" Cheatsheet
 	nnoremap <leader>? :Cheat40<cr>
 
@@ -26,6 +36,7 @@ function! bootstrap#before() abort
 	" }}}
 
 	" ALE Settings {{{
+
 	let g:ale_linters = {
 		\ 'haskell': ['hlint', 'hdevtools'],
 		\ 'bash': ['shellcheck'],
@@ -45,9 +56,11 @@ function! bootstrap#before() abort
 	let g:ale_lint_on_save = 0
 
 	let g:ale_fix_on_save = 1
+
 	" }}}
 
 	" Misc Settings {{{
+
 	" Highlights search and replace matches as you type
 	set inccommand=nosplit
 
@@ -56,6 +69,7 @@ function! bootstrap#before() abort
 
 	" Tab expands to spaces only for certain filetypes
 	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
+
 	" }}}
 endfunction
 

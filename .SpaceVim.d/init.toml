@@ -1,6 +1,7 @@
 # Based off of Wang Shidong's basic.toml for SpaceVim
 
 # SpaceVim Global Options {{{
+
 [options]
 	# Theme settings
 	colorscheme = "palenight"
@@ -33,7 +34,9 @@
 	bootstrap_after = "bootstrap#after"
 
 	# File manager
-	filemanager = "nerdtree"
+	filemanager = "defx"
+	filetree_direction = "left"
+
 # }}}
 
 # Installed Layers {{{
@@ -65,6 +68,9 @@
 
 [[layers]]
 	name = "default"
+
+[[layers]]
+	name = "tools"
 
 [[layers]]
 	name = "games"
