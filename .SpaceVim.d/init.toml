@@ -41,14 +41,6 @@
 
 # Installed Layers {{{
 
-# Disable autocomplete layer {{{
-[[layers]]
-	name = "autocomplete"
-	#auto-completion-return-key-behavior = "complete"
-	#auto-completion-tab-key-behavior = "cycle"
-	enable = false
-# }}}
-
 [[layers]]
 	name = "shell"
 	default_position = "top"
@@ -76,15 +68,18 @@
 	name = "games"
 
 # Layers for git {{{
+
 [[layers]]
 	name = "VersionControl"
 
 [[layers]]
 	name = "git"
 	git-plugin = "fugitive"
+
 # }}}
 
 # Language layers {{{
+
 [[layers]]
 	name = "lang#haskell"
 
@@ -103,10 +98,6 @@
 # }}}
 
 # Custom Plugins {{{
-[[custom_plugins]]
-	name = "mbbill/undotree"
-	on_cmd = ["UndotreeToggle"]
-	merged = false
 
 # Integrated Cheat Sheet
 [[custom_plugins]]
@@ -134,4 +125,15 @@
 	name = "deris/vim-duzzle"
 	on_cmd = ["DuzzleStart"]
 	merged = false
+
+# }}}
+
+# Disabled layers {{{
+
+[[layers]]
+	name = "autocomplete"
+	#auto-completion-return-key-behavior = "complete"
+	#auto-completion-tab-key-behavior = "cycle"
+	enable = false
+
 # }}}
