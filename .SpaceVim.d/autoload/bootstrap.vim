@@ -70,7 +70,15 @@ function! bootstrap#before() abort
 	" Tab expands to spaces only for certain filetypes
 	autocmd BufRead,BufNewFile *.hs,*.yaml,*.cabal setlocal expandtab
 
+	" Automatically toggle number style
+	augroup numbertoggle
+	    autocmd!
+	    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
+	    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+	augroup END
+
 	" }}}
+
 endfunction
 
 function! bootstrap#after() abort
