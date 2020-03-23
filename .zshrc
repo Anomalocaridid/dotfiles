@@ -80,7 +80,7 @@ zplug "plugins/colorize", from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions"
 
 # Vi-like functionality
-zplug "plugins/vi-mode", from:oh-my-zsh
+#zplug "plugins/vi-mode", from:oh-my-zsh
 
 # Adds short command to reload and recompile zsh config
 zplug "plugins/zsh_reload", from:oh-my-zsh
