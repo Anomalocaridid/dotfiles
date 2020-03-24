@@ -1,3 +1,5 @@
+" vim:fileencoding=utf-8:foldmethod=marker
+
 function! bootstrap#before() abort
 	" Keybindings {{{
 
