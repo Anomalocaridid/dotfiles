@@ -1,7 +1,23 @@
 #!/bin/false
+# vim:fileencoding=utf-8:foldmethod=marker
 
-export PATH=$HOME/.cargo/bin:$HOME/scripts:$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+# $PATH declaration {{{
+
+# Location of binaries installed by Rust's Cargo
+cargo_bin=$HOME/.cargo/bin
+
+# Location of binaries installed by Haskell's Stack
+stack_bin=$HOME/.local/bin
+
+# Folder for scripts
+scripts=$HOME/Scripts
+
+home_bin=$HOME/bin
+
+export PATH=$cargo_bin:$stack_bin:$scripts:$home_bin:/usr/local/bin:$PATH
 fpath+=$HOME/.zfunc
+
+# }}}
 
 # Ascii Terminal greeting. {{{
 # Shows Linux distro and version in rainbow ascii art.
