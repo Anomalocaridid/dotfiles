@@ -3,32 +3,6 @@
 function! bootstrap#before() abort
 	" Keybindings {{{
 
-	" Function Keys {{{
-
-	" Already taken keys:
-	" <F1> opens the help screen
-	" <F2> opens ctags
-	" <F3> opens file manager
-	"
-	" Undotree
-	" nnoremap <F4> :UndotreeToggle<cr>
-	" Mundo
-	nnoremap <F4> :MundoToggle<cr>
-
-	" Misc navigation
-	nnoremap <F5> :bp<cr>
-	nnoremap <F6> :bn<cr>
-	nnoremap <F7> :tabp<cr>
-	nnoremap <F8> :tabn<cr>
-
-	" ALE
-	nnoremap <F9> :ALEDetail<cr>
-
-	" Toggle Goyo
-	nnoremap <F10> :Goyo<cr>
-
-	" }}}
-
 	" Cheatsheet
 	nnoremap <leader>? :Cheat40<cr>
 
@@ -84,6 +58,32 @@ function! bootstrap#before() abort
 endfunction
 
 function! bootstrap#after() abort
+	" Function Keys {{{
+
+	" Already taken keys:
+	" <F1> opens the help screen
+	" <F2> opens ctags
+	" <F3> opens file manager
+	"
+	" Undotree
+	" nnoremap <F4> :UndotreeToggle<cr>
+	" Mundo
+	nnoremap <F4> :MundoToggle<cr>
+
+	" Misc navigation
+	nnoremap <F5> :bp<cr>
+	nnoremap <F6> :bn<cr>
+	nnoremap <F7> :tabp<cr>
+	nnoremap <F8> :tabn<cr>
+
+	" ALE
+	nnoremap <F9> :ALEDetail<cr>
+
+	" Toggle Goyo
+	nnoremap <F10> :Goyo<cr>
+
+	" }}}
+
 	" Show command in bottom bar
 	set showcmd
 
