@@ -1,21 +1,27 @@
 #!/bin/false
 # vim:fileencoding=utf-8:foldmethod=marker
 
+# Environment Variables {{{
+
 # $PATH declaration {{{
 
 # Location of binaries installed by Rust's Cargo
-cargo_bin=$HOME/.cargo/bin
+CARGO_BIN=$HOME/.cargo/bin
 
 # Location of binaries installed by Haskell's Stack
-stack_bin=$HOME/.local/bin
+STACK_BIN=$HOME/.local/bin
 
 # Folder for scripts
-scripts=$HOME/Scripts
+SCRIPTS=$HOME/Scripts
 
-home_bin=$HOME/bin
+HOME_BIN=$HOME/bin
 
-export PATH=$cargo_bin:$stack_bin:$scripts:$home_bin:/usr/local/bin:$PATH
+export PATH=$CARGO_BIN:$STACK_BIN:$SCRIPTS:$HOME_BIN:/usr/local/bin:$PATH
 fpath+=$HOME/.zfunc
+
+# }}}
+
+export EDITOR="nvim"
 
 # }}}
 
