@@ -3,9 +3,6 @@
 function! bootstrap#before() abort
 	" Keybindings {{{
 
-	" Cheatsheet
-	nnoremap <leader>? :Cheat40<cr>
-
 	" Turn off highlighting after hitting Escape
 	nnoremap <ESC> :noh<CR><ESC>
 
@@ -68,9 +65,7 @@ function! bootstrap#after() abort
 	" <F3> opens file manager
 	"
 	" Undotree
-	" nnoremap <F4> :UndotreeToggle<cr>
-	" Mundo
-	nnoremap <F4> :MundoToggle<cr>
+	nnoremap <F4> :UndotreeToggle<cr>
 
 	" Misc navigation
 	nnoremap <F5> :bp<cr>
@@ -81,8 +76,7 @@ function! bootstrap#after() abort
 	" ALE
 	nnoremap <F9> :ALEDetail<cr>
 
-	" Toggle Goyo
-	nnoremap <F10> :Goyo<cr>
+	unmap <F11>
 
 	" }}}
 

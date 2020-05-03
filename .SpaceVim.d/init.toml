@@ -36,7 +36,6 @@
 
 	# File manager
 	filemanager = "defx"
-	filetree_direction = "left"
 
 # }}}
 
@@ -62,8 +61,8 @@
 [[layers]]
 	name = "default"
 
-[[layers]]
-	name = "tools"
+# [[layers]]
+#     name = "tools"
 
 [[layers]]
 	name = "games"
@@ -99,6 +98,12 @@
 # }}}
 
 # Custom Plugins {{{
+
+# Undo Tree
+[[custom_plugins]]
+	name = "mbbill/undotree"
+		on_cmd = ["UndotreeToggle"]
+	merged = false
 
 # Integrated Cheat Sheet
 [[custom_plugins]]
