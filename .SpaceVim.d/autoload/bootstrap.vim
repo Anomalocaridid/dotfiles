@@ -14,7 +14,7 @@ function! bootstrap#before() abort
 	" ALE Settings {{{
 
 	let g:ale_linters = {
-		\ 'haskell': ['hlint', 'hdevtools'],
+		\ 'haskell': ['hie'],
 		\ 'bash': ['shellcheck'],
 		\ 'rust': ['rls', 'cargo', 'rustc'],
 		\ 'zsh': ['shellcheck'],
@@ -26,6 +26,8 @@ function! bootstrap#before() abort
 		\ 'sh': ['shfmt'],
 		\ 'rust': ['rustfmt'],
 		\}
+
+	let g:ale_haskell_hie_executable = 'hie-wrapper'
 
     let g:ale_rust_cargo_use_clippy = 1
 
