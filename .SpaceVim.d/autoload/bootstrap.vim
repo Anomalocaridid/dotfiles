@@ -11,7 +11,7 @@ function! bootstrap#before() abort
 	" ALE Settings {{{
 
 	let g:ale_linters = {
-		\ 'haskell': ['hie'],
+		\ 'haskell': ['hie', 'ghc'],
 		\ 'bash': ['shellcheck'],
 		\ 'rust': ['rls', 'cargo', 'rustc'],
 		\ 'zsh': ['shellcheck'],
