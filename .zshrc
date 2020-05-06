@@ -70,16 +70,25 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}'
 # }}}
 
 # Zplug Plugins {{{
-# Check if zplug is installed
+
+# Check if zplug is installed {{{
 if [[ ! -d ~/.zplug ]]; then
     git clone https://github.com/zplug/zplug ~/.zplug
     source ~/.zplug/init.zsh && zplug update --self
 fi
 
+# }}}
+
+# All plugins should be below this command.
 source ~/.zplug/init.zsh
 
 # zplug self management
 zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+
+# Powerlevel10k Theme
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+
+# zsh-users {{{
 
 # Syntax highlighting
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -87,20 +96,21 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # Extends auto completion
 zplug "zsh-users/zsh-completions"
 
-# Oh-My-Zsh's git plugin
-zplug "plugins/git", from:oh-my-zsh
-
-# Powerlevel10k Theme
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
-
-# Change directory based on history
-zplug "plugins/z", from:oh-my-zsh
-
 # Search history based on already entered text
 zplug "zsh-users/zsh-history-substring-search"
 
 # Auto-suggestions
 zplug "zsh-users/zsh-autosuggestions"
+
+# }}}
+
+# Oh-My-Zsh {{{
+
+# Oh-My-Zsh's git plugin
+zplug "plugins/git", from:oh-my-zsh
+
+# Change directory based on history
+zplug "plugins/z", from:oh-my-zsh
 
 # Adds short command to reload and recompile zsh config
 zplug "plugins/zsh_reload", from:oh-my-zsh
@@ -112,7 +122,7 @@ zplug "plugins/sudo", from:oh-my-zsh
 zplug "plugins/wd", from:oh-my-zsh
 
 # Fish-like interactive cd
-# requires fzf
+# Requires fzf
 zplug "plugins/zsh-interactive-cd", from:oh-my-zsh
 
 # Aliases for Arch-based Linux distros
@@ -121,7 +131,13 @@ zplug "plugins/archlinux", from:oh-my-zsh
 # Alias finder
 zplug "plugins/alias-finder", from:oh-my-zsh
 
-# Install packages that have not been installed yet
+# Provides suggestions for packages to be installed if a common command is not found
+# Requires pkgfile
+zplug "plugins/command-not-found", from:oh-my-zsh
+
+# }}}
+
+# Install packages that have not been installed yet {{{
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -rq; then
@@ -131,7 +147,13 @@ if ! zplug check --verbose; then
     fi
 fi
 
+# }}}
+
+# All plugins should be above this command
+# Load installed plugins
 zplug load
+
+# Clean unused plugins
 zplug clean
 
 # }}}
@@ -169,6 +191,9 @@ alias less="bat --paging=always"
 alias grep="batgrep"
 alias man="batman"
 alias diff="batdiff"
+batthemes() {
+	bat --list-themes | fzf --preview="bat --theme={} --color=always $1"
+}
 
 # Ohmyzsh's colorize plugin commands
 # alias cat="ccat"
@@ -256,7 +281,7 @@ function set-zsh() {
 
 # }}}
 
-# Autoload built in commands not enabled by default {{{
+# Autoload zsh modules not enabled by default {{{
 # Calculator program
 autoload zcalc
 
