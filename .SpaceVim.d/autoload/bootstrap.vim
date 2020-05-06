@@ -35,49 +35,49 @@ function! bootstrap#before() abort
 	" Tasks {{{
 
 	" Rust {{{
-		function! s:cargo_task() abort
-			if filereadable('Cargo.toml')
-				let commands = ['build', 'run', 'test']
-				let conf = {}
-				for cmd in commands
-					call extend(conf, {
-								\ cmd: {
-								\ 'command': 'cargo',
-								\ 'args' : [cmd],
-								\ 'isDetected' : 1,
-								\ 'detectedName' : 'cargo:'
-								\ }
-								\ })
-				endfor
-				return conf
-			else
-				return {}
-			endif
-		endfunction
-		call SpaceVim#plugins#tasks#reg_provider(funcref('s:cargo_task'))
+	function! s:cargo_task() abort
+		if filereadable('Cargo.toml')
+			let commands = ['build', 'run', 'test']
+			let conf = {}
+			for cmd in commands
+				call extend(conf, {
+							\ cmd: {
+							\ 'command': 'cargo',
+							\ 'args' : [cmd],
+							\ 'isDetected' : 1,
+							\ 'detectedName' : 'cargo:'
+							\ }
+							\ })
+			endfor
+			return conf
+		else
+			return {}
+		endif
+	endfunction
+	call SpaceVim#plugins#tasks#reg_provider(funcref('s:cargo_task'))
 	" }}}
 
 	" Haskell {{{
-		function! s:stack_task() abort
-			if filereadable('stack.yaml')
-				let commands = ['build', 'run', 'test']
-				let conf = {}
-				for cmd in commands
-					call extend(conf, {
-								\ cmd : {
-								\ 'command': 'stack',
-								\ 'args' : [cmd],
-								\ 'isDetected' : 1,
-								\ 'detectedName' : 'stack:'
-								\ }
-								\ })
-				endfor
-				return conf
-			else
-				return {}
-			endif
-		endfunction
-		call SpaceVim#plugins#tasks#reg_provider(funcref('s:stack_task'))
+	function! s:stack_task() abort
+		if filereadable('stack.yaml')
+			let commands = ['build', 'run', 'test']
+			let conf = {}
+			for cmd in commands
+				call extend(conf, {
+							\ cmd : {
+							\ 'command': 'stack',
+							\ 'args' : [cmd],
+							\ 'isDetected' : 1,
+							\ 'detectedName' : 'stack:'
+							\ }
+							\ })
+			endfor
+			return conf
+		else
+			return {}
+		endif
+	endfunction
+	call SpaceVim#plugins#tasks#reg_provider(funcref('s:stack_task'))
 	" }}}
 
 	" }}}
