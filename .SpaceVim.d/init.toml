@@ -61,8 +61,8 @@
 [[layers]]
 	name = "default"
 
-# [[layers]]
-#     name = "tools"
+[[layers]]
+	name = "fzf"
 
 [[layers]]
 	name = "games"
