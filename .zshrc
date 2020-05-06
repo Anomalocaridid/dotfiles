@@ -23,6 +23,14 @@ fpath+=$HOME/.zfunc
 
 export EDITOR="nvim"
 
+# Program-specific Variables {{{
+
+# bat {{{
+export BAT_THEME="Dracula"
+# }}}
+
+# }}}
+
 # }}}
 
 # Ascii Terminal greeting. {{{
@@ -85,24 +93,14 @@ zplug "plugins/git", from:oh-my-zsh
 # Powerlevel10k Theme
 zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
 
-# Colored man pages
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-
 # Change directory based on history
 zplug "plugins/z", from:oh-my-zsh
 
 # Search history based on already entered text
 zplug "zsh-users/zsh-history-substring-search"
 
-# Syntax highlighted file viewer
-# Requires Pygments
-zplug "plugins/colorize", from:oh-my-zsh
-
 # Auto-suggestions
 zplug "zsh-users/zsh-autosuggestions"
-
-# Vi-like functionality
-#zplug "plugins/vi-mode", from:oh-my-zsh
 
 # Adds short command to reload and recompile zsh config
 zplug "plugins/zsh_reload", from:oh-my-zsh
@@ -116,6 +114,12 @@ zplug "plugins/wd", from:oh-my-zsh
 # Fish-like interactive cd
 # requires fzf
 zplug "plugins/zsh-interactive-cd", from:oh-my-zsh
+
+# Aliases for Arch-based Linux distros
+zplug "plugins/archlinux", from:oh-my-zsh
+
+# Alias finder
+zplug "plugins/alias-finder", from:oh-my-zsh
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
@@ -160,9 +164,15 @@ bindkey "^[[3~" delete-char
 alias ls="exa"
 alias vim="nvim"
 
+alias cat="bat"
+alias less="bat --paging=always"
+alias grep="batgrep"
+alias man="batman"
+alias diff="batdiff"
+
 # Ohmyzsh's colorize plugin commands
-alias cat="ccat"
-alias less="cless"
+# alias cat="ccat"
+# alias less="cless"
 
 # One character ~/.zshrc sourcing
 #alias .=". ~/.zshrc"
