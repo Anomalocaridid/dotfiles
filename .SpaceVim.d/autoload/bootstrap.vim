@@ -22,6 +22,9 @@ function! bootstrap#before() abort
 		\ 'haskell': ['hindent', 'stylish-haskell'],
 		\ 'sh': ['shfmt'],
 		\ 'rust': ['rustfmt'],
+		\ 'html': ['prettier'],
+		\ 'css': ['prettier'],
+		\ 'yaml': ['prettier'],
 		\}
 
     let g:ale_rust_cargo_use_clippy = 1
@@ -29,6 +32,11 @@ function! bootstrap#before() abort
 	let g:ale_lint_on_save = 0
 
 	let g:ale_fix_on_save = 1
+
+	" Also applies to other languages that use prettier
+	let g:ale_javascript_prettier_options = '--tab-width 4 --use-tabs'
+
+	" let g:ale_css_prettier_options = '--tab-width 4 --use-tabs'
 
 	" }}}
 
