@@ -67,7 +67,7 @@ function! bootstrap#before() abort
 
 	" Haskell {{{
 	function! s:stack_task() abort
-		if filereadable('stack.yaml')
+		if filereadable('package.yaml')
 			let commands = ['build', 'run', 'test']
 			let conf = {}
 			for cmd in commands
