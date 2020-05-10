@@ -7,7 +7,7 @@ face global string rgb:d100c3,default
 face global error default,rgb:000000
 face global keyword rgb:f57600,default+b
 face global operator rgb:212121,default
-face global attribute rgb:000000,default
+face global attribute rgb:711c91,default
 face global comment rgb:123e7d,default
 face global meta rgb:787878,default
 
@@ -47,3 +47,7 @@ face global StatusLineInfo rgb:d100c3,rgb:000b1f
 face global StatusLineValue rgb:00ff00,rgb:000b1f
 face global StatusCursor rgb:000b1f,rgb:0abdc7
 face global Prompt rgb:f57600,rgb:000b1f
+
+# kak-crosshairs integration
+face global crosshairs_line rgb:000b1e,rgb:123e7c+b
+face global crosshairs_column rgb:000b1e,rgb:123e7c+b
