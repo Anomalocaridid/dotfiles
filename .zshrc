@@ -205,6 +205,9 @@ alias cp="cp -i"
 # Command to show the main drive's space at a glance
 alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
 
+# Force tmux to use 256 colors
+alias tmux="tmux -2"
+
 # Help Command Alias {{{
 autoload -U run-help
 autoload run-help-git
