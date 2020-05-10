@@ -21,7 +21,6 @@ fpath+=$HOME/.zfunc
 
 # }}}
 
-#export EDITOR="nvim"
 export EDITOR="kak"
 
 # Program-specific Variables {{{
@@ -185,7 +184,6 @@ bindkey "^[[3~" delete-char
 
 # Aliases alternative programs to commonly used commands
 alias ls="exa"
-#alias vim="nvim"
 
 alias cat="bat"
 alias less="bat --paging=always"
@@ -196,12 +194,7 @@ batthemes() {
 	bat --list-themes | fzf --preview="bat --theme={} --color=always $1"
 }
 
-# Ohmyzsh's colorize plugin commands
-# alias cat="ccat"
-# alias less="cless"
-
 # One character ~/.zshrc sourcing
-#alias .=". ~/.zshrc"
 alias .="src"
 
 # So I don't accidentally delete anything again
@@ -246,23 +239,12 @@ alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
 # }}}
 
 # Aliases for quick access to frequently edited dotfiles {{{
-#alias vimrc="vim -p ~/.SpaceVim.d/init.toml ~/.SpaceVim.d/autoload/bootstrap.vim"
-#alias zshrc="vim ~/.zshrc"
-alias zshrc="kak ~/.zshrc"
+alias zshrc="$EDITOR ~/.zshrc"
 alias kakrc="kak ~/.config/kak/kakrc ~/.config/kak-lsp/kak-lsp.toml"
 
 # }}}
 
 # Misc Aliases {{{
-# A helpful cow reminds you that you are not in vim.
-#function not-in-vim() {
-#	cowsay "You aren't in vim, dummy!" | lolcat
-#}
-#alias :w="not-in-vim"
-#alias :x="not-in-vim"
-#
-## Vim style exiting.
-#alias :q="exit"
 
 # A fabulous quote of the day, delivered by a cow.
 alias moo="fortune | cowsay | lolcat"
