@@ -215,7 +215,7 @@ alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
 
 # Force tmux to use 256 colors
 alias tmux="tmux -2"
-alias exit="tmux kill-server"
+alias tkill="tmux kill-server"
 
 # Help Command Alias {{{
 autoload -U run-help
