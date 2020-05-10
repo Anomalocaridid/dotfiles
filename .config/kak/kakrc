@@ -4,9 +4,9 @@ source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
 
-plug "dracula/kakoune" theme config %{
-	colorscheme dracula
-}
+#plug "dracula/kakoune" theme config %{
+#	colorscheme dracula
+#}
 
 plug "ul/kak-lsp" do %{
 	cargo install --locked --force --path .
@@ -75,6 +75,9 @@ plug 'delapouite/kakoune-buffers' %{
 	map global normal ^ ': enter-buffers-mode<ret>' -docstring 'buffers'
 	map global normal <a-^> ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
 }
+
+# Set colorscheme to custom one
+colorscheme cyberpunk-neon
 
 # Buffer user mode
 map global user b ':enter-buffers-mode<ret>'              -docstring 'buffers…'
