@@ -96,8 +96,8 @@ set-option global tabstop 4
 
 # Function Key Mapping
 #map global normal <F2> ': tagbar-toggle<ret>'
-map global normal <F2> ': fzf-mode<ret>'
-map global normal <F3> ': kaktree-toggle<ret>'
+map global normal <F3> ': fzf-mode<ret>'
+map global normal <F2> ': kaktree-toggle<ret>'
 
 map global normal <F5> ': info-buffers<ret>'
 
