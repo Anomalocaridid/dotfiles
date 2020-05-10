@@ -34,10 +34,9 @@ export BAT_THEME="Dracula"
 # }}}
 
 # Autostart tmux {{{
-# As long as tmux is not already started.
+# As long you are not in a tmux session.
 # And you are in an interactive shell.
 if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [[ $- = *i* ]]; then
-    #tmux attach &> /dev/null ||
     exec tmux
 fi
 # }}}
@@ -216,6 +215,7 @@ alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
 
 # Force tmux to use 256 colors
 alias tmux="tmux -2"
+alias exit="tmux kill-server"
 
 # Help Command Alias {{{
 autoload -U run-help
