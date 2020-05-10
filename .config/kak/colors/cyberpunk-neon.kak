@@ -6,7 +6,7 @@ face global identifier rgb:721c92,default
 face global string rgb:d100c3,default
 face global error default,rgb:000000
 face global keyword rgb:f57600,default+b
-face global operator rgb:212121,default
+face global operator rgb:F57800,default
 face global attribute rgb:711c91,default
 face global comment rgb:123e7d,default
 face global meta rgb:787878,default
