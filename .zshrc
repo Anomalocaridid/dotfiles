@@ -33,6 +33,15 @@ export BAT_THEME="Dracula"
 
 # }}}
 
+# Autostart tmux {{{
+# As long as tmux is not already started.
+# And you are in an interactive shell.
+if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [[ $- = *i* ]]; then
+    #tmux attach &> /dev/null ||
+    exec tmux
+fi
+# }}}
+
 # Ascii Terminal greeting. {{{
 # Shows Linux distro and version in rainbow ascii art.
 echo -en "\e[1m"
