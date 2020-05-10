@@ -52,6 +52,7 @@ plug "andreyorst/kaktree" defer kaktree %{
 plug "andreyorst/powerline.kak" defer powerline %{
 	powerline-theme tomorrow-night
 	set-option global powerline_shorten_bufname short
+	# Default layout
 	#set-option global powerline_format 'bufname line-column mode-info filetype client session position'
 } config %{
 	powerline-start
