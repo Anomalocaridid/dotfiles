@@ -114,6 +114,25 @@ plug 'alexherbo2/manual-indent.kak' config %{
     }
 }
 
+# Roguelike-style light simulation
+plug 'occivink/kakoune-roguelight' config %{
+    define-command roguelight-toggle %{
+        try %{
+            crosshairs
+            roguelight-enable
+        } catch %{
+            roguelight-disable
+        }
+
+        hook -group roguelight window RawKey .* roguelight-refresh
+    }
+
+    define-command roguelight-map %{
+        edit -readonly ~/.config/kak/plugins/kakoune-roguelight/map
+        roguelight-toggle
+    }
+}
+
 # Set colorscheme to custom one
 colorscheme cyberpunk-neon
 
