@@ -51,5 +51,3 @@ face global Prompt rgb:f57600,rgb:000b1f
 # kak-crosshairs integration
 face global crosshairs_line default,rgb:09254D+b
 face global crosshairs_column default,rgb:09254D+b
-
-# TODO: powerline.kak integration

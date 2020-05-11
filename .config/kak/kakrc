@@ -1,5 +1,6 @@
 add-highlighter global/ number-lines -hlcursor
 
+# Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
@@ -43,10 +44,14 @@ plug "andreyorst/kaktree" defer kaktree %{
     kaktree-enable
 }
 
+# Source my custom powerline theme
+source ~/.config/kak/colors/cyberpunk-neon-powerline.kak
+
 # Powerline Bar
 # TODO: Investigate creating a theme
 plug "andreyorst/powerline.kak" defer powerline %{
-    powerline-theme tomorrow-night
+    # Use my custom powerline theme
+    powerline-theme cyberpunk-neon
     set-option global powerline_shorten_bufname short
     # Default layout
     #set-option global powerline_format 'git bufname line-column mode-info filetype client session position'
