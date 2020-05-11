@@ -190,7 +190,7 @@ tmux_conf_theme_status_left=' #{username}@#{hostname} '
 tmux_conf_theme_status_right='#{prefix} | ↑#{?uptime_y, #{uptime_y}y,}#{?uptime_d, #{uptime_d}d,}#{?uptime_h, #{uptime_h}h,}#{?uptime_m, #{uptime_m}m,} #{uptime_s}s | ❐ #S | ● #I '
 
 # status left style
-tmux_conf_theme_status_left_fg='#c410de'  # purple
+tmux_conf_theme_status_left_fg='#ff00ff'  # purple
 tmux_conf_theme_status_left_bg='#123e7c'  # blue
 tmux_conf_theme_status_left_attr='none,'
 
