@@ -10,8 +10,8 @@ plug "ul/kak-lsp" do %{
 } config %{
     lsp-enable
     #lsp-auto-hover-enable
-    set-option global lsp_diagnostic_line_error_sign '✖'
-    set-option global lsp_diagnostic_line_warning_sign '➤'
+    set-option global lsp_diagnostic_line_error_sign "✖"
+    set-option global lsp_diagnostic_line_warning_sign "➤"
     set-option global lsp_hover_max_lines 10
 }
 
@@ -29,11 +29,11 @@ plug "insipx/kak-crosshairs" config %{
 
 # File tree navigator
 plug "andreyorst/kaktree" defer kaktree %{
-    set-option global kaktree_double_click_duration '0.5'
+    set-option global kaktree_double_click_duration "0.5"
     set-option global kaktree_indentation 1
-    set-option global kaktree_dir_icon_open  '▾ 🗁 '
-    set-option global kaktree_dir_icon_close '▸ 🗀 '
-    set-option global kaktree_file_icon      '⠀⠀🖺'
+    set-option global kaktree_dir_icon_open  "▾ 🗁 "
+    set-option global kaktree_dir_icon_close "▸ 🗀 "
+    set-option global kaktree_file_icon      "⠀⠀🖺"
 } config %{
     hook global WinSetOption filetype=kaktree %{
         remove-highlighter buffer/numbers
@@ -45,7 +45,7 @@ plug "andreyorst/kaktree" defer kaktree %{
 }
 
 # Source my custom powerline theme
-source ~/.config/kak/colors/cyberpunk-neon-powerline.kak
+source "%val{config}/colors/cyberpunk-neon-powerline.kak"
 
 # Powerline Bar
 # TODO: Investigate creating a theme
@@ -54,7 +54,7 @@ plug "andreyorst/powerline.kak" defer powerline %{
     powerline-theme cyberpunk-neon
     set-option global powerline_shorten_bufname short
     # Default layout
-    #set-option global powerline_format 'git bufname line-column mode-info filetype client session position'
+    #set-option global powerline_format "git bufname line-column mode-info filetype client session position"
 } config %{
        powerline-start
 }
@@ -73,19 +73,19 @@ plug "alexherbo2/search-highlighter.kak"
 plug "andreyorst/fzf.kak"
 
 # Easy navigation of open buffers
-plug 'delapouite/kakoune-buffers' %{
-    map global normal ^ ': enter-buffers-mode<ret>' -docstring 'buffers'
-    map global normal <a-^> ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
+plug "delapouite/kakoune-buffers" %{
+    map global normal ^ ": enter-buffers-mode<ret>" -docstring "buffers"
+    map global normal <a-^> ": enter-user-mode -lock buffers<ret>" -docstring "buffers (lock)"
 }
 
 # Preview faces in a colorscheme
-plug 'delapouite/kakoune-palette'
+plug "delapouite/kakoune-palette"
 
 # Enhanced selections
-plug 'delapouite/kakoune-auto-percent'
+plug "delapouite/kakoune-auto-percent"
 
 # Enhanced searches
-plug 'delapouite/kakoune-auto-star'
+plug "delapouite/kakoune-auto-star"
 
 # Tagbar browsing
 plug "andreyorst/tagbar.kak" defer "tagbar" %{
@@ -94,7 +94,7 @@ plug "andreyorst/tagbar.kak" defer "tagbar" %{
     set-option global tagbar_display_anon false
 } config %{
     # if you have wrap highlighter enamled in you configuration
-    # files it's better to turn it off for tagbar, using this hook:
+    # files it"s better to turn it off for tagbar, using this hook:
     hook global WinSetOption filetype=tagbar %{
         remove-highlighter window/wrap
         # you can also disable rendering whitespaces here, line numbers, and
@@ -108,14 +108,14 @@ plug "andreyorst/tagbar.kak" defer "tagbar" %{
 }
 
 # Manual indentation
-plug 'alexherbo2/manual-indent.kak' config %{
+plug "alexherbo2/manual-indent.kak" config %{
     hook global WinCreate .* %{
           manual-indent-enable
     }
 }
 
 # Roguelike-style light simulation
-plug 'occivink/kakoune-roguelight' config %{
+plug "occivink/kakoune-roguelight" config %{
     define-command roguelight-toggle %{
         try %{
             crosshairs
@@ -128,7 +128,7 @@ plug 'occivink/kakoune-roguelight' config %{
     }
 
     define-command roguelight-map %{
-        edit -readonly ~/.config/kak/plugins/kakoune-roguelight/map
+        edit -readonly %val{config}/plugins/kakoune-roguelight/map
         roguelight-toggle
     }
 }
@@ -137,8 +137,8 @@ plug 'occivink/kakoune-roguelight' config %{
 colorscheme cyberpunk-neon
 
 # Buffer user mode
-map global user b ':enter-buffers-mode<ret>'              -docstring 'buffers…'
-map global user B ':enter-user-mode -lock buffers<ret>'   -docstring 'buffers (lock)…'
+map global user b ":enter-buffers-mode<ret>"              -docstring "buffers…"
+map global user B ":enter-user-mode -lock buffers<ret>"   -docstring "buffers (lock)…"
 
 # Buffer manipulation aliases
 alias global bi info-buffers
@@ -155,13 +155,13 @@ hook global BufWritePre .* lsp-formatting
 set-option global tabstop 4
 
 # Function Key Mapping
-map global normal <F2> ': tagbar-toggle<ret>'
-map global normal <F3> ': fzf-mode<ret>'
-map global normal <F4> ': kaktree-toggle<ret>'
+map global normal <F2> ": tagbar-toggle<ret>"
+map global normal <F3> ": fzf-mode<ret>"
+map global normal <F4> ": kaktree-toggle<ret>"
 
-map global normal <F5> ': info-buffers<ret>'
+map global normal <F5> ": info-buffers<ret>"
 
-map global normal <F9> ': lsp-code-actions<ret>'
-map global normal <F10> ': lsp-hover<ret>'
-map global normal <F11> ': lsp-diagnostics<ret>'
-map global normal <F12> ': delete-buffer<ret>'
+map global normal <F9> ": lsp-code-actions<ret>"
+map global normal <F10> ": lsp-hover<ret>"
+map global normal <F11> ": lsp-diagnostics<ret>"
+map global normal <F12> ": delete-buffer<ret>"
