@@ -1,12 +1,8 @@
-add-highlighter global/ number-lines
+add-highlighter global/ number-lines -hlcursor
 
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
 plug "andreyorst/plug.kak" noload
-
-#plug "dracula/kakoune" theme config %{
-#	colorscheme dracula
-#}
 
 plug "ul/kak-lsp" do %{
 	cargo install --locked --force --path .
@@ -77,6 +73,9 @@ plug 'delapouite/kakoune-buffers' %{
 	map global normal <a-^> ': enter-user-mode -lock buffers<ret>' -docstring 'buffers (lock)'
 }
 
+# Preview faces in a colorscheme
+plug 'delapouite/kakoune-palette'
+
 # Set colorscheme to custom one
 colorscheme cyberpunk-neon
 
@@ -108,3 +107,4 @@ map global normal <F5> ': info-buffers<ret>'
 map global normal <F9> ': lsp-code-actions<ret>'
 map global normal <F10> ': lsp-hover<ret>'
 map global normal <F11> ': lsp-diagnostics<ret>'
+map global normal <F12> ': delete-buffer<ret>'
