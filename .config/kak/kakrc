@@ -144,6 +144,9 @@ hook global BufWritePre .* lsp-formatting
 set-option global tabstop 4
 
 # Function Key Mapping
+
+#map global normal <F1> 
+
 # Utilities
 map global normal <F2> ": tagbar-toggle<ret>"
 map global normal <F3> ": fzf-mode<ret>"
@@ -151,6 +154,9 @@ map global normal <F4> ": kaktree-toggle<ret>"
 
 # Buffer navigation
 map global normal <F5> ": info-buffers<ret>"
+
+#map global normal <F6>
+#map global normal <F7>
 
 # Debug
 map global normal <F8> ": new buffer *debug*<ret>"
@@ -162,3 +168,15 @@ map global normal <F10> ": lsp-hover<ret>"
 # Exiting
 map global normal <F11> ": delete-buffer<ret>"
 map global normal <F12> ": quit<ret>"
+
+# Alt + Number keymaps
+# map global normal <a-1>
+# map global normal <a-2>
+# map global normal <a-3>
+# map global normal <a-4>
+# map global normal <a-5>
+# map global normal <a-6>
+# map global normal <a-7>
+# map global normal <a-8>
+# map global normal <a-9>
+# map global normal <a-0>
