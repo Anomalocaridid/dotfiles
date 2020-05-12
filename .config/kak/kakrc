@@ -155,13 +155,18 @@ hook global BufWritePre .* lsp-formatting
 set-option global tabstop 4
 
 # Function Key Mapping
+# Utilities
 map global normal <F2> ": tagbar-toggle<ret>"
 map global normal <F3> ": fzf-mode<ret>"
 map global normal <F4> ": kaktree-toggle<ret>"
 
+# Buffer navigation
 map global normal <F5> ": info-buffers<ret>"
 
-map global normal <F9> ": lsp-code-actions<ret>"
+# Linting
+map global normal <F9> ": new lsp-diagnostics<ret>"
 map global normal <F10> ": lsp-hover<ret>"
-map global normal <F11> ": lsp-diagnostics<ret>"
-map global normal <F12> ": delete-buffer<ret>"
+
+# Exiting
+map global normal <F11> ": delete-buffer<ret>"
+map global normal <F12> ": quit<ret>"

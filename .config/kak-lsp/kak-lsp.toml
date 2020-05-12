@@ -61,8 +61,8 @@ roots = ["Setup.hs", "stack.yaml", "*.cabal"]
 command = "hie-wrapper"
 args = ["--lsp"]
 
-# TODO: Install bsh language server
 [language.bash]
 filetypes = ["sh"]
-#roots = [".git", ".hg"]
-command = "shellcheck"
+roots = ["*.sh"]
+command = "bash-language-server"
+args = ["start"]
