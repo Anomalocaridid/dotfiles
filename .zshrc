@@ -252,7 +252,7 @@ alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
 
 # Aliases for quick access to frequently edited dotfiles {{{
 alias zshrc="$EDITOR ~/.zshrc"
-alias kakrc="kak ~/.config/kak/kakrc ~/.config/kak-lsp/kak-lsp.toml"
+alias kakrc="kak -e edit-kakrc"
 
 # }}}
 
