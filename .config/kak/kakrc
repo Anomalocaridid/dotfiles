@@ -74,6 +74,7 @@ plug "andreyorst/fzf.kak"
 
 # Easy navigation of open buffers
 plug "delapouite/kakoune-buffers" %{
+    # Buffer user mode
     map global normal ^ ": enter-buffers-mode<ret>" -docstring "buffers"
     map global normal <a-^> ": enter-user-mode -lock buffers<ret>" -docstring "buffers (lock)"
 }
@@ -136,18 +137,6 @@ plug "occivink/kakoune-roguelight" config %{
 # Set colorscheme to custom one
 colorscheme cyberpunk-neon
 
-# Buffer user mode
-map global user b ":enter-buffers-mode<ret>"              -docstring "buffers…"
-map global user B ":enter-user-mode -lock buffers<ret>"   -docstring "buffers (lock)…"
-
-# Buffer manipulation aliases
-alias global bi info-buffers
-alias global bd delete-buffer
-alias global bf buffer-first
-alias global bl buffer-last
-alias global bo buffer-only
-alias global bo! buffer-only-force
-
 # Format on save
 hook global BufWritePre .* lsp-formatting
 
@@ -162,6 +151,9 @@ map global normal <F4> ": kaktree-toggle<ret>"
 
 # Buffer navigation
 map global normal <F5> ": info-buffers<ret>"
+
+# Debug
+map global normal <F8> ": new buffer *debug*<ret>"
 
 # Linting
 map global normal <F9> ": new lsp-diagnostics<ret>"
