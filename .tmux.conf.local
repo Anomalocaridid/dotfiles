@@ -309,21 +309,9 @@ bind C-a send-prefix
 # move status line to top
 set -g status-position top
 
-# split with | and -
-bind | split-window -h
-bind - split-window -v
-unbind _
-unbind '"'
-unbind %
-
 # reload config file
 bind r source ~/.tmux.conf
 
-# switch panes with Alt-arrow
-bind -n M-Left select-pane -L
-bind -n M-Right select-pane -R
-bind -n M-Up select-pane -U
-bind -n M-Down select-pane -D
-
 # Fixes display issues with vim and kakoune
 set -g default-terminal "xterm-256color"
+
