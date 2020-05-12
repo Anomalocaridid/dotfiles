@@ -16,10 +16,10 @@ plug "ul/kak-lsp" do %{
     lsp-enable
 
     # Format on save
-    hook global WinSetOption filetype=(bash|haskell|rust) {
+    hook global WinSetOption filetype=(bash|haskell|rust) %{
         hook buffer BufWritePre .* lsp-formatting-sync
     }
-        set-option global lsp_hover_max_lines 10
+    #    set-option global lsp_hover_max_lines 10
 }
 
 plug "andreyorst/smarttab.kak" defer smarttab %{
