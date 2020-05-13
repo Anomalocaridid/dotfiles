@@ -24,7 +24,7 @@ tmux_conf_new_window_retain_current_path=false
 # new pane retains current path, possible values are:
 #   - true (default)
 #   - false
-tmux_conf_new_pane_retain_current_path=false
+tmux_conf_new_pane_retain_current_path=true
 
 # new pane tries to reconnect ssh sessions (experimental), possible values are:
 #   - true
@@ -308,9 +308,6 @@ bind C-a send-prefix
 
 # move status line to top
 set -g status-position top
-
-# reload config file
-bind r source ~/.tmux.conf
 
 # Fixes display issues with vim and kakoune
 set -g default-terminal "xterm-256color"
