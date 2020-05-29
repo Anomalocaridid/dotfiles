@@ -215,6 +215,8 @@ map global normal <F6> ": new buffer *debug*<ret>"
 # Navigate to error
 map global normal <F7> ": lsp-find-error --previous --include-warnings<ret>"
 map global normal <F8> ": lsp-find-error --include-warnings<ret>"
+map global normal <a-F7> ": lsp-find-error --previous<ret>"
+map global normal <a-F8> ": lsp-find-error <ret>"
 
 # Linting
 unmap global normal <F9> ": tagbar-toggle<ret>"
