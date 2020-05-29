@@ -16,17 +16,27 @@ plug "ul/kak-lsp" do %{
     lsp-enable
 
     # Format on save
-    hook global WinSetOption filetype=(bash|haskell|rust) %{
+    hook global WinSetOption filetype=(haskell|rust) %{
         hook buffer BufWritePre .* lsp-formatting-sync
     }
     #    set-option global lsp_hover_max_lines 10
+}
+
+hook global WinSetOption filetype=sh %{
+    set-option window formatcmd "shfmt"
+    hook buffer BufWritePre .* format
+}
+
+hook global WinSetOption filetype=c %{
+    set-option window formatcmd 'clang-format --style="{IndentWidth: 4}"'
+    hook buffer BufWritePre .* format
 }
 
 plug "andreyorst/smarttab.kak" defer smarttab %{
     set-option global softtabstop 4
 } config %{
     hook global WinSetOption filetype=(kak|bash|plain) .* smarttab
-    hook global WinSetOption filetype=(haskell|rust|yaml) .* expandtab
+    hook global WinSetOption filetype=(c|haskell|rust|yaml) .* expandtab
 }
 
 # Highlight current line and/or current column

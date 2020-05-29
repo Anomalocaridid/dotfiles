@@ -55,6 +55,12 @@ command = "rls"
 #command = "html-languageserver"
 #args = ["--stdio"]
 
+[language.c_cpp]
+filetypes = ["c", "cpp"]
+roots = ["compile_commands.json"]
+command = "ccls"
+#args = ["--init={\"cacheDirectory\":\"/tmp/cquery\",\"highlight\":{\"enabled\":true}}"]
+
 [language.haskell]
 filetypes = ["haskell"]
 roots = ["Setup.hs", "stack.yaml", "*.cabal"]
@@ -63,6 +69,6 @@ args = ["--lsp"]
 
 [language.bash]
 filetypes = ["sh"]
-roots = ["*.sh"]
+roots = [".git", ".hg"]
 command = "bash-language-server"
 args = ["start"]
