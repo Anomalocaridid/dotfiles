@@ -1,7 +1,7 @@
 # code
 
 face global value rgb:00ff00,default
-face global type rgb:ff0000,default
+face global type rgb:ff00ff,default+b
 face global identifier rgb:721c92,default
 face global string rgb:f57800,default
 face global error rgb:ff0000,rgb:000000+bu
