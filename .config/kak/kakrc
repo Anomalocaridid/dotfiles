@@ -13,13 +13,21 @@ plug "ul/kak-lsp" do %{
     set-option global lsp_diagnostic_line_warning_sign "➤"
 
     # Enable lsp
-    lsp-enable
+    #lsp-enable
 
     # Format on save
-    hook global WinSetOption filetype=(haskell|rust) %{
+    hook global WinSetOption filetype=(c|haskell|rust) %{
+        # Enable lsp
+        lsp-enable
         hook buffer BufWritePre .* lsp-formatting-sync
     }
     #    set-option global lsp_hover_max_lines 10
+}
+
+plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
+    hook global WinSetOption filetype=sh %{
+        lint-enable
+    }
 }
 
 hook global WinSetOption filetype=sh %{
