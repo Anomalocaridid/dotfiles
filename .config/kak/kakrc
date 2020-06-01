@@ -231,6 +231,17 @@ unmap global normal <F9> ": tagbar-toggle<ret>"
 map global normal <F9> ": lsp-hover<ret>"
 map global normal <F10> ": new lsp-diagnostics<ret>"
 
+# Bash Only
+hook global WinSetOption filetype=(sh|kak) %{
+    lsp-disable-window
+
+    map window normal <F7> ": lint-previous-error<ret>"
+    map window normal <F8> ": lint-next-error<ret>"
+
+    map window normal <F9> ": lint<ret>"
+    map window normal <F10> ": new buffer *lint-output*<ret>"
+}
+
 # Exiting
 map global normal <F11> ": delete-buffer<ret>"
 map global normal <F12> ": quit<ret>"
