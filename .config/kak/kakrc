@@ -30,6 +30,15 @@ plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
     }
 }
 
+plug "eraserhd/parinfer-rust" do %{
+    cargo install --force --path .
+    cargo clean
+} config %{
+    hook global WinSetOption filetype=(clojure|lisp|scheme|racket) %{
+        parinfer-enable-window -smart
+    }
+}
+
 hook global WinSetOption filetype=sh %{
     set-option window formatcmd "shfmt"
     hook buffer BufWritePre .* format
