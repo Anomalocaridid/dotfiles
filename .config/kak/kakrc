@@ -146,6 +146,10 @@ plug "alexherbo2/manual-indent.kak" config %{
     hook global WinCreate .* %{
         manual-indent-enable
     }
+
+    hook global WinSetOption filetype=lisp %{
+        manual-indent-remove-filetype-hooks
+    }
 }
 
 # Surround selections with paired characters
