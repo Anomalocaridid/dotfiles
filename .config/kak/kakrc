@@ -114,7 +114,7 @@ plug "JJK96/kakoune-rainbow" config %{
 
     # enable rainbow by default
 
-    hook global filetype=(lisp) .* %{
+    hook global WinSetOption filetype=(lisp) %{
         rainbow-enable
     }
 }
