@@ -97,8 +97,21 @@ plug "andreyorst/powerline.kak" defer powerline %{
 plug "alexherbo2/auto-pairs.kak"
 
 # Highlight recursive pairs of parentheses
-# TODO: Configure faces
-plug "JJK96/kakoune-rainbow"
+plug "JJK96/kakoune-rainbow" config %{
+    map global user r ": rainbow<ret>" -docstring "rainbow brackets"
+    map global user <a-r> ": rainbow-enable<ret>" -docstring "continuous rainbow bracketing"
+    map global user R ": rainbow-disable<ret>" -docstring "disable rainbow brackets"
+
+    # colors:                       pink         orange        yellow       green         blue         purple     
+    set-option global rainbow_faces "rgb:ff00ff" "rgb:f57600"  "rgb:ffff00" "rgb:00ff00" "rgb:0abdc7" "rgb:721c92"
+
+    # enable rainbow by default
+
+    hook global WinCreate .* %{
+        rainbow-enable
+    }
+}
+
 
 # Search highlighter
 plug "alexherbo2/search-highlighter.kak"
