@@ -94,7 +94,14 @@ plug "andreyorst/powerline.kak" defer powerline %{
 }
 
 # Pairing parentheses and brackets
-plug "alexherbo2/auto-pairs.kak"
+plug "alexherbo2/auto-pairs.kak" %{
+    #default
+    #set-option window "(" ")" "{ }" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
+    
+    hook global WinSetOption filetype=(haskell|lisp|rust) %{
+        set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
+    }
+}
 
 # Highlight recursive pairs of parentheses
 plug "JJK96/kakoune-rainbow" config %{
@@ -107,7 +114,7 @@ plug "JJK96/kakoune-rainbow" config %{
 
     # enable rainbow by default
 
-    hook global WinCreate .* %{
+    hook global filetype=(lisp) .* %{
         rainbow-enable
     }
 }
