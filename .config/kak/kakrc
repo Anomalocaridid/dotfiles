@@ -96,10 +96,16 @@ plug "andreyorst/powerline.kak" defer powerline %{
 # Pairing parentheses and brackets
 plug "alexherbo2/auto-pairs.kak" %{
     #default
-    #set-option window "(" ")" "{ }" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
-    
-    hook global WinSetOption filetype=(haskell|lisp|rust) %{
+    #set-option window "(" ")" "{" "}" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
+
+    # No single quotes
+    hook global WinSetOption filetype=(haskell|rust) %{
         set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
+    }
+
+    # No single quotes or backticks
+    hook global WinSetOption filetype=lisp %{
+        set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
     }
 }
 
