@@ -118,11 +118,10 @@ plug "JJK96/kakoune-rainbow" config %{
     # colors:                       pink         orange        yellow       green         blue         purple     
     set-option global rainbow_faces "rgb:ff00ff" "rgb:f57600"  "rgb:ffff00" "rgb:00ff00" "rgb:0abdc7" "rgb:721c92"
 
-    # enable rainbow by default
-
-    hook global WinSetOption filetype=(lisp) %{
-        rainbow-enable
-    }
+    ## enable rainbow by default
+    #hook global WinSetOption filetype=(lisp) %{
+    #    rainbow-enable
+    #}
 }
 
 
