@@ -37,7 +37,7 @@ export BAT_THEME="Dracula"
 # As long you are not in a tmux session.
 # And you are in an interactive shell.
 if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [[ $- = *i* ]]; then
-    exec tmux
+    exec tmux new-session -A
 fi
 # }}}
 
