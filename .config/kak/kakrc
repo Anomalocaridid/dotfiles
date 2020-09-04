@@ -3,7 +3,7 @@ add-highlighter global/ number-lines -hlcursor
 # Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-plug "andreyorst/plug.kak" noload
+plug "robertmeta/plug.kak" noload
 
 plug "ul/kak-lsp" do %{
     cargo install --locked --force --path .
@@ -49,11 +49,15 @@ hook global WinSetOption filetype=c %{
     hook buffer BufWritePre .* format
 }
 
+# Automatic tab handling
+# No longer maintained
 plug "andreyorst/smarttab.kak" defer smarttab %{
     set-option global softtabstop 4
 } config %{
-    hook global WinSetOption filetype=(kak|bash|plain) .* smarttab
-    hook global WinSetOption filetype=(c|haskell|rust|yaml) .* expandtab
+    hook global WinSetOption filetype=(kak|bash|plain) smarttab
+   
+    hook global WinSetOption filetype=(c|haskell|rust|yaml|lisp) expandtab
+    
 }
 
 # Highlight current line and/or current column
@@ -62,6 +66,7 @@ plug "insipx/kak-crosshairs" config %{
 }
 
 # File tree navigator
+# No longer maintained
 plug "andreyorst/kaktree" defer kaktree %{
     set-option global kaktree_double_click_duration "0.5"
     set-option global kaktree_indentation 1
@@ -82,8 +87,7 @@ plug "andreyorst/kaktree" defer kaktree %{
 source "%val{config}/colors/cyberpunk-neon-powerline.kak"
 
 # Powerline Bar
-# TODO: Investigate creating a theme
-plug "andreyorst/powerline.kak" defer powerline %{
+plug "jdugan6240/powerline.kak" defer powerline %{
     # Use my custom powerline theme
     powerline-theme cyberpunk-neon
     set-option global powerline_shorten_bufname short
@@ -92,6 +96,10 @@ plug "andreyorst/powerline.kak" defer powerline %{
 } config %{
     powerline-start
 }
+
+# Escape arguments so that they can be passed to Kakoune
+# Required by auto-pairs.kak
+plug "alexherbo2/prelude.kak"
 
 # Pairing parentheses and brackets
 plug "alexherbo2/auto-pairs.kak" %{
@@ -129,6 +137,7 @@ plug "JJK96/kakoune-rainbow" config %{
 plug "alexherbo2/search-highlighter.kak"
 
 # fzf integration
+# No longer maintained
 plug "andreyorst/fzf.kak"
 
 # Easy navigation of open buffers
@@ -142,12 +151,13 @@ plug "delapouite/kakoune-buffers" %{
 plug "delapouite/kakoune-palette"
 
 # Enhanced selections
-plug "delapouite/kakoune-auto-percent"
+    plug "delapouite/kakoune-auto-percent"
 
 # Enhanced searches
 plug "delapouite/kakoune-auto-star"
 
 # Tagbar browsing
+# No longer maintained
 plug "andreyorst/tagbar.kak" defer "tagbar" %{
     set-option global tagbar_sort false
     set-option global tagbar_size 40
@@ -183,8 +193,8 @@ plug "alexherbo2/surround.kak" config %{
     map global user s ": surround<ret>" -docstring "Enter surround mode"
     map global user S ": surround _ _ * *<ret>" -docstring "Enter surround mode with extra surrounding pairs"
 
-    set-option global surround_begin auto-pairs-disable
-    set-option global surround_end auto-pairs-enable
+    #set-option global surround_begin auto-pairs-disable
+    #set-option global surround_end auto-pairs-enable
 }
 
 # Symmetrically grow/shrink horizontlly.
