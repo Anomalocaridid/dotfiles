@@ -54,7 +54,6 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 	hook global WinSetOption filetype=(kak|bash|plain) smarttab
    
 	hook global WinSetOption filetype=(c|haskell|rust|yaml|lisp) expandtab
-
 }
 
 # Highlight current line and/or current column
@@ -247,6 +246,13 @@ colorscheme cyberpunk-neon
 
 # Tabs are 4 characters long
 set-option global tabstop 4
+set-option global indentwidth 4
+
+# But Lisp has 2 character tabs
+hook global WinSetOption filetype=(lisp) %{
+	set-option window tabstop 2
+	set-option window indentwidth 2
+}
 
 # Function Key Mapping
 
