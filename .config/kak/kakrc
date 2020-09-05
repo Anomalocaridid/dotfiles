@@ -12,14 +12,20 @@ plug "ul/kak-lsp" do %{
 	set-option global lsp_diagnostic_line_error_sign "✖"
 	set-option global lsp_diagnostic_line_warning_sign "➤"
 
-	# Enable lsp
-	#lsp-enable
-
 	# Format on save
 	hook global WinSetOption filetype=(c|haskell|rust) %{
 		# Enable lsp
 		lsp-enable
+
+		# Format before saving
 		hook buffer BufWritePre .* lsp-formatting-sync
+		
+		# Highlight errors in code
+		lsp-inline-diagnostics-enable window
+
+		# lsp user mode
+		map window user l ": enter-user-mode lsp<ret>" -docstring "LSP"
+		map window user L ": enter-user-mode -lock lsp<ret>" -docstring "LSP (lock)"
 	}
 	#    set-option global lsp_hover_max_lines 10
 }
@@ -181,8 +187,8 @@ plug "alexherbo2/manual-indent.kak" config %{
 # Surround selections with paired characters
 # Is not affected by auto-pairs like kakoune-mirror is
 plug "alexherbo2/surround.kak" config %{
-	map global user s ": surround<ret>" -docstring "Enter surround mode"
-	map global user S ": surround _ _ * *<ret>" -docstring "Enter surround mode with extra surrounding pairs"
+	map global user q ": enter-user-mode surround<ret>" -docstring "surround mode"
+	map global user Q ": surround-enter-insert-mode<ret>" -docstring "surround insert mode"
 
 	#set-option global surround_begin auto-pairs-disable
 	#set-option global surround_end auto-pairs-enable
@@ -191,24 +197,9 @@ plug "alexherbo2/surround.kak" config %{
 # Symmetrically grow/shrink horizontlly.
 plug "delapouite/kakoune-mirror" config %{
 	map global user m ": enter-user-mode -lock mirror<ret>" -docstring "Enter mirror mode"
-
-	# Unmap surround commands.
-	# Redundant with surround.kak
-	# And vulnerable to weirdness with auto-pairs
-	unmap global mirror (
-	unmap global mirror {
-	unmap global mirror [
-	unmap global mirror <
-	unmap global mirror )
-	unmap global mirror }
-	unmap global mirror ]
-	unmap global mirror >
-	unmap global mirror '"'
-	unmap global mirror "'"
-	unmap global mirror '`'
 }
 
-# Selects all adjavent lines that match the current selection
+# Selects all adjacent lines that match the current selection
 plug "occivink/kakoune-vertical-selection" config %{
 #	map global user v ': vertical-selection-down<ret>' -docstring "Copy current selection downwards."
 #	map global user ^ ': vertical-selection-up<ret>' -docstring "Copy current selection upwards."
@@ -218,8 +209,7 @@ plug "occivink/kakoune-vertical-selection" config %{
 # Enhances text objects
 # Depends on kakoune-vertical-selection
 plug "delapouite/kakoune-text-objects" %{
-	#text-object-map
-	map global user <a-s> ": enter-user-mode selections<ret>" -docstring "selectors..."
+	text-object-map
 }
 
 # Roguelike-style light simulation
