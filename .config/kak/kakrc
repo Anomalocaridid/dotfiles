@@ -85,8 +85,9 @@ plug "andreyorst/kaktree" defer kaktree %{
 	kaktree-enable
 }
 
-# Set colorscheme to custom one
-colorscheme cyberpunk-neon
+plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
+	colorscheme cyberpunk-neon
+}
 
 # Powerline Bar
 plug "jdugan6240/powerline.kak" defer powerline %{
