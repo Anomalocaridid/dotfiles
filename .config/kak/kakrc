@@ -85,14 +85,16 @@ plug "andreyorst/kaktree" defer kaktree %{
 	kaktree-enable
 }
 
-# Source my custom powerline theme
-source "%val{config}/colors/cyberpunk-neon-powerline.kak"
+# Set colorscheme to custom one
+colorscheme cyberpunk-neon
 
 # Powerline Bar
 plug "jdugan6240/powerline.kak" defer powerline %{
+	set-option global powerline_shorten_bufname short
+
 	# Use my custom powerline theme
 	powerline-theme cyberpunk-neon
-	set-option global powerline_shorten_bufname short
+
 	# Default layout
 	#set-option global powerline_format "git bufname line-column mode-info filetype client session position"
 } config %{
@@ -230,9 +232,6 @@ plug "occivink/kakoune-roguelight" config %{
 		roguelight-toggle
 	}
 }
-
-# Set colorscheme to custom one
-colorscheme cyberpunk-neon
 
 # Tabs are 4 characters long
 set-option global tabstop 4
