@@ -20,6 +20,9 @@
 #
 #   for i in {0..255}; do print -Pn "%${i}F${(l:3::0:)i}%f " ${${(M)$((i%8)):#7}:+$'\n'}; done
 
+# Based off Roboron3042's Cyberpunk Neon colorscheme
+# https://github.com/Roboron3042/Cyberpunk-Neon/
+
 #color constants
 NEON_PINK=201
 NEON_DARK_BLUE=017

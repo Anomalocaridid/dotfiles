@@ -1,3 +1,6 @@
+# Based on Roboron3042's Cyberpunk Neon colorscheme
+# https://github.com/Roboron3042/Cyberpunk-Neon/
+
 hook global ModuleLoaded powerline %{ require-module powerline_cyberpunk_neon }
 
 provide-module powerline_cyberpunk_neon %§
@@ -6,7 +9,7 @@ set-option -add global powerline_themes "cyberpunk-neon"
 define-command -hidden powerline-theme-cyberpunk-neon %{
     # bufname
     declare-option -hidden str powerline_color00 "rgb:ff00ff" # fg
-    declare-option -hidden str powerline_color03 "rgb:123e7c" # bg
+    declare-option -hidden str powerline_color03 "rgb:133e7c" # bg
 
     # position
     declare-option -hidden str powerline_color05 "rgb:8700af" # fg
