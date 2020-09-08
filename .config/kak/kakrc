@@ -151,7 +151,7 @@ plug "delapouite/kakoune-buffers" %{
 plug "delapouite/kakoune-palette"
 
 # Enhanced selections
-	plug "delapouite/kakoune-auto-percent"
+plug "delapouite/kakoune-auto-percent"
 
 # Enhanced searches
 plug "delapouite/kakoune-auto-star"
@@ -233,6 +233,17 @@ plug "occivink/kakoune-roguelight" config %{
 		roguelight-toggle
 	}
 }
+
+# Smooth scrolling
+plug "caksoylar/kakoune-smooth-scroll" config %{
+	# Automatically enable for every window
+	hook global WinCreate .* %{
+		hook -once window WinDisplay .* smooth-scroll-enable
+	}
+}
+
+# Get rid of Clippy
+set-option global ui_options ncurses_assistant=none
 
 # Tabs are 4 characters long
 set-option global tabstop 4
