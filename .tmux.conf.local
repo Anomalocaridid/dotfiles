@@ -16,14 +16,14 @@
 # -- colors --------------------------------------------------------------------
 # define colors in here
 
-OFF_WHITE='#d7d7d5'
-CYAN='#0abdc6'
+OFF_WHITE='#eeeeee'
+CYAN='#00d7d7'
 LIGHT_BLUE='#00afff'
 BLUE='#005faf'
-DARK_BLUE='#133e7c'
+DARK_BLUE='#123e7c'
 VERY_DARK_BLUE='#000b1e'
-PINK='#ea00d9'
-PURPLE='#711c91'
+PINK='#ff00ff'
+PURPLE='#8700af'
 
 # -- windows & pane creation ---------------------------------------------------
 
