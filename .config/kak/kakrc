@@ -141,7 +141,7 @@ plug "alexherbo2/search-highlighter.kak"
 plug "andreyorst/fzf.kak"
 
 # Easy navigation of open buffers
-plug "delapouite/kakoune-buffers" %{
+plug "delapouite/kakoune-buffers" config %{
 	# Buffer user mode
 	map global user b ": enter-buffers-mode<ret>" -docstring "buffers"
 	map global user B ": enter-user-mode -lock buffers<ret>" -docstring "buffers (lock)"
