@@ -178,6 +178,8 @@ plug "andreyorst/tagbar.kak" defer "tagbar" %{
 
 # Manual indentation
 plug "alexherbo2/manual-indent.kak" config %{
+	require-module manual-indent
+
 	hook global WinCreate .* %{
 		manual-indent-enable
 	}
