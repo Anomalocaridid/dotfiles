@@ -12,7 +12,6 @@ plug "ul/kak-lsp" do %{
 	set-option global lsp_diagnostic_line_error_sign "✖"
 	set-option global lsp_diagnostic_line_warning_sign "➤"
 
-	# Format on save
 	hook global WinSetOption filetype=(c|haskell|rust) %{
 		# Enable lsp
 		lsp-enable
@@ -24,10 +23,8 @@ plug "ul/kak-lsp" do %{
 		lsp-inline-diagnostics-enable window
 
 		# lsp user mode
-		map window user l ": enter-user-mode lsp<ret>" -docstring "LSP"
-		#map window user L ": enter-user-mode -lock lsp<ret>" -docstring "LSP (lock)"
+		map global user l ": enter-user-mode lsp<ret>" -docstring "LSP"
 	}
-	#    set-option global lsp_hover_max_lines 10
 }
 
 plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
