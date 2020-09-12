@@ -25,13 +25,26 @@ plug "ul/kak-lsp" do %{
 
 		# lsp user mode
 		map window user l ": enter-user-mode lsp<ret>" -docstring "LSP"
-		map window user L ": enter-user-mode -lock lsp<ret>" -docstring "LSP (lock)"
+		#map window user L ": enter-user-mode -lock lsp<ret>" -docstring "LSP (lock)"
 	}
 	#    set-option global lsp_hover_max_lines 10
 }
 
-plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config
+plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
 
+	# Create shellcheck mode with mappings that resemble the lsp mode
+	declare-user-mode shellcheck
+	map global shellcheck l ": lint<ret>" -docstring "lint buffer"
+	map global shellcheck n ": lint-next-message<ret>" -docstring "find next error"
+	map global shellcheck p ": lint-previous-message<ret>" -docstring "find previous error"
+	map global shellcheck e ": buffer *lint-output*<ret>" -docstring "list buffer errors and warnings"
+		
+	hook global WinSetOption filetype=(sh|kak) %{
+		map global user l ": enter-user-mode shellcheck<ret>" -docstring "shellcheck"
+		lint-enable
+	}
+
+}
 
 plug "eraserhd/parinfer-rust" do %{
 	cargo install --force --path .
@@ -83,6 +96,7 @@ plug "andreyorst/kaktree" defer kaktree %{
 		remove-highlighter buffer/show-whitespaces
 	}#
 	kaktree-enable
+	map global user t ": kaktree-toggle<ret>" -docstring "kaktree"
 }
 
 plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
@@ -124,9 +138,6 @@ plug "alexherbo2/auto-pairs.kak" %{
 
 # Highlight recursive pairs of parentheses centered from cursor
 plug "Bodhizafa/kak-rainbow" config %{
-	map global user R ": rainbow-enable<ret>" -docstring "continuous rainbow bracketing"
-	map global user r ": rainbow-disable<ret>" -docstring "disable rainbow brackets"
-
 	# colors:                         pink         orange        yellow       green         blue         purple     
 	set-option global rainbow_colors "rgb:ff00ff" "rgb:f57600"  "rgb:ffff00" "rgb:00ff00" "rgb:0abdc7" "rgb:721c92"
 
@@ -138,7 +149,9 @@ plug "alexherbo2/search-highlighter.kak"
 
 # fzf integration
 # No longer maintained
-plug "andreyorst/fzf.kak"
+plug "andreyorst/fzf.kak" config %{
+	map global user f ": fzf-mode<ret>" -docstring "fzf"
+}
 
 # Easy navigation of open buffers
 plug "delapouite/kakoune-buffers" config %{
@@ -170,10 +183,6 @@ plug "andreyorst/tagbar.kak" defer "tagbar" %{
 		# you can also disable rendering whitespaces here, line numbers, and
 		# matching characters
 	}
-	# Automatically start tagbar on certain filetypes
-	#hook global WinSetOption filetype=(css|html|haskell|rust) %{
-		#tagbar-enable
-	#}
 }
 
 # Manual indentation
@@ -194,9 +203,6 @@ plug "alexherbo2/manual-indent.kak" config %{
 plug "alexherbo2/surround.kak" config %{
 	map global user q ": enter-user-mode surround<ret>" -docstring "surround mode"
 	map global user Q ": surround-enter-insert-mode<ret>" -docstring "surround insert mode"
-
-	#set-option global surround_begin auto-pairs-disable
-	#set-option global surround_end auto-pairs-enable
 }
 
 # Symmetrically grow/shrink horizontlly.
@@ -206,9 +212,6 @@ plug "delapouite/kakoune-mirror" config %{
 
 # Selects all adjacent lines that match the current selection
 plug "occivink/kakoune-vertical-selection" config %{
-#	map global user v ': vertical-selection-down<ret>' -docstring "Copy current selection downwards."
-#	map global user ^ ': vertical-selection-up<ret>' -docstring "Copy current selection upwards."
-#	map global user V ': vertical-selection-up-and-down<ret>' -docstring "Copy current selection upwards or downwards."
 }
 
 # Enhances text objects
@@ -242,6 +245,9 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 	hook global WinCreate .* %{
 		hook -once window WinDisplay .* smooth-scroll-enable
 	}
+
+	# Default mapping conflicts with text-objects
+	set-option global scroll_keys_object
 }
 
 # Get rid of Clippy
@@ -258,42 +264,18 @@ hook global WinSetOption filetype=(lisp) %{
 }
 
 # Function Key Mapping
-
-# Utilities
-map global normal <F1> ": tagbar-enable<ret>"
-map global normal <F2> ": tagbar-toggle<ret>"
-map global normal <F3> ": fzf-mode<ret>"
-map global normal <F4> ": kaktree-toggle<ret>"
-
-# Info
-map global normal <F5> ": info-buffers<ret>"
-map global normal <F6> ": new buffer *debug*<ret>"
-
-# Navigate to error
-map global normal <F7> ": lsp-find-error --previous --include-warnings<ret>"
-map global normal <F8> ": lsp-find-error --include-warnings<ret>"
-map global normal <a-F7> ": lsp-find-error --previous<ret>"
-map global normal <a-F8> ": lsp-find-error <ret>"
-
-# Linting
-unmap global normal <F9> ": tagbar-toggle<ret>"
-map global normal <F9> ": lsp-hover<ret>"
-map global normal <F10> ": new lsp-diagnostics<ret>"
-
-# Bash Only
-hook global WinSetOption filetype=(sh|kak) %{
-	lsp-disable-window
-
-	map window normal <F7> ": lint-previous-error<ret>"
-	map window normal <F8> ": lint-next-error<ret>"
-
-	map window normal <F9> ": lint<ret>"
-	map window normal <F10> ": new buffer *lint-output*<ret>"
-}
-
-# Exiting
-map global normal <F11> ": delete-buffer<ret>"
-map global normal <F12> ": quit<ret>"
+#map global normal <F1> 
+#map global normal <F2> 
+#map global normal <F3>
+#map global normal <F4>
+#map global normal <F5>
+#map global normal <F6>
+#map global normal <F7>
+#map global normal <F8>
+#map global normal <F9>
+#map global normal <F10>
+#map global normal <F11>
+#map global normal <F12>
 
 # Alt + Number keymaps
 # map global normal <a-1>
