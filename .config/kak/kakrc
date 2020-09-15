@@ -119,6 +119,7 @@ plug "alexherbo2/prelude.kak"
 
 # Pairing parentheses and brackets
 plug "alexherbo2/auto-pairs.kak" %{
+	require-module auto-pairs
 	#default
 	#set-option window "(" ")" "{" "}" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
 
@@ -128,9 +129,11 @@ plug "alexherbo2/auto-pairs.kak" %{
 	}
 
 	# No single quotes or backticks
-	hook global WinSetOption filetype=lisp %{
+	hook global WinSetOption filetype=(lisp) %{
 		set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
 	}
+
+	auto-pairs-enable
 }
 
 # Highlight recursive pairs of parentheses centered from cursor
