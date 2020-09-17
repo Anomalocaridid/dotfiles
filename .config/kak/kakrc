@@ -1,4 +1,18 @@
+# Add line numbers
 add-highlighter global/ number-lines -hlcursor
+
+# Get rid of Clippy and don't set terminal window title
+set-option global ui_options ncurses_assistant=none ncurses_set_title=false
+
+# Tabs are 4 characters long
+set-option global tabstop 4
+set-option global indentwidth 4
+
+# But Lisp has 2 character tabs
+hook global WinSetOption filetype=(lisp) %{
+	set-option window tabstop 2
+	set-option window indentwidth 2
+}
 
 # Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
@@ -38,9 +52,12 @@ plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
 		
 	hook global WinSetOption filetype=(sh|kak) %{
 		map global user l ": enter-user-mode shellcheck<ret>" -docstring "shellcheck"
-		lint-enable
 	}
 
+	# Enable symbols in gutter for sh files.
+	hook global WinSetOption filetype=(sh) %{
+		lint-enable
+	}
 }
 
 plug "eraserhd/parinfer-rust" do %{
@@ -249,42 +266,3 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 	# Default mapping conflicts with text-objects
 	set-option global scroll_keys_object
 }
-
-# Get rid of Clippy
-set-option global ui_options ncurses_assistant=none ncurses_set_title=false
-
-# Tabs are 4 characters long
-set-option global tabstop 4
-set-option global indentwidth 4
-
-# But Lisp has 2 character tabs
-hook global WinSetOption filetype=(lisp) %{
-	set-option window tabstop 2
-	set-option window indentwidth 2
-}
-
-# Function Key Mapping
-#map global normal <F1> 
-#map global normal <F2> 
-#map global normal <F3>
-#map global normal <F4>
-#map global normal <F5>
-#map global normal <F6>
-#map global normal <F7>
-#map global normal <F8>
-#map global normal <F9>
-#map global normal <F10>
-#map global normal <F11>
-#map global normal <F12>
-
-# Alt + Number keymaps
-# map global normal <a-1>
-# map global normal <a-2>
-# map global normal <a-3>
-# map global normal <a-4>
-# map global normal <a-5>
-# map global normal <a-6>
-# map global normal <a-7>
-# map global normal <a-8>
-# map global normal <a-9>
-# map global normal <a-0>
