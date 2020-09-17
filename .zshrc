@@ -21,6 +21,7 @@ fpath+=$HOME/.zfunc
 
 # }}}
 
+export VISUAL="kak"
 export EDITOR="kak"
 
 # }}}
