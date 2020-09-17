@@ -23,14 +23,6 @@ fpath+=$HOME/.zfunc
 
 export EDITOR="kak"
 
-# Program-specific Variables {{{
-
-# bat {{{
-export BAT_THEME="Dracula"
-# }}}
-
-# }}}
-
 # }}}
 
 # Autostart tmux {{{
