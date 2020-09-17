@@ -36,9 +36,9 @@ export BAT_THEME="Dracula"
 # Autostart tmux {{{
 # As long you are not in a tmux session.
 # And you are in an interactive shell.
-if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [[ $- = *i* ]]; then
-    exec tmux new-session -A
-fi
+#if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [[ $- = *i* ]]; then
+#    exec tmux new-session -A
+#fi
 # }}}
 
 # Ascii Terminal greeting. {{{

@@ -251,7 +251,7 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 }
 
 # Get rid of Clippy
-set-option global ui_options ncurses_assistant=none
+set-option global ui_options ncurses_assistant=none ncurses_set_title=false
 
 # Tabs are 4 characters long
 set-option global tabstop 4
