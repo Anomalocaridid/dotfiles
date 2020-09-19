@@ -113,23 +113,6 @@ plug "andreyorst/kaktree" defer kaktree %{
 	map global user t ": kaktree-toggle<ret>" -docstring "kaktree"
 }
 
-plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
-	colorscheme cyberpunk-neon
-}
-
-# Powerline Bar
-plug "jdugan6240/powerline.kak" defer powerline %{
-	set-option global powerline_shorten_bufname short
-
-	# Use my custom powerline theme
-	powerline-theme cyberpunk-neon
-
-	# Default layout
-	#set-option global powerline_format "git bufname line-column mode-info filetype client session position"
-} config %{
-	powerline-start
-}
-
 # Escape arguments so that they can be passed to Kakoune
 # Required by auto-pairs.kak
 plug "alexherbo2/prelude.kak"
@@ -221,6 +204,25 @@ plug "delapouite/kakoune-text-objects" %{
 	text-object-map
 }
 
+# Roguelike-style light simulation
+plug "occivink/kakoune-roguelight" config %{
+	define-command roguelight-toggle %{
+		try %{
+			crosshairs
+			roguelight-enable
+		} catch %{
+			roguelight-disable
+		}
+
+		hook -group roguelight window RawKey .* roguelight-refresh
+	}
+
+	define-command roguelight-map %{
+		edit -readonly "%val{config}/plugins/kakoune-roguelight/map"
+		roguelight-toggle
+	}
+}
+
 # Smooth scrolling
 plug "caksoylar/kakoune-smooth-scroll" config %{
 	# Automatically enable for every window
@@ -230,4 +232,26 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 
 	# Default mapping conflicts with text-objects
 	set-option global scroll_keys_object
+}
+
+# Easy navigation
+plug "danr/kakoune-easymotion" config %{
+	map global user e ": enter-user-mode easymotion<ret>" -docstring "easymotion"
+}
+
+plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
+	colorscheme cyberpunk-neon
+}
+
+# Powerline Bar
+plug "jdugan6240/powerline.kak" defer powerline %{
+	set-option global powerline_shorten_bufname short
+
+	# Use my custom powerline theme
+	powerline-theme cyberpunk-neon
+
+	# Default layout
+	#set-option global powerline_format "git bufname line-column mode-info filetype client session position"
+} config %{
+	powerline-start
 }
