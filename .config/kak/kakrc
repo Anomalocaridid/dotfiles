@@ -221,25 +221,6 @@ plug "delapouite/kakoune-text-objects" %{
 	text-object-map
 }
 
-# Roguelike-style light simulation
-plug "occivink/kakoune-roguelight" config %{
-	define-command roguelight-toggle %{
-		try %{
-			crosshairs
-			roguelight-enable
-		} catch %{
-			roguelight-disable
-		}
-
-		hook -group roguelight window RawKey .* roguelight-refresh
-	}
-
-	define-command roguelight-map %{
-		edit -readonly "%val{config}/plugins/kakoune-roguelight/map"
-		roguelight-toggle
-	}
-}
-
 # Smooth scrolling
 plug "caksoylar/kakoune-smooth-scroll" config %{
 	# Automatically enable for every window
