@@ -14,6 +14,9 @@ hook global WinSetOption filetype=(lisp) %{
 	set-option window indentwidth 2
 }
 
+# Math prompt powered by Qalculate!
+map global normal = ': prompt math: %{exec "a%val{text}<lt>esc> | qalc -t +u8 -f -<lt>ret>"}<ret>'
+
 # Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
