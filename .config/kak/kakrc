@@ -155,9 +155,6 @@ plug "alexherbo2/auto-pairs.kak" %{
 
 # Highlight recursive pairs of parentheses centered from cursor
 plug "Bodhizafa/kak-rainbow" config %{
-	# colors:                         pink         orange        yellow       green         blue         purple     
-	set-option global rainbow_colors "rgb:ff00ff" "rgb:f57600"  "rgb:ffff00" "rgb:00ff00" "rgb:0abdc7" "rgb:721c92"
-
 	hook global WinSetOption filetype=(.*) rainbow-enable-window
 }
 
