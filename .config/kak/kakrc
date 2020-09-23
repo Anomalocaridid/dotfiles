@@ -1,6 +1,9 @@
 # Add line numbers
 add-highlighter global/ number-lines -hlcursor
 
+# Highlight matching characters
+add-highlighter global/ show-matching
+
 # Get rid of Clippy and don't set terminal window title
 set-option global ui_options ncurses_assistant=none ncurses_set_title=false
 
@@ -16,6 +19,17 @@ hook global WinSetOption filetype=(lisp) %{
 
 # Math prompt powered by Qalculate!
 map global normal = ': prompt math: %{exec "a%val{text}<lt>esc> | qalc -t +u8 -f -<lt>ret>"}<ret>'
+
+# Toggle visible whitespace
+define-command whitespace-toggle %{
+	try %{
+		add-highlighter global/ show-whitespaces
+	} catch %{
+		remove-highlighter global/show-whitespaces
+	}
+}
+
+map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 
 # Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
@@ -210,10 +224,10 @@ plug "delapouite/kakoune-text-objects" %{
 # Roguelike-style light simulation
 plug "occivink/kakoune-roguelight" config %{
 	define-command roguelight-toggle %{
-		try %{
+try %{
 			crosshairs
 			roguelight-enable
-		} catch %{
+} catch %{
 			roguelight-disable
 		}
 
