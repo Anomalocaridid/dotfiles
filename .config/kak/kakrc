@@ -17,6 +17,20 @@ hook global WinSetOption filetype=(lisp) %{
 	set-option window indentwidth 2
 }
 
+# Format shell scripts on save
+# (No LSP server to format it)
+hook global WinSetOption filetype=sh %{
+	set-option window formatcmd "shfmt"
+	hook buffer BufWritePre .* format
+}
+
+# Format C programs on save
+# (Not supported by ccls)
+hook global WinSetOption filetype=c %{
+set-option window formatcmd 'clang-format --style="{IndentWidth: 4}"'
+	hook buffer BufWritePre .* format
+}
+
 # Math prompt powered by Qalculate!
 map global normal = ': prompt math: %{exec "a%val{text}<lt>esc> | qalc -t +u8 -f -<lt>ret>"}<ret>'
 
@@ -84,16 +98,6 @@ plug "eraserhd/parinfer-rust" do %{
 	hook global WinSetOption filetype=(clojure|lisp|scheme|racket) %{
 		parinfer-enable-window -smart
 	}
-}
-
-hook global WinSetOption filetype=sh %{
-	set-option window formatcmd "shfmt"
-	hook buffer BufWritePre .* format
-}
-
-hook global WinSetOption filetype=c %{
-	set-option window formatcmd 'clang-format --style="{IndentWidth: 4}"'
-	hook buffer BufWritePre .* format
 }
 
 # Automatic tab handling
@@ -221,10 +225,10 @@ plug "delapouite/kakoune-text-objects" %{
 # Roguelike-style light simulation
 plug "occivink/kakoune-roguelight" config %{
 	define-command roguelight-toggle %{
-try %{
+	try %{
 			crosshairs
 			roguelight-enable
-} catch %{
+	} catch %{
 			roguelight-disable
 		}
 
@@ -253,11 +257,21 @@ plug "danr/kakoune-easymotion" config %{
 	map global user e ": enter-user-mode easymotion<ret>" -docstring "easymotion"
 }
 
+# Discord presence
+plug "ABuffSeagull/kakoune-discord" do %{
+	cargo install --path . --force
+} config %{
+	discord-presence-enable
+}
+
+# My custom colorscheme
+# Keep at bottom so that it overwrites supported plugins' custom faces
 plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
 	colorscheme cyberpunk-neon
 }
 
 # Powerline Bar
+# Keep below colorscheme so it can use its powerline theme module
 plug "jdugan6240/powerline.kak" defer powerline %{
 	set-option global powerline_shorten_bufname short
 
