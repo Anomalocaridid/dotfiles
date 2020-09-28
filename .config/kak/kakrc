@@ -77,11 +77,6 @@ plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
 	hook global WinSetOption filetype=(sh|kak) %{
 		map global user l ": enter-user-mode shellcheck<ret>" -docstring "shellcheck"
 	}
-
-	# Enable symbols in gutter for sh files.
-	hook global WinSetOption filetype=(sh) %{
-		lint-enable
-	}
 }
 
 plug "eraserhd/parinfer-rust" do %{
