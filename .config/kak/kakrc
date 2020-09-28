@@ -24,13 +24,6 @@ hook global WinSetOption filetype=sh %{
 	hook buffer BufWritePre .* format
 }
 
-# Format C programs on save
-# (Not supported by ccls)
-hook global WinSetOption filetype=c %{
-set-option window formatcmd 'clang-format --style="{IndentWidth: 4}"'
-	hook buffer BufWritePre .* format
-}
-
 # Math prompt powered by Qalculate!
 map global normal = ': prompt math: %{exec "a%val{text}<lt>esc> | qalc -t +u8 -f -<lt>ret>"}<ret>'
 
