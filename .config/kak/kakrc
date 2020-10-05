@@ -93,7 +93,7 @@ plug "eraserhd/parinfer-rust" do %{
 plug "andreyorst/smarttab.kak" defer smarttab %{
 	set-option global softtabstop 4
 } config %{
-	hook global WinSetOption filetype=(kak|bash|plain) smarttab
+	hook global WinSetOption filetype=(kak|sh|plain) smarttab
    
 	hook global WinSetOption filetype=(c|haskell|rust|yaml|lisp) expandtab
 }
