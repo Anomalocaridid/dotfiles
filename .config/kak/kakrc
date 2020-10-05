@@ -20,7 +20,7 @@ hook global WinSetOption filetype=(lisp) %{
 # Format shell scripts on save
 # (No LSP server to format it)
 hook global WinSetOption filetype=sh %{
-	set-option window formatcmd "shfmt"
+	set-option window formatcmd "shfmt -ci -sr"
 	hook buffer BufWritePre .* format
 }
 
