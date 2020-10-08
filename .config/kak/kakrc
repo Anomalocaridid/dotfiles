@@ -188,26 +188,13 @@ plug "alexherbo2/manual-indent.kak" config %{
 	}
 }
 
-# Surround selections with paired characters
-# Is not affected by auto-pairs like kakoune-mirror is
-plug "alexherbo2/surround.kak" config %{
-	require-module surround
-
-	map global user q ": enter-user-mode surround<ret>" -docstring "surround mode"
-	map global user Q ": surround-enter-insert-mode<ret>" -docstring "surround insert mode"
-}
-
 # Symmetrically grow/shrink horizontlly.
 plug "delapouite/kakoune-mirror" config %{
 	map global user m ": enter-user-mode -lock mirror<ret>" -docstring "Enter mirror mode"
 }
 
 # Selects all adjacent lines that match the current selection
-plug "occivink/kakoune-vertical-selection" config %{
-	map global user v     ': vertical-selection-down<ret>' -docstring "vertical select down"
-	map global user <a-v> ': vertical-selection-up<ret>' -docstring "vertical select up"
-	map global user V     ': vertical-selection-up-and-down<ret>' -docstring "vertical select up/down"
-}
+plug "occivink/kakoune-vertical-selection"
 
 # Enhances text objects
 # Depends on kakoune-vertical-selection
@@ -218,10 +205,10 @@ plug "delapouite/kakoune-text-objects" %{
 # Roguelike-style light simulation
 plug "occivink/kakoune-roguelight" config %{
 	define-command roguelight-toggle %{
-	try %{
+		try %{
 			crosshairs
 			roguelight-enable
-	} catch %{
+		} catch %{
 			roguelight-disable
 		}
 
