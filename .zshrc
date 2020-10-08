@@ -1,48 +1,26 @@
-#!/bin/false
-# vim:fileencoding=utf-8:foldmethod=marker
+#!/usr/bin/env false
 
-# Environment Variables {{{
+# Environment Variables
+CARGO_BIN=$HOME/.cargo/bin # Location of binaries installed by Rust's Cargo
+STACK_BIN=$HOME/.local/bin # Location of binaries installed by Haskell's Stack
+SCRIPTS=$HOME/Scripts      # Folder for scripts
+HOME_BIN=$HOME/bin         # Folder for other programs
 
-# $PATH declaration {{{
-
-# Location of binaries installed by Rust's Cargo
-CARGO_BIN=$HOME/.cargo/bin
-
-# Location of binaries installed by Haskell's Stack
-STACK_BIN=$HOME/.local/bin
-
-# Folder for scripts
-SCRIPTS=$HOME/Scripts
-
-HOME_BIN=$HOME/bin
-
+# $PATH declaration
 export PATH=$CARGO_BIN:$STACK_BIN:$SCRIPTS:$HOME_BIN:/usr/local/bin:$PATH
 fpath+=$HOME/.zfunc
 
-# }}}
-
+# Use Kakoune as the default text editor.
 export VISUAL="kak"
 export EDITOR="kak"
 
-# }}}
-
-# Autostart tmux {{{
-# As long you are not in a tmux session.
-# And you are in an interactive shell.
-#if [[ -t 0 ]] && [[ -z "$TMUX" ]] && [[ $- = *i* ]]; then
-#    exec tmux new-session -A
-#fi
-# }}}
-
-# Ascii Terminal greeting. {{{
+# Ascii Terminal greeting. 
 # Shows Linux distro and version in rainbow ascii art.
 echo -en "\e[1m"
 lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat
 echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
 
-# }}}
-
-# Enable Powerlevel10k instant prompt. {{{
+# Enable Powerlevel10k instant prompt. 
 # Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -50,95 +28,45 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# }}}
+# Autocompletion
+autoload -Uz compinit && compinit              # Enables zsh tab-completion
+kitty + complete setup zsh | source /dev/stdin # Completion for kitty
 
-# Autocompletion {{{
-# Enables zsh tab-completion
-autoload -Uz compinit && compinit
+# Zstyles 
+zstyle ':completion:*' rehash true                        # Persistent rehash
+zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}' # Case-insensitive completion
 
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
-
-# Zstyles {{{
-# Persistent rehash
-zstyle ':completion:*' rehash true
-
-# Case-insensitive completion
-zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}'
-
-# }}}
-
-# }}}
-
-# Zplug Plugins {{{
-
-# Check if zplug is installed {{{
+# Zplug settings
+# Check if zplug is installed 
 if [[ ! -d ~/.zplug ]]; then
     git clone https://github.com/zplug/zplug ~/.zplug
     source ~/.zplug/init.zsh && zplug update --self
 fi
 
-# }}}
-
 # All plugins should be below this command.
 source ~/.zplug/init.zsh
 
-# zplug self management
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'      # zplug self management
+zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme # Powerlevel10k Theme
 
-# Powerlevel10k Theme
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme
+# Zsh-Users
+zplug "zsh-users/zsh-syntax-highlighting", defer:2         # Syntax highlighting
+zplug "zsh-users/zsh-completions"                          # Extends auto completion
+zplug "zsh-users/zsh-history-substring-search"             # Search history based on already entered text
+zplug "zsh-users/zsh-autosuggestions"                      # Auto-suggestions
 
-# zsh-users {{{
+# Oh-My-Zsh
+zplug "plugins/git", from:oh-my-zsh                        # Git integration
+zplug "plugins/z", from:oh-my-zsh                          # Change directory based on history
+zplug "plugins/zsh_reload", from:oh-my-zsh                 # Adds short command to reload and recompile zsh config
+zplug "plugins/sudo", from:oh-my-zsh                       # ESC twice to prefix current or previous command with sudo
+zplug "plugins/wd", from:oh-my-zsh                         # Warp to directory
+zplug "plugins/zsh-interactive-cd", from:oh-my-zsh         # Fish-like interactive cd; requires fzf
+zplug "plugins/archlinux", from:oh-my-zsh                  # Aliases for Arch-based Linux distros
+zplug "plugins/alias-finder", from:oh-my-zsh               # Alias finder
+zplug "plugins/command-not-found", from:oh-my-zsh          # finds packages that contains a command not found; requires pkgfile
 
-# Syntax highlighting
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-# Extends auto completion
-zplug "zsh-users/zsh-completions"
-
-# Search history based on already entered text
-zplug "zsh-users/zsh-history-substring-search"
-
-# Auto-suggestions
-zplug "zsh-users/zsh-autosuggestions"
-
-# }}}
-
-# Oh-My-Zsh {{{
-
-# Oh-My-Zsh's git plugin
-zplug "plugins/git", from:oh-my-zsh
-
-# Change directory based on history
-zplug "plugins/z", from:oh-my-zsh
-
-# Adds short command to reload and recompile zsh config
-zplug "plugins/zsh_reload", from:oh-my-zsh
-
-# ESC twice to prefix current or previous command with sudo
-zplug "plugins/sudo", from:oh-my-zsh
-
-# Warp to directory
-zplug "plugins/wd", from:oh-my-zsh
-
-# Fish-like interactive cd
-# Requires fzf
-zplug "plugins/zsh-interactive-cd", from:oh-my-zsh
-
-# Aliases for Arch-based Linux distros
-zplug "plugins/archlinux", from:oh-my-zsh
-
-# Alias finder
-zplug "plugins/alias-finder", from:oh-my-zsh
-
-# Provides suggestions for packages to be installed if a common command is not found
-# Requires pkgfile
-zplug "plugins/command-not-found", from:oh-my-zsh
-
-# }}}
-
-# Install packages that have not been installed yet {{{
+# Install packages that have not been installed yet 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -rq; then
@@ -148,18 +76,11 @@ if ! zplug check --verbose; then
     fi
 fi
 
-# }}}
-
 # All plugins should be above this command
-# Load installed plugins
-zplug load
+zplug load  # Load installed plugins
+zplug clean # Clean unused plugins
 
-# Clean unused plugins
-zplug clean
-
-# }}}
-
-# Keybindings {{{
+# Keybindings
 
 # Keybindings for history-substring-search
 # bind UP and DOWN arrow keys
@@ -179,13 +100,9 @@ bindkey -M vicmd 'j' history-substring-search-down
 # Make the delete key work like a delete key
 bindkey "^[[3~" delete-char
 
-# }}}
-
-# Aliases {{{
-
+# Aliases 
 # Aliases alternative programs to commonly used commands
 alias ls="exa"
-
 alias cat="bat"
 alias less="bat --paging=always"
 alias grep="batgrep"
@@ -206,83 +123,49 @@ alias cp="cp -i"
 # Command to show the main drive's space at a glance
 alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
 
-# Force tmux to use 256 colors
-alias tmux="tmux -2"
-alias tkill="tmux kill-server"
-
-# Help Command Alias {{{
+# Help Command Alias 
 autoload -U run-help
 autoload run-help-git
 autoload run-help-svn
 autoload run-help-svk
 alias help=run-help
 
-# }}}
+# Aliases for ls 
+alias la="ls -a"    # Show all files including dotfiles in directory
+alias l.="ls -d .*" # Show only dotfiles current directory
+alias ll="ls -l"    # Show files in directory in long format
+alias lla="ls -la"  # Show all files including dotfiles in directory in long format
 
-# Aliases for ls {{{
-# Show all files including dotfiles in directory
-alias la="ls -a"
-
-# Show only dotfiles current directory
-alias l.="ls -d .*"
-
-# Show files in directory in long format
-alias ll="ls -l"
-
-# Show all files including dotfiles in directory in long format
-alias lla="ls -la"
-
-# }}}
-
-# Aliases for kittens included with kitty terminal {{{
-alias icat="kitty +kitten icat"          # Displays images in terminal.
-alias d="kitty +kitten diff"             # Displays diffs between two files.
-alias hints="kitty +kitten hints"        # Selects and acts on arbitrary text snippets on screen.
-alias panel="kitty +kitten panel"        # Draws a gpu accelerated panel using another program's output.
+# Aliases for kittens included with kitty terminal 
+alias icat="kitty +kitten icat"           # Displays images in terminal.
+alias d="kitty +kitten diff"              # Displays diffs between two files.
+alias hints="kitty +kitten hints"         # Selects and acts on arbitrary text snippets on screen.
+alias panel="kitty +kitten panel"         # Draws a gpu accelerated panel using another program's output.
 alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
 
-# }}}
-
-# Aliases for quick access to frequently edited dotfiles {{{
+# Aliases for quick access to frequently edited dotfiles 
 alias zshrc="$EDITOR ~/.zshrc"
 alias kakrc="kak -e edit-kakrc"
-
-# }}}
-
-# Misc Aliases {{{
 
 # A fabulous quote of the day, delivered by a cow.
 alias moo="fortune | cowsay | lolcat"
 
-# }}}
-
-# Command Functions {{{
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
 }
 
-# Sets zsh as shell.
+# Sets zsh as the default shell for the current user.
 function set-zsh() {
 	chsh -s "$(which zsh)" && echo "All done! Please restart terminal."
 }
 
-# }}}
-
-# }}}
-
-# Autoload zsh modules not enabled by default {{{
-# Calculator program
-autoload zcalc
-
-# Move/rename files that match a pattern/
-autoload zmv
-
-# Tetris
-autoload -U tetriscurses
+# Autoload zsh modules not enabled by default 
+autoload zcalc           # Calculator program
+autoload zmv             # Move/rename files that match a pattern/
+autoload -U tetriscurses # Tetris
 alias tetris="tetriscurses"
 
-# }}}
-
+# load Powerlevel10k configuration
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
