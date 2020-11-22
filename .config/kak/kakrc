@@ -38,6 +38,15 @@ define-command whitespace-toggle %{
 
 map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 
+# Ensure that plug.kak is installed.
+# If not, install it.
+nop %sh{
+	if [ ! -d $kak_config/plugins/plug.kak ]; then
+		mkdir -p "$kak_config/plugins"
+		git clone https://github.com/robertmeta/plug.kak.git "$kak_config/plugins/plug.kak"
+	fi
+}
+
 # Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
