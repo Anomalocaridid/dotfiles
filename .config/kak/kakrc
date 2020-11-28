@@ -42,7 +42,6 @@ map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 # If not, install it.
 nop %sh{
 	if [ ! -d "$kak_config/plugins/plug.kak" ]; then
-		mkdir -p "$kak_config/plugins"
 		git clone https://github.com/robertmeta/plug.kak.git "$kak_config/plugins/plug.kak"
 	fi
 }
@@ -50,7 +49,11 @@ nop %sh{
 # Source plug.kak
 source "%val{config}/plugins/plug.kak/rc/plug.kak"
 
-plug "robertmeta/plug.kak" noload
+plug "robertmeta/plug.kak" noload config %{
+	# Automatically install plugins
+	# Instead of only when plug-install is run
+  	set-option global plug_always_ensure 'true'
+}
 
 plug "ul/kak-lsp" do %{
 	cargo install --locked --force --path .
