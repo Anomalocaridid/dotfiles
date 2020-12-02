@@ -38,16 +38,29 @@ define-command whitespace-toggle %{
 
 map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 
-# Ensure that plug.kak is installed.
-# If not, install it.
-nop %sh{
-	if [ ! -d "$kak_config/plugins/plug.kak" ]; then
-		git clone https://github.com/robertmeta/plug.kak.git "$kak_config/plugins/plug.kak"
-	fi
+define-command snip-selection %{
+	evaluate-commands %sh{
+		echo "$kak_reg_dot" | sed "s/^/    /" | expand -t 4 > kak-snip.txt
+	}
 }
 
-# Source plug.kak
-source "%val{config}/plugins/plug.kak/rc/plug.kak"
+map global user n ": snip-selection<ret>" -docstring "copy selection to ~/kak-snip.txt"
+
+declare-option -docstring "plug.kak's directory" str plugkakdir "%val{config}/plugins/plug.kak"
+declare-option -docstring "plug.kak's main script" str plugkak "%opt{plugkakdir}/rc/plug.kak"
+
+# Ensure that plug.kak is installed.
+try %{
+	# Source plug.kak
+	source "%opt{plugkak}"
+} catch %sh{
+	# If plug.kak directory is not present
+	# Then install plug.kak
+	if [ ! -d "$kak_opt_plugkakdir" ]; then
+		git clone https://github.com/robertmeta/plug.kak.git "$kak_opt_plugkakdir"
+		echo "source '%opt{plugkak}"
+	fi
+}
 
 plug "robertmeta/plug.kak" noload config %{
 	# Automatically install plugins
