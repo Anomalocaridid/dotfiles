@@ -38,6 +38,13 @@ define-command whitespace-toggle %{
 
 map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 
+# Games user mode
+declare-user-mode games
+map global user g ": enter-user-mode games<ret>" -docstring "games and fun"
+map global games r ": roguelight-toggle<ret>" -docstring "toggle roguelight"
+map global games m ": roguelight-map<ret>" -docstring "roguelight map"
+map global games s ": sokoban 1<ret>" -docstring "sokoban"
+
 define-command snip-selection %{
 	evaluate-commands %sh{
 		echo "$kak_reg_dot" | sed "s/^/    /" | expand -t 4 > kak-snip.txt
@@ -288,3 +295,5 @@ plug "jdugan6240/powerline.kak" defer powerline %{
 } config %{
 	powerline-start
 }
+
+plug "jpcornwell/kakoune-sokoban"
