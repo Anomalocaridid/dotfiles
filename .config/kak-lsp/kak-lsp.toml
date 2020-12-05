@@ -63,7 +63,7 @@ command = "clangd"
 [language.haskell]
 filetypes = ["haskell"]
 roots = ["Setup.hs", "stack.yaml", "*.cabal"]
-command = "hie-wrapper"
+command = "haskell-language-server-wrapper"
 args = ["--lsp"]
 
 [language.bash]
