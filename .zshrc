@@ -34,6 +34,12 @@ kitty + complete setup zsh | source /dev/stdin # Completion for kitty
 # Zstyles 
 zstyle ':completion:*' rehash true                        # Persistent rehash
 zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}' # Case-insensitive completion
+# fzf-tab styles
+zstyle ":completion:complete:*:options" sort false        # Disable sort when completing options
+zstyle ":completion:*:git-checkout:*" sort false          # Disable sort when completing git branches
+zstyle ':completion:*:descriptions' format '[%d]'         # Add descriptions when able
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}     # color output with LS_COLORS
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -70,13 +76,13 @@ zinit wait lucid for \
 		OMZP::zsh_reload \
 		OMZP::sudo \
 		OMZP::wd \
-		OMZP::zsh-interactive-cd \
 		OMZP::archlinux \
 		OMZP::alias-finder \
 		OMZP::command-not-found \
+		zsh-users/zsh-history-substring-search \
+		Aloxaf/fzf-tab \
 	svn \
 		OMZP::z \
-		zsh-users/zsh-history-substring-search \
 	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
 		zdharma/fast-syntax-highlighting \
 	blockf \
