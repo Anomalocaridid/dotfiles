@@ -45,13 +45,17 @@ map global games r ": roguelight-toggle<ret>" -docstring "toggle roguelight"
 map global games m ": roguelight-map<ret>" -docstring "roguelight map"
 map global games s ": sokoban 1<ret>" -docstring "sokoban"
 
-define-command snip-selection %{
-	evaluate-commands %sh{
-		echo "$kak_reg_dot" | sed "s/^/    /" | expand -t 4 > kak-snip.txt
-	}
-}
+# Extra mappings
+map global normal D "<a-l>d" -docstring "delete to end of line"
+map global normal Y "<a-l>y" -docstring "yank to end of line"
 
-map global user n ": snip-selection<ret>" -docstring "copy selection to ~/kak-snip.txt"
+map global normal "#" ":comment-line<ret>" -docstring "comment line"
+map global normal "<a-#>" ":comment-block<ret>" -docstring "comment block"
+
+map global normal <ret> "xdp" -docstring "move current line one line down"
+map global normal <a-ret> "xdkkp" -docstring "move current line one line up"
+
+map global goto m "<esc>m;" -docstring "matching char"
 
 declare-option -docstring "plug.kak's directory" str plugkakdir "%val{config}/plugins/plug.kak"
 declare-option -docstring "plug.kak's main script" str plugkak "%opt{plugkakdir}/rc/plug.kak"
