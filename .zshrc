@@ -20,12 +20,11 @@ echo -en "\e[1m"
 lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat
 echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
 
-# Enable Powerlevel10k instant prompt. 
-# Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block, everything else may go below.
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Autocompletion
@@ -36,49 +35,54 @@ kitty + complete setup zsh | source /dev/stdin # Completion for kitty
 zstyle ':completion:*' rehash true                        # Persistent rehash
 zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}' # Case-insensitive completion
 
-# Zplug settings
-# Check if zplug is installed 
-if [[ ! -d ~/.zplug ]]; then
-    git clone https://github.com/zplug/zplug ~/.zplug
-    source ~/.zplug/init.zsh && zplug update --self
+### Added by Zinit's installer
+if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
+    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
+    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
+    command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
-# All plugins should be below this command.
-source ~/.zplug/init.zsh
+source "$HOME/.zinit/bin/zinit.zsh"
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-zplug 'zplug/zplug', hook-build:'zplug --self-manage'      # zplug self management
-zplug "romkatv/powerlevel10k", use:powerlevel10k.zsh-theme # Powerlevel10k Theme
+# Load a few important annexes, without Turbo
+# (this is currently required for annexes)
+zinit light-mode for \
+    zinit-zsh/z-a-rust \
+    zinit-zsh/z-a-as-monitor \
+    zinit-zsh/z-a-patch-dl \
+    zinit-zsh/z-a-bin-gem-node
 
-# Zsh-Users
-zplug "zsh-users/zsh-syntax-highlighting", defer:2         # Syntax highlighting
-zplug "zsh-users/zsh-completions"                          # Extends auto completion
-zplug "zsh-users/zsh-history-substring-search"             # Search history based on already entered text
-zplug "zsh-users/zsh-autosuggestions"                      # Auto-suggestions
+### End of Zinit's installer chunk
 
-# Oh-My-Zsh
-zplug "plugins/git", from:oh-my-zsh                        # Git integration
-zplug "plugins/z", from:oh-my-zsh                          # Change directory based on history
-zplug "plugins/zsh_reload", from:oh-my-zsh                 # Adds short command to reload and recompile zsh config
-zplug "plugins/sudo", from:oh-my-zsh                       # ESC twice to prefix current or previous command with sudo
-zplug "plugins/wd", from:oh-my-zsh                         # Warp to directory
-zplug "plugins/zsh-interactive-cd", from:oh-my-zsh         # Fish-like interactive cd; requires fzf
-zplug "plugins/archlinux", from:oh-my-zsh                  # Aliases for Arch-based Linux distros
-zplug "plugins/alias-finder", from:oh-my-zsh               # Alias finder
-zplug "plugins/command-not-found", from:oh-my-zsh          # finds packages that contains a command not found; requires pkgfile
+# Zinit Plugins
 
-# Install packages that have not been installed yet 
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -rq; then
-        echo; zplug install
-    else
-        echo
-    fi
-fi
+# Theme
+# Should be the first plugin
+zinit ice depth=1;
+zinit light romkatv/powerlevel10k
 
-# All plugins should be above this command
-zplug load  # Load installed plugins
-zplug clean # Clean unused plugins
+zinit wait lucid for \
+		OMZP::git \
+		OMZP::zsh_reload \
+		OMZP::sudo \
+		OMZP::wd \
+		OMZP::zsh-interactive-cd \
+		OMZP::archlinux \
+		OMZP::alias-finder \
+		OMZP::command-not-found \
+	svn \
+		OMZP::z \
+		zsh-users/zsh-history-substring-search \
+	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+		zdharma/fast-syntax-highlighting \
+	blockf \
+		zsh-users/zsh-completions \
+	atload"!_zsh_autosuggest_start" \
+       	zsh-users/zsh-autosuggestions
 
 # Keybindings
 
@@ -169,3 +173,4 @@ alias tetris="tetriscurses"
 # load Powerlevel10k configuration
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
