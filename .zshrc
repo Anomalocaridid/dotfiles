@@ -23,30 +23,30 @@ echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+ 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+ fi
 
 # Autocompletion
 autoload -Uz compinit && compinit              # Enables zsh tab-completion
 kitty + complete setup zsh | source /dev/stdin # Completion for kitty
 
 # Zstyles 
-zstyle ':completion:*' rehash true                        # Persistent rehash
-zstyle ':completion:*' matcher-list 'm:{a-zA-z}={A-Za-z}' # Case-insensitive completion
+zstyle ":completion:*" rehash true                        # Persistent rehash
+zstyle ":completion:*" matcher-list "m:{a-zA-z}={A-Za-z}" # Case-insensitive completion
 # fzf-tab styles
 zstyle ":completion:complete:*:options" sort false        # Disable sort when completing options
 zstyle ":completion:*:git-checkout:*" sort false          # Disable sort when completing git branches
-zstyle ':completion:*:descriptions' format '[%d]'         # Add descriptions when able
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}     # color output with LS_COLORS
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+zstyle ":completion:*:descriptions" format "[%d]"         # Add descriptions when able
+zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}     # color output with LS_COLORS
+zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always $realpath' # Show contents of directories
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
     print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma/zinit%F{220})…%f"
     command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
     command git clone https://github.com/zdharma/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" || \
+        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||           \
         print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 
@@ -56,38 +56,39 @@ autoload -Uz _zinit
 
 # Load a few important annexes, without Turbo
 # (this is currently required for annexes)
-zinit light-mode for \
-    zinit-zsh/z-a-rust \
-    zinit-zsh/z-a-as-monitor \
-    zinit-zsh/z-a-patch-dl \
-    zinit-zsh/z-a-bin-gem-node
+zinit light-mode for           \
+    zinit-zsh/z-a-rust         \
+    zinit-zsh/z-a-as-monitor   \
+    zinit-zsh/z-a-patch-dl     \
+    zinit-zsh/z-a-bin-gem-node \
+	zinit-zsh/z-a-man
 
 ### End of Zinit's installer chunk
 
 # Zinit Plugins
 
 # Theme
-# Should be the first plugin
 zinit ice depth=1;
 zinit light romkatv/powerlevel10k
 
-zinit wait lucid for \
-		OMZP::git \
-		OMZP::zsh_reload \
-		OMZP::sudo \
-		OMZP::wd \
-		OMZP::archlinux \
-		OMZP::alias-finder \
-		OMZP::command-not-found \
-		zsh-users/zsh-history-substring-search \
-		Aloxaf/fzf-tab \
-	svn \
-		OMZP::z \
+# Plugins
+zinit light-mode wait lucid for                             \
+		OMZP::git                                           \
+		OMZP::zsh_reload                                    \
+		OMZP::sudo                                          \
+		OMZP::command-not-found                             \
+		OMZP::fancy-ctrl-z                                  \
+		zsh-users/zsh-history-substring-search              \
+		Aloxaf/fzf-tab                                      \
+		agkozak/zsh-z                                       \
+		amstrad/oh-my-matrix                                \
+		Tarrasch/zsh-bd                                     \
+		hlissner/zsh-autopair                               \
 	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-		zdharma/fast-syntax-highlighting \
-	blockf \
-		zsh-users/zsh-completions \
-	atload"!_zsh_autosuggest_start" \
+		zdharma/fast-syntax-highlighting                    \
+	blockf                                                  \
+		zsh-users/zsh-completions                           \
+	atload"!_zsh_autosuggest_start"                         \
        	zsh-users/zsh-autosuggestions
 
 # Keybindings
@@ -100,12 +101,12 @@ bindkey "${terminfo[kcud1]}" history-substring-search-down
 
 # bind UP and DOWN arrow keys (compatibility fallback
 # for Ubuntu 12.04, Fedora 21, and MacOSX 10.9 users)
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey "^[[A" history-substring-search-up
+bindkey "^[[B" history-substring-search-down
 
 # bind k and j for VI mode
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+bindkey -M vicmd "k" history-substring-search-up
+bindkey -M vicmd "j" history-substring-search-down
 
 # Make the delete key work like a delete key
 bindkey "^[[3~" delete-char
