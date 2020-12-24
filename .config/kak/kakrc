@@ -25,6 +25,7 @@ hook global WinSetOption filetype=sh %{
 }
 
 # Math prompt powered by Qalculate!
+# Requires Qalculate!
 map global normal = ': prompt math: %{exec "a%val{text}<lt>esc> | qalc -t +u8 -f -<lt>ret>"}<ret>'
 
 # Toggle visible whitespace
@@ -79,8 +80,11 @@ plug "robertmeta/plug.kak" noload config %{
   	set-option global plug_always_ensure 'true'
 }
 
+# Language Server Protocol integration
+# Requires cargo
+# See ~/.config/kak-lsp/kak-lsp.toml for further dependencies
 plug "ul/kak-lsp" do %{
-	cargo install --locked --force --path .
+cargo install --locked --force --path .
 } config %{
 	# Cool unicode indicators
 	set-option global lsp_diagnostic_line_error_sign "✖"
@@ -101,8 +105,9 @@ plug "ul/kak-lsp" do %{
 	}
 }
 
+# Shellcheck integration
+# Requires shellcheck
 plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
-
 	# Create shellcheck mode with mappings that resemble the lsp mode
 	declare-user-mode shellcheck
 	map global shellcheck l ": lint<ret>" -docstring "lint buffer"
@@ -115,6 +120,8 @@ plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
 	}
 }
 
+# Parentheses and indentation inferrer for lisp
+# Requires cargo
 plug "eraserhd/parinfer-rust" do %{
 	cargo install --force --path .
 	cargo clean
@@ -163,6 +170,7 @@ plug "andreyorst/kaktree" defer kaktree %{
 plug "alexherbo2/prelude.kak"
 
 # Pairing parentheses and brackets
+# Requires prelude.kak
 plug "alexherbo2/auto-pairs.kak" %{
 	require-module auto-pairs
 	#default
@@ -173,9 +181,9 @@ plug "alexherbo2/auto-pairs.kak" %{
 		set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
 	}
 
-	# No single quotes or backticks
+	# No single quotes, backticks, or parentheses
 	hook global WinSetOption filetype=(lisp) %{
-		set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
+		set-option window auto_pairs "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
 	}
 
 	auto-pairs-enable
@@ -190,6 +198,7 @@ plug "Bodhizafa/kak-rainbow" config %{
 plug "alexherbo2/search-highlighter.kak"
 
 # fzf integration
+# Requires fzf
 # No longer maintained
 plug "andreyorst/fzf.kak" config %{
 	map global user f ": fzf-mode<ret>" -docstring "fzf"
@@ -230,10 +239,11 @@ plug "delapouite/kakoune-mirror" config %{
 }
 
 # Selects all adjacent lines that match the current selection
+# Required by kakoune-text-objects
 plug "occivink/kakoune-vertical-selection"
 
 # Enhances text objects
-# Depends on kakoune-vertical-selection
+# Some features require kakoune-vertical-selection
 plug "delapouite/kakoune-text-objects" %{
 	text-object-map
 }
@@ -258,6 +268,7 @@ plug "occivink/kakoune-roguelight" config %{
 }
 
 # Smooth scrolling
+# Requires Python
 plug "caksoylar/kakoune-smooth-scroll" config %{
 	# Automatically enable for every window
 	hook global WinCreate .* %{
@@ -269,13 +280,15 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 }
 
 # Easy navigation
+# Requires Python
 plug "danr/kakoune-easymotion" config %{
 	map global user e ": enter-user-mode easymotion<ret>" -docstring "easymotion"
 }
 
 # Discord presence
+# Requires cargo and Discord
 plug "ABuffSeagull/kakoune-discord" do %{
-	cargo install --path . --force
+cargo install --path . --force
 } config %{
 	discord-presence-enable
 }
@@ -300,4 +313,5 @@ plug "jdugan6240/powerline.kak" defer powerline %{
 	powerline-start
 }
 
+# Sokoban game
 plug "jpcornwell/kakoune-sokoban"
