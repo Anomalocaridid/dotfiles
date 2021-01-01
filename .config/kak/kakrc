@@ -29,7 +29,7 @@ hook global WinSetOption filetype=sh %{
 map global normal = ': prompt math: %{exec "a%val{text}<lt>esc> | qalc -t +u8 -f -<lt>ret>"}<ret>'
 
 # Toggle visible whitespace
-define-command whitespace-toggle %{
+define-command -docstring "show whitespace characters as more visible characters" whitespace-toggle %{
 	try %{
 		add-highlighter global/ show-whitespaces
 	} catch %{
@@ -38,6 +38,13 @@ define-command whitespace-toggle %{
 }
 
 map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
+
+# Open Tutorial
+define-command -docstring "open an interactive tutorial" trampoline %sh{
+	tramp_file=$(mktemp "kakoune-trampoline.XXXXXXXX")
+	echo "edit -fifo $tramp_file *TRAMPOLINE*"
+	curl -s https://raw.githubusercontent.com/mawww/kakoune/master/contrib/TRAMPOLINE > "$tramp_file"
+}
 
 # Games user mode
 declare-user-mode games
