@@ -40,10 +40,13 @@ define-command -docstring "show whitespace characters as more visible characters
 map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 
 # Open Tutorial
-define-command -docstring "open a tutorial" trampoline %sh{
-	tramp_file=$(mktemp "kakoune-trampoline.XXXXXXXX")
-	echo "edit -fifo $tramp_file *TRAMPOLINE*"
-	curl -s https://raw.githubusercontent.com/mawww/kakoune/master/contrib/TRAMPOLINE -o "$tramp_file"
+define-command -docstring "open a tutorial" trampoline %{
+	evaluate-commands %sh{
+		tramp_file=$(mktemp -t kakoune-trampoline.XXXXXXXX)
+		echo "edit -fifo $tramp_file *TRAMPOLINE*"
+		echo "echo -debug $tramp_file"
+		curl -s https://raw.githubusercontent.com/mawww/kakoune/master/contrib/TRAMPOLINE -o "$tramp_file"
+	}
 }
 
 # Games user mode
