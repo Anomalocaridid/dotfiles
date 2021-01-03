@@ -145,7 +145,7 @@ plug "andreyorst/smarttab.kak" defer smarttab %{
 } config %{
 	hook global WinSetOption filetype=(kak|sh|plain) smarttab
    
-	hook global WinSetOption filetype=(c|haskell|rust|yaml|lisp) expandtab
+	hook global WinSetOption filetype=(c|haskell|rust|yaml|lisp|python) expandtab
 }
 
 # Highlight current line and/or current column
