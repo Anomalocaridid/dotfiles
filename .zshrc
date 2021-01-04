@@ -161,6 +161,7 @@ alias kakrc="kak -e edit-kakrc"
 # A fabulous quote of the day, delivered by a cow.
 alias moo="fortune | cowsay | lolcat"
 
+
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
@@ -170,6 +171,17 @@ function ssh-setup() {
 function set-zsh() {
 	chsh -s "$(which zsh)" && echo "All done! Please restart terminal."
 }
+
+# Fallback behaviour if bd has no arguments passed
+function bd-wrapper() {
+	if [[ -z $@ ]] {
+		cd ..
+	} else {
+		bd $@
+	}
+}
+
+alias bd="bd-wrapper"
 
 # Autoload zsh modules not enabled by default 
 autoload zcalc           # Calculator program
