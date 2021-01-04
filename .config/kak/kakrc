@@ -100,7 +100,7 @@ cargo install --locked --force --path .
 	set-option global lsp_diagnostic_line_error_sign "✖"
 	set-option global lsp_diagnostic_line_warning_sign "➤"
 
-	hook global WinSetOption filetype=(c|haskell|rust) %{
+	hook global WinSetOption filetype=(c|haskell|rust|python) %{
 		# Enable lsp
 		lsp-enable
 
