@@ -161,6 +161,8 @@ alias kakrc="kak -e edit-kakrc"
 # A fabulous quote of the day, delivered by a cow.
 alias moo="fortune | cowsay | lolcat"
 
+# Use Kakoune to align columns of text
+alias align="kak -f '<a-s><S>\h<ret><a-;><&>'"
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {

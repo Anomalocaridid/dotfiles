@@ -39,6 +39,10 @@ define-command -docstring "show whitespace characters as more visible characters
 
 map global user w ": whitespace-toggle<ret>" -docstring "toggle whitespace"
 
+# Align columns
+map global user a "<a-s><S>\h<ret><a-;><&>" -docstring "align columns in selection"
+map global user <a-a> "<percent><a-s><S>\h<ret><a-;><&>" -docstring "align columns in buffer"
+
 # Open Tutorial
 define-command -docstring "open a tutorial" trampoline %{
 	evaluate-commands %sh{
