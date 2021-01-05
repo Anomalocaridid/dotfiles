@@ -53,12 +53,14 @@ define-command -docstring "open a tutorial" trampoline %{
 	}
 }
 
+map global user t ": trampoline<ret>" -docstring "open a tutorial"
+
 # Games user mode
 declare-user-mode games
 map global user g ": enter-user-mode games<ret>" -docstring "games and fun"
 map global games r ": roguelight-toggle<ret>" -docstring "toggle roguelight"
 map global games m ": roguelight-map<ret>" -docstring "roguelight map"
-map global games s ": sokoban 1<ret>" -docstring "sokoban"
+map global games s ": prompt -init 1 choose-sokoban-level: %{%{sokoban %val{text}}<ret>}" -docstring "sokoban"
 
 # Extra mappings
 map global normal D "<a-l>d" -docstring "delete to end of line"
@@ -160,25 +162,6 @@ plug "insipx/kak-crosshairs" config %{
 	crosshairs
 }
 
-# File tree navigator
-# No longer maintained
-plug "andreyorst/kaktree" defer kaktree %{
-	set-option global kaktree_double_click_duration "0.5"
-	set-option global kaktree_indentation 1
-	set-option global kaktree_dir_icon_open  "▾ 🗁 "
-	set-option global kaktree_dir_icon_close "▸ 🗀 "
-	set-option global kaktree_file_icon      "⠀⠀🖺"
-} config %{
-	hook global WinSetOption filetype=kaktree %{
-		remove-highlighter buffer/numbers
-		remove-highlighter buffer/matching
-		remove-highlighter buffer/wrap
-		remove-highlighter buffer/show-whitespaces
-	}#
-	kaktree-enable
-	map global user t ": kaktree-toggle<ret>" -docstring "kaktree"
-}
-
 # Escape arguments so that they can be passed to Kakoune
 # Required by auto-pairs.kak
 plug "alexherbo2/prelude.kak"
@@ -228,10 +211,10 @@ plug "delapouite/kakoune-buffers" config %{
 # Preview faces in a colorscheme
 plug "delapouite/kakoune-palette"
 
-# Enhanced selections
+# Selects entire buffer before certain operations
 plug "delapouite/kakoune-auto-percent"
 
-# Enhanced searches
+# Fills search buffer if empty
 plug "delapouite/kakoune-auto-star"
 
 # Manual indentation
