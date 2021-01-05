@@ -217,19 +217,6 @@ plug "delapouite/kakoune-auto-percent"
 # Fills search buffer if empty
 plug "delapouite/kakoune-auto-star"
 
-# Manual indentation
-plug "alexherbo2/manual-indent.kak" config %{
-	require-module manual-indent
-
-	hook global WinCreate .* %{
-		manual-indent-enable
-	}
-
-	hook global WinSetOption filetype=lisp %{
-		manual-indent-remove-filetype-hooks
-	}
-}
-
 # Symmetrically grow/shrink horizontlly.
 plug "delapouite/kakoune-mirror" config %{
 	map global user m ": enter-user-mode -lock mirror<ret>" -docstring "Enter mirror mode"
