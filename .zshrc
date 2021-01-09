@@ -1,5 +1,18 @@
 #!/usr/bin/env false
 
+# Ascii Terminal greeting. 
+# Shows Linux distro and version in rainbow ascii art.
+echo -en "\e[1m"
+lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat
+echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+ 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+ fi
+
 # Environment Variables
 CARGO_BIN=$HOME/.cargo/bin # Location of binaries installed by Rust's Cargo
 STACK_BIN=$HOME/.local/bin # Location of binaries installed by Haskell's Stack
@@ -14,18 +27,8 @@ fpath+=$HOME/.zfunc
 export VISUAL="kak"
 export EDITOR="kak"
 
-# Ascii Terminal greeting. 
-# Shows Linux distro and version in rainbow ascii art.
-echo -en "\e[1m"
-lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat
-echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
- if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
- 	source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
- fi
+# Opt out of Microsoft's telemetry when using .NET SDK
+export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 # Autocompletion
 autoload -Uz compinit && compinit              # Enables zsh tab-completion
