@@ -280,14 +280,6 @@ plug "danr/kakoune-easymotion" config %{
 	map global user e ": enter-user-mode easymotion<ret>" -docstring "easymotion"
 }
 
-# Discord presence
-# Requires cargo and Discord
-plug "ABuffSeagull/kakoune-discord" do %{
-cargo install --path . --force
-} config %{
-	discord-presence-enable
-}
-
 # My custom colorscheme
 # Keep at bottom so that it overwrites supported plugins' custom faces
 plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
