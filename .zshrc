@@ -78,7 +78,6 @@ zinit light romkatv/powerlevel10k
 zinit light-mode wait lucid for                             \
 		OMZP::git                                           \
 		OMZP::zsh_reload                                    \
-		OMZP::sudo                                          \
 		OMZP::command-not-found                             \
 		OMZP::fancy-ctrl-z                                  \
 		zsh-users/zsh-history-substring-search              \
