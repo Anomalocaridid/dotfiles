@@ -82,7 +82,6 @@ zinit light-mode wait lucid for                             \
 		OMZP::fancy-ctrl-z                                  \
 		zsh-users/zsh-history-substring-search              \
 		Aloxaf/fzf-tab                                      \
-		agkozak/zsh-z                                       \
 		amstrad/oh-my-matrix                                \
 		Tarrasch/zsh-bd                                     \
 		hlissner/zsh-autopair                               \
@@ -193,7 +192,9 @@ autoload zmv             # Move/rename files that match a pattern/
 autoload -U tetriscurses # Tetris
 alias tetris="tetriscurses"
 
+# Enable zoxide
+eval "$(zoxide init zsh)"
+
 # load Powerlevel10k configuration
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
-
