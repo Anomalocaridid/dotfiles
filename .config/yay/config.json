@@ -1,7 +1,7 @@
 {
 	"aururl": "https://aur.archlinux.org",
-	"buildDir": "$HOME/.cache/yay",
-	"absdir": "$HOME/.cache/yay/abs",
+	"buildDir": "/home/anomalocaris/.cache/yay",
+	"absdir": "/home/anomalocaris/.cache/yay/abs",
 	"editor": "",
 	"editorflags": "",
 	"makepkgbin": "makepkg",
@@ -10,7 +10,6 @@
 	"pacmanconf": "/etc/pacman.conf",
 	"redownload": "no",
 	"rebuild": "no",
-	"batchinstall": false,
 	"answerclean": "All",
 	"answerdiff": "None",
 	"answeredit": "None",
@@ -22,7 +21,7 @@
 	"sortby": "votes",
 	"searchby": "name-desc",
 	"gitflags": "",
-	"removemake": "no",
+	"removemake": "yes",
 	"sudobin": "sudo",
 	"sudoflags": "",
 	"requestsplitn": 150,
@@ -39,5 +38,6 @@
 	"diffmenu": false,
 	"editmenu": false,
 	"combinedupgrade": false,
-	"useask": false
+	"useask": false,
+	"batchinstall": false
 }
