@@ -1,8 +1,0 @@
-! After modifying, reload with:
-! xrdb ~/.Xresources
-
-#define clifont MesloLGS NF 
-#define clifontsize 12
-#define mybrowser firefox 
-
-#include ".xres/colors"
