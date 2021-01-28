@@ -115,6 +115,7 @@ bindkey "^[[3~" delete-char
 # Aliases 
 # Aliases alternative programs to commonly used commands
 alias ls="exa"
+alias du="dust"
 alias cat="bat"
 alias less="bat --paging=always"
 alias grep="batgrep"
