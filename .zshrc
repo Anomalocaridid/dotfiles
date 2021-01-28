@@ -195,6 +195,7 @@ alias tetris="tetriscurses"
 
 # Enable zoxide
 eval "$(zoxide init zsh)"
+alias cd="z"
 
 # load Powerlevel10k configuration
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
