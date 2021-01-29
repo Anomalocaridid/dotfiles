@@ -30,6 +30,9 @@ export EDITOR="kak"
 # Opt out of Microsoft's telemetry when using .NET SDK
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
+# Set LS_COLORS
+eval "$(dircolors)"
+
 # Autocompletion
 autoload -Uz compinit && compinit              # Enables zsh tab-completion
 kitty + complete setup zsh | source /dev/stdin # Completion for kitty
@@ -41,8 +44,8 @@ zstyle ":completion:*" matcher-list "m:{a-zA-z}={A-Za-z}" # Case-insensitive com
 zstyle ":completion:complete:*:options" sort false        # Disable sort when completing options
 zstyle ":completion:*:git-checkout:*" sort false          # Disable sort when completing git branches
 zstyle ":completion:*:descriptions" format "[%d]"         # Add descriptions when able
-zstyle ":completion:*" list-colors ${(s.:.)LS_COLORS}     # color output with LS_COLORS
-zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always $realpath' # Show contents of directories
+zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"     # color output with LS_COLORS
+zstyle ":fzf-tab:complete:cd:*" fzf-preview "exa -1 --color=always $realpath" # Show contents of directories
 
 ### Added by Zinit's installer
 if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
@@ -116,6 +119,7 @@ bindkey "^[[3~" delete-char
 # Aliases alternative programs to commonly used commands
 alias ls="exa"
 alias du="dust"
+alias find="fd"
 alias cat="bat"
 alias less="bat --paging=always"
 alias grep="batgrep"
@@ -178,11 +182,11 @@ function set-zsh() {
 
 # Fallback behaviour if bd has no arguments passed
 function bd-wrapper() {
-	if [[ -z $@ ]] {
+	if [[ -z "$*" ]]; then
 		cd ..
-	} else {
-		bd $@
-	}
+	else
+		bd "$@"
+	fi
 }
 
 alias bd="bd-wrapper"
