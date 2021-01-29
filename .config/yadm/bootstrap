@@ -1,0 +1,106 @@
+#!/usr/bin/env bash
+
+# TODO: check if distro is EndeavourOS
+
+# Dependencies for my setup for various programs
+# Intended to be redundant so I don't have to consider if other programs
+# already rely on something before adding or removing it.
+
+zsh_deps=(
+	"bat"
+	"bat-extras"
+	"dust"
+	"exa"
+	"fd"
+	"fzf"
+	"kitty"
+	"lolcat"
+	"otf-nerd-fonts-fira-code"
+	"pkgfile"
+	"ripgrep" # Required by bat-extras
+	"toilet"
+	"toilet-fonts" # Required by toilet
+	"zoxide"
+	"zsh"
+)
+
+python_dev=(
+	"flake8"
+	"python"
+	"python-language-server"
+	"yapf"
+)
+
+haskell_dev=(
+	"cabal-install"
+	"ghc"
+	"haskell-language-server"
+	"haskell-ormolu"
+	"hlint"
+	"stack"
+)
+
+bash_dev=(
+	"shellcheck"
+	"shfmt"
+)
+
+common_lisp_dev=(
+	"clisp"
+	"sbcl"
+)
+
+kak_deps=(
+	"${bash_dev[@]}"
+	"${common_lisp_dev[@]}"
+	"${haskell_dev[@]}"
+	"${python_dev[@]}"
+	"clang" # For C development
+	"fzf"
+	"kakoune"
+	"rustup" # For Rust development
+)
+
+misc=(
+	"breeze-hacked-cursor-theme"
+	"discord"
+	"gnuplot" # Required by qalculate-gtk
+	"itch"
+	"joplin-desktop"
+	"keepassxc"
+	"lutris"
+	"megasync"
+	"moreutils"
+	"qalculate-gtk"
+	"steam"
+	"strawberry"
+	"syncthing"
+	"syncthingtray"
+	"teeldeer"
+	"waterfox-g3-bin"
+	"wine"
+	"wine-gecko"
+	"wine-mono"
+	"yubioath-desktop"
+)
+
+# Join and deduplicate program lists.
+install_list=$(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
+
+echo "$install_list"
+
+# TODO: Install programs with yay
+
+# TODO: Switch user's default shell to zsh
+
+# TODO: Configure rustup
+
+# TODO: Install and configure icon theme
+
+# TODO: Install and configure cursor theme
+
+# TODO: Download color scheme to directory
+
+# TODO: Initialize QMK
+
+# TODO: Install and configure betterdiscord
