@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-# TODO: check if distro is EndeavourOS
-
-# Run self with sudo
-[[ "$UID" -eq 0 ]] || exec sudo "$0"
-
 # Dependencies for my setup for various programs
 # Intended to be redundant so I don't have to consider if other programs
 # already rely on something before adding or removing it.
@@ -79,7 +74,7 @@ misc=(
 	"strawberry"
 	"syncthing"
 	"syncthingtray"
-	"teeldeer"
+	"tealdeer"
 	"waterfox-g3-bin"
 	"wine"
 	"wine-gecko"
@@ -90,18 +85,37 @@ misc=(
 # Install programs with yay
 yay -S --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
-# TODO: Switch user's default shell to zsh
+# Switch user's default shell to zsh
+if chsh -s "$(which zsh)"; then
+	echo "Successfully set $USER's shell to zsh."
+else
+	echo "Could not set $USER's shell to zsh."
+fi
 
-# TODO: Configure rustup
+# Set cursor theme in default theme
+default_cursor_theme="/usr/share/icons/default/index.theme"
+
+if sed -i "s/Adwaita/Breeze_Hacked" "$default_cursor_theme"; then
+	echo "Successfully set cursor in $default_cursor_theme"
+else
+	echo "Could not set cursor in $default_cursor_theme"
+fi
+
+# Download color scheme to KDE home directory
+color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/kde/cyberpunk-neon.colors"
+
+if curl "$color_scheme_url" -o "$HOME/.local/share/color-schemes/cyberpunk-neon.colors"; then
+	echo "Successfully downloaded KDE color scheme."
+else
+	echo "Could not download KDE color scheme."
+fi
 
 # TODO: Install and configure icon theme
 
-# TODO: Install and configure cursor theme
-
-# TODO: Download color scheme to directory
-
-# TODO: Initialize QMK
-
 # TODO: Install GRUB theme
 
+# TODO: Configure rustup
+
 # TODO: Install and configure betterdiscord
+
+# TODO: Initialize QMK
