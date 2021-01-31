@@ -87,9 +87,8 @@ misc=(
 # Join and deduplicate program lists.
 install_list=$(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
-echo "$install_list"
-
-# TODO: Install programs with yay
+# Install programs with yay
+yay -S --needed "${install_list[*]}"
 
 # TODO: Switch user's default shell to zsh
 
@@ -102,5 +101,7 @@ echo "$install_list"
 # TODO: Download color scheme to directory
 
 # TODO: Initialize QMK
+
+# TODO: Install GRUB theme
 
 # TODO: Install and configure betterdiscord
