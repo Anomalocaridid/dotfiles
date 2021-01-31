@@ -87,11 +87,8 @@ misc=(
 	"yubioath-desktop"
 )
 
-# Join and deduplicate program lists.
-install_list=$(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
-
 # Install programs with yay
-yay -S --needed "${install_list[*]}"
+yay -S --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
 # TODO: Switch user's default shell to zsh
 
