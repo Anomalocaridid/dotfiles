@@ -2,6 +2,9 @@
 
 # TODO: check if distro is EndeavourOS
 
+# Run self with sudo
+[[ "$UID" -eq 0 ]] || exec sudo "$0"
+
 # Dependencies for my setup for various programs
 # Intended to be redundant so I don't have to consider if other programs
 # already rely on something before adding or removing it.
