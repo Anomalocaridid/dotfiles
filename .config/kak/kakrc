@@ -205,13 +205,6 @@ plug "Bodhizafa/kak-rainbow" config %{
 # Search highlighter
 plug "alexherbo2/search-highlighter.kak"
 
-# fzf integration
-# Requires fzf
-# No longer maintained
-plug "andreyorst/fzf.kak" config %{
-	map global user f ": fzf-mode<ret>" -docstring "fzf"
-}
-
 # Easy navigation of open buffers
 plug "delapouite/kakoune-buffers" config %{
 	# Buffer user mode
