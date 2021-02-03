@@ -123,9 +123,9 @@ bindkey "^[[3~" delete-char
 alias ls="exa"
 alias du="dust"
 alias find="fd"
+alias grep="rg"
 alias cat="bat"
 alias less="bat --paging=always"
-alias grep="batgrep"
 alias man="batman"
 alias diff="batdiff"
 batthemes() {
