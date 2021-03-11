@@ -111,7 +111,7 @@ cargo install --locked --force --path .
 
 	# Search for errors as well as warnings
 	map global lsp n ": lsp-find-error --include-warnings<ret>" -docstring "find next error"
-	map global lsp p ": lsp-find-error --include-warnings --previous<ret>" -docstring "find previous error"
+	map global lsp p ": lsp-find-error --previous --include-warnings<ret>" -docstring "find previous error"
 	
 	hook global WinSetOption filetype=(c|haskell|rust|python) %{
 		# Enable lsp
