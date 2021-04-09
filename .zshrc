@@ -3,8 +3,8 @@
 # Ascii Terminal greeting. 
 # Shows Linux distro and version in rainbow ascii art.
 echo -en "\e[1m"
-lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat
-echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat
+lsb_release --description --release --short | tr -d '"' | toilet -t -f smslant -F border | lolcat -t
+echo -e "\e[1m Welcome back, $USER!\e[0m\n" | lolcat -t
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -156,12 +156,8 @@ alias l.="ls -d .*" # Show only dotfiles current directory
 alias ll="ls -l"    # Show files in directory in long format
 alias lla="ls -la"  # Show all files including dotfiles in directory in long format
 
-# Aliases for kittens included with kitty terminal 
-alias icat="kitty +kitten icat"           # Displays images in terminal.
-alias d="kitty +kitten diff"              # Displays diffs between two files.
-alias hints="kitty +kitten hints"         # Selects and acts on arbitrary text snippets on screen.
-alias panel="kitty +kitten panel"         # Draws a gpu accelerated panel using another program's output.
-alias clipboard="kitty +kitten clipboard" # Copy/paste to system clipboard.
+# wezterm imgcat
+alias imgcat="wezterm imgcat"
 
 # Aliases for quick access to frequently edited dotfiles 
 alias zshrc="$EDITOR ~/.zshrc"
