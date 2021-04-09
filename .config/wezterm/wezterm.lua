@@ -41,4 +41,12 @@ return {
             },
         },
     },
+
+    keys = {
+    	-- Horizontal Pane Split
+        {key="\\", mods="SUPER", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
+
+        -- Vertical Pane Split
+		{key="|", mods="SUPER", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
+    },
 }
