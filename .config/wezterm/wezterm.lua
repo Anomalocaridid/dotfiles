@@ -16,7 +16,7 @@ return {
         cursor_fg = "#000b1e",
 
         ansi = {"#123e7c", "#ff0000", "#d300c4", "#f57800", "#123e7c", "#711c91", "#0abdc6", "#d7d7d5"},
-        bright = {"#1c61c2", "#ff0000", "#d300c4", "#f57800", "#00ff00", "#711c91", "0abdc6", "#d7d7d5"},
+        brights = {"#1c61c2", "#ff0000", "#d300c4", "#f57800", "#00ff00", "#711c91", "#0abdc6", "#d7d7d5"},
 
         tab_bar = {
             background = "#000b1e",
