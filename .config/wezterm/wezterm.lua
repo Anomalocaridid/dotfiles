@@ -53,5 +53,10 @@ return {
 		-- Go one tab to the right
 		{key="]", mods="SUPER", action=wezterm.action{ActivateTabRelative=1}},
 
+		-- Close current pane
+		{key="x", mods="SUPER", action=wezterm.action{CloseCurrentPane={confirm=false}}},
+		-- Close current tab
+		{key="x", mods="SUPER|SHIFT", action=wezterm.action{CloseCurrentTab={confirm=false}}},
+
     },
 }
