@@ -74,23 +74,16 @@ map global normal <a-ret> "xdkkp" -docstring "move current line one line up"
 
 map global goto m "<esc>m;" -docstring "matching char"
 
-declare-option -docstring "plug.kak's directory" str plugkakdir "%val{config}/plugins/plug.kak"
-declare-option -docstring "plug.kak's main script" str plugkak "%opt{plugkakdir}/rc/plug.kak"
-
-# Ensure that plug.kak is installed.
-try %{
-	# Source plug.kak
-	source "%opt{plugkak}"
-} catch %sh{
-	# If plug.kak directory is not present
-	# Then install plug.kak
-	if [ ! -d "$kak_opt_plugkakdir" ]; then
-		git clone https://github.com/robertmeta/plug.kak.git "$kak_opt_plugkakdir"
-		echo "source '%opt{plugkak}"
-	fi
+# Ensure that plug.kak is installed
+evaluate-commands %sh{
+	plugins="$kak_config/plugins"
+    mkdir -p "$plugins"
+    [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
 }
 
-plug "robertmeta/plug.kak" noload config %{
+plug "andreyorst/plug.kak" noload config %{
 	# Automatically install plugins
 	# Instead of only when plug-install is run
   	set-option global plug_always_ensure 'true'
@@ -281,9 +274,7 @@ plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
 
 # Powerline Bar
 # Keep below colorscheme so it can use its powerline theme module
-plug "jdugan6240/powerline.kak" defer powerline %{
-	set-option global powerline_shorten_bufname short
-
+plug "andreyorst/powerline.kak" defer powerline %{
 	# Use my custom powerline theme
 	powerline-theme cyberpunk-neon
 
@@ -291,6 +282,7 @@ plug "jdugan6240/powerline.kak" defer powerline %{
 	#set-option global powerline_format "git bufname line-column mode-info filetype client session position"
 } config %{
 	powerline-start
+	set-option global powerline_shorten_bufname short
 }
 
 # Sokoban game
