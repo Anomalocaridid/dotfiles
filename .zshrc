@@ -38,7 +38,6 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=true
 
 # Autocompletion
 autoload -Uz compinit && compinit              # Enables zsh tab-completion
-kitty + complete setup zsh | source /dev/stdin # Completion for kitty
 
 # Zstyles 
 zstyle ":completion:*" rehash true                        # Persistent rehash
