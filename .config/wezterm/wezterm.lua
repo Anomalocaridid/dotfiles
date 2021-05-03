@@ -9,6 +9,8 @@ return {
 	bold_brightens_ansi_colors = false,
 
 	exit_behavior = "Close",
+
+	check_for_updates = false,
     
     colors = {
         foreground = "#0abdc6",
