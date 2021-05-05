@@ -274,15 +274,16 @@ plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
 
 # Powerline Bar
 # Keep below colorscheme so it can use its powerline theme module
-plug "andreyorst/powerline.kak" defer powerline %{
+
+# Default layout
+# powerline-format "git bufname line-column mode-info filetype client session position"
+plug "andreyorst/powerline.kak" defer powerline_bufname %{
+	set-option global powerline_shorten_bufname short
+} defer powerline_cyberpunk_neon %{
 	# Use my custom powerline theme
 	powerline-theme cyberpunk-neon
-
-	# Default layout
-	#set-option global powerline_format "git bufname line-column mode-info filetype client session position"
 } config %{
 	powerline-start
-	set-option global powerline_shorten_bufname short
 }
 
 # Sokoban game
