@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+# .config/yadm/bootstrap
+# Bootstrap script intended to automate setting up a new hyper-personalized system
+# WARNING: Only tested with EndeavourOS. May still work with other Arch derivatives, but NOT guaranteed.
+
 # Dependencies for my setup for various programs
 # Intended to be redundant so I don't have to consider if other programs
 # already rely on something before adding or removing it.
 
+# Dependencies for zsh config
 zsh_deps=(
 	"bat"
 	"bat-extras"
@@ -48,6 +53,7 @@ common_lisp_dev=(
 	"sbcl"
 )
 
+# Dependencies for Kakoune setup
 kak_deps=(
 	"${bash_dev[@]}"
 	"${common_lisp_dev[@]}"
@@ -59,6 +65,7 @@ kak_deps=(
 	"rustup" # For Rust development
 )
 
+# Miscellanious programs that I frequently use
 misc=(
 	"breeze-hacked-cursor-theme"
 	"discord"
@@ -119,3 +126,9 @@ fi
 # TODO: Install and configure betterdiscord
 
 # TODO: Initialize QMK
+
+# TODO: Configure QEMU
+
+# TODO: Enable pkgfile service
+
+# TODO: Prompt instructions for remaining manual setup
