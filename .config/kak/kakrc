@@ -117,7 +117,7 @@ cargo install --locked --force --path .
 		lsp-inline-diagnostics-enable window
 
 		# lsp user mode
-		map global user l ": enter-user-mode lsp<ret>" -docstring "LSP"
+		map window user l ": enter-user-mode lsp<ret>" -docstring "LSP"
 
 		# alias default formatting commands
 		alias buffer format lsp-formatting
@@ -136,7 +136,7 @@ plug "screwtapello/kakoune-shellcheck" domain "gitlab.com" config %{
 	map global shellcheck e ": buffer *lint-output*<ret>" -docstring "list buffer errors and warnings"
 		
 	hook global WinSetOption filetype=(sh|kak) %{
-		map global user l ": enter-user-mode shellcheck<ret>" -docstring "shellcheck"
+		map window user l ": enter-user-mode shellcheck<ret>" -docstring "shellcheck"
 	}
 }
 
