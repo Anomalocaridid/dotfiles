@@ -263,7 +263,7 @@ plug "danr/kakoune-easymotion" config %{
 
 # My custom colorscheme
 # Keep at bottom so that it overwrites supported plugins' custom faces
-plug "DERPSQUID9/kakoune-cyberpunk-neon" theme config %{
+plug "Anomalocaridid/kakoune-cyberpunk-neon" theme config %{
 	colorscheme cyberpunk-neon
 }
 
