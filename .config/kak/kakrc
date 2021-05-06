@@ -166,14 +166,9 @@ plug "insipx/kak-crosshairs" config %{
 	crosshairs
 }
 
-# Escape arguments so that they can be passed to Kakoune
-# Required by auto-pairs.kak
-plug "alexherbo2/prelude.kak"
-
 # Pairing parentheses and brackets
-# Requires prelude.kak
-plug "alexherbo2/auto-pairs.kak" %{
-	require-module auto-pairs
+# Requires kakoune.cr
+plug "alexherbo2/auto-pairs.kak" demand auto-pairs %{
 	#default
 	#set-option window "(" ")" "{" "}" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
 
