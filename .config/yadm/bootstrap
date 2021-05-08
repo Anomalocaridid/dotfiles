@@ -16,13 +16,13 @@ zsh_deps=(
 	"exa"
 	"fd"
 	"fzf"
-	"kitty"
 	"lolcat"
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
 	"ripgrep" # Required by bat-extras
 	"toilet"
 	"toilet-fonts" # Required by toilet
+	"wezterm"
 	"zoxide"
 	"zsh"
 )
