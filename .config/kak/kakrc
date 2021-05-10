@@ -107,9 +107,6 @@ cargo install --locked --force --path .
 	map global lsp p ": lsp-find-error --previous --include-warnings<ret>" -docstring "find previous error"
 	
 	hook global WinSetOption filetype=(c|haskell|rust|python) %{
-		# Enable lsp
-		lsp-enable
-
 		# Format before saving
 		hook buffer BufWritePre .* lsp-formatting-sync
 		
@@ -122,6 +119,11 @@ cargo install --locked --force --path .
 		# alias default formatting commands
 		alias buffer format lsp-formatting
 		alias buffer format-selections lsp-range-formatting
+
+		# Enable lsp
+		# Make sure to leave at end of config
+		# Or the rest of the lsp config only gets applied to one window
+		lsp-enable
 	}
 }
 
