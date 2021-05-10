@@ -125,12 +125,14 @@ fi
 # Install and configure icon theme
 if wget -qO- https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh | sh; then
 	echo "Successfully installed icon theme"
-	if sudo mv /usr/icons/Suru++-Asprómauros /usr/icons/Suru++; then
+
+	if sudo mv /usr/share/icons/Suru++-Asprómauros /usr/share/icons/Suru++; then
 		echo "Successfully renamed icon theme folder"
+
 		if sudo wget https://git.io/fhbxw -O /usr/local/bin/suru-plus-colourise; then
 			if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
 				echo "Successfully installed suru-plus-colourise"
-				suru-plus-colourise
+				sudo suru-plus-colourise
 			else
 				echo "Could not install suru-plus-colourise"
 			fi
