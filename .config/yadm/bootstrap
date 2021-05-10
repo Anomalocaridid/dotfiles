@@ -90,7 +90,7 @@ misc=(
 )
 
 # Install programs with yay
-yay -S --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
+yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
 # Switch user's default shell to zsh
 if chsh -s "$(which zsh)"; then
