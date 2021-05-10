@@ -94,9 +94,9 @@ yay -S --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
 # Switch user's default shell to zsh
 if chsh -s "$(which zsh)"; then
-	echo "Successfully set $USER's shell to zsh."
+	echo "Successfully set $USER's shell to zsh"
 else
-	echo "Could not set $USER's shell to zsh."
+	echo "Could not set $USER's shell to zsh"
 fi
 
 # Set cursor theme in default theme
@@ -114,15 +114,35 @@ color_scheme_dir="$HOME/.local/share/color-schemes/"
 
 if mkdir -p "$color_scheme_dir"; then
 	if curl "$color_scheme_url" -o "$color_scheme_dir/cyberpunk-neon.colors"; then
-		echo "Successfully downloaded KDE color scheme."
+		echo "Successfully downloaded KDE color scheme"
 	else
-		echo "Could not download KDE color scheme."
+		echo "Could not download KDE color scheme"
 	fi
 else
 	echo "Could not create folder at $color_scheme_dir"
 fi
 
-# TODO: Install and configure icon theme
+# Install and configure icon theme
+if wget -qO- https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh | sh; then
+	echo "Successfully installed icon theme"
+	if sudo mv /usr/icons/Suru++-Asprómauros /usr/icons/Suru++; then
+		echo "Successfully renamed icon theme folder"
+		if sudo wget https://git.io/fhbxw -O /usr/local/bin/suru-plus-colourise; then
+			if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
+				echo "Successfully installed suru-plus-colourise"
+				suru-plus-colourise
+			else
+				echo "Could not install suru-plus-colourise"
+			fi
+		else
+			echo "Could not install suru-plus-colourise"
+		fi
+	else
+		echo "Could not rename icon theme folder"
+	fi
+else
+	echo "Could not install icon theme"
+fi
 
 # TODO: Install GRUB theme
 
