@@ -123,10 +123,13 @@ else
 fi
 
 # Install and configure icon theme
-if wget -qO- https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh | sh; then
+icon_theme_url="https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh"
+icon_themes_dir="/usr/share/icons"
+
+if wget -qO- "$icon_theme_url" | sh; then
 	echo "Successfully installed icon theme"
 
-	if sudo mv /usr/share/icons/Suru++-Asprómauros /usr/share/icons/Suru++; then
+	if sudo mv "$icon_themes_dir/Suru++-Asprómauros" "$icon_themes_dir/Suru++"; then
 		echo "Successfully renamed icon theme folder"
 
 		if sudo wget https://git.io/fhbxw --output-document="/usr/local/bin/suru-plus-colourise"; then
