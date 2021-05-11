@@ -113,7 +113,7 @@ color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/m
 color_scheme_dir="$HOME/.local/share/color-schemes/"
 
 if mkdir -p "$color_scheme_dir"; then
-	if curl "$color_scheme_url" -o "$color_scheme_dir/cyberpunk-neon.colors"; then
+	if wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors"; then
 		echo "Successfully downloaded KDE color scheme"
 	else
 		echo "Could not download KDE color scheme"
@@ -129,7 +129,7 @@ if wget -qO- https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/
 	if sudo mv /usr/share/icons/Suru++-Asprómauros /usr/share/icons/Suru++; then
 		echo "Successfully renamed icon theme folder"
 
-		if sudo wget https://git.io/fhbxw -O /usr/local/bin/suru-plus-colourise; then
+		if sudo wget https://git.io/fhbxw --output-document="/usr/local/bin/suru-plus-colourise"; then
 			if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
 				echo "Successfully installed suru-plus-colourise"
 				sudo suru-plus-colourise
