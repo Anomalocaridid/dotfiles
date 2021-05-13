@@ -74,7 +74,7 @@ misc=(
 	"joplin-desktop"
 	"keepassxc"
 	"lutris"
-	"megasync"
+	"megasync-bin"
 	"moreutils"
 	"qalculate-gtk"
 	"steam"
@@ -178,9 +178,19 @@ fi
 
 # TODO: Configure QEMU
 
-# TODO: Enable pkgfile service
+# Enable important services
+sudo systemctl enable pcscd
+sudo systemctl enable pkgfile-update.timer
+
+# Update pkgfile cache
+if pkgfile --update; then
+	echo "Successfully updated pkgfile cache"
+else
+	echo "Could not update pkgfile cache"
+fi
 
 # TODO: Prompt instructions for remaining manual setup
 # Set Default Programs
 # Set color scheme
 # Set icon theme
+# Configure syncs
