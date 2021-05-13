@@ -23,7 +23,7 @@ zsh_deps=(
 	"toilet"
 	"toilet-fonts" # Required by toilet
 	"wezterm"
-	"zoxide"
+	# "zoxide" # Has to be installed after rustup is configured.
 	"zsh"
 )
 
@@ -151,7 +151,26 @@ fi
 
 # TODO: Install GRUB theme
 
-# TODO: Configure rustup
+# Configure rustup
+if rustup default stable; then
+	if rustup component add rls rust-analysis rust-src; then
+		echo "Successfully configured rustup"
+	else
+		echo "Could not configure rustup"
+	fi
+else
+	echo "Could not configure rustup"
+fi
+
+# Install zoxide
+yay -S zoxide
+
+# Build bat theme cache
+if bat cache --build; then
+	echo "Successfully built bat cache"
+else
+	echo "Could not build bat cache"
+fi
 
 # TODO: Install and configure betterdiscord
 
@@ -162,3 +181,6 @@ fi
 # TODO: Enable pkgfile service
 
 # TODO: Prompt instructions for remaining manual setup
+# Set Default Programs
+# Set color scheme
+# Set icon theme
