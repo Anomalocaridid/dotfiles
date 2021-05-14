@@ -121,9 +121,8 @@ cargo install --locked --force --path .
 		alias buffer format-selections lsp-range-formatting
 
 		# Enable lsp
-		# Make sure to leave at end of config
-		# Or the rest of the lsp config only gets applied to one window
-		lsp-enable
+		# Can fail if lsp is already enabled
+		try lsp-enable
 	}
 }
 
