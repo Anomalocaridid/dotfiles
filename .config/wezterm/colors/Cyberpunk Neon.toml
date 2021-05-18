@@ -1,0 +1,14 @@
+# Cyberpunk Neon
+# Based on Roboron3042's Cyberpunk Neon color scheme
+# at https://github.com/Roboron3042/Cyberpunk-Neon
+[colors]
+foreground = "#0abdc6"
+background = "#000b1e"
+cursor_bg = "#0abdc6"
+cursor_border = "#0abdc6"
+cursor_fg = "#000b1e"
+selection_bg = "#711c91"
+selection_fg = "#133e7c"
+
+ansi = ["#123e7c","#ff0000","#d300c4","#f57800","#123e7c","#711c91","#0abdc6","#d7d7d5"]
+brights = ["#1c61c2","#ff0000","#d300c4","#f57800","#00ff00","#711c91","#0abdc6","#d7d7d5"]
