@@ -131,16 +131,10 @@ batthemes() {
 	bat --list-themes | fzf --preview="bat --theme={} --color=always $1"
 }
 
-# One character ~/.zshrc sourcing
-alias .="src"
-
 # So I don't accidentally delete anything again
 alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
-
-# Command to show the main drive's space at a glance
-alias space="df -h --output='source,size,used,avail,pcent' /dev/sda1"
 
 # Help Command Alias 
 autoload -U run-help
