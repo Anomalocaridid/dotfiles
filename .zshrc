@@ -172,6 +172,17 @@ function set-zsh() {
 	chsh -s "$(which zsh)" && echo "All done! Please restart terminal."
 }
 
+# Single character sourcing
+function source-wrapper() {
+	if [[ -z "$*" ]]; then
+		src
+	else
+		source "$@"
+	fi
+}
+
+alias .="source-wrapper"
+
 # Fallback behaviour if bd has no arguments passed
 function bd-wrapper() {
 	if [[ -z "$*" ]]; then
