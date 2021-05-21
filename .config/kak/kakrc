@@ -262,6 +262,12 @@ plug "danr/kakoune-easymotion" config %{
 	map global user e ": enter-user-mode easymotion<ret>" -docstring "easymotion"
 }
 
+# Vim-style visual mode
+plug "dead10ck/visual-mode.kak" domain "gitlab.com" demand visual-mode %{
+	map global normal <a-v> ": visual-mode v<ret>"
+	map global normal <a-V> ": visual-line-mode V<ret>"
+}
+
 # My custom colorscheme
 # Keep at bottom so that it overwrites supported plugins' custom faces
 plug "Anomalocaridid/kakoune-cyberpunk-neon" theme config %{
@@ -270,7 +276,6 @@ plug "Anomalocaridid/kakoune-cyberpunk-neon" theme config %{
 
 # Powerline Bar
 # Keep below colorscheme so it can use its powerline theme module
-
 # Default layout
 # powerline-format "git bufname line-column mode-info filetype client session position"
 plug "andreyorst/powerline.kak" defer powerline_bufname %{
