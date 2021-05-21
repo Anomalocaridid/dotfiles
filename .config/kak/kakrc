@@ -119,10 +119,11 @@ cargo install --locked --force --path .
 		# alias default formatting commands
 		alias buffer format lsp-formatting
 		alias buffer format-selections lsp-range-formatting
+	}
 
-		# Enable lsp
-		# Can fail if lsp is already enabled
-		try lsp-enable
+	# Enable lsp
+	hook -once global WinSetOption filetype=(c|haskell|rust|python) %{
+		lsp-enable
 	}
 }
 
