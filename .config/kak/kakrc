@@ -264,12 +264,6 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 	set-option global scroll_keys_object
 }
 
-# Easy navigation
-# Requires Python
-plug "danr/kakoune-easymotion" config %{
-	map global user e ": enter-user-mode easymotion<ret>" -docstring "easymotion"
-}
-
 # Vim-style visual mode
 plug "dead10ck/visual-mode.kak" domain "gitlab.com" demand visual-mode %{
 	map global normal <a-v> ": visual-mode v<ret>"
