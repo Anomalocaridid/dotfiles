@@ -1,6 +1,3 @@
-# Add line numbers
-add-highlighter global/ number-lines -hlcursor
-
 # Highlight matching characters
 add-highlighter global/ show-matching
 
@@ -268,6 +265,11 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 plug "dead10ck/visual-mode.kak" domain "gitlab.com" demand visual-mode %{
 	map global normal <a-v> ": visual-mode v<ret>"
 	map global normal <a-V> ": visual-line-mode V<ret>"
+}
+
+# Switch between relative and absolute line numbers
+plug "evanrelf/number-toggle.kak" demand "number-toggle" %{
+	set-option global number_toggle_params -hlcursor
 }
 
 # My custom colorscheme
