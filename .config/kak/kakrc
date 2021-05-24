@@ -254,8 +254,18 @@ plug "occivink/kakoune-roguelight" config %{
 plug "caksoylar/kakoune-smooth-scroll" config %{
 	# Automatically enable for every window
 	hook global WinCreate .* %{
-		hook -once window WinDisplay .* smooth-scroll-enable
-	}
+		hook -once window WinDisplay .* %{
+			smooth-scroll-enable
+
+			# Switch between relative and absolute line numbers
+		    hook -group smooth-scroll window User ScrollBegin %{
+	            add-highlighter -override window/number-toggle number-lines
+		    }
+		    hook -group smooth-scroll window User ScrollEnd %{
+	            add-highlighter -override window/number-toggle number-lines -relative -hlcursor
+		    }
+	    }
+    }
 
 	# Default mapping conflicts with text-objects
 	set-option global scroll_keys_object
