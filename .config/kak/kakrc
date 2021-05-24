@@ -258,11 +258,15 @@ plug "caksoylar/kakoune-smooth-scroll" config %{
 			smooth-scroll-enable
 
 			# Switch between relative and absolute line numbers
-		    hook -group smooth-scroll window User ScrollBegin %{
+			# and update crosshairs
+			hook -group smooth-scroll window User ScrollBegin %{
 	            add-highlighter -override window/number-toggle number-lines
+	            crosshairs
 		    }
+
 		    hook -group smooth-scroll window User ScrollEnd %{
 	            add-highlighter -override window/number-toggle number-lines -relative -hlcursor
+	            crosshairs
 		    }
 	    }
     }
