@@ -286,6 +286,11 @@ plug "evanrelf/number-toggle.kak" demand "number-toggle" %{
 	set-option global number_toggle_params -hlcursor
 }
 
+# WezTerm integration
+plug "Anomalocaridid/wezterm.kak" demand "wezterm" %{
+	hook global -once KakBegin .* wezterm-integration-enable
+}
+
 # My custom colorscheme
 # Keep at bottom so that it overwrites supported plugins' custom faces
 plug "Anomalocaridid/kakoune-cyberpunk-neon" theme config %{
