@@ -188,7 +188,7 @@ function bd-wrapper() {
 	if [[ -z "$*" ]]; then
 		cd ..
 	else
-		bd "$@"
+		\bd "$@"
 	fi
 }
 
