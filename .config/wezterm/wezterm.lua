@@ -37,14 +37,9 @@ return {
 
 	keys = {
 		-- Horizontal Pane Split
-		{key="\\", mods="SUPER", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
+		{key="-", mods="SUPER", action=wezterm.action{SplitHorizontal={domain="CurrentPaneDomain"}}},
 		-- Vertical Pane Split
 		{key="|", mods="SUPER", action=wezterm.action{SplitVertical={domain="CurrentPaneDomain"}}},
-
-		-- Go one tab to the left
-		{key="[", mods="SUPER", action=wezterm.action{ActivateTabRelative=-1}},
-		-- Go one tab to the right
-		{key="]", mods="SUPER", action=wezterm.action{ActivateTabRelative=1}},
 
 		-- Close current pane
 		{key="x", mods="SUPER", action=wezterm.action{CloseCurrentPane={confirm=false}}},
