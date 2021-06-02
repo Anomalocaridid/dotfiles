@@ -9,7 +9,7 @@
 # already rely on something before adding or removing it.
 
 # Dependencies for zsh config
-zsh_deps=(
+readonly zsh_deps=(
 	"bat"
 	"bat-extras-git"
 	# "dust" # Has to be installed after rustup is configured.
@@ -28,14 +28,14 @@ zsh_deps=(
 	"zsh"
 )
 
-python_dev=(
+readonly python_dev=(
 	"flake8"
 	"python"
 	"python-language-server"
 	"yapf"
 )
 
-haskell_dev=(
+readonly haskell_dev=(
 	"cabal-install"
 	"ghc"
 	"haskell-language-server"
@@ -44,18 +44,18 @@ haskell_dev=(
 	"stack"
 )
 
-bash_dev=(
+readonly bash_dev=(
 	"shellcheck"
 	"shfmt"
 )
 
-common_lisp_dev=(
+readonly common_lisp_dev=(
 	"clisp"
 	"sbcl"
 )
 
 # Dependencies for Kakoune setup
-kak_deps=(
+readonly kak_deps=(
 	"${bash_dev[@]}"
 	"${common_lisp_dev[@]}"
 	"${haskell_dev[@]}"
@@ -67,7 +67,7 @@ kak_deps=(
 )
 
 # Miscellanious programs that I frequently use
-misc=(
+readonly misc=(
 	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
@@ -92,8 +92,10 @@ misc=(
 	"yubioath-desktop"
 )
 
+packages=$(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
+
 # Install programs with yay
-yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
+yay -Syu --needed "$packages"
 
 # Configure rustup
 if rustup default stable; then
@@ -117,7 +119,7 @@ else
 fi
 
 # Enable important services
-services=(
+readonly services=(
 	"pcscd"
 	"pkgfile-update.timer"
 )
@@ -125,6 +127,8 @@ services=(
 for service in "${services[@]}"; do
 	if sudo systemctl enable "$service"; then
 		echo "Successfully enabled service: $service"
+	else
+		echo "Could not enable service: $service"
 	fi
 done
 
