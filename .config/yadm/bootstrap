@@ -158,7 +158,7 @@ fi
 # TODO: Configure QEMU
 
 # Set cursor theme in default theme
-default_cursor_theme="/usr/share/icons/default/index.theme"
+readonly default_cursor_theme="/usr/share/icons/default/index.theme"
 
 if sudo sed -i "s/Adwaita/Breeze_Hacked/" "$default_cursor_theme"; then
 	echo "Successfully set cursor in $default_cursor_theme"
@@ -167,8 +167,8 @@ else
 fi
 
 # Download color scheme to KDE home directory
-color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/kde/cyberpunk-neon.colors"
-color_scheme_dir="$HOME/.local/share/color-schemes/"
+readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/kde/cyberpunk-neon.colors"
+readonly color_scheme_dir="$HOME/.local/share/color-schemes/"
 
 if mkdir -p "$color_scheme_dir"; then
 	if wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors"; then
@@ -181,8 +181,8 @@ else
 fi
 
 # Install and configure icon theme
-icon_theme_url="https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh"
-icon_themes_dir="/usr/share/icons"
+readonly icon_theme_url="https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh"
+readonly icon_themes_dir="/usr/share/icons"
 
 if wget -qO- "$icon_theme_url" | sh; then
 	echo "Successfully installed icon theme"
@@ -207,7 +207,12 @@ else
 	echo "Could not install icon theme"
 fi
 
-# TODO: Install GRUB theme
+# Install GRUB theme
+readonly grub_theme_url="https://download1518.mediafire.com/74m2xi1450kg/nd3qlksb1pwkg3n/Grub2-theme+CyberRe+1.0.0.tar.gz"
+readonly grub_theme_file="/tmp/CyberRe.tar.gz"
+wget "$grub_theme_url" --output-document "$grub_theme_file"
+tar xf "$grub_theme_file" --directory/tmp
+/tmp/CyberRe 1.0.0/install.sh
 
 # TODO: Prompt instructions for remaining manual setup
 # Set Default Programs
