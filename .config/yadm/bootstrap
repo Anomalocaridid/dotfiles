@@ -12,7 +12,7 @@
 zsh_deps=(
 	"bat"
 	"bat-extras-git"
-	"dust"
+	# "dust" # Has to be installed after rustup is configured.
 	"exa"
 	"fd"
 	"fzf"
@@ -71,7 +71,7 @@ misc=(
 	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
-	"gdlauncher"
+	"gdlauncher-bin"
 	"gnuplot" # Required by qalculate-gtk
 	"itch"
 	"joplin-desktop"
@@ -84,7 +84,7 @@ misc=(
 	"strawberry"
 	"syncthing"
 	"syncthingtray"
-	"tealdeer"
+	# "tealdeer" # Has to be installed after rustup is configured.
 	"waterfox-g3-bin"
 	"wine"
 	"wine-gecko"
@@ -95,12 +95,63 @@ misc=(
 # Install programs with yay
 yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
+# Configure rustup
+if rustup default stable; then
+	if rustup component add rls rust-analysis rust-src; then
+		echo "Successfully configured rustup"
+	else
+		echo "Could not configure rustup"
+	fi
+else
+	echo "Could not configure rustup"
+fi
+
+# Install packages that require rustup
+yay -S dust zoxide tealdeer
+
 # Switch user's default shell to zsh
 if chsh -s "$(which zsh)"; then
 	echo "Successfully set $USER's shell to zsh"
 else
 	echo "Could not set $USER's shell to zsh"
 fi
+
+# Enable important services
+services=(
+	"pcscd"
+	"pkgfile-update.timer"
+)
+
+for service in "${services[@]}"; do
+	if sudo systemctl enable "$service"; then
+		echo "Successfully enabled service: $service"
+	fi
+done
+
+# Update pkgfile cache
+if sudo pkgfile --update; then
+	echo "Successfully updated pkgfile cache"
+else
+	echo "Could not update pkgfile cache"
+fi
+
+# Update tldr cache
+if tldr --update; then
+	echo "Successfully updated tldr cache"
+else
+	echo "Could not update tldr cache"
+fi
+
+# Build bat theme cache
+if bat cache --build; then
+	echo "Successfully built bat cache"
+else
+	echo "Could not build bat cache"
+fi
+
+# TODO: Initialize QMK
+
+# TODO: Configure QEMU
 
 # Set cursor theme in default theme
 default_cursor_theme="/usr/share/icons/default/index.theme"
@@ -153,42 +204,6 @@ else
 fi
 
 # TODO: Install GRUB theme
-
-# Configure rustup
-if rustup default stable; then
-	if rustup component add rls rust-analysis rust-src; then
-		echo "Successfully configured rustup"
-	else
-		echo "Could not configure rustup"
-	fi
-else
-	echo "Could not configure rustup"
-fi
-
-# Install zoxide
-yay -S zoxide
-
-# Build bat theme cache
-if bat cache --build; then
-	echo "Successfully built bat cache"
-else
-	echo "Could not build bat cache"
-fi
-
-# TODO: Initialize QMK
-
-# TODO: Configure QEMU
-
-# Enable important services
-sudo systemctl enable pcscd
-sudo systemctl enable pkgfile-update.timer
-
-# Update pkgfile cache
-if pkgfile --update; then
-	echo "Successfully updated pkgfile cache"
-else
-	echo "Could not update pkgfile cache"
-fi
 
 # TODO: Prompt instructions for remaining manual setup
 # Set Default Programs
