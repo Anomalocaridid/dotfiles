@@ -8,6 +8,9 @@
 # Intended to be redundant so I don't have to consider if other programs
 # already rely on something before adding or removing it.
 
+# Initialize submodules
+yadm submodule init
+
 # Dependencies for zsh config
 readonly zsh_deps=(
 	"bat"
@@ -109,7 +112,7 @@ else
 fi
 
 # Install packages that require rustup
-yay -S dust zoxide tealdeer
+yay -S --needed dust zoxide tealdeer
 
 # Switch user's default shell to zsh
 if chsh -s "$(which zsh)"; then
