@@ -11,7 +11,7 @@
 # Dependencies for zsh config
 zsh_deps=(
 	"bat"
-	"bat-extras"
+	"bat-extras-git"
 	"dust"
 	"exa"
 	"fd"
@@ -19,7 +19,8 @@ zsh_deps=(
 	"lolcat"
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
-	"ripgrep" # Required by bat-extras
+	"ripgrep" # Required by bat-extras-git
+	"ranger"
 	"toilet"
 	"toilet-fonts" # Required by toilet
 	"wezterm"
@@ -67,8 +68,10 @@ kak_deps=(
 
 # Miscellanious programs that I frequently use
 misc=(
+	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
+	"gdlauncher"
 	"gnuplot" # Required by qalculate-gtk
 	"itch"
 	"joplin-desktop"
@@ -171,8 +174,6 @@ if bat cache --build; then
 else
 	echo "Could not build bat cache"
 fi
-
-# TODO: Install and configure betterdiscord
 
 # TODO: Initialize QMK
 
