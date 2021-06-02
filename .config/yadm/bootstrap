@@ -95,10 +95,8 @@ readonly misc=(
 	"yubioath-desktop"
 )
 
-packages=$(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
-
 # Install programs with yay
-yay -Syu --needed "$packages"
+yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
 
 # Configure rustup
 if rustup default stable; then
