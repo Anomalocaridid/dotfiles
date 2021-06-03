@@ -119,7 +119,7 @@ bindkey "^[[3~" delete-char
 
 # Aliases 
 # Aliases alternative programs to commonly used commands
-alias ls="exa"
+alias ls="exa --color=always --group-directories-first --icons"
 alias du="dust"
 alias find="fd"
 alias grep="rg"
