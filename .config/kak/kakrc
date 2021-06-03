@@ -63,11 +63,11 @@ map global games s ": prompt -init 1 choose-sokoban-level: %{%{sokoban %val{text
 map global normal D "<a-l>d" -docstring "delete to end of line"
 map global normal Y "<a-l>y" -docstring "yank to end of line"
 
-map global normal "#" ":comment-line<ret>" -docstring "comment line"
-map global normal "<a-#>" ":comment-block<ret>" -docstring "comment block"
+map global normal "#" ": comment-line<ret>" -docstring "comment line"
+map global normal "<a-#>" ": comment-block<ret>" -docstring "comment block"
 
-map global normal <ret> "xdp" -docstring "move current line one line down"
-map global normal <a-ret> "xdkkp" -docstring "move current line one line up"
+map global normal <ret> ": execute-keys xdp<ret>" -docstring "move current line one line down"
+map global normal <a-ret> ": execute-keys xdkkp<ret>" -docstring "move current line one line up"
 
 map global goto m "<esc>m;" -docstring "matching char"
 
