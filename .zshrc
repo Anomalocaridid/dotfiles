@@ -31,21 +31,24 @@ zinit ice depth=1;
 zinit light romkatv/powerlevel10k
 
 # Plugins
-zinit light-mode wait lucid for                             \
-		OMZP::git                                           \
-		OMZP::zsh_reload                                    \
-		OMZP::command-not-found                             \
-		OMZP::fancy-ctrl-z                                  \
-		zsh-users/zsh-history-substring-search              \
-		Aloxaf/fzf-tab                                      \
-		amstrad/oh-my-matrix                                \
-		Tarrasch/zsh-bd                                     \
-		hlissner/zsh-autopair                               \
-	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-		zdharma/fast-syntax-highlighting                    \
-	blockf                                                  \
-		zsh-users/zsh-completions                           \
-	atload"!_zsh_autosuggest_start"                         \
+# Replace ranger snippet with version from main repo
+# when it gets merged.
+zinit light-mode wait lucid for                                                                    \
+		https://raw.githubusercontent.com/toonn/ranger/automatic-cd/examples/shell_automatic_cd.sh \
+		OMZP::git                                                                                  \
+		OMZP::zsh_reload                                                                           \
+		OMZP::command-not-found                                                                    \
+		OMZP::fancy-ctrl-z                                                                         \
+		zsh-users/zsh-history-substring-search                                                     \
+		Aloxaf/fzf-tab                                                                             \
+		amstrad/oh-my-matrix                                                                       \
+		Tarrasch/zsh-bd                                                                            \
+		hlissner/zsh-autopair                                                                      \
+	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"                                        \
+		zdharma/fast-syntax-highlighting                                                           \
+	blockf                                                                                         \
+		zsh-users/zsh-completions                                                                  \
+	atload"!_zsh_autosuggest_start"                                                                \
        	zsh-users/zsh-autosuggestions
 
 # Ascii Terminal greeting. 
@@ -156,8 +159,8 @@ alias imgcat="wezterm imgcat"
 alias zshrc="$EDITOR ~/.zshrc"
 alias kakrc="kak -e edit-kakrc"
 
-# A fabulous quote of the day, delivered by a cow.
-alias moo="fortune | cowsay | lolcat"
+# Change directory to ranger's current directory after quitting ranger
+alias ranger="ranger_cd"
 
 # Use Kakoune to align columns of text
 alias align="kak -f '<a-s><S>\h<ret><a-;><&>'"
