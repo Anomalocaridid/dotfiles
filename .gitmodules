@@ -4,3 +4,6 @@
 [submodule ".config/ranger/plugins/ranger-archives"]
 	path = .config/ranger/plugins/ranger-archives
 	url = https://github.com/maximtrp/ranger-archives
+[submodule ".config/ranger/plugins/ranger-zoxide"]
+	path = .config/ranger/plugins/ranger-zoxide
+	url = https://github.com/jchook/ranger-zoxide.git
