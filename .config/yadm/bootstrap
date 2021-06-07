@@ -218,14 +218,15 @@ else
 fi
 
 # Install GRUB theme
-readonly grub_theme_url="https://dllb2.pling.com/api/files/download/j/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjE1OTk3MTQ4MDIiLCJ1IjpudWxsLCJsdCI6ImRvd25sb2FkIiwicyI6IjkwOTQ3ZDM0OThmNThlYzkwODY5YjBmMDI1NGJkMzA5N2UzM2M4YWMwMzc0Yjg5ZWFmOWMzNDBhMjM0ZjNlOTI2NzNkYjZlZDFkNjhhOTgwODAyZDA5N2Q2YTliZWE1NWYyMDE5ZjBiNDUzNzk1YmQyMWIxNWYwNTFiNDczY2UyIiwidCI6MTYyMzA5ODAyMSwic3RmcCI6ImViNGI1MzFmZGM5MzFhMjVkYWVhNTUwZjQ3ODUwZTA1Iiwic3RpcCI6IjcyLjI0MC4xNDQuMTk3In0.7K4PL37eBj08nrnQSFxZztW5nATH3Rbd7HDvK9NvATg/Grub2-theme%20CyberRe%201.0.0.tar.gz"
+# TODO: Find permalink to grub theme archive
+# readonly grub_theme_url=""
 
-readonly grub_theme_file="/tmp/CyberRe.tar.gz"
-wget "$grub_theme_url" --output-document "$grub_theme_file"
-tar xf "$grub_theme_file" --directory=/tmp
-cd "/tmp/CyberRe 1.0.0"
-./install.sh
-cd
+# readonly grub_theme_file="/tmp/CyberRe.tar.gz"
+# wget "$grub_theme_url" --output-document "$grub_theme_file"
+# tar xf "$grub_theme_file" --directory=/tmp
+# cd "/tmp/CyberRe 1.0.0"
+# ./install.sh
+# cd
 
 # TODO: Prompt instructions for remaining manual setup
 # Set Default Programs
