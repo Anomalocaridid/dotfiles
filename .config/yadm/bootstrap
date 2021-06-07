@@ -9,7 +9,7 @@
 # already rely on something before adding or removing it.
 
 # Initialize submodules
-yadm submodule init
+yadm submodule update --recursive --init
 
 # Dependencies for zsh config
 readonly zsh_deps=(
