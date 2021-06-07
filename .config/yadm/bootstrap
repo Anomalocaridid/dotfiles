@@ -154,7 +154,13 @@ else
 	echo "Could not build bat cache"
 fi
 
-# TODO: Initialize QMK
+# Initialize QMK
+readonly qmk_repo="https://github.com/anomalocaridid/qmk_firmware.git"
+git clone "$qmk_repo"
+python3 -m pip install --user qmk
+PATH=$PATH:".local/bin"
+sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d
+qmk setup
 
 # TODO: Configure QEMU
 
