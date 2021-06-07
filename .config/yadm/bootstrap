@@ -167,9 +167,9 @@ else
 	echo "Could not set cursor in $default_cursor_theme"
 fi
 
-# Download color scheme to KDE home directory
+# Download color scheme to KDE system theme directory
 readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/kde/cyberpunk-neon.colors"
-readonly color_scheme_dir="$HOME/.local/share/color-schemes/"
+readonly color_scheme_dir="/usr/share/color-schemes/"
 
 if mkdir -p "$color_scheme_dir"; then
 	if wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors"; then
