@@ -163,7 +163,7 @@ sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d
 qmk setup
 
 # Add avr-gcc to IgnorePkg in pacman.conf, as qmk only works with a certain version
-sed "/^#IgnorePkg/ {s/$/ avr-gcc/; s/^#//}" /etc/pacman.conf
+sudo sed -i "/^#IgnorePkg/ {s/$/ avr-gcc/; s/^#//}" /etc/pacman.conf
 
 # TODO: Configure QEMU
 
