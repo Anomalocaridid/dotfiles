@@ -158,7 +158,7 @@ fi
 readonly qmk_repo="https://github.com/anomalocaridid/qmk_firmware.git"
 git clone "$qmk_repo"
 python3 -m pip install --user qmk
-PATH=$PATH:".local/bin"
+PATH=$PATH:"$HOME/.local/bin"
 sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d
 qmk setup
 
@@ -178,7 +178,7 @@ readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpu
 readonly color_scheme_dir="/usr/share/color-schemes/"
 
 if mkdir -p "$color_scheme_dir"; then
-	if wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors"; then
+	if sudo wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors"; then
 		echo "Successfully downloaded KDE color scheme"
 	else
 		echo "Could not download KDE color scheme"
