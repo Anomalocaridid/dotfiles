@@ -127,8 +127,8 @@ else
 fi
 
 # Configure ClamAV and add Fangfrisch signatures
-freshclam
-sudo -u clamav /usr/bin/fangfrish --conf /etc/fangfrisch/fangfrisch.conf initdb
+sudo freshclam
+sudo -u clamav /usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf initdb
 
 # Test ClamAV configuration
 readonly eicar_test_file_url="https://secure.eicar.org/eicar.com.txt"
