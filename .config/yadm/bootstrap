@@ -385,7 +385,15 @@ fi
 # cd
 
 # Prompt instructions for remaining manual setup
-# Set Default Programs
-# Set color scheme
-# Set icon theme
-# Configure syncs
+\cat <<- EOL
+	##### Automated Setup Complete #####
+	Further manual setup to do:
+	- Reboot the system
+	- Set color scheme
+	- Set icon theme
+	- Set cursor theme
+	- Install GRUB theme
+	- Set up sync services
+	- Log into any necessary services
+	- Install any desired games
+EOL
