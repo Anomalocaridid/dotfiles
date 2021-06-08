@@ -179,7 +179,7 @@ fi
 
 # Initialize QMK
 readonly qmk_repo="https://github.com/anomalocaridid/qmk_firmware.git"
-git clone "$qmk_repo"
+git clone "$qmk_repo" --recurse-submodules
 python3 -m pip install --user qmk
 PATH=$PATH:"$HOME/.local/bin"
 sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d
