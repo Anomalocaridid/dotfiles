@@ -75,9 +75,21 @@ readonly clamav_deps=(
 	"python-fangfrisch"
 )
 
+# Dependencies for QEMU/KVM setup
+readonly vm_deps=(
+	"bridge-utils"
+	"dnsmasq"
+	"iptables-nft"
+	"openbsd-netcat"
+	"qemu"
+	"vde2"
+	"virt-manager"
+)
+
 # Miscellanious programs that I frequently use
 readonly misc=(
 	"${clamav_deps[@]}"
+	"${vm_deps[@]}"
 	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
@@ -140,12 +152,21 @@ else
 	echo "ClamAV incorrectly configured: EICAR test failed"
 fi
 
+# Configure QEMU/KVM Setup
+# Uncomment unix_sock_group and unix_sock_rw_perms in libvirtd.conf
+sudo sed -E -i "/#unix_sock(group|rw_perms)/ s/^#//" /etc/libvirt/libvirtd.conf
+sudo usermod -a -G libvirt "$USER"
+# Enable nested virtualization
+echo "options kvm-intel nested=1" > /etc/modprobe.d/kvm-intel.conf
+
 # Enable important services
 readonly services=(
-	"pcscd"                    # Required for yubioauth-desktop
-	"pkgfile-update.timer"     # Update pkgfile cache automatically
-	"clamav-freshclam.service" # Update ClamAV official signatures
 	"clamav-daemon.service"    # ClamAV automatic scan dawmon
+	"clamav-freshclam.service" # Update ClamAV official signatures
+	"fangfrisch.timer"         # Update fangfrisch signatures
+	"libvirtd.service"         # KVM libvirt service
+	"pcscd"                    # Required for yubioauth-desktop
+	"pkgfile-update.timer"     # Update pkgfile cache
 )
 
 for service in "${services[@]}"; do
@@ -155,6 +176,13 @@ for service in "${services[@]}"; do
 		echo "Could not enable service: $service"
 	fi
 done
+
+# Enable Syncthing user service
+if sudo systemctl --user enable syncthing.service; then
+	echo "Successfully enabled user service: syncthing.service"
+else
+	echo "Could not enable user service: syncthing.service"
+fi
 
 # Update pkgfile cache
 if sudo pkgfile --update; then
@@ -187,8 +215,6 @@ qmk setup
 
 # Add avr-gcc to IgnorePkg in pacman.conf, as qmk only works with a certain version
 sudo sed -i "/^#IgnorePkg/ {s/$/ avr-gcc/; s/^#//}" /etc/pacman.conf
-
-# TODO: Configure QEMU
 
 # Set cursor theme in default theme
 readonly default_cursor_theme="/usr/share/icons/default/index.theme"
