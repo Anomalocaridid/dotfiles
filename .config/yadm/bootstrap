@@ -69,8 +69,15 @@ readonly kak_deps=(
 	"rustup" # For Rust development
 )
 
+# Dependencies for ClamAV setup
+readonly clamav_deps=(
+	"clamav"
+	"python-fangfrisch"
+)
+
 # Miscellanious programs that I frequently use
 readonly misc=(
+	"${clamav_deps[@]}"
 	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
@@ -119,10 +126,26 @@ else
 	echo "Could not set $USER's shell to zsh"
 fi
 
+# Configure ClamAV and add Fangfrisch signatures
+freshclam
+sudo -u clamav /usr/bin/fangfrish --conf /etc/fangfrisch/fangfrisch.conf initdb
+
+# Test ClamAV configuration
+readonly eicar_test_file_url="https://secure.eicar.org/eicar.com.txt"
+readonly target="stdin: Win.Test.EICAR_HDB-1 FOUND"
+
+if curl "$eicar_test_file_url" | clamscan - | grep "$target" &> /dev/null; then
+	echo "ClamAV successfully configured"
+else
+	echo "ClamAV incorrectly configured: EICAR test failed"
+fi
+
 # Enable important services
 readonly services=(
-	"pcscd"
-	"pkgfile-update.timer"
+	"pcscd"                    # Required for yubioauth-desktop
+	"pkgfile-update.timer"     # Update pkgfile cache automatically
+	"clamav-freshclam.service" # Update ClamAV official signatures
+	"clamav-daemon.service"    # ClamAV automatic scan dawmon
 )
 
 for service in "${services[@]}"; do
