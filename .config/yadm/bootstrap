@@ -107,32 +107,53 @@ readonly vm_deps=(
 	"virt-manager"
 )
 
-# Miscellanious programs that I frequently use
+# Programs for gaming
+readonly games=(
+	"gdlauncher-bin"
+	"itch"
+	"lutris"
+	"runelite"
+	"steam"
+	"wine"
+	"wine-gecko"
+	"wine-mono"
+)
+
+# Productivity software
+readonly productivity=(
+	"gnuplot" # Required by qalculate-gtk
+	"joplin-desktop"
+	"qalculate-gtk"
+	"waterfox-g3-bin"
+)
+
+# File sync programs
+readonly sync=(
+	"megasync"
+	"syncthing"
+	"syncthingtray"
+)
+
+# Security-oriented software
+readonly security=(
+	"keepassxc"
+	"yubioath-desktop"
+)
+
+# Miscellaneous programs that I frequently use
 readonly misc=(
 	"${clamav_deps[@]}"
+	"${games[@]}"
+	"${productivity[@]}"
+	"${security[@]}"
+	"${sync[@]}"
 	"${vm_deps[@]}"
 	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
-	"gdlauncher-bin"
-	"gnuplot" # Required by qalculate-gtk
-	"itch"
-	"joplin-desktop"
-	"keepassxc"
-	"lutris"
-	"megasync-bin"
 	"moreutils"
-	"qalculate-gtk"
-	"steam"
 	"strawberry"
-	"syncthing"
-	"syncthingtray"
 	# "tealdeer" # Has to be installed after rustup is configured.
-	"waterfox-g3-bin"
-	"wine"
-	"wine-gecko"
-	"wine-mono"
-	"yubioath-desktop"
 )
 
 # Install programs with yay
