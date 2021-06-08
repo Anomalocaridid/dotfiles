@@ -4,12 +4,28 @@
 # Bootstrap script intended to automate setting up a new hyper-personalized system
 # WARNING: Only tested with EndeavourOS. May still work with other Arch derivatives, but NOT guaranteed.
 
+# Helper functions
+success() {
+	printf "\e[1;32m%s\e[0\n" "$1"
+}
+
+error() {
+	printf "Error: \e[1;31m%s\e[0\n" "$1"
+	exit 1
+}
+
+# Initialize submodules
+echo "Cloning submodules"
+
+if yadm submodule update --recursive --init > /dev/null; then
+	success "Successfully cloned submodules"
+else
+	error "Could not clone submodules"
+fi
+
 # Dependencies for my setup for various programs
 # Intended to be redundant so I don't have to consider if other programs
 # already rely on something before adding or removing it.
-
-# Initialize submodules
-yadm submodule update --recursive --init
 
 # Dependencies for zsh config
 readonly zsh_deps=(
@@ -115,49 +131,93 @@ readonly misc=(
 )
 
 # Install programs with yay
-yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq)
+echo "Installing packages"
+if yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq); then
+	success "Successfully installed packages"
+else
+	error "Could not install packages"
+fi
 
 # Configure rustup
-if rustup default stable; then
-	if rustup component add rls rust-analysis rust-src; then
-		echo "Successfully configured rustup"
-	else
-		echo "Could not configure rustup"
-	fi
+echo "Installing Rust with rustup"
+if rustup default stable > /dev/null; then
+	success "Successfully installed Rust"
 else
-	echo "Could not configure rustup"
+	error "Could not install Rust"
+fi
+
+echo "Configuring Rust with rustup"
+if rustup component add rls rust-analysis rust-src > /dev/null; then
+	success "Successfully configured Rust"
+else
+	error "Could not configure Rust"
 fi
 
 # Install packages that require rustup
-yay -S --needed dust zoxide tealdeer
+echo "Installing packages that depend on Rust"
+if yay -S --needed dust zoxide tealdeer; then
+	success "Successfully installed packages"
+else
+	error "Could not install packages"
+fi
 
 # Switch user's default shell to zsh
+echo "Changing user's shell to zsh"
 if chsh -s "$(which zsh)"; then
-	echo "Successfully set $USER's shell to zsh"
+	success "Successfully set $USER's shell to zsh"
 else
-	echo "Could not set $USER's shell to zsh"
+	error "Could not set $USER's shell to zsh"
 fi
 
 # Configure ClamAV and add Fangfrisch signatures
-sudo freshclam
-sudo -u clamav /usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf initdb
+echo "Initializing ClamAV database"
+if sudo freshclam; then
+	success "Successfully initialized ClamAV"
+else
+	error "Could not initialize ClamAV"
+fi
+
+echo "Initializing Fangfrisch database"
+if sudo -u clamav /usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf initdb; then
+	success "Successfully initialized Fangfrisch"
+else
+	error "Could not initialize Fangfrisch"
+fi
 
 # Test ClamAV configuration
 readonly eicar_test_file_url="https://secure.eicar.org/eicar.com.txt"
 readonly target="stdin: Win.Test.EICAR_HDB-1 FOUND"
 
+echo "Testing ClamAV config with EICAR test file"
 if curl "$eicar_test_file_url" | clamscan - | grep "$target" &> /dev/null; then
-	echo "ClamAV successfully configured"
+	success "Test succeeded"
 else
-	echo "ClamAV incorrectly configured: EICAR test failed"
+	error "Test failed"
 fi
 
 # Configure QEMU/KVM Setup
 # Uncomment unix_sock_group and unix_sock_rw_perms in libvirtd.conf
-sudo sed -E -i "/^#unix_sock_(group|rw_perms)/ s/^#//" /etc/libvirt/libvirtd.conf
-sudo usermod -a -G libvirt "$USER"
+echo "Configuring libvirt"
+if sudo sed -E -i "/^#unix_sock_(group|rw_perms)/ s/^#//" /etc/libvirt/libvirtd.conf; then
+	success "Successfully configured libvirt"
+else
+	error "Could not configure libvirt"
+fi
+
+echo "Adding $USER to libvirt group"
+if sudo usermod -a -G libvirt "$USER"; then
+	success "Successfully added $USER to libvirt group"
+else
+	error "Could not add $USER to libvirt group"
+fi
+
 # Enable nested virtualization
-echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf
+echo "Enabling KVM nested virtualization"
+if echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf > /dev/null; then
+	success "Enabled KVM nested virtualization"
+else
+	error "Could not enable KVM nested virtualization"
+fi
 
 # Enable important services
 readonly services=(
@@ -169,101 +229,137 @@ readonly services=(
 	"pkgfile-update.timer"     # Update pkgfile cache
 )
 
+echo "Enabling important services"
 for service in "${services[@]}"; do
 	if sudo systemctl enable "$service"; then
-		echo "Successfully enabled service: $service"
+		success "Successfully enabled service: $service"
 	else
-		echo "Could not enable service: $service"
+		error "Could not enable service: $service"
 	fi
 done
 
 # Enable Syncthing user service
 if systemctl --user enable syncthing.service; then
-	echo "Successfully enabled user service: syncthing.service"
+	success "Successfully enabled user service: syncthing.service"
 else
-	echo "Could not enable user service: syncthing.service"
+	error "Could not enable user service: syncthing.service"
 fi
 
 # Update pkgfile cache
+echo "Updating pkgfile cache"
 if sudo pkgfile --update; then
-	echo "Successfully updated pkgfile cache"
+	success "Successfully updated pkgfile cache"
 else
-	echo "Could not update pkgfile cache"
+	error "Could not update pkgfile cache"
 fi
 
 # Update tldr cache
+echo "Updating tldr cache"
 if tldr --update; then
-	echo "Successfully updated tldr cache"
+	success "Successfully updated tldr cache"
 else
-	echo "Could not update tldr cache"
+	error "Could not update tldr cache"
 fi
 
 # Build bat theme cache
+echo "Building bat cache"
 if bat cache --build; then
-	echo "Successfully built bat cache"
+	success "Successfully built bat cache"
 else
-	echo "Could not build bat cache"
+	error "Could not build bat cache"
 fi
 
 # Initialize QMK
 readonly qmk_repo="https://github.com/anomalocaridid/qmk_firmware.git"
-git clone "$qmk_repo" --recurse-submodules
+
+echo "Cloning personal QMK fork"
+if git clone "$qmk_repo" --recurse-submodules > /dev/null; then
+	success "Successfully cloned personal QMK fork"
+else
+	error "Could not clone personal QMK fork"
+fi
+
 PATH=$PATH:"$HOME/.local/bin"
-python3 -m pip install --user qmk
-sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d
-qmk setup
+echo "Installing QMK"
+if python3 -m pip install --user qmk; then
+	success "Successfully installed QMK"
+else
+	error "Could not install QMK"
+fi
+
+echo "Setting up QMK udev rules"
+if sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d; then
+	success "Successfully set up QMK udev rules"
+else
+	error "Could not set up QMK udev rules"
+fi
+
+echo "Initializing QMK"
+if qmk setup; then
+	success "Successfully initialized QMK"
+else
+	error "Could not initialize QMK"
+fi
 
 # Add avr-gcc to IgnorePkg in pacman.conf, as qmk only works with a certain version
-sudo sed -i "/^#IgnorePkg/ {s/$/ avr-gcc/; s/^#//}" /etc/pacman.conf
+echo "Adding avr-gcc to IgnorePkg in pacman.conf"
+if sudo sed -i "/^#IgnorePkg/ {s/$/ avr-gcc/; s/^#//}" /etc/pacman.conf; then
+	success "Successfully added avr-gcc to IgnorePkg"
+else
+	error "Could not add avr-gcc to IgnorePkg"
+fi
 
 # Set cursor theme in default theme
 readonly default_cursor_theme="/usr/share/icons/default/index.theme"
 
+echo "Setting cursor theme"
 if sudo sed -i "s/Adwaita/Breeze_Hacked/" "$default_cursor_theme"; then
-	echo "Successfully set cursor in $default_cursor_theme"
+	success "Successfully set cursor in $default_cursor_theme"
 else
-	echo "Could not set cursor in $default_cursor_theme"
+	error "Could not set cursor in $default_cursor_theme"
 fi
 
 # Download color scheme to KDE system theme directory
 readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/kde/cyberpunk-neon.colors"
 readonly color_scheme_dir="/usr/share/color-schemes/"
 
+echo "Downloading KDE color scheme"
+
 if mkdir -p "$color_scheme_dir"; then
 	if sudo wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors"; then
-		echo "Successfully downloaded KDE color scheme"
+		success "Successfully downloaded KDE color scheme"
 	else
-		echo "Could not download KDE color scheme"
+		error "Could not download KDE color scheme"
 	fi
 else
-	echo "Could not create folder at $color_scheme_dir"
+	error "Could not create folder at $color_scheme_dir"
 fi
 
 # Install and configure icon theme
 readonly icon_theme_url="https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh"
 readonly icon_themes_dir="/usr/share/icons"
 
+echo "Installing icon theme"
 if wget -qO- "$icon_theme_url" | sh; then
-	echo "Successfully installed icon theme"
+	success "Successfully installed icon theme"
+else
+	error "Could not install icon theme"
+fi
 
-	if sudo mv "$icon_themes_dir/Suru++-Asprómauros" "$icon_themes_dir/Suru++"; then
-		echo "Successfully renamed icon theme folder"
-
-		if sudo wget https://git.io/fhbxw --output-document="/usr/local/bin/suru-plus-colourise"; then
-			if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
-				echo "Successfully installed suru-plus-colourise"
-				sudo suru-plus-colourise
-			else
-				echo "Could not install suru-plus-colourise"
-			fi
+echo "Recoloring Icon theme"
+if sudo mv "$icon_themes_dir/Suru++-Asprómauros" "$icon_themes_dir/Suru++"; then
+	if sudo wget https://git.io/fhbxw --output-document="/usr/local/bin/suru-plus-colourise"; then
+		if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
+			success "Successfully installed suru-plus-colourise"
+			sudo suru-plus-colourise
 		else
-			echo "Could not install suru-plus-colourise"
+			error "Could not install suru-plus-colourise"
 		fi
 	else
-		echo "Could not rename icon theme folder"
+		error "Could not install suru-plus-colourise"
 	fi
 else
-	echo "Could not install icon theme"
+	error "Could not rename icon theme folder"
 fi
 
 # Install GRUB theme
