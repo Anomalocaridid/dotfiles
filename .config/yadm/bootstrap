@@ -7,7 +7,7 @@
 # Helper functions
 
 step() {
-	printf "\e[1m%s\e[0m\n\n" "$1"
+	printf "\e[1m%s\e[0m\n" "$1"
 }
 
 success() {
@@ -15,7 +15,7 @@ success() {
 }
 
 error() {
-	printf "Error: \e[1;31m%s\e[0m\n" "$1"
+	printf "\e[1;31mError: %s\e[0m\n" "$1"
 	exit 1
 }
 
