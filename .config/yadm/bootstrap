@@ -366,7 +366,7 @@ readonly color_scheme_dir="/usr/share/themes/"
 
 step "Downloading GTK color scheme"
 if sudo mkdir -p "$color_scheme_dir"; then
-	if curl "$color_scheme_url" 2> /dev/null | sudo tar xzf --directory="$color_scheme_dir" &> /dev/null; then
+	if curl "$color_scheme_url" 2> /dev/null | sudo tar xzf - --directory="$color_scheme_dir"; then
 		success "Successfully downloaded GTK color scheme"
 	else
 		error "Could not download GTK color scheme"
