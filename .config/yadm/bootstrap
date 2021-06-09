@@ -344,7 +344,7 @@ fi
 readonly upstream_qmk_repo="https://github.com/qmk/qmk_firmware.git"
 
 step "Adding upstream QMK repo as remote"
-if git -C qmk_firmware remote add upstream "$upstream_qmk_repo"; then
+if git -C qmk_firmware remote add upstream "$upstream_qmk_repo" &> /dev/null; then
 	success "Successfully added upstream QMK repo as remote"
 else
 	error "Could not add upstream QMK repo as remote"
