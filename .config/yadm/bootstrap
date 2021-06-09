@@ -113,6 +113,8 @@ readonly games=(
 	"itch"
 	"lutris"
 	"pulseaudio-alsa" # Required for runelite
+	"pysolfc"
+	"pysolfc-cardsets"
 	"runelite"
 	"steam"
 	"wine"
@@ -420,7 +422,7 @@ fi
 # cd
 
 # Prompt instructions for remaining manual setup
-\cat <<- EOL
+\cat <<- EOF
 	##### Automated Setup Complete #####
 	Further manual setup to do:
 	- Reboot the system
@@ -431,4 +433,4 @@ fi
 	- Set up sync services
 	- Log into any necessary services
 	- Install any desired games
-EOL
+EOF
