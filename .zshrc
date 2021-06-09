@@ -170,11 +170,6 @@ function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
 }
 
-# Sets zsh as the default shell for the current user.
-function set-zsh() {
-	chsh -s "$(which zsh)" && echo "All done! Please restart terminal."
-}
-
 # Single character sourcing
 function source-wrapper() {
 	if [[ -z "$*" ]]; then
