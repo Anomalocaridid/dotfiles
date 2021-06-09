@@ -338,6 +338,16 @@ else
 	error "Could not add avr-gcc to IgnorePkg"
 fi
 
+# Add upstream QMK repo as remote
+readonly upstream_qmk_repo="https://github.com/qmk/qmk_firmware.git"
+
+step "Adding upstream QMK repo as remote"
+if git -C qmk_firmware remote add upstream "$upstream_qmk_repo"; then
+	success "Successfully added upstream QMK repo as remote"
+else
+	error "Could not add upstream QMK repo as remote"
+fi
+
 # Set cursor theme in default theme
 readonly default_cursor_theme="/usr/share/icons/default/index.theme"
 
