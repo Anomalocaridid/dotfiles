@@ -284,7 +284,7 @@ fi
 
 # Update tldr cache
 step "Updating tldr cache"
-if tldr --update &>; then
+if tldr --update &> /dev/null; then
 	success "Successfully updated tldr cache"
 else
 	error "Could not update tldr cache"
