@@ -112,6 +112,7 @@ readonly games=(
 	"gdlauncher-bin"
 	"itch"
 	"lutris"
+	"pulseaudio-alsa" # Required for runelite
 	"runelite"
 	"steam"
 	"wine"
@@ -123,15 +124,16 @@ readonly games=(
 readonly productivity=(
 	"gnuplot" # Required by qalculate-gtk
 	"joplin-desktop"
+	"libreoffice-fresh"
 	"qalculate-gtk"
 	"waterfox-g3-bin"
 )
 
 # File sync programs
 readonly sync=(
-	"megasync"
+	"megasync-bin"
 	"syncthing"
-	"syncthingtray"
+	"syncthingtray" # Tray icon for syncthing
 )
 
 # Security-oriented software
@@ -151,6 +153,7 @@ readonly misc=(
 	"betterdiscord-installer"
 	"breeze-hacked-cursor-theme"
 	"discord"
+	"freetube"
 	"moreutils"
 	"strawberry"
 	# "tealdeer" # Has to be installed after rustup is configured.
@@ -281,7 +284,7 @@ fi
 
 # Update tldr cache
 step "Updating tldr cache"
-if tldr --update; then
+if tldr --update &>; then
 	success "Successfully updated tldr cache"
 else
 	error "Could not update tldr cache"
