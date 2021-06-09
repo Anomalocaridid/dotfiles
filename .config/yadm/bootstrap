@@ -360,17 +360,16 @@ else
 	error "Could not set cursor in $default_cursor_theme"
 fi
 
-# Download color scheme to KDE system theme directory
-readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/kde/cyberpunk-neon.colors"
-readonly color_scheme_dir="/usr/share/color-schemes/"
+# Download color scheme to GTK system theme directory
+readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/gtk/materia-cyberpunk-neon.tar.gz"
+readonly color_scheme_dir="/usr/share/themes/"
 
-step "Downloading KDE color scheme"
-
+step "Downloading GTK color scheme"
 if sudo mkdir -p "$color_scheme_dir"; then
-	if sudo wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors" &> /dev/null; then
-		success "Successfully downloaded KDE color scheme"
+	if curl "$color_scheme_url" 2> /dev/null | sudo tar xzf --directory="$color_scheme_dir" &> /dev/null; then
+		success "Successfully downloaded GTK color scheme"
 	else
-		error "Could not download KDE color scheme"
+		error "Could not download GTK color scheme"
 	fi
 else
 	error "Could not create folder at $color_scheme_dir"
