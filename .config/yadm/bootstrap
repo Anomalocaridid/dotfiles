@@ -163,7 +163,7 @@ readonly misc=(
 
 # Install programs with yay
 step "Installing packages"
-if yay -Syu --needed $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq); then
+if yay -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq); then
 	success "Successfully installed packages"
 else
 	error "Could not install packages"
@@ -186,7 +186,7 @@ fi
 
 # Install packages that require rustup
 step "Installing packages that depend on Rust"
-if yay -S --needed dust zoxide tealdeer; then
+if yay -S --needed --answerclean None dust zoxide tealdeer; then
 	success "Successfully installed packages"
 else
 	error "Could not install packages"
@@ -220,7 +220,7 @@ readonly eicar_test_file_url="https://secure.eicar.org/eicar.com.txt"
 readonly target="stdin: Win.Test.EICAR_HDB-1 FOUND"
 
 step "Testing ClamAV config with EICAR test file"
-if curl "$eicar_test_file_url" | clamscan - | grep "$target" &> /dev/null; then
+if curl "$eicar_test_file_url" 2> /dev/null | clamscan - | grep "$target" &> /dev/null; then
 	success "Test succeeded"
 else
 	error "Test failed"
@@ -366,7 +366,7 @@ readonly color_scheme_dir="/usr/share/color-schemes/"
 
 step "Downloading KDE color scheme"
 
-if mkdir -p "$color_scheme_dir"; then
+if sudo mkdir -p "$color_scheme_dir"; then
 	if sudo wget "$color_scheme_url" --output-document="$color_scheme_dir/cyberpunk-neon.colors" &> /dev/null; then
 		success "Successfully downloaded KDE color scheme"
 	else
