@@ -19,6 +19,15 @@ error() {
 	exit 1
 }
 
+# Clone system dotfiles
+step "Cloning system-level dotfile repo"
+
+if sudo yadm -Y /etc/yadm -C / clone https://github.com/Anomalocaridid/system-dotfiles &>; then
+	success "Successfully cloned system-level dotfile repo"
+else
+	error "Could not clone system-level dotfile repo"
+fi
+
 # Initialize submodules
 step "Cloning submodules"
 
