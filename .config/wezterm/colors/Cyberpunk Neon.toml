@@ -8,7 +8,7 @@ cursor_bg = "#0abdc6"
 cursor_border = "#0abdc6"
 cursor_fg = "#000b1e"
 selection_bg = "#711c91"
-selection_fg = "#133e7c"
+selection_fg = "#d7d7d5"
 split = "#ea00d9"
 scrollbar_thumb = "#ea00d9"
 
