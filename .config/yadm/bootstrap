@@ -22,7 +22,7 @@ error() {
 # Clone system dotfiles
 step "Cloning system-level dotfile repo"
 
-if sudo yadm -Y /etc/yadm -C / clone https://github.com/Anomalocaridid/system-dotfiles &>; then
+if sudo yadm -Y /etc/yadm -C / clone https://github.com/Anomalocaridid/system-dotfiles &> /dev/null; then
 	success "Successfully cloned system-level dotfile repo"
 else
 	error "Could not clone system-level dotfile repo"
@@ -238,14 +238,6 @@ else
 fi
 
 # Configure QEMU/KVM Setup
-# Uncomment unix_sock_group and unix_sock_rw_perms in libvirtd.conf
-step "Configuring libvirt"
-if sudo sed -E -i "/^#unix_sock_(group|rw_perms)/ s/^#//" /etc/libvirt/libvirtd.conf; then
-	success "Successfully configured libvirt"
-else
-	error "Could not configure libvirt"
-fi
-
 step "Adding $USER to libvirt group"
 if sudo usermod -a -G libvirt "$USER"; then
 	success "Successfully added $USER to libvirt group"
@@ -341,14 +333,6 @@ if qmk setup; then
 	success "Successfully initialized QMK"
 else
 	error "Could not initialize QMK"
-fi
-
-# Add avr-gcc to IgnorePkg in pacman.conf, as qmk only works with a certain version
-step "Adding avr-gcc to IgnorePkg in pacman.conf"
-if sudo sed -i "/^#IgnorePkg/ {s/$/ avr-gcc/; s/^#//}" /etc/pacman.conf; then
-	success "Successfully added avr-gcc to IgnorePkg"
-else
-	error "Could not add avr-gcc to IgnorePkg"
 fi
 
 # Add upstream QMK repo as remote
