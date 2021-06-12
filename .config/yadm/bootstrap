@@ -352,16 +352,6 @@ else
 	error "Could not add upstream QMK repo as remote"
 fi
 
-# Set cursor theme in default theme
-readonly default_cursor_theme="/usr/share/icons/default/index.theme"
-
-step "Setting cursor theme"
-if sudo sed -i "s/Adwaita/Breeze_Hacked/" "$default_cursor_theme"; then
-	success "Successfully set cursor in $default_cursor_theme"
-else
-	error "Could not set cursor in $default_cursor_theme"
-fi
-
 # Download color scheme to GTK system theme directory
 readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/gtk/materia-cyberpunk-neon.tar.gz"
 readonly color_scheme_dir="/usr/share/themes/"
