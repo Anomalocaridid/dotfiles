@@ -162,6 +162,9 @@ alias kakrc="kak -e edit-kakrc"
 # Change directory to ranger's current directory after quitting ranger
 alias ranger="ranger_cd"
 
+# Run yadm for system files
+alias sysyadm="sudo yadm -Y /etc/yadm -C /"
+
 # Use Kakoune to align columns of text
 alias align="kak -f '<a-s><S>\h<ret><a-;><&>'"
 
