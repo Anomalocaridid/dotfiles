@@ -393,6 +393,22 @@ else
 	error "Could not recolor icon theme"
 fi
 
+# Install music for PySolFC
+step "Installing PySolFC music"
+
+readonly pysolfc_music_url="https://phoenixnap.dl.sourceforge.net/project/pysolfc/PySol-Music/PySol-Music-4.50/pysol-music-4.50.tar.xz"
+readonly pysolfc_music_dir="/usr/share/PySolFC/music"
+
+if curl "$pysolfc_music_url" 2> /dev/null | sudo tar xJf - --directory=/tmp; then
+	if sudo cp -r /tmp/pysol-music-4.50/data/music "$pysolfc_music_dir"; then
+		success "Successfully installed PySolFC music to $pysolfc_music_dir"
+	else
+		error "Could not copy PySolFC music to $pysolfc_music_dir"
+	fi
+else
+	error "Could not download PySolfc music from $pysolfc_music_url"
+fi
+
 # Install GRUB theme
 # TODO: Find permalink to grub theme archive
 # readonly grub_theme_url=""
