@@ -174,6 +174,7 @@ readonly misc=(
 
 # Install programs with yay
 step "Installing packages"
+
 if yay -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq); then
 	success "Successfully installed packages"
 else
@@ -182,6 +183,7 @@ fi
 
 # Configure rustup
 step "Installing Rust with rustup"
+
 if rustup default stable &> /dev/null; then
 	success "Successfully installed Rust"
 else
@@ -189,6 +191,7 @@ else
 fi
 
 step "Configuring Rust with rustup"
+
 if rustup component add rls rust-analysis rust-src &> /dev/null; then
 	success "Successfully configured Rust"
 else
@@ -197,6 +200,7 @@ fi
 
 # Install packages that require rustup
 step "Installing packages that depend on Rust"
+
 if yay -S --needed --answerclean None dust zoxide tealdeer; then
 	success "Successfully installed packages"
 else
@@ -205,6 +209,7 @@ fi
 
 # Switch user's default shell to zsh
 step "Changing user's shell to zsh"
+
 if chsh -s "$(which zsh)"; then
 	success "Successfully set $USER's shell to zsh"
 else
@@ -213,6 +218,7 @@ fi
 
 # Configure ClamAV and add Fangfrisch signatures
 step "Initializing ClamAV database"
+
 if sudo freshclam &> /dev/null; then
 	success "Successfully initialized ClamAV"
 else
@@ -220,6 +226,7 @@ else
 fi
 
 step "Initializing Fangfrisch database"
+
 if sudo -u clamav /usr/bin/fangfrisch --conf /etc/fangfrisch/fangfrisch.conf initdb; then
 	success "Successfully initialized Fangfrisch"
 else
@@ -231,6 +238,7 @@ readonly eicar_test_file_url="https://secure.eicar.org/eicar.com.txt"
 readonly target="stdin: Win.Test.EICAR_HDB-1 FOUND"
 
 step "Testing ClamAV config with EICAR test file"
+
 if curl "$eicar_test_file_url" 2> /dev/null | clamscan - | grep "$target" &> /dev/null; then
 	success "Test succeeded"
 else
@@ -239,6 +247,7 @@ fi
 
 # Configure QEMU/KVM Setup
 step "Adding $USER to libvirt group"
+
 if sudo usermod -a -G libvirt "$USER"; then
 	success "Successfully added $USER to libvirt group"
 else
@@ -247,6 +256,7 @@ fi
 
 # Enable nested virtualization
 step "Enabling KVM nested virtualization"
+
 if echo "options kvm-intel nested=1" | sudo tee /etc/modprobe.d/kvm-intel.conf > /dev/null; then
 	success "Successfully enabled KVM nested virtualization"
 else
@@ -264,6 +274,7 @@ readonly services=(
 )
 
 step "Enabling important services"
+
 for service in "${services[@]}"; do
 	if sudo systemctl enable "$service" &> /dev/null; then
 		success "Successfully enabled service: $service"
@@ -281,6 +292,7 @@ fi
 
 # Update pkgfile cache
 step "Updating pkgfile cache"
+
 if sudo pkgfile --update &> /dev/null; then
 	success "Successfully updated pkgfile cache"
 else
@@ -289,6 +301,7 @@ fi
 
 # Update tldr cache
 step "Updating tldr cache"
+
 if tldr --update &> /dev/null; then
 	success "Successfully updated tldr cache"
 else
@@ -297,6 +310,7 @@ fi
 
 # Build bat theme cache
 step "Building bat cache"
+
 if bat cache --build &> /dev/null; then
 	success "Successfully built bat cache"
 else
@@ -305,30 +319,34 @@ fi
 
 # Initialize QMK
 readonly qmk_repo="https://github.com/anomalocaridid/qmk_firmware.git"
-
 step "Cloning personal QMK fork"
+
 if git clone "$qmk_repo" --recurse-submodules &> /dev/null; then
-	success "Successfully cloned personal QMK fork"
+	success "Successfully cloned personal QMK fork at $qmk_repo"
 else
-	error "Could not clone personal QMK fork"
+	error "Could not clone personal QMK fork at $qmk_repo"
 fi
 
 PATH=$PATH:"$HOME/.local/bin"
-step "Installing QMK"
+step "Installing QMK with pip"
+
 if python3 -m pip install --user qmk &> /dev/null; then
 	success "Successfully installed QMK"
 else
 	error "Could not install QMK"
 fi
 
+readonly udev_dir="/etc/udev/rules.d"
 step "Setting up QMK udev rules"
-if sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" /etc/udev/rules.d; then
-	success "Successfully set up QMK udev rules"
+
+if sudo cp "$HOME/qmk_firmware/util/udev/50-qmk.rules" "$udev_dir"; then
+	success "Successfully copied QMK udev rules to $udev_dir"
 else
-	error "Could not set up QMK udev rules"
+	error "Could not set up QMK udev rules $udev_dir"
 fi
 
 step "Initializing QMK"
+
 if qmk setup; then
 	success "Successfully initialized QMK"
 else
@@ -337,19 +355,19 @@ fi
 
 # Add upstream QMK repo as remote
 readonly upstream_qmk_repo="https://github.com/qmk/qmk_firmware.git"
-
 step "Adding upstream QMK repo as remote"
+
 if git -C qmk_firmware remote add upstream "$upstream_qmk_repo" &> /dev/null; then
-	success "Successfully added upstream QMK repo as remote"
+	success "Successfully added upstream QMK repo at $upstream_qmk_repo"
 else
-	error "Could not add upstream QMK repo as remote"
+	error "Could not add upstream QMK repo at $upstream_qmk_repo"
 fi
 
 # Download color scheme to GTK system theme directory
 readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/gtk/materia-cyberpunk-neon.tar.gz"
 readonly color_scheme_dir="/usr/share/themes/"
-
 step "Downloading GTK color scheme"
+
 if sudo mkdir -p "$color_scheme_dir"; then
 	if curl "$color_scheme_url" 2> /dev/null | sudo tar xzf - --directory="$color_scheme_dir"; then
 		success "Successfully downloaded GTK color scheme"
@@ -363,11 +381,11 @@ fi
 # Install and configure icon theme
 readonly icon_theme_url="https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh"
 readonly icon_themes_dir="/usr/share/icons"
-
 step "Installing icon theme"
+
 if wget -qO- "$icon_theme_url" | sh &> /dev/null; then
 	if sudo mv "$icon_themes_dir/Suru++-Asprómauros" "$icon_themes_dir/Suru++"; then
-		success "Successfully installed icon theme"
+		success "Successfully installed icon theme at $icon_themes_dir/Suru++"
 	else
 		error "Could not rename icon theme folder"
 	fi
@@ -376,26 +394,27 @@ else
 fi
 
 step "Installing suru-plus-colourize"
+
 if sudo wget https://git.io/fhbxw --output-document="/usr/local/bin/suru-plus-colourise"; then
 	if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
 		success "Successfully installed suru-plus-colourise"
 	else
-		error "Could not install suru-plus-colourise"
+		error "Could not set execute permissions on /usr/local/bin/suru-plus-colourise"
 	fi
 else
 	error "Could not install suru-plus-colourise"
 fi
 
-step "Recoloring icon theme"
+step "Recoloring icon theme with suru-plus-colourise"
+
 if sudo suru-plus-colourise; then
-	success "Recolored icon theme"
+	success "Successfully recolored icon theme"
 else
 	error "Could not recolor icon theme"
 fi
 
 # Install music for PySolFC
 step "Installing PySolFC music"
-
 readonly pysolfc_music_url="https://phoenixnap.dl.sourceforge.net/project/pysolfc/PySol-Music/PySol-Music-4.50/pysol-music-4.50.tar.xz"
 readonly pysolfc_music_dir="/usr/share/PySolFC/music"
 
