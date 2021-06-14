@@ -96,6 +96,7 @@ readonly kak_deps=(
 	"clang" # For C development
 	"fzf"
 	"kakoune"
+	"kakoune.cr-git"
 	"rustup" # For Rust development
 )
 
@@ -124,6 +125,7 @@ readonly games=(
 	"pulseaudio-alsa" # Required for runelite
 	"pysolfc"
 	"pysolfc-cardsets"
+	"python-pygame" # Required for pysolfc
 	"runelite"
 	"steam"
 	"wine"
