@@ -22,7 +22,7 @@ error() {
 # Clone system dotfiles
 step "Cloning system-level dotfile repo"
 
-if sudo yadm -Y /etc/yadm -C / clone https://github.com/Anomalocaridid/system-dotfiles &> /dev/null; then
+if sudo yadm -Y /etc/yadm -w / clone https://github.com/Anomalocaridid/system-dotfiles &> /dev/null; then
 	success "Successfully cloned system-level dotfile repo"
 else
 	error "Could not clone system-level dotfile repo"
