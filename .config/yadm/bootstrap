@@ -170,7 +170,10 @@ readonly misc=(
 	"discord"
 	"exercism-bin"
 	"freetube-bin"
+	"hardcode-fixer-git"
+	"hardcode-tray-git"
 	"moreutils"
+	"qt5-styleplugins"
 	"strawberry"
 	# "tealdeer" # Has to be installed after rustup is configured.
 )
@@ -431,6 +434,22 @@ else
 	error "Could not download PySolfc music from $pysolfc_music_url"
 fi
 
+# Fix hardcoded icons
+step "Fixing hardcoded icons"
+if sudo hardcode-fixer 2> /dev/null; then
+	success "Successfully fixed application icons."
+else
+	error "Could not fix application icons."
+fi
+
+# Fix hardcoded tray icons
+# TODO: Update when hardcode-tray is fixed
+# if sudo hardcode-tray 2> /dev/null; then
+# 	success "Successfully fixed tray icons."
+# else
+# 	error "Could not fix tray icons."
+# fi
+
 # Install GRUB theme
 # TODO: Find permalink to grub theme archive
 # readonly grub_theme_url=""
@@ -447,9 +466,6 @@ fi
 	##### Automated Setup Complete #####
 	Further manual setup to do:
 	- Reboot the system
-	- Set color scheme
-	- Set icon theme
-	- Set cursor theme
 	- Install GRUB theme
 	- Set up sync services
 	- Log into any necessary services
