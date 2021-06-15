@@ -173,6 +173,7 @@ readonly misc=(
 	"hardcode-fixer-git"
 	"hardcode-tray-git"
 	"moreutils"
+	"qt5-styleplugins"
 	"strawberry"
 	# "tealdeer" # Has to be installed after rustup is configured.
 )
@@ -465,9 +466,6 @@ fi
 	##### Automated Setup Complete #####
 	Further manual setup to do:
 	- Reboot the system
-	- Set color scheme
-	- Set icon theme
-	- Set cursor theme
 	- Install GRUB theme
 	- Set up sync services
 	- Log into any necessary services
