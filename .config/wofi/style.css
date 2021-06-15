@@ -41,7 +41,7 @@ window {
     padding:3px;
     border-radius: 5px;
     border:none;
-    color: white;
+    color: @cyan;
 }
 
 #inner-box {
