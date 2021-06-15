@@ -170,6 +170,8 @@ readonly misc=(
 	"discord"
 	"exercism-bin"
 	"freetube-bin"
+	"hardcode-fixer-git"
+	"hardcode-tray-git"
 	"moreutils"
 	"strawberry"
 	# "tealdeer" # Has to be installed after rustup is configured.
@@ -430,6 +432,22 @@ if curl "$pysolfc_music_url" 2> /dev/null | sudo tar xJf - --directory=/tmp; the
 else
 	error "Could not download PySolfc music from $pysolfc_music_url"
 fi
+
+# Fix hardcoded icons
+step "Fixing hardcoded icons"
+if sudo hardcode-fixer 2> /dev/null; then
+	success "Successfully fixed application icons."
+else
+	error "Could not fix application icons."
+fi
+
+# Fix hardcoded tray icons
+# TODO: Update when hardcode-tray is fixed
+# if sudo hardcode-tray 2> /dev/null; then
+# 	success "Successfully fixed tray icons."
+# else
+# 	error "Could not fix tray icons."
+# fi
 
 # Install GRUB theme
 # TODO: Find permalink to grub theme archive
