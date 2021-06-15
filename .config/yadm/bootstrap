@@ -65,6 +65,7 @@ readonly python_dev=(
 	"flake8"
 	"python"
 	"python-language-server"
+	"python-pytest"
 	"yapf"
 )
 
