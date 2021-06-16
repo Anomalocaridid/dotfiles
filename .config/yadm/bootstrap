@@ -66,6 +66,7 @@ readonly python_dev=(
 	"python"
 	"python-language-server"
 	"python-pytest"
+	"pyls-mypy"
 	"yapf"
 )
 
