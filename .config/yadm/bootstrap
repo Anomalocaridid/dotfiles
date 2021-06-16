@@ -95,6 +95,7 @@ readonly kak_deps=(
 	"${haskell_dev[@]}"
 	"${python_dev[@]}"
 	"clang" # For C development
+	"bear"  # Helps with clangd
 	"fzf"
 	"kakoune"
 	"kakoune.cr-git"
