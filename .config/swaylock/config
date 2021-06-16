@@ -2,7 +2,7 @@
 # no-unlock-indicator
 # daemonize
 indicator-caps-lock
-indicator-idle-visible
+# indicator-idle-visible
 # datestr=%A
 image=$HOME/.config/sway/swaylock.png
 scaling=fill
