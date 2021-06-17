@@ -109,6 +109,12 @@ readonly clamav_deps=(
 	"python-fangfrisch"
 )
 
+# Sway setup dependencies
+readonly sway_deps=(
+	"autotiling"
+	"qt5-styleplugins"
+)
+
 # Dependencies for QEMU/KVM setup
 readonly vm_deps=(
 	"bridge-utils"
@@ -164,6 +170,7 @@ readonly misc=(
 	"${games[@]}"
 	"${productivity[@]}"
 	"${security[@]}"
+	"${sway_deps[@]}"
 	"${sync[@]}"
 	"${vm_deps[@]}"
 	"betterdiscord-installer"
@@ -175,7 +182,6 @@ readonly misc=(
 	"hardcode-fixer-git"
 	"hardcode-tray-git"
 	"moreutils"
-	"qt5-styleplugins"
 	"strawberry"
 	"teensy-loader-cli" # Required for compiling my QMK layout
 	# "tealdeer" # Has to be installed after rustup is configured.
