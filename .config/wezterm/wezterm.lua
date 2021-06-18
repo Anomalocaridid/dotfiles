@@ -9,6 +9,7 @@ return {
 	bold_brightens_ansi_colors = false,
 	exit_behavior = "Close",
 	check_for_updates = false,
+	enable_wayland = true,
 
 	color_scheme = "Cyberpunk Neon",
 
