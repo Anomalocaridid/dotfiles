@@ -174,6 +174,7 @@ readonly misc=(
 	"${sync[@]}"
 	"${vm_deps[@]}"
 	"betterdiscord-installer"
+	"bpytop"
 	"breeze-hacked-cursor-theme"
 	"cht.sh-git"
 	"discord"
