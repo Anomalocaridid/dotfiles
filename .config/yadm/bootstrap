@@ -85,7 +85,6 @@ readonly bash_dev=(
 )
 
 readonly common_lisp_dev=(
-	"clisp"
 	"sbcl"
 )
 
