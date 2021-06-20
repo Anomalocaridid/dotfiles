@@ -94,8 +94,9 @@ readonly kak_deps=(
 	"${common_lisp_dev[@]}"
 	"${haskell_dev[@]}"
 	"${python_dev[@]}"
-	"clang" # For C development
+	"bash-bats"
 	"bear"  # Helps with clangd
+	"clang" # For C development
 	"fzf"
 	"kakoune"
 	"kakoune.cr-git"
