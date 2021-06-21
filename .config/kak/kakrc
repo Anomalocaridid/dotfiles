@@ -287,8 +287,8 @@ plug "evanrelf/number-toggle.kak" demand "number-toggle" %{
 }
 
 # WezTerm integration
-plug "Anomalocaridid/wezterm.kak" demand "wezterm" %{
-	hook global -once KakBegin .* wezterm-integration-enable
+plug "Anomalocaridid/wezterm.kak" %{
+	wezterm-integration-enable
 }
 
 # My custom colorscheme
