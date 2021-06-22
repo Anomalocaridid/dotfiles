@@ -167,30 +167,30 @@ plug "insipx/kak-crosshairs" config %{
 
 # Pairing parentheses and brackets
 # Requires kakoune.cr
-plug "alexherbo2/auto-pairs.kak" demand auto-pairs %{
-	#default
-	#set-option window "(" ")" "{" "}" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
+# plug "alexherbo2/auto-pairs.kak" demand auto-pairs %{
+# 	#default
+# 	#set-option window "(" ")" "{" "}" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
 
-	# No single quotes
-	hook global WinSetOption filetype=(haskell|rust) %{
-		set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
-	}
+# 	# No single quotes
+# 	hook global WinSetOption filetype=(haskell|rust) %{
+# 		set-option window auto_pairs "(" ")" "{" "}" "[" "]" '"' '"' "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
+# 	}
 
-	# No single quotes, backticks, or parentheses
-	hook global WinSetOption filetype=(lisp) %{
-		set-option window auto_pairs "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
-	}
+# 	# No single quotes, backticks, or parentheses
+# 	hook global WinSetOption filetype=(lisp) %{
+# 		set-option window auto_pairs "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
+# 	}
 
-	auto-pairs-enable
-}
+# 	auto-pairs-enable
+# }
 
 # Highlight recursive pairs of parentheses centered from cursor
 plug "Bodhizafa/kak-rainbow" config %{
 	hook global WinSetOption filetype=(.*) rainbow-enable-window
 }
 
-# Search highlighter
-plug "alexherbo2/search-highlighter.kak"
+# # Search highlighter
+# plug "alexherbo2/search-highlighter.kak"
 
 # Easy navigation of open buffers
 plug "delapouite/kakoune-buffers" config %{
