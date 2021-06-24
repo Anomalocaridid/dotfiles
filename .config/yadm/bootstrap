@@ -131,7 +131,7 @@ readonly games=(
 	"gdlauncher-bin"
 	"itch"
 	"lutris"
-	"pulseaudio-alsa" # Required for runelite
+	"pulseaudio-alsa" # Required for runelite for sound
 	"pysolfc"
 	"pysolfc-cardsets"
 	"python-pygame" # Required for pysolfc
@@ -140,6 +140,8 @@ readonly games=(
 	"wine"
 	"wine-gecko"
 	"wine-mono"
+	"grapejuice-git"
+	"lib32-libpulse" # required for grapejuice-git for sound
 )
 
 # Productivity software
