@@ -98,8 +98,8 @@ readonly kak_deps=(
 	"bear"  # Helps with clangd
 	"clang" # For C development
 	"fzf"
+	"jq"
 	"kakoune"
-	"kakoune.cr-git"
 	"rustup" # For Rust development
 )
 
@@ -129,7 +129,9 @@ readonly vm_deps=(
 # Programs for gaming
 readonly games=(
 	"gdlauncher-bin"
+	"grapejuice-git"
 	"itch"
+	"lib32-libpulse" # required for grapejuice-git for sound
 	"lutris"
 	"pulseaudio-alsa" # Required for runelite for sound
 	"pysolfc"
@@ -140,8 +142,6 @@ readonly games=(
 	"wine"
 	"wine-gecko"
 	"wine-mono"
-	"grapejuice-git"
-	"lib32-libpulse" # required for grapejuice-git for sound
 )
 
 # Productivity software
