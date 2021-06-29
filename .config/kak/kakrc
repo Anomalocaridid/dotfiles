@@ -52,6 +52,16 @@ define-command -docstring "open a tutorial" trampoline %{
 
 map global user t ": trampoline<ret>" -docstring "open a tutorial"
 
+# Lock user mode from inside mode
+define-command -params 1 usermode-lock-add %{
+	evaluate-commands %sh{
+		printf 'map -docstring %s -- global %s <ret> %s\n' \
+			'"lock mode"' "$1" "': enter-user-mode -lock $1<ret>'"
+	}
+} -shell-script-candidates %{
+	printf '%s\n' $kak_user_modes
+} -docstring "Add <ret> = lock to any usermode"
+
 # Games user mode
 declare-user-mode games
 map global user g ": enter-user-mode games<ret>" -docstring "games and fun"
@@ -192,7 +202,8 @@ plug "Bodhizafa/kak-rainbow" config %{
 plug "delapouite/kakoune-buffers" config %{
 	# Buffer user mode
 	map global user b ": enter-buffers-mode<ret>" -docstring "buffers"
-	map global user B ": enter-user-mode -lock buffers<ret>" -docstring "buffers (lock)"
+	# map global user B ": enter-user-mode -lock buffers<ret>" -docstring "buffers (lock)"
+	usermode-lock-add buffers
 
 	# Command aliases
 	alias global bd delete-buffer
@@ -213,7 +224,7 @@ plug "delapouite/kakoune-auto-star"
 
 # Symmetrically grow/shrink horizontlly.
 plug "delapouite/kakoune-mirror" config %{
-	map global user m ": enter-user-mode -lock mirror<ret>" -docstring "Enter mirror mode"
+	map global user m ": enter-user-mode -lock mirror<ret>" -docstring "enter mirror mode"
 }
 
 # Selects all adjacent lines that match the current selection
