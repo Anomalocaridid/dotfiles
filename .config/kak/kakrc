@@ -8,8 +8,8 @@ set-option global ui_options ncurses_assistant=none ncurses_set_title=false
 set-option global tabstop 4
 set-option global indentwidth 4
 
-# But Lisp has 2 character tabs
-hook global WinSetOption filetype=(lisp) %{
+# But Lisp, Haskell, and YAML have 2 character tabs
+hook global WinSetOption filetype=(lisp|haskell|yaml) %{
 	set-option window tabstop 2
 	set-option window indentwidth 2
 }
