@@ -115,7 +115,7 @@ cargo install --locked --force --path .
 	
 	hook global WinSetOption filetype=(c|haskell|rust|python) %{
 		# Format before saving
-		hook buffer BufWritePre .* lsp-formatting
+		hook buffer BufWritePre .* lsp-formatting-sync
 		
 		# Highlight errors in code
 		lsp-inline-diagnostics-enable window
