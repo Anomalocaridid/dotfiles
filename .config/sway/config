@@ -7,3 +7,7 @@ include $HOME/.config/sway/config.d/*
 
 # only enable this if every app you use is compatible with wayland
 # xwayland disable
+
+# Autostart applications that require the tray
+exec syncthingtray
+exec megasync
