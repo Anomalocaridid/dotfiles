@@ -77,9 +77,9 @@
  
 "clock": {
       	"interval": 1,
-      	"format-alt": "{:%e %b %Y}", // Icon: calendar-alt
-      	"format": "{:%H:%M:%S}",
-      	"tooltip-format": "{:%e %B %Y}"
+      	"format-alt": " {:%a, %b%e, %Y}", // Icon: calendar-alt
+      	"format": " {:%r}", // Icon: clock
+      	"tooltip-format": "{:%A, %B %e, %Y\n%R:%S}"
 },
  
 "cpu": {
