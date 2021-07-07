@@ -70,4 +70,5 @@ color: @cyan;
 }
 
 #text:selected {
+    color: @white;
 }
