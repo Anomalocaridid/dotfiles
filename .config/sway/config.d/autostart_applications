@@ -22,5 +22,5 @@ exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 exec autotiling
 
 # Sync Apps
-exec syncthingtray --wait
-exec megasync
+# exec syncthingtray --wait
+# exec megasync
