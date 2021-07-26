@@ -18,6 +18,9 @@ exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/
 # Sway Fader
 # exec python3 ~/.config/sway/scripts/swayfader.py
 
+# Bluetooth Tray
+exec blueman-tray
+
 # Autotiling
 exec autotiling
 
