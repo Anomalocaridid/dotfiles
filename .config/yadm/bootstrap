@@ -176,6 +176,7 @@ readonly bluetooth=(
 
 # Miscellaneous programs that I frequently use
 readonly misc=(
+	"${bluetooth[@]}"
 	"${clamav_deps[@]}"
 	"${games[@]}"
 	"${productivity[@]}"
