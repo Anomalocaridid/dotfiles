@@ -2,46 +2,44 @@ from i3ipc import Connection, Event
 from threading import Thread
 from time import sleep
 
-
 FRAME_T = 0.01  # time taken between each frame of fade
 
 # transparency values
-CON_AC     = 1     # active window
-CON_INAC   = 0.5   # inactive window
-FLOAT_AC   = 1     # active floating window
-FLOAT_INAC = 0.5  # inactive floating window
-BOT_INAC   = 0.9   # bottom window
-
+CON_AC = 1  # active window
+CON_INAC = 0.8  # inactive window
+FLOAT_AC = 1  # active floating window
+FLOAT_INAC = 0.6  # inactive floating window
+BOT_INAC = 0.9  # bottom window
 
 # fade durations
-FADE_TIME      = 0.2
-ALT_FADE_TIME  = 0.1
+FADE_TIME = 0.2
+ALT_FADE_TIME = 0.1
 
-CON_OUT        = FADE_TIME      # window fading out
-CON_IN         = 0.15           # window fading in
-FLOAT_OUT      = ALT_FADE_TIME  # floating window fading out
-FLOAT_IN       = ALT_FADE_TIME  # floating window fading in
-BOT_OUT        = ALT_FADE_TIME  # bottom window fading out
-BOT_IN         = ALT_FADE_TIME  # bottom window fading in
-BOT_SWITCH_IN  = FADE_TIME      # window becoming bottom window
-BOT_SWITCH_OUT = FADE_TIME      # bottom window becoming window
-FLOAT_BOT_OUT  = FADE_TIME      # floating window fading out from bottom
-FLOAT_BOT_IN   = FADE_TIME      # floating window fading in from bottom
+CON_OUT = FADE_TIME  # window fading out
+CON_IN = 0.15  # window fading in
+FLOAT_OUT = ALT_FADE_TIME  # floating window fading out
+FLOAT_IN = ALT_FADE_TIME  # floating window fading in
+BOT_OUT = ALT_FADE_TIME  # bottom window fading out
+BOT_IN = ALT_FADE_TIME  # bottom window fading in
+BOT_SWITCH_IN = FADE_TIME  # window becoming bottom window
+BOT_SWITCH_OUT = FADE_TIME  # bottom window becoming window
+FLOAT_BOT_OUT = FADE_TIME  # floating window fading out from bottom
+FLOAT_BOT_IN = FADE_TIME  # floating window fading in from bottom
 
 
 class Fader:
     def __init__(self):
         self.floating_windows = []
-        self.fader_running    = False
-        self.fade_queue       = []
-        self.fade_data        = {}
-        self.bottom_win       = None
-        self.old_win          = None
-        self.active_win       = None
+        self.fader_running = False
+        self.fade_queue = []
+        self.fade_data = {}
+        self.bottom_win = None
+        self.old_win = None
+        self.active_win = None
 
         ipc = Connection()
-        ipc.on(Event.WINDOW_FOCUS,    self.on_window_focus)
-        ipc.on(Event.WINDOW_NEW,      self.on_window_new)
+        ipc.on(Event.WINDOW_FOCUS, self.on_window_focus)
+        ipc.on(Event.WINDOW_NEW, self.on_window_new)
         ipc.on(Event.WINDOW_FLOATING, self.on_window_floating)
 
         for win in ipc.get_tree():
@@ -78,7 +76,12 @@ class Fader:
 
         change_opacity(win, start)
         change = (FRAME_T / duration) * (target - start)
-        fade_data = {"opacity": start, "change": change, "target": target, "win": win}
+        fade_data = {
+            "opacity": start,
+            "change": change,
+            "target": target,
+            "win": win
+        }
         self.fade_queue.append(win.id)
         self.fade_data[win.id] = fade_data
 
@@ -122,54 +125,34 @@ class Fader:
 
         if self.active_win.type == "con":
             if e.container.type == "con":
-                self.add_fade(
-                    e.container, CON_INAC,
-                    CON_AC, CON_IN)
-                self.add_fade(
-                    self.active_win, CON_AC,
-                    CON_INAC, CON_OUT)
+                self.add_fade(e.container, CON_INAC, CON_AC, CON_IN)
+                self.add_fade(self.active_win, CON_AC, CON_INAC, CON_OUT)
 
             else:
-                self.add_fade(
-                    e.container, FLOAT_INAC,
-                    FLOAT_AC, FLOAT_IN)
-                self.add_fade(
-                    self.active_win, CON_AC,
-                    BOT_INAC, BOT_OUT)
+                self.add_fade(e.container, FLOAT_INAC, FLOAT_AC, FLOAT_IN)
+                self.add_fade(self.active_win, CON_AC, BOT_INAC, BOT_OUT)
                 self.bottom_win = self.active_win
 
         else:
             if e.container.type == "con":
-                self.add_fade(
-                    self.active_win, FLOAT_AC,
-                    FLOAT_INAC, FLOAT_BOT_OUT)
+                self.add_fade(self.active_win, FLOAT_AC, FLOAT_INAC,
+                              FLOAT_BOT_OUT)
 
                 if not self.bottom_win:
-                    self.add_fade(
-                        e.container, CON_INAC,
-                        CON_AC, CON_IN)
+                    self.add_fade(e.container, CON_INAC, CON_AC, CON_IN)
 
                 elif e.container.id != self.bottom_win.id:
-                    self.add_fade(
-                        self.bottom_win, BOT_INAC,
-                        CON_INAC, BOT_SWITCH_OUT)
-                    self.add_fade(
-                        e.container, CON_INAC,
-                        CON_AC, BOT_SWITCH_IN)
+                    self.add_fade(self.bottom_win, BOT_INAC, CON_INAC,
+                                  BOT_SWITCH_OUT)
+                    self.add_fade(e.container, CON_INAC, CON_AC, BOT_SWITCH_IN)
                     self.bottom_win = e.container
 
                 else:
-                    self.add_fade(
-                        self.bottom_win, BOT_INAC,
-                        CON_AC, BOT_IN)
+                    self.add_fade(self.bottom_win, BOT_INAC, CON_AC, BOT_IN)
 
             else:
-                self.add_fade(
-                    self.active_win, FLOAT_AC,
-                    FLOAT_INAC, FLOAT_OUT)
-                self.add_fade(
-                    e.container, FLOAT_INAC,
-                    FLOAT_AC, FLOAT_IN)
+                self.add_fade(self.active_win, FLOAT_AC, FLOAT_INAC, FLOAT_OUT)
+                self.add_fade(e.container, FLOAT_INAC, FLOAT_AC, FLOAT_IN)
 
         self.start_fader()
         self.active_win = e.container
@@ -226,4 +209,3 @@ def change_opacity(win, trans):
 
 if __name__ == "__main__":
     Fader()
-
