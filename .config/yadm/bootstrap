@@ -166,6 +166,14 @@ readonly security=(
 	"yubioath-desktop"
 )
 
+# Bluetooth dependencies
+readonly bluetooth=(
+	"blueman"
+	"bluez"
+	"bluez-utils"
+	"pulseaudio-bluetooth"
+)
+
 # Miscellaneous programs that I frequently use
 readonly misc=(
 	"${clamav_deps[@]}"
@@ -283,6 +291,7 @@ fi
 
 # Enable important services
 readonly services=(
+	"bluetooth"                # Bluetooth service
 	"clamav-daemon.service"    # ClamAV automatic scan dawmon
 	"clamav-freshclam.service" # Update ClamAV official signatures
 	"fangfrisch.timer"         # Update fangfrisch signatures
