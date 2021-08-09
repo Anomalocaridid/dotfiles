@@ -113,6 +113,7 @@ readonly clamav_deps=(
 readonly sway_deps=(
 	"autotiling"
 	"qt5-styleplugins"
+	"sworkstyle"
 )
 
 # Dependencies for QEMU/KVM setup
