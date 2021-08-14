@@ -21,6 +21,7 @@ for_window [app_id="yad"] floating enable
 for_window [app_id="blueman-manager"] floating enable, resize set width 40 ppt height 30 ppt
 for_window [title="^Syncthing Tray( \(.*\))?$"] floating enable, border none, resize set 450 400, move position 880 0
 for_window [class="MEGAsync" instance="megasync"] floating enable, border none
+for_window [title="RuneLite Launcher"] floating enable
 
 # set floating (nontiling) for special apps:
 for_window [class="Xsane" instance="xsane"] floating enable
@@ -29,7 +30,7 @@ for_window [class="qt5ct" instance="qt5ct"] floating enable, resize set width 60
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [app_id="pamac-manager"] floating enable, resize set width 80 ppt height 70 ppt
 for_window [class="Lxappearance"] floating enable, resize set width 60 ppt height 50 ppt
-for_window [title="RuneLite Launcher"] floating enable
+for_window [app_id = "yubico.com.yubioath-desktop"] floating enable, resize set width 30 ppt height 50 ppt
 
 # set floating for window roles
 for_window [window_role="pop-up"] floating enable
