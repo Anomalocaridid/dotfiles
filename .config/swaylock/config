@@ -22,7 +22,7 @@ inside-color=#000b1e00
 ring-color=#000b1e
 separator-color=#ea00d9
 key-hl-color=#ea00d9
-bs-hl-color=#133e7c
+bs-hl-color=#ff0000
 
 # Verifying
 line-ver-color=#0abcd6
