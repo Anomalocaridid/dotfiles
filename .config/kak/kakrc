@@ -176,7 +176,7 @@ plug "insipx/kak-crosshairs" config %{
 }
 
 # Pairing parentheses and brackets
-plug "dead10ck/auto-pairs.kak" branch "remove-kcr" demand auto-pairs %{
+plug "alexherbo2/auto-pairs.kak" %{
 	#default
 	#set-option window "(" ")" "{" "}" "[" "]" '"' '"' "'" "'" "`" "`" "“" "”" "‘" "’" "«" "»" "‹" "›"
 
@@ -190,7 +190,7 @@ plug "dead10ck/auto-pairs.kak" branch "remove-kcr" demand auto-pairs %{
 		set-option window auto_pairs "{" "}" "[" "]" '"' '"' "“" "”" "‘" "’" "«" "»" "‹" "›"
 	}
 
-	auto-pairs-enable
+	enable-auto-pairs
 }
 
 # Highlight recursive pairs of parentheses centered from cursor
