@@ -2,7 +2,7 @@
 add-highlighter global/ show-matching
 
 # Get rid of Clippy and don't set terminal window title
-set-option global ui_options ncurses_assistant=none ncurses_set_title=false
+set-option global ui_options terminal_assistant=none terminal_set_title=false
 
 # Tabs are 4 characters long
 set-option global tabstop 4
