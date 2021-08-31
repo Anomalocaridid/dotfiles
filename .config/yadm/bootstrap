@@ -199,8 +199,9 @@ readonly misc=(
 	"hardcode-tray-git"
 	"k3b" # disc ripper/burner
 	"moreutils"
-	"picard"     # music tagger
-	"strawberry" # music player
+	"picard"           # music tagger
+	"strawberry"       # music player
+	"swaylock-effects" # fancier swaylock alternative
 	# "tealdeer" # Has to be installed after rustup is configured.
 	"teensy-loader-cli" # Required for compiling my QMK layout
 )
