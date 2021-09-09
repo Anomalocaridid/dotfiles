@@ -77,7 +77,7 @@
  
 "clock": {
       	"interval": 1,
-      	"format-alt": " {:%a, %b %e, %Y}", // Icon: calendar-alt
+      	"format-alt": " {:%a, %b %d, %Y}", // Icon: calendar-alt
       	"format": " {:%r}", // Icon: clock
       	"tooltip-format": "{:%A, %B %e, %Y\n%R:%S}",
 		"on-click-right": "yad --calendar --no-buttons",
