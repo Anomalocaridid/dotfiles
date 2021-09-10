@@ -27,6 +27,9 @@ exec autotiling
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
 
+# Japanese keyboard
+exec --no-startup-id fcitx5 -d
+
 # Sync Apps
 # exec syncthingtray --wait
 # exec megasync

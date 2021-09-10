@@ -175,11 +175,20 @@ readonly bluetooth=(
 	"pulseaudio-bluetooth"
 )
 
+# Japanese IME
+readonly mozc=(
+	"fcitx"
+	"fcitx5-configtool"
+	"fcitx5-mozc"
+	"fcitx5-qt"
+)
+
 # Miscellaneous programs that I frequently use
 readonly misc=(
 	"${bluetooth[@]}"
 	"${clamav_deps[@]}"
 	"${games[@]}"
+	"${mozc[@]}"
 	"${productivity[@]}"
 	"${security[@]}"
 	"${sway_deps[@]}"
