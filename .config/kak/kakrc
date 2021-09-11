@@ -113,7 +113,7 @@ cargo install --locked --force --path .
 	map global lsp n ": lsp-find-error --include-warnings<ret>" -docstring "find next error"
 	map global lsp p ": lsp-find-error --previous --include-warnings<ret>" -docstring "find previous error"
 	
-	hook global WinSetOption filetype=(c|haskell|rust|python) %{
+	hook global WinSetOption filetype=(c|cpp|haskell|rust|python) %{
 		# Format before saving
 		hook buffer BufWritePre .* lsp-formatting-sync
 		
@@ -233,9 +233,7 @@ plug "occivink/kakoune-vertical-selection"
 
 # Enhances text objects
 # Some features require kakoune-vertical-selection
-plug "delapouite/kakoune-text-objects" %{
-	text-object-map
-}
+plug "delapouite/kakoune-text-objects"
 
 # Roguelike-style light simulation
 plug "occivink/kakoune-roguelight" config %{
