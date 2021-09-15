@@ -12,9 +12,6 @@ exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
      
-# Welcome App
-exec dex -a -s /etc/xdg/autostart/:~/.config/autostart/  
-
 # Sway Fader
 exec python3 ~/.config/sway/scripts/swayfader.py
 
@@ -23,9 +20,6 @@ exec blueman-tray
 
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
-
-# Japanese keyboard
-# exec --no-startup-id fcitx5 -d
 
 # Sync Apps
 # exec syncthingtray --wait
