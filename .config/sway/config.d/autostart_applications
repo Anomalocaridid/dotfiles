@@ -21,14 +21,11 @@ exec python3 ~/.config/sway/scripts/swayfader.py
 # Bluetooth Tray
 exec blueman-tray
 
-# Autotiling
-exec autotiling
-
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
 
 # Japanese keyboard
-exec --no-startup-id fcitx5 -d
+# exec --no-startup-id fcitx5 -d
 
 # Sync Apps
 # exec syncthingtray --wait

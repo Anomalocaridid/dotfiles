@@ -111,7 +111,6 @@ readonly clamav_deps=(
 
 # Sway setup dependencies
 readonly sway_deps=(
-	"autotiling"
 	"qt5-styleplugins"
 	"sworkstyle"
 )
