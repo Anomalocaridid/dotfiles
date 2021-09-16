@@ -111,6 +111,7 @@ readonly clamav_deps=(
 
 # Sway setup dependencies
 readonly sway_deps=(
+	"mpvpaper"
 	"qt5-styleplugins"
 	"sworkstyle"
 )
@@ -203,6 +204,7 @@ readonly misc=(
 	"dvd+rw-tools" # Required by k3b
 	"exercism-bin"
 	"freetube-bin"
+	"git-lfs" # For managing mpvwallpaper file
 	"hardcode-fixer-git"
 	"hardcode-tray-git"
 	"k3b" # disc ripper/burner
