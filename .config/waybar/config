@@ -10,8 +10,8 @@
         	"custom/launcher",
 			"custom/right-arrow-launcher",
         	"sway/workspaces",
-			"custom/right-arrow-workspaces",
         	"sway/mode",
+			"custom/right-arrow-workspaces",
 	],
  
 	"modules-center": [     

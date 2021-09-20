@@ -32,7 +32,8 @@ Arc-Dark Color Scheme
 @define-color green      #00ff00;
 
 @define-color highlight  @pink;
-@define-color base1      @dark-blue;
+@define-color base1      transparent;
+@define-color base2      @dark-blue;
 
 @define-color warning    @yellow;
 @define-color critical   @red;
@@ -168,7 +169,7 @@ Arc-Dark Color Scheme
     border-bottom: 3px transparent;
     color: @white;
     margin-left: 5px;
-    padding: 7;
+   padding: 7;
   }
  
 #network.disconnected {
@@ -220,14 +221,16 @@ Arc-Dark Color Scheme
 }
  
 #custom-power{
-   margin-left:15px;
-   margin-right:15px;
+   padding-left:15px;
+   padding-right:15px;
    font-size:15px;
+   background: @base2;
 }   
 #custom-launcher{
    font-size:15px;
-   margin-left:15px;
-   margin-right:10px;
+   padding-left:15px;
+   padding-right:10px;
+   background: @base2;
  }   
 
 #backlight.icon{
@@ -255,7 +258,7 @@ Arc-Dark Color Scheme
 #custom-right-arrow-launcher{
 	font-size: 27px;
 	background-color: @light-alt;
-	color: @base1;
+	color: @base2;
 }
 
 #custom-right-arrow-workspaces{
@@ -288,6 +291,7 @@ Arc-Dark Color Scheme
 
 #custom-left-arrow-power{
     font-size: 27px;
-    color: @base1;
+    color: @base2;
     background-color: @purple-alt;
 }
+
