@@ -3,7 +3,6 @@ local wezterm = require 'wezterm';
 return {
 	font_size = 11.0,
 	font = wezterm.font("FiraCode Nerd Font"),
-	custom_block_glyphs = false,
 	hide_tab_bar_if_only_one_tab = true,
 	window_background_opacity = 0.90,
 	bold_brightens_ansi_colors = false,
