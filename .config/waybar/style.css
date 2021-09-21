@@ -282,10 +282,14 @@ Arc-Dark Color Scheme
     color: @light-alt;
 }
 
+#custom-right-arrow-system{
+    font-size: 27px;
+    color: @light-alt;
+}
+
 #custom-left-arrow-settings{
     font-size: 27px;
     color: @purple-alt;
-    background-color: @light-alt;
 }
 
 #custom-left-arrow-clock{

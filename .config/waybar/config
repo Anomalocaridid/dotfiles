@@ -21,17 +21,18 @@
 	],
  
 	"modules-center": [     
-      	],
- 
-    	"modules-right": [
 			"custom/left-arrow-system",
-            "network",
+        	"network",
 	        "memory",
 	        "cpu",
 			"disk",
 			"temperature",
 			"custom/pacman",
 	        // "custom/weather",
+			"custom/right-arrow-system",
+	],
+ 
+    	"modules-right": [
 			"custom/left-arrow-settings",
 	        "idle_inhibitor",
 	        "pulseaudio",
@@ -288,6 +289,11 @@
 
 "custom/left-arrow-system": {
 		"format": "",
+		"tooltip": false,
+},
+
+"custom/right-arrow-system": {
+		"format": "",
 		"tooltip": false,
 },
 
