@@ -233,6 +233,11 @@ Arc-Dark Color Scheme
    background: @base2;
  }   
 
+#custom-waterfox, #custom-terminal, #custom-files, #custom-lutris{
+	font-size:20px;
+	background-color: @purple-alt;
+}
+
 #backlight.icon{
 	padding-right:1px;
 	font-size: 13px;
@@ -264,6 +269,12 @@ Arc-Dark Color Scheme
 #custom-right-arrow-workspaces{
 	font-size: 27px;
 	color: @light-alt;
+    background-color: @purple-alt;
+}
+
+#custom-right-arrow-shortcuts{
+    font-size: 27px;
+    color: @purple-alt;
 }
 
 #custom-left-arrow-system{

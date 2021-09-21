@@ -12,6 +12,12 @@
         	"sway/workspaces",
         	"sway/mode",
 			"custom/right-arrow-workspaces",
+			"custom/terminal",
+			"custom/waterfox",
+			"custom/files",
+			"custom/lutris",
+			"custom/right-arrow-shortcuts",
+			
 	],
  
 	"modules-center": [     
@@ -227,15 +233,15 @@
 
 },
 
-"custom/firefox": {
+"custom/waterfox": {
     	"format": " ",
-    	"on-click": "exec firefox",
+    	"on-click": "exec waterfox-g3",
     	"tooltip": false
 },
  
 "custom/terminal": {
     	"format": " ",
-    	"on-click": "exec alacritty",
+    	"on-click": "exec wezterm",
     	"tooltip": false
 },
  
@@ -243,6 +249,12 @@
     	"format": " ",
     	"on-click": "exec thunar",
     	"tooltip": false
+},
+
+"custom/lutris": {
+    "format": " ",
+	"on-click": "exec lutris",
+	"tooltip": false,
 },
  
 "custom/launcher": {
@@ -265,6 +277,11 @@
 },
 
 "custom/right-arrow-workspaces": {
+		"format": "",
+		"tooltip": false,
+},
+
+"custom/right-arrow-shortcuts": {
 		"format": "",
 		"tooltip": false,
 },
