@@ -56,15 +56,12 @@
 	},
 	"battery": {
 		"states": {
-			// "good": 95,
 			"warning": 30,
 			"critical": 15
 		},
 		"format": "{capacity}% {icon}",
 		"format-charging": "{capacity}% ",
 		"format-plugged": "{capacity}% ",
-		// "format-good": "", // An empty format will hide the module
-		// "format-full": "",
 		"format-icons": [
 			"",
 			"",
@@ -108,7 +105,6 @@
 		"format": " {}",
 		"interval": 3600, // every hour
 		"exec": "checkupdates | wc -l", // # of updates
-		"exec-if": "exit 0", // always run; consider advanced run conditions
 		"on-click": "wezterm start yay; pkill -SIGRTMIN+8 waybar", // update system
 		"signal": 8
 	},
@@ -156,14 +152,7 @@
 		"disable-scroll": true,
 		"disable-markup": false,
 		"all-outputs": true,
-		"format": "  {icon}  "
-		//"format":"{icon}",
-		//"format-icons": {
-		//	"1": "",
-		//	"2": "",
-		//	"3": "",
-		//	"4": "ﭮ",
-		//}
+		"format": " {icon} "
 	},
 	"temperature": {
 		"critical-threshold": 75,

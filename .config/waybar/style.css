@@ -189,15 +189,11 @@ Arc-Dark Color Scheme
 
 #workspaces button {
     border-bottom: 3px solid transparent;
-    margin-bottom: 0px;
-    padding: 0px;
     background: @light-alt;
 }
 
 #workspaces button.focused {
     border-bottom: 3px solid @highlight;
-    margin-bottom: 1px;
-    padding-left: 0;
     color: @pink;
 }
 
