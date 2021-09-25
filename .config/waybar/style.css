@@ -251,8 +251,8 @@ Arc-Dark Color Scheme
 #cpu,
 #disk,
 #custom-pacman {
-    padding-left: 5px;
-    padding-right: 5px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 #idle_inhibitor,
@@ -262,6 +262,11 @@ Arc-Dark Color Scheme
 #tray {
     background-color: @purple-alt;
     margin: 0;
+}
+
+#idle_inhibitor {
+	padding-left: 1px;
+	padding-right: 1px;
 }
 
 /* Powerline Arrows */
