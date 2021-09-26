@@ -14,6 +14,9 @@ font pango:Noto Sans Regular 10
 # Thin borders:
 smart_borders on
 
+# Hide edge borders for single tabbed windows
+hide_edge_borders --i3 none
+
 # Set wallpaper:
 swaybg_command -
 exec mpvpaper -o "no-audio loop" HDMI-A-1 -i ~/.config/sway/sway.mp4
