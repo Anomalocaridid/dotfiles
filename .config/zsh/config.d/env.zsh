@@ -10,10 +10,6 @@ HOME_BIN=$HOME/bin         # Folder for other programs
 export PATH=$CARGO_BIN:$STACK_BIN:$SCRIPTS:$HOME_BIN:/usr/local/bin:$PATH
 fpath+=$HOME/.zfunc
 
-# Use Kakoune as the default text editor.
-export VISUAL="kak"
-export EDITOR="kak"
-
 # Set LS_COLORS
 eval "$(dircolors)"
 
