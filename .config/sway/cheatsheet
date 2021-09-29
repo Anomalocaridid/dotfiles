@@ -151,6 +151,8 @@ They are enabled -  you may need to hold down the function key while doing so.
 +n thunar
 +o waterfox
 
+# Clipboard:
++c clear clipboard
 
 # Other Things:
 

@@ -209,4 +209,9 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 #
 # Keybindings List
 #
-   bindsym $mod+t exec wezterm start -- kak ~/.config/sway/cheatsheet    
+    bindsym $mod+t exec wezterm start -- kak ~/.config/sway/cheatsheet    
+
+#
+# Clipboard
+#
+    bindsym $mod+c exec wl-copy -c && notify-send --icon="accessories-clipboard" "Clipboard cleared" "The clipboard has been cleared."
