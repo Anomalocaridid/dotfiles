@@ -36,6 +36,7 @@ zinit light romkatv/powerlevel10k
 # when it gets merged.
 zinit light-mode wait lucid for                                                                    \
 		https://raw.githubusercontent.com/toonn/ranger/automatic-cd/examples/shell_automatic_cd.sh \
+		https://raw.githubusercontent.com/wez/wezterm/main/assets/shell-integration/wezterm.sh     \
 		OMZP::git                                                                                  \
 		OMZP::zsh_reload                                                                           \
 		OMZP::command-not-found                                                                    \
