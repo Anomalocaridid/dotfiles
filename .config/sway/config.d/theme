@@ -19,7 +19,7 @@ hide_edge_borders --i3 none
 
 # Set wallpaper:
 swaybg_command -
-exec mpvpaper -o "no-audio loop" HDMI-A-1 -i ~/.config/sway/sway.mp4
+exec mpvpaper -o "no-audio loop" HDMI-A-1 ~/.config/sway/sway.mp4
 
 # Title format for windows
 for_window [shell="xdg_shell"] title_format "%title (%app_id)"
