@@ -177,10 +177,10 @@ readonly bluetooth=(
 
 # Japanese IME
 readonly mozc=(
-	"fcitx5"
-	"fcitx5-configtool"
-	"fcitx5-mozc"
-	"fcitx5-qt"
+	"fcitx"
+	"fcitx-configtool"
+	"fcitx-mozc"
+	"fcitx-qt"
 )
 
 # Miscellaneous programs that I frequently use

@@ -18,6 +18,9 @@ exec python3 ~/.config/sway/scripts/swayfader.py
 # Bluetooth Tray
 exec blueman-tray
 
+# IME
+exec --no-startup-id fcitx -d
+
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
 
