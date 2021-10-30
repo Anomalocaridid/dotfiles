@@ -53,7 +53,7 @@ fallback = ''
 'Alacritty' = ''
 
 'org.wezfurlong.wezterm' = ''
-'Waterfox' = ''
+'waterfox' = ''
 'thunar' = ''
 'lutris' = ''
 'org.keepassxc.KeePassXC' = ''
