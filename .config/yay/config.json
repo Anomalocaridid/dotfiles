@@ -1,7 +1,6 @@
 {
 	"aururl": "https://aur.archlinux.org",
 	"buildDir": "/home/anomalocaris/.cache/yay",
-	"absdir": "/home/anomalocaris/.cache/yay/abs",
 	"editor": "",
 	"editorflags": "",
 	"makepkgbin": "makepkg",
@@ -37,7 +36,7 @@
 	"cleanmenu": true,
 	"diffmenu": false,
 	"editmenu": false,
-	"combinedupgrade": false,
+	"combinedupgrade": true,
 	"useask": false,
 	"batchinstall": false
 }
