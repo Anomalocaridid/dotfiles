@@ -208,6 +208,7 @@ readonly misc=(
 	"hardcode-fixer-git"
 	"hardcode-tray-git"
 	"k3b" # disc ripper/burner
+	"ly"  # display manager
 	"moreutils"
 	"picard"           # music tagger
 	"strawberry"       # music player
@@ -342,6 +343,13 @@ if systemctl --user enable syncthing.service &> /dev/null; then
 	success "Successfully enabled user service: syncthing.service"
 else
 	error "Could not enable user service: syncthing.service"
+fi
+
+# Force enable Ly service
+if sudo systemctl enable ly.service -f &> /dev/null; then
+	success "Successfully replaced display manager with Ly"
+else
+	error "Could not replave display manager with Ly"
 fi
 
 # Update pkgfile cache
