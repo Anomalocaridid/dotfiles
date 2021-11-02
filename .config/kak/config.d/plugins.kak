@@ -175,7 +175,8 @@ plug "occivink/kakoune-roguelight" config %{
 } plug "Anomalocaridid/wezterm.kak" %{
 # WezTerm integration
 	wezterm-integration-enable
-} plug "Anomalocaridid/kakoune-cyberpunk-neon" theme config %{
+} plug "TeddyDD/kakoune-cfdg" \
+plug "Anomalocaridid/kakoune-cyberpunk-neon" theme config %{
 # My custom colorscheme
 # Keep at bottom so that it overwrites supported plugins' custom faces
 	colorscheme cyberpunk-neon
