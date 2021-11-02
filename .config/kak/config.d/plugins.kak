@@ -10,11 +10,12 @@ evaluate-commands %sh{
     printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
 }
 
-plug-chain "andreyorst/plug.kak" noload config %{
-	# Automatically install plugins
-	# Instead of only when plug-install is run
-  	set-option global plug_always_ensure 'true'
-} plug "ul/kak-lsp" do %{
+# Automatically install plugins
+# Instead of only when plug-install is run
+set-option global plug_always_ensure 'true'
+
+plug-chain "andreyorst/plug.kak" noload \
+plug "ul/kak-lsp" do %{
 # Language Server Protocol integration
 # Requires cargo
 # See ~/.config/kak-lsp/kak-lsp.toml for further dependencies
