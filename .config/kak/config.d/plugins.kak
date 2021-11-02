@@ -23,6 +23,8 @@ plug-chain "andreyorst/plug.kak" noload config %{
 	# Cool unicode indicators
 	set-option global lsp_diagnostic_line_error_sign "✖"
 	set-option global lsp_diagnostic_line_warning_sign "➤"
+	set-option global lsp_diagnostic_line_info_sign ""
+	set-option global lsp_diagnostic_line_hint_sign ""
 
 	# # Only show errors and warnings
 	# set-option global lsp_show_hover_format 'printf %s "${lsp_diagnostics}"'
