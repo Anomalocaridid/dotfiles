@@ -75,6 +75,13 @@ function bd-wrapper() {
 
 alias bd="bd-wrapper"
 
+# Render and view context free art in one command
+cfdg-view() {
+	in="$1"
+	out="${in:0:-4}png"
+	cfdg "$in" "$out" && imv "$out"
+}
+
 # Autoload zsh modules not enabled by default
 autoload zcalc           # Calculator program
 autoload zmv             # Move/rename files that match a pattern/
