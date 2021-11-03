@@ -212,6 +212,7 @@ readonly misc=(
 	"k3b" # disc ripper/burner
 	"ly"  # display manager
 	"moreutils"
+	"paru"             # aur helper Note: only in aur, so install method will have to change if using an Arch-based distro without yay by default.
 	"picard"           # music tagger
 	"strawberry"       # music player
 	"swaylock-effects" # fancier swaylock alternative
@@ -220,6 +221,7 @@ readonly misc=(
 )
 
 # Install programs with yay
+# May have to replace with paru if moving to a distro without it by default
 step "Installing packages"
 
 if yay -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq); then
