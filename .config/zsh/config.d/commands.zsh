@@ -53,17 +53,6 @@ function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
 }
 
-# Single character sourcing
-function source-wrapper() {
-	if [[ -z "$*" ]]; then
-		src
-	else
-		source "$@"
-	fi
-}
-
-alias .="source-wrapper"
-
 # Fallback behaviour if bd has no arguments passed
 function bd-wrapper() {
 	if [[ -z "$*" ]]; then
