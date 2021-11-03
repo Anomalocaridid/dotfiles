@@ -45,6 +45,7 @@ fi
 readonly zsh_deps=(
 	"bat"
 	"bat-extras-git"
+	"cfdg" # Context Free interpreter
 	# "dust" # Has to be installed after rustup is configured.
 	"exa"
 	"fd"
@@ -52,8 +53,8 @@ readonly zsh_deps=(
 	"lolcat"
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
-	"ripgrep" # Required by bat-extras-git
 	"ranger"
+	"ripgrep" # Required by bat-extras-git
 	"toilet"
 	"toilet-fonts" # Required by toilet
 	"wezterm"
@@ -96,6 +97,7 @@ readonly kak_deps=(
 	"${python_dev[@]}"
 	"bash-bats"
 	"bear"  # Helps with clangd
+	"cfdg"  # Context Free interpreter
 	"clang" # For C development
 	"fzf"
 	"jq"
