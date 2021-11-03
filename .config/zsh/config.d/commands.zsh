@@ -48,6 +48,9 @@ alias sysyadm="sudo yadm -Y /etc/yadm -C /"
 # Use Kakoune to align columns of text
 alias align="kak -f '<a-s><S>\h<ret><a-;><&>'"
 
+# Render and view context free art in one command
+alias cfdg-view="cfdg --display=imv --"
+
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
@@ -64,8 +67,12 @@ function bd-wrapper() {
 
 alias bd="bd-wrapper"
 
-# Render and view context free art in one command
-alias cfdg-view="cfdg --display=imv --"
+# zcompile all config files
+function zcomp() {
+	for i in ~/.zshrc ~/.p10k.zsh ~/.config/zsh/config.d/*.zsh; do
+		zcompile $i && echo "zcompile: $i"
+	done
+}
 
 # Autoload zsh modules not enabled by default
 autoload zcalc           # Calculator program
