@@ -9,6 +9,7 @@ set $right l
 
 # Your preferred terminal emulators
 set $term-float wezterm
+set $term-exec $term-float start --
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -199,7 +200,7 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 #
 # App shortcuts
 #
-    bindsym $mod+n exec thunar
+    bindsym $mod+n exec $term-exec nnn
     bindsym $mod+o exec waterfox-g3
 #
 # Screenshots
