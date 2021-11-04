@@ -9,6 +9,7 @@ return {
 	exit_behavior = "Close",
 	check_for_updates = false,
 	enable_wayland = true,
+	enable_kitty_graphics = true,
 
 	color_scheme = "Cyberpunk Neon",
 
