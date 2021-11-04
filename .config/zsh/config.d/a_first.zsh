@@ -32,24 +32,22 @@ zinit ice depth=1;
 zinit light romkatv/powerlevel10k
 
 # Plugins
-# Replace ranger snippet with version from main repo
-# when it gets merged.
-zinit light-mode wait lucid for                                                                    \
-		https://raw.githubusercontent.com/toonn/ranger/automatic-cd/examples/shell_automatic_cd.sh \
-		https://raw.githubusercontent.com/wez/wezterm/main/assets/shell-integration/wezterm.sh     \
-		OMZP::git                                                                                  \
-		OMZP::command-not-found                                                                    \
-		OMZP::fancy-ctrl-z                                                                         \
-		zsh-users/zsh-history-substring-search                                                     \
-		Aloxaf/fzf-tab                                                                             \
-		amstrad/oh-my-matrix                                                                       \
-		Tarrasch/zsh-bd                                                                            \
-		hlissner/zsh-autopair                                                                      \
-	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"                                        \
-		zdharma-continuum/fast-syntax-highlighting                                                           \
-	blockf                                                                                         \
-		zsh-users/zsh-completions                                                                  \
-	atload"!_zsh_autosuggest_start"                                                                \
+zinit light-mode wait lucid for                                                                \
+		https://raw.githubusercontent.com/jarun/nnn/master/misc/quitcd/quitcd.bash_zsh         \
+		https://raw.githubusercontent.com/wez/wezterm/main/assets/shell-integration/wezterm.sh \
+		OMZP::git                                                                              \
+		OMZP::command-not-found                                                                \
+		OMZP::fancy-ctrl-z                                                                     \
+		zsh-users/zsh-history-substring-search                                                 \
+		Aloxaf/fzf-tab                                                                         \
+		amstrad/oh-my-matrix                                                                   \
+		Tarrasch/zsh-bd                                                                        \
+		hlissner/zsh-autopair                                                                  \
+	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"                                    \
+		zdharma-continuum/fast-syntax-highlighting                                             \
+	blockf                                                                                     \
+		zsh-users/zsh-completions                                                              \
+	atload"!_zsh_autosuggest_start"                                                            \
        	zsh-users/zsh-autosuggestions
 
 # Ascii Terminal greeting. 

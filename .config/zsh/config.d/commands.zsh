@@ -39,9 +39,6 @@ alias imgcat="wezterm imgcat"
 alias zshrc="$EDITOR ~/.zshrc"
 alias kakrc="kak -e edit-kakrc"
 
-# Change directory to ranger's current directory after quitting ranger
-alias ranger="ranger_cd"
-
 # Run yadm for system files
 alias sysyadm="sudo yadm -Y /etc/yadm -C /"
 

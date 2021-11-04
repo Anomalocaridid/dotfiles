@@ -51,9 +51,9 @@ readonly zsh_deps=(
 	"fd"
 	"fzf"
 	"lolcat"
+	"nnn" # TUI file manager)
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
-	"ranger"
 	"ripgrep" # Required by bat-extras-git
 	"toilet"
 	"toilet-fonts" # Required by toilet
