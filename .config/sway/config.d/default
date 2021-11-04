@@ -200,7 +200,7 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 #
 # App shortcuts
 #
-    bindsym $mod+n exec $term-exec nnn
+    bindsym $mod+n exec $term-exec zsh -c 'source "$HOME/.config/zsh/config.d/nnn.zsh" && nnn'
     bindsym $mod+o exec waterfox-g3
 #
 # Screenshots
