@@ -89,7 +89,7 @@
 			"warning": 70,
 			"critical": 90
 		},
-		"on-click": "wezterm start 'htop'"
+		"on-click": "wezterm start -- bpytop"
 	},
 	"custom/keyboard-layout": {
 		"exec": "swaymsg -t get_inputs | grep -m1 'xkb_active_layout_name' | cut -d '\"' -f4",
@@ -105,7 +105,7 @@
 		"format": " {}",
 		"interval": 3600, // every hour
 		"exec": "checkupdates | wc -l", // # of updates
-		"on-click": "wezterm start paru; pkill -SIGRTMIN+8 waybar", // update system
+		"on-click": "wezterm start -- paru; pkill -SIGRTMIN+8 waybar", // update system
 		"signal": 8
 	},
 	"disk": {
@@ -115,12 +115,12 @@
 			"warning": 70,
 			"critical": 90
 		},
-		"on-click": "thunar"
+		"on-click": "wezterm start -- nnn"
 	},
 	"memory": {
 		"interval": 5,
 		"format": " {}%", // Icon: memory
-		"on-click": "wezterm start 'htop'",
+		"on-click": "exec wezterm start -- bpytop",
 		"states": {
 			"warning": 70,
 			"critical": 90
@@ -217,7 +217,7 @@
 	},
 	"custom/files": {
 		"format": " ",
-		"on-click": "exec thunar",
+		"on-click": "exec wezterm start -- nnn",
 		"tooltip": false
 	},
 	"custom/lutris": {
