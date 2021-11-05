@@ -11,9 +11,6 @@
 		"sway/workspaces",
 		"sway/mode",
 		"custom/right-arrow-workspaces",
-		"custom/terminal",
-		"custom/waterfox",
-		"custom/files",
 		"custom/lutris",
 		"custom/right-arrow-shortcuts"
 	],
@@ -115,7 +112,7 @@
 			"warning": 70,
 			"critical": 90
 		},
-		"on-click": "wezterm start -- nnn"
+		"on-click": "wezterm start -- zsh -c 'dust | bat --paging always'"
 	},
 	"memory": {
 		"interval": 5,
@@ -132,7 +129,7 @@
 		"format-ethernet": "  {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
 		"format-disconnected": "⚠  Disconnected",
 		"tooltip-format": "{ifname}: {ipaddr}",
-		"on-click": "wezterm start 'nmtui'"
+		"on-click": "wezterm start -- 'nmtui'"
 	},
 	"network#vpn": {
 		"interface": "tun0",
@@ -204,21 +201,6 @@
 		"format": "{percent}%",
 		"on-scroll-down": "brightnessctl -c backlight set 5%",
 		"on-scroll-up": "brightnessctl -c backlight set +5%"
-	},
-	"custom/waterfox": {
-		"format": " ",
-		"on-click": "exec waterfox-g3",
-		"tooltip": false
-	},
-	"custom/terminal": {
-		"format": " ",
-		"on-click": "exec wezterm",
-		"tooltip": false
-	},
-	"custom/files": {
-		"format": " ",
-		"on-click": "exec wezterm start -- nnn",
-		"tooltip": false
 	},
 	"custom/lutris": {
 		"format": " ",

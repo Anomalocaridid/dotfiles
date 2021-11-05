@@ -221,9 +221,6 @@ Arc-Dark Color Scheme
     background: @base2;
 }
 
-#custom-waterfox,
-#custom-terminal,
-#custom-files,
 #custom-lutris {
     font-size: 20px;
     background-color: @purple-alt;
