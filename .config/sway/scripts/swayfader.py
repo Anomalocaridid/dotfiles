@@ -8,7 +8,7 @@ FRAME_T = 0.01  # time taken between each frame of fade
 CON_AC = 1  # active window
 CON_INAC = 0.8  # inactive window
 FLOAT_AC = 1  # active floating window
-FLOAT_INAC = 0.6  # inactive floating window
+FLOAT_INAC = 0.8  # inactive floating window
 BOT_INAC = 0.9  # bottom window
 
 # fade durations
