@@ -153,7 +153,7 @@ readonly productivity=(
 	"joplin-desktop"
 	"libreoffice-fresh"
 	"qalculate-gtk"
-	"waterfox-g3-bin"
+	"waterfox-g4-bin"
 )
 
 # File sync programs
