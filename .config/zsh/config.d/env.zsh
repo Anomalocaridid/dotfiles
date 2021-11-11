@@ -10,6 +10,9 @@ HOME_BIN=$HOME/bin         # Folder for other programs
 export PATH=$CARGO_BIN:$STACK_BIN:$SCRIPTS:$HOME_BIN:/usr/local/bin:$PATH
 fpath+=$HOME/.zfunc
 
+export EDITOR="kak"
+export VISUAL="$EDITOR"
+
 # Set LS_COLORS
 eval "$(dircolors)"
 
