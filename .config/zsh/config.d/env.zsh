@@ -1,13 +1,8 @@
 # ~/.config/zsh/config.d/env.zsh
 # Environment variables for zsh.
 
-CARGO_BIN=$HOME/.cargo/bin # Location of binaries installed by Rust's Cargo
-STACK_BIN=$HOME/.local/bin # Location of binaries installed by Haskell's Stack
-SCRIPTS=$HOME/Scripts      # Folder for scripts
-HOME_BIN=$HOME/bin         # Folder for other programs
-
 # $PATH declaration
-export PATH=$CARGO_BIN:$STACK_BIN:$SCRIPTS:$HOME_BIN:/usr/local/bin:$PATH
+# export PATH=$PATH:
 fpath+=$HOME/.zfunc
 
 export EDITOR="kak"
