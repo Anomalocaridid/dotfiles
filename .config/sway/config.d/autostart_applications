@@ -24,6 +24,9 @@ exec --no-startup-id fcitx -d
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
 
+# Launch Discord
+exec discord
+
 # Sync Apps
 # exec syncthingtray --wait
 # exec megasync
