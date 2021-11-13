@@ -27,17 +27,13 @@ autoload run-help-svk
 alias help=run-help
 
 # Aliases for ls
-alias la="ls -a"    # Show all files including dotfiles in directory
-alias l.="ls -d .*" # Show only dotfiles current directory
-alias ll="ls -l"    # Show files in directory in long format
-alias lla="ls -la"  # Show all files including dotfiles in directory in long format
+alias la="ls -a"       # Show all files including dotfiles in directory
+alias l.="ls -d .*"    # Show only dotfiles current directory
+alias ll="ls -l --git" # Show files in directory in long format
+alias lla="ls -la"     # Show all files including dotfiles in directory in long format
 
 # wezterm imgcat
 alias imgcat="wezterm imgcat"
-
-# Aliases for quick access to frequently edited dotfiles
-alias zshrc="$EDITOR ~/.zshrc"
-alias kakrc="kak -e edit-kakrc"
 
 # Run yadm for system files
 alias sysyadm="sudo yadm -Y /etc/yadm -C /"
