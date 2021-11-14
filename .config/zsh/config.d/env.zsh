@@ -1,10 +1,6 @@
 # ~/.config/zsh/config.d/env.zsh
 # Environment variables for zsh.
 
-# $PATH declaration
-# export PATH=$PATH:
-fpath+=$HOME/.zfunc
-
 export EDITOR="kak"
 export VISUAL="$EDITOR"
 
