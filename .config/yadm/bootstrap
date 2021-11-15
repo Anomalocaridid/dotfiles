@@ -99,6 +99,7 @@ readonly kak_deps=(
 	"bear"  # Helps with clangd
 	"cfdg"  # Context Free interpreter
 	"clang" # For C development
+	"dhall"
 	"fzf"
 	"jq"
 	"kakoune"
@@ -202,6 +203,7 @@ readonly misc=(
 	"cdrdao"   # Required by k3b
 	"cdrtools" # Required by k3b
 	"cht.sh-git"
+	"dhall-json" # Converts dhall to json and yaml
 	"discord"
 	"dvd+rw-tools" # Required by k3b
 	"exercism-bin"

@@ -23,3 +23,10 @@ hook global WinSetOption filetype=sh %{
 	set-option window formatcmd "shfmt -ci -sr"
 	hook buffer BufWritePre .* format
 }
+
+# Format dhall files on save
+# (No LSP server to format it)
+hook global WinSetOption filetype=dhall %{
+	set-option window formatcmd "dhall format"
+	hook buffer BufWritePre .* format
+}
