@@ -1,6 +1,11 @@
 # ~/.config/zsh/config.d/env.zsh
 # Environment variables for zsh.
 
+CARGO_BIN="$HOME/.cargo/bin" # Location of binaries installed by Rust's Cargo
+STACK_BIN="$HOME/.local/bin" # Location of binaries installed by Haskell's Stack
+
+path+=("$CARGO_BIN" "$STACK_BIN")
+
 export EDITOR="kak"
 export VISUAL="$EDITOR"
 
