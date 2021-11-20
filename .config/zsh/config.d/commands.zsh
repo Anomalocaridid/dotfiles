@@ -60,6 +60,9 @@ function bd-wrapper() {
 
 alias bd="bd-wrapper"
 
+# Undo last cd
+alias dc="cd -"
+
 # zcompile all config files
 function zcomp() {
 	for i in ~/.zshrc ~/.p10k.zsh ~/.config/zsh/config.d/*.zsh; do
