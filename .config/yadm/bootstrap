@@ -214,8 +214,10 @@ readonly misc=(
 	"k3b" # disc ripper/burner
 	"ly"  # display manager
 	"moreutils"
-	"paru"             # aur helper Note: only in aur, so install method will have to change if using an Arch-based distro without yay by default.
-	"picard"           # music tagger
+	"paru"   # aur helper Note: only in aur, so install method will have to change if using an Arch-based distro without yay by default.
+	"picard" # music tagger
+	"spotify"
+	"spotify-adblock-git"
 	"strawberry"       # music player
 	"swaylock-effects" # fancier swaylock alternative
 	# "tealdeer" # Has to be installed after rustup is configured.
