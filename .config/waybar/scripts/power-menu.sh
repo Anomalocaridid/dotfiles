@@ -2,22 +2,16 @@
 
 entries=(Logout Suspend Hibernate Reboot Shutdown)
 
-selected=$(printf '%s\n' "${entries[@]}" | wofi --conf="$HOME/.config/wofi/config.power" --style="$HOME/.config/wofi/style.widgets.css" | awk '{print tolower($1)}')
+selected=$(printf '%s\n' "${entries[@]}" | wofi --conf="$HOME/.config/wofi/config.power" --style="$HOME/.config/wofi/style.widgets.css")
 
 case $selected in
-	logout)
+	Logout)
 		swaymsg exit
 		;;
-	suspend)
-		exec systemctl suspend
+	Suspend | Hibernate | Reboot)
+		exec systemctl ${selected,,}
 		;;
-	hibernate)
-		exec systemctl hibernate
-		;;
-	reboot)
-		exec systemctl reboot
-		;;
-	shutdown)
-		exec systemctl poweroff -i
+	Shutdown)
+		systemctl poweroff -i
 		;;
 esac
