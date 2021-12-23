@@ -74,7 +74,7 @@ readonly python_dev=(
 readonly haskell_dev=(
 	"cabal-install"
 	"ghc"
-	"haskell-language-server-bin"
+	"haskell-language-server"
 	"haskell-ormolu"
 	"hlint"
 	"stack"
