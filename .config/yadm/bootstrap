@@ -151,7 +151,7 @@ readonly games=(
 # Productivity software
 readonly productivity=(
 	"gnuplot" # Required by qalculate-gtk
-	"joplin-desktop"
+	"joplin-desktop-bin"
 	"libreoffice-fresh"
 	"qalculate-gtk"
 	"waterfox-g4-bin"
