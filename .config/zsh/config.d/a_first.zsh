@@ -22,6 +22,7 @@ zcomet load zsh-users/zsh-history-substring-search # Fish-style history search
 # Oh My Zsh plugins
 zcomet load ohmyzsh plugins/command-not-found # Shows which package an uninstalled command is in
 zcomet load ohmyzsh plugins/fancy-ctrl-z # Hit Ctrl z instead of running fg
+zcomet load ohmyzsh lib/termsupport.zsh # Set terminal window title
 
 # Snippets
 zcomet snippet https://github.com/jarun/nnn/blob/master/misc/quitcd/quitcd.bash_zsh
