@@ -1,52 +1,38 @@
 # ~/.config/zsh/config.d/a_first.zsh
 # Script to be run first on zsh startup.
 
-### Added by Zinit's installer
-if [[ ! -f $HOME/.zinit/bin/zinit.zsh ]]; then
-    print -P "%F{33}▓▒░ %F{220}Installing %F{33}DHARMA%F{220} Initiative Plugin Manager (%F{33}zdharma-continuum/zinit%F{220})…%f"
-    command mkdir -p "$HOME/.zinit" && command chmod g-rwX "$HOME/.zinit"
-    command git clone https://github.com/zdharma-continuum/zinit "$HOME/.zinit/bin" && \
-        print -P "%F{33}▓▒░ %F{34}Installation successful.%f%b" ||           \
-        print -P "%F{160}▓▒░ The clone has failed.%f%b"
+# Clone zcomet if necessary
+if [[ ! -f ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh ]]; then
+  command git clone https://github.com/agkozak/zcomet.git ${ZDOTDIR:-${HOME}}/.zcomet/bin
 fi
 
-source "$HOME/.zinit/bin/zinit.zsh"
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+# Source zcomet
+source ${ZDOTDIR:-${HOME}}/.zcomet/bin/zcomet.zsh
 
-# Load a few important annexes, without Turbo
-# (this is currently required for annexes)
-zinit light-mode for                   \
-    zdharma-continuum/z-a-rust         \
-    zdharma-continuum/z-a-as-monitor   \
-    zdharma-continuum/z-a-patch-dl     \
-    zdharma-continuum/z-a-bin-gem-node 
-	# zdharma-continuum/z-a-man
-
-### End of Zinit's installer chunk
-
-# Zinit Plugins
-
-# Theme
-zinit ice depth=1;
-zinit light romkatv/powerlevel10k
+# Install prompt theme
+zcomet load romkatv/powerlevel10k
 
 # Plugins
-zinit light-mode wait lucid for                                                                \
-		https://raw.githubusercontent.com/jarun/nnn/master/misc/quitcd/quitcd.bash_zsh         \
-		https://raw.githubusercontent.com/wez/wezterm/main/assets/shell-integration/wezterm.sh \
-		OMZP::git                                                                              \
-		OMZP::command-not-found                                                                \
-		OMZP::fancy-ctrl-z                                                                     \
-		zsh-users/zsh-history-substring-search                                                 \
-		Aloxaf/fzf-tab                                                                         \
-		amstrad/oh-my-matrix                                                                   \
-		Tarrasch/zsh-bd                                                                        \
-		hlissner/zsh-autopair                                                                  \
-	atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay"                                    \
-		zdharma-continuum/fast-syntax-highlighting                                             \
-	atload"!_zsh_autosuggest_start"                                                            \
-       	zsh-users/zsh-autosuggestions
+zcomet load	Aloxaf/fzf-tab # Use fzf for tab completion
+zcomet load	amstrad/oh-my-matrix # Falling text
+zcomet load	hlissner/zsh-autopair # Automatically close and delete paired delimiters
+zcomet load	Tarrasch/zsh-bd # Move to higher level directory
+zcomet load zsh-users/zsh-history-substring-search # Fish-style history search
+
+# Oh My Zsh plugins
+zcomet load ohmyzsh plugins/command-not-found # Shows which package an uninstalled command is in
+zcomet load ohmyzsh plugins/fancy-ctrl-z # Hit Ctrl z instead of running fg
+
+# Snippets
+zcomet snippet https://github.com/jarun/nnn/blob/master/misc/quitcd/quitcd.bash_zsh
+zcomet snippet https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
+
+# Load these plugins last and in this order
+zcomet load zdharma-continuum/fast-syntax-highlighting # Fast syntax highlighting (not really maintained)
+zcomet load zsh-users/zsh-autosuggestions # Fish-style autosuggestions
+
+# Run compinit and compile its cache
+zcomet compinit
 
 # Ascii Terminal greeting. 
 # Shows Linux distro and version in rainbow ascii art.
