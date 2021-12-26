@@ -21,10 +21,6 @@ hide_edge_borders --i3 none
 swaybg_command -
 exec mpvpaper -o "no-audio loop" HDMI-A-1 ~/.config/sway/sway.mp4
 
-# Title format for windows
-for_window [shell="xdg_shell"] title_format "%title (%app_id)"
-for_window [shell="x_wayland"] title_format "%class - %title"
-
 # class                 border  bground text    indicator child_border
 client.focused          #ea00d9 #ea00d9 #000b1e #ea00d9 #ea00d9 
 client.focused_inactive #000b1e #000b1e #0abdc6 #000b1e #000b1e
