@@ -11,6 +11,10 @@ let termCmd = "wezterm start -- "
 
 let scriptDir = "~/.config/waybar/scripts/"
 
+let shellCmd = termCmd ++ "zsh -c "
+
+let pagerCmd = "bat --paging always"
+
 let modules-left =
       Some
         [ "custom/launcher"
@@ -118,7 +122,7 @@ let custom/pacman =
       , format = Some " {}"
       , interval = Some (types.Interval.Int 3600)
       , exec = Some "checkupdates | wc -l"
-      , on-click = Some "wezterm start -- paru; pkill -SIGRTMIN+8 waybar"
+      , on-click = Some (termCmd ++ "paru; pkill -SIGRTMIN+8 waybar")
       , signal = Some 8
       }
 
@@ -127,7 +131,7 @@ let disk =
       , interval = cpu.interval
       , format = Some " {}%"
       , states = cpu.states
-      , on-click = Some (termCmd ++ "zsh -c 'dust | bat --paging always'")
+      , on-click = Some (shellCmd ++ "'dust | ${pagerCmd}'")
       }
 
 let memory =
@@ -247,6 +251,8 @@ let custom/launcher =
       modules.Custom::{
       , format = Some " "
       , on-click = Some "exec wofi -c ~/.config/wofi/config -I"
+      , on-click-right = Some
+          (shellCmd ++ "'swaymsg -t get_tree | ${pagerCmd}'")
       , tooltip = Some False
       }
 
