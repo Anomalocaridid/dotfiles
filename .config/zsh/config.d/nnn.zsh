@@ -3,6 +3,7 @@
 export NNN_PLUG="s:!zsh -i;z:autojump;u:getplugs"
 export NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads;p:$HOME/Pictures;v:$HOME/Videos;e:$HOME/exercism"
 export NNN_FIFO="/tmp/nnn.fifo"
+export NNN_COLORS=#1909c9d02e0d2cff
 
 # Sync subshell PWD with nnn
 nnn_cd() {
