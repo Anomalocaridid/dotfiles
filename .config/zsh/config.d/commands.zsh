@@ -37,7 +37,7 @@ alias lla="ls -la"     # Show all files including dotfiles in directory in long 
 alias imgcat="wezterm imgcat"
 
 # Run yadm for system files
-alias sysyadm="sudo yadm -Y /etc/yadm -C /"
+alias sysyadm="sudo yadm -Y /etc/yadm"
 
 # Render and view context free art in one command
 alias cfdg-view="cfdg --display=imv --"
