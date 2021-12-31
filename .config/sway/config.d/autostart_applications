@@ -1,6 +1,9 @@
 # Auth with polkit-gnome:
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
+# Open kwallet with kwallet-pam
+exec /usr/lib/pam_kwallet_init
+
 # Desktop notifications
 exec mako
 
@@ -19,7 +22,7 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 exec blueman-tray
 
 # IME
-exec --no-startup-id fcitx -d
+exec fcitx -d
 
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
@@ -30,3 +33,4 @@ exec discord
 # Sync Apps
 # exec syncthingtray --wait
 # exec megasync
+# exec protonvpn-cli connect -f

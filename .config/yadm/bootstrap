@@ -191,6 +191,12 @@ readonly mozc=(
 	"fcitx-qt"
 )
 
+# ProtonVPN setup
+readonly vpn=(
+	"protonvpn"
+	"kwallet-pam"
+)
+
 # Miscellaneous programs that I frequently use
 readonly misc=(
 	"${bluetooth[@]}"
