@@ -1,0 +1,14 @@
+[[language]]
+name = "bash"
+language-server = { command = "efm-langserver", args = ["-c /home/anomalocaris/.config/efm-langserver/config.yaml"] }
+
+[[language]]
+name = "haskell"
+scope = "source.haskell"
+injection-regex = "haskell"
+file-types = ["hs"]
+roots = []
+comment-token = "--"
+
+indent = { tab-width = 2, unit = "  " }
+language-server = { command = "haskell-language-server-wrapper", args = ["--lsp"] }

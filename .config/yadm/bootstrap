@@ -65,7 +65,7 @@ readonly zsh_deps=(
 readonly python_dev=(
 	"flake8"
 	"python"
-	"python-language-server"
+	"python-lsp-server"
 	"python-pytest"
 	"pyls-mypy"
 	"yapf"
@@ -81,6 +81,7 @@ readonly haskell_dev=(
 )
 
 readonly bash_dev=(
+	"bash-bats"
 	"shellcheck"
 	"shfmt"
 )
@@ -89,21 +90,25 @@ readonly common_lisp_dev=(
 	"sbcl"
 )
 
-# Dependencies for Kakoune setup
-readonly kak_deps=(
+readonly rust_dev=(
+	"rust-analyzer"
+	"rustup"
+)
+
+readonly c_dev=(
+	"bear"  # Helps with clangd
+	"clang" # For C development
+)
+
+# Dependencies for Helix setup
+readonly hx_deps=(
 	"${bash_dev[@]}"
 	"${common_lisp_dev[@]}"
+	"${c_dev[@]}"
 	"${haskell_dev[@]}"
 	"${python_dev[@]}"
-	"bash-bats"
-	"bear"  # Helps with clangd
-	"cfdg"  # Context Free interpreter
-	"clang" # For C development
-	"dhall"
-	"fzf"
-	"jq"
-	"kakoune"
-	"rustup" # For Rust development
+	"${rust_dev[@]}"
+	"helix-git"
 )
 
 # Dependencies for ClamAV setup
@@ -202,7 +207,9 @@ readonly misc=(
 	"breeze-hacked-cursor-theme"
 	"cdrdao"   # Required by k3b
 	"cdrtools" # Required by k3b
+	"cfdg"  # Context Free interpreter
 	"cht.sh-git"
+	"dhall"
 	"dhall-json" # Converts dhall to json and yaml
 	"discord"
 	"dvd+rw-tools" # Required by k3b
@@ -229,7 +236,7 @@ readonly misc=(
 # May have to replace with paru if moving to a distro without it by default
 step "Installing packages"
 
-if yay -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${kak_deps[*]} ${misc[*]}" | sort | uniq); then
+if yay -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${hx_deps[*]} ${misc[*]}" | sort | uniq); then
 	success "Successfully installed packages"
 else
 	error "Could not install packages"
@@ -245,12 +252,6 @@ else
 fi
 
 step "Configuring Rust with rustup"
-
-if rustup component add rls rust-analysis rust-src &> /dev/null; then
-	success "Successfully configured Rust"
-else
-	error "Could not configure Rust"
-fi
 
 # Install packages that require rustup
 step "Installing packages that depend on Rust"

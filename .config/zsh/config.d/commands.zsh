@@ -39,9 +39,6 @@ alias imgcat="wezterm imgcat"
 # Run yadm for system files
 alias sysyadm="sudo yadm -Y /etc/yadm -C /"
 
-# Use Kakoune to align columns of text
-alias align="kak -f '<a-s><S>\h<ret><a-;><&>'"
-
 # Render and view context free art in one command
 alias cfdg-view="cfdg --display=imv --"
 

@@ -6,7 +6,7 @@ STACK_BIN="$HOME/.local/bin" # Location of binaries installed by Haskell's Stack
 
 path+=("$CARGO_BIN" "$STACK_BIN")
 
-export EDITOR="kak"
+export EDITOR="hx"
 export VISUAL="$EDITOR"
 
 # Set LS_COLORS

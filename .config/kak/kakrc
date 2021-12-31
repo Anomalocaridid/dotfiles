@@ -1,8 +1,0 @@
-# ~/.kakrc
-
-# Source the separate config files
-evaluate-commands %sh{
-	for conf in "$HOME/.config/kak/config.d/"*.kak; do
-		echo "source ${conf}"
-	done
-}

@@ -1,0 +1,94 @@
+# Based on Roboron3042's Cyberpunk Neon colorscheme
+# https://github.com/Roboron3042/Cyberpunk-Neon
+
+attribute = "pink"
+keyword = {fg = "pink", modifiers = ["bold"]}
+"keyword.directive" = "pink" # -- preprocessor comments (#if in C)
+namespace = "pink"
+punctuation = "purple"
+#"punctuation.delimiter" = "light-blue"
+operator = "pink"
+special = "orange"
+variable.other.member = "cyan"
+variable = "cyan"
+# variable = "almond" # TODO: metavariables only
+# "variable.parameter" = { fg = "lavender", modifiers = ["underlined"] }
+"variable.parameter" = { fg = "cyan" }
+"variable.builtin" = "cyan"
+type = "cyan"
+"type.builtin" = { fg = "pink", modifiers = ["bold"] } # TODO: distinguish?
+constructor = "pink"
+function = "pink"
+"function.macro" = "orange"
+"function.builtin" = {fg = "cyan", modifiers = ["bold"]}
+tag = "cyan"
+comment = "light-blue"
+constant = "orange"
+"constant.builtin" = "orange"
+string = "orange"
+"constant.numeric" = "orange"
+"constant.numeric.integer" = "orange"
+"constant.numeric.float" = "orange"
+"constant.character.escape" = "orange"
+# used for lifetimes
+label = "orange"
+
+"markup.heading" = "pink"
+"markup.bold" = { modifiers = ["bold"] }
+"markup.italic" = { modifiers = ["italic"] }
+"markup.link.url" = { fg = "pink", modifiers = ["underlined"] }
+"markup.raw" = "cyan"
+
+"diff.plus" = "green"
+"diff.minus" = "red"
+"diff.delta" = "purple"
+
+# TODO: diferentiate doc comment
+# concat (ERROR) @error.syntax and "MISSING ;" selectors for errors
+
+"ui.background" = { bg = "dark-blue" }
+"ui.linenr" = { fg = "cyan" }
+"ui.linenr.selected" = { fg = "cyan", bg = "blue", modifiers = ["bold"] }
+"ui.statusline" = { fg = "cyan", bg = "blue" }
+"ui.statusline.inactive" = { fg = "purple", bg = "dark-blue" }
+"ui.popup" = { fg = "pink" }
+"ui.window" = { fg = "pink" }
+"ui.help" = { bg = "blue", fg = "pink" }
+
+"ui.text" = { fg = "cyan" }
+"ui.text.focus" = { fg = "pink" }
+
+"ui.selection" = { fg = "white", bg = "light-blue" }
+"ui.selection.primary" = { fg = "white", bg = "purple" }
+# TODO: namespace ui.cursor as ui.selection.cursor?
+#"ui.cursor.select" = { fg = "white", bg = "purple" }
+#"ui.cursor.insert" = { bg = "cyan" }
+"ui.cursor.match" = { fg = "dark-blue", bg = "pink", modifiers = ["bold"] }
+"ui.cursor" = { fg = "dark-blue", bg = "white", modifiers = ["bold"] }
+"ui.cursor.primary" = { fg = "dark-blue", bg = "cyan", modifiers = ["bold"] }
+"ui.highlight" = { fg = "dark-blue", bg = "pink" }
+
+"ui.menu.selected" = { fg = "cyan", bg = "purple" }
+
+diagnostic = { modifiers = ["underlined"] }
+
+warning = { fg = "yellow", modifiers = ["bold"]}
+error = { fg = "red", modifiers = ["bold"]}
+info = "pink"
+hint = "pink"
+
+[palette]
+
+dark-blue = "#000b1e"
+blue = "#091833"
+light-blue = "#133e7c"
+#trans-blue = "#133e7c99"
+cyan = "#0abdc6"
+pink = "#ea00d9"
+purple = "#711c91"
+#trans-purple = "#711c9199"
+red = "#ff0000"
+orange = "#f57800"
+white = "#d7d7d5"
+yellow = "#ffff00"
+green = "#00ff00"
