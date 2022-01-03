@@ -100,12 +100,18 @@ readonly c_dev=(
 	"clang" # For C development
 )
 
+readonly lua_dev=(
+	"lua"
+	"lua-language-server"
+)
+
 # Dependencies for Helix setup
 readonly hx_deps=(
 	"${bash_dev[@]}"
-	"${common_lisp_dev[@]}"
 	"${c_dev[@]}"
+	"${common_lisp_dev[@]}"
 	"${haskell_dev[@]}"
+	"${lua_dev[@]}"
 	"${python_dev[@]}"
 	"${rust_dev[@]}"
 	"helix-git"
