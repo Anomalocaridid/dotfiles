@@ -7,7 +7,7 @@ height=200
 padding=10
 margin=10
 progress-color=over #711c91
-icon-path=/usr/share/icons/Suru++
+icon-path=/usr/share/icons/Sweet-Rainbow
 max-icon-size=70
 layer=overlay
 

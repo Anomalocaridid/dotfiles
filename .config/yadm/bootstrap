@@ -217,6 +217,7 @@ readonly misc=(
 	"betterdiscord-installer"
 	"bpytop"
 	"breeze-hacked-cursor-theme"
+	"candy-icons-git" # Icon theme
 	"cdrdao"   # Required by k3b
 	"cdrtools" # Required by k3b
 	"cfdg"  # Context Free interpreter
@@ -239,9 +240,10 @@ readonly misc=(
 	"spotify-adblock-git"
 	"strawberry"       # music player
 	"swaylock-effects" # fancier swaylock alternative
+	"sweet-folders-icons-git" # Part of candy-icons-git
 	# "tealdeer" # Has to be installed after rustup is configured.
 	"teensy-loader-cli" # Required for compiling my QMK layout
-	"ventoy-bin"        # Tool for making multiboot USB drives.
+	"ventoy-bin"       # Tool for making multiboot USB drives.
 )
 
 # Install programs with yay
@@ -460,41 +462,6 @@ if sudo mkdir -p "$color_scheme_dir"; then
 	fi
 else
 	error "Could not create folder at $color_scheme_dir"
-fi
-
-# Install and configure icon theme
-readonly icon_theme_url="https://raw.githubusercontent.com/gusbemacbe/suru-plus-aspromauros/master/install.sh"
-readonly icon_themes_dir="/usr/share/icons"
-step "Installing icon theme"
-
-if wget -qO- "$icon_theme_url" | sh &> /dev/null; then
-	if sudo mv "$icon_themes_dir/Suru++-Asprómauros" "$icon_themes_dir/Suru++"; then
-		success "Successfully installed icon theme at $icon_themes_dir/Suru++"
-	else
-		error "Could not rename icon theme folder"
-	fi
-else
-	error "Could not install icon theme"
-fi
-
-step "Installing suru-plus-colourize"
-
-if sudo wget https://git.io/fhbxw --output-document="/usr/local/bin/suru-plus-colourise"; then
-	if sudo chmod a+x /usr/local/bin/suru-plus-colourise; then
-		success "Successfully installed suru-plus-colourise"
-	else
-		error "Could not set execute permissions on /usr/local/bin/suru-plus-colourise"
-	fi
-else
-	error "Could not install suru-plus-colourise"
-fi
-
-step "Recoloring icon theme with suru-plus-colourise"
-
-if sudo suru-plus-colourise; then
-	success "Successfully recolored icon theme"
-else
-	error "Could not recolor icon theme"
 fi
 
 # Install music for PySolFC

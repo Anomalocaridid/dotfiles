@@ -215,4 +215,5 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 #
 # Clipboard
 #
-    bindsym $mod+c exec wl-copy -c && notify-send --icon="accessories-clipboard" "Clipboard cleared" "The clipboard has been cleared."
+#    bindsym $mod+c exec wl-copy -c && notify-send --icon="accessories-clipboard" "Clipboard cleared" "The clipboard has been cleared."
+    bindsym $mod+c exec wl-copy -c && notify-send --icon="xclipboard" "Clipboard cleared" "The clipboard has been cleared."
