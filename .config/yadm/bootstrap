@@ -143,9 +143,13 @@ readonly vm_deps=(
 
 # Programs for gaming
 readonly games=(
+	"gamemode"
 	"gdlauncher-bin"
 	"grapejuice-git"
+	"hid-nintendo-dkms" # Nintendo Switch controller drivers
 	"itch"
+	"joycond-git" # Nintendo Switch controller drivers
+	"lib32-gamemode"
 	"lib32-libpulse" # required for grapejuice-git for sound
 	"lutris"
 	"pulseaudio-alsa" # Required for runelite for sound
@@ -350,6 +354,7 @@ readonly services=(
 	"libvirtd.service"         # KVM libvirt service
 	"pcscd"                    # Required for yubioauth-desktop
 	"pkgfile-update.timer"     # Update pkgfile cache
+	"joycond"                  # Nintendo Switch controllers
 )
 
 step "Enabling important services"
