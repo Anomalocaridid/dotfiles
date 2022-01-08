@@ -68,7 +68,7 @@ label = "orange"
 "ui.cursor.primary" = { fg = "dark-blue", bg = "cyan", modifiers = ["bold"] }
 "ui.highlight" = { fg = "dark-blue", bg = "pink" }
 
-"ui.menu.selected" = { fg = "cyan", bg = "purple" }
+"ui.menu.selected" = { fg = "dark-blue", bg = "purple", modifiers = ["bold"] }
 
 diagnostic = { modifiers = ["underlined"] }
 
