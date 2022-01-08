@@ -218,6 +218,7 @@ readonly misc=(
 	"${sway_deps[@]}"
 	"${sync[@]}"
 	"${vm_deps[@]}"
+	"aurpublish" # For managing custom PKGBUILDs
 	"betterdiscord-installer"
 	"bpytop"
 	"breeze-hacked-cursor-theme"
