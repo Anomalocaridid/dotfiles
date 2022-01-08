@@ -80,7 +80,7 @@ readonly python_dev=(
 readonly haskell_dev=(
 	"cabal-install"
 	"ghc"
-	"haskell-language-server"
+	"haskell-language-server-static"
 	"haskell-ormolu"
 	"hlint"
 	"stack"
