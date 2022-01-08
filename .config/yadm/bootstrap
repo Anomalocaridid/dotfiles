@@ -43,6 +43,7 @@ fi
 
 # Dependencies for zsh config
 readonly zsh_deps=(
+	"advcpmv"
 	"bat"
 	"bat-extras-git"
 	"cfdg" # Context Free interpreter
@@ -60,6 +61,11 @@ readonly zsh_deps=(
 	"wezterm"
 	# "zoxide" # Has to be installed after rustup is configured.
 	"zsh"
+)
+
+# Dependencies for nnn config
+readonly nnn_deps=(
+	"advcmp"
 )
 
 readonly python_dev=(
