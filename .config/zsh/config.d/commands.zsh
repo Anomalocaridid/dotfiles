@@ -17,8 +17,8 @@ batthemes() {
 
 # So I don't accidentally delete anything again
 alias rm="rm -i"
-alias mv="mv -i"
-alias cp="cp -i"
+alias mv="mvg -gi" # mv with progress bar
+alias cp="cpg -gi" # cp with progress bar
 
 # Help Command Alias
 autoload -U run-help
