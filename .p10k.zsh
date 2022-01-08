@@ -69,6 +69,7 @@ NEON_WHITE=255
       # =========================[ Line #1 ]=========================
       status                  # exit code of the last command
       command_execution_time  # duration of the last command
+      nnn                     # nnn shell indicator
       background_jobs         # presence of background jobs
       #virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
       #anaconda                # conda environment (https://conda.io/)
@@ -682,9 +683,10 @@ NEON_WHITE=255
 
   ######################[ nnn: nnn shell (https://github.com/jarun/nnn) ]#######################
   # Nnn shell color.
-  typeset -g POWERLEVEL9K_NNN_FOREGROUND=72
+  typeset -g POWERLEVEL9K_NNN_FOREGROUND=$NEON_LIGHT_BLUE
+  typeset -g POWERLEVEL9K_NNN_BACKGROUND=$NEON_PURPLE
   # Custom icon.
-  # typeset -g POWERLEVEL9K_NNN_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_NNN_VISUAL_IDENTIFIER_EXPANSION=''
 
   ###########################[ vim_shell: vim shell indicator (:sh) ]###########################
   # Vim shell indicator color.
