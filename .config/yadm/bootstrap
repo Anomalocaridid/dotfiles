@@ -65,7 +65,9 @@ readonly zsh_deps=(
 
 # Dependencies for nnn config
 readonly nnn_deps=(
-	"advcmp"
+	"advcmp" # cp and mv with progress bars
+	"zathura" # Document viewer
+	"zathura-pdf-mupdf" # PDF, epub, and OpenXPZ support for Zathura
 )
 
 readonly python_dev=(
