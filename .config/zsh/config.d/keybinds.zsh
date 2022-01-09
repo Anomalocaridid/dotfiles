@@ -18,3 +18,6 @@ bindkey -M vicmd "j" history-substring-search-down
 
 # Make the delete key work like a delete key
 bindkey "^[[3~" delete-char
+
+# Vi-style line editing
+bindkey -v
