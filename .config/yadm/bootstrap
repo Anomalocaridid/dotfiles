@@ -66,6 +66,8 @@ readonly zsh_deps=(
 # Dependencies for nnn config
 readonly nnn_deps=(
 	"advcmp" # cp and mv with progress bars
+	"mimeo" # Resource opener
+	"xdg-utils-mimeo" # xdg-open falls back to using mimeo
 	"zathura" # Document viewer
 	"zathura-pdf-mupdf" # PDF, epub, and OpenXPZ support for Zathura
 )
