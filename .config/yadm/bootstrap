@@ -73,12 +73,14 @@ readonly nnn_deps=(
 )
 
 readonly python_dev=(
-	"flake8"
 	"python"
+	"python-lsp-black"
+	"python-lsp-mypy"
 	"python-lsp-server"
+	"python-mccabe"
+	"python-pycodestyle"
+	"python-pyls-flake8"
 	"python-pytest"
-	"pyls-mypy"
-	"yapf"
 )
 
 readonly haskell_dev=(
