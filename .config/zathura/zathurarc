@@ -6,7 +6,7 @@ set completion-bg "#091833"
 set completion-fg "#0ABDC6"
 # set completion-group-bg
 # set completion-group-fg
-set completion-highlight-bg "#711c91"
+set completion-highlight-bg "#711C91"
 set completion-highlight-fg "#000B1E"
 set default-fg "#0ABDC6"
 set default-bg "#000B1E"
@@ -21,6 +21,11 @@ set notification-warning-bg "#091833"
 set notification-warning-fg "#F57800"
 set statusbar-bg "#091833"
 set statusbar-fg "#0ABDC6"
+
+set highlight-color "#EA00D9"
+set highlight-fg "#711C91"
+set highlight-active-color "#00FF00"
+set highlight-transparency 0.6
 set recolor-darkcolor "#D7D7D5"
 set recolor-lightcolor "#000B1E"
 set index-bg "#091833"
