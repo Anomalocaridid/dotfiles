@@ -4,7 +4,7 @@ export NNN_OPTS="cDEirx"
 export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
 export GUI=1
 export NNN_BMS="d:$HOME/Documents;D:$HOME/Downloads;p:$HOME/Pictures;v:$HOME/Videos;e:$HOME/exercism"
-export NNN_PLUG="s:!zsh -i;z:autojump;u:getplugs;d:dragdrop"
+export NNN_PLUG="s:!zsh -i;z:autojump;u:getplugs;d:dragdrop;k:kdeconnect"
 export NNN_FIFO="/tmp/nnn.fifo"
 export NNN_COLORS=#1909c9d02e0d2cff
 

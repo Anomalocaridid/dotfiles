@@ -67,6 +67,8 @@ readonly zsh_deps=(
 readonly nnn_deps=(
 	"advcmp" # cp and mv with progress bars
 	"dragon-drag-and-drop"
+	"indicator-kdeconnect-git"
+	"kdeconnect"
 	"mimeo" # Resource opener
 	"nnn"
 	"xdg-utils-mimeo" # xdg-open falls back to using mimeo
