@@ -61,13 +61,6 @@ alias bd="bd-wrapper"
 # Undo last cd
 alias dc="cd -"
 
-# zcompile all config files
-function zcomp() {
-	for i in ~/.zshrc ~/.p10k.zsh ~/.config/zsh/config.d/*.zsh; do
-		zcompile $i && echo "zcompile: $i"
-	done
-}
-
 # Autoload zsh modules not enabled by default
 autoload zcalc           # Calculator program
 autoload zmv             # Move/rename files that match a pattern/
