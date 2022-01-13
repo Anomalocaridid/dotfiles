@@ -71,6 +71,8 @@ readonly nnn_deps=(
 	"kdeconnect"
 	"mimeo" # Resource opener
 	"nnn"
+	"pmount-safe-removal" # mount portable devices
+	"udisks2" # disk management service
 	"xdg-utils-mimeo" # xdg-open falls back to using mimeo
 	"zathura" # Document viewer
 	"zathura-pdf-mupdf" # PDF, epub, and OpenXPZ support for Zathura
