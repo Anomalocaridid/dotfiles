@@ -197,3 +197,4 @@ video/x-theora+ogg=mpv.desktop;
 x-content/audio-player=org.strawberrymusicplayer.strawberry.desktop;
 x-scheme-handler/terminal=org.wezfurlong.wezterm.desktop;
 x-scheme-handler/tidal=org.strawberrymusicplayer.strawberry.desktop;
+x-scheme-handler/discord-409416265891971072=discord-409416265891971072.desktop
