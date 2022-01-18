@@ -26,7 +26,7 @@ set highlight-color "#EA00D9"
 set highlight-fg "#711C91"
 set highlight-active-color "#00FF00"
 set highlight-transparency 0.6
-set recolor-darkcolor "#D7D7D5"
+set recolor-darkcolor "#0ABDC6"
 set recolor-lightcolor "#000B1E"
 set index-bg "#091833"
 set index-fg "#0ABDC6"
