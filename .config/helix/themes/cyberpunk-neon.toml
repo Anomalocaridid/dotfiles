@@ -58,8 +58,8 @@ label = "orange"
 "ui.text" = { fg = "cyan" }
 "ui.text.focus" = { fg = "pink" }
 
-"ui.selection" = { fg = "white", bg = "light-blue" }
-"ui.selection.primary" = { fg = "white", bg = "purple" }
+"ui.selection" = { fg = "white", bg = "light-blue", modifiers = ["bold"] }
+"ui.selection.primary" = { fg = "white", bg = "purple", modifiers = ["bold"]}
 # TODO: namespace ui.cursor as ui.selection.cursor?
 #"ui.cursor.select" = { fg = "white", bg = "purple" }
 #"ui.cursor.insert" = { bg = "cyan" }
@@ -68,7 +68,7 @@ label = "orange"
 "ui.cursor.primary" = { fg = "dark-blue", bg = "cyan", modifiers = ["bold"] }
 "ui.highlight" = { fg = "dark-blue", bg = "pink" }
 
-"ui.menu.selected" = { fg = "dark-blue", bg = "purple", modifiers = ["bold"] }
+"ui.menu.selected" = { fg = "cyan", bg = "purple", modifiers = ["bold"] }
 
 diagnostic = { modifiers = ["underlined"] }
 
