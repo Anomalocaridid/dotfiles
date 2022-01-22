@@ -50,6 +50,7 @@ for_window [app_id="xsensors"] floating enable
 for_window [title="Save File"] floating enable
 for_window [class="Waterfox" title="Waterfox — Sharing Indicator"] kill
 for_window [app_id="waterfox" title="Waterfox — Sharing Indicator"] kill
+for_window [title="Steam - News.*"] kill
 
 # Inhibit idle
 for_window [class="Waterfox"] inhibit_idle fullscreen
