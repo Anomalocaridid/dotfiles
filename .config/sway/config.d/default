@@ -11,6 +11,9 @@ set $right l
 set $term-float wezterm
 set $term-exec $term-float start --
 
+# You preferred text editor
+set $editor hx
+
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -210,7 +213,7 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 #
 # Keybindings List
 #
-    bindsym $mod+t exec wezterm start -- kak ~/.config/sway/cheatsheet    
+    bindsym $mod+t exec $term-exec $editor ~/.config/sway/cheatsheet    
 
 #
 # Clipboard
