@@ -195,6 +195,7 @@ video/x-ogm+ogg=mpv.desktop;
 video/x-theora=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
 x-content/audio-player=org.strawberrymusicplayer.strawberry.desktop;
+x-scheme-handler/discord-402572971681644545=discord-402572971681644545.desktop;
 x-scheme-handler/discord-409416265891971072=discord-409416265891971072.desktop;
 x-scheme-handler/http=waterfox-g4.desktop;
 x-scheme-handler/https=waterfox-g4.desktop;
