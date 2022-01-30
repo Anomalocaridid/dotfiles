@@ -119,9 +119,9 @@ let custom/keyboard-layout =
 
 let custom/pacman =
       modules.Custom::{
-      , format = Some " {}"
       , interval = Some (types.Interval.Int 3600)
-      , exec = Some "checkupdates | wc -l"
+      , exec = Some (scriptDir ++ "pacman.py")
+      , return-type = Some types.ReturnType.json
       , on-click = Some (termCmd ++ "paru; pkill -SIGRTMIN+8 waybar")
       , signal = Some 8
       }
