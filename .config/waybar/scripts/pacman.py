@@ -29,8 +29,12 @@ update_count = len(update_list.split("\n")) - 1
 
 output = {
     "text": f"{ICON} {update_count}",
-    "tooltip": f"{update_count} updates available",
 }
+
+if update_count == 0:
+    output["tooltip"] = "Up to date"
+else:
+    output["tooltip"] = f"{update_count} updates available"
 
 if re.search(reboot_regex, update_list) is not None:
     output["text"] += "!"
