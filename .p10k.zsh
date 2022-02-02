@@ -167,7 +167,7 @@ NEON_WHITE=255
 
   #################################[ os_icon: os identifier ]##################################
   # OS identifier color.
-  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=$NEON_PURPLE
+  typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=$NEON_PINK
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=$NEON_DARK_BLUE
   # Custom icon.
   # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
@@ -464,7 +464,7 @@ NEON_WHITE=255
 
   ##########################[ status: exit code of the last command ]###########################
   # Default Background Color
-  typeset -g POWERLEVEL9K_STATUS_BACKGROUND=$NEON_WHITE
+  typeset -g POWERLEVEL9K_STATUS_BACKGROUND=$NEON_DARK_BLUE
 
   # Enable OK_PIPE, ERROR_PIPE and ERROR_SIGNAL status states to allow us to enable, disable and
   # style them independently from the regular OK and ERROR state.
@@ -508,8 +508,8 @@ NEON_WHITE=255
   # Show this many fractional digits. Zero means round to seconds.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=0
   # Execution time color.
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$NEON_DARK_BLUE
-  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_WHITE
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND=$NEON_PINK
+  typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND=$NEON_DARK_BLUE
   # Duration format: 1d 2h 3m 4s.
   typeset -g POWERLEVEL9K_COMMAND_EXECUTION_TIME_FORMAT='d h m s'
   # Custom icon.
@@ -1456,8 +1456,8 @@ NEON_WHITE=255
 
  ####################################[ date: current date ]####################################
   # Current datecolor.
-  typeset -g POWERLEVEL9K_DATE_BACKGROUND=$NEON_LIGHT_BLUE
-  typeset -g POWERLEVEL9K_DATE_FOREGROUND=$NEON_PURPLE
+  typeset -g POWERLEVEL9K_DATE_BACKGROUND=$NEON_PURPLE
+  typeset -g POWERLEVEL9K_DATE_FOREGROUND=$NEON_LIGHT_BLUE
 
 #################################[ history ]##################################
   # Default Colors
