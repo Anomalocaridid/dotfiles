@@ -1,3 +1,2 @@
 freetube %U
-  ^https?://(www.)?youtube.com/(watch|playlist)\?.*(v|list)=
-  ^https?://(www.)?youtu.be/.*
+  ^(https://)?(www.)?youtu(be.com|.be)/?
