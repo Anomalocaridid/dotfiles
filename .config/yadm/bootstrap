@@ -187,7 +187,7 @@ readonly productivity=(
 	"joplin-desktop-bin"
 	"libreoffice-fresh"
 	"qalculate-gtk"
-	"waterfox-g4-bin"
+	"nyxt-browser-git" # Web browser
 )
 
 # File sync programs
