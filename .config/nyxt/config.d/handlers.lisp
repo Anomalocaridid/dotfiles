@@ -44,24 +44,20 @@ Intended for use with `request-resource-hook'."
     `("freetube" ,(quri:render-uri url)))
   nil)
 
+(defmacro define-url-handlers (&rest handlers)
+  "Helper macro to set `request-resource-hook' handlers in `buffer'."
+  `(define-configuration buffer
+     ((request-resource-hook
+       (reduce #'hooks:add-hook
+         (list ,@(loop for (name pred)
+                       in handlers
+                       collect `(url-dispatching-handler ,name
+                                                         ,pred
+                                                         (symbol-function ,name))))
+               :initial-value %slot-default%)))))
+
 ;;; set url handlers
-(define-configuration buffer
-  ((request-resource-hook 
-    (reduce #'hooks:add-hook
-      (list (url-dispatching-handler
-              ;; redirect wikipedia to wikiwand
-              'wikiwand-handler
-              (match-domain "wikipedia.org")
-              #'wikiwand-handler)
-            (url-dispatching-handler
-              ;; redirect about:blank to new buffer page
-              'about-blank-handler
-              (match-url "about:blank")
-              #'about-blank-handler)
-            (url-dispatching-handler
-              ;; open youtube urls in freetube
-              'freetube-handler
-              (match-domain "youtube.com"
-                            "youtu.be")
-              #'freetube-handler))
-      :initial-value %slot-default%))))
+(define-url-handlers ('about-blank-handler (match-url "about:blank"))
+                     ('freetube-handler (match-domain "youtube.com"
+                                                      "youtu.be"))
+                     ('wikiwand-handler (match-domain "wikipedia.org")))
