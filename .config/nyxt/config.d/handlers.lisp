@@ -1,10 +1,13 @@
-;; ~/.config/nyxt/config.d/handlers.lisp
-;; url handler configurations
+;;;; ~/.config/nyxt/config.d/handlers.lisp
+;;;; url handler configurations
 
-;; redirect wikipedia to wikiwand
-(defparameter *wikipedia-regex* "(\\w{2})?\.?wikipedia.org(/wiki/)?(.*)?$")
+;;; redirect wikipedia to wikiwand
+(defparameter *wikipedia-regex* "(\\w{2})?\.?wikipedia.org(/wiki/)?(.*)?$"
+  "Regular expression used by `wikiwand-handler' to identify Wikipedia URLs.")
 
 (defun wikiwand-handler (url)
+  "Handler to redirect Wikipedia pages to Wikiwand pages.
+Intended for use with `request-resource-hook'."
   (let ((url-text (str:concat (quri:uri-host url)
                               (quri:uri-path url)))
         (params (quri:uri-query-params url)))
@@ -24,18 +27,24 @@
                                                   "/"
                                                   article))))))))
 
-;; redirect about:blank to new buffer page
+;;; redirect about:blank to new buffer page
 (defun about-blank-handler (url)
+  "Handler to redirect about:blank to `default-new-buffer-url' in `*browser*'.
+The given url will be ignored and is only used to comply with the type expected by `request-resource-hook'.
+Intended for use with `request-resource-hook'."
   ;; url argument's merely to comply with expected type
   (declare (ignore url))
   (default-new-buffer-url *browser*))
 
-;; open youtube links in freetube
+;;; open youtube links in freetube
 (defun freetube-handler (url)
+  "Handler to open YouTube URLs in FreeTube.
+Intended for use with `request-resource-hook'."
   (uiop:launch-program
     `("freetube" ,(quri:render-uri url)))
   nil)
 
+;;; set url handlers
 (define-configuration buffer
   ((request-resource-hook 
     (reduce #'hooks:add-hook

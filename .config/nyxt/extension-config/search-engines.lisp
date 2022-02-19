@@ -1,7 +1,5 @@
-;; ~/.config/nyxt/extension-config/search-engines.lisp
-;; settings for the nx-search-engines extension
-
-(in-package #:nyxt-user)
+;;;; ~/.config/nyxt/extension-config/search-engines.lisp
+;;;; settings for the nx-search-engines extension
 
 (define-configuration (buffer)
   ((search-engines

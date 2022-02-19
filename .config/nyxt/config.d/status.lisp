@@ -1,15 +1,18 @@
-;; ~/.config/nyxt/config.d/status.lisp
-;; status bar settings
+;;;; ~/.config/nyxt/config.d/status.lisp
+;;;; status bar settings
 
+;;; enable glyphs in status buffer
 (define-configuration status-buffer
   ((glyph-mode-presentation-p t)))
 
 (defmacro define-glyphs (&rest glyphs)
+  "Helper macro to set `glyph' slot for multiple modes at once."
   `(progn ,@(loop for (mode glyph)
                   in glyphs 
                   collect `(define-configuration ,mode
                              ((glyph ,glyph))))))
 
+;;; define glyphs for modes
 (define-glyphs (nyxt/blocker-mode:blocker-mode "")
                (nyxt/bookmark-mode:bookmark-mode "")
                (nyxt/certificate-exception-mode:certificate-exception-mode "")

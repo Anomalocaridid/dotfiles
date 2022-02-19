@@ -1,5 +1,5 @@
-;; ~/.config/nyxt/extension-config/kaomoji.lisp
-;; settings for the nx-kaomoji extension 
+;;;; ~/.config/nyxt/extension-config/kaomoji.lisp
+;;;; settings for the nx-kaomoji extension 
 
 (define-configuration buffer
   ((override-map (let ((map (keymap:make-keymap "override-map")))

@@ -1,5 +1,5 @@
-;; ~/.config/nyxt/extension-config/freestance-handler.lisp
-;; settings for nx-freestance-handler extension
+;;;; ~/.config/nyxt/extension-config/freestance-handler.lisp
+;;;; settings for nx-freestance-handler extension
 
 (define-configuration buffer
   ((request-resource-hook

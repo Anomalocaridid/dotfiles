@@ -1,8 +1,9 @@
 ;;;; ~/.config/nyxt/init.lisp
 ;;;; main config file for Nyxt
 
-;;; preferred command to run terminal program
-(defparameter *terminal* '("wezterm" "start" "--"))
+;;; set terminal command
+(defparameter *terminal* '("wezterm" "start" "--")
+  "Preferred command to run terminal programs with")
 
 ;;; misc settings
 (define-configuration browser
@@ -23,6 +24,7 @@
 
 ;;; load extensions and their respective config files
 (defmacro load-extension (extension)
+  "Helper macro to load extensions along with config files with the same name."
   `(load-after-system ',(intern (format nil "NX-~a" extension))
                       (nyxt-init-file ,(string-downcase (format nil "extension-config/~a.lisp" extension)))))
 
