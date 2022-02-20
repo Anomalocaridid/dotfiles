@@ -1,28 +1,29 @@
 ;;;; ~/.config/nyxt/config.d/theme.lisp
 ;;;; theme settings for nyxt
 
-;;;; color palette
-(defparameter *colors* '((*dark-blue* "#000b1e")
-                         (*semi-dark-blue* "#00005f")
-                         (*blue* "#091833")
-                         (*light-blue* "#133e7c")
-                         (*cyan* "#0abdc6")
-                         (*pink* "#ea00d9")
-                         (*purple* "#711c91")
-                         (*red* "#ff0000")
-                         (*orange* "#f57800")
-                         (*white* "#d7d7d5")
-                         (*yellow* "#ffff00")
-                         (*green* "#00ff00"))
-  "List of hex codes for colors to be set as global variables for theming.")
+;;; set color palette
+(defmacro define-palette (&rest colors)
+  "Helper macro to set global variables for `theme' colors."
+  `(progn ,@(loop for (name hex)
+                  in colors
+                  collect `(defparameter ,name ,hex "Color used for `theme'."))))
 
-;;; define global variables for all of the colors
-(dolist (colors *colors*)
-  (eval `(defparameter ,@colors "Color used in theming.")))
+(define-palette (*dark-blue* "#000b1e")
+                (*semi-dark-blue* "#00005f")
+                (*blue* "#091833")
+                (*light-blue* "#133e7c")
+                (*cyan* "#0abdc6")
+                (*pink* "#ea00d9")
+                (*purple* "#711c91")
+                (*red* "#ff0000")
+                (*orange* "#f57800")
+                (*white* "#d7d7d5")
+                (*yellow* "#ffff00")
+                (*green* "#00ff00"))
 
 ;;; set preferred font
 (defparameter *font* "FuraCode Nerd Font"
-  "Preferred font to use for theming.")
+  "Preferred font to use for `theme'.")
 
 (defparameter *cyberpunk-neon* (make-instance 'theme:theme
                                               :dark-p t
