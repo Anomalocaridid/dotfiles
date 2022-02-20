@@ -21,15 +21,3 @@
                 (nyxt-init-file
                   (pathname "config.d/*.lisp"))))
         (load file))
-
-;;; load extensions and their respective config files
-(defmacro load-extension (extension)
-  "Helper macro to load extensions along with config files with the same name."
-  `(load-after-system ',(intern (format nil "NX-~a" extension))
-                      (nyxt-init-file ,(string-downcase (format nil "extension-config/~a.lisp" extension)))))
-
-;;; load extensions
-(load-extension search-engines)
-(load-extension kaomoji)
-(load-extension freestance-handler)
-(asdf:load-system :nx-fruit)
