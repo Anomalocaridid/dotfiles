@@ -45,7 +45,7 @@ fi
 readonly zsh_deps=(
 	"advcpmv"
 	"bat"
-	"bat-extras-git"
+	"bat-extras"
 	"cfdg" # Context Free interpreter
 	# "dust" # Has to be installed after rustup is configured.
 	"exa"
