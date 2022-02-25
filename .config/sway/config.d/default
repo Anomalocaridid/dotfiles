@@ -139,6 +139,9 @@ exec swayidle -w\
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
+    
+    # Default workspace layout to tabbed
+    workspace_layout tabbed
 #
 # Scratchpad:
 #
