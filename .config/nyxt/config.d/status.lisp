@@ -18,6 +18,7 @@
                (nyxt/certificate-exception-mode:certificate-exception-mode "")
                (nyxt/help-mode:help-mode "")
                (nyxt/message-mode:message-mode "")
+               (nyxt/reduce-tracking-mode:reduce-tracking-mode "")
                (nyxt/repl-mode:repl-mode "")
                (nyxt/small-web-mode:small-web-mode "ﰍ")
                (nyxt/vi-mode:vi-insert-mode "")

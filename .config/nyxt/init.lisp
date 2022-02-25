@@ -12,9 +12,11 @@
    ;; set external editor
    (external-editor-program (append *terminal* '("hx")))))
 
-;;; enable blocker mode
+;;; enable default modes mode
 (define-configuration web-buffer
-  ((default-modes (append '(nyxt/blocker-mode:blocker-mode) %slot-default%))))
+  ((default-modes (append '(nyxt/blocker-mode:blocker-mode
+                            nyxt/reduce-tracking-mode:reduce-tracking-mode)
+                          %slot-default%))))
 
 ;;; load all lisp files in ./config.d
 (dolist (file (directory
