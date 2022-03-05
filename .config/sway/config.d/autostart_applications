@@ -33,4 +33,7 @@ exec discord
 # Sync Apps
 # exec syncthingtray --wait
 # exec megasync
-# exec protonvpn-cli connect -f
+
+# Start VPN
+exec gnome-keyring-daemon --start
+exec protonvpn-cli connect -f
