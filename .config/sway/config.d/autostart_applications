@@ -28,7 +28,7 @@ exec fcitx -d
 exec sworkstyle &> /tmp/sworkstyle.log
 
 # Launch Discord
-exec discord
+exec discord --start-minimized
 
 # Sync Apps
 # exec syncthingtray --wait
