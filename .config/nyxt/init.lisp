@@ -23,3 +23,9 @@
                 (nyxt-init-file
                   (pathname "config.d/*.lisp"))))
         (load file))
+
+;;; load extensions
+(load-extensions freestance-handler
+                 kaomoji
+                 search-engines)
+(asdf:load-system :nx-fruit)

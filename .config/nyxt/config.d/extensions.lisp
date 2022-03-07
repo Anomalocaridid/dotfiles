@@ -1,5 +1,5 @@
 ;;;; ~/.config/nyxt/config.d/extensions.lisp
-;;;; load extensions and their configs
+;;;; helper code to load extensions and their configs
 
 ;;; load extensions and their respective config files
 (defmacro load-extensions (&rest extensions)
@@ -8,9 +8,3 @@
                   in extensions
                   collect `(load-after-system ',(intern (format nil "NX-~a" extension))
                                               (nyxt-init-file ,(string-downcase (format nil "extension-config/~a.lisp" extension)))))))
-
-;;; load extensions
-(load-extensions freestance-handler
-                 kaomoji
-                 search-engines)
-(asdf:load-system :nx-fruit)
