@@ -20,4 +20,4 @@ bindkey -M vicmd "j" history-substring-search-down
 bindkey "^[[3~" delete-char
 
 # Vi-style line editing
-bindkey -v
+#bindkey -v
