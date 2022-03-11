@@ -27,9 +27,6 @@ exec fcitx -d
 # Dynamic Workspace Names
 exec sworkstyle &> /tmp/sworkstyle.log
 
-# Launch Discord
-exec discord --start-minimized
-
 # Sync Apps
 # exec syncthingtray --wait
 # exec megasync
