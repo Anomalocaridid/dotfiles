@@ -262,7 +262,7 @@ readonly misc=(
 	"spotify"
 	"spotify-adblock-git"
 	"strawberry"       # music player
-	"swaylock-effects" # fancier swaylock alternative
+	"swaylock-effects-git" # fancier swaylock alternative
 	"sweet-folders-icons-git" # Part of candy-icons-git
 	# "tealdeer" # Has to be installed after rustup is configured.
 	"teensy-loader-cli" # Required for compiling my QMK layout
