@@ -52,7 +52,7 @@ readonly zsh_deps=(
 	"fd"
 	"fzf"
 	"lolcat"
-	"nnn" # TUI file manager)
+	"nnn-nerd" # TUI file manager
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
 	"ripgrep" # Required by bat-extras-git
@@ -66,6 +66,7 @@ readonly zsh_deps=(
 # Dependencies for nnn config
 readonly nnn_deps=(
 	"advcmp" # cp and mv with progress bars
+	"customizepkg" # Edit PKGBUILDs automatically before install
 	"dragon-drag-and-drop"
 	"indicator-kdeconnect-git"
 	"kdeconnect"
@@ -236,7 +237,6 @@ readonly misc=(
 	"${sway_deps[@]}"
 	"${sync[@]}"
 	"${vm_deps[@]}"
-	"aurpublish" # For managing custom PKGBUILDs
 	"betterdiscord-installer"
 	"bpytop"
 	"breeze-hacked-cursor-theme"
