@@ -16,10 +16,11 @@ REGEX = r"(?<=Target\s=\s).*"
 # Icon for segment
 ICON = ""
 
+# Command to run to check updates
+COMMAND = "checkupdates && paru -Qua --color never"
+
 # Get list of available updates
-update_list = (
-    sub.run("checkupdates", stdout=sub.PIPE).stdout.decode("utf-8").split()[::4]
-)
+update_list = sub.run(COMMAND, stdout=sub.PIPE, shell=True).stdout.decode("utf-8").split()[::4]
 
 # Get number of updates
 update_count = len(update_list)
