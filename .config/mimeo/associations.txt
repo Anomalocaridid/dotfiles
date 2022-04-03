@@ -1,2 +1,0 @@
-freetube %U
-  ^(https://)?(www.)?youtu(be.com|.be)/?

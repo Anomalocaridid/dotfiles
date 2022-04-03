@@ -68,13 +68,13 @@ readonly nnn_deps=(
 	"advcmp" # cp and mv with progress bars
 	"customizepkg" # Edit PKGBUILDs automatically before install
 	"dragon-drag-and-drop"
+	"handlr-regex" # Resource opener
 	"indicator-kdeconnect-git"
 	"kdeconnect"
-	"mimeo" # Resource opener
 	"nnn"
 	"pmount-safe-removal" # mount portable devices
 	"udisks2" # disk management service
-	"xdg-utils-mimeo" # xdg-open falls back to using mimeo
+	"xdg-utils-handlr" # xdg-open falls back to using handlr
 	"zathura" # Document viewer
 	"zathura-pdf-mupdf" # PDF, epub, and OpenXPZ support for Zathura
 )
