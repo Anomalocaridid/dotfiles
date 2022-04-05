@@ -1,0 +1,292 @@
+From dcc64f06c66148c0238b452084d7146d99c5ac56 Mon Sep 17 00:00:00 2001
+From: romkatv <roman.perepelitsa@gmail.com>
+Date: Tue, 16 Jul 2019 10:09:05 +0200
+Subject: [PATCH 1/2] draw prompt on the correct line after window change
+
+Many terminals reflow text when the window is resized. When the height
+of the prompt changes as a result of this reflowing, ZSH draws the
+updated prompt on the wrong line. This can lead to some parts of the
+prompt not being erased, or to the disappearance of lines prior to the
+prompt.
+
+There are many ways to reproduce this issue. Here are a couple. Both
+require terminals that reflow text when the window is resized.
+
+1. Run `zsh -df`, hit <enter> a few times, then type
+  `xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` (don't hit <enter>).
+
+  OR
+
+2. Run `PROMPT="${(pl.$COLUMNS..-.)}%f"$'\n> ' zsh -df`
+  and hit <enter> a few times.
+
+Now try resizing the terminal window back and forth causing lines to
+wrap and unwrap. Terminal content before the last prompt will be
+erased one line at a time.
+
+This patch cannot handle the case when the terminal window is being
+resized while the first prompt line is outside the terminal window.
+The content of the viewport will be correct but scrolling the terminal
+window up will reveal some mess up there. ZSH before this patch also
+fails in this case although it creates a different mess.
+
+The change is conservative. The new code triggers only on window
+resize and not, for example, on redisplay. It doesn't trigger if
+single_line_zle is set. This reduces the chance that it'll break
+something that isn't currently broken.
+---
+ Src/Zle/zle_refresh.c | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+
+diff --git a/Src/Zle/zle_refresh.c b/Src/Zle/zle_refresh.c
+index 7b8593dec..1790b5d1a 100644
+--- a/Src/Zle/zle_refresh.c
++++ b/Src/Zle/zle_refresh.c
+@@ -660,6 +660,7 @@ static int more_start,		/* more text before start of screen?	    */
+     lpromptw, rpromptw,		/* prompt widths on screen                  */
+     lpromptwof,			/* left prompt width with real end position */
+     lprompth,			/* lines taken up by the prompt		    */
++    cursorsaved,                /* whether prompt start position was saved  */
+     rprompth,			/* right prompt height                      */
+     vcs, vln,			/* video cursor position column & line	    */
+     vmaxln,			/* video maximum number of lines	    */
+@@ -994,6 +995,7 @@ zrefresh(void)
+     int remetafy;		/* flag that zle line is metafied	     */
+     zattr txtchange;		/* attributes set after prompts              */
+     int rprompt_off = 1;	/* Offset of rprompt from right of screen    */
++    int savecursorneeded = 0;	/* prompt start position needs to be saved   */
+     struct rparams rpms;
+ #ifdef MULTIBYTE_SUPPORT
+     int width;			/* width of wide character		     */
+@@ -1133,7 +1135,13 @@ zrefresh(void)
+ 	zsetterm();
+ #ifdef TIOCGWINSZ
+ 	if (winchanged) {
+-	    moveto(0, 0);
++	    if (cursorsaved) {
++		tcout(TCRESTRCURSOR);
++		zputc(&zr_cr);
++		vln = vcs = 0;
++	    } else {
++		moveto(0, 0);
++	    }
+ 	    t0 = olnct;		/* this is to clear extra lines even when */
+ 	    winchanged = 0;	/* the terminal cannot TCCLEAREOD	  */
+ 	    listshown = 0;
+@@ -1164,6 +1172,8 @@ zrefresh(void)
+ 	if (termflags & TERM_SHORT)
+ 	    vcs = 0;
+ 	else if (!clearflag && lpromptbuf[0]) {
++	    cursorsaved = 0;
++	    savecursorneeded = tccan(TCSAVECURSOR) && tccan(TCRESTRCURSOR);
+ 	    zputs(lpromptbuf, shout);
+ 	    if (lpromptwof == winw)
+ 		zputs("\n", shout);	/* works with both hasam and !hasam */
+@@ -1185,6 +1195,7 @@ zrefresh(void)
+    width comparisons can be made with winw, height comparisons with winh */
+ 
+     if (termflags & TERM_SHORT) {
++	cursorsaved = 0;
+ 	singlerefresh(tmpline, tmpll, tmpcs);
+ 	goto singlelineout;
+     }
+@@ -1737,6 +1748,19 @@ individually */
+     clearf = 0;
+     oput_rpmpt = put_rpmpt;
+ 
++    if (savecursorneeded && lprompth + nlnct <= rwinh) {
++	moveto(1 - lprompth, 0);
++	tcout(TCSAVECURSOR);
++	cursorsaved = 1;
++    } else if (nlnct > olnct) {
++	/*
++	 * If the new buffer is taller than the old, it might have scrolled
++	 * the terminal window by creating new lines at the bottom. Our saved
++	 * cursor position can no longer be trusted.
++	 */
++	cursorsaved = 0;
++    }
++
+ /* move to the new cursor position */
+     moveto(rpms.nvln, rpms.nvcs);
+ 
+-- 
+2.35.1
+
+
+From e9afb3f3228e6e6ebb156d68c9f6ebe2403695e0 Mon Sep 17 00:00:00 2001
+From: romkatv <roman.perepelitsa@gmail.com>
+Date: Wed, 15 Jan 2020 15:29:03 +0100
+Subject: [PATCH 2/2] improve handling of SIGWINCH
+
+1. When SIGWINCH is received during prompt expansion triggered by SIGWINCH,
+   the old prompt (without reexpansion) used to be printed before being
+   overwritten by a new prompt (after reexpansion). Now only the new
+   prompt gets printed.
+2. Cursor position used to be saved *after* printing the prompt. To do this,
+   the cursor needs to be moved up to the beginning of the prompt before
+   issuing tcout(TCSAVECURSOR). This fails if the real terminal width is
+   not equal to what zsh thinks it is. Now tcout(TCSAVECURSOR) is issued
+   before printing prompt. The move-up-and-save-cursor logic is still used
+   but only when the terminal might have been scrolled since the previous
+   tcout(TCSAVECURSOR).
+3. When the height of the terminal changes, saved cursor now gets
+   invalidated. This is necessary to avoid making things worse on
+   terminals that store saved cursor as absolute coordinates. This
+   includes urxvt and Konsole.
+---
+ Src/Zle/zle_main.c    |  1 +
+ Src/Zle/zle_refresh.c | 33 ++++++++++++++++-----------------
+ Src/utils.c           | 29 ++++++++++++++++++++++++-----
+ 3 files changed, 41 insertions(+), 22 deletions(-)
+
+diff --git a/Src/Zle/zle_main.c b/Src/Zle/zle_main.c
+index 8c0534708..5f4ae0945 100644
+--- a/Src/Zle/zle_main.c
++++ b/Src/Zle/zle_main.c
+@@ -1260,6 +1260,7 @@ zleread(char **lp, char **rp, int flags, int context, char *init, char *finish)
+     resetneeded = 0;
+     fetchttyinfo = 0;
+     trashedzle = 0;
++    maxheight = 0;
+     raw_lp = lp;
+     lpromptbuf = promptexpand(lp ? *lp : NULL, 1, NULL, NULL, &pmpt_attr);
+     raw_rp = rp;
+diff --git a/Src/Zle/zle_refresh.c b/Src/Zle/zle_refresh.c
+index 1790b5d1a..ba0f697cb 100644
+--- a/Src/Zle/zle_refresh.c
++++ b/Src/Zle/zle_refresh.c
+@@ -187,6 +187,11 @@ mod_export int clearflag;
+ /**/
+ mod_export int clearlist;
+ 
++/* Maximum value of lprompth + nlnct for the current command */
++
++/**/
++int maxheight;
++
+ /* Zle in trashed state - updates may be subtly altered */
+ 
+ /**/
+@@ -660,7 +665,6 @@ static int more_start,		/* more text before start of screen?	    */
+     lpromptw, rpromptw,		/* prompt widths on screen                  */
+     lpromptwof,			/* left prompt width with real end position */
+     lprompth,			/* lines taken up by the prompt		    */
+-    cursorsaved,                /* whether prompt start position was saved  */
+     rprompth,			/* right prompt height                      */
+     vcs, vln,			/* video cursor position column & line	    */
+     vmaxln,			/* video maximum number of lines	    */
+@@ -995,7 +999,6 @@ zrefresh(void)
+     int remetafy;		/* flag that zle line is metafied	     */
+     zattr txtchange;		/* attributes set after prompts              */
+     int rprompt_off = 1;	/* Offset of rprompt from right of screen    */
+-    int savecursorneeded = 0;	/* prompt start position needs to be saved   */
+     struct rparams rpms;
+ #ifdef MULTIBYTE_SUPPORT
+     int width;			/* width of wide character		     */
+@@ -1143,8 +1146,7 @@ zrefresh(void)
+ 		moveto(0, 0);
+ 	    }
+ 	    t0 = olnct;		/* this is to clear extra lines even when */
+-	    winchanged = 0;	/* the terminal cannot TCCLEAREOD	  */
+-	    listshown = 0;
++	    listshown = 0;	/* the terminal cannot TCCLEAREOD	  */
+ 	}
+ #endif
+ 	/* we probably should only have explicitly set attributes */
+@@ -1172,8 +1174,8 @@ zrefresh(void)
+ 	if (termflags & TERM_SHORT)
+ 	    vcs = 0;
+ 	else if (!clearflag && lpromptbuf[0]) {
+-	    cursorsaved = 0;
+-	    savecursorneeded = tccan(TCSAVECURSOR) && tccan(TCRESTRCURSOR);
++	    if ((cursorsaved = tccan(TCSAVECURSOR) && tccan(TCRESTRCURSOR)))
++		tcout(TCSAVECURSOR);
+ 	    zputs(lpromptbuf, shout);
+ 	    if (lpromptwof == winw)
+ 		zputs("\n", shout);	/* works with both hasam and !hasam */
+@@ -1748,17 +1750,14 @@ individually */
+     clearf = 0;
+     oput_rpmpt = put_rpmpt;
+ 
+-    if (savecursorneeded && lprompth + nlnct <= rwinh) {
+-	moveto(1 - lprompth, 0);
+-	tcout(TCSAVECURSOR);
+-	cursorsaved = 1;
+-    } else if (nlnct > olnct) {
+-	/*
+-	 * If the new buffer is taller than the old, it might have scrolled
+-	 * the terminal window by creating new lines at the bottom. Our saved
+-	 * cursor position can no longer be trusted.
+-	 */
+-	cursorsaved = 0;
++    if (lprompth + nlnct > maxheight) {
++	maxheight = lprompth + nlnct;
++	if (lprompth + nlnct > rwinh) {
++	    cursorsaved = 0;
++	} else if (cursorsaved) {
++	    moveto(1 - lprompth, 0);
++	    tcout(TCSAVECURSOR);
++	}
+     }
+ 
+ /* move to the new cursor position */
+diff --git a/Src/utils.c b/Src/utils.c
+index 5158a70b1..8f20d908a 100644
+--- a/Src/utils.c
++++ b/Src/utils.c
+@@ -1860,6 +1860,11 @@ mod_export int resetneeded;
+ mod_export int winchanged;
+ #endif
+ 
++/* whether prompt start position was saved  */
++
++/**/
++mod_export int cursorsaved;
++
+ static int
+ adjustlines(int signalled)
+ {
+@@ -1961,8 +1966,11 @@ adjustwinsize(int from)
+ 	 * The commented "else return;" above might be a safe shortcut,   *
+ 	 * but I'm concerned about what happens on race conditions; e.g., *
+ 	 * suppose the user resizes his xterm during `eval $(resize)'?    */
+-	if (adjustlines(from) && zgetenv("LINES"))
+-	    setiparam("LINES", zterm_lines);
++	if (adjustlines(from)) {
++	    if (zgetenv("LINES"))
++		setiparam("LINES", zterm_lines);
++	    cursorsaved = 0;
++        }
+ 	if (adjustcolumns(from) && zgetenv("COLUMNS"))
+ 	    setiparam("COLUMNS", zterm_columns);
+ 	getwinsz = 1;
+@@ -1986,11 +1994,22 @@ adjustwinsize(int from)
+ 
+     if (zleactive && resetzle) {
+ #ifdef TIOCGWINSZ
+-	winchanged =
+-#endif /* TIOCGWINSZ */
+-	    resetneeded = 1;
++	if (winchanged) {
++	    winchanged = 2;
++	} else {
++	    do {
++		winchanged = resetneeded = 1;
++		zleentry(ZLE_CMD_RESET_PROMPT);
++		if (winchanged == 1)
++		    zleentry(ZLE_CMD_REFRESH);
++	    } while (winchanged != 1);
++	    winchanged = 0;
++	}
++#else
++	resetneeded = 1;
+ 	zleentry(ZLE_CMD_RESET_PROMPT);
+ 	zleentry(ZLE_CMD_REFRESH);
++#endif /* TIOCGWINSZ */
+     }
+ }
+ 
+-- 
+2.35.1
+

@@ -60,7 +60,7 @@ readonly zsh_deps=(
 	"toilet-fonts" # Required by toilet
 	"wezterm"
 	# "zoxide" # Has to be installed after rustup is configured.
-	"zsh"
+	"zsh-git" # zsh-git so a patch can be applied.
 )
 
 # Dependencies for nnn config
