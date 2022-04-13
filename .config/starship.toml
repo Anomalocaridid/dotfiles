@@ -1,0 +1,149 @@
+format = """
+[](fg:17)\
+$username\
+$hostname\
+[](fg:17 bg:25)\
+$directory\
+[](fg:25 bg:13)\
+$git_branch\
+$git_status\
+[](fg:13 bg:17)\
+$rust\
+[](fg:17)\
+$fill\
+[](fg:17)\
+$cmd_duration\
+[](fg:13 bg:17)\
+$jobs\
+[](fg:25 bg:13)\
+$status\
+[](fg:17 bg:25)\
+$localip\
+[](fg:17)\
+$line_break\
+$character
+"""
+
+# Bottom right only
+right_format= """ 
+[](fg:13)\
+$memory_usage\
+[](fg:201 bg:13)\
+$time\
+[](fg:201)
+"""
+
+# Upper left
+[username]
+show_always = true
+style_user = "fg:201 bg:17"
+style_root = "fg:9 bg:17"
+format = '[ $user]($style)[@]($style)'
+
+[hostname]
+ssh_only = false
+style = "fg:201 bg:17"
+format = "[$hostname ]($style)"
+
+[directory]
+style = "fg:44 bg:25"
+read_only = ""
+read_only_style = "fg:44 bg:25"
+format = "[  $path]($style)[$read_only ]($read_only_style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+# Here is how you can shorten some long paths by text replacement
+[directory.substitutions]
+"Documents" = " "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+# Keep in mind that the order matters. For example:
+# "Important Documents" = "  "
+# will not be replaced, because "Documents" was already substituted before.
+# So either put "Important Documents" before "Documents" or use the substituted version:
+# "Important  " = "  "
+
+[git_branch]
+symbol = ""
+style = "fg:#00FF00 bg:13"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+conflicted = "=$count"
+ahead = "⇡$count"
+behind = "⇣$count"
+diverged = "⇕⇣$count_behind/⇡$count_ahead"
+untracked = "?$count"
+stashed = "$$count"
+modified = "!$count"
+staged = "+$count"
+renamed = "»$count"
+deleted = "✘$count"
+style = "fg:#00FF00 bg:13"
+format = '[($all_status$ahead_behind )]($style)'
+
+[rust]
+symbol = ""
+style = "fg:201 bg:17"
+format = '[ $symbol ($version) ]($style)'
+
+[fill]
+symbol = " "
+
+# Upper right
+[cmd_duration]
+min_time = 10_000
+style = "bold fg:201 bg:17"
+format = '[ $duration  ]($style)'
+show_milliseconds = true
+
+[jobs]
+style = "bold fg:44 bg:13"
+symbol = ""
+format = '[ $number$symbol ]($style)'
+
+
+[status]
+disabled = false
+style = "bold fg:44 bg:25"
+symbol = "✘"
+not_executable_symbol = ""
+not_found_symbol = ""
+sigint_symbol = ""
+signal_symbol = ""
+map_symbol = true
+# Re-enable when issues are resolved
+# Issues: pipestatus does not right align
+#         cannot style separator
+# pipestatus = true
+# pipestatus_separator = '[|]($style)'
+pipestatus_format = '[$pipestatus]($style)'
+format = '[ $common_meaning $status $symbol ]($style)'
+
+[localip]
+disabled = false
+ssh_only = false
+style = "fg:201 bg:17"
+format = "[ $localipv4 ﯱ ]($style)"
+
+# Lower left
+[character]
+success_symbol = '[❯](bold fg:44)'
+error_symbol = '[❯](bold fg:201)'
+vicmd_symbol ='[❮](bold fg:44)'
+
+# Lower right
+[memory_usage]
+disabled = false
+threshold = 0
+symbol = ""
+style = "fg:44 bg:13"
+format = "[ $ram_pct $swap_pct $symbol ]($style)"
+
+[time]
+disabled = false
+time_format = "%T" # Hour:Minute:Second Format
+style = "fg:255 bg:201"
+format = '[ $time  ]($style)'

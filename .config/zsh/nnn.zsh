@@ -24,4 +24,4 @@ alias nnn="n"
 # That may not be otherwise accessible when calling nnn through other means like Sway hotkeys
 # Also I don't want to have to manually source multiple zsh scripts whenever I do something like that.
 # Because I have to run a terminal emulator and have it execute zsh and make it run nnn and source nnn.zsh
-source $HOME/.config/zsh/config.d/env.zsh
+source $HOME/.config/zsh/env.zsh

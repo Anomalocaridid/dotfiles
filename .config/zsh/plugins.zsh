@@ -3,7 +3,7 @@
 # Source after zcomet clone, before terminal greeting
 
 # Install prompt theme
-zcomet load romkatv/powerlevel10k
+#zcomet load romkatv/powerlevel10k
 
 # Plugins
 zcomet load Aloxaf/fzf-tab # Use fzf for tab completion
