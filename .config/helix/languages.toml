@@ -10,3 +10,17 @@ language-server = { command = "lua-language-server" }
 name = "haskell"
 roots = ["Setup.hs", "stack.yaml", "*.cabal"]
 language-server = { command = "haskell-language-server-wrapper", args = ["--lsp"] }
+
+[[language]]
+name = "python"
+config = """
+{
+  "pylsp": { 
+    "plugins": {
+      "black": {
+        "enabled": true
+      }
+    }
+  }
+}
+"""
