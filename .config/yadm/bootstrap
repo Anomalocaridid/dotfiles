@@ -56,6 +56,7 @@ readonly zsh_deps=(
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
 	"ripgrep" # Required by bat-extras-git
+	"starship"
 	"toilet"
 	"toilet-fonts" # Required by toilet
 	"wezterm"
