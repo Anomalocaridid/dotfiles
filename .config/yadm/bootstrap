@@ -256,6 +256,7 @@ readonly misc=(
 	"hardcode-fixer-git"
 	"hardcode-tray-git"
 	"k3b" # disc ripper/burner
+	"kernel-modules-hook" # Ensures kernel modules are reloaded after kernel update
 	"ly"  # display manager
 	"moreutils"
 	"paru"   # aur helper Note: only in aur, so install method will have to change if using an Arch-based distro without yay by default.
@@ -268,6 +269,7 @@ readonly misc=(
 	# "tealdeer" # Has to be installed after rustup is configured.
 	"teensy-loader-cli" # Required for compiling my QMK layout
 	"ventoy-bin"       # Tool for making multiboot USB drives.
+
 )
 
 # Install programs with yay
