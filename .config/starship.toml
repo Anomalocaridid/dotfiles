@@ -74,7 +74,7 @@ format = '[ $symbol $branch ]($style)'
 conflicted = "=$count"
 ahead = "⇡$count"
 behind = "⇣$count"
-diverged = "⇕⇣$count_behind/⇡$count_ahead"
+diverged = "⇕⇣$behind_count⇡$ahead_count"
 untracked = "?$count"
 stashed = "$$count"
 modified = "!$count"
