@@ -147,6 +147,7 @@ readonly clamav_deps=(
 readonly sway_deps=(
 	"mpvpaper"
 	"qt5-styleplugins"
+	"qt6gtk2"
 	"sworkstyle"
 )
 
