@@ -1,13 +1,15 @@
 # ~/.config/zsh/config.d/nnn.zsh
 # nnn config
 
+NNN_PLUGIN_DIR="$HOME/.config/nnn/plugins"
+
 export NNN_OPTS="cDEirx"
-export NNN_OPENER="$HOME/.config/nnn/plugins/nuke"
+export NNN_OPENER="$NNN_PLUGIN_DIR/nuke"
 export GUI=1
 export NNN_BMS="c:$HOME/.config;d:$HOME/Documents;D:$HOME/Downloads;e:$HOME/exercism;p:$HOME/Pictures;v:$HOME/Videos;"
-export NNN_PLUG="c:chksum;d:dragdrop;k:kdeconnect;M:nmount;n:bulknew;s:!zsh -i;u:getplugs;z:autojump;"
+export NNN_PLUG="c:chksum;d:dragdrop;k:kdeconnect;M:nmount;n:bulknew;s:!zsh -i;u:!$NNN_PLUGIN_DIR/getplugs master;z:autojump;"
 export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_COLORS=#1909c9d02e0d2cff
+export NNN_COLORS="#1909c9d02e0d2cff"
 
 # Sync subshell PWD with nnn
 nnn_cd() {
