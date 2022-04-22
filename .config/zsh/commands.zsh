@@ -42,6 +42,9 @@ alias sysyadm="sudo yadm -Y /etc/yadm"
 # Render and view context free art in one command
 alias cfdg-view="cfdg --display=imv --"
 
+# Run clamdscan with required options
+alias clamdscan="clamdscan --multiscan --fdpass"
+
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
