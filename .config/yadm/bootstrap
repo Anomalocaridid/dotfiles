@@ -4,6 +4,9 @@
 # Bootstrap script intended to automate setting up a new hyper-personalized system
 # WARNING: Only tested with EndeavourOS. May still work with other Arch derivatives, but NOT guaranteed.
 
+# Constants
+AUR_HELPER="paru"
+
 # Helper functions
 
 step() {
@@ -260,7 +263,7 @@ readonly misc=(
 	"kernel-modules-hook" # Ensures kernel modules are reloaded after kernel update
 	"ly"  # display manager
 	"moreutils"
-	"paru"   # aur helper Note: only in aur, so install method will have to change if using an Arch-based distro without yay by default.
+	# "paru" # Already installed by default in EndeavourOS.
 	"picard" # music tagger
 	"spotify"
 	"spotify-adblock-git"
@@ -277,7 +280,7 @@ readonly misc=(
 # May have to replace with paru if moving to a distro without it by default
 step "Installing packages"
 
-if yay -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${hx_deps[*]} ${misc[*]}" | sort | uniq); then
+if $AUR_HELPER -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${hx_deps[*]} ${misc[*]}" | sort | uniq); then
 	success "Successfully installed packages"
 else
 	error "Could not install packages"
@@ -297,7 +300,7 @@ step "Configuring Rust with rustup"
 # Install packages that require rustup
 step "Installing packages that depend on Rust"
 
-if yay -S --needed --answerclean None dust zoxide tealdeer; then
+if $AUR_HELPER -S --needed --answerclean None dust zoxide tealdeer; then
 	success "Successfully installed packages"
 else
 	error "Could not install packages"
@@ -544,3 +547,4 @@ fi
 	- Log into any necessary services
 	- Install any desired games
 EOF
+
