@@ -71,7 +71,7 @@ readonly zsh_deps=(
 readonly nnn_deps=(
 	"advcmp" # cp and mv with progress bars
 	"customizepkg" # Edit PKGBUILDs automatically before install
-	"dragon-drag-and-drop"
+	"dragon-drop"
 	"handlr-regex" # Resource opener
 	"indicator-kdeconnect-git"
 	"kdeconnect"
@@ -86,7 +86,7 @@ readonly nnn_deps=(
 readonly python_dev=(
 	"python"
 	"python-lsp-black"
-	"python-lsp-mypy"
+	"python-pylsp-mypy"
 	"python-lsp-server"
 	"python-mccabe"
 	"python-pycodestyle"
@@ -171,7 +171,7 @@ readonly games=(
 	"gdlauncher-bin"
 	"grapejuice-git"
 	"hid-nintendo-dkms" # Nintendo Switch controller drivers
-	"itch"
+	"itch-bin"
 	"joycond-git" # Nintendo Switch controller drivers
 	"lib32-gamemode"
 	"lib32-libpulse" # required for grapejuice-git for sound
@@ -190,7 +190,7 @@ readonly games=(
 # Productivity software
 readonly productivity=(
 	"gnuplot" # Required by qalculate-gtk
-	"joplin-desktop-bin"
+	"joplin-desktop-bin" # Note taking app
 	"libreoffice-fresh"
 	"qalculate-gtk"
 	"nyxt-browser-git" # Web browser
