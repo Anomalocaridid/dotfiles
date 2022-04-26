@@ -62,6 +62,7 @@ let global =
       , position = Some types.Position.top
       , height = Some 30
       , width = Some 10
+      , ipc = Some True
       , modules-left
       , modules-center
       , modules-right
