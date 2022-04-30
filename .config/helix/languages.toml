@@ -5,6 +5,7 @@ language-server = { command = "efm-langserver" }
 [[language]]
 name = "lua"
 language-server = { command = "lua-language-server" }
+auto-format = true
 
 [[language]]
 name = "haskell"
@@ -13,12 +14,14 @@ language-server = { command = "haskell-language-server-wrapper", args = ["--lsp"
 
 [[language]]
 name = "python"
+auto-format = true
 config = """
 {
   "pylsp": { 
     "plugins": {
       "black": {
         "enabled": true
+        "line-length": 79
       }
     }
   }
