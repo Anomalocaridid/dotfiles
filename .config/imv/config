@@ -6,8 +6,6 @@ overlay_text_color = 0ABDC6
 overlay_background_color = 091833
 title_text = imv - ${imv_current_file##*/}
 
-command_text_color = 0abcd6
-
 #[aliases]
 
 #[binds]
