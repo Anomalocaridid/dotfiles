@@ -21,18 +21,20 @@ set $menu wofi -c ~/.config/wofi/config -I
 
 set $powermenu ~/.config/waybar/scripts/power-menu.sh
 
+set $lock ~/.config/sway/scripts/lockman.sh
+
 ### Idle configuration
 exec swayidle -w\
-    timeout 1070 'swaylock -f -C ~/.config/swaylock/config'\
+    timeout 1070 '$lock'\
     timeout 770 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock -C ~/.config/swaylock/config'
+    before-sleep '$lock'
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
 
 ## Lock Screen
- bindsym $mod+f1 exec ~/.config/sway/scripts/lockman.sh
+ bindsym $mod+f1 exec $lock
 
 ### Key bindings
 #
