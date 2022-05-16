@@ -105,6 +105,7 @@ readonly haskell_dev=(
 
 readonly bash_dev=(
 	"bash-bats"
+	"bash-language-server"
 	"shellcheck"
 	"shfmt"
 )

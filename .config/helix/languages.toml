@@ -1,8 +1,4 @@
 [[language]]
-name = "bash"
-language-server = { command = "efm-langserver" }
-
-[[language]]
 name = "lua"
 language-server = { command = "lua-language-server" }
 auto-format = true
@@ -10,7 +6,7 @@ auto-format = true
 [[language]]
 name = "haskell"
 roots = ["Setup.hs", "stack.yaml", "*.cabal"]
-language-server = { command = "haskell-language-server-wrapper", args = ["--lsp"] }
+language-server = { command = "haskell-language-server-wrapper", args = ["lsp"] }
 
 [[language]]
 name = "python"
