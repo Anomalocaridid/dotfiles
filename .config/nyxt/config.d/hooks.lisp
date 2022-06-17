@@ -10,7 +10,7 @@
 (defun wikiwand-copy-url-handler ()
   "Handler to convert copied Wikiwand URLs into Wikipedia URLs.
 Intended for use with `copy-url-after-hook'."
-  (let ((url (clipboard-text *browser*)))
+  (let ((url (cl-containers:current-item (nyxt::clipboard-ring *browser*))))
     (if (string= (quri:uri-domain (quri:uri url))
                  "wikiwand.com")
         (cl-ppcre:register-groups-bind (lang article)
@@ -27,5 +27,5 @@ Intended for use with `copy-url-after-hook'."
                         "Main_Page"
                         article)))))))
 
-;;; add hook to copy-url-after-hook
-(hooks:add-hook copy-url-after-hook 'wikiwand-copy-url-handler)
+;;; make after hook for copy-url
+(defmethod copy-url :after () (wikiwand-copy-url-handler))

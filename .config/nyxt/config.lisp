@@ -1,4 +1,4 @@
-;;;; ~/.config/nyxt/init.lisp
+;;;; ~/.config/nyxt/config.lisp
 ;;;; main config file for Nyxt
 
 ;;; set terminal command
@@ -20,7 +20,7 @@
 
 ;;; load all lisp files in ./config.d
 (dolist (file (directory
-                (nyxt-init-file
+                (nyxt-config-file
                   (pathname "config.d/*.lisp"))))
         (load file))
 

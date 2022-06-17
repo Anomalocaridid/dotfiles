@@ -7,4 +7,4 @@
   `(progn ,@(loop for extension
                   in extensions
                   collect `(load-after-system ',(intern (format nil "NX-~a" extension))
-                                              (nyxt-init-file ,(string-downcase (format nil "extension-config/~a.lisp" extension)))))))
+                                              (nyxt-config-file ,(string-downcase (format nil "extension-config/~a.lisp" extension)))))))
