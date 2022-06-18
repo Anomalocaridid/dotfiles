@@ -12,8 +12,8 @@
    ;; set external editor
    (external-editor-program (append *terminal* '("hx")))))
 
-;;; enable default modes mode
-(define-configuration web-buffer
+;;; enable default modes
+(define-configuration buffer
   ((default-modes (append '(nyxt/blocker-mode:blocker-mode
                             nyxt/reduce-tracking-mode:reduce-tracking-mode)
                           %slot-default%))))
@@ -25,7 +25,8 @@
         (load file))
 
 ;;; load extensions
+(asdf:load-system :nx-fruit)
 (load-extensions freestance-handler
                  kaomoji
-                 search-engines)
-(asdf:load-system :nx-fruit)
+                 search-engines
+                 tailor)
