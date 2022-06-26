@@ -2,4 +2,4 @@
 
 WAYBAR_DIR="$HOME/.config/waybar"
 
-dhall-to-json --file "$WAYBAR_DIR/config.dhall" > "$WAYBAR_DIR/config"
+dhall-to-json --file "$WAYBAR_DIR/config.dhall" --output "$WAYBAR_DIR/config"
