@@ -48,6 +48,9 @@ alias clamdscan="clamdscan --multiscan --fdpass"
 # So I don't have to remember how to see btrfs disk usage
 alias bdu="btrfs filesystem usage /"
 
+# shorter command for helix
+alias hx="helix"
+
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
