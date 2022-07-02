@@ -226,12 +226,6 @@ readonly mozc=(
 	"fcitx-qt"
 )
 
-# ProtonVPN setup
-readonly vpn=(
-	"protonvpn"
-	"gnome-keyring"
-)
-
 # Miscellaneous programs that I frequently use
 readonly misc=(
 	"${bluetooth[@]}"
