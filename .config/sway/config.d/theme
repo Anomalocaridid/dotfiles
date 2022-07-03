@@ -31,6 +31,7 @@ client.background       #000b1e
 
 # Cursor
 seat seat0 xcursor_theme "Breeze_Hacked" 28
+seat seat0 hide_cursor 5000
 
 #
 # Status Bar:
