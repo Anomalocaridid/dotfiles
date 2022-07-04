@@ -19,12 +19,15 @@
                           %slot-default%))))
 
 ;;; load all lisp files in ./config.d
-(dolist (file (directory
-                (nyxt-config-file
-                  (pathname "config.d/*.lisp"))))
-        (load file))
+;;; TODO: get file names dynamically
+(define-nyxt-user-system-and-load nyxt/user/config
+                                  :components ("config.d/extensions"
+                                               "config.d/handlers"
+                                               "config.d/hooks"
+                                               "config.d/palette"
+                                               "config.d/status"))
 
-;;; load extensions
+;;;; load extensions
 (asdf:load-system :nx-fruit)
 (load-extensions freestance-handler
                  kaomoji
