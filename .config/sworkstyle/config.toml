@@ -60,7 +60,7 @@ fallback = ''
 'yubico.com.yubioath-desktop' = ''
 'virt-manager' = ''
 '/RuneLite.*/' = ''
-'runescape' = { type = 'generic', value = '' }
+'/^RuneScape$/' = ''
 'Grapejuice' = ''
 '/Roblox.*/' = ''
 'gdlauncher' = ''
