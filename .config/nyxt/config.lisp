@@ -20,7 +20,7 @@
 
 ;;; load all lisp files in ./config.d
 ;;; TODO: get file names dynamically
-(define-nyxt-user-system-and-load nyxt/user/config
+(define-nyxt-user-system-and-load nyxt-user/config
                                   :components ("config.d/extensions"
                                                "config.d/handlers"
                                                "config.d/hooks"
