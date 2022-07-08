@@ -1,6 +1,11 @@
 ;;;; ~/.config/nyxt/extension-config/search-engines.lisp
 ;;;; settings for the nx-search-engines extension
 
+; TODO: Investigate more elegant solutions
+(defun color-kludge (color)
+  "Quick and dirty helper function to work around issues with color hex codes starting with '#'"
+  (subseq color 1))
+
 (define-configuration (buffer)
   ((search-engines
     (append %slot-default%
@@ -15,13 +20,13 @@
                                   :homepage-privacy-tips nil
                                   :theme :dark
                                   :font *font*
-                                  :background-color *dark-blue*
-                                  :header-color *blue*
-                                  :result-title-color *cyan*
-                                  :result-visited-title-color *pink*
-                                  :result-description-color *cyan*
-                                  :result-url-color *pink*
+                                  :background-color (color-kludge *dark-blue*)
+                                  :header-color (color-kludge *blue*)
+                                  :result-title-color (color-kludge *cyan*)
+                                  :result-visited-title-color (color-kludge *pink*)
+                                  :result-description-color (color-kludge *cyan*)
+                                  :result-url-color (color-kludge *pink*)
                                   :result-full-urls t
                                   :result-urls-above-snippet t
-                                  :result-module-color *blue*
+                                  :result-module-color (color-kludge *blue*)
                                   :result-visible-checkmark t))))))
