@@ -5,21 +5,47 @@
 (define-configuration status-buffer
   ((glyph-mode-presentation-p t)))
 
+;;; make all modes visible
+(define-configuration mode
+  ((visible-in-status-p t)))
+
+;(defmacro define-glyphs (&rest glyphs)
+;  "Helper macro to set `glyph' slot for multiple modes at once."
+;  `(progn ,@(loop for (mode glyph)
+;                  in glyphs 
+;                  collect `(define-configuration ,mode
+;                             ((glyph ,glyph))))))
+
 (defmacro define-glyphs (&rest glyphs)
   "Helper macro to set `glyph' slot for multiple modes at once."
-  `(progn ,@(loop for (mode glyph)
+  `(progn ,@(loop for (mode glyph raw-p)
                   in glyphs 
-                  collect `(define-configuration ,mode
+                  collect `(define-configuration ,(if raw-p
+                                                      mode
+                                                      (read-from-string (format nil "NYXT/~a:~a" mode mode)))
                              ((glyph ,glyph))))))
 
 ;;; define glyphs for modes
-(define-glyphs (nyxt/blocker-mode:blocker-mode "")
-               (nyxt/bookmark-mode:bookmark-mode "")
-               (nyxt/certificate-exception-mode:certificate-exception-mode "")
-               (nyxt/help-mode:help-mode "")
-               (nyxt/message-mode:message-mode "")
-               (nyxt/reduce-tracking-mode:reduce-tracking-mode "")
-               (nyxt/repl-mode:repl-mode "")
-               (nyxt/small-web-mode:small-web-mode "ﰍ")
-               (nyxt/vi-mode:vi-insert-mode "")
-               (nyxt/vi-mode:vi-normal-mode ""))
+(define-glyphs (autofill-mode               "")
+               (annotate-mode               "")
+               (base-mode                   "" t)
+               ; use when nerd font code point conflicts have been resolved
+               ;(base-mode                  "爵" t)
+               (blocker-mode                "")
+               (bookmark-mode               "")
+               (certificate-exception-mode  "")
+               (document-mode               "")
+               (help-mode                   "")
+               (hint-mode                   "")
+               (history-mode                "")
+               (message-mode                "")
+               (password-mode               "ﳳ")
+               (reduce-tracking-mode        "")
+               (repl-mode                   "")
+               (search-buffer-mode          "")
+               (small-web-mode              "ﰍ")
+               (spell-check-mode            "")
+               ; use when nerd font code point conflicts have been resolved
+               ;(spell-check-mode           "暈")
+               (nyxt/vi-mode:vi-insert-mode "" t)
+               (nyxt/vi-mode:vi-normal-mode "" t))

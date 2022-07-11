@@ -4,6 +4,8 @@
 (define-configuration web-buffer
   ((default-modes (append '(tailor:tailor-mode) %slot-default%))))
 
+(define-glyphs (nx-tailor:tailor-mode "" t))
+
 ;;; define custom theme
 (define-configuration tailor:tailor-mode
   ((tailor:themes
@@ -115,6 +117,10 @@
         :color theme:on-primary)
        ("#controls button:active"
         :color theme:on-background)
+       ("#container"
+        ; original style before truncation
+        ;:grid-template-columns "90px minmax(auto, 30ch) 1fr minmax(220px)")
+        :grid-template-columns "90px minmax(auto, 30ch) 1fr auto")
        ("#url"
         :background-color theme:on-secondary
         :color theme:on-background)
