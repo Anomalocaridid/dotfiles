@@ -2,14 +2,11 @@
 # Plugins to load
 # Source after zcomet clone, before terminal greeting
 
-# Install prompt theme
-#zcomet load romkatv/powerlevel10k
-
 # Plugins
 zcomet load Aloxaf/fzf-tab # Use fzf for tab completion
 zcomet load hlissner/zsh-autopair # Automatically close and delete paired delimiters
 zcomet load zsh-users/zsh-history-substring-search # Fish-style history search
-zcomet trigger bd Tarrasch/zsh-bd # Move to higher level directory
+zcomet trigger bd melkster/zsh-bd # Move to higher level directory
 zcomet trigger matrix amstrad/oh-my-matrix # Falling text
 
 # Oh My Zsh plugins

@@ -56,17 +56,6 @@ function ssh-setup() {
 	eval "$(ssh-agent -s)" && ssh-add
 }
 
-# Fallback behaviour if bd has no arguments passed
-function bd-wrapper() {
-	if [[ -z "$*" ]]; then
-		cd ..
-	else
-		\bd "$@"
-	fi
-}
-
-alias bd="bd-wrapper"
-
 # Undo last cd
 alias dc="cd -"
 
