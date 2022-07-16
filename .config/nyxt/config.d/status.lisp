@@ -40,6 +40,7 @@
                (history-mode                "")
                (message-mode                "")
                (password-mode               "ﳳ")
+               (prompt-buffer-mode          "")
                (reduce-tracking-mode        "")
                (repl-mode                   "")
                (search-buffer-mode          "")
