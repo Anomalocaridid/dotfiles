@@ -102,7 +102,7 @@ let cpu =
       , interval = Some (types.Interval.Int 5)
       , format = Some " {usage}%"
       , states = Some (toMap { warning = 70, critical = 90 })
-      , on-click = Some (termCmd ++ "bpytop")
+      , on-click = Some (termCmd ++ "btop")
       }
 
 let custom/keyboard-layout =

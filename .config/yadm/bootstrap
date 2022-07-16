@@ -238,8 +238,8 @@ readonly misc=(
 	"${sync[@]}"
 	"${vm_deps[@]}"
 	"betterdiscord-installer"
-	"bpytop"
 	"breeze-hacked-cursor-theme"
+	"btop"
 	"candy-icons-git" # Icon theme
 	"cdrdao"   # Required by k3b
 	"cdrtools" # Required by k3b
