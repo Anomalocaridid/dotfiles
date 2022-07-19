@@ -8,7 +8,7 @@
 ;;; misc settings
 (define-configuration browser
    ;; never restore session
-  ((session-restore-prompt :never-restore)
+  ((restore-session-on-startup-p nil)
    ;; set external editor
    (external-editor-program (append *terminal* '("hx")))))
 
