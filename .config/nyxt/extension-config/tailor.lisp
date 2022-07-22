@@ -56,7 +56,7 @@
        (".marked"
         :background-color theme:primary
         :color theme:on-primary)))
-   (tailor:user-buffer
+   (tailor:buffer
      '((*
         :font-family theme:font-family)
        ("a:hover"
