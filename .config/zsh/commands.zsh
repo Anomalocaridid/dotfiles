@@ -5,7 +5,7 @@
 alias ls="exa --color=always --group-directories-first --icons"
 alias du="dust"
 alias find="fd"
-alias grep="rg"
+alias grep="rg --color=always"
 alias filegrep="rg --files | rg"
 alias cat="bat --paging=never"
 alias less="bat --paging=always"
