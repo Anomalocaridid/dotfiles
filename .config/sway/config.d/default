@@ -7,12 +7,15 @@ set $down j
 set $up k
 set $right l
 
+# Your preferred resource opener
+set $opener handlr launch
+
 # Your preferred terminal emulators
-set $term-float wezterm
-set $term-exec $term-float start --
+set $term-float handlr launch x-scheme-handler/terminal
+#set $term-exec $term-float start --
 
 # You preferred text editor
-set $editor hx
+set $editor xdg-open
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -209,9 +212,9 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 # App shortcuts
 #
     # file manager: nnn
-    bindsym $mod+n exec $term-exec zsh -c 'source "$HOME/.config/zsh/nnn.zsh" && nnn'
-    # web browser: nyxt
-    bindsym $mod+o exec nyxt
+    bindsym $mod+n exec $(handlr get --json inode/directory | jq .cmd | tr -d '"' | sed "s/\-e//")
+    # web browser
+    bindsym $mod+o exec $opener x-scheme-handler/https
 #
 # Screenshots
 #
@@ -220,7 +223,7 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 #
 # Keybindings List
 #
-    bindsym $mod+t exec $term-exec $editor ~/.config/sway/cheatsheet    
+    bindsym $mod+t exec $term-float $editor ~/.config/sway/cheatsheet    
 
 #
 # Clipboard
