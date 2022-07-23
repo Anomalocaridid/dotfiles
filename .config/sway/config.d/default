@@ -212,7 +212,7 @@ bindsym --whole-window --border $mod+shift+button5 resize grow width 5 px or 5 p
 # App shortcuts
 #
     # file manager: nnn
-    bindsym $mod+n exec $(handlr get --json inode/directory | jq .cmd | tr -d '"' | sed "s/\-e//")
+    bindsym $mod+n exec $(handlr get --json inode/directory | jq -r .cmd | sed "s/\-e//")
     # web browser
     bindsym $mod+o exec $opener x-scheme-handler/https
 #
