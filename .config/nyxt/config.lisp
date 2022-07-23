@@ -10,7 +10,7 @@
    ;; never restore session
   ((restore-session-on-startup-p nil)
    ;; set external editor
-   (external-editor-program (append *terminal* '("hx")))))
+   (external-editor-program (append *terminal* '("helix")))))
 
 ;;; enable default modes
 (define-configuration buffer
