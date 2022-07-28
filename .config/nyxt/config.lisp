@@ -24,12 +24,11 @@
                                   :components ("config.d/extensions"
                                                "config.d/handlers"
                                                "config.d/hooks"
-                                               "config.d/palette"
-                                               "config.d/status"))
+                                               "config.d/status"
+                                               "config.d/theme"))
 
 ;;;; load extensions
 (asdf:load-system :nx-fruit)
 (load-extensions freestance-handler
                  kaomoji
-                 search-engines
-                 tailor)
+                 search-engines)
