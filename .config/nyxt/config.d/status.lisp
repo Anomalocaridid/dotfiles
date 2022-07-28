@@ -16,4 +16,5 @@
 
 ;;; define glyphs for modes
 (define-glyphs (blocker-mode                "")
-               (reduce-tracking-mode        ""))
+               (reduce-tracking-mode        "")
+               (repl-mode                   ""))
