@@ -12,6 +12,9 @@ export VISUAL="$EDITOR"
 # Set LS_COLORS
 eval "$(dircolors)"
 
+# Set LESS_OPEN
+eval "$(batpipe)"
+
 # fzf configuration
 export FZF_DEFAULT_OPTS="--color 'bg+:#091833,pointer:#ea00d9,prompt:#ea00d9'"
 
