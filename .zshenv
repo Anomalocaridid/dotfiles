@@ -8,6 +8,7 @@ path+=("$CARGO_BIN" "$STACK_BIN")
 
 export EDITOR="xdg-open" # MIGHT rely on xdg-utils-handlr
 export VISUAL="$EDITOR"
+export PAGER="bat"
 
 # Set LS_COLORS
 eval "$(dircolors)"
@@ -40,5 +41,3 @@ nnn_cd() {
 }
 
 trap nnn_cd EXIT
-
-#alias nnn="n"
