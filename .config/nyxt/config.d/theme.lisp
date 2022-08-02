@@ -154,6 +154,7 @@
                 ("#controls button:active"
                  :color theme:on-background)
                 ("#container"
+                 :display "grid"
                  :grid-template-columns "90px minmax(auto, 30ch) 1fr auto")
                 ("#url"
                  :background-color theme:on-secondary
