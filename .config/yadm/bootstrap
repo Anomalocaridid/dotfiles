@@ -46,6 +46,7 @@ fi
 
 # Dependencies for zsh config
 readonly zsh_deps=(
+	"${nnn_deps[@]}"
 	"advcpmv"
 	"bat"
 	"bat-extras"
