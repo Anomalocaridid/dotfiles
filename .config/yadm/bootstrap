@@ -54,12 +54,13 @@ readonly zsh_deps=(
 	# "dust" # Has to be installed after rustup is configured.
 	"exa"
 	"fd"
-	"fzf"
 	"lolcat"
 	"nnn-nerd" # TUI file manager
 	"otf-nerd-fonts-fira-code"
 	"pkgfile"
 	"ripgrep" # Required by bat-extras-git
+	"skim"
+	"skim-fzf-dropin"
 	"starship"
 	"toilet"
 	"toilet-fonts" # Required by toilet

@@ -16,8 +16,8 @@ eval "$(dircolors)"
 # Set LESS_OPEN
 eval "$(batpipe)"
 
-# fzf configuration
-export FZF_DEFAULT_OPTS="--color 'bg+:#091833,pointer:#ea00d9,prompt:#ea00d9'"
+# fuzzy finder configuration
+export SKIM_DEFAULT_OPTIONS="--color=bg+:#091833,pointer:#ea00d9,prompt:#ea00d9"
 
 # Opt out of Microsoft's telemetry when using .NET SDK
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
