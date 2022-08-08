@@ -47,8 +47,17 @@ alias clamdscan="clamdscan --multiscan --fdpass"
 # So I don't have to remember how to see btrfs disk usage
 alias bdu="btrfs filesystem usage /"
 
-# shorter command for helix
+# Shorter command for helix
 alias hx="helix"
+
+# Search files with skim and rg
+alias search="sk --ansi --delimiter ':' --nth=3 \
+	--cmd 'rg --color=always --line-number \"{}\"' \
+	--preview 'bat --style=numbers --color=always --highlight-line {2} {1}' | \
+	cut --delimiter=':' --fields=1 -"
+
+# grep + edit
+alias gredit='$EDITOR $(search)'
 
 # Sets up ssh-agent and adds ssh key at default location
 function ssh-setup() {
