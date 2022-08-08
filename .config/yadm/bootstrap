@@ -249,6 +249,7 @@ readonly misc=(
 	"dhall-json" # Converts dhall to json and yaml
 	"discord"
 	"dvd+rw-tools" # Required by k3b
+	"electricsheep" # Screensaver
 	"exercism-bin"
 	"freetube-bin"
 	"git-lfs" # For managing mpvwallpaper file

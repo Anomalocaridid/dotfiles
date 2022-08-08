@@ -29,8 +29,7 @@ set $lock ~/.config/sway/scripts/lockman.sh
 ### Idle configuration
 exec swayidle -w\
     timeout 1070 '$lock'\
-    timeout 770 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
+    timeout 770 'electricsheep' \
     before-sleep '$lock'
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
