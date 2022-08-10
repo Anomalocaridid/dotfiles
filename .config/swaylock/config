@@ -1,21 +1,13 @@
-indicator
-# no-unlock-indicator
-# daemonize
 indicator-caps-lock
-# indicator-idle-visible
-# datestr=%A
-image=$HOME/.config/sway/swaylock.png
-scaling=fill
 font="Fira Code Nerd Font"
 font-size=20
 ignore-empty-password
 show-failed-attempts
+color=#00000000
 
 
 # Ring
 indicator-radius=115
-#indicator-thickness=10
-#line-uses-ring
 
 # Typing 
 line-color=#0abdc6
@@ -59,7 +51,6 @@ layout-border-color=#ea00d9
 layout-text-color=#0abcd6
 
 # Swaylock-effects specific settings
-screenshot
 clock
 timestr=%r
 grace=2
