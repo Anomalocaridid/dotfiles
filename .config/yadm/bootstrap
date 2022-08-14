@@ -182,6 +182,7 @@ readonly games=(
 	"pulseaudio-alsa" # Required for runelite for sound
 	"pysolfc"
 	"pysolfc-cardsets"
+	"pysolfc-music"
 	"python-pygame" # Required for pysolfc
 	"runelite"
 	"steam"
@@ -476,21 +477,6 @@ if git -C qmk_firmware remote add upstream "$upstream_qmk_repo" &> /dev/null; th
 	success "Successfully added upstream QMK repo at $upstream_qmk_repo"
 else
 	error "Could not add upstream QMK repo at $upstream_qmk_repo"
-fi
-
-# Install music for PySolFC
-step "Installing PySolFC music"
-readonly pysolfc_music_url="https://phoenixnap.dl.sourceforge.net/project/pysolfc/PySol-Music/PySol-Music-4.50/pysol-music-4.50.tar.xz"
-readonly pysolfc_music_dir="/usr/share/PySolFC/music"
-
-if curl "$pysolfc_music_url" 2> /dev/null | sudo tar xJf - --directory=/tmp; then
-	if sudo cp -r /tmp/pysol-music-4.50/data/music "$pysolfc_music_dir"; then
-		success "Successfully installed PySolFC music to $pysolfc_music_dir"
-	else
-		error "Could not copy PySolFC music to $pysolfc_music_dir"
-	fi
-else
-	error "Could not download PySolfc music from $pysolfc_music_url"
 fi
 
 # Fix hardcoded icons
