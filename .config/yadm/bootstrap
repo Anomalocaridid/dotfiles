@@ -255,6 +255,7 @@ readonly misc=(
 	"exercism-bin"
 	"freetube-bin"
 	"git-lfs" # For managing mpvwallpaper file
+	"gtk-cyberpunk-neon-theme-git" # gtk theme
 	"hardcode-fixer-git"
 	"hardcode-tray-git"
 	"k3b" # disc ripper/burner
@@ -271,7 +272,6 @@ readonly misc=(
 	# "tealdeer" # Has to be installed after rustup is configured.
 	"teensy-loader-cli" # Required for compiling my QMK layout
 	"ventoy-bin"       # Tool for making multiboot USB drives.
-
 )
 
 # Install programs with yay
@@ -476,21 +476,6 @@ if git -C qmk_firmware remote add upstream "$upstream_qmk_repo" &> /dev/null; th
 	success "Successfully added upstream QMK repo at $upstream_qmk_repo"
 else
 	error "Could not add upstream QMK repo at $upstream_qmk_repo"
-fi
-
-# Download color scheme to GTK system theme directory
-readonly color_scheme_url="https://raw.githubusercontent.com/Roboron3042/Cyberpunk-Neon/master/gtk/materia-cyberpunk-neon.tar.gz"
-readonly color_scheme_dir="/usr/share/themes/"
-step "Downloading GTK color scheme"
-
-if sudo mkdir -p "$color_scheme_dir"; then
-	if curl "$color_scheme_url" 2> /dev/null | sudo tar xzf - --directory="$color_scheme_dir"; then
-		success "Successfully downloaded GTK color scheme"
-	else
-		error "Could not download GTK color scheme"
-	fi
-else
-	error "Could not create folder at $color_scheme_dir"
 fi
 
 # Install music for PySolFC
