@@ -17,7 +17,7 @@ eval "$(dircolors)"
 eval "$(batpipe)"
 
 # fuzzy finder configuration
-export SKIM_DEFAULT_OPTIONS="--color=bg+:#091833,pointer:#ea00d9,prompt:#ea00d9"
+export SKIM_DEFAULT_OPTIONS="--color=matched:#d7d7d5,matched_bg:#ea00d9,current_bg:#091833,current_match_bg:#711c91,info:#0abdc6,border:#ea00d9,prompt:#ea00d9,pointer:#ea00d9,spinner:#00ff00"
 
 # Opt out of Microsoft's telemetry when using .NET SDK
 export DOTNET_CLI_TELEMETRY_OPTOUT=true
