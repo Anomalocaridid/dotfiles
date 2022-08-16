@@ -58,7 +58,7 @@ label = "orange"
 "ui.text" = { fg = "cyan" }
 "ui.text.focus" = { fg = "pink" }
 
-"ui.selection" = { fg = "white", bg = "light-blue", modifiers = ["bold"] }
+"ui.selection" = { fg = "white", bg = "pink", modifiers = ["bold"] }
 "ui.selection.primary" = { fg = "white", bg = "purple", modifiers = ["bold"]}
 # TODO: namespace ui.cursor as ui.selection.cursor?
 #"ui.cursor.select" = { fg = "white", bg = "purple" }
