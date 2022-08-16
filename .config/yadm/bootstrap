@@ -51,7 +51,7 @@ readonly zsh_deps=(
 	"bat"
 	"bat-extras"
 	"cfdg" # Context Free interpreter
-	# "dust" # Has to be installed after rustup is configured.
+	"dust" 
 	"exa"
 	"fd"
 	"lolcat"
@@ -65,7 +65,7 @@ readonly zsh_deps=(
 	"toilet"
 	"toilet-fonts" # Required by toilet
 	"wezterm"
-	# "zoxide" # Has to be installed after rustup is configured.
+	"zoxide"
 	"zsh-git" # zsh-git so a patch can be applied.
 )
 
@@ -118,7 +118,7 @@ readonly common_lisp_dev=(
 
 readonly rust_dev=(
 	"rust-analyzer"
-	"rustup"
+	"rust"
 )
 
 readonly c_dev=(
@@ -270,7 +270,7 @@ readonly misc=(
 	"strawberry"       # music player
 	"swaylock-effects-git" # fancier swaylock alternative
 	"sweet-folders-icons-git" # Part of candy-icons-git
-	# "tealdeer" # Has to be installed after rustup is configured.
+	"tealdeer"
 	"teensy-loader-cli" # Required for compiling my QMK layout
 	"ventoy-bin"       # Tool for making multiboot USB drives.
 )
@@ -280,26 +280,6 @@ readonly misc=(
 step "Installing packages"
 
 if $AUR_HELPER -Syu --needed --answerclean None $(echo "${zsh_deps[*]} ${hx_deps[*]} ${misc[*]}" | sort | uniq); then
-	success "Successfully installed packages"
-else
-	error "Could not install packages"
-fi
-
-# Configure rustup
-step "Installing Rust with rustup"
-
-if rustup default stable &> /dev/null; then
-	success "Successfully installed Rust"
-else
-	error "Could not install Rust"
-fi
-
-step "Configuring Rust with rustup"
-
-# Install packages that require rustup
-step "Installing packages that depend on Rust"
-
-if $AUR_HELPER -S --needed --answerclean None dust zoxide tealdeer; then
 	success "Successfully installed packages"
 else
 	error "Could not install packages"
