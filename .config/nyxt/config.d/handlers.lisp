@@ -58,6 +58,6 @@ Intended for use with `request-resource-hook'."
 
 ;;; set url handlers
 (define-url-handlers ('about-blank-handler (match-url "about:blank"))
-                     ('freetube-handler (match-domain "youtube.com"
-                                                      "youtu.be"))
+                     ;('freetube-handler (match-domain "youtube.com"
+                     ;                                 "youtu.be"))
                      ('wikiwand-handler (match-domain "wikipedia.org")))
