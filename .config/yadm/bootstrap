@@ -51,6 +51,7 @@ readonly zsh_deps=(
 	"bat"
 	"bat-extras"
 	"cfdg" # Context Free interpreter
+	"duf"
 	"dust" 
 	"exa"
 	"fd"
