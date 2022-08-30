@@ -142,6 +142,7 @@ readonly hx_deps=(
 	"${python_dev[@]}"
 	"${rust_dev[@]}"
 	"helix"
+	"marksman-bin" # markdown lsp w/ zettlekasten-like features
 )
 
 # Dependencies for ClamAV setup
@@ -195,7 +196,6 @@ readonly games=(
 # Productivity software
 readonly productivity=(
 	"gnuplot" # Required by qalculate-gtk
-	"joplin-desktop-bin" # Note taking app
 	"libreoffice-fresh"
 	"qalculate-gtk"
 	"nyxt-browser-git" # Web browser

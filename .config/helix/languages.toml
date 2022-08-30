@@ -23,3 +23,8 @@ config = """
   }
 }
 """
+
+[[language]]
+name = "markdown"
+roots = [".marksman.toml"]
+language-server = { command = "marksman", args=["server"] }
