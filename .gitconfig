@@ -1,0 +1,12 @@
+[user]
+	email = 29845794+Anomalocaridid@users.noreply.github.com
+	name = Anomalocaridid
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
+[core]
+	autocrlf = input
