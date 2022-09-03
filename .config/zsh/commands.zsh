@@ -10,7 +10,7 @@ alias cat="bat --paging=never"
 alias less="bat --paging=always"
 alias man="batman"
 alias diff="batdiff"
-alias df="duf --only-mp '/,/boot/*,/mnt/media/*'"
+alias df="duf --only-mp '/,/boot/*,/mnt,/media/*'"
 batthemes() {
 	bat --list-themes | fzf --preview="bat --theme={} --color=always $1"
 }
