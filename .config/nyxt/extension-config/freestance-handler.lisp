@@ -4,8 +4,5 @@
 (define-configuration web-buffer
   ((request-resource-hook
     (reduce #'hooks:add-hook
-            '(nx-freestance-handler:nitter-handler
-              nx-freestance-handler:bibliogram-handler
-              nx-freestance-handler:scribe-handler
-              nx-freestance-handler:invidious-handler)
+            nx-freestance-handler:*freestance-handlers*
             :initial-value %slot-default%))))
