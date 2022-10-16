@@ -20,7 +20,7 @@
                 (*white* "#d7d7d5")
                 (*yellow* "#ffff00")
                 (*green* "#00ff00")
-                (*font* "FuraCode Nerd Font"))
+                (*font* "FiraCode Nerd Font"))
 
 (define-configuration browser
   ((theme (make-instance 'theme:theme
