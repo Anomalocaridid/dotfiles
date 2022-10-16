@@ -57,7 +57,7 @@ readonly zsh_deps=(
 	"fd"
 	"lolcat"
 	"nnn-nerd" # TUI file manager
-	"otf-nerd-fonts-fira-code"
+	"nerd-fonts-fira-code"
 	"pkgfile"
 	"ripgrep" # Required by bat-extras-git
 	"skim"
