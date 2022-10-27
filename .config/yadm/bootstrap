@@ -249,6 +249,7 @@ readonly misc=(
 	"cdrtools" # Required by k3b
 	"cfdg"  # Context Free interpreter
 	"cht.sh-git"
+	"delta" # Alternative to diff, required by git setup
 	"dhall"
 	"dhall-json" # Converts dhall to json and yaml
 	"discord"
