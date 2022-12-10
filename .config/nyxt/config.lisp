@@ -35,5 +35,5 @@
 ;;; load extensions
 (asdf:load-system :nx-fruit)
 (load-extensions freestance-handler
-                 ;kaomoji
+                 kaomoji
                  search-engines)

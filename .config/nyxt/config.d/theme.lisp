@@ -42,147 +42,144 @@
   ((style (str:concat
             %slot-value%
             (theme:themed-css (theme *browser*)  
-              (*
-               :font-family theme:font-family)
-              ("#prompt, #prompt-extra, #prompt-area"
-               :background-color theme:secondary
-               :color theme:on-background)
-              (button
-               :border-radius "4px")
-              ("button[title=vi-normal-mode], button[title=vi-insert-mode]:hover"
-               :background-color theme:accent
-               :border-color theme:accent
-               :color theme:on-background)
-              ("button[title=vi-insert-mode], button[title=vi-normal-mode]:hover"
-               :background-color theme:primary
-               :border-color theme:primary
-               :color theme:on-primary)
-              (".source-name"
-               :color theme:on-background
-               :font-weight "bold")
-              (".source-content th"
-               :background-color theme:background
-               :border "1px solid"
-               :border-color theme:primary
-               :color theme:on-background)
-              ("#selection"
-               :color theme:on-background
-               :font-weight "bold")
-              (".marked"
-               :background-color theme:primary
-               :color theme:on-primary))))))
+              `(*
+                :font-family ,theme:font-family)
+              `("#prompt, #prompt-extra, #prompt-area"
+                :background-color ,theme:secondary
+                :color ,theme:on-background)
+              `(button
+                :border-radius "4px")
+              `("button[title=vi-normal-mode], button[title=vi-insert-mode]:hover"
+                :background-color ,theme:accent
+                :border-color ,theme:accent
+                :color ,theme:on-background)
+              `("button[title=vi-insert-mode], button[title=vi-normal-mode]:hover"
+                :background-color ,theme:primary
+                :border-color ,theme:primary
+                :color ,theme:on-primary)
+              `(".source-name"
+                :color ,theme:on-background
+                :font-weight "bold")
+              `(".source-content th"
+                :background-color ,theme:background
+                :border "1px solid"
+                :border-color ,theme:primary
+                :color ,theme:on-background)
+              `("#selection"
+                :color ,theme:on-background
+                :font-weight "bold")
+              `(".marked"
+                :background-color ,theme:primary
+                :color ,theme:on-primary))))))
 
 (define-configuration web-buffer
   ((style (str:concat
             %slot-value%
             (theme:themed-css (theme *browser*)
-              (*
-               :font-family theme:font-family)
-              ("a:hover"
-               :color theme:on-accent)
-              ("a:active"
-               :color theme:on-secondary)
-              (".button"
-               :background-color (make-important theme:background) ; important necessary for gopher search buttons
-               :border "1px solid"
-               :border-color theme:primary
-               :color theme:on-background)
-              (".button:hover"
-               :background-color (make-important theme:secondary) ; important necessary for gopher search buttons 
-               :border "1px solid"
-               :border-color (make-important theme:secondary) ; important necessary for gopher search buttons
-               :color theme:on-background
-               :opacity 1)
-              (".button:active"
-               :background-color (make-important theme:on-secondary) ; important necessary for gopher search buttons
-               :border "1px solid"
-               :border-color (make-important theme:on-secondary) ; important necessary for gopher search buttons
-               :color theme:primary)
-              (".button:visited"
-               :color theme:accent)
-              (".button:visited:active"
-               :color theme:background)
+              `(*
+                :font-family ,theme:font-family)
+              `("a:hover"
+                :color ,theme:on-accent)
+              `("a:active"
+                :color ,theme:on-secondary)
+              `(".button"
+                :background-color ,(make-important theme:background) ; important necessary for gopher search buttons
+                :background-color ,theme:background ; important necessary for gopher search buttons
+                :border "1px solid"
+                :border-color ,theme:primary
+                :color ,theme:on-background)
+              `(".button:hover"
+                :background-color ,(make-important theme:secondary) ; important necessary for gopher search buttons 
+                :border "1px solid"
+                :border-color ,(make-important theme:secondary) ; important necessary for gopher search buttons
+                :color ,theme:on-background
+                :opacity 1)
+              `(".button:active"
+                :background-color ,(make-important theme:on-secondary) ; important necessary for gopher search buttons
+                :border "1px solid"
+                :border-color ,(make-important theme:on-secondary) ; important necessary for gopher search buttons
+                :color ,theme:primary)
+              `(".button:visited"
+                :color ,theme:accent)
+              `(".button:visited:active"
+                :color ,theme:background)
               ;; necessary for headings on nyxt::dashboard
-              ("h2, h3, h4, h5, h6"
-               :color (make-important theme:primary))
+              `("h2, h3, h4, h5, h6"
+                :color ,(make-important theme:primary))
               ;; "Browser" title text on nyxt:dashboard
-              ("#subtitle"
-               :color (make-important theme:accent)))))))
+              `("#subtitle"
+                :color ,(make-important theme:accent)))))))
 
 (define-configuration nyxt/repl-mode:repl-mode
   ((style (str:concat
             %slot-value%
             (theme:themed-css (theme *browser*)
-              (".input"
-               :background-color theme:secondary
-               :border "1px solid"
-               :border-color theme:primary
-               :color theme:on-background)
-              (".input-buffer"
-               :background-color theme:background
-               :color theme:on-background
-               :opacity 1)
-              (".input-buffer::placeholder"
-               :color theme:accent))))))
+              `(".input"
+                :background-color ,theme:secondary
+                :border "1px solid"
+                :border-color ,theme:primary
+                :color ,theme:on-background)
+              `(".input-buffer"
+                :background-color ,theme:background
+                :color ,theme:on-background
+                :opacity 1)
+              `(".input-buffer::placeholder"
+                :color ,theme:accent))))))
 
 (define-configuration nyxt/small-web-mode:small-web-mode
   ((style (str:concat
             %slot-value%
-            (eval
-              `(theme:themed-css (theme *browser*)
-                ("pre"
-                 :background-color theme:background)
-                ("a.button.search"
-                 :color theme:on-accent
-                 :border-color theme:on-accent)
-                ("a.button.error"
-                 :color ,*red*
-                 :border-color ,*red*)))))))
+            (theme:themed-css (theme *browser*)
+              `("pre"
+                :background-color ,theme:background)
+              `("a.button.search"
+                :color ,theme:on-accent
+                :border-color ,theme:on-accent)
+              `("a.button.error"
+                :color ,*red*
+                :border-color ,*red*))))));)
 
+; TODO: fix spacing for far left and far right segments
 (define-configuration status-buffer
   ((style (str:concat
             %slot-value%
-            (eval
-              `(theme:themed-css (theme *browser*)
-                (*
-                 :font-family theme:font-family)
-                ("#controls"
-                 :background-color ,*semi-dark-blue*
-                 :color theme:primary)
-                ("#controls button:hover"
-                 :color theme:on-primary)
-                ("#controls button:active"
-                 :color theme:on-background)
-                ("#container"
-                 :display "grid"
-                 :grid-template-columns "90px minmax(auto, 30ch) 1fr auto")
-                ("#url"
-                 :background-color theme:on-secondary
-                 :color theme:on-background)
-                (".button:hover"
-                 :opacity 1)
-                ("#url .button:hover"
-                 :color theme:primary)
-                ("#url .button:active"
-                 :color theme:on-primary)
-                ("#tabs"
-                 :background-color theme:background
-                 :color theme:on-background)
-                ("#tabs .button:hover"
-                 :color theme:primary)
-                ("#tabs .button:active"
-                 :color theme:on-primary)
-                ("#modes .button:hover"
-                 :color theme:on-background)
-                ("#modes .button:active"
-                 :color theme:background)))))))
+            (theme:themed-css (theme *browser*)
+              `(*
+                :font-family ,theme:font-family)
+              `("#controls"
+                :background-color ,*semi-dark-blue*
+                :color ,theme:primary)
+              `("#controls button:hover"
+                :color ,theme:on-primary)
+              `("#controls button:active"
+                :color ,theme:on-background)
+              `("#container"
+                :display "grid"
+                :grid-template-columns "90px minmax(auto, 30ch) 1fr auto")
+              `("#url"
+                :background-color ,theme:on-secondary
+                :color ,theme:on-background)
+              `(".button:hover"
+                :opacity 1)
+              `("#url .button:hover"
+                :color ,theme:primary)
+              `("#url .button:active"
+                :color ,theme:on-primary)
+              `("#tabs"
+                :background-color ,theme:background
+                :color ,theme:on-background)
+              `("#tabs .button:hover"
+                :color ,theme:primary)
+              `("#tabs .button:active"
+                :color ,theme:on-primary)
+              `("#modes .button:hover"
+                :color ,theme:on-background)
+              `("#modes .button:active"
+                :color ,theme:background))))))
 
 (define-configuration window
   ((message-buffer-style (str:concat
                            %slot-value%
                            (theme:themed-css (theme *browser*)
-                             (body
-                              :font-family theme:font-family))))))
-
-;; TODO: tweak hint mode style
-;; TODO: style dark mode
+                             `(body
+                               :font-family ,theme:font-family))))))
