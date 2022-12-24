@@ -15,8 +15,20 @@
 ;;; enable default modes
 (define-configuration buffer
   ((default-modes (append '(nyxt/blocker-mode:blocker-mode
-                            nyxt/reduce-tracking-mode:reduce-tracking-mode)
+                            nyxt/reduce-tracking-mode:reduce-tracking-mode
+                            nyxt/password-mode:password-mode)
                           %slot-default%))))
+
+;;; password manager config
+(defmethod initialize-instance :after
+           ((interface password:keepassxc-interface)
+            &key &allow-other-keys)
+  (setf (password:password-file interface) "/home/anomalocaris/Sync/Keepass Databases/Personal.kdbx"
+        (password:yubikey-slot interface) "2"))
+
+(define-configuration nyxt/password-mode:password-mode
+  ((nyxt/password-mode:password-interface
+    (make-instance 'password:keepassxc-interface))))
 
 ;;; load all lisp files in ./config.d
 (eval 
