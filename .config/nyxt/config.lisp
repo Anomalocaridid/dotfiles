@@ -16,7 +16,8 @@
 (define-configuration buffer
   ((default-modes (append '(nyxt/blocker-mode:blocker-mode
                             nyxt/reduce-tracking-mode:reduce-tracking-mode
-                            nyxt/password-mode:password-mode)
+                            nyxt/password-mode:password-mode
+                            nyxt/vi-mode:vi-normal-mode)
                           %slot-default%))))
 
 ;;; password manager config
