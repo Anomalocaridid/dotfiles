@@ -5,6 +5,7 @@ application/epub+zip=org.pwmt.zathura-pdf-mupdf.desktop;
 application/msword=libreoffice-writer.desktop;
 application/oxps=org.pwmt.zathura-pdf-mupdf.desktop;
 application/pdf=org.pwmt.zathura-pdf-mupdf.desktop;
+application/toml=helix.desktop;
 application/vnd.ms-excel=libreoffice-calc.desktop;
 application/vnd.ms-powerpoint=libreoffice-impress.desktop;
 application/vnd.oasis.opendocument.database=libreoffice-base.desktop;
