@@ -1,12 +1,10 @@
 [[language]]
 name = "lua"
-language-server = { command = "lua-language-server" }
 auto-format = true
 
 [[language]]
 name = "haskell"
-roots = ["Setup.hs", "stack.yaml", "*.cabal"]
-language-server = { command = "haskell-language-server-wrapper", args = ["lsp"] }
+auto-format = true
 
 [[language]]
 name = "python"
@@ -24,7 +22,3 @@ config = """
 }
 """
 
-[[language]]
-name = "markdown"
-roots = [".marksman.toml"]
-language-server = { command = "marksman", args=["server"] }
