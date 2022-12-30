@@ -40,8 +40,8 @@
     line-numbers-plus-style = bold "#00ff00"
     line-numbers-right-style = "#711c91"
     line-numbers-zero-style = "#0abdc6"
-    minus-emph-style = syntax "#880000"
+    minus-emph-style = bold syntax "#880000"
     minus-style = bold syntax "#330000"
-    plus-emph-style = syntax "#005500"
+    plus-emph-style = bold syntax "#005500"
     plus-style = bold syntax "#002200"
     syntax-theme = cyberpunk-neon
