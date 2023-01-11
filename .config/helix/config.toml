@@ -1,2 +1,15 @@
 theme = "cyberpunk_neon"
-#[editor]
+
+[editor]
+bufferline = "multiple"
+
+[editor.statusline]
+left = ["mode", "separator", "spinner", "file-name", "separator"]
+# center = []
+right = ["diagnostics","separator", "file-type", "separator", "selections", "separator", "position", "file-encoding"]
+separator = ""
+
+[editor.indent-guides]
+render = true
+character = "┋"
+

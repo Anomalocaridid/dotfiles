@@ -51,6 +51,7 @@ label = "orange"
 "ui.linenr.selected" = { fg = "cyan", bg = "blue", modifiers = ["bold"] }
 "ui.statusline" = { fg = "cyan", bg = "blue" }
 "ui.statusline.inactive" = { fg = "purple", bg = "dark-blue" }
+"ui.statusline.separator" = { fg = "cyan" }
 "ui.popup" = { fg = "pink", bg = "blue" }
 "ui.window" = { fg = "pink", bg = "dark-blue" }
 "ui.help" = { fg = "white", bg = "pink" }
