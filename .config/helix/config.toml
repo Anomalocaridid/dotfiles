@@ -9,6 +9,9 @@ left = ["mode", "separator", "spinner", "file-name", "separator"]
 right = ["diagnostics","separator", "file-type", "separator", "selections", "separator", "position", "file-encoding"]
 separator = ""
 
+[editor.lsp]
+display-messages = true
+
 [editor.indent-guides]
 render = true
 character = "┋"
