@@ -20,7 +20,6 @@ return {
 			"cv27", -- []
 			"cv28", -- {. .}
 			"ss07", -- =~ !~
-			"ss10", -- Fl Tl fi fj fl ft
 		},
 	},
 
