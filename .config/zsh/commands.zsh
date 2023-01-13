@@ -14,6 +14,9 @@ alias df="duf --only-mp '/,/boot/*,/mnt,/media/*'"
 batthemes() {
 	bat --list-themes | fzf --preview="bat --theme={} --color=always $1"
 }
+# Use bat to color --help messages
+alias -g -- --help="--help | bat --plain --language=help"
+alias -g -- -h="--help" # alias to --help specifically because not all programs that support --help support -h
 
 # So I don't accidentally delete anything again
 alias rm="rm -i"

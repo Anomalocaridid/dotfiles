@@ -9,6 +9,7 @@ path+=("$CARGO_BIN" "$STACK_BIN")
 export EDITOR="xdg-open" # MIGHT rely on xdg-utils-handlr
 export VISUAL="$EDITOR"
 export PAGER="bat"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Set LS_COLORS
 eval "$(dircolors)"
@@ -36,7 +37,7 @@ export NNN_COLORS="#1909c9d02e0d2cff"
 # Sync subshell PWD with nnn
 nnn_cd() {
 	if [ -n "$NNN_PIPE" ]; then
-		printf "%s\0" "0c${PWD}" ! > "${NNN_PIPE}" &
+		printf "%s\0" "0c${PWD}" ! >"${NNN_PIPE}" &
 	fi
 }
 
