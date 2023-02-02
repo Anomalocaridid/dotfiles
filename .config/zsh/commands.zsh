@@ -53,6 +53,9 @@ alias bdu="btrfs filesystem usage /"
 # Shorter command for helix
 alias hx="helix"
 
+# Markdown note-taking
+alias notes="glow $HOME/Sync/Notes"
+
 # Search files with skim and rg
 alias search="sk --ansi --delimiter ':' --nth=3 \
 	--cmd 'rg --color=always --line-number \"{}\"' \
