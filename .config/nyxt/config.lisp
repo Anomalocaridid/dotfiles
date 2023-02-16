@@ -1,16 +1,12 @@
 ;;;; ~/.config/nyxt/config.lisp
 ;;;; main config file for Nyxt
 
-;;; set terminal command
-(defparameter *terminal* '("wezterm" "start" "--")
-  "Preferred command to run terminal programs with")
-
 ;;; misc settings
 (define-configuration browser
    ;; never restore session
   ((restore-session-on-startup-p nil)
    ;; set external editor
-   (external-editor-program (append *terminal* '("helix")))))
+   (external-editor-program '("handlr" "open"))))
 
 ;;; enable default modes
 (define-configuration buffer
