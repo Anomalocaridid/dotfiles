@@ -21,7 +21,6 @@ application/vnd.openxmlformats-officedocument.presentationml.presentation=libreo
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet=libreoffice-calc.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=libreoffice-writer.desktop;
 application/vnd.openxmlformats-officedocument.wordprocessingml.template=libreoffice-writer.desktop;
-application/x-zerosize=helix.desktop;
 application/x-yaml=helix.desktop;
 audio/*=org.strawberrymusicplayer.strawberry.desktop;
 image/*=imv.desktop;
