@@ -1,4 +1,4 @@
-{ lib, disk ? "/dev/vda", memory ? "8G", ... }: {
+{ disk ? "/dev/vda", memory ? "8G", ... }: {
   disk = {
     vda = {
       type = "disk";
