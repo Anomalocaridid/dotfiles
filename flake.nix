@@ -9,9 +9,12 @@
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    impermanence.url = "github:nix-community/impermanence";
+    # impermanence.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = {self, nixpkgs, disko, home-manager}: {
+  outputs = {self, nixpkgs, disko, home-manager, impermanence}: {
     nixosConfigurations.home-pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       
@@ -19,10 +22,13 @@
         ./configuration.nix
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
+        impermanence.nixosModules.impermanence
+        # impermanence.nixosModules.home-manager.impermanence
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.anomalocaris = import ./home.nix;
+          environment.persistence = import ./persistance.nix;
         }
       ];
     };

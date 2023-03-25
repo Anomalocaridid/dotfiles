@@ -88,8 +88,6 @@
     wget
   ];
 
-  environment.etc."nixos".source = "/persist/etc/nixos";
-  
   programs.git.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -110,7 +108,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-
+  
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.
