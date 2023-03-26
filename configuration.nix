@@ -89,6 +89,7 @@
   ];
 
   programs.git.enable = true;
+  programs.fuse.userAllowOther = true;
 
   # Stylix
   stylix = import ./stylix.nix { inherit pkgs; };

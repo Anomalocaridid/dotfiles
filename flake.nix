@@ -44,11 +44,15 @@
           # Home Manager
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.anomalocaris = import ./home.nix;
+          home-manager.users.anomalocaris = {
+            imports = [
+              impermanence.nixosModules.home-manager.impermanence
+               ./home.nix
+            ];
+          };
 
           # Impermanence
           environment.persistence = import ./persistance.nix;
-
         }
       ];
     };

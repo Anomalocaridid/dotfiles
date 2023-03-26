@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   image = pkgs.fetchurl {
-    url = "https://www.pixelstalk.net/wp-content/uploads/images1/Game-OutRun-Photos-Download.jpg"
-    sha256 = "";
-  };
+    url = "https://www.pixelstalk.net/wp-content/uploads/images1/Game-OutRun-Photos-Download.jpg";
+    sha256 = "sha256-/xlKtONGKF0eYAvIGqZD63j6QvzGUaA6XYu082WMtIg=";
+};
   base16Scheme = {
     slug = "cyberpunk-neon";
     scheme = "Cyberpunk Neon";
