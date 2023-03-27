@@ -70,13 +70,16 @@
 
   fileSystems."/persist".neededForBoot = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.anomalocaris = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox
-    ];
-    passwordFile = "/persist/passwords/anomalocaris";
+  users.users = {
+    anomalocaris = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      packages = with pkgs; [
+        firefox
+      ];
+      passwordFile = "/persist/passwords/anomalocaris";
+    };
+    root.passwordFile = "/persist/passwords/root";
   };
 
   # List packages installed in system profile. To search, run:
