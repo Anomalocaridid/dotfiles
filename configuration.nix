@@ -91,6 +91,13 @@
     wget
   ];
 
+  security.sudo.extraConfig = ''
+    # Prevents sudo lecture from appearing after reboot
+    Defaults lecture = never
+    # Sudo insults after failed attempts because why not
+    Defaults insults
+  '';
+
   programs.fuse.userAllowOther = true;
 
   # Stylix
