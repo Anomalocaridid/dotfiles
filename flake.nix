@@ -30,7 +30,7 @@
     impermanence,
     stylix,
     ...
-  }: {
+  } @ inputs: {
     nixosConfigurations.home-pc = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       
@@ -50,11 +50,18 @@
                ./home.nix
             ];
           };
+          # Inherit inputs to use extra base16 themes with Stylix
+          home-manager.extraSpecialArgs = {inherit inputs;};
 
           # Impermanence
           environment.persistence = import ./persistance.nix;
+
         }
       ];
+      # Inherit inputs to use extra base16 themes with Stylix
+      specialArgs = {
+        inherit inputs;
+      };
     };
   };
 }

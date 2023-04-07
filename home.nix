@@ -5,7 +5,7 @@
   home.homeDirectory = "/home/anomalocaris";
   home.packages = with pkgs; [
     helix
-    wezterm
+    neofetch
   ];
   imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
 
