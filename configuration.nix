@@ -11,7 +11,17 @@
       #"${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix = {
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 14d";
+    };
+  };
 
   disko.devices = import ./disko-config.nix {
     disk = "/dev/vda";
