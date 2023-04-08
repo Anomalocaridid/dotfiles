@@ -33,15 +33,14 @@
           minus-style = "bold syntax #330000";
           plus-emph-style = "bold syntax ${base0B}";
           plus-style = "bold syntax ${base0E}";
-          # TODO: Requires bat
-          #syntax-theme = "base16";
+          syntax-theme = "base16";
         };
       };
     };
 
     extraConfig = {
       init.defaultBranch = "main";
-      core.autocrlf = true;
+      core.autocrlf = "input";
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };
