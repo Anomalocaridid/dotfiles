@@ -9,9 +9,9 @@
     scheme = "Cyberpunk Neon";
     author = "Roboron3042";
     base00 = "000b1e";
-    base01 = "123e7c";
-    base02 = "1c61c2";
-    base03 = "123e7c";
+    base01 = "133e7c";
+    base02 = "321959";
+    base03 = "133e7c";
     base04 = "00000a";
     base05 = "0abdc6";
     base06 = "d7d7d5";
