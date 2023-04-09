@@ -28,9 +28,12 @@
     memory = "8G";
   };
 
-  # Use the systemd-boot EFI boot loader.
+  # Use GRUB
   boot.loader = {
-    systemd-boot.enable = true;
+    grub = {
+      device = "nodev";
+      efiSupport = true;
+    };
     efi.canTouchEfiVariables = true;
   };
 
