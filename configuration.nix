@@ -88,7 +88,6 @@
     wget
   ];
 
-  programs.git.enable = true;
   programs.fuse.userAllowOther = true;
 
   # Stylix

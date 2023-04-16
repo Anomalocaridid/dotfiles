@@ -7,7 +7,7 @@
     helix
     wezterm
   ];
-  imports = map (n: "./home/${n}") (builtins.attrNames (builtins.readDir ./home));
+  imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
 
   home.persistence."/persist/home/anomalocaris" = {   
     allowOther = true;
