@@ -33,3 +33,6 @@ name = "c"
 indent = { tab-width = 4, unit = " " }
 auto-format = true
 
+[[language]]
+name = "julia"
+auto-format = true
