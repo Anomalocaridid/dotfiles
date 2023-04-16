@@ -4,10 +4,10 @@
   home.username = "anomalocaris";
   home.homeDirectory = "/home/anomalocaris";
   home.packages = with pkgs; [
-    git
     helix
     wezterm
   ];
+  imports = map (n: "./home/${n}") (builtins.attrNames (builtins.readDir ./home));
 
   home.persistence."/persist/home/anomalocaris" = {   
     allowOther = true;
@@ -32,7 +32,4 @@
 
   programs.home-manager.enable = true;
 
-  # Temporary
-  # Just the bare minimum to commit setup so far
-  home.file.".gitconfig".source = ./home/.gitconfig;
 }
