@@ -1,30 +1,39 @@
-{ config, ... }:
+{ config, lib, ... }:
 
-with config.lib;
-with config.lib.stylix.scheme.withHashtag;
 {
   programs.wezterm = {
     enable = true;
-    # colorSchemes = (stylix.scheme inputs.base16-wezterm);
     colorSchemes = {
-      base16 = rec {
-        foreground = base05;
-        background = base00;
+      cyberpunk-neon = rec {
+        foreground = "#0abdc6";
+        background = "#000b1e";
         cursor_bg = foreground;
-        cursor_border = foreground;
+        cursor_border = cursor_bg;
         cursor_fg = background;
-        selection_bg = base02;
-        selection_fg = base06;
-        split = base01; # maybe tweak later
-        scrollbar_thumb = base01; # maybe tweak later
+        selection_bg = "#321959";
+        selection_fg = "#d7d7d5";
+        split = "#ea00d9";
+        scrollbar_thumb = "#ea00d9";
 
         ansi = [
-          base00 base08 base0B base0A
-          base0D base0E base0C base05
+          "#123e7c"
+          "#ff0000"
+          "#d300c4"
+          "#f57800"
+          "#123e7c"
+          "#711c91"
+          "#0abdc6"
+          "#d7d7d5"
         ];
         brights = [
-          base03 base09 base01 base02
-          base04 base06 base0F base07
+          "#1c61c2"
+          "#ff0000"
+          "#d300c4"
+          "#f57800"
+          "#00ff00"
+          "#711c91"
+          "#0abdc6"
+          "#d7d7d5"
         ];
       };
     };
@@ -40,7 +49,7 @@ with config.lib.stylix.scheme.withHashtag;
     	enable_wayland = true,
     	enable_kitty_graphics = true,
 
-    	font_size = ${builtins.toString config.stylix.fonts.sizes.terminal},
+    	font_size = 11.0,
     	font = wezterm.font {
     		family = "FiraCode Nerd Font",
     		harfbuzz_features = {
@@ -54,25 +63,25 @@ with config.lib.stylix.scheme.withHashtag;
     		},
     	},
 
-    	color_scheme = "base16",
+    	color_scheme = "cyberpunk-neon",
     	colors = {
     		tab_bar =  {
-    			background = "${base00}",
+    			background = "#000b1e",
 
     			active_tab = {
-    				bg_color = "${base01}",
-    				fg_color = "${base05}",
+    				bg_color = "#005faf",
+    				fg_color = "#0abdc6",
     				intensity = "Bold",
     			},
 
     			inactive_tab = {
-    				bg_color = "${base00}",
-            fg_color = "${base05}",
+    				bg_color = "#000b1e",
+            fg_color = "#0abdc6",
     			},
 
     			inactive_tab_hover = {
-    				bg_color = "${base00}",
-    				fg_color = "${base0E}",    			
+    				bg_color = "#000b1e",
+    				fg_color = "#711c91",    			
           },
     		},
     	},

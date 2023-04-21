@@ -6,7 +6,12 @@
   home.packages = with pkgs; [
     helix
     neofetch
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
+
+
+
+  
   imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
 
   home.persistence."/persist/home/anomalocaris" = {   

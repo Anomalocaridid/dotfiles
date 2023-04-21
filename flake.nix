@@ -16,10 +16,6 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
-    stylix = {
-      url = "github:danth/stylix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
@@ -28,7 +24,6 @@
     disko,
     home-manager,
     impermanence,
-    stylix,
     ...
   } @ inputs: {
     nixosConfigurations.home-pc = nixpkgs.lib.nixosSystem {
@@ -39,7 +34,6 @@
         disko.nixosModules.disko
         home-manager.nixosModules.home-manager
         impermanence.nixosModules.impermanence
-        stylix.nixosModules.stylix
         {
           # Home Manager
           home-manager.useGlobalPkgs = true;
@@ -50,12 +44,9 @@
                ./home.nix
             ];
           };
-          # Inherit inputs to use extra base16 themes with Stylix
-          home-manager.extraSpecialArgs = {inherit inputs;};
-
+          
           # Impermanence
           environment.persistence = import ./persistance.nix;
-
         }
       ];
       # Inherit inputs to use extra base16 themes with Stylix
