@@ -8,7 +8,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #"${builtins.fetchTarball "https://github.com/nix-community/disko/archive/master.tar.gz"}/module.nix"
     ];
 
   nix = {
@@ -52,7 +51,28 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
-    font = "Lat2-Terminus16";
+    font = "FiraCode Nerd Font";
+    colors = [      
+      # Normal
+      "000b1e"
+      "ff0000"
+      "d300c4"
+      "f57800"
+      "123e7c"
+      "711c91"
+      "0abdc6"
+      "0abdc6"
+
+      # Bright
+      "1c61c2"
+      "ff0000"
+      "d300c4"
+      "f57800"
+      "00ff00"
+      "711c91"
+      "0abdc6"
+      "d7d7d5"
+    ];
   #   keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
