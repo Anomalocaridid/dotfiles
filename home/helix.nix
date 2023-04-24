@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 {
   programs.helix = {
     enable = true;
@@ -38,7 +38,7 @@
         name = "lua";
         auto-format = true;
       }
-      { 
+      {
         name = "haskell";
         auto-format = true;
       }
@@ -67,12 +67,16 @@
         name = "julia";
         auto-format = true;
       }
+      {
+        name = "nix";
+        formatter = { command = "nixpkgs-fmt"; };
+      }
     ];
     themes = {
-      cyberpunk_neon = { 
+      cyberpunk_neon = {
         attribute = "pink";
-        keyword = { fg = "pink"; modifiers = ["bold"]; };
-        "keyword.directive"= { fg = "pink"; modifiers = ["bold"]; }; # -- preprocessor comments (#if in C)
+        keyword = { fg = "pink"; modifiers = [ "bold" ]; };
+        "keyword.directive" = { fg = "pink"; modifiers = [ "bold" ]; }; # -- preprocessor comments (#if in C)
         namespace = "pink";
         punctuation = "purple";
         #"punctuation.delimiter" = "lavender";
@@ -85,11 +89,11 @@
         "variable.parameter" = { fg = "cyan"; };
         "variable.builtin" = "cyan";
         type = "cyan";
-        "type.builtin" = { fg = "pink"; modifiers = ["bold"]; }; # TODO: distinguish?
+        "type.builtin" = { fg = "pink"; modifiers = [ "bold" ]; }; # TODO: distinguish?
         constructor = "pink";
         function = "pink";
         "function.macro" = "orange";
-        "function.builtin" = { fg = "cyan"; modifiers = ["bold"]; };
+        "function.builtin" = { fg = "cyan"; modifiers = [ "bold" ]; };
         tag = "cyan";
         comment = "light-blue";
         constant = "orange";
@@ -101,9 +105,9 @@
         label = "orange";
 
         "markup.heading" = "pink";
-        "markup.bold" = { modifiers = ["bold"]; };
-        "markup.italic" = { modifiers = ["italic"]; };
-        "markup.link.url" = { fg = "pink"; modifiers = ["underlined"]; };
+        "markup.bold" = { modifiers = [ "bold" ]; };
+        "markup.italic" = { modifiers = [ "italic" ]; };
+        "markup.link.url" = { fg = "pink"; modifiers = [ "underlined" ]; };
         "markup.link.text" = "orange";
         "markup.raw" = "cyan";
 
@@ -117,7 +121,7 @@
         "ui.background" = { bg = "dark-blue"; };
         "ui.background.separator" = { fg = "light-blue"; };
         "ui.linenr" = { fg = "cyan"; };
-        "ui.linenr.selected" = { fg = "cyan"; bg = "semi-dark-blue"; modifiers = ["bold"]; };
+        "ui.linenr.selected" = { fg = "cyan"; bg = "semi-dark-blue"; modifiers = [ "bold" ]; };
         "ui.statusline" = { fg = "cyan"; bg = "blue"; };
         "ui.statusline.inactive" = { fg = "purple"; bg = "dark-blue"; };
         "ui.statusline.separator" = { fg = "cyan"; };
@@ -134,18 +138,18 @@
 
         "ui.virtual.indent-guide" = { fg = "light-blue"; };
 
-        "ui.selection" = { fg = "white"; bg = "trans-blue"; modifiers = ["bold"]; };
-        "ui.selection.primary" = { fg = "white"; bg = "trans-purple"; modifiers = ["bold"]; };
+        "ui.selection" = { fg = "white"; bg = "trans-blue"; modifiers = [ "bold" ]; };
+        "ui.selection.primary" = { fg = "white"; bg = "trans-purple"; modifiers = [ "bold" ]; };
         # TODO: namespace ui.cursor as ui.selection.cursor?
         "ui.cursor.select" = { fg = "dark-blue"; bg = "white"; };
         "ui.cursor.insert" = { fg = "dark-blue"; bg = "cyan"; };
         "ui.cursor.match" = { fg = "dark-blue"; bg = "purple"; };
-        "ui.cursor" = { modifiers = ["bold" "reversed"]; };
-        "ui.cursorline.primary" = { bg = "semi-dark-blue"; modifiers = ["bold"]; };
+        "ui.cursor" = { modifiers = [ "bold" "reversed" ]; };
+        "ui.cursorline.primary" = { bg = "semi-dark-blue"; modifiers = [ "bold" ]; };
         "ui.highlight" = { fg = "dark-blue"; bg = "pink"; };
 
         "ui.menu" = { fg = "cyan"; bg = "dark-blue"; };
-        "ui.menu.selected" = { fg = "cyan"; bg = "trans-purple"; modifiers = ["bold"]; };
+        "ui.menu.selected" = { fg = "cyan"; bg = "trans-purple"; modifiers = [ "bold" ]; };
         "ui.menu.scroll" = { fg = "light-blue"; bg = "dark-blue"; };
 
         "diagnostic.hint" = { underline = { color = "pink"; style = "curl"; }; };
@@ -153,12 +157,12 @@
         "diagnostic.warning" = { underline = { color = "yellow"; style = "curl"; }; };
         "diagnostic.error" = { underline = { color = "red"; style = "curl"; }; };
 
-        warning = { fg = "yellow"; modifiers = ["bold"]; };
-        error = { fg = "red"; modifiers = ["bold"]; };
-        info = { fg = "pink"; modifiers = ["bold"]; };
+        warning = { fg = "yellow"; modifiers = [ "bold" ]; };
+        error = { fg = "red"; modifiers = [ "bold" ]; };
+        info = { fg = "pink"; modifiers = [ "bold" ]; };
         hint = "pink";
 
-        palette = rec {
+        palette = {
           dark-blue = "#000b1e";
           semi-dark-blue = "#09254b";
           blue = "#091833";
