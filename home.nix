@@ -4,9 +4,11 @@
   home.username = "anomalocaris";
   home.homeDirectory = "/home/anomalocaris";
   home.packages = with pkgs; [
-    helix
     neofetch
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    firefox # fallback browser
+    nixpkgs-fmt
+    nil
   ];
 
 
