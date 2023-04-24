@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -39,7 +40,7 @@
   networking.hostName = "home-pc"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -52,7 +53,7 @@
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
     font = "FiraCode Nerd Font";
-    colors = [      
+    colors = [
       # Normal
       "000b1e"
       "ff0000"
@@ -73,7 +74,7 @@
       "0abdc6"
       "d7d7d5"
     ];
-  #   keyMap = "us";
+    #   keyMap = "us";
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
@@ -84,7 +85,7 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
-  
+
 
   # Configure keymap in X11
   services.xserver.layout = "us";
@@ -147,7 +148,7 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
-  
+
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
   # accidentally delete configuration.nix.

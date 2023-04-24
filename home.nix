@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.username = "anomalocaris";
@@ -12,11 +12,9 @@
   ];
 
 
-
-  
   imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
 
-  home.persistence."/persist/home/anomalocaris" = {   
+  home.persistence."/persist/home/anomalocaris" = {
     allowOther = true;
     directories = [
       # Default directories I care about
@@ -26,11 +24,11 @@
       "Pictures"
       "Videos"
       # Other important stuff
-      "Sync"         # Syncthing
-      "exercism"     # Exercism
-      "Projects"     # Misc. programming
+      "Sync" # Syncthing
+      "exercism" # Exercism
+      "Projects" # Misc. programming
       "qmk_firmware" # QMK
-      ".ssh"         # SSH key
+      ".ssh" # SSH key
     ];
   };
 
