@@ -2,9 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
-
-{
+{ pkgs, ... }: {
   imports =
     [
       # Include the results of the hardware scan.
@@ -108,6 +106,7 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
     anomalocaris = {
+      shell = pkgs.zsh;
       isNormalUser = true;
       extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
       passwordFile = "/persist/passwords/anomalocaris";
@@ -128,7 +127,11 @@
     Defaults insults
   '';
 
-  programs.fuse.userAllowOther = true;
+  programs = {
+    # Needed for root to access bind mounted dirs created by impermanence
+    fuse.userAllowOther = true;
+    zsh.enable = true;
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
