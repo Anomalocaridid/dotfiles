@@ -9,7 +9,7 @@
       enable = true;
       options = {
         navigate = true;
-        features = "base16";
+        features = "cyberpunk-neon";
         side-by-side = true;
         interactive.keep-plus-minus-markers = false;
         cyberpunk-neon = {

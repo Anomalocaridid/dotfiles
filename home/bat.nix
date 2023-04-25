@@ -3,7 +3,7 @@
   programs.bat = {
     enable = true;
     config = {
-      theme = "base16";
+      theme = "cyberpunk-neon";
     };
     themes = {
       cyberpunk-neon = builtins.readFile ../config/bat/themes/cyberpunk-neon.tmTheme;
