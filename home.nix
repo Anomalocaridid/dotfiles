@@ -10,8 +10,6 @@
       neofetch
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       firefox # fallback browser
-      nixpkgs-fmt
-      nil
     ];
 
     persistence."/persist/home/${username}" = {

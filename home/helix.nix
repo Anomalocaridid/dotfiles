@@ -1,5 +1,12 @@
-{ ... }:
+{ pkgs, ... }:
 {
+  # Necessary extra packages
+  home.packages = with pkgs; [
+    # Nix development
+    nixpkgs-fmt
+    nil
+  ];
+
   programs.helix = {
     enable = true;
     settings = {
