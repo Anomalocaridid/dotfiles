@@ -1,4 +1,4 @@
-{ pkgs, osConfig, ... }: {
+{ lib, pkgs, osConfig, ... }: {
   # Import all files in ./home/
   # Note: Will fail to build if non-nix files are present in ./home/
   imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
@@ -32,6 +32,13 @@
       ];
     };
 
+    activation = {
+      symlinkConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] #shell
+        ''
+          ln --symbolic --force --no-target-directory "/etc/nixos" ${homeDirectory}/nixos
+          # chown -R ${username}:users /persist/etc/nixos
+        '';
+    };
     # DON'T TOUCH
     # Use system-level stateVersion
     stateVersion = osConfig.system.stateVersion;

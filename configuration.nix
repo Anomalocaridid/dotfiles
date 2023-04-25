@@ -130,7 +130,15 @@
   programs = {
     # Needed for root to access bind mounted dirs created by impermanence
     fuse.userAllowOther = true;
+    # Need to enable zsh at system level
     zsh.enable = true;
+  };
+
+  system.activationScripts = {
+    configOwnership = #shell
+      ''
+        chown -R anomalocaris:users /persist/etc/nixos
+      '';
   };
 
   # Some programs need SUID wrappers, can be configured further or are
