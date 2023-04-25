@@ -70,6 +70,7 @@
       {
         name = "nix";
         formatter = { command = "nixpkgs-fmt"; };
+        auto-format = true;
       }
     ];
     themes = {
