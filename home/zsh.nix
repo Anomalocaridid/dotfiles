@@ -7,7 +7,7 @@
     initExtra = #shell
       ''    
       echo -en "\e[1m"
-      lsb_release --description --release --short | 
+      lsb_release --description --short | 
         tr --delete '"' |
         toilet --termwidth --font smslant --filter border --directory ${pkgs.figlet}/share/figlet |
         lolcat
