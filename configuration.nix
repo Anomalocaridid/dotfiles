@@ -21,11 +21,6 @@
     };
   };
 
-  disko.devices = import ./disko-config.nix {
-    disk = "/dev/vda";
-    memory = "8G";
-  };
-
   # Use GRUB
   boot.loader = {
     grub = {

@@ -25,6 +25,10 @@
         modules = [
           ./configuration.nix
           inputs.disko.nixosModules.disko
+          (import ./disko-config.nix { 
+            disk = "/dev/vda";
+            memory = "8G";
+          })
           inputs.home-manager.nixosModules.home-manager
           inputs.impermanence.nixosModules.impermanence
           {
@@ -47,5 +51,7 @@
           inherit inputs;
         };
       };
+      # Expose this to use flake directly with Disko
+      diskoConfigurations.home-pc = import ./disko-config.nix;
     };
 }
