@@ -18,7 +18,7 @@ readonly MEMORY="8G"
 
 readonly MOUNT_DIR="/mnt"
 readonly PERSIST_DIR="/persist"
-readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"
+readonly CONFIG_DIR="$PERSIST_DIR/etc/nixos"
 
 # Partition disk with disko
 echo "Partitioning disk with disko"
@@ -33,7 +33,7 @@ nix run github:nix-community/disko \
 
 echo "Cloning config repo"
 # NOTE: Remove branch argument before merge
-git clone -b nixos "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
+git clone -b nixos "https://github.com/$CONFIG_REPO.git" "$MOUNT_DIR$CONFIG_DIR"
 
 # Will either leave config untouched or update hardware-configuration.nix and nothing else
 echo "Generating hardware config"
@@ -72,5 +72,7 @@ set -x
 
 # Install NixOS
 echo "Installing NixOS and rebooting"
-nixos-install --flake "git+file://$CONFIG_DIR#home-pc" --no-root-passwd
+nixos-install --flake "git+file://$MOUNT_DIR$CONFIG_DIR#home-pc" --no-root-passwd
+# Make config editable by my user acct
+chroot "$MOUNT_DIR" "chown -R $USERNAME:users $CONFIG_DIR"
 #reboot
