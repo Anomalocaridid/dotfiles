@@ -73,6 +73,4 @@ set -x
 # Install NixOS
 echo "Installing NixOS and rebooting"
 nixos-install --flake "git+file://$MOUNT_DIR$CONFIG_DIR#home-pc" --no-root-passwd
-# Make config editable by my user acct
-chroot "$MOUNT_DIR" "chown -R $USERNAME:users $CONFIG_DIR"
 #reboot
