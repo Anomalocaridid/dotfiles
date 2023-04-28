@@ -129,13 +129,6 @@
     zsh.enable = true;
   };
 
-  system.activationScripts = {
-    configOwnership = #shell
-      ''
-        chown -R anomalocaris:users /persist/etc/nixos
-      '';
-  };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
