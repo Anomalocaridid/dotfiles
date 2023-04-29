@@ -27,8 +27,6 @@
         "Projects" # Misc. programming
         "qmk_firmware" # QMK
         ".ssh" # SSH key
-        # Caches I need to persist
-        ".cache/bat" # bat cache --build
       ];
     };
 

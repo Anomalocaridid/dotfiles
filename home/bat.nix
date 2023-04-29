@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.bat = {
     enable = true;
     config = {
@@ -14,5 +13,13 @@
       batman
       batpipe
     ];
+  };
+  systemd.user.services.bat-cache = {
+    Unit.Description = "Build and update bat cache";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.bat}/bin/bat cache --build";
+    };
+    Install.WantedBy = [ "default.target" ];
   };
 }
