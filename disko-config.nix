@@ -56,18 +56,21 @@
             content = {
               type = "btrfs";
               extraArgs = [ "-f" ]; # Override existing partition
-              subvolumes = {
-                "/nix" = {
-                  mountOptions = [ "compress=zstd" "noatime" "nodiratime" "discard" ];
+              subvolumes =
+                let mountOptions = [ "compress=zstd" "noatime" "nodiratime" "discard" ];
+                in
+                {
+                  "/nix" = {
+                    mountOptions = mountOptions;
+                  };
+                  "/persist" = {
+                    mountOptions = mountOptions;
+                  };
+                  "/log" = {
+                    mountpoint = "/var/log";
+                    mountOptions = mountOptions;
+                  };
                 };
-                "/persist" = {
-                  mountOptions = [ "compress=zstd" "noatime" "nodiratime" "discard" ];
-                };
-                "/log" = {
-                  mountpoint = "/var/log";
-                  mountOptions = [ "compress=zstd" "noatime" "nodiratime" "discard" ];
-                };
-              };
             };
           };
         };
