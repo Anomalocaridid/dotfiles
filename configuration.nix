@@ -129,6 +129,12 @@
     zsh.enable = true;
   };
 
+  # Ensure certain directories have necessary permissions
+  systemd.tmpfiles.rules = [
+    "Z /persist/etc/nixos         -    anomalocaris users"
+    "d /persist/home/anomalocaris 0755 anomalocaris users"
+  ];
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
