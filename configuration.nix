@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports =
     [
       # Include the results of the hardware scan.
@@ -133,6 +133,15 @@
   systemd.tmpfiles.rules = [
     "Z /persist/etc/nixos         -    anomalocaris users"
     "d /persist/home/anomalocaris 0755 anomalocaris users"
+  ];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      coreutils-advcpmv = prev.coreutils.overrideAttrs
+        (oldAttrs: {
+          patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${oldAttrs.version}.patch" ];
+        });
+    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

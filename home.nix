@@ -10,6 +10,7 @@
       neofetch
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       firefox # fallback browser
+      coreutils-advcpmv
     ];
 
     persistence."/persist/home/${username}" = {

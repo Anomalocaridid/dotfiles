@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "advcpmv": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1681830969,
+        "narHash": "sha256-beJrAWG9cQ0ejWIPgFvSLzorXjh2H+jvVImZsSoJpc8=",
+        "owner": "jarun",
+        "repo": "advcpmv",
+        "rev": "2253f7a38033e00e3ad3580bc9ea44f8f87744d8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jarun",
+        "repo": "advcpmv",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -74,6 +90,7 @@
     },
     "root": {
       "inputs": {
+        "advcpmv": "advcpmv",
         "disko": "disko",
         "home-manager": "home-manager",
         "impermanence": "impermanence",
