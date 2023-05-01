@@ -1,9 +1,9 @@
 { pkgs, ... }: {
   programs.zsh = {
     enable = true;
+
     # Ascii Terminal greeting. 
     # Shows Linux distro and version in rainbow ascii art.
-
     initExtra = #shell
       ''    
       echo -en "\e[1m"
@@ -13,6 +13,12 @@
         lolcat
       echo -e "\e[1m Welcome back, $USER!\e[0m" | lolcat
       '';
+
+    shellAliases = {
+      # advcpmv
+      cp = "cp -ig";
+      mv = "cp -ig";
+    };
   };
 
   home.packages = with pkgs; [
