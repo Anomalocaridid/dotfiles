@@ -16,6 +16,12 @@
 
     impermanence.url = "github:nix-community/impermanence";
 
+    # Use nix-index without having to generate the database locally
+    nix-index-database = {
+      url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     advcpmv = {
       url = "github:jarun/advcpmv";
       flake = false;
@@ -43,8 +49,9 @@
             useUserPackages = true;
             users.anomalocaris = {
               imports = [
-                inputs.impermanence.nixosModules.home-manager.impermanence
                 ./home.nix
+                inputs.impermanence.nixosModules.home-manager.impermanence
+                inputs.nix-index-database.hmModules.nix-index
               ];
             };
             # Inherit inputs to use advcpmv patch

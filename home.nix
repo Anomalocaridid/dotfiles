@@ -48,7 +48,7 @@
   };
 
   programs = {
-    command-not-found.enable = true;
+    nix-index.enable = true;
     # lets Home Manager manage itself
     home-manager.enable = true;
   };
