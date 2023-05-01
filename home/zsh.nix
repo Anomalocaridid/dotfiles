@@ -2,22 +2,38 @@
   programs.zsh = {
     enable = true;
 
-    # Ascii Terminal greeting. 
-    # Shows Linux distro and version in rainbow ascii art.
     initExtra = #shell
       ''    
+    # Ascii Terminal greeting. 
+    # Shows Linux distro and version in rainbow ascii art.
       echo -en "\e[1m"
       lsb_release --description --short | 
         tr --delete '"' |
         toilet --termwidth --font smslant --filter border --directory ${pkgs.figlet}/share/figlet |
         lolcat
       echo -e "\e[1m Welcome back, $USER!\e[0m" | lolcat
+      # init batpipe
+      eval "$(batpipe)"
       '';
 
     shellAliases = {
+      rm = "rm -i";
       # advcpmv
       cp = "cp -ig";
       mv = "cp -ig";
+      # bat
+      bg = "batgrep";
+      cat = "bat --paging=never";
+      less = "bat --paging=always";
+      man = "batman";
+      diff = "batdiff";
+    };
+    sessionVariables = {
+      # bat
+      PAGER = "bat";
+      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      # git
+      GIT_PAGER = "PAGER=less delta";
     };
   };
 
