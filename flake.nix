@@ -38,23 +38,26 @@
         inputs.impermanence.nixosModules.impermanence
         {
           # Home Manager
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.users.anomalocaris = {
-            imports = [
-              inputs.impermanence.nixosModules.home-manager.impermanence
-              ./home.nix
-            ];
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            users.anomalocaris = {
+              imports = [
+                inputs.impermanence.nixosModules.home-manager.impermanence
+                ./home.nix
+              ];
+            };
+            # Inherit inputs to use advcpmv patch
+            extraSpecialArgs = {
+              inherit inputs;
+            };
           };
 
           # Impermanence
-          environment.persistence = import ./persistance.nix;
+          environment.persistence = import
+            ./persistance.nix;
         }
       ];
-      # Inherit inputs to use advcpmv patch
-      specialArgs = {
-        inherit inputs;
-      };
     };
     # Expose this to use flake directly with Disko
     diskoConfigurations.home-pc = import ./disko-config.nix;

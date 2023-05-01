@@ -1,4 +1,4 @@
-{ lib, pkgs, osConfig, ... }: {
+{ lib, pkgs, osConfig, inputs, ... }: {
   # Import all files in ./home/
   # Note: Will fail to build if non-nix files are present in ./home/
   imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
@@ -9,8 +9,12 @@
     packages = with pkgs; [
       neofetch
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
+      # add progress bars to cp and mv
+      (coreutils.overrideAttrs
+        (oldAttrs: {
+          patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${oldAttrs.version}.patch" ];
+        }))
       firefox # fallback browser
-      coreutils-advcpmv
     ];
 
     persistence."/persist/home/${username}" = {
@@ -43,5 +47,9 @@
     stateVersion = osConfig.system.stateVersion;
   };
 
-  programs.home-manager.enable = true;
+  programs = {
+    command-not-found.enable = true;
+    # lets Home Manager manage itself
+    home-manager.enable = true;
+  };
 }
