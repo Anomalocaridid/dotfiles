@@ -17,10 +17,10 @@
       '';
 
     shellAliases = {
-      rm = "rm -i";
+      rm = "rm --interactive";
       # advcpmv
-      cp = "cp -ig";
-      mv = "cp -ig";
+      cp = "cp --interactive --progress-bar";
+      mv = "cp --interactive --progress-bar";
       # bat
       bg = "batgrep";
       cat = "bat --paging=never";
