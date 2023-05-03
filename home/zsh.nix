@@ -22,7 +22,7 @@
       cp = "cp --interactive --progress-bar";
       mv = "cp --interactive --progress-bar";
       # bat
-      bg = "batgrep";
+      bgrep = "batgrep";
       cat = "bat --paging=never";
       less = "bat --paging=always";
       man = "batman";
