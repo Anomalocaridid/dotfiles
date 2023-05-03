@@ -37,12 +37,16 @@
            cut --delimiter=':' --fields=1 -
       '';
     };
+    shellGlobalAliases = {
+      # page through help text
+      "-- --help" = "--help | bat --plain --language=help";
+    };
     sessionVariables = {
       # bat
       PAGER = "bat";
-      MANPAGER = "sh -c 'col -bx | bat -l man -p'";
+      MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
       # git
-      GIT_PAGER = "PAGER=less delta";
+      GIT_PAGER = "PAGER='bat --plain' delta";
     };
   };
 
