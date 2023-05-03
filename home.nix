@@ -49,6 +49,7 @@
 
   programs = {
     nix-index.enable = true;
+    dircolors.enable = true;
     # lets Home Manager manage itself
     home-manager.enable = true;
   };

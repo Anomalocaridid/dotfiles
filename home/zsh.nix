@@ -27,6 +27,15 @@
       less = "bat --paging=always";
       man = "batman";
       diff = "batdiff";
+      # skim
+      search = ''
+        sk --ansi \
+           --delimiter ':' \
+           --nth=3 \
+           --cmd 'rg --color=always --line-number \"{}\"' \
+           --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' | \
+           cut --delimiter=':' --fields=1 -
+      '';
     };
     sessionVariables = {
       # bat
@@ -43,5 +52,7 @@
     lolcat
     lsb-release
     figlet # provides fonts for toilet
+    # Needed for custom command
+    ripgrep
   ];
 }
