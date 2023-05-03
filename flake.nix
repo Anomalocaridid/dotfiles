@@ -22,11 +22,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Patch for progress bars for cp and mv
     advcpmv = {
       url = "github:jarun/advcpmv";
       flake = false;
     };
 
+    # Fork of zsh-bd zsh plugin
+    zsh-bd = {
+      url = "github:mawkler/zsh-bd";
+      flake = false;
+    };
   };
 
   outputs = inputs: {

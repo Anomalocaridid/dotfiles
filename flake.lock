@@ -115,7 +115,8 @@
         "home-manager": "home-manager",
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "zsh-bd": "zsh-bd"
       }
     },
     "utils": {
@@ -130,6 +131,22 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "zsh-bd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1599940120,
+        "narHash": "sha256-17JKWiQ7aglL86ZaUuwWC+/OHM8Z0mx4Di9BuU5xzo8=",
+        "owner": "mawkler",
+        "repo": "zsh-bd",
+        "rev": "b511ee1a3822edcde8f881588fcb4cf707c98749",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mawkler",
+        "repo": "zsh-bd",
         "type": "github"
       }
     }
