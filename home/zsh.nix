@@ -101,11 +101,6 @@
         "-- --help" = "--help | bat --plain --language=help";
       };
       sessionVariables = {
-        # bat
-        PAGER = "bat";
-        MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
-        # git
-        GIT_PAGER = "PAGER='bat --plain' delta";
         # oh-my-zsh alias-finder
         ZSH_ALIAS_FINDER_AUTOMATIC = "true";
         # Fix ZVM's conflict with autopair
