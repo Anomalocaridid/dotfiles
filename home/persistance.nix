@@ -14,6 +14,8 @@
       "Projects" # Misc. programming
       "qmk_firmware" # QMK
       ".ssh" # SSH key
+      # Caches and data to persist
+      ".local/share/zoxide" # zoxide history
     ];
   };
 

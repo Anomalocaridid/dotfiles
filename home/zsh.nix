@@ -1,9 +1,10 @@
 { pkgs, inputs, ... }: {
-  programs.zsh = {
-    enable = true;
+  programs = {
+    zsh = {
+      enable = true;
 
-    initExtra = #shell
-      ''    
+      initExtra = #shell
+        ''    
     # Ascii Terminal greeting. 
     # Shows Linux distro and version in rainbow ascii art.
       echo -en "\e[1m"
@@ -32,83 +33,87 @@
       zvm_after_init_commands=(autopair-init)
       '';
 
-    shellAliases = {
-      rm = "rm --interactive";
-      # advcpmv
-      cp = "cp --interactive --progress-bar";
-      mv = "cp --interactive --progress-bar";
-      # bat
-      bgrep = "batgrep";
-      cat = "bat --paging=never";
-      less = "bat --paging=always";
-      man = "batman";
-      diff = "batdiff";
-      # wezterm
-      imgcat = "wezterm imgcat";
-      # skim
-      search = ''
-        sk --ansi \
-           --delimiter ':' \
-           --nth=3 \
-           --cmd 'rg --color=always --line-number \"{}\"' \
-           --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' | \
-           cut --delimiter=':' --fields=1 -
-      '';
-    };
-    shellGlobalAliases = {
-      # page through help text
-      "-- --help" = "--help | bat --plain --language=help";
-    };
-    sessionVariables = {
-      # bat
-      PAGER = "bat";
-      MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
-      # git
-      GIT_PAGER = "PAGER='bat --plain' delta";
-      # oh-my-zsh alias-finder
-      ZSH_ALIAS_FINDER_AUTOMATIC = "true";
-      # Fix ZVM's conflict with autopait
-      AUTOPAIR_INHIBIT_INIT = 1;
-    };
+      shellAliases = {
+        rm = "rm --interactive";
+        # advcpmv
+        cp = "cp --interactive --progress-bar";
+        mv = "cp --interactive --progress-bar";
+        # bat
+        bgrep = "batgrep";
+        cat = "bat --paging=never";
+        less = "bat --paging=always";
+        man = "batman";
+        diff = "batdiff";
+        # zoxide
+        cd = "z";
+        # wezterm
+        imgcat = "wezterm imgcat";
+        # skim
+        search = ''
+          sk --ansi \
+             --delimiter ':' \
+             --nth=3 \
+             --cmd 'rg --color=always --line-number \"{}\"' \
+             --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' | \
+             cut --delimiter=':' --fields=1 -
+        '';
+      };
+      shellGlobalAliases = {
+        # page through help text
+        "-- --help" = "--help | bat --plain --language=help";
+      };
+      sessionVariables = {
+        # bat
+        PAGER = "bat";
+        MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
+        # git
+        GIT_PAGER = "PAGER='bat --plain' delta";
+        # oh-my-zsh alias-finder
+        ZSH_ALIAS_FINDER_AUTOMATIC = "true";
+        # Fix ZVM's conflict with autopait
+        AUTOPAIR_INHIBIT_INIT = 1;
+      };
 
-    plugins = with pkgs; [
-      {
-        name = "fzf-tab";
-        src = "${zsh-fzf-tab}/share/fzf-tab";
-      }
-      {
-        name = "autopair";
-        file = "autopair.zsh";
-        src = "${zsh-autopair}/share/zsh/zsh-autopair";
-      }
-      {
-        name = "bd";
-        src = inputs.zsh-bd;
-      }
-      {
-        name = "fast-syntax-highlighting";
-        src = "${zsh-fast-syntax-highlighting}/share/zsh/site-functions";
-      }
-      {
-        name = "zsh-vi-mode";
-        src = "${zsh-vi-mode}/share/zsh-vi-mode";
-      }
-    ];
-
-    defaultKeymap = "viins";
-
-    historySubstringSearch = {
-      enable = true;
-    };
-
-    oh-my-zsh = {
-      enable = true;
-      plugins = [
-        "alias-finder"
-        "fancy-ctrl-z"
-        "sudo"
+      plugins = with pkgs; [
+        {
+          name = "fzf-tab";
+          src = "${zsh-fzf-tab}/share/fzf-tab";
+        }
+        {
+          name = "autopair";
+          file = "autopair.zsh";
+          src = "${zsh-autopair}/share/zsh/zsh-autopair";
+        }
+        {
+          name = "bd";
+          src = inputs.zsh-bd;
+        }
+        {
+          name = "fast-syntax-highlighting";
+          src = "${zsh-fast-syntax-highlighting}/share/zsh/site-functions";
+        }
+        {
+          name = "zsh-vi-mode";
+          src = "${zsh-vi-mode}/share/zsh-vi-mode";
+        }
       ];
+
+      defaultKeymap = "viins";
+
+      historySubstringSearch = {
+        enable = true;
+      };
+
+      oh-my-zsh = {
+        enable = true;
+        plugins = [
+          "alias-finder"
+          "fancy-ctrl-z"
+          "sudo"
+        ];
+      };
     };
+    zoxide.enable = true;
   };
 
   home.packages = with pkgs; [
