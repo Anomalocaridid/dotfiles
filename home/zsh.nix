@@ -29,8 +29,46 @@
       zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always $realpath' # Preview directories with exa
       zstyle ":fzf-tab:*" fzf-flags "$SKIM_DEFAULT_OPTIONS"                         # Since skim is being instead of fzf, use skim"s default flags
 
-      # Fix ZVM's conflict with autopait
+      # Fix ZVM's conflict with autopair
       zvm_after_init_commands=(autopair-init)
+
+      # Hook for transient prompt in starship
+      zle-line-init() {
+        emulate -L zsh
+
+        [[ $CONTEXT == start ]] || return 0
+
+        while true; do
+          zle .recursive-edit
+          local -i ret=$?
+          [[ $ret == 0 && $KEYS == $'\4' ]] || break
+          [[ -o ignore_eof ]] || exit 0
+        done
+
+        local saved_prompt=$PROMPT
+        local saved_rprompt=$RPROMPT
+        # Use if transient prompt needs to be significantly different from main prompt
+        #PROMPT='$(STARSHIP_CONFIG=~/.config/starship/config-transient.toml starship prompt ... )'
+        PROMPT='$(starship module character --terminal-width="$COLUMNS" \
+                                            --keymap="''${KEYMAP:-}" \
+                                            --status="$STARSHIP_CMD_STATUS" \
+                                            --pipestatus="''${STARSHIP_PIPE_STATUS[*]}" \
+                                            --cmd-duration="''${STARSHIP_DURATION:-}" \
+                                            --jobs="$STARSHIP_JOBS_COUNT")'
+        RPROMPT=""
+        zle .reset-prompt
+        PROMPT=$saved_prompt
+        RPROMPT=$saved_rprompt
+
+        if (( ret )); then
+          zle .send-break
+        else
+          zle .accept-line
+        fi
+        return ret
+      }
+
+      zle -N zle-line-init
       '';
 
       shellAliases = {
@@ -70,8 +108,10 @@
         GIT_PAGER = "PAGER='bat --plain' delta";
         # oh-my-zsh alias-finder
         ZSH_ALIAS_FINDER_AUTOMATIC = "true";
-        # Fix ZVM's conflict with autopait
+        # Fix ZVM's conflict with autopair
         AUTOPAIR_INHIBIT_INIT = 1;
+        # Fix ZVM's conflict with starship transient prompt code
+        ZVM_INIT_MODE = "sourcing";
       };
 
       plugins = with pkgs; [
