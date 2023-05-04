@@ -8,6 +8,7 @@
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
       neofetch
+      tree
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       # add progress bars to cp and mv
       (coreutils.overrideAttrs
