@@ -43,6 +43,8 @@
       less = "bat --paging=always";
       man = "batman";
       diff = "batdiff";
+      # wezterm
+      imgcat = "wezterm imgcat";
       # skim
       search = ''
         sk --ansi \
