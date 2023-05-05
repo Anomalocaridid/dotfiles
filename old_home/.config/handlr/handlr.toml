@@ -1,7 +1,0 @@
-enable_selector = false
-selector = "rofi -dmenu -i -p 'Open With: '"
-term_exec_args = ''
-
-[[handlers]]
-exec = "freetube %u"
-regexes = ['(https://)?(www\.)?youtu(be.com|.be)/.*']

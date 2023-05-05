@@ -108,6 +108,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-handlr-regex": {
+      "locked": {
+        "lastModified": 1683753610,
+        "narHash": "sha256-2T85NM/816PEeEw19occcyAmVwyEu2r5saArBtBVxYk=",
+        "owner": "Anomalocaridid",
+        "repo": "nixpkgs",
+        "rev": "a17f36926165dc9159ea3de3a819226038fd268c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Anomalocaridid",
+        "ref": "handlr-regex",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "advcpmv": "advcpmv",
@@ -116,6 +132,7 @@
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-handlr-regex": "nixpkgs-handlr-regex",
         "zsh-bd": "zsh-bd"
       }
     },

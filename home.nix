@@ -9,6 +9,14 @@
     packages = with pkgs; [
       neofetch
       tree
+      zathura
+      libreoffice-fresh
+      strawberry
+      nnn
+      imv
+      mpv
+      nyxt
+      freetube
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       # add progress bars to cp and mv
       (coreutils.overrideAttrs
@@ -19,7 +27,7 @@
     ];
 
     sessionVariables = {
-      EDITOR = "hx";
+      EDITOR = "handlr open";
       VISUAL = "$EDITOR";
       # bat
       PAGER = "bat";
