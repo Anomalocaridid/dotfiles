@@ -2,6 +2,7 @@
   programs = {
     zsh = {
       enable = true;
+      enableAutosuggestions = true;
 
       initExtra = #shell
         ''    
@@ -69,13 +70,20 @@
       }
 
       zle -N zle-line-init
+
+      # Autoload zsh modules not enabled by default
+      autoload zcalc           # Calculator program
+      autoload zmv             # Move files that match a pattern  
+      autoload -U tetriscurses # Tetris
       '';
 
       shellAliases = {
         rm = "rm --interactive";
+        du = "dust";
+        df = "duf";
         # advcpmv
         cp = "cp --interactive --progress-bar";
-        mv = "cp --interactive --progress-bar";
+        mv = "mv --interactive --progress-bar";
         # bat
         bgrep = "batgrep";
         cat = "bat --paging=never";
@@ -86,6 +94,8 @@
         cd = "z";
         # wezterm
         imgcat = "wezterm imgcat";
+        # ssh
+        ssh-setup = "eval $(ssh-agent -s) && ssh-add";
         # skim
         search = ''
           sk --ansi \
@@ -159,5 +169,8 @@
     figlet # provides fonts for toilet
     # Needed for custom command
     ripgrep
+    du-dust
+    duf
+    fd
   ];
 }
