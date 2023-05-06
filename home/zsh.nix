@@ -117,6 +117,8 @@
              --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' | \
              cut --delimiter=':' --fields=1 -
         '';
+        # tealdeer
+        tldr = "PAGER='bat --plain' tldr";
       };
       shellGlobalAliases = {
         # page through help text
