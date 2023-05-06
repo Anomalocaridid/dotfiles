@@ -115,6 +115,15 @@
     wget
   ];
 
+  nixpkgs.overlays = [
+    # Enable insults in sudo
+    (final: prev: {
+      sudo = prev.sudo.override {
+        withInsults = true;
+      };
+    })
+  ];
+
   security.sudo.extraConfig = ''
     # Prevents sudo lecture from appearing after reboot
     Defaults lecture = never
