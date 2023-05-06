@@ -9,7 +9,6 @@
     packages = with pkgs; [
       neofetch
       tree
-      zathura
       libreoffice-fresh
       strawberry
       imv
