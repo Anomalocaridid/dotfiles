@@ -28,11 +28,8 @@
     sessionVariables = {
       EDITOR = "handlr open";
       VISUAL = "$EDITOR";
-      # bat
       PAGER = "bat";
       MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
-      # git
-      GIT_PAGER = "PAGER='bat --plain' delta";
     };
 
     activation = {

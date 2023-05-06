@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
   programs.git = {
     enable = true;
     userEmail = "29845794+Anomalocaridid@users.noreply.github.com";
@@ -44,5 +43,10 @@
       merge.conflictstyle = "diff3";
       diff.colorMoved = "default";
     };
+  };
+
+  home.sessionVariables = {
+    # Ensure bat's line numbers don't show up and mess things up
+    GIT_PAGER = "PAGER='bat --plain' delta";
   };
 }
