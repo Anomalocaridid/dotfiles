@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }: {
+{ config, pkgs, inputs, ... }: {
   programs = {
     zsh = {
       enable = true;
@@ -70,6 +70,18 @@
       }
 
       zle -N zle-line-init
+
+      # Sync PWD with shell when exiting nnn's n alias
+      source "${config.programs.nnn.package}/share/quitcd/quitcd.bash_zsh";
+
+      # Sync subshell PWD with nnn
+      nnn_cd() {
+      	if [ -n "$NNN_PIPE" ]; then
+      		printf "%s\0" "0c''${PWD}" ! >"''${NNN_PIPE}" &
+      	fi
+      }
+
+      trap nnn_cd EXIT
 
       # Autoload zsh modules not enabled by default
       autoload zcalc           # Calculator program

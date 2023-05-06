@@ -1,4 +1,0 @@
-# ~/.customizepkg/hardcode-fixer-git
-# Fix broken source url
-
-replace#source#git://#git+https://

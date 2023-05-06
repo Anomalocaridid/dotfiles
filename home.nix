@@ -12,7 +12,6 @@
       zathura
       libreoffice-fresh
       strawberry
-      nnn
       imv
       mpv
       nyxt

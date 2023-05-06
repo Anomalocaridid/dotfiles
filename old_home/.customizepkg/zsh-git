@@ -1,5 +1,0 @@
-# ~/.customizepkg/zsh-git
-# Apply patch to zsh to fix text reflow bug
-
-patch#1#romkatv-reflow-fix.patch
-replace#prepare#romkatv#${srcdir}/romkatv

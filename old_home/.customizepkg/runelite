@@ -1,4 +1,0 @@
-# ~/.customizepkg/runelite
-# Add pulseaudio-alsa as dependency so audio will work
-
-add#depends#pulseaudio-alsa
