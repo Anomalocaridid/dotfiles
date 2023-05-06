@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   # Necessary extra packages
   home.packages = with pkgs; [
     # Nix development
@@ -24,6 +23,7 @@
             "spinner"
             "file-name"
             "separator"
+            "file-modification-indicator"
           ];
           # center = [];
           right = [
