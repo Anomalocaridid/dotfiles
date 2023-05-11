@@ -20,6 +20,7 @@
       "quicklisp" # Quicklisp and related package installation
       ".cache/common-lisp" # Prevents recompilation for quicklisp, etc. on first launch of sbcl for every boot
       ".julia" # Prevents recompilation for julia repl and lsp
+      ".unison" # Unison codebase, needs to be persistent as all added code ends up there
     ];
   };
 

@@ -22,6 +22,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Up to date Unison packages
+    unison-nix = {
+      url = "github:ceedubs/unison-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Patch for progress bars for cp and mv
     advcpmv = {
       url = "github:jarun/advcpmv";
@@ -74,6 +80,9 @@
           # Impermanence
           environment.persistence = import
             ./persistance.nix;
+
+          # Unison
+          nixpkgs.overlays = [ inputs.unison-nix.overlay ];
         }
       ];
     };

@@ -56,6 +56,10 @@
       markdown_pkgs = [
         marksman
       ];
+      unison_pkgs = [
+        unison-ucm
+        netcat-gnu # required for lsp
+      ];
     in
     lib.concatLists [
       nix_pkgs
@@ -68,6 +72,7 @@
       lua_pkgs
       julia_pkgs
       markdown_pkgs
+      unison_pkgs
     ];
   home.file = {
     ".ghci".text = ":set prompt \"\\ESC[1;35mλ> \\ESC[m\"";
