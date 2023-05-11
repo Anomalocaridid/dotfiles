@@ -16,6 +16,7 @@
       ".ssh" # SSH key
       # Caches and data to persist
       ".local/share/zoxide" # Zoxide history
+      ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
       "quicklisp" # Quicklisp and related package installation
       ".cache/common-lisp" # Prevents recompilation for quicklisp, etc. on first launch of sbcl for every boot
       ".julia" # Prevents recompilation for julia repl and lsp
