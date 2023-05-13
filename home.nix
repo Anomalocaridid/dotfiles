@@ -15,6 +15,7 @@
       mpv
       nyxt
       freetube
+      pavucontrol # Graphical audio controller
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       # add progress bars to cp and mv
       (coreutils.overrideAttrs
