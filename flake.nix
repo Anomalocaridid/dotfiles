@@ -79,7 +79,7 @@
 
           # Impermanence
           environment.persistence = import
-            ./persistance.nix;
+            ./persistence.nix;
 
           # Unison
           nixpkgs.overlays = [ inputs.unison-nix.overlay ];
