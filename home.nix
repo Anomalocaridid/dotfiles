@@ -11,7 +11,6 @@
       tree
       libreoffice-fresh
       strawberry
-      mpv
       nyxt
       freetube
       pavucontrol # Graphical audio controller
