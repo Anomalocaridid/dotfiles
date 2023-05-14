@@ -11,7 +11,6 @@
       tree
       libreoffice-fresh
       strawberry
-      imv
       mpv
       nyxt
       freetube
