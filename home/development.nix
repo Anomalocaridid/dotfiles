@@ -60,6 +60,16 @@
         unison-ucm
         netcat-gnu # required for lsp
       ];
+      ocaml_pkgs = [
+        dune_3
+        ocamlformat
+        dune-release
+      ] ++ (with ocamlPackages; [
+        ocaml-lsp
+        odoc
+        utop
+        ounit # required for exercism tests
+      ]);
     in
     lib.concatLists [
       nix_pkgs
@@ -73,6 +83,7 @@
       julia_pkgs
       markdown_pkgs
       unison_pkgs
+      ocaml_pkgs
     ];
   home.file = {
     ".ghci".text = ":set prompt \"\\ESC[1;35mλ> \\ESC[m\"";
