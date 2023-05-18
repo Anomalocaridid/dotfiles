@@ -106,6 +106,16 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Btrfs snapshots
+  services.btrbk.instances.daily = {
+    settings = {
+      volume."/persist" = {
+        subvolume = "persist";
+        target = "/persist/snapshots";
+      };
+    };
+  };
+
   fileSystems."/persist".neededForBoot = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
