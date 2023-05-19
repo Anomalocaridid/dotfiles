@@ -107,6 +107,25 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  # Enable ClamAV
+  services.clamav = {
+    daemon.enable = true;
+    updater.enable = true;
+  };
+
+  systemd.services.freshclam-init =
+    let
+      clamavServices = [ "clamav-daemon.service" ];
+    in
+    {
+      description = "Create ClamAV signature database";
+      before = clamavServices;
+      script = "${pkgs.clamav}/bin/freshclam";
+      unitConfig.ConditionPathExists = "!/var/lib/clamav";
+      serviceConfig.Type = "oneshot";
+      requiredBy = clamavServices;
+    };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 

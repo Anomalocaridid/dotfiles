@@ -2,8 +2,9 @@
   "/persist" = {
     hideMounts = true;
     directories = [
-      "/etc/nixos"
-      "/etc/NetworkManager/system-connections"
+      "/etc/nixos" # Nix config
+      "/etc/NetworkManager/system-connections" # Network connections
+      "/var/lib/clamav" # ClamAV signature database
     ];
   };
 }
