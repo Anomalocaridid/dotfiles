@@ -1,4 +1,4 @@
-{ lib, pkgs, osConfig, inputs, ... }: {
+{ lib, pkgs, osConfig, ... }: {
   # Import all files in ./home/
   # Note: Will fail to build if non-nix files are present in ./home/
   imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
@@ -15,11 +15,7 @@
       freetube
       pavucontrol # Graphical audio controller
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      # add progress bars to cp and mv
-      (coreutils.overrideAttrs
-        (oldAttrs: {
-          patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${oldAttrs.version}.patch" ];
-        }))
+      advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
       firefox # fallback browser
     ];
 

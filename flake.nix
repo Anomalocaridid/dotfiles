@@ -66,7 +66,7 @@
                 inputs.nix-index-database.hmModules.nix-index
               ];
             };
-            # Inherit inputs to use advcpmv patch
+            # Inherit inputs to use zsh plugins not in nixpkgs
             extraSpecialArgs = {
               inherit inputs;
             };
@@ -76,12 +76,21 @@
           environment.persistence = import
             ./persistence.nix;
 
-          # Unison
-          nixpkgs.overlays = [ inputs.unison-nix.overlay ];
+          nixpkgs.overlays = [
+            # cp and mv with progress bars
+            (final: prev: {
+              advcpmv-coreutils = prev.coreutils.overrideAttrs (oldAttrs: {
+                patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${oldAttrs.version}.patch" ];
+              });
+            })
+            # Up to date Unison packages
+            inputs.unison-nix.overlay
+          ];
         }
       ];
     };
     # Expose this to use flake directly with Disko
-    diskoConfigurations.home-pc = import ./disko-config.nix;
+    diskoConfigurations.home-pc = import
+      ./disko-config.nix;
   };
 }
