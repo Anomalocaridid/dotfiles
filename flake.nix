@@ -39,11 +39,6 @@
       url = "github:mawkler/zsh-bd";
       flake = false;
     };
-
-    # nixpkgs fork, remove when pull request accepted
-    nixpkgs-handlr-regex = {
-      url = "github:Anomalocaridid/nixpkgs/handlr-regex";
-    };
   };
 
   outputs = inputs: {

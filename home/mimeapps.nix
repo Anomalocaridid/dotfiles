@@ -1,5 +1,4 @@
-{ pkgs, inputs, ... }: {
-
+{ pkgs, ... }: {
   xdg = {
     mimeApps = {
       enable = true;
@@ -64,39 +63,34 @@
         };
   };
 
-  home.packages =
-    let
-      handlr-regex =
-        inputs.nixpkgs-handlr-regex.legacyPackages.${pkgs.system}.handlr-regex;
-    in
-    with pkgs; [
-      handlr-regex
-      # Use handlr as drop-in replacement for xdg-open
-      (writeShellApplication {
-        name = "
+  home.packages = with pkgs; [
+    handlr-regex
+    # Use handlr as drop-in replacement for xdg-open
+    (writeShellApplication {
+      name = "
         xdg-open ";
-        runtimeInputs = [ handlr-regex ];
-        text = #shell
-          ''
-            ${handlr-regex}/bin/handlr "$@"
-          '';
-      })
-      # Use handlr as drop-in replacement for xterm
-      (writeShellApplication {
-        name = "xterm";
-        runtimeInputs = [ handlr-regex ];
-        text = #shell
-          ''
-            # Strip leading -e flag from args because not all terminal emulators support it.
-            if [ "''${1-}" = "-e" ]; then
-              shift
-            fi
-            # Since there's too much variation to account for otherwise, just assume the terminal handler's
-            # desktop file is set up to handle just being given a command by itself
-            handlr launch x-scheme-handler/terminal -- "$@"
-          '';
-      })
-    ];
+      runtimeInputs = [ handlr-regex ];
+      text = #shell
+        ''
+          ${handlr-regex}/bin/handlr "$@"
+        '';
+    })
+    # Use handlr as drop-in replacement for xterm
+    (writeShellApplication {
+      name = "xterm";
+      runtimeInputs = [ handlr-regex ];
+      text = #shell
+        ''
+          # Strip leading -e flag from args because not all terminal emulators support it.
+          if [ "''${1-}" = "-e" ]; then
+            shift
+          fi
+          # Since there's too much variation to account for otherwise, just assume the terminal handler's
+          # desktop file is set up to handle just being given a command by itself
+          handlr launch x-scheme-handler/terminal -- "$@"
+        '';
+    })
+  ];
 
 }
 
