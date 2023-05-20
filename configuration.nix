@@ -145,17 +145,27 @@
     anomalocaris = {
       shell = pkgs.zsh;
       isNormalUser = true;
-      extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [
+        "wheel" # Enable ‘sudo’ for the user
+        "libvirtd" # Allow access to virt-manager
+      ];
       passwordFile = "/persist/passwords/anomalocaris";
     };
     root.passwordFile = "/persist/passwords/root";
   };
 
+  # Virtual machine config
+  # NOTE: Autoconnecting to QEMU is configured via dconf in home.nix
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+  boot.extraModprobeConfig = "options kvm_amd nested=1";
+
   # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    wget
-  ];
+  environment.systemPackages = with pkgs;
+    [
+      virt-manager
+      # qemu
+    ];
 
   nixpkgs.overlays = [
     # Enable insults in sudo

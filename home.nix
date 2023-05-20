@@ -38,6 +38,14 @@
     stateVersion = osConfig.system.stateVersion;
   };
 
+  # Set qemu as hypervisor for virt-manager
+  dconf.settings = {
+    "org/virt-manager/virt-manager/connections" = rec {
+      uris = lib.hm.gvariant.mkArray "s" [ "qemu:///system" ];
+      autoconnect = uris;
+    };
+  };
+
   programs = {
     nix-index.enable = true;
     dircolors.enable = true;
