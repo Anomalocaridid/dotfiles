@@ -196,6 +196,13 @@
     "d /persist/home/anomalocaris 0755 anomalocaris users"
   ];
 
+  # Configure Qt theme
+  qt = rec {
+    enable = true;
+    platformTheme = "gtk2";
+    style = platformTheme;
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
