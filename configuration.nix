@@ -139,6 +139,9 @@
     };
   };
 
+  # Enable weechat service
+  services.weechat.enable = true;
+
   fileSystems."/persist".neededForBoot = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
