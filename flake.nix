@@ -39,6 +39,27 @@
       url = "github:mawkler/zsh-bd";
       flake = false;
     };
+
+    # Nyxt plugins
+    nx-freestance-handler = {
+      url = "github:kssytsrk/nx-freestance-handler";
+      flake = false;
+    };
+
+    nx-fruit = {
+      url = "github:atlas-engineer/nx-fruit";
+      flake = false;
+    };
+
+    nx-kaomoji = {
+      url = "github:aartaka/nx-kaomoji";
+      flake = false;
+    };
+
+    nx-search-engines = {
+      url = "github:aartaka/nx-search-engines";
+      flake = false;
+    };
   };
 
   outputs = inputs: {

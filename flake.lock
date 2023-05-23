@@ -126,6 +126,70 @@
         "type": "github"
       }
     },
+    "nx-freestance-handler": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1653846918,
+        "narHash": "sha256-6fipTpJlus+z2K8x9nQ1ei9cSoUw4eZ+Tqxklh16iZk=",
+        "owner": "kssytsrk",
+        "repo": "nx-freestance-handler",
+        "rev": "83aea7f0b650c6dab2ceb2b227301e86459a6e5b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kssytsrk",
+        "repo": "nx-freestance-handler",
+        "type": "github"
+      }
+    },
+    "nx-fruit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679287704,
+        "narHash": "sha256-K/Ms2nPSjO/5cxaNY/MSzxOjDp9fFZwirv8mxTep2Co=",
+        "owner": "atlas-engineer",
+        "repo": "nx-fruit",
+        "rev": "d130dff96c276f05b06a777bbf5565ac06cda260",
+        "type": "github"
+      },
+      "original": {
+        "owner": "atlas-engineer",
+        "repo": "nx-fruit",
+        "type": "github"
+      }
+    },
+    "nx-kaomoji": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1684763758,
+        "narHash": "sha256-dlIZhcTwGPIL5w1GJNv1kjNWjxVaK68sHtUx3LE/Z/U=",
+        "owner": "aartaka",
+        "repo": "nx-kaomoji",
+        "rev": "a11c19bbd6a7c70ac886fe0e6d2181de748e735e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aartaka",
+        "repo": "nx-kaomoji",
+        "type": "github"
+      }
+    },
+    "nx-search-engines": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1666168085,
+        "narHash": "sha256-ldmM56SOuCofmXy4LBwirFBqu80trTzpni9fKpJSsOE=",
+        "owner": "aartaka",
+        "repo": "nx-search-engines",
+        "rev": "887780bcd98506064e987f78762b12ab07bff297",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aartaka",
+        "repo": "nx-search-engines",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "advcpmv": "advcpmv",
@@ -134,6 +198,10 @@
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nx-freestance-handler": "nx-freestance-handler",
+        "nx-fruit": "nx-fruit",
+        "nx-kaomoji": "nx-kaomoji",
+        "nx-search-engines": "nx-search-engines",
         "unison-nix": "unison-nix",
         "zsh-bd": "zsh-bd"
       }

@@ -11,7 +11,6 @@
       tree
       libreoffice-fresh
       strawberry
-      nyxt
       freetube
       pavucontrol # Graphical audio controller
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
