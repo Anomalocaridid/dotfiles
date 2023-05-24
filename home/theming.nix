@@ -31,5 +31,6 @@
     name = "Breeze_Hacked";
     package = pkgs.callPackage ../pkgs/breeze-hacked-cursor { };
     gtk.enable = true;
+    x11.enable = true;
   };
 }
