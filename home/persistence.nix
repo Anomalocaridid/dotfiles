@@ -29,9 +29,10 @@
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
       ".config/strawberry" # Strawberry settings
+      ".config/WebCord" # Webcord user data
       ".julia" # Prevents recompilation for julia repl and lsp
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
-      ".local/share/straeberry" # Strawberry cache
+      ".local/share/strawberry" # Strawberry cache
       ".local/share/weechat" # Weechat logs (plugins too?)
       ".local/share/zathura" # Zathura bookmarks, etc.
       ".local/share/zoxide" # Zoxide history
