@@ -7,14 +7,21 @@
     username = "anomalocaris";
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
-      neofetch
-      tree
-      libreoffice-fresh
-      strawberry
+      exercism
       freetube
-      pavucontrol # Graphical audio controller
+      freetube
+      gimp-with-plugins
       keepassxc
+      languagetool
+      libreoffice-fresh
+      neofetch
+      pavucontrol # Graphical audio controller
+      qalculate-gtk
+      strawberry
+      tree
+      ventoy
       yubioath-flutter
+      zotero
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
       advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
       firefox # fallback browser
