@@ -12,8 +12,6 @@
       freetube
       gimp-with-plugins
       keepassxc
-      languagetool
-      libreoffice-fresh
       neofetch
       pavucontrol # Graphical audio controller
       qalculate-gtk
