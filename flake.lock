@@ -126,6 +126,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1685655936,
+        "narHash": "sha256-KkOQZQK0upEq+O2JDWeceeo0ulRh6UV1/wBxtD9ef9k=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "3c58e841ac19ae929e68c5ae11c6b2c92996a618",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "nx-freestance-handler": {
       "flake": false,
       "locked": {
@@ -198,6 +213,7 @@
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs",
+        "nur": "nur",
         "nx-freestance-handler": "nx-freestance-handler",
         "nx-fruit": "nx-fruit",
         "nx-kaomoji": "nx-kaomoji",

@@ -22,6 +22,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Nix User Repo
+    nur.url = "github:nix-community/NUR";
+
     # Up to date Unison packages
     unison-nix = {
       url = "github:ceedubs/unison-nix";
@@ -73,6 +76,7 @@
           disk = "/dev/vda";
           memory = "8G";
         })
+        inputs.nur.nixosModules.nur
         inputs.home-manager.nixosModules.home-manager
         inputs.impermanence.nixosModules.impermanence
         {

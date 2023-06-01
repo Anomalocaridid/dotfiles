@@ -28,6 +28,7 @@
       ".config/GIMP" # GIMP settings
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
+      ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
       ".config/WebCord" # Webcord user data
       ".julia" # Prevents recompilation for julia repl and lsp

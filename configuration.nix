@@ -188,14 +188,17 @@
       # qemu
     ];
 
-  nixpkgs.overlays = [
-    # Enable insults in sudo
-    (final: prev: {
-      sudo = prev.sudo.override {
-        withInsults = true;
-      };
-    })
-  ];
+  nixpkgs = {
+    config.allowUnfree = true;
+    overlays = [
+      # Enable insults in sudo
+      (final: prev: {
+        sudo = prev.sudo.override {
+          withInsults = true;
+        };
+      })
+    ];
+  };
 
   security.sudo.extraConfig = ''
     # Prevents sudo lecture from appearing after reboot
