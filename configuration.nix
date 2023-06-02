@@ -108,6 +108,9 @@
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
 
+  # Enable QMK
+  hardware.keyboard.qmk.enable = true;
+
   # Enable ClamAV
   services.clamav = {
     daemon.enable = true;
