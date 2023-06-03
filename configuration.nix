@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { pkgs, ... }: {
   imports =
     [
@@ -21,27 +17,26 @@
     };
   };
 
-  # Use GRUB
-  boot.loader = {
-    grub = {
-      device = "nodev";
-      efiSupport = true;
-      theme = pkgs.callPackage ./pkgs/cyberre-grub-theme { };
+  boot = {
+    # Enable KVM nested virtualization
+    extraModprobeConfig = "options kvm_amd nested=1";
+    # Use GRUB
+    loader = {
+      grub = {
+        device = "nodev";
+        efiSupport = true;
+        theme = pkgs.callPackage ./pkgs/cyberre-grub-theme { };
+      };
+      efi.canTouchEfiVariables = true;
     };
-    efi.canTouchEfiVariables = true;
   };
 
-  networking.hostName = "home-pc"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking = {
+    hostName = "home-pc";
+    networkmanager.enable = true;
+  };
 
-  # Set your time zone.
   time.timeZone = "America/New_York";
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -72,140 +67,87 @@
     useXkbConfig = true; # use xkbOptions in tty.
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
 
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-
-  # Configure keymap in X11
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = {
-  #   "eurosign:e";
-  #   "caps:escape" # map caps to escape.
-  # };
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound.
-  hardware.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa = {
-      enable = true;
-      support32Bit = true;
-    };
-    pulse.enable = true;
-    jack.enable = true;
+  hardware = {
+    # Disable pulseaudio in order to use pipewire
+    pulseaudio.enable = false;
+    # Enable bluetooth
+    bluetooth.enable = true;
+    # Enable QMK support
+    keyboard.qmk.enable = true;
   };
 
-  # Enable bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  systemd = {
+    # Ensure certain directories have necessary permissions
+    tmpfiles.rules =
+      let
+        user = "anomalocaris";
+        persistDir = "/persist";
+      in
+      [
+        "Z ${persistDir}/etc/nixos    -    ${user} users"
+        "d ${persistDir}/home/${user} 0755 ${user} users"
+      ];
+    services = {
+      # Create ClamAV signature database if it does not exist.
+      freshclam-init =
+        let
+          clamavServices = [ "clamav-daemon.service" ];
+        in
+        {
+          description = "Create ClamAV signature database";
+          before = clamavServices;
+          script = "${pkgs.clamav}/bin/freshclam";
+          unitConfig.ConditionPathExists = "!/var/lib/clamav";
+          serviceConfig.Type = "oneshot";
+          requiredBy = clamavServices;
+        };
 
-  # Enable QMK
-  hardware.keyboard.qmk.enable = true;
-
-  # Enable ClamAV
-  services.clamav = {
-    daemon.enable = true;
-    updater.enable = true;
-  };
-
-  systemd.services.freshclam-init =
-    let
-      clamavServices = [ "clamav-daemon.service" ];
-    in
-    {
-      description = "Create ClamAV signature database";
-      before = clamavServices;
-      script = "${pkgs.clamav}/bin/freshclam";
-      unitConfig.ConditionPathExists = "!/var/lib/clamav";
-      serviceConfig.Type = "oneshot";
-      requiredBy = clamavServices;
-    };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  # Btrfs snapshots
-  services.btrbk.instances.daily.settings = {
-    snapshot_preserve = "14d";
-    snapshot_preserve_min = "2d";
-    volume."/persist" = {
-      subvolume = ".";
-      snapshot_dir = "btrbk_snapshots";
+      # Create btrbk snapshot directory if it doesn't exist yet.
+      btrbk-daily-init =
+        let
+          btrbkServices = [ "btrbk-daily.service" ];
+          snapshotDir = "/persist/btrbk_snapshots";
+        in
+        {
+          description = "Ensure btrbk snapshot dir exists";
+          before = btrbkServices;
+          script = "mkdir ${snapshotDir}";
+          unitConfig.ConditionPathExists = "!${snapshotDir}";
+          serviceConfig.Type = "oneshot";
+          requiredBy = btrbkServices;
+        };
     };
   };
 
-  systemd.services.btrbk-daily-init =
-    let
-      btrbkServices = [ "btrbk-daily.service" ];
-      snapshotDir = "/persist/btrbk_snapshots";
-    in
-    {
-      description = "Ensure btrbk snapshot dir exists";
-      before = btrbkServices;
-      script = "mkdir ${snapshotDir}";
-      unitConfig.ConditionPathExists = "!${snapshotDir}";
-      serviceConfig.Type = "oneshot";
-      requiredBy = btrbkServices;
-    };
-
-  # Enable weechat service
-  services.weechat.enable = true;
-
-  # Enable Yubikey support
-  services.pcscd.enable = true;
-
-  # Enable and configure Syncthing
-  services.syncthing = rec {
-    enable = true;
-    user = "anomalocaris";
-    dataDir = "/home/${user}";
-    openDefaultPorts = true;
-    overrideDevices = true;
-    overrideFolders = true;
-    settings = {
-      devices."Phone".id = "X27YFTT-WNFUHVK-JR5VE7B-NLRDS53-YX5VTC7-6JNY3LB-EI65HWR-E5YVHAV";
-      folders."Sync" = {
-        path = "${dataDir}/Sync";
-        devices = [ "Phone" ];
-      };
-    };
-  };
-
+  # /persist is needed for boot because it contains password hashes
+  # TODO: See if this can be moved to disko config
   fileSystems."/persist".neededForBoot = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users = {
-    anomalocaris = {
-      shell = pkgs.zsh;
-      isNormalUser = true;
-      extraGroups = [
-        "wheel" # Enable ‘sudo’ for the user
-        "libvirtd" # Allow access to virt-manager
-      ];
-      passwordFile = "/persist/passwords/anomalocaris";
+  users.users =
+    let
+      passwordDir = "/persist/passwords";
+    in
+    {
+      anomalocaris = {
+        shell = pkgs.zsh;
+        isNormalUser = true;
+        extraGroups = [
+          "wheel" # Enable ‘sudo’ for the user
+          "libvirtd" # Allow access to virt-manager
+        ];
+        passwordFile = "${passwordDir}/anomalocaris";
+      };
+      root.passwordFile = "${passwordDir}/root";
     };
-    root.passwordFile = "/persist/passwords/root";
-  };
 
-  # Virtual machine config
-  # NOTE: Autoconnecting to QEMU is configured via dconf in home.nix
+  # Enable libvirtd for virt-manager
   virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
-  boot.extraModprobeConfig = "options kvm_amd nested=1";
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs;
     [
       virt-manager
-      # qemu
     ];
 
   nixpkgs = {
@@ -220,25 +162,27 @@
     ];
   };
 
-  security.sudo.extraConfig = ''
-    # Prevents sudo lecture from appearing after reboot
-    Defaults lecture = never
-    # Sudo insults after failed attempts because why not
-    Defaults insults
-  '';
+  security = {
+    sudo.extraConfig = #sudo
+      ''
+        # Prevents sudo lecture from appearing after reboot without persisting
+        Defaults lecture = never
+        # Sudo insults after failed attempts because why not
+        Defaults insults
+      '';
+    # Needed for pipewire
+    rtkit.enable = true;
+  };
 
   programs = {
     # Needed for root to access bind mounted dirs created by impermanence
     fuse.userAllowOther = true;
-    # Need to enable zsh at system level
+    # Need to enable zsh at system level to use as shell
     zsh.enable = true;
+    # Enable dconf for virt-manager
+    # NOTE: Autoconnecting to QEMU is configured via dconf in home.nix
+    dconf.enable = true;
   };
-
-  # Ensure certain directories have necessary permissions
-  systemd.tmpfiles.rules = [
-    "Z /persist/etc/nixos         -    anomalocaris users"
-    "d /persist/home/anomalocaris 0755 anomalocaris users"
-  ];
 
   # Configure Qt theme
   qt = rec {
@@ -247,29 +191,66 @@
     style = platformTheme;
   };
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
   # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Copy the NixOS configuration file and link it from the resulting system
-  # (/run/current-system/configuration.nix). This is useful in case you
-  # accidentally delete configuration.nix.
-  # system.copySystemConfiguration = true;
+  services = {
+    # Enable the X11 windowing system.
+    xserver = {
+      enable = true;
+      # Enable the GNOME Desktop Environment.
+      displayManager.gdm.enable = true;
+      desktopManager.gnome.enable = true;
+      # Configure keymap in X11
+      layout = "us";
+    };
+    # Enable CUPS to print documents.
+    printing.enable = true;
+    # Enable sound.
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+      jack.enable = true;
+    };
+    # Bluetooth manager
+    blueman.enable = true;
+    # Enable ClamAV
+    clamav = {
+      daemon.enable = true;
+      updater.enable = true;
+    };
+    # Btrfs snapshots
+    btrbk.instances.daily.settings = {
+      snapshot_preserve = "14d";
+      snapshot_preserve_min = "2d";
+      volume."/persist" = {
+        subvolume = ".";
+        snapshot_dir = "btrbk_snapshots";
+      };
+    };
+    # Enable weechat service
+    weechat.enable = true;
+    # Enable Yubikey support
+    pcscd.enable = true;
+    # Enable and configure Syncthing
+    syncthing = rec {
+      enable = true;
+      user = "anomalocaris";
+      dataDir = "/home/${user}";
+      openDefaultPorts = true;
+      overrideDevices = true;
+      overrideFolders = true;
+      settings = {
+        devices."Phone".id = "X27YFTT-WNFUHVK-JR5VE7B-NLRDS53-YX5VTC7-6JNY3LB-EI65HWR-E5YVHAV";
+        folders."Sync" = {
+          path = "${dataDir}/Sync";
+          devices = [ "Phone" ];
+        };
+      };
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
@@ -278,6 +259,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "22.11"; # Did you read the comment?
-
 }
-
