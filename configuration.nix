@@ -234,22 +234,6 @@
     weechat.enable = true;
     # Enable Yubikey support
     pcscd.enable = true;
-    # Enable and configure Syncthing
-    syncthing = rec {
-      enable = true;
-      user = "anomalocaris";
-      dataDir = "/home/${user}";
-      openDefaultPorts = true;
-      overrideDevices = true;
-      overrideFolders = true;
-      settings = {
-        devices."Phone".id = "X27YFTT-WNFUHVK-JR5VE7B-NLRDS53-YX5VTC7-6JNY3LB-EI65HWR-E5YVHAV";
-        folders."Sync" = {
-          path = "${dataDir}/Sync";
-          devices = [ "Phone" ];
-        };
-      };
-    };
   };
 
   # This value determines the NixOS release from which the default

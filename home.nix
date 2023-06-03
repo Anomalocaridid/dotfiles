@@ -51,7 +51,10 @@
     home-manager.enable = true; # lets Home Manager manage itself
   };
 
-  services.syncthing.tray.enable = true;
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
+  };
 
   systemd.user.tmpfiles.rules = [
     "L ${home.homeDirectory}/nixos - - - - /etc/nixos"
