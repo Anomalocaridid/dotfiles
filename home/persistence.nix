@@ -31,6 +31,7 @@
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
       ".config/WebCord" # Webcord user data
+      ".config/syncthing" # Syncthing settings
       ".julia" # Prevents recompilation for julia repl and lsp
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache

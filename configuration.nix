@@ -163,6 +163,23 @@
   # Enable Yubikey support
   services.pcscd.enable = true;
 
+  # Enable and configure Syncthing
+  services.syncthing = rec {
+    enable = true;
+    user = "anomalocaris";
+    dataDir = "/home/${user}";
+    openDefaultPorts = true;
+    overrideDevices = true;
+    overrideFolders = true;
+    settings = {
+      devices."Phone".id = "X27YFTT-WNFUHVK-JR5VE7B-NLRDS53-YX5VTC7-6JNY3LB-EI65HWR-E5YVHAV";
+      folders."Sync" = {
+        path = "${dataDir}/Sync";
+        devices = [ "Phone" ];
+      };
+    };
+  };
+
   fileSystems."/persist".neededForBoot = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {

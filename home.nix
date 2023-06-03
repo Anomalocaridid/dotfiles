@@ -32,14 +32,6 @@
       MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
     };
 
-    # activation = {
-    #   symlinkConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] #shell
-    #     ''
-    #       ln --symbolic --force --no-target-directory "/etc/nixos" ${homeDirectory}/nixos
-    #       # chown -R ${username}:users /persist/etc/nixos
-    #     '';
-    # };
-
     # DON'T TOUCH
     # Use system-level stateVersion
     stateVersion = osConfig.system.stateVersion;
@@ -58,6 +50,8 @@
     dircolors.enable = true; # Color ls output
     home-manager.enable = true; # lets Home Manager manage itself
   };
+
+  services.syncthing.tray.enable = true;
 
   systemd.user.tmpfiles.rules = [
     "L ${home.homeDirectory}/nixos - - - - /etc/nixos"
