@@ -30,11 +30,8 @@
       zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always $realpath' # Preview directories with exa
       zstyle ":fzf-tab:*" fzf-flags "$SKIM_DEFAULT_OPTIONS"                         # Since skim is being instead of fzf, use skim"s default flags
 
-      # Fix ZVM's conflict with autopair
-      zvm_after_init_commands=(autopair-init)
-
       # Hook for transient prompt in starship
-      zle-line-init() {
+      starship_zle-line-init() {
         emulate -L zsh
 
         [[ $CONTEXT == start ]] || return 0
@@ -69,7 +66,12 @@
         return ret
       }
 
-      zle -N zle-line-init
+      hooks-add-hook zle_line_init_hook zvm_zle-line-init
+      hooks-add-hook zle_line_init_hook starship_zle-line-init
+
+      # Manually init or these won't work with zvm + zsh-hooks
+      autopair-init # zsh-autopair
+      bindkey '^Z' fancy-ctrl-z # Oh My Zsh's fancy-ctrl-z
 
       # Sync PWD with shell when exiting nnn's n alias
       source "${config.programs.nnn.package}/share/quitcd/quitcd.bash_zsh";
@@ -129,9 +131,9 @@
       sessionVariables = {
         # oh-my-zsh alias-finder
         ZSH_ALIAS_FINDER_AUTOMATIC = "true";
-        # Fix ZVM's conflict with autopair
+        # Prevent initializing zsh-autopair twice since it's manually initialized in initExtra
         AUTOPAIR_INHIBIT_INIT = 1;
-        # Fix ZVM's conflict with starship transient prompt code
+        # # Fix ZVM's conflict with starship transient prompt code
         ZVM_INIT_MODE = "sourcing";
       };
 
@@ -156,6 +158,10 @@
         {
           name = "zsh-vi-mode";
           src = "${zsh-vi-mode}/share/zsh-vi-mode";
+        }
+        {
+          name = "zsh-hooks";
+          src = inputs.zsh-hooks;
         }
       ];
 

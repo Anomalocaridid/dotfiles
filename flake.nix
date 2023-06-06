@@ -43,6 +43,12 @@
       flake = false;
     };
 
+    # Hooks to simplify zle widget code
+    zsh-hooks = {
+      url = "github:zsh-hooks/zsh-hooks";
+      flake = false;
+    };
+
     # Nyxt plugins
     nx-freestance-handler = {
       url = "github:kssytsrk/nx-freestance-handler";

@@ -219,7 +219,8 @@
         "nx-kaomoji": "nx-kaomoji",
         "nx-search-engines": "nx-search-engines",
         "unison-nix": "unison-nix",
-        "zsh-bd": "zsh-bd"
+        "zsh-bd": "zsh-bd",
+        "zsh-hooks": "zsh-hooks"
       }
     },
     "systems": {
@@ -303,6 +304,22 @@
       "original": {
         "owner": "mawkler",
         "repo": "zsh-bd",
+        "type": "github"
+      }
+    },
+    "zsh-hooks": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1638344006,
+        "narHash": "sha256-n33jaUlti1S2G2Oxc+KuMZcHqd2FO/knivHam47EK78=",
+        "owner": "zsh-hooks",
+        "repo": "zsh-hooks",
+        "rev": "283346c132d61baa4c6b81961c217f9b238d023b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zsh-hooks",
+        "repo": "zsh-hooks",
         "type": "github"
       }
     }
