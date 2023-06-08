@@ -7,6 +7,6 @@ Run the following command from a NixOS installation medium:
 ## NOTE: Change branch before merge
 
 ```bash
-curl -s https://raw.githubusercontent.com/Anomalocaridid/dotfiles/nixos/nixos-install.sh | sudo bash
+curl -s https://raw.githubusercontent.com/Anomalocaridid/dotfiles/nixos/scripts/nixos-install.sh | sudo bash
   
 ```
