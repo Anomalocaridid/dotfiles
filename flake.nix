@@ -71,17 +71,14 @@
     };
   };
 
-  outputs = inputs: {
+  outputs = inputs: rec {
     nixosConfigurations.home-pc = inputs.nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
 
       modules = [
         ./configuration.nix
         inputs.disko.nixosModules.disko
-        (import ./disko-config.nix {
-          disk = "/dev/vda";
-          memory = "8G";
-        })
+        diskoConfigurations.home-pc
         inputs.nur.nixosModules.nur
         inputs.home-manager.nixosModules.home-manager
         inputs.impermanence.nixosModules.impermanence
@@ -121,7 +118,9 @@
       ];
     };
     # Expose this to use flake directly with Disko
-    diskoConfigurations.home-pc = import
-      ./disko-config.nix;
+    diskoConfigurations.home-pc = (import ./disko-config.nix {
+      disk = "/dev/vda";
+      memory = "8G";
+    });
   };
 }

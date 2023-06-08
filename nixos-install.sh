@@ -13,8 +13,6 @@ readonly USERNAME="anomalocaris"
 # NOTE: Remove branch argument before merge
 readonly CONFIG_REPO="Anomalocaridid/dotfiles"
 readonly FLAKE="github:$CONFIG_REPO/nixos#home-pc"
-readonly DISK="/dev/vda"
-readonly MEMORY="8G"
 
 readonly MOUNT_DIR="/mnt"
 readonly PERSIST_DIR="/persist"
@@ -27,9 +25,7 @@ nix run github:nix-community/disko \
 	--extra-experimental-features flakes \
 	-- \
 	--flake "$FLAKE" \
-	--mode zap_create_mount \
-	--argstr disk "$DISK" \
-	--argstr memory "$MEMORY" </dev/tty
+	--mode zap_create_mount </dev/tty
 
 echo "Cloning config repo"
 # NOTE: Remove branch argument before merge
