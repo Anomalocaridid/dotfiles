@@ -10,21 +10,46 @@ set -o errtrace \
 
 # Config constants
 # NOTE: Remove branch argument before merge
-readonly CONFIG_REPO="Anomalocaridid/dotfiles"
-readonly FLAKE="github:$CONFIG_REPO/nixos#home-pc"
+readonly CONFIG_REPO="Anomalocaridid/dotfiles" # Dotfile config repo name
+readonly FLAKE="github:$CONFIG_REPO/nixos"     # Flake URL
 
-readonly MOUNT_DIR="/mnt"
-readonly PERSIST_DIR="/persist"
-readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"
+readonly MOUNT_DIR="/mnt"                              # Where drive is mounted by disko (set by disko, not config)
+readonly PERSIST_DIR="/persist"                        # Persistant partition mount location
+readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos" # Config location in persistant partition
+
+# Nix flags to use
+readonly NIX_FLAGS=("--extra-experimental-features" "nix-command" "--extra-experimental-features" "flakes")
+
+# Select config from flake to install
+PS3="Select device config to install: "
+# Dynamically retrieve list of available configs
+device_list="$(nix "${NIX_FLAGS[@]}" flake show --json $FLAKE |
+	nix "${NIX_FLAGS[@]}" run nixpkgs#jq -- --raw-output ".nixosConfigurations | keys[]")"
+
+select device in "$device_list" "quit"; do
+	case $device in
+	"quit")
+		echo "Aborting install"
+		exit
+		;;
+	"")
+		echo "ERROR: Invalid selection '$REPLY'"
+		REPLY=""
+		;;
+	*)
+		echo "Installing $device config"
+		break
+		;;
+	esac
+done </dev/tty # Necessary because otherwise script stdout will be fed back into select statement when piping from curl into bash
 
 # Partition disk with disko
 echo "Partitioning disk with disko"
-nix run github:nix-community/disko \
-	--extra-experimental-features nix-command \
-	--extra-experimental-features flakes \
+nix "${NIX_FLAGS[@]}" \
+	run github:nix-community/disko \
 	-- \
-	--flake "$FLAKE" \
-	--mode zap_create_mount </dev/tty
+	--flake "$FLAKE#$device" \
+	--mode zap_create_mount </dev/tty # Necessary because otherwise it can't set LUKS password interactively
 
 echo "Cloning config repo"
 # NOTE: Remove branch argument before merge
@@ -42,5 +67,5 @@ echo "Setting password (xtrace disabled)"
 
 # Install NixOS
 echo "Installing NixOS and rebooting"
-nixos-install --flake "git+file://$CONFIG_DIR#home-pc" --no-root-passwd
-#reboot
+nixos-install --flake "git+file://$CONFIG_DIR#$device" --no-root-passwd
+reboot
