@@ -77,6 +77,7 @@
 
       modules = [
         ./configuration.nix
+        ./hosts/home-pc/configuration.nix
         inputs.disko.nixosModules.disko
         diskoConfigurations.home-pc
         inputs.nur.nixosModules.nur

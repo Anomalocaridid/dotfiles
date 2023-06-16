@@ -10,11 +10,10 @@ set -o errtrace \
 
 # Config constants
 # NOTE: Remove branch argument before merge
-readonly CONFIG_REPO="Anomalocaridid/dotfiles" # Dotfile config repo name
-readonly FLAKE="github:$CONFIG_REPO/nixos"     # Flake URL
-
+readonly CONFIG_REPO="Anomalocaridid/dotfiles"         # Dotfile config repo name
+readonly FLAKE="github:$CONFIG_REPO/nixos"             # Flake URL
 readonly MOUNT_DIR="/mnt"                              # Where drive is mounted by disko (set by disko, not config)
-readonly PERSIST_DIR="/persist"                        # Persistant partition mount location
+readonly PERSIST_DIR="/persist"                        # Persistent partition mount location
 readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos" # Config location in persistant partition
 
 # Nix flags to use
@@ -56,16 +55,17 @@ echo "Cloning config repo"
 git clone -b nixos "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
 git -C "$CONFIG_DIR" remote set-url origin "git@github.com:$CONFIG_REPO.git"
 
-# Will either leave config untouched or update hardware-configuration.nix and nothing else
+# (Re)generate hardware config
 echo "Generating hardware config"
-nixos-generate-config --no-filesystems --root "$MOUNT_DIR" --dir "$PERSIST_DIR"
+# Call nixos-generate-config.sh from its location in config directory
+"$CONFIG_DIR/scripts/nixos-generate-config.sh" "$device" "$MOUNT_DIR"
 
 # Generate password hashes
 echo "Setting password (xtrace disabled)"
-# Call chpasswd.sh from it's location in config directory
+# Call chpasswd.sh from its location in config directory
 "$CONFIG_DIR"/scripts/chpasswd.sh "$MOUNT_DIR"
 
 # Install NixOS
 echo "Installing NixOS and rebooting"
 nixos-install --flake "git+file://$CONFIG_DIR#$device" --no-channel-copy --no-root-passwd
-reboot
+#reboot
