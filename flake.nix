@@ -120,8 +120,8 @@
     };
     # Expose this to use flake directly with Disko
     diskoConfigurations.home-pc = (import ./disko-config.nix {
-      disk = "/dev/vda";
-      memory = "8G";
+      disk = "/dev/nvme0n1";
+      memory = "32G";
     });
   };
 }
