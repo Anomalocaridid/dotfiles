@@ -21,7 +21,7 @@
       yubioath-flutter
       zotero
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
+      # advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
       firefox # fallback browser
     ];
 

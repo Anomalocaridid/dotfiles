@@ -96,8 +96,10 @@
         du = "dust";
         df = "duf";
         # advcpmv
-        cp = "cp --interactive --progress-bar";
-        mv = "mv --interactive --progress-bar";
+        # cp = "cp --interactive --progress-bar";
+        # mv = "mv --interactive --progress-bar";
+        cp = "cp --interactive";
+        mv = "mv --interactive";
         # bat
         bgrep = "batgrep";
         cat = "bat --paging=never";
