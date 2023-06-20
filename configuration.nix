@@ -190,9 +190,6 @@
     # Enable the X11 windowing system.
     xserver = {
       enable = true;
-      # Enable the GNOME Desktop Environment.
-      displayManager.gdm.enable = true;
-      desktopManager.gnome.enable = true;
       # Configure keymap in X11
       layout = "us";
     };
@@ -228,6 +225,17 @@
     weechat.enable = true;
     # Enable Yubikey support
     pcscd.enable = true;
+    # Enable tuigreet display manager
+    # Replace when Ly when people get it working
+    greetd = {
+      enable = true;
+      settings = {
+        default_session = {
+          command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+          user = "greeter";
+        };
+      };
+    };
   };
 
   # This value determines the NixOS release from which the default

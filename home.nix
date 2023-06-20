@@ -53,7 +53,8 @@
 
   services.syncthing = {
     enable = true;
-    tray.enable = true;
+    # Reenable after getting a tray service
+    # tray.enable = true;
   };
 
   systemd.user.tmpfiles.rules = [

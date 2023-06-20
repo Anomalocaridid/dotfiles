@@ -25,6 +25,9 @@
     # Nix User Repo
     nur.url = "github:nix-community/NUR";
 
+    # Hyprland
+    hyprland.url = "github:hyprwm/Hyprland";
+
     # Up to date Unison packages
     unison-nix = {
       url = "github:ceedubs/unison-nix";
@@ -83,6 +86,7 @@
         inputs.nur.nixosModules.nur
         inputs.home-manager.nixosModules.home-manager
         inputs.impermanence.nixosModules.impermanence
+        inputs.hyprland.nixosModules.default
         {
           # Home Manager
           home-manager = {
@@ -93,6 +97,7 @@
                 ./home.nix
                 inputs.impermanence.nixosModules.home-manager.impermanence
                 inputs.nix-index-database.hmModules.nix-index
+                inputs.hyprland.homeManagerModules.default
               ];
             };
             # Inherit inputs to use zsh plugins not in nixpkgs
@@ -115,6 +120,15 @@
             # Up to date Unison packages
             inputs.unison-nix.overlay
           ];
+
+          # Enable Hyprland
+          programs.hyprland.enable = true;
+
+          nix.settings = {
+            # Hyprland flake cache
+            substituters = [ "https://hyprland.cachix.org" ];
+            trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+          };
         }
       ];
     };
