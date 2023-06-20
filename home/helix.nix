@@ -33,7 +33,7 @@
         };
       };
     };
-    languages = [
+    languages.language = [
       {
         name = "lua";
         auto-format = true;
