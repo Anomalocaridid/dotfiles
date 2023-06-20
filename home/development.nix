@@ -70,6 +70,11 @@
         utop
         ounit # required for exercism tests
       ]);
+      clojure_pkgs = [
+        clojure
+        clojure-lsp
+        leiningen
+      ];
     in
     lib.concatLists [
       nix_pkgs
@@ -84,6 +89,7 @@
       markdown_pkgs
       unison_pkgs
       ocaml_pkgs
+      clojure_pkgs
     ];
   home.file = {
     ".ghci".text = ":set prompt \"\\ESC[1;35mλ> \\ESC[m\"";
