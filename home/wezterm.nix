@@ -46,6 +46,7 @@
         	check_for_updates = false,
         	enable_wayland = true,
         	enable_kitty_graphics = true,
+          window_close_confirmation = "NeverPrompt",
 
         	font_size = 11.0,
         	font = wezterm.font {
