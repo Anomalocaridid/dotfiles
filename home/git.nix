@@ -4,6 +4,8 @@
     userEmail = "29845794+Anomalocaridid@users.noreply.github.com";
     userName = "Anomalocaridid";
 
+    lfs.enable = true;
+
     delta = {
       enable = true;
       options = {
