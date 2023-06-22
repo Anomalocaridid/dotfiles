@@ -12,12 +12,14 @@
       freetube
       gimp-with-plugins
       keepassxc
+      killall
       neofetch
       pavucontrol # Graphical audio controller
       qalculate-gtk
       strawberry
       tree
       ventoy
+      wl-clipboard
       yubioath-flutter
       zotero
       (nerdfonts.override { fonts = [ "FiraCode" ]; })
