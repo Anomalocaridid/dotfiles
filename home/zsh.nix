@@ -96,10 +96,8 @@
         du = "dust";
         df = "duf";
         # advcpmv
-        # cp = "cp --interactive --progress-bar";
-        # mv = "mv --interactive --progress-bar";
-        cp = "cp --interactive";
-        mv = "mv --interactive";
+        cp = "cp --interactive --progress-bar";
+        mv = "mv --interactive --progress-bar";
         # bat
         bgrep = "batgrep";
         cat = "bat --paging=never";
@@ -199,5 +197,6 @@
     du-dust
     duf
     fd
+    advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
   ];
 }

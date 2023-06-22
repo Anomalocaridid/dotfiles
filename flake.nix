@@ -112,12 +112,18 @@
 
           nixpkgs.overlays = [
             # cp and mv with progress bars
-            # Uncomment when 9.3 patch is out
-            # (final: prev: {
-            #   advcpmv-coreutils = prev.coreutils.overrideAttrs (oldAttrs: {
-            #     patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${oldAttrs.version}.patch" ];
-            #   });
-            # })
+            (final: prev: {
+              advcpmv-coreutils = prev.coreutils.overrideAttrs (oldAttrs: rec {
+                # Remove when 9.3 patch is out
+                version = "9.2";
+                # Remove when 9.3 patch is out
+                src = prev.fetchurl {
+                  url = "mirror://gnu/coreutils/coreutils-${version}.tar.xz";
+                  hash = "sha256-aIX/R7nNshHeR9NowXhT9Abar5ixSKrs3xDeKcwEsLM=";
+                };
+                patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${version}.patch" ];
+              });
+            })
             # Up to date Unison packages
             inputs.unison-nix.overlay
           ];

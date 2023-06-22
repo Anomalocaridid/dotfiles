@@ -20,11 +20,25 @@
       };
       src = "${package}/share/plugins";
     };
-    extraPackages = with pkgs; [
-      pmount
-      udisks
-      xdragon
-    ];
+    extraPackages =
+      with pkgs;
+      let
+        wrapAdvcpmv = (util:
+          writeShellApplication {
+            name = util + "g";
+            runtimeInputs = [ advcpmv-coreutils ];
+            text = ''
+              ${util} "$@"
+            '';
+          }
+        );
+      in
+      [
+        pmount
+        udisks
+        xdragon
+        advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
+      ] ++ (map wrapAdvcpmv [ "cp" "mv" ]); # nnn support for advcpmv-coreutils
     package = (pkgs.nnn.override {
       withNerdIcons = true;
     }).overrideAttrs
