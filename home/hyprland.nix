@@ -120,6 +120,7 @@
         # Example windowrule v2
         # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
         # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+        windowrulev2 = float,class:^(wlogout)$
 
 
         # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -128,7 +129,7 @@
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         bind = $mainMod, Q, exec, handlr launch x-scheme-handler/terminal
         bind = $mainMod, C, killactive,
-        bind = $mainMod, M, exit,
+        bind = $mainMod, M, exec, wlogout
         bind = $mainMod, E, exec, dolphin
         bind = $mainMod, V, togglefloating,
         bind = $mainMod, R, exec, wofi --show drun
