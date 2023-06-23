@@ -1,0 +1,93 @@
+$background-color: #000b1e;
+$text-color: #0abdc6;
+$light-background: #133e7c;
+$accent-color: #ea00d9;
+$urgent: #ffff00;
+$critical: #ff0000;
+$green: #00ff00;
+$purple: #711c91;
+$orange: #f57800;
+
+// NOTE: 1 rem = 13 1/3 px (font size according to eww inspector)
+
+* {
+  all: unset; //Unsets everything so you can style everything from scratch
+  font-family: "FiraCode Nerd Font";
+}
+
+//Global Styles
+@mixin rootContainer {  
+  background-color: $background-color;
+  color: $text-color;
+  border-radius: 1.2rem;
+  border: 0.05rem solid $accent-color;
+}
+
+.bar {
+  @include rootContainer;
+  padding: 0.75rem;
+}
+
+tooltip {
+  @include rootContainer;
+}
+
+scale trough {
+  background-color: $light-background;
+  border-radius: 0.75rem; 
+  min-height: 0.3rem;
+  min-width: 3.75rem; 
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+
+  highlight {
+    background-color: $accent-color;
+    // Seems redundant, but it will have square ends otherwise
+    border-radius: 0.75rem; 
+  }
+}
+
+$statColors: (
+  "memory": $green,
+  "cpu": $accent-color,
+  "disk": $purple,
+  "temperature": $orange
+);
+
+.stat {
+  @each $class, $color in $statColors {
+    &.#{$class} {
+      color: $color;
+
+      &.urgent {
+        color: $urgent;
+      }
+      &.critical {
+        color: $critical;
+      }
+    }  
+  }
+}
+
+@mixin heading(){
+  color: $accent-color;
+  font-weight: bold;
+}
+
+calendar.header, calendar:selected, .workspace-entry.current {
+  @include heading;
+}
+
+.music-title {
+  @include heading;
+  font-size: 1.2rem;
+}
+
+.music-album {
+  font-style: italic;
+}
+
+.disconnected {
+  color: $urgent;
+}
+

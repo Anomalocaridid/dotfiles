@@ -27,6 +27,7 @@
         # Set up live wallpaper
         # https://moewalls.com/landscape/synthwave-city-live-wallpaper/
         exec-once = mpvpaper -o "no-audio loop" HDMI-A-1 "/etc/nixos/assets/wallpaper.mp4"
+        exec-once = eww open bar
 
         # Source a file (multi-file configs)
         # source = ~/.config/hypr/myColors.conf
