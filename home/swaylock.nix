@@ -63,11 +63,13 @@
         hyprctl dispatch workspace empty
         handlr launch x-scheme-handler/terminal -- pipes-rs
         # Fullscreen screensaver
-        sleep 0.1 # slight delay needed for fullscreen to work
+        sleep 0.1 # slight delay needed for fullscreen and address query to work
         hyprctl dispatch fullscreen 0
-        # Lock screen
+        win_addr=$(hyprctl activewindow -j | jq --raw-output '.address')
+        # Lock screen, will block until unlocked
         swaylock
-        hyprctl --batch "dispatch killactive ; dispatch workspace previous"
+        # After unlocked, close screensaver
+        hyprctl --batch "dispatch closewindow address:$win_addr ; dispatch workspace previous"
       '';
     })
   ];
