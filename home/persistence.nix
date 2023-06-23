@@ -26,12 +26,13 @@
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
       ".config/exercism"
       ".config/GIMP" # GIMP settings
+      ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
-      ".config/WebCord" # Webcord user data
       ".config/syncthing" # Syncthing settings
+      ".config/WebCord" # Webcord user data
       ".julia" # Prevents recompilation for julia repl and lsp
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache
