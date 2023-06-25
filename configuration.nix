@@ -69,6 +69,8 @@
     bluetooth.enable = true;
     # Enable QMK support
     keyboard.qmk.enable = true;
+    # Support Direct Rendering for 32-bit applications, like Wine
+    opengl.driSupport32Bit = true;
   };
 
   systemd = {
@@ -170,6 +172,13 @@
   };
 
   programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+    };
+    # On-demand system optimization for gaming
+    gamemode.enable = true;
     # Needed for root to access bind mounted dirs created by impermanence
     fuse.userAllowOther = true;
     # Need to enable zsh at system level to use as shell
@@ -217,6 +226,8 @@
     weechat.enable = true;
     # Enable Yubikey support
     pcscd.enable = true;
+    # Nintendo Pro Controller / Joycon support
+    joycond.enable = true;
     # Enable tuigreet display manager
     # Replace when Ly when people get it working
     greetd = {

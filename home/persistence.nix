@@ -8,6 +8,13 @@
       "Music"
       "Pictures"
       "Videos"
+      # Gaming-specific stuff
+      ".cache/lutris" # Lutris banner cache
+      ".config/lutris" # Lutris games and settings
+      ".local/share/lutris" # Lutris runtime data
+      ".local/share/PrismLauncher" # Prism Launcher data
+      ".local/share/Steam" # Steam games and save data
+      ".PySolFC" # PySolFC settings and save data
       # Other important stuff
       ".config/FreeTube" # Freetube user data
       ".config/weechat" # .config/weechat/sec.conf has secrets that shouldn't be managed like a normal dotfile 
