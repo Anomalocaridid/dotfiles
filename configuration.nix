@@ -174,9 +174,6 @@
     fuse.userAllowOther = true;
     # Need to enable zsh at system level to use as shell
     zsh.enable = true;
-    # Enable dconf for virt-manager
-    # NOTE: Autoconnecting to QEMU is configured via dconf in home.nix
-    dconf.enable = true;
   };
 
   # Configure Qt theme
@@ -188,12 +185,6 @@
 
   # List services that you want to enable:
   services = {
-    # Enable the X11 windowing system.
-    xserver = {
-      enable = true;
-      # Configure keymap in X11
-      layout = "us";
-    };
     # Enable CUPS to print documents.
     printing.enable = true;
     # Enable sound.
