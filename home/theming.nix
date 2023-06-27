@@ -27,10 +27,14 @@
       gtk4.extraConfig = extraConfig;
     };
 
-  home.pointerCursor = {
-    name = "Breeze_Hacked";
-    package = pkgs.callPackage ../pkgs/breeze-hacked-cursor { };
-    gtk.enable = true;
-    x11.enable = true;
+  home = {
+    pointerCursor = {
+      name = "Breeze_Hacked";
+      package = pkgs.callPackage ../pkgs/breeze-hacked-cursor { };
+      gtk.enable = true;
+      x11.enable = true;
+    };
+    # fallback icon theme
+    packages = with pkgs; [ gnome.adwaita-icon-theme ];
   };
 }
