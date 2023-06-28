@@ -1,10 +1,10 @@
-{ config, pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }: {
   programs = {
     zsh = {
       enable = true;
       enableAutosuggestions = true;
 
-      initExtra = #shell
+      initExtra = #sh
         ''    
           # Ascii Terminal greeting. 
           # Shows Linux distro and version in rainbow ascii art.
@@ -74,7 +74,7 @@
           bindkey '^Z' fancy-ctrl-z # Oh My Zsh's fancy-ctrl-z
 
           # Sync PWD with shell when exiting nnn's n alias
-          source "${config.programs.nnn.package}/share/quitcd/quitcd.bash_zsh";
+          source "${pkgs.nnn}/share/quitcd/quitcd.bash_zsh";
 
           # Sync subshell PWD with nnn
           nnn_cd() {

@@ -121,7 +121,7 @@
 
           nixpkgs.overlays = [
             # custom overlay
-            (import ./pkgs/default.nix)
+            (import ./pkgs)
             # Eww master branch
             inputs.eww.overlays.default
             inputs.rust-overlay.overlays.default

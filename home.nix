@@ -8,11 +8,13 @@
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
       exercism
+      firefox # fallback browser
       freetube
       gimp-with-plugins
       keepassxc
       killall
       neofetch
+      nerdfonts
       pavucontrol # Graphical audio controller
       qalculate-gtk
       strawberry
@@ -21,8 +23,6 @@
       wl-clipboard
       yubioath-flutter
       zotero
-      (nerdfonts.override { fonts = [ "FiraCode" ]; })
-      firefox # fallback browser
     ];
 
     sessionVariables = {

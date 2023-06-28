@@ -141,22 +141,11 @@
   virtualisation.libvirtd.enable = true;
 
   # List packages installed in system profile. To search, run:
-  environment.systemPackages = with pkgs;
-    [
-      virt-manager
-    ];
+  environment.systemPackages = with pkgs; [
+    virt-manager
+  ];
 
-  nixpkgs = {
-    config.allowUnfree = true;
-    overlays = [
-      # Enable insults in sudo
-      (final: prev: {
-        sudo = prev.sudo.override {
-          withInsults = true;
-        };
-      })
-    ];
-  };
+  nixpkgs.config.allowUnfree = true;
 
   security = {
     sudo.extraConfig = #sudo
