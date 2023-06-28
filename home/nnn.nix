@@ -26,7 +26,7 @@
         wrapAdvcpmv = (util:
           writeShellApplication {
             name = util + "g";
-            runtimeInputs = [ advcpmv-coreutils ];
+            runtimeInputs = [ custom.advcpmv-coreutils ];
             text = ''
               ${util} "$@"
             '';
@@ -37,7 +37,7 @@
         pmount
         udisks
         xdragon
-        advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
+        custom.advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
       ] ++ (map wrapAdvcpmv [ "cp" "mv" ]); # nnn support for advcpmv-coreutils
     package = (pkgs.nnn.override {
       withNerdIcons = true;

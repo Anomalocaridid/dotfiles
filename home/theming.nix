@@ -16,11 +16,11 @@
       enable = true;
       theme = {
         name = "materia-cyberpunk-neon";
-        package = pkgs.callPackage ../pkgs/gtk-materia-cyberpunk-neon { };
+        package = pkgs.custom.gtk-materia-cyberpunk-neon;
       };
       iconTheme = {
         name = "Sweet-Rainbow";
-        package = pkgs.callPackage ../pkgs/candy-icons { };
+        package = pkgs.custom.candy-icons;
       };
       gtk2.extraConfig = gtk2ExtraConfig;
       gtk3.extraConfig = extraConfig;
@@ -30,7 +30,7 @@
   home = {
     pointerCursor = {
       name = "Breeze_Hacked";
-      package = pkgs.callPackage ../pkgs/breeze-hacked-cursor { };
+      package = pkgs.custom.breeze-hacked-cursor;
       gtk.enable = true;
       x11.enable = true;
     };

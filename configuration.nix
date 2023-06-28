@@ -19,7 +19,7 @@
       grub = {
         device = "nodev";
         efiSupport = true;
-        theme = pkgs.callPackage ./pkgs/cyberre-grub-theme { };
+        theme = pkgs.custom.cyberre-grub-theme;
       };
       efi.canTouchEfiVariables = true;
     };

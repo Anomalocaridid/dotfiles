@@ -197,6 +197,6 @@
     du-dust
     duf
     fd
-    advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
+    custom.advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
   ];
 }

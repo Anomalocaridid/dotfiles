@@ -49,12 +49,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Patch for progress bars for cp and mv
-    advcpmv = {
-      url = "github:jarun/advcpmv";
-      flake = false;
-    };
-
     # Fork of zsh-bd zsh plugin
     zsh-bd = {
       url = "github:mawkler/zsh-bd";
@@ -126,19 +120,8 @@
             ./persistence.nix;
 
           nixpkgs.overlays = [
-            # cp and mv with progress bars
-            (final: prev: {
-              advcpmv-coreutils = prev.coreutils.overrideAttrs (oldAttrs: rec {
-                # Remove when 9.3 patch is out
-                version = "9.2";
-                # Remove when 9.3 patch is out
-                src = prev.fetchurl {
-                  url = "mirror://gnu/coreutils/coreutils-${version}.tar.xz";
-                  hash = "sha256-aIX/R7nNshHeR9NowXhT9Abar5ixSKrs3xDeKcwEsLM=";
-                };
-                patches = (oldAttrs.patches or [ ]) ++ [ "${inputs.advcpmv}/advcpmv-0.9-${version}.patch" ];
-              });
-            })
+            # custom overlay
+            (import ./pkgs/default.nix)
             # Eww master branch
             inputs.eww.overlays.default
             inputs.rust-overlay.overlays.default
