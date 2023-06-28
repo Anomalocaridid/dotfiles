@@ -30,6 +30,7 @@
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
       ".config/spotify" # Spotify user data
+      ".cache/spotify" # Spotify cache
       ".config/strawberry" # Strawberry settings
       ".config/syncthing" # Syncthing settings
       ".config/WebCord" # Webcord user data
