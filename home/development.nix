@@ -121,7 +121,7 @@
         IndentCaseLabels = true;
         AlignConsecutiveDeclarations = true;
       };
-    ".julia/config/startup.jl".source = ../dotfiles/.julia/config/startup.jl;
+    ".julia/config/startup.jl".source = ./.julia/config/startup.jl;
   };
 
   systemd.user.services.quicklisp-setup = {

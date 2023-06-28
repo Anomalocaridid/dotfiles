@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }: {
   home.packages = with pkgs; [ nyxt ];
   xdg = {
-    configFile."nyxt".source = ../dotfiles/.config/nyxt;
+    configFile."nyxt".source = ./.config/nyxt;
     dataFile =
       let
         extensionDir = "nyxt/extensions/";

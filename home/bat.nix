@@ -5,7 +5,7 @@
       theme = "cyberpunk-neon";
     };
     themes = {
-      cyberpunk-neon = builtins.readFile ../dotfiles/.config/bat/themes/cyberpunk-neon.tmTheme;
+      cyberpunk-neon = builtins.readFile ./.config/bat/themes/cyberpunk-neon.tmTheme;
     };
     extraPackages = with pkgs.bat-extras; [
       batdiff

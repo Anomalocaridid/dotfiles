@@ -4,7 +4,7 @@
   # Individually link files because sec.conf can't be persisted otherwise
   xdg.configFile =
     let
-      configDir = ../dotfiles/.config/weechat;
+      configDir = ./.config/weechat;
     in
     lib.foldr
       (file: acc:

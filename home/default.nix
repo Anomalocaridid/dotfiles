@@ -1,7 +1,12 @@
 { lib, pkgs, osConfig, ... }: rec {
-  # Import all files in ./home/
-  # Note: Will fail to build if non-nix files are present in ./home/
-  imports = map (n: ./. + "/home/${n}") (builtins.attrNames (builtins.readDir ./home));
+  # Import all nix files in directory 
+  # Should ignore this file and all non-nix files
+  imports = map
+    (file: ./. + "/${file}")
+    (lib.strings.filter
+      (file: lib.strings.hasSuffix ".nix" file && file != "default.nix")
+      (builtins.attrNames (builtins.readDir ./.))
+    );
 
   home = rec {
     username = "anomalocaris";

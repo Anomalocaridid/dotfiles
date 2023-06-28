@@ -215,5 +215,5 @@
     };
   };
 
-  xdg.configFile."btop/themes/cyberpunk_neon.theme".source = ../dotfiles/.config/btop/themes/cyberpunk_neon.theme;
+  xdg.configFile."btop/themes/cyberpunk_neon.theme".source = ./.config/btop/themes/cyberpunk_neon.theme;
 }

@@ -103,7 +103,7 @@
             useUserPackages = true;
             users.anomalocaris = {
               imports = [
-                ./home.nix
+                ./home
                 inputs.impermanence.nixosModules.home-manager.impermanence
                 inputs.nix-index-database.hmModules.nix-index
                 inputs.hyprland.homeManagerModules.default
