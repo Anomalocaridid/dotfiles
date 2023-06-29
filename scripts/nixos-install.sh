@@ -9,7 +9,6 @@ set -o errtrace \
 	-o pipefail
 
 # Config constants
-# NOTE: Remove branch argument before merge
 readonly CONFIG_REPO="Anomalocaridid/dotfiles"         # Dotfile config repo name
 readonly FLAKE="github:$CONFIG_REPO"                   # Flake URL
 readonly MOUNT_DIR="/mnt"                              # Where drive is mounted by disko (set by disko, not config)
