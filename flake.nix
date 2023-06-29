@@ -117,44 +117,12 @@
       hostDefaults = {
         system = flake-utils.lib.system.x86_64-linux;
         modules = [
-          ./configuration.nix
+          ./modules
           disko.nixosModules.disko
           nur.nixosModules.nur
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
           hyprland.nixosModules.default
-          {
-            # Home Manager
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users.anomalocaris = {
-                imports = [
-                  ./home
-                  impermanence.nixosModules.home-manager.impermanence
-                  nix-index-database.hmModules.nix-index
-                  hyprland.homeManagerModules.default
-                ];
-              };
-              # Inherit inputs to use zsh plugins not in nixpkgs
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-            };
-
-            # Impermanence
-            environment.persistence = import
-              ./persistence.nix;
-
-            # Enable Hyprland
-            programs.hyprland.enable = true;
-
-            nix.settings = {
-              # Hyprland flake cache
-              substituters = [ "https://hyprland.cachix.org" ];
-              trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-            };
-          }
         ];
       };
 
