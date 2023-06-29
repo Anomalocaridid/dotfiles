@@ -61,14 +61,14 @@
                 in
                 {
                   "/nix" = {
-                    mountOptions = mountOptions;
+                    inherit mountOptions;
                   };
                   "/persist" = {
-                    mountOptions = mountOptions;
+                    inherit mountOptions;
                   };
                   "/log" = {
                     mountpoint = "/var/log";
-                    mountOptions = mountOptions;
+                    inherit mountOptions;
                   };
                 };
             };
