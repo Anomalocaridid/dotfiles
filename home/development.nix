@@ -4,6 +4,7 @@
       nix_pkgs = [
         nil
         nixpkgs-fmt
+        nixpkgs-review
       ];
       python_pkgs = [
         (python3.withPackages
