@@ -25,6 +25,7 @@
       strawberry
       tree
       ventoy
+      webcord-vencord
       wl-clipboard
       yubioath-flutter
       zotero

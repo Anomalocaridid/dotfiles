@@ -6,19 +6,6 @@ final: prev: {
 
   nerdfonts = prev.nerdfonts.override { fonts = [ "FiraCode" ]; };
 
-  # TODO: Upstream this change to pysolfc in nixpkgs
-  pysolfc = prev.pysolfc.overrideAttrs (oldAttrs: {
-    music = final.fetchzip {
-      url = "https://versaweb.dl.sourceforge.net/project/pysolfc/PySol-Music/PySol-Music-4.50/pysol-music-4.50.tar.xz";
-      sha256 = "sha256-sOl5U98aIorrQHJRy34s0HHaSW8hMUE7q84FMQAj5Yg=";
-    };
-
-    postInstall = (oldAttrs.postInstall or "") + ''
-      mkdir $out/share/PySolFC/music
-      cp -r $music/data/music/* $out/share/PySolFC/music
-    '';
-  });
-
   nnn = (prev.nnn.override {
     withNerdIcons = true;
   }).overrideAttrs
