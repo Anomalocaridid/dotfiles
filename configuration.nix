@@ -145,7 +145,7 @@
     virt-manager
   ];
 
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   security = {
     sudo.extraConfig = #sudo

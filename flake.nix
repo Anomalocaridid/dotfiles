@@ -22,6 +22,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
+
     # Nix User Repo
     nur.url = "github:nix-community/NUR";
 
@@ -83,67 +85,88 @@
     };
   };
 
-  outputs = inputs: rec {
-    nixosConfigurations.home-pc = inputs.nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , disko
+    , home-manager
+    , impermanence
+    , nix-index-database
+    , flake-utils
+    , nur
+    , hyprland
+    , eww
+    , rust-overlay
+    , unison-nix
+    , ...
+    }: flake-utils.lib.mkFlake rec {
+      inherit self inputs;
 
-      modules = [
-        ./configuration.nix
-        ./hosts/home-pc/configuration.nix
-        inputs.disko.nixosModules.disko
-        diskoConfigurations.home-pc
-        inputs.nur.nixosModules.nur
-        inputs.home-manager.nixosModules.home-manager
-        inputs.impermanence.nixosModules.impermanence
-        inputs.hyprland.nixosModules.default
-        {
-          # Home Manager
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            users.anomalocaris = {
-              imports = [
-                ./home
-                inputs.impermanence.nixosModules.home-manager.impermanence
-                inputs.nix-index-database.hmModules.nix-index
-                inputs.hyprland.homeManagerModules.default
-              ];
-            };
-            # Inherit inputs to use zsh plugins not in nixpkgs
-            extraSpecialArgs = {
-              inherit inputs;
-            };
-          };
+      channelsConfig.allowUnfree = true;
 
-          # Impermanence
-          environment.persistence = import
-            ./persistence.nix;
-
-          nixpkgs.overlays = [
-            # custom overlay
-            (import ./pkgs)
-            # Eww master branch
-            inputs.eww.overlays.default
-            inputs.rust-overlay.overlays.default
-            # Up to date Unison packages
-            inputs.unison-nix.overlay
-          ];
-
-          # Enable Hyprland
-          programs.hyprland.enable = true;
-
-          nix.settings = {
-            # Hyprland flake cache
-            substituters = [ "https://hyprland.cachix.org" ];
-            trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
-          };
-        }
+      sharedOverlays = [
+        # custom overlay
+        (import ./pkgs)
+        # Eww master branch
+        eww.overlays.default
+        rust-overlay.overlays.default
+        # Up to date Unison packages
+        unison-nix.overlay
       ];
+
+      hostDefaults = {
+        system = flake-utils.lib.system.x86_64-linux;
+        modules = [
+          ./configuration.nix
+          disko.nixosModules.disko
+          nur.nixosModules.nur
+          home-manager.nixosModules.home-manager
+          impermanence.nixosModules.impermanence
+          hyprland.nixosModules.default
+          {
+            # Home Manager
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users.anomalocaris = {
+                imports = [
+                  ./home
+                  impermanence.nixosModules.home-manager.impermanence
+                  nix-index-database.hmModules.nix-index
+                  hyprland.homeManagerModules.default
+                ];
+              };
+              # Inherit inputs to use zsh plugins not in nixpkgs
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+            };
+
+            # Impermanence
+            environment.persistence = import
+              ./persistence.nix;
+
+            # Enable Hyprland
+            programs.hyprland.enable = true;
+
+            nix.settings = {
+              # Hyprland flake cache
+              substituters = [ "https://hyprland.cachix.org" ];
+              trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
+            };
+          }
+        ];
+      };
+
+      hosts.home-pc.modules = [
+        ./hosts/home-pc/configuration.nix
+        diskoConfigurations.home-pc
+      ];
+
+      # Expose this to use flake directly with Disko
+      diskoConfigurations.home-pc = (import ./disko-config.nix {
+        disk = "/dev/nvme0n1";
+        memory = "32G";
+      });
     };
-    # Expose this to use flake directly with Disko
-    diskoConfigurations.home-pc = (import ./disko-config.nix {
-      disk = "/dev/nvme0n1";
-      memory = "32G";
-    });
-  };
 }

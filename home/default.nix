@@ -29,6 +29,7 @@
       wl-clipboard
       yubioath-flutter
       zotero
+      fup-repl
     ];
 
     sessionVariables = {
