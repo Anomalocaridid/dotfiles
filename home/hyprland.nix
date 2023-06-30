@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ lib, pkgs, ... }: {
   # Additional dependencies
   home.packages = with pkgs; [
     mpvpaper # Live wallpaper
@@ -6,33 +6,66 @@
   ];
   wayland.windowManager.hyprland = {
     enable = true;
-    extraConfig = #hypr
+    extraConfig =
+      let
+        # Switch workspaces with mainMod + [0-9]
+        # Move active window to a workspace with mainMod + SHIFT + [0-9]
+        workspaceSwitch = lib.strings.concatMapStrings
+          (n:
+            let
+              key = (if workspace == "10" then "0" else workspace);
+              workspace = toString n;
+            in
+            #hypr
+            '' 
+              bind = $mainMod, ${key}, workspace, ${workspace}
+              bind = $mainMod SHIFT, ${key}, movetoworkspace, ${workspace}
+            ''
+          )
+          (lib.lists.range 1 10);
+        # Move focus with mainMod + direction keys
+        # Swap active window with an adjacent window with mainMod + SHIFT + direction keys
+        directionSwitch = lib.strings.concatMapStrings
+          (key:
+            let
+              dir = (builtins.elemAt (lib.strings.stringToCharacters key) 1);
+            in
+            #hypr
+            ''
+              bind = $mainMod, ${key}, movefocus, ${dir}
+              bind = $mainMod SHIFT, ${key}, swapwindow, ${dir}
+            ''
+          ) [ "$left" "$down" "$up" "$right" ];
+        pink = "ea00d9";
+        purple = "711c91";
+        darkBlue = "000b1e";
+        lightBlue = "133e7c";
+        cyan = "0abdc6";
+        green = "00ff00";
+        orange = "f57800";
+        red = "ff00ff";
+      in
+      #hypr
       ''
-        # This is an example Hyprland config file.
-        #
-        # Refer to the wiki for more information.
-
-        #
-        # Please note not all available settings / options are set here.
-        # For a full list, see the wiki
-        #
-
-        monitor=,preferred,auto,auto
-
         # Execute your favorite apps at launch
-        # exec-once = waybar & hyprpaper & firefox
+        # TODO: steam
         # Set up live wallpaper
         # https://moewalls.com/landscape/synthwave-city-live-wallpaper/
         exec-once = mpvpaper -o "no-audio loop" HDMI-A-1 "/etc/nixos/assets/wallpaper.mp4"
         exec-once = eww open bar
         exec-once = hyprland-autoname-workspaces
+        exec-once = webcord
 
         general {
             gaps_in = 5
             gaps_out = 20
             border_size = 2
-            col.active_border = rgba(33ccffee) rgba(00ff99ee) 45deg
-            col.inactive_border = rgba(595959aa)
+            col.active_border = rgba(${pink}ee) rgba(${purple}ee) 45deg
+            col.inactive_border = rgba(${darkBlue}aa) rgba(${lightBlue}aa) 45deg
+            # col.group_border = rgba(${darkBlue}aa) rgba(${lightBlue}ee) 45deg
+            # col.group_border_active = rgba(${cyan}ee) rgba(${green}ee) 45deg
+            # col.group_border_locked = rgba(${darkBlue}aa) rgba(${lightBlue}ee) 45deg
+            # col.group_border_locked_active = rgba(${orange}ee) rgba(${red}ee) 45deg
 
             layout = dwindle
         }
@@ -49,7 +82,7 @@
             drop_shadow = true
             shadow_range = 4
             shadow_render_power = 3
-            col.shadow = rgba(1a1a1aee)
+            col.shadow = rgba(${darkBlue}ee)
         }
 
         animations {
@@ -83,78 +116,79 @@
             workspace_swipe = false
         }
 
-        # Example per-device config
-        # See https://wiki.hyprland.org/Configuring/Keywords/#per-device-input-configs for more
-        device:epic-mouse-v1 {
-            sensitivity = -0.5
+        misc {
+          enable_swallow = true
+          swallow_regex = ^(org.wezfurlong.wezterm)$
+          # groupbar_text_color = rgb(${cyan})
         }
-
-        # Example windowrule v1
-        # windowrule = float, ^(kitty)$
-        # Example windowrule v2
-        # windowrulev2 = float,class:^(kitty)$,title:^(kitty)$
-        # See https://wiki.hyprland.org/Configuring/Window-Rules/ for more
+        
+        # Window rules
         windowrulev2 = float,class:^(wlogout)$
-
-
-        # See https://wiki.hyprland.org/Configuring/Keywords/ for more
+        windowrulev2 = float, class:^(pavucontrol|nmtui)$
+        windowrulev2 = workspace 1, class:^(lutris)$
+        windowrulev2 = workspace 2, class:^(nyxt)$
+        windowrulev2 = workspace 3, title:^(Spotify)$
+        windowrulev2 = workspace 4, class:^(WebCord)$
+        
         $mainMod = SUPER
+        
+        $shellExec = zsh -c
+        $opener = handlr launch
+        $term = $opener x-scheme-handler/terminal --
+        # Launch nnn in a shell so it gets the necessary variables
+        $fileMan = $term $shellExec "$opener inode/directory --"
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-        bind = $mainMod, Q, exec, handlr launch x-scheme-handler/terminal
-        bind = $mainMod, C, killactive,
-        bind = $mainMod, M, exec, wlogout
-        bind = $mainMod, E, exec, dolphin
+        bind = $mainMod, Return, exec, $term
+        bind = $mainMod, Q, killactive,
+        bind = $mainMod SHIFT, Q, exec, wlogout
+        bind = $mainMod, N, exec, $fileMan
         bind = $mainMod, V, togglefloating,
         bind = $mainMod, R, exec, wofi --show drun
         bind = $mainMod, P, pseudo, # dwindle
-        bind = $mainMod, J, togglesplit, # dwindle
+        bind = $mainMod, S, togglesplit, # dwindle
+        bind = $mainMod, D, exec, hyprctl keyword general:layout dwindle
+        bind = $mainMod, M, exec, hyprctl keyword general:layout master
+        bind = $mainMod, O, exec, nyxt
+        # bind = $mainMod, G, togglegroup
+        # bind = $mainMod SHIFT, G, lockgroups, toggle
 
-        bind = $mainMod, L, exec, lockman.sh
-
-        # Move focus with mainMod + arrow keys
-        bind = $mainMod, left, movefocus, l
-        bind = $mainMod, right, movefocus, r
-        bind = $mainMod, up, movefocus, u
-        bind = $mainMod, down, movefocus, d
-
-        # Switch workspaces with mainMod + [0-9]
-        bind = $mainMod, 1, workspace, 1
-        bind = $mainMod, 2, workspace, 2
-        bind = $mainMod, 3, workspace, 3
-        bind = $mainMod, 4, workspace, 4
-        bind = $mainMod, 5, workspace, 5
-        bind = $mainMod, 6, workspace, 6
-        bind = $mainMod, 7, workspace, 7
-        bind = $mainMod, 8, workspace, 8
-        bind = $mainMod, 9, workspace, 9
-        bind = $mainMod, 0, workspace, 10
-
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        bind = $mainMod SHIFT, 1, movetoworkspace, 1
-        bind = $mainMod SHIFT, 2, movetoworkspace, 2
-        bind = $mainMod SHIFT, 3, movetoworkspace, 3
-        bind = $mainMod SHIFT, 4, movetoworkspace, 4
-        bind = $mainMod SHIFT, 5, movetoworkspace, 5
-        bind = $mainMod SHIFT, 6, movetoworkspace, 6
-        bind = $mainMod SHIFT, 7, movetoworkspace, 7
-        bind = $mainMod SHIFT, 8, movetoworkspace, 8
-        bind = $mainMod SHIFT, 9, movetoworkspace, 9
-        bind = $mainMod SHIFT, 0, movetoworkspace, 10
+        # Vim-style homerow direction keys
+        $left = h
+        $down = j
+        $up = k
+        $right = l
 
         # Scroll through existing workspaces with mainMod + scroll
         bind = $mainMod, mouse_down, workspace, e+1
         bind = $mainMod, mouse_up, workspace, e-1
 
+        $LMB = mouse:272
+        $RMB = mouse:275
+
         # Move/resize windows with mainMod + LMB/RMB and dragging
-        bindm = $mainMod, mouse:272, movewindow
-        bindm = $mainMod, mouse:273, resizewindow
-      '';
+        bindm = $mainMod, $LMB, movewindow
+        bindm = $mainMod, $RMB, resizewindow
+
+        # Resize submap
+        bind = $mainMod ALT,R,submap,resize
+        submap = resize
+
+        binde = ,$right,resizeactive,10 0
+        binde = ,$left,resizeactive,-10 0
+        binde = ,$up,resizeactive,0 -10
+        binde = ,$down,resizeactive,0 10
+
+        bind = ,escape,submap,reset 
+
+        submap=reset
+      '' + workspaceSwitch + directionSwitch;
   };
 
   xdg.configFile."hyprland-autoname-workspaces/config.toml".source =
     let
       tomlFormat = pkgs.formats.toml { };
+      green = "#00FF00";
     in
     tomlFormat.generate "hyprland-autoname-workspaces-config" {
       version = "1.1.0";
@@ -176,7 +210,7 @@
         workspace_empty = "{name}"; # {id}, {delim} and {clients} are supported
         # client formatter
         client = "{icon}";
-        client_active = "<span color='#00FF00'>${client}</span>";
+        client_active = "<span color='${green}'>${client}</span>";
 
         # deduplicate client formatter
         # client_fullscreen = "[{icon}]";
@@ -256,3 +290,4 @@
       # };
     };
 }
+

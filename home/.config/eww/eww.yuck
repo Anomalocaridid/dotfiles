@@ -204,7 +204,7 @@
   (interactive :reveal show-network
                :onhover "${EWW_CMD} update show-network=true"
                :onhoverlost "${EWW_CMD} update show-network=false"
-               :onclick "${TERM_CMD} nmtui"
+               :onclick "${TERM_CMD} --class nmtui nmtui"
                :class "network ${network.name == "" ? "disconnected" : ""}"
                :spacing 3
                "${network.icon} ${network.name ?: "<Disconnected>"}"
