@@ -18,14 +18,16 @@
     (right-bar)))
 
 (defwidget left-bar []
-  (box :space-evenly false
+  (box :class "left-bar"
+       :space-evenly false
        (workspaces)
        (left-sep)
        (active-window)
        (left-sep)))
 
 (defwidget mid-bar []
-  (box :space-evenly false
+  (box :class "mid-bar"
+       :space-evenly false
        :halign "center"
        (right-sep)
        (splash :reveal {music == ""})
@@ -33,7 +35,8 @@
        (left-sep)))
 
 (defwidget right-bar []
-  (box :space-evenly false
+  (box :class "right-bar"
+       :space-evenly false
        :halign "end"
        (right-sep)
        (controls)
@@ -89,17 +92,14 @@
   (eventbox :onscroll "${EWW_CONFIG_DIR}/scripts/change-active-workspace.sh {} ${current-workspace}"
             :class "workspaces-widget"
     (box :space-evenly false
-         :spacing 10
+      (label :text "${workspaces}${current-workspace}" :visible false)
       (for workspace in workspaces
-        (eventbox :onclick "hyprctl dispatch workspace ${workspace.name}"
-          (box :class "workspace-entry ${workspace.name == current-workspace ? "current" : ""}"
-            (label :text {workspace.name})))))))
+        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+          (box :class "workspace-entry ${workspace.id == current-workspace ? "current" : ""}"
+            (label :markup {workspace.name})))))))
 
 (deflisten active-window "~/.config/eww/scripts/get-window-title.sh")
 
-; TODO: after getting hyprland-autoname-workspaces set up,
-; try to somehow use it to provide icons to this widget
-; either directly or by manually parsing its config
 (defwidget active-window []
   (label :text " ${active-window ?: "..."}"
          :limit-width 30))

@@ -30,6 +30,11 @@
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
+    hyprland-autoname-patch = {
+      url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/236515.patch";
+      flake = false;
+    };
+
     # Elkowar's Wacky Widgets
     eww = {
       url = "github:elkowar/eww";
@@ -103,6 +108,9 @@
       inherit self inputs;
 
       channelsConfig.allowUnfree = true;
+
+      # TODO: remove when merged
+      channels."nixpkgs".patches = [ inputs.hyprland-autoname-patch ];
 
       sharedOverlays = [
         # custom overlay

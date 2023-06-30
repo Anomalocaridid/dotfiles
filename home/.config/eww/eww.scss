@@ -28,6 +28,24 @@ $orange: #f57800;
   padding: 0.75rem;
 }
 
+// Ensure elements don't go over the sides
+@mixin sideBar($side) {
+  .#{$side} {
+    padding-#{$side}: 0.4rem;
+  }
+}
+
+// @include sideBar(left);
+// @include sideBar(right);
+
+.left-bar {
+  padding-left: 0.4rem;
+}
+
+.right-bar {
+  padding-right: 0.4rem;
+}
+
 tooltip {
   @include rootContainer;
 }
@@ -74,8 +92,16 @@ $statColors: (
   font-weight: bold;
 }
 
-calendar.header, calendar:selected, .workspace-entry.current {
+calendar.header, calendar:selected {
   @include heading;
+}
+
+.workspace-entry {
+  &.current {
+    @include heading;
+  }
+  // Ensure icons are not cut off
+  padding: 0rem 0.4rem;
 }
 
 .music-title {

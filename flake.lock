@@ -170,6 +170,18 @@
         "type": "github"
       }
     },
+    "hyprland-autoname-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-QZh1mx6YkszoDsf4w2XlPAJaepdKJsZWchF4CyaOFgQ=",
+        "type": "file",
+        "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/236515.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/236515.patch"
+      }
+    },
     "hyprland-protocols": {
       "inputs": {
         "nixpkgs": [
@@ -344,6 +356,7 @@
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "hyprland-autoname-patch": "hyprland-autoname-patch",
         "impermanence": "impermanence",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",

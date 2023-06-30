@@ -8,9 +8,14 @@ set -o errtrace \
 	-o nounset \
 	-o pipefail
 
-hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id'
+active-space() {
+	hyprctl monitors -j | jq '.[] | select(.focused) | .activeWorkspace.id'
+}
 
-# They are awk arguments, not bash arguments
-# shellcheck disable=SC2016
+active-space
+# Get id of active space, when workspace or focused monitor changes
 socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - |
-	stdbuf -o0 awk -F '>>|,' -e '/^workspace>>/ {print $2}' -e '/^focusedmon>>/ {print $3}'
+	stdbuf -o0 awk -F '>>|,' -e '/^(workspace|focusedmon)>>/' |
+	while read -r _; do
+		active-space
+	done

@@ -4,7 +4,7 @@
 
 spaces() {
 	# Sort before filtering to account for hyprland-autoname-workspaces
-	hyprctl workspaces -j | jq --compact-output 'sort_by(.id) | map({name, window})'
+	hyprctl workspaces -j | jq --compact-output 'sort_by(.id) | map({id, name, window})'
 }
 
 spaces

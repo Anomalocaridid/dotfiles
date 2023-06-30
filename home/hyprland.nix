@@ -2,6 +2,7 @@
   # Additional dependencies
   home.packages = with pkgs; [
     mpvpaper # Live wallpaper
+    hyprland-autoname-workspaces
   ];
   wayland.windowManager.hyprland = {
     enable = true;
@@ -16,11 +17,7 @@
         # For a full list, see the wiki
         #
 
-        # See https://wiki.hyprland.org/Configuring/Monitors/
         monitor=,preferred,auto,auto
-
-
-        # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
         # Execute your favorite apps at launch
         # exec-once = waybar & hyprpaper & firefox
@@ -28,33 +25,9 @@
         # https://moewalls.com/landscape/synthwave-city-live-wallpaper/
         exec-once = mpvpaper -o "no-audio loop" HDMI-A-1 "/etc/nixos/assets/wallpaper.mp4"
         exec-once = eww open bar
-
-        # Source a file (multi-file configs)
-        # source = ~/.config/hypr/myColors.conf
-
-        # Some default env vars.
-        env = XCURSOR_SIZE,24
-
-        # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
-        input {
-            kb_layout = us
-            kb_variant =
-            kb_model =
-            kb_options =
-            kb_rules =
-
-            follow_mouse = 1
-
-            touchpad {
-                natural_scroll = false
-            }
-
-            sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-        }
+        exec-once = hyprland-autoname-workspaces
 
         general {
-            # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
             gaps_in = 5
             gaps_out = 20
             border_size = 2
@@ -178,4 +151,108 @@
         bindm = $mainMod, mouse:273, resizewindow
       '';
   };
+
+  xdg.configFile."hyprland-autoname-workspaces/config.toml".source =
+    let
+      tomlFormat = pkgs.formats.toml { };
+    in
+    tomlFormat.generate "hyprland-autoname-workspaces-config" {
+      version = "1.1.0";
+
+      # TODO: Investigate if it would be possible to use eww literals as a replacement for inline pango
+      format = rec {
+        # Deduplicate icons if enable.
+        # A superscripted counter will be added.
+        dedup = true;
+        dedup_inactive_fullscreen = true; # dedup more
+        # window delimiter
+        delim = " ";
+
+        # available formatter:
+        # {counter_sup} - superscripted count of clients on the workspace, and simple {counter}, {delim}
+        # {icon}, {client}
+        # workspace formatter
+        workspace = "${workspace_empty}:{delim}{clients}"; # {id}, {delim} and {clients} are supported
+        workspace_empty = "{name}"; # {id}, {delim} and {clients} are supported
+        # client formatter
+        client = "{icon}";
+        client_active = "<span color='#00FF00'>${client}</span>";
+
+        # deduplicate client formatter
+        # client_fullscreen = "[{icon}]";
+        # client_dup = "{client}{counter_sup}";
+        # client_dup_fullscreen = "[{icon}]{delim}{icon}{counter_unfocused}";
+        # client_dup_active = "*{icon}*{delim}{icon}{counter_unfocused}";
+      };
+
+      class = {
+        # Add your icons mapping
+        # use double quote the key and the value
+        # take class name from 'hyprctl clients'
+        # "DEFAULT" = " {class}: {title}";
+        "DEFAULT" = "";
+        "blueman-manager" = "";
+        "[Ff]irefox" = "";
+        "FreeTube" = "";
+        "libreoffice" = "󰈙";
+        "lutris" = "";
+        "Minecraft" = "󰍳";
+        "nyxt" = "󰖟";
+        "org.keepassxc.KeePassXC" = "󰌋";
+        "org.prismlauncher.PrismLauncher" = "󰍳";
+        "org.pwmt.zathura" = "";
+        "org.wezfurlong.wezterm" = "";
+        "pavucontrol" = "󰕾";
+        "steam" = "󰓓";
+        "virt-manager" = "󰍺";
+        "WebCord" = "󰙯";
+        ".yubioath-flutter-wrapped_" = "󰌋";
+      };
+
+      # class_active = {};
+
+      # initial_class = {};
+
+      # initial_class_active = {};
+
+      # regex captures support is supported
+      # "emerge: (.+?/.+?)-.*" = "{match1}"
+
+      title_in_class."^$" = {
+        "(?i)spotify" = "";
+      };
+
+      # title_in_class_active = {};
+
+      # title_in_initial_class = {};
+
+      # initial_title = {};
+
+      # initial_title_active = {};
+
+      # initial_title_in_class = {};
+
+      # initial_title_in_initial_class = {};
+
+      # Add your applications that need to be exclude
+      # The key is the class, the value is the title.
+      # You can put an empty title to exclude based on
+      # class name only, "" make the job.
+      exclude = {
+        "[Ss]team" = "(Friends List.*|^$)"; # will match all Steam window with null title (some popup)
+      };
+
+      # workspaces_name = {
+      #   "1" = "一";
+      #   "2" = "二";
+      #   "3" = "三";
+      #   "4" = "四";
+      #   "5" = "五";
+      #   "6" = "六";
+      #   "7" = "七";
+      #   "8" = "八";
+      #   "9" = "九";
+      #   "10" = "十";
+      # };
+    };
 }
