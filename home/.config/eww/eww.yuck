@@ -105,7 +105,8 @@
 (defwidget active-window []
   (abbrev-text :name "active"
                :reveal show-active
-               :text " ${active-window ?: "..."}" ))
+               :text " ${active-window ?: "..."}"
+               :max-width 30))
 
 (deflisten splash :interval "60m"
   "hyprctl splash")
@@ -115,13 +116,14 @@
 (defwidget splash [reveal]
   (abbrev-text :name "splash"
                :reveal show-splash
-               :text {reveal ? splash : ""}))
+               :text {reveal ? splash : ""}
+               :max-width 75))
 
-(defwidget abbrev-text [name reveal text]
+(defwidget abbrev-text [name reveal text max-width]
   (eventbox :onhover "${EWW_CMD} update show-${name}=true"
             :onhoverlost "${EWW_CMD} update show-${name}=false"
     (label :text text
-           :limit-width {reveal ? 30 : 15})))
+           :limit-width {reveal ? max-width : 15})))
 
 (defwindow music
   :monitor 0
@@ -177,8 +179,8 @@
                :transition "slideright"
                (music-info :text " ")
                (music-info :text "${music.artist} - ")
-               (label :text {music?.title}
-                      :limit-width {show-music ? 50 : 30})))
+               (label :text {music != "" ? music.title : ""}
+                      :limit-width 30)))
 
 ; Don't use label and :visible here or else it breaks when passing artist string
 (defwidget music-info [text]
