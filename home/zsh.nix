@@ -108,8 +108,6 @@
         cd = "z";
         # wezterm
         imgcat = "wezterm imgcat";
-        # ssh
-        ssh-setup = "eval $(ssh-agent -s) && ssh-add";
         # glow
         notes = "glow $HOME/Sync/Notes";
         # skim

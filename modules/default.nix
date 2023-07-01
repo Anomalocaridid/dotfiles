@@ -44,6 +44,9 @@
   # Enable QMK support
   hardware.keyboard.qmk.enable = true;
 
+  # Enable ssh agent
+  programs.ssh.startAgent = true;
+
   # List services that you want to enable:
   services = {
     # Enable CUPS to print documents.
