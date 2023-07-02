@@ -123,26 +123,27 @@
         }
         
         # Window rules
-        windowrulev2 = float,class:^(wlogout)$
-        windowrulev2 = float, class:^(pavucontrol|nmtui)$
+        windowrulev2 = float, class:^(wlogout|pavucontrol|nmtui)$
         windowrulev2 = workspace 1, class:^(lutris)$
         windowrulev2 = workspace 2, class:^(nyxt)$
-        windowrulev2 = workspace 3, title:^(Spotify)$
+        windowrulev2 = workspace 3, class:^(nnn)$
         windowrulev2 = workspace 4, class:^(WebCord)$
+        windowrulev2 = workspace 5, title:^(Spotify)$
         
         $mainMod = SUPER
         
         $shellExec = zsh -c
         $opener = handlr launch
         $term = $opener x-scheme-handler/terminal --
-        # Launch nnn in a shell so it gets the necessary variables
-        $fileMan = $term $shellExec "$opener inode/directory --"
+        # Launch nnn in a shell so it gets the necessary variables and a custom class
+        # FIXME: Cannot open preview-tui if nnn is opened with this
+        $fileMan = $term --class=nnn -- $shellExec "$opener inode/directory"
 
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         bind = $mainMod, Return, exec, $term
         bind = $mainMod, Q, killactive,
         bind = $mainMod SHIFT, Q, exec, wlogout
-        bind = $mainMod, N, exec, $fileMan
+        bind = $mainMod, N, execr, $fileMan
         bind = $mainMod, V, togglefloating,
         bind = $mainMod, R, exec, wofi --show drun
         bind = $mainMod, P, pseudo, # dwindle
@@ -241,6 +242,7 @@
         "virt-manager" = "󰍺";
         "WebCord" = "󰙯";
         ".yubioath-flutter-wrapped_" = "󰌋";
+        "nnn" = "";
       };
 
       # class_active = {};
