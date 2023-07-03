@@ -54,25 +54,25 @@
       grace = 2;
     };
   };
-  home.packages = with pkgs;[
-    (writeShellApplication {
-      name = "lockman.sh";
-      runtimeInputs = [ pipes-rs ];
-      text = ''
-        # Move to empty workspace and run screensaver
-        hyprctl dispatch workspace empty
-        handlr launch x-scheme-handler/terminal -- pipes-rs
-        # Fullscreen screensaver
-        sleep 0.1 # slight delay needed for fullscreen and address query to work
-        hyprctl dispatch fullscreen 0
-        win_addr=$(hyprctl activewindow -j | jq --raw-output '.address')
-        # Lock screen, will block until unlocked
-        swaylock
-        # After unlocked, close screensaver
-        hyprctl --batch "dispatch closewindow address:$win_addr ; dispatch workspace previous"
-      '';
-    })
-  ];
+  # home.packages = with pkgs;[
+  #   (writeShellApplication {
+  #     name = "lockman.sh";
+  #     runtimeInputs = [ finalPackages.programs.swaylock pipes-rs jq ];
+  #     text = ''
+  #       # Move to empty workspace and run screensaver
+  #       hyprctl dispatch workspace empty
+  #       handlr launch x-scheme-handler/terminal -- pipes-rs
+  #       # Fullscreen screensaver
+  #       sleep 0.1 # slight delay needed for fullscreen and address query to work
+  #       hyprctl dispatch fullscreen 0
+  #       win_addr=$(hyprctl activewindow -j | jq --raw-output '.address')
+  #       # Lock screen, will block until unlocked
+  #       swaylock
+  #       # After unlocked, close screensaver
+  #       hyprctl --batch "dispatch closewindow address:$win_addr ; dispatch workspace previous"
+  #     '';
+  #   })
+  # ];
   # Screensaver config
   xdg.configFile."pipes-rs/config.toml".source =
     let

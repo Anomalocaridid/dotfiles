@@ -4,7 +4,7 @@
     layout = [
       {
         label = "lock";
-        action = "lockman.sh";
+        action = "${pkgs.custom.lockman}/bin/lockman.sh";
         text = "Lock";
         keybind = "l";
       }
@@ -17,8 +17,8 @@
       {
         label = "logout";
         action = "loginctl terminate-user $USER";
-        text = "Logout";
-        keybind = "e";
+        text = "lOgout";
+        keybind = "o";
       }
       {
         label = "shutdown";
@@ -29,7 +29,7 @@
       {
         label = "suspend";
         action = "systemctl suspend";
-        text = "Suspend";
+        text = "sUspend";
         keybind = "u";
       }
       {

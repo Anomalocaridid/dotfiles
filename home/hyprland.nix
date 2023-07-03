@@ -127,7 +127,7 @@
         windowrulev2 = workspace 1, class:^(lutris)$
         windowrulev2 = workspace 2, class:^(nyxt)$
         windowrulev2 = workspace 3, class:^(nnn)$
-        windowrulev2 = workspace 4, class:^(WebCord)$
+        windowrulev2 = workspace 4 silent, class:^(WebCord)$
         windowrulev2 = workspace 5, title:^(Spotify)$
         
         $mainMod = SUPER

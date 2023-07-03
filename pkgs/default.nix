@@ -57,5 +57,30 @@ final: prev: {
 
       patches = (oldAttrs.patches or [ ]) ++ [ advcpmv-patch ];
     });
+    # custom locking script
+    lockman = (final.writeShellApplication {
+      name = "lockman.sh";
+      runtimeInputs = with final; [
+        coreutils
+        handlr-regex
+        hyprland
+        pipes-rs
+        swaylock-effects
+        wezterm
+      ];
+      text = ''
+        # NOTE: screensaver gets closed externally by swayidle
+        # Move to empty workspace and run screensaver
+        hyprctl dispatch workspace empty
+        handlr launch x-scheme-handler/terminal -- --class=lockman -- pipes-rs
+        # Fullscreen screensaver
+        sleep 0.1 # Slight delay to ensure screensaver is focused
+        hyprctl dispatch fullscreen 0
+        # Lock screen (blocks until unlocked)
+        swaylock
+        # Close screensaver
+        hyprctl --batch "dispatch closewindow ^(lockman)$; dispatch workspace previous"
+      '';
+    });
   };
 }
