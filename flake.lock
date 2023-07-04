@@ -173,7 +173,7 @@
     "hyprland-autoname-patch": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-QZh1mx6YkszoDsf4w2XlPAJaepdKJsZWchF4CyaOFgQ=",
+        "narHash": "sha256-oMpRX92mfC7pngnpgvbq2G6DEKat/zxFauxKaCQlv2U=",
         "type": "file",
         "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/236515.patch"
       },
