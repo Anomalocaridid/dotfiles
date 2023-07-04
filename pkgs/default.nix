@@ -71,15 +71,18 @@ final: prev: {
     lockman = (final.writeShellApplication {
       name = "lockman.sh";
       runtimeInputs = with final; [
-        coreutils
+        coreutils # provides sleep
         handlr-regex
-        hyprland
+        hyprland # provides hyprctl
         pipes-rs
         swaylock-effects
         wezterm
+        util-linux # provides flock
       ];
       text = ''
-        # NOTE: screensaver gets closed externally by swayidle
+        # Exit if script is already running (lock exists)
+        exec 3>/tmp/lockman.lock
+        flock --nonblock 3
         # Move to empty workspace and run screensaver
         hyprctl dispatch workspace empty
         handlr launch x-scheme-handler/terminal -- --class=lockman -- pipes-rs
@@ -90,6 +93,8 @@ final: prev: {
         swaylock
         # Close screensaver
         hyprctl --batch "dispatch closewindow ^(lockman)$; dispatch workspace previous"
+        # Release lock
+        echo "$$" >&3
       '';
     });
   };
