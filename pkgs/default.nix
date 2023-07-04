@@ -33,6 +33,16 @@ final: prev: {
       '';
     });
 
+  zsh = prev.zsh.overrideAttrs (oldAttrs: {
+    patches = (oldAttrs.patches or [ ]) ++ [
+      # Patch to resolve issues with reflowing text when changing window dimensions
+      (final.fetchpatch {
+        url = "https://github.com/zsh-users/zsh/compare/master...romkatv:zsh:fix-winchanged.patch";
+        hash = "sha256-TwQv8c0pa7gI7DI5rWhwLyl2aQGwILQgd2V5Zem53uQ=";
+      })
+    ];
+  });
+
   # Custom-written packages
   custom = {
     cyberre-grub-theme = final.pkgs.callPackage ./cyberre-grub-theme { };
