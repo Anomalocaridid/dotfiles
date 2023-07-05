@@ -1,6 +1,4 @@
-{ config, pkgs, ... }: {
-  # For custom notifications for scripting with notify-send
-  home.packages = with pkgs; [ libnotify ];
+{ config, ... }: {
   services.mako = {
     enable = true;
     font = "Fira Code Nerd Font 12.5";

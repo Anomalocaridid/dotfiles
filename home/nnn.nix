@@ -5,6 +5,7 @@
       d = "~/Documents";
       D = "~/Downloads";
       e = "~/exercism";
+      m = "/run/media/anomalocaris";
       n = "~/nixos";
       p = "~/Pictures";
       v = "~/Videos";

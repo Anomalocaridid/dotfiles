@@ -53,6 +53,8 @@
     printing.enable = true;
     # Enable weechat service
     weechat.enable = true;
+    # Required for udiskie
+    udisks2.enable = true;
   };
 
   # This value determines the NixOS release from which the default

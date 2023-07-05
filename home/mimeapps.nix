@@ -67,8 +67,7 @@
     handlr-regex
     # Use handlr as drop-in replacement for xdg-open
     (writeShellApplication {
-      name = "
-        xdg-open ";
+      name = "xdg-open";
       runtimeInputs = [ handlr-regex ];
       text = #shell
         ''
