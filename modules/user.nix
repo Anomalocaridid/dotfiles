@@ -12,6 +12,7 @@ in
       extraGroups = [
         "wheel" # Enable ‘sudo’ for the user
         "libvirtd" # Allow access to virt-manager
+        "networkmanager" # Change network settings
       ];
       passwordFile = "${passwordDir}/${user}";
     };
