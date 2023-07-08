@@ -129,6 +129,8 @@
         windowrulev2 = workspace 3, class:^(nnn)$
         windowrulev2 = workspace 4 silent, class:^(WebCord)$
         windowrulev2 = workspace 5, title:^(Spotify)$
+        # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
+        windowrulev2 = idleinhibit fullscreen, class:^(FreeTube)$
         
         $mainMod = SUPER
         
