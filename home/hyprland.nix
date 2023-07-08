@@ -194,7 +194,7 @@
       green = "#00FF00";
     in
     tomlFormat.generate "hyprland-autoname-workspaces-config" {
-      version = "1.1.0";
+      version = "1.1.3";
 
       # TODO: Investigate if it would be possible to use eww literals as a replacement for inline pango
       format = rec {
