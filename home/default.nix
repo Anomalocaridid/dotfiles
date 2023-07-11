@@ -1,10 +1,11 @@
 { lib, pkgs, osConfig, ... }: rec {
   # Import all nix files in directory 
   # Should ignore this file and all non-nix files
+  # Currently, all non-nix files and dirs here are hidden dotfiles
   imports = map
     (file: ./. + "/${file}")
     (lib.strings.filter
-      (file: lib.strings.hasSuffix ".nix" file && file != "default.nix")
+      (file: ! lib.strings.hasPrefix "." file && file != "default.nix")
       (builtins.attrNames (builtins.readDir ./.))
     );
 
