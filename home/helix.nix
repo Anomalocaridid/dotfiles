@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, ... }: {
   programs.helix = {
     enable = true;
     settings = {
@@ -33,58 +33,62 @@
         };
       };
     };
-    languages.language = [
-      {
-        name = "lua";
-        auto-format = true;
-      }
-      {
-        name = "haskell";
-        auto-format = true;
-      }
-      {
-        name = "python";
-        auto-format = true;
-      }
-      {
-        name = "bash";
-        indent = {
-          tab-width = 4;
-          unit = "\t";
-        };
-        formatter = { command = "shfmt"; };
-        auto-format = true;
-      }
-      {
-        name = "c";
-        indent = {
-          tab-width = 4;
-          unit = " ";
-        };
-        auto-format = true;
-      }
-      {
-        name = "julia";
-        auto-format = true;
-      }
-      {
-        name = "nix";
-        formatter = { command = "nixpkgs-fmt"; };
-        auto-format = true;
-      }
-      {
-        name = "unison";
-        scope = "scope.unison";
-        injection-regex = "unison";
-        file-types = [ "u" ];
-        shebangs = [ ];
-        roots = [ ];
-        auto-format = false;
-        comment-token = "--";
-        indent = { tab-width = 4; unit = "    "; };
-        language-server = { command = "netcat"; args = [ "localhost" "5757" ]; };
-      }
-    ];
+    languages.language =
+      let
+        # Languages that just need auto-format = true
+        autoFormat = map
+          (name: {
+            name = name;
+            auto-format = true;
+          }) [
+          "haskell"
+          "lua"
+          "nix"
+          "python"
+        ];
+        # Languages that need auto-format and indent
+        fourSpaceTab = map
+          (name: {
+            name = name;
+            auto-format = true;
+            indent = {
+              tab-width = 4;
+              unit = "    ";
+            };
+          }) [
+          "bash"
+          "c"
+          "cpp"
+          "unison"
+        ];
+      in
+      lib.concatLists [
+        autoFormat
+        fourSpaceTab
+        [
+          {
+            name = "bash";
+            formatter.command = "shfmt";
+          }
+          {
+            name = "nix";
+            formatter.command = "nixpkgs-fmt";
+          }
+          {
+            name = "unison";
+            scope = "scope.unison";
+            injection-regex = "unison";
+            file-types = [ "u" ];
+            shebangs = [ ];
+            roots = [ ];
+            comment-token = "--";
+            language-server = {
+              command = "netcat";
+              args = [ "localhost" "5757" ];
+            };
+          }
+        ]
+      ];
     themes = {
       cyberpunk_neon = {
         attribute = "pink";
