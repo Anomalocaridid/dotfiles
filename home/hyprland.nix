@@ -227,24 +227,25 @@
         # use double quote the key and the value
         # take class name from 'hyprctl clients'
         # "DEFAULT" = " {class}: {title}";
-        "DEFAULT" = "";
         "blueman-manager" = "";
+        "DEFAULT" = "";
         "[Ff]irefox" = "";
         "FreeTube" = "";
         "libreoffice" = "󰈙";
         "lutris" = "";
         "Minecraft" = "󰍳";
+        "nnn" = "";
         "nyxt" = "󰖟";
         "org.keepassxc.KeePassXC" = "󰌋";
         "org.prismlauncher.PrismLauncher" = "󰍳";
         "org.pwmt.zathura" = "";
         "org.wezfurlong.wezterm" = "";
         "pavucontrol" = "󰕾";
+        "Py[Ss]ol" = "󰣎";
         "steam" = "󰓓";
         "virt-manager" = "󰍺";
         "WebCord" = "󰙯";
         ".yubioath-flutter-wrapped_" = "󰌋";
-        "nnn" = "";
       };
 
       # class_active = {};
