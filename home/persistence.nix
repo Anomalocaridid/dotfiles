@@ -31,7 +31,7 @@
       ".cache/keepassxc" # KeePassXC cache
       ".cache/nyxt" # Nyxt browser cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
-      ".config/exercism"
+      ".config/exercism" # Exercism API key
       ".config/GIMP" # GIMP settings
       ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
