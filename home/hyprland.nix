@@ -194,7 +194,7 @@
       green = "#00FF00";
     in
     tomlFormat.generate "hyprland-autoname-workspaces-config" {
-      version = "1.1.3";
+      version = pkgs.hyprland-autoname-workspaces.version;
 
       # TODO: Investigate if it would be possible to use eww literals as a replacement for inline pango
       format = rec {
@@ -278,6 +278,7 @@
       # You can put an empty title to exclude based on
       # class name only, "" make the job.
       exclude = {
+        "" = "^$"; # Hide XWayland windows that remain after closing
         "[Ss]team" = "(Friends List.*|^$)"; # will match all Steam window with null title (some popup)
       };
 
