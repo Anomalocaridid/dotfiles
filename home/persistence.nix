@@ -25,6 +25,7 @@
       "qmk_firmware" # QMK
       ".ssh" # SSH key
       "Sync" # Syncthing
+      ".tuxpaint" # Tux Paint saves
       "Zotero" # Zotero databases
       # Non-critical caches and data to persist
       ".cache/common-lisp" # Prevents recompilation for quicklisp, etc. on first launch of sbcl for every boot

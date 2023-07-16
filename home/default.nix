@@ -16,6 +16,7 @@
       exercism
       firefox # fallback browser
       freetube
+      fup-repl
       gimp-with-plugins
       keepassxc
       killall
@@ -25,12 +26,12 @@
       qalculate-gtk
       strawberry
       tree
+      tuxpaint
       ventoy
       webcord-vencord
       wl-clipboard
       yubioath-flutter
       zotero
-      fup-repl
     ];
 
     sessionVariables = {
