@@ -94,10 +94,10 @@
         "Pictures" = " ";
       };
       # Keep in mind that the order matters. For example:
-      # "Important Documents" = "  "
+      # "Important Documents" = " 󰈙 "
       # will not be replaced, because "Documents" was already substituted before.
       # So either put "Important Documents" before "Documents" or use the substituted version:
-      # "Important  " = "  
+      # "Important 󰈙 " = " 󰈙 "
       git_branch = {
         symbol = "";
         style = "fg:green bg:purple";
@@ -105,15 +105,15 @@
       };
 
       git_status = {
-        conflicted = "=$count";
-        ahead = "⇡$count";
-        behind = "⇣$count";
-        diverged = "⇕⇣$behind_count⇡$ahead_count";
-        untracked = "?$count";
-        stashed = "󰋻$count";
-        modified = "!$count";
-        staged = "+$count";
-        renamed = "»$count";
+        conflicted = "$count";
+        ahead = "$count";
+        behind = "$count";
+        diverged = "󱒓$behind_count/$ahead_count";
+        untracked = "$count";
+        stashed = "󱉙$count";
+        modified = "$count";
+        staged = "󰩍$count";
+        renamed = "󰪹$count";
         deleted = "✘$count";
         style = "fg:green bg:purple";
         format = "[($all_status$ahead_behind )]($style)";
