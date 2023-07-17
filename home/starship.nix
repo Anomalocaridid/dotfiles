@@ -88,7 +88,7 @@
 
       # Here is how you can shorten some long paths by text replacement
       directory.substitutions = {
-        "Documents" = " ";
+        "Documents" = "󰈙 ";
         "Downloads" = " ";
         "Music" = " ";
         "Pictures" = " ";
@@ -110,7 +110,7 @@
         behind = "⇣$count";
         diverged = "⇕⇣$behind_count⇡$ahead_count";
         untracked = "?$count";
-        stashed = " $count";
+        stashed = "󰋻$count";
         modified = "!$count";
         staged = "+$count";
         renamed = "»$count";
@@ -145,7 +145,7 @@
         disabled = false;
         style = "bold fg:cyan bg:light-blue";
         symbol = "✘";
-        not_executable_symbol = "";
+        not_executable_symbol = "󰂭";
         not_found_symbol = "";
         sigint_symbol = "";
         signal_symbol = "";
@@ -157,7 +157,7 @@
         disabled = false;
         ssh_only = false;
         style = "fg:pink bg:dark-blue";
-        format = "[ $localipv4 ﯱ ]($style)";
+        format = "[ $localipv4 󰛳 ]($style)";
       };
 
       # Lower left
@@ -171,7 +171,7 @@
       memory_usage = {
         disabled = false;
         threshold = 0;
-        symbol = "";
+        symbol = "󰍛";
         style = "fg:cyan bg:purple";
         format = "[ $ram_pct $swap_pct $symbol ]($style)";
       };
