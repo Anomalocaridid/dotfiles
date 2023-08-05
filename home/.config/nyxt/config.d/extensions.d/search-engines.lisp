@@ -1,5 +1,6 @@
-;;;; ~/.config/nyxt/extension-config/search-engines.lisp
+;;;; extension-config/search-engines.lisp
 ;;;; settings for the nx-search-engines extension
+(in-package #:nyxt-user)
 
 ; TODO: Investigate more elegant solutions
 (defun color-kludge (color)

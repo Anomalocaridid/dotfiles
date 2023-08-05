@@ -285,22 +285,6 @@
         "type": "github"
       }
     },
-    "nx-freestance-handler": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1653846918,
-        "narHash": "sha256-6fipTpJlus+z2K8x9nQ1ei9cSoUw4eZ+Tqxklh16iZk=",
-        "owner": "kssytsrk",
-        "repo": "nx-freestance-handler",
-        "rev": "83aea7f0b650c6dab2ceb2b227301e86459a6e5b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kssytsrk",
-        "repo": "nx-freestance-handler",
-        "type": "github"
-      }
-    },
     "nx-fruit": {
       "flake": false,
       "locked": {
@@ -317,19 +301,19 @@
         "type": "github"
       }
     },
-    "nx-kaomoji": {
+    "nx-router": {
       "flake": false,
       "locked": {
-        "lastModified": 1688410110,
-        "narHash": "sha256-FF0u39OJJjN0EZ0sCDHQiBgZJHeacVqUpx8CYhJgleQ=",
-        "owner": "aartaka",
-        "repo": "nx-kaomoji",
-        "rev": "21a3b3df38c1f467f5728fc8c7edcd6a49130ce9",
+        "lastModified": 1691262572,
+        "narHash": "sha256-Z3YHnUvDeYUBRu7f0S4CGtmyL4kXJ29we3zh0o8UKjU=",
+        "owner": "migalmoreno",
+        "repo": "nx-router",
+        "rev": "5536f6bb725932abc0e7c53faadf156f7f76e531",
         "type": "github"
       },
       "original": {
-        "owner": "aartaka",
-        "repo": "nx-kaomoji",
+        "owner": "migalmoreno",
+        "repo": "nx-router",
         "type": "github"
       }
     },
@@ -361,9 +345,8 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "nur": "nur",
-        "nx-freestance-handler": "nx-freestance-handler",
         "nx-fruit": "nx-fruit",
-        "nx-kaomoji": "nx-kaomoji",
+        "nx-router": "nx-router",
         "nx-search-engines": "nx-search-engines",
         "rust-overlay": "rust-overlay",
         "unison-nix": "unison-nix",

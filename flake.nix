@@ -69,23 +69,18 @@
     };
 
     # Nyxt plugins
-    nx-freestance-handler = {
-      url = "github:kssytsrk/nx-freestance-handler";
-      flake = false;
-    };
-
     nx-fruit = {
       url = "github:atlas-engineer/nx-fruit";
       flake = false;
     };
 
-    nx-kaomoji = {
-      url = "github:aartaka/nx-kaomoji";
+    nx-search-engines = {
+      url = "github:aartaka/nx-search-engines";
       flake = false;
     };
 
-    nx-search-engines = {
-      url = "github:aartaka/nx-search-engines";
+    nx-router = {
+      url = "github:migalmoreno/nx-router";
       flake = false;
     };
   };

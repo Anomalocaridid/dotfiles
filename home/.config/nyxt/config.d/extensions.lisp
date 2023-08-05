@@ -1,11 +1,20 @@
-;;;; ~/.config/nyxt/config.d/extensions.lisp
-;;;; helper code to load extensions and their configs
+;;;; config.d/extensions.lisp
+;;;; extension config
+(in-package #:nyxt-user)
 
-;;; load extensions and their respective config files
 (defmacro load-extensions (&rest extensions)
   "Helper macro to load extensions along with config files with the same name."
   `(progn ,@(loop for extension
                   in extensions
-                  collect `(define-nyxt-user-system-and-load ,(alexandria:symbolicate 'nyxt-user/ extension)
-                                                             :components (,(str:concat "extension-config/" (string-downcase (symbol-name extension))))
-                                                             :depends-on (,(alexandria:symbolicate 'nx- extension))))))
+                  collect `(nyxt:define-nyxt-user-system-and-load
+                            ,(alexandria:symbolicate 'nyxt-user/ extension)
+                            :depends-on (,(alexandria:symbolicate 'nx- extension))
+                            :components (,(str:concat "config.d/extensions.d/"
+                                            (string-downcase (symbol-name extension))))
+                                                            ))))
+
+(nyxt:define-nyxt-user-system-and-load nyxt-user/nx-fruit
+  :depends-on ("nx-fruit"))
+
+(load-extensions search-engines
+                 router)

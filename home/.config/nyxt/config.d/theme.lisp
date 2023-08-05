@@ -1,5 +1,6 @@
-;;;; ~/.config/nyxt/config.d/theme.lisp
+;;;; config.d/theme.lisp
 ;;;; theme settings for nyxt
+(in-package #:nyxt-user)
 
 ;;; set color palette
 (defmacro define-palette (&rest colors)
@@ -24,7 +25,7 @@
 
 (define-configuration browser
   ((theme (make-instance 'theme:theme
-                         :dark-p t
+                         ; :dark-p t
                          :background-color *dark-blue*
                          :on-background-color *cyan*
                          :primary-color *pink*
@@ -65,6 +66,10 @@
                 :border "1px solid"
                 :border-color ,theme:primary
                 :color ,theme:on-background)
+              `(".source-content tr:hover"
+                :color ,theme:on-background
+                :font-weight "bold"
+                :background-color ,theme:secondary)
               `("#selection"
                 :color ,theme:on-background
                 :font-weight "bold")
@@ -82,12 +87,13 @@
                 :color ,theme:on-accent)
               `("a:active"
                 :color ,theme:on-secondary)
-              `(".button"
+              `(".button, .button.set-url, .button.execute-command"
                 :background-color ,(make-important theme:background) ; important necessary for gopher search buttons
-                :background-color ,theme:background ; important necessary for gopher search buttons
                 :border "1px solid"
-                :border-color ,theme:primary
-                :color ,theme:on-background)
+                :border-color ,(make-important theme:primary)
+                :color ,(make-important theme:on-background))
+              `(".button.set-url, .button.execute-command"
+                :color ,(make-important theme:primary))
               `(".button:hover"
                 :background-color ,(make-important theme:secondary) ; important necessary for gopher search buttons 
                 :border "1px solid"
@@ -110,7 +116,7 @@
               `("#subtitle"
                 :color ,(make-important theme:accent)))))))
 
-(define-configuration nyxt/repl-mode:repl-mode
+(define-configuration nyxt/mode/repl:repl-mode
   ((style (str:concat
             %slot-value%
             (theme:themed-css (theme *browser*)
@@ -126,7 +132,7 @@
               `(".input-buffer::placeholder"
                 :color ,theme:accent))))))
 
-(define-configuration nyxt/small-web-mode:small-web-mode
+(define-configuration nyxt/mode/small-web:small-web-mode
   ((style (str:concat
             %slot-value%
             (theme:themed-css (theme *browser*)
@@ -139,7 +145,6 @@
                 :color ,*red*
                 :border-color ,*red*))))));)
 
-; TODO: fix spacing for far left and far right segments
 (define-configuration status-buffer
   ((style (str:concat
             %slot-value%
@@ -171,6 +176,12 @@
               `("#tabs .button:hover"
                 :color ,theme:primary)
               `("#tabs .button:active"
+                :color ,theme:on-primary)
+              `(".tab"
+                :background-color ,theme:accent)
+              `(".tab .button:hover"
+                :color ,theme:primary)
+              `(".tab .button:active"
                 :color ,theme:on-primary)
               `("#modes .button:hover"
                 :color ,theme:on-background)
