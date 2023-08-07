@@ -42,6 +42,7 @@
             auto-format = true;
           }) [
           "haskell"
+          "javascript"
           "lua"
           "nix"
           "python"
