@@ -13,9 +13,11 @@
                 (*semi-dark-blue* "#00005f")
                 (*blue* "#091833")
                 (*light-blue* "#133e7c")
+                (*trans-blue* "#0b2956")
                 (*cyan* "#0abdc6")
                 (*pink* "#ea00d9")
                 (*purple* "#711c91")
+                (*trans-purple* "#321959")
                 (*red* "#ff0000")
                 (*orange* "#f57800")
                 (*white* "#d7d7d5")
@@ -71,10 +73,11 @@
                 :font-weight "bold"
                 :background-color ,theme:secondary)
               `("#selection"
+                :background-color ,*trans-purple*
                 :color ,theme:on-background
                 :font-weight "bold")
               `(".marked"
-                :background-color ,theme:primary
+                :background-color ,*trans-blue*
                 :color ,theme:on-primary))))))
 
 (define-configuration web-buffer
@@ -194,3 +197,14 @@
                            (theme:themed-css (theme *browser*)
                              `(body
                                :font-family ,theme:font-family))))))
+
+(define-configuration nyxt/mode/search-buffer:search-buffer-mode
+  ((style (str:concat
+            %slot-value%
+            (theme:themed-css (theme *browser*)
+              `("span[nyxt-search-mark]"
+                :background-color ,(make-important *trans-blue*)
+                :color ,(make-important theme:on-primary))
+              `("span[nyxt-search-mark].nyxt-current-search-mark"
+                :background-color ,(make-important *trans-purple*)
+                :color ,(make-important theme:on-accent)))))))
