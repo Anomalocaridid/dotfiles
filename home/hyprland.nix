@@ -8,34 +8,6 @@
     enable = true;
     extraConfig =
       let
-        # Switch workspaces with mainMod + [0-9]
-        # Move active window to a workspace with mainMod + SHIFT + [0-9]
-        workspaceSwitch = lib.strings.concatMapStrings
-          (n:
-            let
-              key = (if workspace == "10" then "0" else workspace);
-              workspace = toString n;
-            in
-            #hypr
-            '' 
-              bind = $mainMod, ${key}, workspace, ${workspace}
-              bind = $mainMod SHIFT, ${key}, movetoworkspace, ${workspace}
-            ''
-          )
-          (lib.lists.range 1 10);
-        # Move focus with mainMod + direction keys
-        # Swap active window with an adjacent window with mainMod + SHIFT + direction keys
-        directionSwitch = lib.strings.concatMapStrings
-          (key:
-            let
-              dir = (builtins.elemAt (lib.strings.stringToCharacters key) 1);
-            in
-            #hypr
-            ''
-              bind = $mainMod, ${key}, movefocus, ${dir}
-              bind = $mainMod SHIFT, ${key}, swapwindow, ${dir}
-            ''
-          ) [ "$left" "$down" "$up" "$right" ];
         pink = "ea00d9";
         purple = "711c91";
         darkBlue = "000b1e";
@@ -72,13 +44,12 @@
 
         decoration {
             # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
             rounding = 10
+
             blur {
               enabled = true
               size = 3
               passes = 1
-              new_optimizations = true
             }
 
             drop_shadow = true
@@ -91,7 +62,6 @@
             enabled = true
 
             # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
-
             bezier = myBezier, 0.05, 0.9, 0.1, 1.05
 
             animation = windows, 1, 7, myBezier
@@ -164,6 +134,34 @@
         $up = k
         $right = l
 
+        # Move focus with mainMod + direction keys
+        # Swap active window with an adjacent window with mainMod + SHIFT + direction keys
+        ${lib.strings.concatMapStrings (key:
+            let
+              dir = (builtins.elemAt (lib.strings.stringToCharacters key) 1);
+            in
+            #hypr
+            ''
+              bind = $mainMod, ${key}, movefocus, ${dir}
+              bind = $mainMod SHIFT, ${key}, swapwindow, ${dir}
+            ''
+          ) [ "$left" "$down" "$up" "$right" ]};
+
+        # Switch workspaces with mainMod + [0-9]
+        # Move active window to a workspace with mainMod + SHIFT + [0-9]
+        ${builtins.concatStringsSep "\n" (builtins.genList (x:
+            let
+              ws = x + 1;
+              key = toString (lib.trivial.mod ws 10);
+            in 
+            #hypr
+            ''
+              bind = $mainMod, ${key}, workspace, ${toString ws}
+              bind = $mainMod SHIFT, ${key}, movetoworkspace, ${toString ws}
+            ''
+          )
+          10)}
+
         # Scroll through existing workspaces with mainMod + scroll
         bind = $mainMod, mouse_down, workspace, e+1
         bind = $mainMod, mouse_up, workspace, e-1
@@ -187,7 +185,7 @@
         bind = ,escape,submap,reset 
 
         submap=reset
-      '' + workspaceSwitch + directionSwitch;
+      '';
   };
 
   xdg.configFile."hyprland-autoname-workspaces/config.toml".source =
