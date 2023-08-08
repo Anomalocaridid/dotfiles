@@ -1,4 +1,4 @@
-{ lib, ... }: {
+{ lib, pkgs, ... }: {
   # Import all nix files in directory 
   # Should ignore this file and all non-nix files
   imports = map
@@ -21,12 +21,15 @@
   };
 
   # Use GRUB
-  boot.loader = {
-    grub = {
-      device = "nodev";
-      efiSupport = true;
+  boot = {
+    kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+    loader = {
+      grub = {
+        device = "nodev";
+        efiSupport = true;
+      };
+      efi.canTouchEfiVariables = true;
     };
-    efi.canTouchEfiVariables = true;
   };
 
   networking = {
