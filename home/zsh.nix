@@ -121,6 +121,8 @@
         '';
         # tealdeer
         tldr = "PAGER='bat --plain' tldr";
+        # Ensure ssh key is loaded before using git
+        git = "ssh-add -l >/dev/null || ssh-add && git";
       };
       shellGlobalAliases = {
         # page through help text
