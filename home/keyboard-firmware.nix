@@ -1,5 +1,13 @@
 { config, pkgs, ... }: {
-  home.packages = with pkgs; [ qmk ];
+  home.packages = with pkgs; [
+    # Needed for QMK
+    qmk
+    # Needed for KMK
+    tio # Helpful for debugging
+    circup # Easily manage circuitpython libraries
+  ];
+
+  # TODO: Ensure master branch is cloned as well
   systemd.user.services.qmk-clone =
     let
       qmkRepoDir = "${config.home.homeDirectory}/qmk_firmware";

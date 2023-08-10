@@ -1,8 +1,5 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    tio # needed for KMK debugging
-    circup # Update circuitpython libraries
-    micropython # Includes mpy-cross for KMK
     (python3.withPackages
       (ps: with ps; lib.concatLists [
         [
