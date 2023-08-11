@@ -33,63 +33,62 @@
         };
       };
     };
-    languages.language =
-      let
-        # Languages that just need auto-format = true
-        autoFormat = map
-          (name: {
-            name = name;
-            auto-format = true;
-          }) [
+    languages.language = lib.concatLists [
+      # Languages that just need auto-format = true
+      (map
+        (name: {
+          name = name;
+          auto-format = true;
+        })
+        [
           "haskell"
           "javascript"
           "lua"
           "nix"
           "python"
-        ];
-        # Languages that need auto-format and indent
-        fourSpaceTab = map
-          (name: {
-            name = name;
-            auto-format = true;
-            indent = {
-              tab-width = 4;
-              unit = "    ";
-            };
-          }) [
+        ]
+      )
+      # Languages that need auto-format and indent
+      (map
+        (name: {
+          name = name;
+          auto-format = true;
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+        })
+        [
           "bash"
           "c"
           "cpp"
           "unison"
-        ];
-      in
-      lib.concatLists [
-        autoFormat
-        fourSpaceTab
-        [
-          {
-            name = "bash";
-            formatter.command = "shfmt";
-          }
-          {
-            name = "nix";
-            formatter.command = "nixpkgs-fmt";
-          }
-          {
-            name = "unison";
-            scope = "scope.unison";
-            injection-regex = "unison";
-            file-types = [ "u" ];
-            shebangs = [ ];
-            roots = [ ];
-            comment-token = "--";
-            language-server = {
-              command = "netcat";
-              args = [ "localhost" "5757" ];
-            };
-          }
         ]
-      ];
+      )
+      [
+        {
+          name = "bash";
+          formatter.command = "shfmt";
+        }
+        {
+          name = "nix";
+          formatter.command = "nixpkgs-fmt";
+        }
+        {
+          name = "unison";
+          scope = "scope.unison";
+          injection-regex = "unison";
+          file-types = [ "u" ];
+          shebangs = [ ];
+          roots = [ ];
+          comment-token = "--";
+          language-server = {
+            command = "netcat";
+            args = [ "localhost" "5757" ];
+          };
+        }
+      ]
+    ];
     themes = {
       cyberpunk_neon = {
         attribute = "pink";
