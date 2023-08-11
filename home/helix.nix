@@ -71,6 +71,10 @@
           formatter.command = "shfmt";
         }
         {
+          name = "javascript";
+          config.format.semicolons = "insert";
+        }
+        {
           name = "nix";
           formatter.command = "nixpkgs-fmt";
         }
