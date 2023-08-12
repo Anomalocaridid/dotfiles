@@ -1,7 +1,7 @@
 { ... }: {
   # Disable pulseaudio in order to use pipewire
   hardware.pulseaudio.enable = false;
-  # Needed for pipewire
+  # Needed for pipewire to work in real time
   security.rtkit.enable = true;
   # Enable sound.
   services.pipewire = {
@@ -12,5 +12,6 @@
     };
     pulse.enable = true;
     jack.enable = true;
+    lowLatency.enable = true;
   };
 }

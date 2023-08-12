@@ -27,6 +27,9 @@
     # Nix User Repo
     nur.url = "github:nix-community/NUR";
 
+    # Gaming tweaks
+    nix-gaming.url = "github:fufexan/nix-gaming";
+
     # Hyprland
     hyprland.url = "github:hyprwm/Hyprland";
 
@@ -89,6 +92,7 @@
     , nix-index-database
     , flake-utils
     , nur
+    , nix-gaming
     , hyprland
     , eww
     , rust-overlay
@@ -118,6 +122,7 @@
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
           hyprland.nixosModules.default
+          nix-gaming.nixosModules.pipewireLowLatency
         ];
       };
 
