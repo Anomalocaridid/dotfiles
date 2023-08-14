@@ -30,9 +30,6 @@
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    # Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
-
     # Elkowar's Wacky Widgets
     eww = {
       url = "github:elkowar/eww";
@@ -93,7 +90,6 @@
     , flake-utils
     , nur
     , nix-gaming
-    , hyprland
     , eww
     , rust-overlay
     , unison-nix
@@ -121,7 +117,6 @@
           nur.nixosModules.nur
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
-          hyprland.nixosModules.default
           nix-gaming.nixosModules.pipewireLowLatency
         ];
       };
