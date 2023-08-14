@@ -30,21 +30,6 @@
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    # Elkowar's Wacky Widgets
-    eww = {
-      url = "github:elkowar/eww";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        rust-overlay.follows = "rust-overlay";
-      };
-    };
-
-    # Needed for eww
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Up to date Unison packages
     unison-nix = {
       url = "github:ceedubs/unison-nix";
@@ -90,8 +75,6 @@
     , flake-utils
     , nur
     , nix-gaming
-    , eww
-    , rust-overlay
     , unison-nix
     , ...
     }: flake-utils.lib.mkFlake rec {
@@ -102,9 +85,6 @@
       sharedOverlays = [
         # custom overlay
         (import ./pkgs)
-        # Eww master branch
-        eww.overlays.default
-        rust-overlay.overlays.default
         # Up to date Unison packages
         unison-nix.overlay
       ];
