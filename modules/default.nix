@@ -44,8 +44,12 @@
   # use xkbOptions in tty.
   console.useXkbConfig = true;
 
-  # Enable QMK support
-  hardware.keyboard.qmk.enable = true;
+  hardware = {
+    # Enable QMK support
+    keyboard.qmk.enable = true;
+    # Enable AMD microcode updates
+    enableRedistributableFirmware = true;
+  };
 
   # Enable ssh agent
   programs.ssh.startAgent = true;
