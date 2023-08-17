@@ -71,7 +71,7 @@
       runtimeInputs = [ handlr-regex ];
       text = #shell
         ''
-          handlr "$@"
+          handlr open "$@"
         '';
     })
     # Use handlr as drop-in replacement for xterm
