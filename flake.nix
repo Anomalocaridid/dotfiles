@@ -24,11 +24,14 @@
 
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
-    # Nix User Repo
-    nur.url = "github:nix-community/NUR";
-
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
+
+    # Spotify customization
+    spicetify-nix = {
+      url = "github:the-argus/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Up to date Unison packages
     unison-nix = {
@@ -73,8 +76,8 @@
     , impermanence
     , nix-index-database
     , flake-utils
-    , nur
     , nix-gaming
+    , spicetify-nix
     , unison-nix
     , ...
     }: flake-utils.lib.mkFlake rec {
@@ -94,10 +97,10 @@
         modules = [
           ./modules
           disko.nixosModules.disko
-          nur.nixosModules.nur
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
           nix-gaming.nixosModules.pipewireLowLatency
+          spicetify-nix.nixosModules.spicetify
         ];
       };
 
