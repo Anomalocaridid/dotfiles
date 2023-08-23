@@ -59,34 +59,38 @@ final: prev: {
       patches = (oldAttrs.patches or [ ]) ++ [ advcpmv-patch ];
     });
     # custom locking script
-    lockman = (final.writeShellApplication {
-      name = "lockman.sh";
-      runtimeInputs = with final; [
-        coreutils # provides sleep
-        handlr-regex
-        hyprland # provides hyprctl
-        pipes-rs
-        swaylock-effects
-        wezterm
-        util-linux # provides flock
-      ];
-      text = ''
-        # Exit if script is already running (lock exists)
-        exec 3>/tmp/lockman.lock
-        flock --nonblock 3
-        # Move to empty workspace and run screensaver
-        hyprctl dispatch workspace empty
-        handlr launch x-scheme-handler/terminal -- --class=lockman -- pipes-rs
-        # Fullscreen screensaver
-        sleep 0.1 # Slight delay to ensure screensaver is focused
-        hyprctl dispatch fullscreen 0
-        # Lock screen (blocks until unlocked)
-        swaylock
-        # Close screensaver
-        hyprctl --batch "dispatch closewindow ^(lockman)$; dispatch workspace previous"
-        # Release lock
-        echo "$$" >&3
-      '';
-    });
+    lockman =
+      let
+        scriptName = "lockman";
+      in
+      (final.writeShellApplication {
+        name = "${scriptName}.sh";
+        runtimeInputs = with final; [
+          coreutils # provides sleep
+          handlr-regex
+          hyprland # provides hyprctl
+          pipes-rs
+          swaylock-effects
+          wezterm
+          util-linux # provides flock
+        ];
+        text = ''
+          # Exit if script is already running (lock exists)
+          exec 3>/tmp/${scriptName}.lock
+          flock --nonblock 3
+          # Move to empty workspace
+          hyprctl dispatch workspace empty
+          # Run screensaver
+          handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- pipes-rs
+          # Focus screensaver (assumed to be already fullscreened)
+          hyprctl dispatch focuswindow "^(${scriptName})$"
+          # Lock screen (blocks until unlocked)
+          swaylock
+          # Close screensaver
+          hyprctl --batch "dispatch closewindow ^(${scriptName})$; dispatch workspace previous"
+          # Release lock
+          echo "$$" >&3
+        '';
+      });
   };
 }

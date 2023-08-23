@@ -104,6 +104,8 @@
           "workspace 5, title:^(Spotify)$"
           # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
           "idleinhibit fullscreen, class:^(FreeTube)$"
+          # Required for locking script
+          "fullscreen, class:^(lockman)$"
         ];
 
         "$mainMod" = "SUPER";
