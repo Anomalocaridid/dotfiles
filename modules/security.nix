@@ -20,17 +20,4 @@
     # Needed for swaylock to unlock
     pam.services.swaylock = { };
   };
-  # Create ClamAV signature database if it does not exist.
-  systemd.services.freshclam-init =
-    let
-      clamavServices = [ "clamav-daemon.service" ];
-    in
-    {
-      description = "Create ClamAV signature database";
-      before = clamavServices;
-      script = "${pkgs.clamav}/bin/freshclam";
-      unitConfig.ConditionPathExists = "!/var/lib/clamav";
-      serviceConfig.Type = "oneshot";
-      requiredBy = clamavServices;
-    };
 }
