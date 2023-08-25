@@ -52,12 +52,16 @@
       tomlFormat.generate "handlr-config"
         {
           enable_selector = false;
-          selector = "rofi -dmenu -i -p 'Open With: '"; # default option, change if necessary
+          selector = "wofi -dmenu -i -p 'Open With: '";
           term_exec_args = "";
           handlers = [
             {
               exec = "freetube %u";
-              regexes = [ "(https://)?(www\.)?youtu(be.com|.be)/.*" ];
+              regexes = [ "youtu(be.com|.be)" ];
+            }
+            {
+              exec = "handlr open steam://openurl/%u";
+              regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
             }
           ];
         };
