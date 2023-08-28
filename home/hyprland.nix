@@ -110,11 +110,8 @@
 
         "$mainMod" = "SUPER";
 
-        "$shellExec" = "zsh -c";
         "$opener" = "handlr launch";
         "$term" = "$opener x-scheme-handler/terminal --";
-        # Launch nnn in a shell so it gets the necessary variables and a custom class
-        "$fileMan" = "$term --class=nnn -- $shellExec '$opener inode/directory'";
 
         # Vim-style homerow direction keys
         "$left" = "h";
@@ -127,7 +124,9 @@
           "$mainMod, Return, exec, $term"
           "$mainMod, Q, killactive,"
           "$mainMod SHIFT, Q, exec, wlogout"
-          "$mainMod, N, execr, $fileMan"
+          # Launch nnn in a shell so it gets the necessary variables and a custom class
+          # TODO: Figure out how to not need the shell
+          "$mainMod, N, exec, $term --class=nnn -- zsh -c '$opener inode/directory'"
           "$mainMod, V, togglefloating,"
           "$mainMod, R, exec, wofi --show drun"
           "$mainMod, P, pseudo, # dwindle"
