@@ -35,7 +35,8 @@
     ];
 
     sessionVariables = {
-      EDITOR = "handlr open";
+      # Some things require $EDITOR to be a single command with no args
+      EDITOR = "xdg-open";
       VISUAL = "$EDITOR";
       PAGER = "bat";
       MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
