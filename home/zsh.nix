@@ -74,7 +74,7 @@
           bindkey '^Z' fancy-ctrl-z # Oh My Zsh's fancy-ctrl-z
 
           # Sync PWD with shell when exiting nnn's n alias
-          source "${pkgs.nnn}/share/quitcd/quitcd.bash_zsh";
+          source "${pkgs.nnn}/share/quitcd/quitcd.bash_sh_zsh";
 
           # Sync subshell PWD with nnn
           nnn_cd() {
