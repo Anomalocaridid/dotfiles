@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, ... }: {
   home.packages = with pkgs; [
     gamescope # Used by Lutris for control over game resolution
     lutris
@@ -8,4 +8,9 @@
     pysolfc
     sgtpuzzles
   ];
+
+  ssbm.slippi-launcher = {
+    enable = true;
+    isoPath = "${config.home.homeDirectory}/Documents/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).ciso";
+  };
 }

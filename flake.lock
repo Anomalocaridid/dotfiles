@@ -142,6 +142,40 @@
         "type": "github"
       }
     },
+    "lowdown-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1598695561,
+        "narHash": "sha256-gyH/5j+h/nWw0W8AcR2WKvNBUsiQ7QuxqSJNXAwV+8E=",
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "rev": "1705b4a26fbf065d9574dce47a94e8c7c79e052f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kristapsdz",
+        "repo": "lowdown",
+        "type": "github"
+      }
+    },
+    "nix": {
+      "inputs": {
+        "lowdown-src": "lowdown-src",
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1609520816,
+        "narHash": "sha256-IGO7tfJXsv9u2wpW76VCzOsHYapRZqH9pHGVsoffPrI=",
+        "owner": "NixOS",
+        "repo": "nix",
+        "rev": "8a2ce0f455da32bc20978e68c0aad9efb4560abc",
+        "type": "github"
+      },
+      "original": {
+        "id": "nix",
+        "type": "indirect"
+      }
+    },
     "nix-gaming": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -231,6 +265,21 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1602702596,
+        "narHash": "sha256-fqJ4UgOb4ZUnCDIapDb4gCrtAah5Rnr2/At3IzMitig=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "ad0d20345219790533ebe06571f82ed6b034db31",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-20.09-small",
+        "type": "indirect"
+      }
+    },
     "nx-fruit": {
       "flake": false,
       "locked": {
@@ -292,9 +341,26 @@
         "nx-router": "nx-router",
         "nx-search-engines": "nx-search-engines",
         "spicetify-nix": "spicetify-nix",
+        "ssbm-nix": "ssbm-nix",
         "unison-nix": "unison-nix",
         "zsh-bd": "zsh-bd",
         "zsh-hooks": "zsh-hooks"
+      }
+    },
+    "slippi-desktop": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1607036060,
+        "narHash": "sha256-TUYsiVvKAws3N3roZYDwkLB0obyl6zwvh8CAk2RwHrY=",
+        "owner": "project-slippi",
+        "repo": "slippi-desktop-app",
+        "rev": "3ca39ba6bbd02157515b12a79aa01e5d669ad1b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "project-slippi",
+        "repo": "slippi-desktop-app",
+        "type": "github"
       }
     },
     "spicetify-nix": {
@@ -315,6 +381,29 @@
       "original": {
         "owner": "the-argus",
         "repo": "spicetify-nix",
+        "type": "github"
+      }
+    },
+    "ssbm-nix": {
+      "inputs": {
+        "nix": "nix",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "slippi-desktop": "slippi-desktop"
+      },
+      "locked": {
+        "lastModified": 1693621681,
+        "narHash": "sha256-6TKRUeiJSlFXZJfzt4bfSLmGUV3/AQVInkMTs7b36Vg=",
+        "owner": "Anomalocaridid",
+        "repo": "ssbm-nix",
+        "rev": "45296d3e3c387a225b9b2cebe03f695668e4da00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Anomalocaridid",
+        "ref": "slippi-launcher",
+        "repo": "ssbm-nix",
         "type": "github"
       }
     },

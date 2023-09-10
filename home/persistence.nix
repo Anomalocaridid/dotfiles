@@ -23,6 +23,7 @@
       ".mozilla" # Firefox data
       "Projects" # Misc. programming
       "qmk_firmware" # QMK
+      "Slippi" # Slippi replays
       ".ssh" # SSH key
       "Sync" # Syncthing
       ".tuxpaint" # Tux Paint saves
@@ -31,14 +32,15 @@
       ".cache/common-lisp" # Prevents recompilation for quicklisp, etc. on first launch of sbcl for every boot
       ".cache/keepassxc" # KeePassXC cache
       ".cache/nyxt" # Nyxt browser cache
+      ".cache/spotify" # Spotify cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
       ".config/exercism" # Exercism API key
       ".config/GIMP" # GIMP settings
       ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
+      ".config/Slippi Launcher" # Slippi user data
       ".config/spotify" # Spotify user data
-      ".cache/spotify" # Spotify cache
       ".config/strawberry" # Strawberry settings
       ".config/syncthing" # Syncthing settings
       ".config/WebCord" # Webcord user data

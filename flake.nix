@@ -27,6 +27,13 @@
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 
+    # Slippi
+    # Update once PR is merged
+    ssbm-nix = {
+      url = "github:Anomalocaridid/ssbm-nix/slippi-launcher";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Spotify customization
     spicetify-nix = {
       url = "github:the-argus/spicetify-nix";
@@ -77,6 +84,7 @@
     , nix-index-database
     , flake-utils
     , nix-gaming
+    , ssbm-nix
     , spicetify-nix
     , unison-nix
     , ...
@@ -100,6 +108,7 @@
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
           nix-gaming.nixosModules.pipewireLowLatency
+          ssbm-nix.nixosModule
           spicetify-nix.nixosModules.spicetify
         ];
       };
