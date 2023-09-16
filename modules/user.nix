@@ -14,9 +14,9 @@ in
         "libvirtd" # Allow access to virt-manager
         "networkmanager" # Change network settings
       ];
-      passwordFile = "${passwordDir}/${user}";
+      hashedPasswordFile = "${passwordDir}/${user}";
     };
-    root.passwordFile = "${passwordDir}/root";
+    root.hashedPasswordFile = "${passwordDir}/root";
   };
 
   # Ensure certain directories have necessary permissions
