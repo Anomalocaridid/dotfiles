@@ -41,10 +41,17 @@
     ];
     style =
       let
-        useIcon = (icon: #css
+        recolorIcon = (color: icon:
+          let
+            iconFile = "${config.programs.wlogout.package}/share/wlogout/icons/${icon}.png";
+            recolored = pkgs.runCommand "${icon}-recolored.png" { } ''
+              ${pkgs.imagemagick}/bin/convert ${iconFile} -alpha extract -background "${color}" -alpha shape $out
+            '';
+          in
+          #css
           ''
             #${icon} {
-              background-image: url("${config.programs.wlogout.package}/share/wlogout/icons/${icon}.png");
+              background-image: url("${recolored}");
             }
           '');
       in
@@ -78,13 +85,15 @@
         	background-color: #711c91;
         	outline-style: none;
         }
-      '' + (builtins.concatStringsSep "" (map useIcon [
-        "lock"
-        "logout"
-        "suspend"
-        "hibernate"
-        "shutdown"
-        "reboot"
-      ]));
+
+        ${builtins.concatStringsSep "" (map (recolorIcon "#0abdc6") [
+          "lock"
+          "logout"
+          "suspend"
+          "hibernate"
+          "shutdown"
+          "reboot"
+        ])}
+      '';
   };
 }
