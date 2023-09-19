@@ -108,8 +108,6 @@
         cd = "z";
         # wezterm
         imgcat = "wezterm imgcat";
-        # glow
-        notes = "glow $HOME/Sync/Notes";
         # skim
         search = ''
           sk --ansi \

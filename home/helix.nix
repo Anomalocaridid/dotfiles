@@ -62,6 +62,7 @@
           "bash"
           "c"
           "cpp"
+          "markdown"
           "unison"
         ]
       )
@@ -77,6 +78,14 @@
         {
           name = "nix";
           formatter.command = "nixpkgs-fmt";
+        }
+        {
+          name = "markdown";
+          roots = [ ".zk" ];
+          language-server = {
+            command = "zk";
+            args = [ "lsp" ];
+          };
         }
         {
           name = "unison";
