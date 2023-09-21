@@ -3,6 +3,7 @@
   xdg.configFile."zk/config.toml".source =
     let
       tomlFormat = pkgs.formats.toml { };
+      viewCommand = "glow --style ~/.config/glow/cyberpunk_neon.json";
     in
     tomlFormat.generate "zk-config" {
       notebook.dir = "~/Sync/notes";
@@ -20,13 +21,17 @@
       };
 
       # Need to specify the theme or else glow will not output color
-      tool.fzf-preview = "glow --style ~/.config/glow/cyberpunk_neon.json {-1}";
+      tool.fzf-preview = "${viewCommand} {-1}";
 
       lsp.diagnostics = {
         dead-link = "error";
       };
 
       # filter = {};
-      # aliases = {};
+
+      alias = {
+        show = "zk list --interactive --format \"{{abs-path}}\" | xargs zsh -c 'PAGER=\"bat --file-name $0\" ${viewCommand} $0'";
+      };
     };
 }
+
