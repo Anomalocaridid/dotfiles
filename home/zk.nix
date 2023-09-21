@@ -19,11 +19,8 @@
         multiword-tags = true;
       };
 
-      tool = {
-        fzf-preview = "bat --plain --color always {-1}";
-        # Needed because using skim in place of fzf
-        fzf-options = "--delimiter=' '";
-      };
+      # Need to specify the theme or else glow will not output color
+      tool.fzf-preview = "glow --style ~/.config/glow/cyberpunk_neon.json {-1}";
 
       lsp.diagnostics = {
         dead-link = "error";

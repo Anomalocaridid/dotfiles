@@ -26,9 +26,8 @@
           zstyle ":completion:complete:*:options" sort false                            # Disable sort when completing options
           zstyle ":completion:*:git-checkout:*" sort false                              # Disable sort when completing git branches
           zstyle ":completion:*:descriptions" format "[%d]"                             # Add descriptions when able
-          zstyle ":completion:*" list-colors "''${(s.:.)LS_COLORS}"                       # color output with LS_COLORS
-          zstyle ":fzf-tab:complete:cd:*" fzf-preview 'exa -1 --color=always $realpath' # Preview directories with exa
-          zstyle ":fzf-tab:*" fzf-flags "$SKIM_DEFAULT_OPTIONS"                         # Since skim is being instead of fzf, use skim"s default flags
+          zstyle ":completion:*" list-colors "''${(s.:.)LS_COLORS}"                     # color output with LS_COLORS
+          zstyle ":fzf-tab:complete:cd:*" fzf-preview 'eza -1 --color=always $realpath' # Preview directories with exa
 
           # Hook for transient prompt in starship
           starship_zle-line-init() {
@@ -108,15 +107,6 @@
         cd = "z";
         # wezterm
         imgcat = "wezterm imgcat";
-        # skim
-        search = ''
-          sk --ansi \
-             --delimiter ':' \
-             --nth=3 \
-             --cmd 'rg --color=always --line-number \"{}\"' \
-             --preview 'bat --style=numbers --color=always --highlight-line {2} {1}' | \
-             cut --delimiter=':' --fields=1 -
-        '';
         # tealdeer
         tldr = "PAGER='bat --plain' tldr";
         # Ensure ssh key is loaded before using git
