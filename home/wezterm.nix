@@ -41,7 +41,6 @@
         return {
         	hide_tab_bar_if_only_one_tab = true,
         	window_background_opacity = 0.90,
-        	bold_brightens_ansi_colors = false,
         	exit_behavior = "Close",
         	check_for_updates = false,
         	enable_wayland = true,
