@@ -7,32 +7,42 @@ set -o errtrace \
 	-o errexit \
 	-o nounset
 
+WIFI_ICONS=("󰤯" "󰤟" "󰤢" "󰤥" "󰤨")
+VPN_ICONS=("󰤬" "󰤡" "󰤤" "󰤧" "󰤪")
+
 icon() {
 	bars="$1"
+	vpn_status="$2"
 
-	if [[ $(cat /sys/class/net/w*/operstate) = "up" ]]; then
+	# All wireless interfaces in Linux start with wl
+	# Note that wireguard interfaces start with wg and should be excluded
+	if [[ $(cat /sys/class/net/wl*/operstate) = "up" ]]; then
+		if [[ $vpn_status = "connected" ]]; then
+			icons=("${VPN_ICONS[@]}")
+		else
+			icons=("${WIFI_ICONS[@]}")
+		fi
+
 		case $bars in
-		"____" | "") echo "󰤯" ;;
-		"▂___" | "*") echo "󰤟" ;;
-		"▂▄__" | "**") echo "󰤢" ;;
-		"▂▄▆_" | "***") echo "󰤥" ;;
-		"▂▄▆█" | "****") echo "󰤨" ;;
+		"____" | "") echo "${icons[1]}" ;;
+		"▂___" | "*") echo "${icons[2]}" ;;
+		"▂▄__" | "**") echo "${icons[3]}" ;;
+		"▂▄▆_" | "***") echo "${icons[4]}" ;;
+		"▂▄▆█" | "****") echo "${icons[5]}" ;;
 		esac
 	else
 		echo "󰤮"
 	fi
 }
 
-readonly FORMAT='{"name": "%s", "rate": "%d %s", "icon": "%s"}\n'
+connection="$(
+	nmcli device wifi list |
+		# Get SSID, rate (in two fields), and bars
+		awk '$1 == "*" { printf "{\"name\": \"%s\", \"rate\": \"%d %s\", \"icon\": \"%s\"}\n", $3, $6, $7, $9 }'
+)"
 
-IFS=" "
+wireguard_status="$(nmcli device status | awk '$2 == "wireguard" { print $3 }')"
 
-connection="$(nmcli --fields IN-USE,SSID,RATE,BARS device wifi list |
-	grep -- "^\*" |
-	tr -s "$IFS" |
-	cut --delimiter="$IFS" --fields=2- |
-	xargs printf "$FORMAT")"
-
-new_icon="$(icon "$(echo "$connection" | jq --raw-output '.icon')")"
+new_icon="$(icon "$(echo "$connection" | jq --raw-output '.icon')" "$wireguard_status")"
 
 echo "$connection" | jq --compact-output ".icon = \"$new_icon\""
