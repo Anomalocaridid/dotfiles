@@ -28,11 +28,7 @@
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     # Slippi
-    # Update once PR is merged
-    ssbm-nix = {
-      url = "github:Anomalocaridid/ssbm-nix/slippi-launcher";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    ssbm-nix.url = "github:djanatyn/ssbm-nix";
 
     # Spotify customization
     spicetify-nix = {

@@ -280,6 +280,22 @@
         "type": "indirect"
       }
     },
+    "nixpkgs_4": {
+      "locked": {
+        "lastModified": 1696879762,
+        "narHash": "sha256-Ud6bH4DMcYHUDKavNMxAhcIpDGgHMyL/yaDEAVSImQY=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f99e5f03cc0aa231ab5950a15ed02afec45ed51a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nx-fruit": {
       "flake": false,
       "locked": {
@@ -387,22 +403,19 @@
     "ssbm-nix": {
       "inputs": {
         "nix": "nix",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
+        "nixpkgs": "nixpkgs_4",
         "slippi-desktop": "slippi-desktop"
       },
       "locked": {
-        "lastModified": 1693621681,
-        "narHash": "sha256-6TKRUeiJSlFXZJfzt4bfSLmGUV3/AQVInkMTs7b36Vg=",
-        "owner": "Anomalocaridid",
+        "lastModified": 1696638790,
+        "narHash": "sha256-fmpFkchuAyQfaSOWqEMnw4wRxWFkD7LqBwjKcVog8xQ=",
+        "owner": "djanatyn",
         "repo": "ssbm-nix",
-        "rev": "45296d3e3c387a225b9b2cebe03f695668e4da00",
+        "rev": "cfeb1874b437e5883272c522234d1d15cb3d3ebd",
         "type": "github"
       },
       "original": {
-        "owner": "Anomalocaridid",
-        "ref": "slippi-launcher",
+        "owner": "djanatyn",
         "repo": "ssbm-nix",
         "type": "github"
       }
