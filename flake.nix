@@ -113,6 +113,7 @@
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
           nix-gaming.nixosModules.pipewireLowLatency
+          nix-gaming.nixosModules.steamCompat
           ssbm-nix.nixosModule
           spicetify-nix.nixosModules.spicetify
         ];
