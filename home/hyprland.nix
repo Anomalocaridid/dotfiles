@@ -138,7 +138,7 @@
           # "$mainMod SHIFT, G, lockgroups, toggle"
 
           # Move focus with mainMod + direction keys
-          # Swap active window with an adjacent window with mainMod + SHIFT + direction keys
+          # Move active window with mainMod + SHIFT + direction keys
           (builtins.map
             (key:
               let
@@ -146,7 +146,7 @@
               in
               [
                 "$mainMod, ${key}, movefocus, ${dir}"
-                "$mainMod SHIFT, ${key}, swapwindow, ${dir}"
+                "$mainMod SHIFT, ${key}, movewindow, ${dir}"
               ]
             )
             [ "$left" "$down" "$up" "$right" ])
