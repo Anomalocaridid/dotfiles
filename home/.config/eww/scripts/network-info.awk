@@ -2,23 +2,23 @@
 # network-info.awk: format info for network-info.sh
 
 BEGIN {
-  FORMAT = "{\"name\": \"%s\", \"rate\": \"%s\", \"icon\": \"%s\"}\n"
+  FORMAT = "{\"name\": \"%s\", \"rate\": \"%s\", \"icon\": \"%s\", \"connected\": \"%s\"}\n"
   if (vpn_status == "connected") {
     split("󰤬 󰤡 󰤤 󰤧 󰤪", icons)
   } else {
     split("󰤯 󰤟 󰤢 󰤥 󰤨", icons)
   }
-  matched = "false"
+  matched = 0
 }
 
 $1 == "*" { 
-  matched = "true"
-  printf FORMAT, $3, $6 " " $7, icon(icons, $9)
+  matched = 1
+  printf FORMAT, $3, $6 " " $7, icon(icons, $9), "true"
 }
 
 END {
-  if (matched == "false") {
-    printf FORMAT, "<Disconnected>", "N/A", "󰤮"
+  if (!matched) {
+    printf FORMAT, "<Disconnected>", "N/A", "󰤮", "false"
   }
 }
 
