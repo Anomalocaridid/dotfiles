@@ -55,8 +55,6 @@
 (defwidget right-sep []
   (sep :text ""))
 
-(defvar calendar-window false)
-
 (defwindow calendar
   :monitor 0
   :stacking "overlay"
@@ -78,8 +76,8 @@
   (interactive :reveal show-date
                :onhover "${EWW_CMD} update show-date=true"
                :onhoverlost "${EWW_CMD} update show-date=false"
-               :onclick "${EWW_CONFIG_DIR}/scripts/pop-window.sh calendar"
-               :onrightclick "${EWW_CONFIG_DIR}/scripts/toggle-var.sh military-time"
+               :onclick "${EWW_CMD} open --toggle calendar"
+               :onrightclick "${EWW_CMD} update military-time=${!military-time}"
                :spacing 5
                {formattime(timestamp, "󰅐 ${military-time ? "%T" : "%r"}")}
                {formattime(timestamp, "  %b %d, %Y")}
@@ -165,7 +163,6 @@
         (label :class "music-position"
                :text "${music.position_hr} / ${music.length_hr}"))))
 
-(defvar music-window false)
 (defvar show-music false)
 
 ; FIXME: When re-opening Spotify, title and artist are empty
@@ -173,7 +170,7 @@
   (interactive :reveal show-music
                :onhover "${EWW_CMD} update show-music=true"
                :onhoverlost "${EWW_CMD} update show-music=false"
-               :onclick "${EWW_CONFIG_DIR}/scripts/pop-window.sh music"
+               :onclick "${EWW_CMD} open --toggle music"
                :tooltip "${music.position_hr} / ${music.length_hr}"
                :class "music"
                :transition "slideright"
