@@ -362,7 +362,6 @@
         "spicetify-nix": "spicetify-nix",
         "ssbm-nix": "ssbm-nix",
         "unison-nix": "unison-nix",
-        "webcord-vencord-patch": "webcord-vencord-patch",
         "zsh-bd": "zsh-bd",
         "zsh-hooks": "zsh-hooks"
       }
@@ -505,18 +504,6 @@
         "owner": "ceedubs",
         "repo": "unison-nix",
         "type": "github"
-      }
-    },
-    "webcord-vencord-patch": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-U+4IPBDNO9S2Hjdaa5V8j9rSmDTlAcZgFZJVtiVsOz8=",
-        "type": "file",
-        "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/255802.patch"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/255802.patch"
       }
     },
     "zsh-bd": {

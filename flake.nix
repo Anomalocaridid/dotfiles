@@ -69,11 +69,6 @@
       url = "github:migalmoreno/nx-router";
       flake = false;
     };
-
-    webcord-vencord-patch = {
-      url = "https://patch-diff.githubusercontent.com/raw/NixOS/nixpkgs/pull/255802.patch";
-      flake = false;
-    };
   };
 
   outputs =
@@ -94,9 +89,7 @@
 
       channelsConfig.allowUnfree = true;
 
-      channels."nixpkgs".patches = [
-        inputs.webcord-vencord-patch
-      ];
+      # channels."nixpkgs".patches = [];
 
       sharedOverlays = [
         # custom overlay

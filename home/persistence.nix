@@ -34,6 +34,7 @@
       ".cache/nyxt" # Nyxt browser cache
       ".cache/spotify" # Spotify cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
+      ".config/ArmCord" # ArmCord user data
       ".config/exercism" # Exercism API key
       ".config/GIMP" # GIMP settings
       ".config/keepassxc" # KeePassXC settings
@@ -43,7 +44,6 @@
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
       ".config/syncthing" # Syncthing settings
-      ".config/WebCord" # Webcord user data
       ".julia" # Prevents recompilation for julia repl and lsp
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache

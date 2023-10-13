@@ -26,7 +26,7 @@
           "mpvpaper -o 'no-audio loop' HDMI-A-1 '/etc/nixos/assets/wallpaper.mp4'"
           "eww open bar"
           "hyprland-autoname-workspaces"
-          "webcord"
+          "armcord"
           "steam -silent"
         ];
 
@@ -100,7 +100,7 @@
           "workspace 1, class:^(lutris)$"
           "workspace 2, class:^(nyxt)$"
           "workspace 3, class:^(nnn)$"
-          "workspace 4 silent, class:^(WebCord)$"
+          "workspace 4 silent, class:^(ArmCord)$"
           "workspace 5, title:^(Spotify)$"
           # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
           "idleinhibit fullscreen, class:^(FreeTube)$"
@@ -254,7 +254,7 @@
         "Py[Ss]ol" = "󰣎";
         "steam" = "󰓓";
         "virt-manager" = "󰍺";
-        "WebCord" = "󰙯";
+        "ArmCord" = "󰙯";
         ".yubioath-flutter-wrapped_" = "󰌋";
       };
 

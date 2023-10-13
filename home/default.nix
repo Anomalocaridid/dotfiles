@@ -13,6 +13,7 @@
     username = "anomalocaris";
     homeDirectory = "/home/${username}";
     packages = with pkgs; [
+      armcord
       exercism
       firefox # fallback browser
       freetube
@@ -28,7 +29,6 @@
       tree
       tuxpaint
       ventoy
-      webcord-vencord
       wl-clipboard
       yubioath-flutter
       zotero
