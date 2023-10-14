@@ -1,10 +1,12 @@
-{ ... }: {
+{ lib, ... }: {
   programs.btop = {
     enable = true;
+    catppuccin.enable = true;
     settings = {
       #* Name of a btop++/bpytop/bashtop formatted ".theme" file, "Default" and "TTY" for builtin themes.
       #* Themes should be placed in "../share/btop/themes" relative to binary or "$HOME/.config/btop/themes"
-      color_theme = "cyberpunk_neon.theme";
+      # Necessary because ctp-nix sets theme wrong
+      color_theme = lib.mkForce "catppuccin_mocha.theme";
 
       #* If the theme set background should be shown, set to false if you want terminal background transparency.
       theme_background = false;
@@ -214,6 +216,4 @@
       log_level = "WARNING";
     };
   };
-
-  xdg.configFile."btop/themes/cyberpunk_neon.theme".source = ./.config/btop/themes/cyberpunk_neon.theme;
 }

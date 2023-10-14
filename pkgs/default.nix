@@ -4,8 +4,6 @@ final: prev: {
     withInsults = true;
   };
 
-  nerdfonts = prev.nerdfonts.override { fonts = [ "FiraCode" ]; };
-
   nnn = (prev.nnn.override {
     withNerdIcons = true;
   }).overrideAttrs
@@ -45,8 +43,33 @@ final: prev: {
 
   # Custom-written packages
   custom = {
-    cyberre-grub-theme = final.callPackage ./cyberre-grub-theme { };
-    gtk-materia-cyberpunk-neon = final.callPackage ./gtk-materia-cyberpunk-neon { };
+    catppuccin-palette-files = final.callPackage ./catppuccin-palette-files { };
+    catppuccin-palette = (builtins.fromJSON (builtins.readFile (final.custom.catppuccin-palette-files + /share/palette-porcelain.json)));
+    parseTheme = { name, themeFile, keyField, valueField, formatStr ? "\\\"%s\\\": \\\"%s\\\"", fs ? " " }:
+      (builtins.fromJSON (builtins.readFile
+        (final.runCommand "catppuccin-${name}-theme" { } ''
+          ${final.gawk}/bin/awk -f- ${themeFile} <<'EOF' > $out
+            BEGIN {
+              FS="${fs}"
+              print "{"
+            } 
+
+            # Ignore empty lines
+            /.+/ {
+              printf "%s${formatStr}", t, ${"$" + (toString keyField)}, ${"$" + (toString valueField)}
+            } 
+
+            # Put commas before every line except for the first
+            # Because every line needs a comma after it except for the last
+            {
+              t=","
+            }
+
+            END {
+              print "}"
+            }
+          EOF
+        '')));
     candy-icons = final.callPackage ./candy-icons { };
     breeze-hacked-cursor = final.callPackage ./breeze-hacked-cursor { };
     # cp and mv with progress bars

@@ -7,6 +7,7 @@
         ../home
         inputs.impermanence.nixosModules.home-manager.impermanence
         inputs.nix-index-database.hmModules.nix-index
+        inputs.catppuccin.homeManagerModules.catppuccin
         inputs.ssbm-nix.homeManagerModule
       ];
     };

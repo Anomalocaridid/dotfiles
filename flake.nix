@@ -24,6 +24,27 @@
 
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
+    # Only used for GRUB theme
+    stylix = {
+      url = "github:danth/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+
+    ttf-to-tty = {
+      url = "github:Sigmanificient/ttf_to_tty";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        utils.follows = "flake-utils";
+      };
+    };
+
+    # Catppuccin Theming
+    catppuccin = {
+      url = "github:Stonks3141/ctp-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 
@@ -79,6 +100,8 @@
     , impermanence
     , nix-index-database
     , flake-utils
+    , stylix
+    , catppuccin
     , nix-gaming
     , ssbm-nix
     , spicetify-nix
@@ -105,6 +128,8 @@
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence
+          stylix.nixosModules.stylix
+          catppuccin.nixosModules.catppuccin
           nix-gaming.nixosModules.pipewireLowLatency
           nix-gaming.nixosModules.steamCompat
           ssbm-nix.nixosModule

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   programs.wlogout = {
     enable = true;
     layout = [
@@ -41,6 +41,7 @@
     ];
     style =
       let
+        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
         recolorIcon = (color: icon:
           let
             iconFile = "${config.programs.wlogout.package}/share/wlogout/icons/${icon}.png";
@@ -62,13 +63,17 @@
         }
 
         window {
-        	background-color: rgba(0, 11, 30, 0.9);
+        	background-color: rgba(${lib.trivial.pipe palette.base.rgb 
+          [
+            (builtins.map toString)
+            (lib.strings.concatStringsSep ", ")
+          ]}, 0.9);
         }
 
         button {
-          color: #0abdc6;
-        	background-color: #133e7c;
-          border-color: #ea00d9;
+          color: #${palette.text.hex};
+        	background-color: #${palette.surface0.hex};
+          border-color: #${palette.lavender.hex};
         	border-style: solid;
         	border-width: 2px;
         	background-repeat: no-repeat;
@@ -76,24 +81,15 @@
         	background-size: 25%;
         }
 
-        button:focus, button:hover {
-        	background-color: #321959;
+        button:focus, button:hover, button:active {
+        	background-color: #${palette.surface2.hex};
         	outline-style: none;
         }
 
-        button:active {
-        	background-color: #711c91;
-        	outline-style: none;
-        }
-
-        ${builtins.concatStringsSep "" (map (recolorIcon "#0abdc6") [
-          "lock"
-          "logout"
-          "suspend"
-          "hibernate"
-          "shutdown"
-          "reboot"
-        ])}
+        ${lib.concatStrings
+          (map
+            (button: recolorIcon "#${palette.text.hex}" button.label) 
+            config.programs.wlogout.layout)}
       '';
   };
 }

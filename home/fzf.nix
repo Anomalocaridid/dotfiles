@@ -1,23 +1,23 @@
-{ ... }: {
+{ config, pkgs, ... }: {
   programs.fzf = {
     enable = true;
     colors =
       let
-        cyan = "#0abdc6";
-        pink = "#ea00d9";
-        blue = "#091833";
-        green = "#00ff00";
-        purple = "#711c91";
+        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
       in
       {
-        hl = pink;
-        "bg+" = blue;
-        "hl+" = purple;
-        info = cyan;
-        border = pink;
-        prompt = pink;
-        pointer = pink;
-        spinner = green;
+        "bg+" = "#${palette.surface0.hex}";
+        bg = "#${palette.base.hex}";
+        spinner = "#${palette.rosewater.hex}";
+        hl = "#${palette.red.hex}";
+        fg = "#${palette.text.hex}";
+        header = "#${palette.red.hex}";
+        info = "#${palette.mauve.hex}";
+        pointer = "#${palette.rosewater.hex}";
+        marker = "#${palette.rosewater.hex}";
+        "fg+" = "#${palette.text.hex}";
+        prompt = "#${palette.mauve.hex}";
+        "hl+" = "#${palette.red.hex}";
       };
   };
 }

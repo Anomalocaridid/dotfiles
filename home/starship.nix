@@ -1,187 +1,184 @@
 { lib, ... }: {
   programs.starship = {
     enable = true;
-    settings = {
-      format = lib.concatStrings [
-        "[]"
-        "(fg:dark-blue)"
-        "$username"
-        "$hostname"
-        "[]"
-        "(fg:dark-blue bg:light-blue)"
-        "$directory"
-        "[]"
-        "(fg:light-blue bg:purple)"
-        "$git_branch"
-        "$git_status"
-        "[]"
-        "(fg:purple bg:dark-blue)"
-        "$rust"
-        "[]"
-        "(fg:dark-blue)"
-        "$fill"
-        "[]"
-        "(fg:dark-blue)"
-        "$cmd_duration"
-        "[]"
-        "(fg:purple bg:dark-blue)"
-        "$jobs"
-        "[]"
-        "(fg:light-blue bg:purple)"
-        "$status"
-        "[]"
-        "(fg:dark-blue bg:light-blue)"
-        "$localip"
-        "[]"
-        "(fg:dark-blue)"
-        "$line_break"
-        "$character"
-      ];
+    catppuccin.enable = true;
+    settings =
+      let
+        langs = {
+          c = "";
+          cmake = "";
+          haskell = "";
+          java = "";
+          julia = "";
+          lua = "󰢱";
+          nodejs = "󰌞";
+          ocaml = "";
+          python = "";
+          rust = "";
+        };
+        mkLangSeg = name: symbol:
+          {
+            "${name}" = {
+              symbol = symbol;
+              style = "fg:green bg:surface0";
+              format = "[ $symbol ($version)]($style)";
+            };
+          };
+        langNames = builtins.attrNames langs;
+        langSegments = builtins.foldl'
+          (x: y: x // y)
+          { }
+          (lib.lists.zipListsWith
+            mkLangSeg
+            langNames
+            (builtins.attrValues langs));
+      in
+      langSegments // {
+        format = lib.concatStrings ([
+          "[](surface0)"
+          "$username"
+          "$hostname"
+          "[](fg:surface0 bg:surface1)"
+          "$directory"
+          "[](fg:surface1 bg:surface2)"
+          "$git_branch"
+          "$git_status"
+          "[](fg:surface2 bg:surface0)"
+        ] ++ (map (x: "$" + x) langNames) ++ [
+          "[](surface0)"
+          "$fill"
+          "[](surface0)"
+          "$cmd_duration"
+          "[](fg:surface1 bg:surface0)"
+          "$jobs"
+          "[](fg:surface2 bg:surface1)"
+          "$status"
+          "[](fg:surface0 bg:surface2)"
+          "$localip"
+          "[](surface0)"
+          "$line_break"
+          "$character"
+        ]);
 
-      # Bottom right only
-      right_format = lib.concatStrings [
-        "[](fg:purple)"
-        "$memory_usage"
-        "[](fg:pink bg:purple)"
-        "$time"
-        "[](fg:pink)"
-      ];
+        # Bottom right only
+        right_format = lib.concatStrings [
+          "[](surface2)"
+          "$memory_usage"
+          "[](fg:surface1 bg:surface2)"
+          "$time"
+          "[](fg:surface1)"
+        ];
 
-      palette = "cyberpunk-neon";
+        # Upper left
+        username = {
+          show_always = true;
+          style_user = "fg:flamingo bg:surface0";
+          style_root = "fg:red bg:surface0";
+          format = "[ $user]($style)";
+        };
 
-      palettes.cyberpunk-neon = {
-        dark-blue = "17";
-        # blue = 
-        light-blue = "25";
-        cyan = "44";
-        pink = "201";
-        purple = "13";
-        red = "9";
-        #orange = "208";
-        white = "255";
-        #yellow = "11";
-        green = "#00FF00";
+        hostname = {
+          ssh_only = false;
+          style = "fg:pink bg:surface0";
+          format = "[@$hostname ]($style)";
+        };
+
+        directory = {
+          style = "fg:maroon  bg:surface1";
+          read_only = "";
+          read_only_style = "fg:red bg:surface1";
+          format = "[  $path]($style)[$read_only ]($read_only_style)";
+          truncation_length = 3;
+          truncation_symbol = "…/";
+          substitutions = {
+            "Documents" = "󰈙 ";
+            "Downloads" = " ";
+            "Music" = " ";
+            "Pictures" = " ";
+          };
+        };
+
+        git_branch = {
+          symbol = "";
+          style = "fg:peach bg:surface2";
+          format = "[ $symbol $branch ]($style)";
+        };
+
+        git_status = {
+          conflicted = "$count";
+          ahead = "$count";
+          behind = "$count";
+          diverged = "󱒓$behind_count/$ahead_count";
+          untracked = "$count";
+          stashed = "󱉙$count";
+          modified = "$count";
+          staged = "󰩍$count";
+          renamed = "󰪹$count";
+          deleted = "$count";
+          style = "fg:yellow bg:surface2";
+          format = "[($all_status$ahead_behind )]($style)";
+        };
+
+        fill.symbol = " ";
+
+        # Upper right
+        cmd_duration = {
+          min_time = 10000;
+          style = "bold fg:teal bg:surface0";
+          format = "[ $duration  ]($style)";
+          show_milliseconds = true;
+        };
+
+        jobs = {
+          style = "bold fg:sky bg:surface1";
+          symbol = "";
+          format = "[ $number$symbol ]($style)";
+        };
+
+        status = {
+          disabled = false;
+          style = "bold fg:sapphire bg:surface2";
+          symbol = "✘";
+          not_executable_symbol = "󰂭";
+          not_found_symbol = "";
+          sigint_symbol = "";
+          signal_symbol = "";
+          map_symbol = true;
+          format = "[ $common_meaning $status $symbol ]($style)";
+        };
+
+        localip = {
+          disabled = false;
+          ssh_only = false;
+          style = "fg:blue bg:surface0";
+          format = "[ $localipv4 󰛳 ]($style)";
+        };
+
+        # Lower left
+        # Colors chosed to match modes on helix theme
+        character = {
+          vimcmd_symbol = "[❮](bold lavender)";
+          # These below do not seem to work for some reason
+          vimcmd_replace_one_symbol = "[❮](bold green)";
+          vimcmd_replace_symbol = "[❮](bold green)";
+          vimcmd_visual_symbol = "[❮](bold flamingo)";
+        };
+
+        # Lower right
+        memory_usage = {
+          disabled = false;
+          threshold = 0;
+          symbol = "󰍛";
+          style = "fg:lavender bg:surface2";
+          format = "[ $ram_pct $swap_pct $symbol ]($style)";
+        };
+
+        time = {
+          disabled = false;
+          time_format = "%T"; # Hour:Minute:Second Format
+          style = "fg:mauve bg:surface1";
+          format = "[ $time  ]($style)";
+        };
       };
-
-      # Upper left
-      username = {
-        show_always = true;
-        style_user = "fg:pink bg:dark-blue";
-        style_root = "fg:red bg:dark-blue";
-        format = "[ $user]($style)[@]($style)";
-      };
-
-      hostname = {
-        ssh_only = false;
-        style = "fg:pink bg:dark-blue";
-        format = "[$hostname ]($style)";
-      };
-
-      directory = {
-        style = "fg:cyan bg:light-blue";
-        read_only = "";
-        read_only_style = "fg:cyan bg:light-blue";
-        format = "[  $path]($style)[$read_only ]($read_only_style)";
-        truncation_length = 3;
-        truncation_symbol = "…/";
-      };
-
-      # Here is how you can shorten some long paths by text replacement
-      directory.substitutions = {
-        "Documents" = "󰈙 ";
-        "Downloads" = " ";
-        "Music" = " ";
-        "Pictures" = " ";
-      };
-      # Keep in mind that the order matters. For example:
-      # "Important Documents" = " 󰈙 "
-      # will not be replaced, because "Documents" was already substituted before.
-      # So either put "Important Documents" before "Documents" or use the substituted version:
-      # "Important 󰈙 " = " 󰈙 "
-      git_branch = {
-        symbol = "";
-        style = "fg:green bg:purple";
-        format = "[ $symbol $branch ]($style)";
-      };
-
-      git_status = {
-        conflicted = "$count";
-        ahead = "$count";
-        behind = "$count";
-        diverged = "󱒓$behind_count/$ahead_count";
-        untracked = "$count";
-        stashed = "󱉙$count";
-        modified = "$count";
-        staged = "󰩍$count";
-        renamed = "󰪹$count";
-        deleted = "✘$count";
-        style = "fg:green bg:purple";
-        format = "[($all_status$ahead_behind )]($style)";
-      };
-
-      rust = {
-        symbol = "";
-        style = "fg:pink bg:dark-blue";
-        format = "[ $symbol ($version) ]($style)";
-      };
-
-      fill.symbol = " ";
-
-      # Upper right
-      cmd_duration = {
-        min_time = 10000;
-        style = "bold fg:pink bg:dark-blue";
-        format = "[ $duration  ]($style)";
-        show_milliseconds = true;
-      };
-
-      jobs = {
-        style = "bold fg:cyan bg:purple";
-        symbol = "";
-        format = "[ $number$symbol ]($style)";
-      };
-
-      status = {
-        disabled = false;
-        style = "bold fg:cyan bg:light-blue";
-        symbol = "✘";
-        not_executable_symbol = "󰂭";
-        not_found_symbol = "";
-        sigint_symbol = "";
-        signal_symbol = "";
-        map_symbol = true;
-        format = "[ $common_meaning $status $symbol ]($style)";
-      };
-
-      localip = {
-        disabled = false;
-        ssh_only = false;
-        style = "fg:pink bg:dark-blue";
-        format = "[ $localipv4 󰛳 ]($style)";
-      };
-
-      # Lower left
-      character = {
-        success_symbol = "[❯](bold fg:cyan)";
-        error_symbol = "[❯](bold fg:pink)";
-        vicmd_symbol = "[❮](bold fg:cyan)";
-      };
-
-      # Lower right
-      memory_usage = {
-        disabled = false;
-        threshold = 0;
-        symbol = "󰍛";
-        style = "fg:cyan bg:purple";
-        format = "[ $ram_pct $swap_pct $symbol ]($style)";
-      };
-
-      time = {
-        disabled = false;
-        time_format = "%T"; # Hour:Minute:Second Format
-        style = "fg:white bg:pink";
-        format = "[ $time  ]($style)";
-      };
-    };
   };
 }

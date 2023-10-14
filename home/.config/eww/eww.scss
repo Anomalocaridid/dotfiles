@@ -1,26 +1,18 @@
-$background-color: #000b1e;
-$text-color: #0abdc6;
-$light-background: #133e7c;
-$accent-color: #ea00d9;
-$urgent: #ffff00;
-$critical: #ff0000;
-$green: #00ff00;
-$purple: #711c91;
-$orange: #f57800;
+@use "palette" as p;
 
 // NOTE: 1 rem = 13 1/3 px (font size according to eww inspector)
 
 * {
   all: unset; //Unsets everything so you can style everything from scratch
-  font-family: "FiraCode Nerd Font";
+  font-family: p.$font;
 }
 
 //Global Styles
 @mixin rootContainer {  
-  background-color: $background-color;
-  color: $text-color;
+  background-color: p.$base;
+  color: p.$text;
   border-radius: 1.2rem;
-  border: 0.05rem solid $accent-color;
+  border: 0.05rem solid p.$lavender;
 }
 
 .bar {
@@ -51,7 +43,7 @@ tooltip {
 }
 
 scale trough {
-  background-color: $light-background;
+  background-color: p.$overlay0;
   border-radius: 0.75rem; 
   min-height: 0.3rem;
   min-width: 3.75rem; 
@@ -59,17 +51,17 @@ scale trough {
   margin-right: 0.75rem;
 
   highlight {
-    background-color: $accent-color;
+    background-color: p.$accent;
     // Seems redundant, but it will have square ends otherwise
     border-radius: 0.75rem; 
   }
 }
 
 $statColors: (
-  "memory": $green,
-  "cpu": $accent-color,
-  "disk": $purple,
-  "temperature": $orange
+  "memory": p.$pink,
+  "cpu": p.$peach,
+  "disk": p.$green,
+  "temperature": p.$sapphire
 );
 
 .stat {
@@ -78,17 +70,18 @@ $statColors: (
       color: $color;
 
       &.urgent {
-        color: $urgent;
+        color: p.$yellow;
       }
+
       &.critical {
-        color: $critical;
+        color: p.$red;
       }
     }  
   }
 }
 
 @mixin heading(){
-  color: $accent-color;
+  color: p.$accent;
   font-weight: bold;
 }
 
@@ -102,6 +95,7 @@ calendar.header, calendar:selected {
   }
   // Ensure icons are not cut off
   padding: 0rem 0.4rem;
+
 }
 
 .music-title {
@@ -114,6 +108,6 @@ calendar.header, calendar:selected {
 }
 
 .disconnected {
-  color: $urgent;
+  color: p.$yellow;
 }
 

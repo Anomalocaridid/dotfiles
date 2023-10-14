@@ -1,10 +1,20 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, config, ... }: {
   programs = {
     zsh = {
       enable = true;
       enableAutosuggestions = true;
 
-      initExtra = #sh
+      initExtra =
+        let
+          fshTheme = pkgs.fetchFromGitHub
+            {
+              owner = "Catppuccin";
+              repo = "zsh-fsh";
+              rev = "7cdab58bddafe0565f84f6eaf2d7dd109bd6fc18";
+              hash = "sha256-31lh+LpXGe7BMZBhRWvvbOTkwjOM77FPNaGy6d26hIA=";
+            } + "/themes/catppuccin-${config.catppuccin.flavour}";
+        in
+        #sh
         ''    
           # Ascii Terminal greeting. 
           # Shows Linux distro and version in rainbow ascii art.
@@ -15,6 +25,11 @@
             lolcat
           echo -e "\e[1m Welcome back, $USER!\e[0m" | lolcat
 
+          # Set syntax highlighting theme
+          # Supposed to write persistent files, but fortunately does not
+          # Because it tries to write to read-only fast-syntax-highlighting directory by default
+          fast-theme ${fshTheme} &>/dev/null
+          
           # Init batpipe
           eval "$(batpipe)"
 

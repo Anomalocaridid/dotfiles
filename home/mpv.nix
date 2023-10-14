@@ -1,28 +1,52 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [ mpv ];
-
-  xdg.configFile =
+{ config, lib, pkgs, ... }: {
+  programs.mpv =
     let
-      kvFormat = pkgs.formats.keyValue { };
-      font = "FiraCode Nerd Font";
+      fonts = config.stylix.fonts;
+      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
     in
     {
-      "mpv/mpv.conf".source = ./.config/mpv/mpv.conf;
-      "mpv/script-opts/console.conf".source = kvFormat.generate "mpv-script-opts-console" {
-        font = font;
+      enable = true;
+      config = {
+        osd-font = fonts.sansSerif.name;
+        osd-back-color = "#${palette.overlay0.hex}";
+        osd-border-color = "#${palette.mantle.hex}";
+        osd-color = "#${palette.text.hex}";
+        osd-fractions = true;
+        osd-shadow-color = "#${palette.base.hex}";
+        background = "#${palette.base.hex}";
+        volume = 40;
       };
-      "mpv/script-opts/osc.conf".source = kvFormat.generate "mpv-script-opts-osc" {
-        seekbarstyle = "diamond";
+
+      profiles = {
+        eye-cancer = {
+          sharpen = 5;
+          osd-font = "Comic Sans MS";
+        };
       };
-      "mpv/script-opts/stats.conf".source = kvFormat.generate "mpv-script-opts-stats" {
-        font = font;
-        font_mono = font;
-        #BBGGRR
-        font_color = "C6BD0A";
-        border_color = "1E0B00";
-        plot_bg_border_color = "D900EA";
-        plot_bg_color = "331809";
-        plot_color = "D900EA";
+
+      scriptOpts = {
+        console.font = fonts.monospace.name;
+        osc.seekbarstyle = "diamond";
+        stats =
+          let
+            # Need BBGGRR format
+            rgb2Bgr = rgb: lib.trivial.pipe rgb
+              [
+                # Split into 3 chunks of 2 (i.e. RR GG BB)
+                (x: builtins.genList (n: builtins.substring (n * 2) 2 x) 3)
+                lib.lists.reverseList
+                lib.strings.concatStrings
+              ];
+          in
+          {
+            font = fonts.monospace.name;
+            font_mono = fonts.monospace.name;
+            font_color = rgb2Bgr palette.text.hex;
+            border_color = rgb2Bgr palette.mantle.hex;
+            plot_bg_border_color = rgb2Bgr palette.${config.catppuccin.accent}.hex;
+            plot_bg_color = rgb2Bgr palette.mantle.hex;
+            plot_color = rgb2Bgr palette.${config.catppuccin.accent}.hex;
+          };
       };
     };
 }

@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ config, lib, pkgs, ... }: {
   # Additional dependencies
   home.packages = with pkgs; [
     mpvpaper # Live wallpaper
@@ -8,21 +8,28 @@
     enable = true;
     settings =
       let
-        pink = "ea00d9";
-        purple = "711c91";
-        darkBlue = "000b1e";
-        lightBlue = "133e7c";
-        # cyan = "0abdc6";
-        # green = "00ff00";
-        # orange = "f57800";
-        # red = "ff00ff";
+        # Temporary workaround because home manager hyprland module does not handle importing well
+        theme = pkgs.custom.parseTheme {
+          name = "hyprland";
+          themeFile = pkgs.fetchFromGitHub
+            {
+              owner = "catppuccin";
+              repo = "hyprland";
+              rev = "99a88fd21fac270bd999d4a26cf0f4a4222c58be";
+              hash = "sha256-07B5QmQmsUKYf38oWU3+2C6KO4JvinuTwmW1Pfk8CT8=";
+            } + "/themes/${config.catppuccin.flavour}.conf";
+          keyField = 1;
+          valueField = 3;
+        };
+        accent = "\$${config.catppuccin.accent}";
       in
       #hypr
+      theme //
       {
         # Execute your favorite apps at launch
         exec-once = [
           # Set up live wallpaper
-          # https://moewalls.com/landscape/synthwave-city-live-wallpaper/
+          # https://moewalls.com/pixel-art/cyberpunk-rain-city-pixel-live-wallpaper/
           "mpvpaper -o 'no-audio loop' HDMI-A-1 '/etc/nixos/assets/wallpaper.mp4'"
           "eww open bar"
           "hyprland-autoname-workspaces"
@@ -34,14 +41,15 @@
           gaps_in = 5;
           gaps_out = 20;
           border_size = 2;
-          "col.active_border" = "rgba(${pink}ee) rgba(${purple}ee) 45deg";
-          "col.inactive_border" = "rgba(${darkBlue}aa) rgba(${lightBlue}aa) 45deg";
-          # "col.group_border" = "rgba(${darkBlue}aa) rgba(${lightBlue}ee) 45deg";
-          # "col.group_border_active" = "rgba(${cyan}ee) rgba(${green}ee) 45deg";
-          # "col.group_border_locked" = "rgba(${darkBlue}aa) rgba(${lightBlue}ee) 45deg";
-          # "col.group_border_locked_active" = "rgba(${orange}ee) rgba(${red}ee) 45deg";
+          "col.active_border" = "0xee$lavenderAlpha 0xee${accent}Alpha 45deg";
+          "col.inactive_border" = "0xaa$overlay0Alpha 0xaa$mantleAlpha 45deg";
+          "col.group_border" = "0xaa$overlay0Alpha 0xaa$yellowAlpha 45deg";
+          "col.group_border_active" = "0xee$yellowAlpha";
+          "col.group_border_locked" = "0xaa$overlay0Alpha 0xaa$redAlpha 45deg";
+          "col.group_border_locked_active" = "0xee$yellowAlpha 0xee$redAlpha 45deg";
 
           layout = "dwindle";
+          cursor_inactive_timeout = 60;
         };
 
         decoration = {
@@ -57,7 +65,7 @@
           drop_shadow = true;
           shadow_range = 4;
           shadow_render_power = 3;
-          "col.shadow" = "rgba(${darkBlue}ee)";
+          "col.shadow" = "$base";
         };
 
         animations = {
@@ -91,7 +99,7 @@
         misc = {
           enable_swallow = true;
           swallow_regex = "^(org.wezfurlong.wezterm)$";
-          # groupbar_text_color = "rgb(${cyan})";
+          groupbar_text_color = "$text";
         };
 
         # Window rules
@@ -134,8 +142,10 @@
           "$mainMod, D, exec, hyprctl keyword general:layout dwindle"
           "$mainMod, M, exec, hyprctl keyword general:layout master"
           "$mainMod, O, exec, nyxt"
-          # "$mainMod, G, togglegroup"
-          # "$mainMod SHIFT, G, lockgroups, toggle"
+          "$mainMod, G, togglegroup"
+          "$mainMod SHIFT, G, lockactivegroup, toggle"
+          "$mainMod, bracketleft, changegroupactive, b"
+          "$mainMod, bracketright, changegroupactive, f"
 
           # Move focus with mainMod + direction keys
           # Move active window with mainMod + SHIFT + direction keys
@@ -146,7 +156,7 @@
               in
               [
                 "$mainMod, ${key}, movefocus, ${dir}"
-                "$mainMod SHIFT, ${key}, movewindow, ${dir}"
+                "$mainMod SHIFT, ${key}, movewindoworgroup, ${dir}"
               ]
             )
             [ "$left" "$down" "$up" "$right" ])
@@ -198,10 +208,11 @@
       '';
   };
 
+  # TODO: change green to a catppuccin color
   xdg.configFile."hyprland-autoname-workspaces/config.toml".source =
     let
       tomlFormat = pkgs.formats.toml { };
-      green = "#00FF00";
+      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
     in
     tomlFormat.generate "hyprland-autoname-workspaces-config" {
       version = pkgs.hyprland-autoname-workspaces.version;
@@ -223,7 +234,7 @@
         workspace_empty = "{name}"; # {id}, {delim} and {clients} are supported
         # client formatter
         client = "{icon}";
-        client_active = "<span color='${green}'>${client}</span>";
+        client_active = "<span color='#${palette.green.hex}'>${client}</span>";
 
         # deduplicate client formatter
         # client_fullscreen = "[{icon}]";

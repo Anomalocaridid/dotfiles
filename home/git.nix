@@ -1,4 +1,4 @@
-{ ... }: {
+{ config, pkgs, ... }: {
   programs.git = {
     enable = true;
     userEmail = "29845794+Anomalocaridid@users.noreply.github.com";
@@ -10,32 +10,40 @@
       enable = true;
       options = {
         navigate = true;
-        features = "cyberpunk-neon";
+        features = "catppuccin-${config.catppuccin.flavour}";
         side-by-side = true;
         interactive.keep-plus-minus-markers = false;
-        cyberpunk-neon = {
-          commit-decoration-style = "box ul";
-          dark = true;
-          file-decoration-style = "#ea00d9";
-          file-style = "#ea00d9";
-          hunk-header-decoration-style = "box ul";
-          hunk-header-file-style = "bold";
-          hunk-header-line-number-style = "bold #f57800";
-          hunk-header-style = "file line-number syntax";
-          line-numbers = true;
-          line-numbers-left-style = "#ea00d9";
-          line-numbers-minus-style = "bold #ff0000";
-          line-numbers-plus-style = "bold #00ff00";
-          line-numbers-right-style = "#711c91";
-          line-numbers-zero-style = "#0abdc6";
-          # Not exactly standards-conformant,
-          # But idk how to make it look good otherwise
-          minus-emph-style = "bold syntax #880000";
-          minus-style = "bold syntax #330000";
-          plus-emph-style = "bold syntax #005500";
-          plus-style = "bold syntax #002200";
-          syntax-theme = "cyberpunk-neon";
-        };
+        "catppuccin-${config.catppuccin.flavour}" =
+          let
+            palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+            red20Percent = "483346";
+            red60Percent = "9d5477";
+            green20Percent = "394545";
+            green60Percent = "6f9473";
+          in
+          {
+            commit-decoration-style = "box ul";
+            dark = true;
+            file-decoration-style = "#${palette.text.hex}";
+            file-style = "#${palette.text.hex}";
+            hunk-header-decoration-style = "box ul";
+            hunk-header-file-style = "bold";
+            hunk-header-line-number-style = "bold #${palette.subtext0.hex}";
+            hunk-header-style = "file line-number syntax";
+            line-numbers = true;
+            line-numbers-left-style = "#${palette.overlay0.hex}";
+            line-numbers-minus-style = "bold #${palette.red.hex}";
+            line-numbers-plus-style = "bold #${palette.green.hex}";
+            line-numbers-right-style = "#${palette.overlay0.hex}";
+            line-numbers-zero-style = "#${palette.overlay0.hex}";
+            # Not exactly standards-conformant,
+            # But idk how to make it look good otherwise
+            minus-emph-style = "bold syntax #${red60Percent}";
+            minus-style = "bold syntax #${red20Percent}";
+            plus-emph-style = "bold syntax #${green60Percent}";
+            plus-style = "bold syntax #${green20Percent}";
+            syntax-theme = "Catppuccin-${config.catppuccin.flavour}";
+          };
       };
     };
 

@@ -1,78 +1,50 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;
-    settings = {
-      indicator-caps-lock = true;
-      font = "Fira Code Nerd Font";
-      font-size = 20;
-      ignore-empty-password = true;
-      show-failed-attempts = true;
-      color = "#00000000";
+    settings =
+      let
+        fonts = config.stylix.fonts;
+        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+        theme = pkgs.custom.parseTheme {
+          name = "swaylock";
+          themeFile = pkgs.fetchFromGitHub
+            {
+              owner = "remiposo";
+              repo = "swaylock";
+              rev = "9b88d9e866c044d47c98046ee6c8d6de2546cf82";
+              hash = "sha256-v2op7V52VYqzY9govnfkgmF7ybRRlPkohgnrUWDjItI=";
+            } + "/themes/${config.catppuccin.flavour}.conf";
+          keyField = 1;
+          valueField = 2;
+          fs = "=";
+        };
+      in
+      theme // {
+        indicator-caps-lock = true;
+        font = "${fonts.sansSerif.name}";
+        font-size = 20;
+        ignore-empty-password = true;
+        show-failed-attempts = true;
+        color = "#00000000";
 
-      # Ring
-      indicator-radius = 115;
+        # Ring
+        indicator-radius = 115;
 
-      # Typing 
-      line-color = "#0abdc6";
-      text-color = "#0abdc6";
-      inside-color = "#000b1e";
-      ring-color = "#000b1e";
-      separator-color = "#ea00d9";
-      key-hl-color = "#ea00d9";
-      bs-hl-color = "#ff0000";
+        # Inside background color
+        inside-color = "#${palette.base.hex}";
+        inside-ver-color = "#${palette.base.hex}";
+        inside-caps-lock-color = "#${palette.base.hex}";
+        inside-wrong-color = "#${palette.base.hex}";
+        inside-clear-color = "#${palette.base.hex}";
 
-      # Verifying
-      line-ver-color = "#0abdc6";
-      text-ver-color = "#0abdc6";
-      inside-ver-color = "#091833";
-      ring-ver-color = "#133e7c";
-
-      # Caps Lock
-      line-caps-lock-color = "#f57800";
-      text-caps-lock-color = "#f57800";
-      inside-caps-lock-color = "#f5780050";
-      ring-caps-lock-color = "#f57800";
-      caps-lock-key-hl-color = "#ffff00";
-      caps-lock-bs-hl-color = "#ff0000";
-
-      # Wrong
-      line-wrong-color = "#ff0000";
-      text-wrong-color = "#ff0000";
-      inside-wrong-color = "#ff000040";
-      ring-wrong-color = "#ff0000";
-
-      # Clear
-      line-clear-color = "#00ff00";
-      text-clear-color = "#00ff00";
-      inside-clear-color = "#00ff0040";
-      ring-clear-color = "#00ff00";
-
-      # Swaylock-effects specific settings
-      clock = true;
-      timestr = "%r";
-      grace = 2;
-    };
+        # Swaylock-effects specific settings
+        clock = true;
+        timestr = "%r";
+        grace = 2;
+      };
   };
-  # home.packages = with pkgs;[
-  #   (writeShellApplication {
-  #     name = "lockman.sh";
-  #     runtimeInputs = [ finalPackages.programs.swaylock pipes-rs jq ];
-  #     text = ''
-  #       # Move to empty workspace and run screensaver
-  #       hyprctl dispatch workspace empty
-  #       handlr launch x-scheme-handler/terminal -- pipes-rs
-  #       # Fullscreen screensaver
-  #       sleep 0.1 # slight delay needed for fullscreen and address query to work
-  #       hyprctl dispatch fullscreen 0
-  #       win_addr=$(hyprctl activewindow -j | jq --raw-output '.address')
-  #       # Lock screen, will block until unlocked
-  #       swaylock
-  #       # After unlocked, close screensaver
-  #       hyprctl --batch "dispatch closewindow address:$win_addr ; dispatch workspace previous"
-  #     '';
-  #   })
-  # ];
+
   # Screensaver config
   xdg.configFile."pipes-rs/config.toml".source =
     let

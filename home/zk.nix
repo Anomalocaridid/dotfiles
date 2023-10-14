@@ -1,9 +1,9 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   home.packages = with pkgs; [ zk ];
   xdg.configFile."zk/config.toml".source =
     let
       tomlFormat = pkgs.formats.toml { };
-      viewCommand = "glow --style ~/.config/glow/cyberpunk_neon.json";
+      viewCommand = "glow --style ${config.home.sessionVariables.GLAMOUR_STYLE}";
     in
     tomlFormat.generate "zk-config" {
       notebook.dir = "~/Sync/notes";

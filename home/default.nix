@@ -22,7 +22,6 @@
       keepassxc
       killall
       neofetch
-      nerdfonts
       pavucontrol # Graphical audio controller
       qalculate-gtk
       strawberry
