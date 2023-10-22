@@ -62,6 +62,7 @@
           "bash"
           "c"
           "cpp"
+          "java"
           "markdown"
           "unison"
         ]
@@ -70,6 +71,12 @@
         {
           name = "bash";
           formatter.command = "shfmt";
+        }
+        {
+          name = "java";
+          language-server = {
+            command = "jdt-language-server";
+          };
         }
         {
           name = "javascript";
