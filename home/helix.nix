@@ -74,9 +74,9 @@
         }
         {
           name = "java";
-          language-server = {
-            command = "jdt-language-server";
-          };
+          # TODO: replace with jdtls if it gets fixed
+          language-server.command = "java-language-server";
+          formatter.command = "google-java-format";
         }
         {
           name = "javascript";

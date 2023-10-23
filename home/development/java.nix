@@ -2,6 +2,7 @@
   home.packages = with pkgs; [
     gradle
     jdk
-    jdt-language-server
+    java-language-server
+    google-java-format
   ];
 }
