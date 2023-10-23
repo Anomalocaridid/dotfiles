@@ -33,7 +33,7 @@
           "mpvpaper -o 'no-audio loop' HDMI-A-1 '/etc/nixos/assets/wallpaper.mp4'"
           "eww open bar"
           "hyprland-autoname-workspaces"
-          "armcord"
+          # "armcord"
           "steam -silent"
         ];
 
