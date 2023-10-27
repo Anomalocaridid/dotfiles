@@ -5,8 +5,8 @@
     packwiz # minecraft modpack creator
     parsec-bin # Online multiplayer for local multiplayer games
     prismlauncher
-    # prismlauncher-qt5 # Non-qt5 version does not work as well with theme
     pysolfc
+    runelite
     sgt-puzzles
   ];
 

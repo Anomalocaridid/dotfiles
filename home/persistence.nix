@@ -15,6 +15,7 @@
       ".local/share/PrismLauncher" # Prism Launcher data
       ".local/share/Steam" # Steam games and save data
       ".PySolFC" # PySolFC settings and save data
+      ".runelite" # Runelite settings and cache
       # Other important stuff
       ".config/FreeTube" # Freetube user data
       ".config/weechat" # .config/weechat/sec.conf has secrets that shouldn't be managed like a normal dotfile 
