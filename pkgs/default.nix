@@ -107,10 +107,12 @@ final: prev: {
           handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- pipes-rs
           # Focus screensaver (assumed to be already fullscreened)
           hyprctl dispatch focuswindow "^(${scriptName})$"
+          # Turn on CRT shader
+          hyprctl keyword decoration:screen_shader ${../assets/crt.frag};
           # Lock screen (blocks until unlocked)
           swaylock
-          # Close screensaver
-          hyprctl --batch "dispatch closewindow ^(${scriptName})$; dispatch workspace previous"
+          # Close screensaver, return to original workspace, and turn off shader
+          hyprctl --batch "dispatch closewindow ^(${scriptName})$; dispatch workspace previous; reload"
           # Release lock
           echo "$$" >&3
         '';
