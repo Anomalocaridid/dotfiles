@@ -24,6 +24,12 @@
 
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
+    # Hyprland community tools
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Only used for GRUB theme
     stylix = {
       url = "github:danth/stylix";
@@ -106,6 +112,7 @@
     , impermanence
     , nix-index-database
     , flake-utils
+    , hyprland-contrib
     , stylix
     , catppuccin
     , nix-gaming
@@ -123,6 +130,8 @@
       sharedOverlays = [
         # custom overlay
         (import ./pkgs)
+        # Hyprland community tools
+        hyprland-contrib.overlays.default
         # Up to date Unison packages
         unison-nix.overlay
       ];

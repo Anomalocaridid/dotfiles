@@ -115,5 +115,22 @@ final: prev: {
           echo "$$" >&3
         '';
       });
+    # custom screenshot script
+    screenshot = final.writeShellApplication {
+      name = "screenshot.sh";
+      runtimeInputs = with final; [
+        grimblast
+        swappy
+      ];
+      text = ''        
+        entries=("Active" "Screen" "Output" "Area" "Window")
+        selected=$(printf '%s\n' "''${entries[@]}" | wofi --show dmenu)
+        grimblast --notify save "''${selected,,}" - | swappy -f -
+      '';
+    };
   };
 }
+
+
+
+

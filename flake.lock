@@ -314,6 +314,26 @@
         "type": "github"
       }
     },
+    "hyprland-contrib": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698409082,
+        "narHash": "sha256-Y9D2S63oV3aj+KS+qYZUBx48mrHN+wJC2WIVADmoCLM=",
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "rev": "c0b2d2e2ad6568e58f9c7bd458a8a4baa5dd5e99",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hyprwm",
+        "repo": "contrib",
+        "type": "github"
+      }
+    },
     "impermanence": {
       "locked": {
         "lastModified": 1697303681,
@@ -537,6 +557,7 @@
         "disko": "disko",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "hyprland-contrib": "hyprland-contrib",
         "impermanence": "impermanence",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",

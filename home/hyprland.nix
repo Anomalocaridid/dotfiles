@@ -3,7 +3,9 @@
   home.packages = with pkgs; [
     mpvpaper # Live wallpaper
     hyprland-autoname-workspaces
+    custom.screenshot
   ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings =
@@ -146,6 +148,7 @@
           "$mainMod SHIFT, G, lockactivegroup, toggle"
           "$mainMod, bracketleft, changegroupactive, b"
           "$mainMod, bracketright, changegroupactive, f"
+          ", Print, exec, screenshot.sh"
 
           # Move focus with mainMod + direction keys
           # Move active window with mainMod + SHIFT + direction keys
@@ -208,113 +211,127 @@
       '';
   };
 
-  # TODO: change green to a catppuccin color
-  xdg.configFile."hyprland-autoname-workspaces/config.toml".source =
-    let
-      tomlFormat = pkgs.formats.toml { };
-      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
-    in
-    tomlFormat.generate "hyprland-autoname-workspaces-config" {
-      version = pkgs.hyprland-autoname-workspaces.version;
+  xdg.configFile = {
+    "hyprland-autoname-workspaces/config.toml".source =
+      let
+        tomlFormat = pkgs.formats.toml { };
+        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+      in
+      tomlFormat.generate "hyprland-autoname-workspaces-config" {
+        version = pkgs.hyprland-autoname-workspaces.version;
 
-      # TODO: Investigate if it would be possible to use eww literals as a replacement for inline pango
-      format = rec {
-        # Deduplicate icons if enable.
-        # A superscripted counter will be added.
-        dedup = true;
-        dedup_inactive_fullscreen = true; # dedup more
-        # window delimiter
-        delim = " ";
+        # TODO: Investigate if it would be possible to use eww literals as a replacement for inline pango
+        format = rec {
+          # Deduplicate icons if enable.
+          # A superscripted counter will be added.
+          dedup = true;
+          dedup_inactive_fullscreen = true; # dedup more
+          # window delimiter
+          delim = " ";
 
-        # available formatter:
-        # {counter_sup} - superscripted count of clients on the workspace, and simple {counter}, {delim}
-        # {icon}, {client}
-        # workspace formatter
-        workspace = "${workspace_empty}:{delim}{clients}"; # {id}, {delim} and {clients} are supported
-        workspace_empty = "{name}"; # {id}, {delim} and {clients} are supported
-        # client formatter
-        client = "{icon}";
-        client_active = "<span color='#${palette.green.hex}'>${client}</span>";
+          # available formatter:
+          # {counter_sup} - superscripted count of clients on the workspace, and simple {counter}, {delim}
+          # {icon}, {client}
+          # workspace formatter
+          workspace = "${workspace_empty}:{delim}{clients}"; # {id}, {delim} and {clients} are supported
+          workspace_empty = "{name}"; # {id}, {delim} and {clients} are supported
+          # client formatter
+          client = "{icon}";
+          client_active = "<span color='#${palette.green.hex}'>${client}</span>";
 
-        # deduplicate client formatter
-        # client_fullscreen = "[{icon}]";
-        # client_dup = "{client}{counter_sup}";
-        # client_dup_fullscreen = "[{icon}]{delim}{icon}{counter_unfocused}";
-        # client_dup_active = "*{icon}*{delim}{icon}{counter_unfocused}";
+          # deduplicate client formatter
+          # client_fullscreen = "[{icon}]";
+          # client_dup = "{client}{counter_sup}";
+          # client_dup_fullscreen = "[{icon}]{delim}{icon}{counter_unfocused}";
+          # client_dup_active = "*{icon}*{delim}{icon}{counter_unfocused}";
+        };
+
+        class = {
+          # Add your icons mapping
+          # use double quote the key and the value
+          # take class name from 'hyprctl clients'
+          # "DEFAULT" = " {class}: {title}";
+          "blueman-manager" = "";
+          "DEFAULT" = "";
+          "[Ff]irefox" = "";
+          "FreeTube" = "";
+          "libreoffice" = "󰈙";
+          "lutris" = "";
+          "Minecraft" = "󰍳";
+          "nnn" = "";
+          "nyxt" = "󰖟";
+          "org.keepassxc.KeePassXC" = "󰌋";
+          "org.prismlauncher.PrismLauncher" = "󰍳";
+          "org.pwmt.zathura" = "";
+          "org.wezfurlong.wezterm" = "";
+          "pavucontrol" = "󰕾";
+          "Py[Ss]ol" = "󰣎";
+          "steam" = "󰓓";
+          "virt-manager" = "󰍺";
+          "ArmCord" = "󰙯";
+          ".yubioath-flutter-wrapped_" = "󰌋";
+        };
+
+        # class_active = {};
+
+        # initial_class = {};
+
+        # initial_class_active = {};
+
+        # regex captures support is supported
+        # "emerge: (.+?/.+?)-.*" = "{match1}"
+
+        title_in_class."^$" = {
+          "(?i)spotify" = "";
+        };
+
+        # title_in_class_active = {};
+
+        # title_in_initial_class = {};
+
+        # initial_title = {};
+
+        # initial_title_active = {};
+
+        # initial_title_in_class = {};
+
+        # initial_title_in_initial_class = {};
+
+        # Add your applications that need to be exclude
+        # The key is the class, the value is the title.
+        # You can put an empty title to exclude based on
+        # class name only, "" make the job.
+        exclude = {
+          "" = "^$"; # Hide XWayland windows that remain after closing
+          "[Ss]team" = "(Friends List.*|^$)"; # will match all Steam window with null title (some popup)
+        };
+
+        # workspaces_name = {
+        #   "1" = "一";
+        #   "2" = "二";
+        #   "3" = "三";
+        #   "4" = "四";
+        #   "5" = "五";
+        #   "6" = "六";
+        #   "7" = "七";
+        #   "8" = "八";
+        #   "9" = "九";
+        #   "10" = "十";
+        # };
       };
 
-      class = {
-        # Add your icons mapping
-        # use double quote the key and the value
-        # take class name from 'hyprctl clients'
-        # "DEFAULT" = " {class}: {title}";
-        "blueman-manager" = "";
-        "DEFAULT" = "";
-        "[Ff]irefox" = "";
-        "FreeTube" = "";
-        "libreoffice" = "󰈙";
-        "lutris" = "";
-        "Minecraft" = "󰍳";
-        "nnn" = "";
-        "nyxt" = "󰖟";
-        "org.keepassxc.KeePassXC" = "󰌋";
-        "org.prismlauncher.PrismLauncher" = "󰍳";
-        "org.pwmt.zathura" = "";
-        "org.wezfurlong.wezterm" = "";
-        "pavucontrol" = "󰕾";
-        "Py[Ss]ol" = "󰣎";
-        "steam" = "󰓓";
-        "virt-manager" = "󰍺";
-        "ArmCord" = "󰙯";
-        ".yubioath-flutter-wrapped_" = "󰌋";
+    # For screenshot.sh
+    "swappy/config".source =
+      let
+        iniFormat = pkgs.formats.ini { };
+        fonts = config.stylix.fonts;
+      in
+      iniFormat.generate "swappy-config" {
+        Default = {
+          save_dir = "$HOME/Pictures/Screenshots";
+          text_size = fonts.sizes.applications;
+          text_font = fonts.sansSerif.name;
+        };
       };
-
-      # class_active = {};
-
-      # initial_class = {};
-
-      # initial_class_active = {};
-
-      # regex captures support is supported
-      # "emerge: (.+?/.+?)-.*" = "{match1}"
-
-      title_in_class."^$" = {
-        "(?i)spotify" = "";
-      };
-
-      # title_in_class_active = {};
-
-      # title_in_initial_class = {};
-
-      # initial_title = {};
-
-      # initial_title_active = {};
-
-      # initial_title_in_class = {};
-
-      # initial_title_in_initial_class = {};
-
-      # Add your applications that need to be exclude
-      # The key is the class, the value is the title.
-      # You can put an empty title to exclude based on
-      # class name only, "" make the job.
-      exclude = {
-        "" = "^$"; # Hide XWayland windows that remain after closing
-        "[Ss]team" = "(Friends List.*|^$)"; # will match all Steam window with null title (some popup)
-      };
-
-      # workspaces_name = {
-      #   "1" = "一";
-      #   "2" = "二";
-      #   "3" = "三";
-      #   "4" = "四";
-      #   "5" = "五";
-      #   "6" = "六";
-      #   "7" = "七";
-      #   "8" = "八";
-      #   "9" = "九";
-      #   "10" = "十";
-      # };
-    };
+  };
 }
-
