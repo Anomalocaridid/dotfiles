@@ -27,4 +27,7 @@
     flavour = osConfig.catppuccin.flavour;
     accent = "mauve";
   };
+
+  # Required for btop theme
+  xdg.enable = true;
 }

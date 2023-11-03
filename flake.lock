@@ -132,22 +132,54 @@
     },
     "catppuccin": {
       "inputs": {
-        "flake-compat": "flake-compat",
+        "home-manager": "home-manager",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1698002908,
-        "narHash": "sha256-Bge0FHsAQx1SQZyzpFl0EdgLC/RaYEToU2YVUMDlFvw=",
+        "lastModified": 1699032324,
+        "narHash": "sha256-tq781SVetuc0AqTiZyH8Iu/VNNk3Zf7WAdbuIC639Mw=",
         "owner": "Stonks3141",
         "repo": "ctp-nix",
-        "rev": "5713b478b10c5ef703fd921d96ca6a3057c457b5",
+        "rev": "a0e508260c67a57adb3f7b511da4162643db22d7",
         "type": "github"
       },
       "original": {
         "owner": "Stonks3141",
         "repo": "ctp-nix",
+        "type": "github"
+      }
+    },
+    "catppuccin-swaylock": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1676017629,
+        "narHash": "sha256-v2op7V52VYqzY9govnfkgmF7ybRRlPkohgnrUWDjItI=",
+        "owner": "remiposo",
+        "repo": "swaylock",
+        "rev": "9b88d9e866c044d47c98046ee6c8d6de2546cf82",
+        "type": "github"
+      },
+      "original": {
+        "owner": "remiposo",
+        "repo": "swaylock",
+        "type": "github"
+      }
+    },
+    "catppuccin-wofi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1694887594,
+        "narHash": "sha256-zQGiF/8WZ15ZlQVVgxuQq4qatinxMx2Y6Xl5Zcuhp7Y=",
+        "owner": "quantumfate",
+        "repo": "wofi",
+        "rev": "6c37e0f65b9af45ebe680e3e0f5131f452747c6f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "quantumfate",
+        "repo": "wofi",
         "type": "github"
       }
     },
@@ -172,22 +204,6 @@
       }
     },
     "flake-compat": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1673956053,
-        "narHash": "sha256-4gtG9iQuiKITOjNQQeQIpoIB6b16fm+504Ch3sNKLd8=",
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "rev": "35bb57c0c8d8b62bbfd284272c928ceb64ddbde9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "edolstra",
-        "repo": "flake-compat",
-        "type": "github"
-      }
-    },
-    "flake-compat_2": {
       "flake": false,
       "locked": {
         "lastModified": 1673956053,
@@ -276,6 +292,27 @@
     "home-manager": {
       "inputs": {
         "nixpkgs": [
+          "catppuccin",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698873617,
+        "narHash": "sha256-FfGFcfbULwbK1vD+H0rslIOfmy4g8f2hXiPkQG3ZCTk=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "48b0a30202516e25d9885525fbb200a045f23f26",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
+    "home-manager_2": {
+      "inputs": {
+        "nixpkgs": [
           "nixpkgs"
         ]
       },
@@ -293,7 +330,7 @@
         "type": "github"
       }
     },
-    "home-manager_2": {
+    "home-manager_3": {
       "inputs": {
         "nixpkgs": [
           "stylix",
@@ -554,9 +591,11 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
+        "catppuccin-swaylock": "catppuccin-swaylock",
+        "catppuccin-wofi": "catppuccin-wofi",
         "disko": "disko",
         "flake-utils": "flake-utils",
-        "home-manager": "home-manager",
+        "home-manager": "home-manager_2",
         "hyprland-contrib": "hyprland-contrib",
         "impermanence": "impermanence",
         "nix-gaming": "nix-gaming",
@@ -643,8 +682,8 @@
         "base16-kitty": "base16-kitty",
         "base16-tmux": "base16-tmux",
         "base16-vim": "base16-vim",
-        "flake-compat": "flake-compat_2",
-        "home-manager": "home-manager_2",
+        "flake-compat": "flake-compat",
+        "home-manager": "home-manager_3",
         "nixpkgs": [
           "nixpkgs"
         ]

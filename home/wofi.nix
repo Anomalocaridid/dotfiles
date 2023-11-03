@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, inputs, ... }: {
   programs.wofi = {
     enable = true;
     settings = {
@@ -23,17 +23,12 @@
     style =
       let
         fonts = config.stylix.fonts;
-        theme = pkgs.fetchFromGitHub {
-          owner = "quantumfate";
-          repo = "wofi";
-          rev = "6c37e0f65b9af45ebe680e3e0f5131f452747c6f";
-          hash = "sha256-zQGiF/8WZ15ZlQVVgxuQq4qatinxMx2Y6Xl5Zcuhp7Y=";
-        };
       in
       builtins.readFile
         (pkgs.runCommand "catppuccin-wofi-theme" { }
           ''
-            sed 's/Inconsolata Nerd Font/${fonts.sansSerif.name}/' <${theme}/src/${config.catppuccin.flavour}/style.css > $out
+            cp ${inputs.catppuccin-wofi + /src/${config.catppuccin.flavour}/style.css} $out
+            substituteInPlace $out --replace "Inconsolata Nerd Font" "${fonts.monospace.name}";
           '');
   };
 }

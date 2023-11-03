@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, lib, pkgs, inputs, ... }: {
   programs.swaylock = {
     enable = true;
     package = pkgs.swaylock-effects;
@@ -6,19 +6,15 @@
       let
         fonts = config.stylix.fonts;
         palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
-        theme = pkgs.custom.parseTheme {
-          name = "swaylock";
-          themeFile = pkgs.fetchFromGitHub
-            {
-              owner = "remiposo";
-              repo = "swaylock";
-              rev = "9b88d9e866c044d47c98046ee6c8d6de2546cf82";
-              hash = "sha256-v2op7V52VYqzY9govnfkgmF7ybRRlPkohgnrUWDjItI=";
-            } + "/themes/${config.catppuccin.flavour}.conf";
-          keyField = 1;
-          valueField = 2;
-          fs = "=";
-        };
+        themeFile = inputs.catppuccin-swaylock + /themes/${config.catppuccin.flavour}.conf;
+        theme = lib.trivial.pipe
+          (pkgs.runCommand "catppuccin-swaylock-theme" { } ''
+            ${pkgs.jc}/bin/jc --ini < ${themeFile} > $out
+          '')
+          [
+            builtins.readFile
+            builtins.fromJSON
+          ];
       in
       theme // {
         indicator-caps-lock = true;

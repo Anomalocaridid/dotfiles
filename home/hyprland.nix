@@ -8,25 +8,12 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    catppuccin.enable = true;
     settings =
       let
-        # Temporary workaround because home manager hyprland module does not handle importing well
-        theme = pkgs.custom.parseTheme {
-          name = "hyprland";
-          themeFile = pkgs.fetchFromGitHub
-            {
-              owner = "catppuccin";
-              repo = "hyprland";
-              rev = "99a88fd21fac270bd999d4a26cf0f4a4222c58be";
-              hash = "sha256-07B5QmQmsUKYf38oWU3+2C6KO4JvinuTwmW1Pfk8CT8=";
-            } + "/themes/${config.catppuccin.flavour}.conf";
-          keyField = 1;
-          valueField = 3;
-        };
         accent = "\$${config.catppuccin.accent}";
       in
       #hypr
-      theme //
       {
         # Execute your favorite apps at launch
         exec-once = [
