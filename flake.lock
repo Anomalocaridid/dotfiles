@@ -608,6 +608,7 @@
         "ssbm-nix": "ssbm-nix",
         "stylix": "stylix",
         "ttf-to-tty": "ttf-to-tty",
+        "unimatrix-patch": "unimatrix-patch",
         "unison-nix": "unison-nix",
         "zsh-bd": "zsh-bd",
         "zsh-hooks": "zsh-hooks"
@@ -738,6 +739,18 @@
         "owner": "Sigmanificient",
         "repo": "ttf_to_tty",
         "type": "github"
+      }
+    },
+    "unimatrix-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-O07dDsC27w2e8qarQ3Lan8mFzN0gUIrcyBCOAW4DyAE=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/264716.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/264716.patch"
       }
     },
     "unison": {

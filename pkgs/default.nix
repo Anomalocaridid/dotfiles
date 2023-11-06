@@ -57,41 +57,7 @@ final: prev: {
       patches = (oldAttrs.patches or [ ]) ++ [ advcpmv-patch ];
     });
     # custom locking script
-    lockman =
-      let
-        scriptName = "lockman";
-      in
-      (final.writeShellApplication {
-        name = "${scriptName}.sh";
-        runtimeInputs = with final; [
-          coreutils # provides sleep
-          handlr-regex
-          hyprland # provides hyprctl
-          pipes-rs
-          swaylock-effects
-          wezterm
-          util-linux # provides flock
-        ];
-        text = ''
-          # Exit if script is already running (lock exists)
-          exec 3>/tmp/${scriptName}.lock
-          flock --nonblock 3
-          # Move to empty workspace
-          hyprctl dispatch workspace empty
-          # Run screensaver
-          handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- pipes-rs
-          # Focus screensaver (assumed to be already fullscreened)
-          hyprctl dispatch focuswindow "^(${scriptName})$"
-          # Turn on CRT shader
-          hyprctl keyword decoration:screen_shader ${../assets/crt.frag};
-          # Lock screen (blocks until unlocked)
-          swaylock
-          # Close screensaver, return to original workspace, and turn off shader
-          hyprctl --batch "dispatch closewindow ^(${scriptName})$; dispatch workspace previous; reload"
-          # Release lock
-          echo "$$" >&3
-        '';
-      });
+    lockman = final.callPackage ./lockman { };
     # custom screenshot script
     screenshot = final.writeShellApplication {
       name = "screenshot.sh";
