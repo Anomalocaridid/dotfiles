@@ -59,18 +59,7 @@ final: prev: {
     # custom locking script
     lockman = final.callPackage ./lockman { };
     # custom screenshot script
-    screenshot = final.writeShellApplication {
-      name = "screenshot.sh";
-      runtimeInputs = with final; [
-        grimblast
-        swappy
-      ];
-      text = ''        
-        entries=("Active" "Screen" "Output" "Area" "Window")
-        selected=$(printf '%s\n' "''${entries[@]}" | wofi --show dmenu)
-        grimblast --notify save "''${selected,,}" - | swappy -f -
-      '';
-    };
+    screenshot = final.callPackage ./screenshot { };
   };
 }
 
