@@ -8,8 +8,8 @@ in
 
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes."catppuccin-${config.catppuccin.flavour}";
-    colorScheme = config.catppuccin.accent;
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = config.catppuccin.flavour;
     enabledExtensions = with spicePkgs.extensions; [
       keyboardShortcut
       shuffle
