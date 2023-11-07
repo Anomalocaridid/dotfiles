@@ -30,7 +30,7 @@
       ventoy
       wl-clipboard
       yubioath-flutter
-      zotero
+      # zotero
     ];
 
     sessionVariables = {
