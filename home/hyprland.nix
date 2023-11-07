@@ -13,7 +13,6 @@
       let
         accent = "\$${config.catppuccin.accent}";
       in
-      #hypr
       {
         # Execute your favorite apps at launch
         exec-once = [
@@ -32,10 +31,6 @@
           border_size = 2;
           "col.active_border" = "0xee$lavenderAlpha 0xee${accent}Alpha 45deg";
           "col.inactive_border" = "0xaa$overlay0Alpha 0xaa$mantleAlpha 45deg";
-          "col.group_border" = "0xaa$overlay0Alpha 0xaa$yellowAlpha 45deg";
-          "col.group_border_active" = "0xee$yellowAlpha";
-          "col.group_border_locked" = "0xaa$overlay0Alpha 0xaa$redAlpha 45deg";
-          "col.group_border_locked_active" = "0xee$yellowAlpha 0xee$redAlpha 45deg";
 
           layout = "dwindle";
           cursor_inactive_timeout = 60;
@@ -85,10 +80,19 @@
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         gestures.workspace_swipe = false;
 
+        group = {
+          "col.border_active" = "0xee$yellowAlpha";
+          "col.border_inactive" = "0xaa$overlay0Alpha 0xaa$yellowAlpha 45deg";
+          "col.border_locked_active" = "0xee$yellowAlpha 0xee$redAlpha 45deg";
+          "col.border_locked_inactive" = "0xaa$overlay0Alpha 0xaa$redAlpha 45deg";
+          groupbar = {
+            text_color = "$text";
+          };
+        };
+
         misc = {
           enable_swallow = true;
           swallow_regex = "^(org.wezfurlong.wezterm)$";
-          groupbar_text_color = "$text";
         };
 
         # Window rules
