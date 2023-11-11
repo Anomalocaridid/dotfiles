@@ -19,6 +19,7 @@
       freetube
       fup-repl
       gimp-with-plugins
+      itd
       keepassxc
       killall
       neofetch
