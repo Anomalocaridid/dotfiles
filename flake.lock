@@ -744,7 +744,7 @@
     "unimatrix-patch": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-O07dDsC27w2e8qarQ3Lan8mFzN0gUIrcyBCOAW4DyAE=",
+        "narHash": "sha256-c/bjpXw0ZlUFjdvGqxB1jAc52iB7/w7S++UeEFkddVs=",
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/264716.patch"
       },
