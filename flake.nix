@@ -118,6 +118,11 @@
       url = "https://github.com/NixOS/nixpkgs/pull/264716.patch";
       flake = false;
     };
+
+    hm-bat-fix = {
+      url = "github:pluiedev/home-manager/fix/4657";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

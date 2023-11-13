@@ -289,6 +289,27 @@
         "type": "github"
       }
     },
+    "hm-bat-fix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1699870791,
+        "narHash": "sha256-qWyBH0UVcMxHjBREx8KpjEbaCM+EQF/5QmWGRiy5gmo=",
+        "owner": "pluiedev",
+        "repo": "home-manager",
+        "rev": "e8bfd772d2e7314e1dde35af5dbaf56356be5a44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "pluiedev",
+        "ref": "fix/4657",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -595,6 +616,7 @@
         "catppuccin-wofi": "catppuccin-wofi",
         "disko": "disko",
         "flake-utils": "flake-utils",
+        "hm-bat-fix": "hm-bat-fix",
         "home-manager": "home-manager_2",
         "hyprland-contrib": "hyprland-contrib",
         "impermanence": "impermanence",

@@ -4,6 +4,11 @@ final: prev: {
     withInsults = true;
   };
 
+  # Remove once $LESSOPEN support is enabled by default
+  bat = prev.bat.overrideAttrs (oldAttrs: {
+    cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
+  });
+
   nnn = (prev.nnn.override {
     withNerdIcons = true;
   }).overrideAttrs
