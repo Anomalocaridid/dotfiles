@@ -9,6 +9,27 @@ final: prev: {
     cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
   });
 
+  # Add tray with dynamic icon support
+  # Remove once elkowar#743 and ralismark#4 are merged
+  eww-wayland = prev.eww-wayland.overrideAttrs (oldAttrs: rec {
+    patches = (oldAttrs.patches or [ ]) ++ [
+      # Don't use fetchpatch because it somehow makes it not find certain files
+      # This patch should include both elkowar#743 and ralismark#4
+      (final.fetchurl {
+        url = "https://github.com/elkowar/eww/compare/${oldAttrs.src.rev}...hylophile:eww:dynamic-icons.patch";
+        hash = "sha256-aQgK+46N9H83li4FAj8+vw0ntZW2vUke5Ovj0FneVi0=";
+      })
+    ];
+    cargoDeps = oldAttrs.cargoDeps.overrideAttrs (oldDeps: {
+      patches = (oldDeps.patches or [ ]) ++ patches;
+      outputHash = "sha256-3B81cTIVt/cne6I/gKBgX4zR5w0UU60ccrFGV1nNCoA=";
+    });
+    buildInputs = (oldAttrs.buildInputs or [ ]) ++ [
+      final.libdbusmenu
+      final.libdbusmenu-gtk3
+    ];
+  });
+
   nnn = (prev.nnn.override {
     withNerdIcons = true;
   }).overrideAttrs
@@ -36,15 +57,16 @@ final: prev: {
       '';
     });
 
-  zsh = prev.zsh.overrideAttrs (oldAttrs: {
-    patches = (oldAttrs.patches or [ ]) ++ [
-      # Patch to resolve issues with reflowing text when changing window dimensions
-      (final.fetchpatch {
-        url = "https://github.com/zsh-users/zsh/compare/master...romkatv:zsh:fix-winchanged.patch";
-        hash = "sha256-TwQv8c0pa7gI7DI5rWhwLyl2aQGwILQgd2V5Zem53uQ=";
-      })
-    ];
-  });
+  zsh = prev.zsh.overrideAttrs
+    (oldAttrs: {
+      patches = (oldAttrs.patches or [ ]) ++ [
+        # Patch to resolve issues with reflowing text when changing window dimensions
+        (final.fetchpatch {
+          url = "https://github.com/zsh-users/zsh/compare/master...romkatv:zsh:fix-winchanged.patch";
+          hash = "sha256-TwQv8c0pa7gI7DI5rWhwLyl2aQGwILQgd2V5Zem53uQ=";
+        })
+      ];
+    });
 
   # Custom-written packages
   custom = {
