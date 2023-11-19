@@ -71,19 +71,14 @@
 (defpoll timestamp :interval "1s"
   "date +%s")
 
-(defvar show-date false)
 (defvar military-time false)
 
 (defwidget time []
-  (interactive :reveal show-date
-               :onhover "${EWW_CMD} update show-date=true"
-               :onhoverlost "${EWW_CMD} update show-date=false"
-               :onclick "${EWW_CMD} open --toggle calendar"
-               :onrightclick "${EWW_CMD} update military-time=${!military-time}"
-               :spacing 5
-               {formattime(timestamp, "󰅐 ${military-time ? "%T" : "%r"}")}
-               {formattime(timestamp, "  %b %d, %Y")}
-               ""))
+  (eventbox :onclick "${EWW_CMD} open --toggle calendar"
+            :onrightclick "${EWW_CMD} update military-time=${!military-time}"
+            :spacing 5
+            :tooltip {formattime(timestamp, "  %b %d, %Y")}
+            {formattime(timestamp, "󰅐 ${military-time ? "%T" : "%r"}")}))
 
 (deflisten workspaces :initial "[]" "~/.config/eww/scripts/get-workspaces.sh")
 (deflisten current-workspace :initial "1" "~/.config/eww/scripts/get-active-workspace.sh")
@@ -100,30 +95,18 @@
 
 (deflisten active-window "~/.config/eww/scripts/get-window-title.sh")
 
-(defvar show-active false)
-
 (defwidget active-window []
-  (abbrev-text :name "active"
-               :reveal show-active
-               :text " ${active-window ?: "..."}"
-               :max-width 30))
+  (label :text " ${active-window ?: "..."}"
+         :limit-width 15
+         :tooltip active-window))
 
 (deflisten splash :interval "60m"
   "hyprctl splash")
 
-(defvar show-splash false)
-
 (defwidget splash [reveal]
-  (abbrev-text :name "splash"
-               :reveal show-splash
-               :text {reveal ? splash : ""}
-               :max-width 75))
-
-(defwidget abbrev-text [name reveal text max-width]
-  (eventbox :onhover "${EWW_CMD} update show-${name}=true"
-            :onhoverlost "${EWW_CMD} update show-${name}=false"
-    (label :text text
-           :limit-width {reveal ? max-width : 15})))
+  (label :text {reveal ? "󱀡 ${splash}" : ""}
+         :limit-width 15
+         :tooltip splash))
 
 (defwindow music
   :monitor 0
@@ -167,7 +150,6 @@
 
 (defvar show-music false)
 
-; FIXME: When re-opening Spotify, title and artist are empty
 (defwidget music []
   (interactive :reveal show-music
                :onhover "${EWW_CMD} update show-music=true"
@@ -222,10 +204,12 @@
                :onhover "${EWW_CMD} update show-network=true"
                :onhoverlost "${EWW_CMD} update show-network=false"
                :onclick "${TERM_CMD} --class nmtui nmtui"
+               :onrightclick "nmcli connection down wg0 || nmcli connection up wg0"
                :class "network ${!network.connected ? "disconnected" : ""}"
                :spacing 3
-               "${network.icon} ${network.name}"
-               "󰓅 ${network.rate}"
+               :tooltip "󰓅 ${network.rate}"
+               "${network.icon} "
+               "${network.name}"
                ""))
 
 (defvar show-memory false)
@@ -292,7 +276,7 @@
                "${label} ${value}${unit}"
                (graph :value value
                       :time-range "60s"
-                      :width 60
+                      :width 30
                       :min min-graph
                       :max max-graph
                       :dynamic true
