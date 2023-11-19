@@ -11,7 +11,7 @@
 @mixin rootContainer {  
   background-color: p.$base;
   color: p.$text;
-  border-radius: 1.2rem;
+  border-radius: 0.6rem;
   border: 0.05rem solid p.$lavender;
 }
 
@@ -22,21 +22,13 @@
 
 // Ensure elements don't go over the sides
 @mixin sideBar($side) {
-  .#{$side} {
+  .#{$side}-bar {
     padding-#{$side}: 0.4rem;
   }
 }
 
-// @include sideBar(left);
-// @include sideBar(right);
-
-.left-bar {
-  padding-left: 0.4rem;
-}
-
-.right-bar {
-  padding-right: 0.4rem;
-}
+@include sideBar(left);
+@include sideBar(right);
 
 tooltip {
   @include rootContainer;
@@ -109,5 +101,19 @@ calendar.header, calendar:selected {
 
 .disconnected {
   color: p.$yellow;
+}
+
+// Systray dropdown
+menu {
+  @include rootContainer;
+
+  * {
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+
+    &:hover {
+      background-color: rgba(p.$surface2, 0.6);
+    }
+  }
 }
 
