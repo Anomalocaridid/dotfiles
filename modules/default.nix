@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, inputs, ... }: {
   # Import all nix files in directory 
   # Should ignore this file and all non-nix files
   imports = map
@@ -18,6 +18,12 @@
       dates = "weekly";
       options = "--delete-older-than 14d";
     };
+    # Set flake inputs to system registry
+    registry = lib.mapAttrs
+      (_: flake: { inherit flake; })
+      # Remove "self" input from registry to not risk messing
+      # things up if it is ever used
+      (lib.attrsets.removeAttrs inputs [ "self" ]);
   };
 
   # Use GRUB
