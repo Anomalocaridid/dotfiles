@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, ... }: {
   programs.bat = {
     enable = true;
     catppuccin.enable = true;
@@ -85,8 +85,4 @@
         header = batpipe_archive_header;
       }
     ];
-
-  # Remove once #4660 is merged into home-manager
-  disabledModules = [ "programs/bat.nix" ];
-  imports = [ "${inputs.hm-bat-fix}/modules/programs/bat.nix" ];
 }

@@ -113,16 +113,6 @@
       url = "github:migalmoreno/nx-router";
       flake = false;
     };
-
-    unimatrix-patch = {
-      url = "https://github.com/NixOS/nixpkgs/pull/264716.patch";
-      flake = false;
-    };
-
-    hm-bat-fix = {
-      url = "github:pluiedev/home-manager/fix/4657";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -140,16 +130,13 @@
     , ssbm-nix
     , spicetify-nix
     , unison-nix
-    , unimatrix-patch
     , ...
     }: flake-utils.lib.mkFlake rec {
       inherit self inputs;
 
       channelsConfig.allowUnfree = true;
 
-      channels."nixpkgs".patches = [
-        unimatrix-patch
-      ];
+      # channels."nixpkgs".patches = [];
 
       sharedOverlays = [
         # custom overlay
