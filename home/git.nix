@@ -11,7 +11,7 @@
       options = {
         navigate = true;
         features = "catppuccin-${config.catppuccin.flavour}";
-        side-by-side = true;
+        # side-by-side = true;
         interactive.keep-plus-minus-markers = false;
         "catppuccin-${config.catppuccin.flavour}" =
           let
@@ -57,6 +57,9 @@
 
   home.sessionVariables = {
     # Ensure bat's line numbers don't show up and mess things up
+    # Also ensure --side-by-side is only used for git diffs
+    # GIT_PAGER = "PAGER='bat --plain' delta --side-by-side";
     GIT_PAGER = "PAGER='bat --plain' delta";
+    DELTA_FEATURES = "+side-by-side";
   };
 }

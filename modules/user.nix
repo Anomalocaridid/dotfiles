@@ -7,7 +7,7 @@ in
 {
   users.users = {
     ${user} = {
-      shell = pkgs.zsh;
+      shell = pkgs.fish;
       isNormalUser = true;
       extraGroups = [
         "wheel" # Enable ‘sudo’ for the user
@@ -30,6 +30,9 @@ in
   # TODO: See if this line can be moved to disko config
   fileSystems.${persistDir}.neededForBoot = true;
 
-  # Need to enable zsh at system level to use as shell
-  programs.zsh.enable = true;
+  # Need to enable fish at system level to use as shell
+  programs.fish = {
+    enable = true;
+    useBabelfish = true;
+  };
 }

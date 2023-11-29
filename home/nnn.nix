@@ -17,7 +17,7 @@
         M = "nmount";
         n = "bulknew";
         p = "preview-tui";
-        s = "!zsh -i";
+        s = "!fish -i";
         z = "autojump";
       };
       src = "${pkgs.nnn}/share/plugins";

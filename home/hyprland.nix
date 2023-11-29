@@ -127,7 +127,7 @@
           "$mainMod SHIFT, Q, exec, wlogout"
           # Launch nnn in a shell so it gets the necessary variables and a custom class
           # TODO: Figure out how to not need the shell
-          "$mainMod, N, exec, $term --class=nnn -- zsh -c '$opener inode/directory'"
+          "$mainMod, N, exec, $term --class=nnn -- fish -c '$opener inode/directory'"
           "$mainMod, V, togglefloating,"
           "$mainMod, R, exec, wofi --show drun"
           "$mainMod, P, pseudo, # dwindle"

@@ -86,15 +86,19 @@
       };
     };
 
-    # Fork of zsh-bd zsh plugin
-    zsh-bd = {
-      url = "github:mawkler/zsh-bd";
+    # Fish plugins
+    fish-bd = {
+      url = "github:0rax/fish-bd";
       flake = false;
     };
 
-    # Hooks to simplify zle widget code
-    zsh-hooks = {
-      url = "github:zsh-hooks/zsh-hooks";
+    plugin-sudope = {
+      url = "github:oh-my-fish/plugin-sudope";
+      flake = false;
+    };
+
+    you-should-use = {
+      url = "github:paysonwallach/fish-you-should-use";
       flake = false;
     };
 

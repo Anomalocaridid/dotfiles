@@ -203,6 +203,22 @@
         "type": "github"
       }
     },
+    "fish-bd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1646360749,
+        "narHash": "sha256-GeWjoakXa0t2TsMC/wpLEmsSVGhHFhBVK3v9eyQdzv0=",
+        "owner": "0rax",
+        "repo": "fish-bd",
+        "rev": "ab686e028bfe95fa561a4f4e57840e36902d4d7d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0rax",
+        "repo": "fish-bd",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -588,12 +604,29 @@
         "type": "github"
       }
     },
+    "plugin-sudope": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1618136089,
+        "narHash": "sha256-pD4rNuqg6TG22L9m8425CO2iqcYm8JaAEXIVa0H/v/U=",
+        "owner": "oh-my-fish",
+        "repo": "plugin-sudope",
+        "rev": "83919a692bc1194aa322f3627c859fecace5f496",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oh-my-fish",
+        "repo": "plugin-sudope",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
         "catppuccin-swaylock": "catppuccin-swaylock",
         "catppuccin-wofi": "catppuccin-wofi",
         "disko": "disko",
+        "fish-bd": "fish-bd",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager_2",
         "hyprland-contrib": "hyprland-contrib",
@@ -604,13 +637,13 @@
         "nx-fruit": "nx-fruit",
         "nx-router": "nx-router",
         "nx-search-engines": "nx-search-engines",
+        "plugin-sudope": "plugin-sudope",
         "spicetify-nix": "spicetify-nix",
         "ssbm-nix": "ssbm-nix",
         "stylix": "stylix",
         "ttf-to-tty": "ttf-to-tty",
         "unison-nix": "unison-nix",
-        "zsh-bd": "zsh-bd",
-        "zsh-hooks": "zsh-hooks"
+        "you-should-use": "you-should-use"
       }
     },
     "slippi-desktop": {
@@ -780,35 +813,19 @@
         "type": "github"
       }
     },
-    "zsh-bd": {
+    "you-should-use": {
       "flake": false,
       "locked": {
-        "lastModified": 1599940120,
-        "narHash": "sha256-17JKWiQ7aglL86ZaUuwWC+/OHM8Z0mx4Di9BuU5xzo8=",
-        "owner": "mawkler",
-        "repo": "zsh-bd",
-        "rev": "b511ee1a3822edcde8f881588fcb4cf707c98749",
+        "lastModified": 1644782383,
+        "narHash": "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=",
+        "owner": "paysonwallach",
+        "repo": "fish-you-should-use",
+        "rev": "a332823512c0b51e71516ebb8341db0528c87926",
         "type": "github"
       },
       "original": {
-        "owner": "mawkler",
-        "repo": "zsh-bd",
-        "type": "github"
-      }
-    },
-    "zsh-hooks": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1638344006,
-        "narHash": "sha256-n33jaUlti1S2G2Oxc+KuMZcHqd2FO/knivHam47EK78=",
-        "owner": "zsh-hooks",
-        "repo": "zsh-hooks",
-        "rev": "283346c132d61baa4c6b81961c217f9b238d023b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "zsh-hooks",
-        "repo": "zsh-hooks",
+        "owner": "paysonwallach",
+        "repo": "fish-you-should-use",
         "type": "github"
       }
     }
