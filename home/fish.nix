@@ -11,9 +11,14 @@
             echo -en "\e[1m"
             ${pkgs.lsb-release}/bin/lsb_release --description --short | 
               tr --delete '"' |
-              ${pkgs.toilet}/bin/toilet --termwidth --font smslant --filter border --directory ${pkgs.figlet}/share/figlet >3
-            echo -e "\e[1m Welcome back, $USER!\e[0m" >>3
-            ${pkgs.lolcat}/bin/lolcat <3
+              ${pkgs.toilet}/bin/toilet \
+                --termwidth \
+                --font smslant \
+                --filter border \
+                --directory ${pkgs.figlet}/share/figlet |
+                ${pkgs.lolcat}/bin/lolcat
+            echo -e "\e[1m Welcome back, $USER!\e[0m" |
+              ${pkgs.lolcat}/bin/lolcat
           '';
         fish_user_key_bindings = # fish
           ''
@@ -21,7 +26,7 @@
             fish_vi_key_bindings
             
             # Make Ctrl+Z also bring program to foreground
-            bind \cz 'fg 2>/dev/null; commandline -f repaint'
+            bind \cz -M insert 'fg 2>/dev/null; commandline -f repaint'
           '';
       };
       interactiveShellInit = # fish
