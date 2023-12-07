@@ -10,7 +10,6 @@
 , asciiquarium-transparent
 , cbonsai
 , pipes-rs
-, sl
 , unimatrix
 , ...
 }:
@@ -21,7 +20,6 @@ let
     name = "loop.sh";
     text = ''
       while true; do
-        # Let commands be split
         "$@"
       done
     '';
@@ -50,7 +48,6 @@ writeShellApplication {
     cbonsai
     neofetch-wrapper # Workaround to pipe neofetch's output
     pipes-rs
-    sl
     unimatrix
   ];
   text = ''
@@ -58,7 +55,6 @@ writeShellApplication {
       "asciiquarium --transparent"
       "cbonsai --live --infinite"
       "loop.sh neofetch-wrapper.sh"
-      "loop.sh sl"
       "pipes-rs"
       "unimatrix --asynchronous --flashers"
     )
