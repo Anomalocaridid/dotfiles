@@ -18,12 +18,18 @@
       dates = "weekly";
       options = "--delete-older-than 14d";
     };
-    # Set flake inputs to system registry
-    registry = lib.mapAttrs
-      (_: flake: { inherit flake; })
+    # Set system registry to flake inputs
+    registry = lib.pipe inputs [
+      # Remove non flake inputs, which cause errors
+      # Flakes have an attribute _type, which equals "flake"
+      # while non-flakes lack this attribute
+      (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
       # Remove "self" input from registry to not risk messing
       # things up if it is ever used
-      (lib.attrsets.removeAttrs inputs [ "self" ]);
+      ((lib.flip lib.attrsets.removeAttrs) [ "self" ])
+      (lib.mapAttrs
+        (_: flake: { inherit flake; }))
+    ];
   };
 
   # Use GRUB
