@@ -140,6 +140,7 @@
           "$mainMod, bracketleft, changegroupactive, b"
           "$mainMod, bracketright, changegroupactive, f"
           ", Print, exec, screenshot.sh"
+          ", XF86AudioPlay, exec, playerctl play-pause"
 
           # Move focus with mainMod + direction keys
           # Move active window with mainMod + SHIFT + direction keys
