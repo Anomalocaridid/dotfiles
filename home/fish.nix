@@ -29,11 +29,8 @@
             bind \cz -M insert 'fg 2>/dev/null; commandline -f repaint'
           '';
       };
-      interactiveShellInit = # fish
+      shellInit = # fish
         ''
-          # Pipe every command run with --help through bat
-          abbr --add --position anywhere -- --help "--help | bat --plain --language=help" 
-
           # Initialize batpipe
           eval (batpipe)
 
@@ -42,6 +39,13 @@
           # also disable side-by-side
           set -g fzf_diff_highlighter DELTA_FEATURES="+" delta --paging=never --width=20
         '';
+      shellAbbrs = {
+        # Pipe every command run with --help through bat
+        "--help" = {
+          position = "anywhere";
+          expansion = "--help | bat --plain --language=help";
+        };
+      };
       shellAliases = {
         rm = "rm --interactive";
         du = "dust";
