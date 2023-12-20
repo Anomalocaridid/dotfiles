@@ -5,8 +5,21 @@ final: prev: {
   };
 
   # Remove once $LESSOPEN support is enabled by default
-  bat = prev.bat.overrideAttrs (oldAttrs: {
+  bat = prev.bat.overrideAttrs (oldAttrs: rec {
     cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
+    # Remove once bat#2805 is merged and bat has a new release
+    version = "unstable-2023-12-18";
+    src = final.fetchFromGitHub {
+      owner = "Anomalocaridid";
+      repo = oldAttrs.pname;
+      rev = "11e40104b4f85cb4da04f3e2fab3ec76ae673aeb";
+      hash = "sha256-kWpqTEqiZuI4j1tG/fk+Xw252O2ryrNdZqjbqCRYCrk=";
+    };
+    cargoDeps = oldAttrs.cargoDeps.overrideAttrs (oldDeps: {
+      inherit src;
+      lockFile = "${src}/Cargo.lock";
+      outputHash = "sha256-WAfCEbhJXvWOvALhCg0QCmKtI3lb9rvTyywqwpCKHWY=";
+    });
   });
 
   # Fix crash when opening with current version of Hyprland

@@ -41,10 +41,6 @@
           # width=20 so delta decorations don't wrap around small fzf preview pane
           # also disable side-by-side
           set -g fzf_diff_highlighter DELTA_FEATURES="+" delta --paging=never --width=20
-          # Workaround $LESSOPEN support issue
-          # Remove when fixed
-          set -g fzf_preview_file_cmd bat --no-lessopen
-          # grc settings
         '';
       shellAliases = {
         rm = "rm --interactive";
@@ -55,13 +51,8 @@
         mv = "mv --interactive --progress-bar";
         # bat
         bgrep = "batgrep";
-        # SHELL=sh is a temporary workaround for bat's $LESSOPEN
-        # support currently not quite working in fish
-        # Uncomment and remove duplicates when fixed
-        # cat = "bat --paging=never";
-        # less = "bat --paging=always";
-        cat = "SHELL=sh bat --paging=never";
-        less = "SHELL=sh bat --paging=always";
+        cat = "bat --paging=never";
+        less = "bat --paging=always";
         man = "batman";
         diff = "batdiff";
         # zoxide
