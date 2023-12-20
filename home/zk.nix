@@ -29,9 +29,7 @@
 
       # filter = {};
 
-      alias = {
-        show = "zk list --interactive --format \"{{abs-path}}\" | xargs fish -c 'PAGER=\"bat --file-name $0\" ${viewCommand} $0'";
-      };
+      # alias = {};
     };
 }
 
