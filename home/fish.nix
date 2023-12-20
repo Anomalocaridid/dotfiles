@@ -64,7 +64,7 @@
         # wezterm
         imgcat = "wezterm imgcat";
         # tealdeer
-        tldr = "PAGER='bat --plain' tldr";
+        tldr = "PAGER='bat --plain' command tldr";
       };
       plugins = with pkgs;
         let
