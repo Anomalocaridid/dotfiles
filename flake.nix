@@ -45,10 +45,7 @@
     };
 
     # Catppuccin Theming
-    catppuccin = {
-      url = "github:Stonks3141/ctp-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    catppuccin.url = "github:Stonks3141/ctp-nix";
 
     # Unofficial Catppuccin ports
     catppuccin-swaylock = {
