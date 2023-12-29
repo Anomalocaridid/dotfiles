@@ -289,6 +289,18 @@
         "type": "github"
       }
     },
+    "fix-fetchDartDeps-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-lCYRqR8K66aK0qSu/zFRlPuzNwWR5tiewyBHQVLqQLE=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/276414.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/276414.patch"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -767,6 +779,7 @@
         "dua-cli.xplr": "dua-cli.xplr",
         "extra-icons.xplr": "extra-icons.xplr",
         "fish-bd": "fish-bd",
+        "fix-fetchDartDeps-patch": "fix-fetchDartDeps-patch",
         "flake-utils": "flake-utils",
         "fzf.xplr": "fzf.xplr",
         "hm-xplr-fix": "hm-xplr-fix",
