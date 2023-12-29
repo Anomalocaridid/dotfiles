@@ -50,8 +50,8 @@
       du = "dust";
       df = "duf";
       # advcpmv
-      cp = "cp --interactive --progress-bar";
-      mv = "mv --interactive --progress-bar";
+      cp = "cpg --interactive";
+      mv = "mvg --interactive";
       # bat
       bgrep = "batgrep";
       cat = "bat --paging=never";
@@ -96,7 +96,7 @@
     libnotify # Needed for done
     grc # Needed for grc
     # Needed for custom commands
-    advcpmv # add progress bars to cp and mv (depends on overlay in flake.nix)
+    advcpmv # add progress bars to cp and mv (depends on patch in flake.nix)
     du-dust
     duf
     fd
