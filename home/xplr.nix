@@ -30,7 +30,7 @@
         {
           name = "style";
           bind = "style";
-          dontSetup = true;
+          setup = false;
         }
         # Integration
         { name = "dragon"; }
@@ -49,24 +49,20 @@
         { name = "extra-icons"; }
       ];
       luaFormat = lib.generators.toLua { };
-      renderPlugin = (plugin:
+      renderPlugin = ({ name
+                      , args ? null
+                      , bind ? null
+                      , setup ? true
+                      }:
         let
-          args = lib.strings.optionalString
-            (plugin ? "args")
-            (luaFormat plugin.args);
-          bindName = lib.strings.optionalString
-            (plugin ? "bind")
-            "\n${plugin.bind}";
-          setup = lib.strings.optionalString
-            (!(plugin ? "dontSetup" && plugin.dontSetup))
-            "${bindName}.setup(${args})";
-          binding = lib.strings.optionalString
-            (plugin ? "bind")
-            "local ${plugin.bind} = ";
+          inherit (lib.strings) optionalString;
+          bindName = optionalString (bind != null) "\n${bind}";
+          setupCall = optionalString setup "${bindName}.setup(${luaFormat args})";
+          binding = optionalString (bind != null) "local ${bind} = ";
         in
         #lua
         ''
-          ${binding}require("${plugin.name}")${setup}
+          ${binding}require("${name}")${setupCall}
         ''
       );
     in
