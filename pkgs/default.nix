@@ -76,15 +76,6 @@ final: prev: {
     catppuccin-palette-files = final.callPackage ./catppuccin-palette-files { };
     catppuccin-palette = (builtins.fromJSON (builtins.readFile (final.custom.catppuccin-palette-files + /share/palette-porcelain.json)));
     candy-icons = final.callPackage ./candy-icons { };
-    # cp and mv with progress bars
-    advcpmv-coreutils = prev.coreutils.overrideAttrs (oldAttrs: rec {
-      advcpmv-patch = final.fetchpatch {
-        url = "https://raw.githubusercontent.com/jarun/advcpmv/master/advcpmv-0.9-9.3.patch";
-        hash = "sha256-I25F7uHESUsMDZFYTv8/56eR8QwelIPpABRXTgvszQI=";
-      };
-
-      patches = (oldAttrs.patches or [ ]) ++ [ advcpmv-patch ];
-    });
     # custom locking script
     lockman = final.callPackage ./lockman { };
     # custom screenshot script

@@ -198,6 +198,13 @@
       url = "github:ChanceHarrison/home-manager/xplr-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Add advcpmv
+    # Remove when nixpkgs#272535 is merged and makes it to master
+    advcpmv-patch = {
+      url = "https://github.com/NixOS/nixpkgs/pull/272535.patch";
+      flake = false;
+    };
   };
 
   outputs =
@@ -221,7 +228,11 @@
 
       channelsConfig.allowUnfree = true;
 
-      # channels."nixpkgs".patches = [];
+      # Add advcpmv
+      # Remove when nixpkgs#272535 is merged and makes it to master
+      channels."nixpkgs".patches = [
+        inputs.advcpmv-patch
+      ];
 
       sharedOverlays = [
         # custom overlay

@@ -100,12 +100,12 @@
     # Needed for plugins
     libnotify # Needed for done
     grc # Needed for grc
-    # Needed for custom command
+    # Needed for custom commands
+    advcpmv # add progress bars to cp and mv (depends on overlay in flake.nix)
     du-dust
     duf
     fd
     ripgrep
-    custom.advcpmv-coreutils # add progress bars to cp and mv (depends on overlay in flake.nix)
   ];
 }
 

@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "advcpmv-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-UEs1ftmuLyGBPY85DLShaYZxaWaYCTWFZZmuF7obO2Y=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/272535.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/272535.patch"
+      }
+    },
     "base16": {
       "inputs": {
         "fromYaml": "fromYaml"
@@ -745,6 +757,7 @@
     },
     "root": {
       "inputs": {
+        "advcpmv-patch": "advcpmv-patch",
         "catppuccin": "catppuccin",
         "catppuccin-swaylock": "catppuccin-swaylock",
         "catppuccin-wofi": "catppuccin-wofi",
