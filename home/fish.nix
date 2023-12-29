@@ -46,6 +46,8 @@
       };
     };
     shellAliases = {
+      rd = "rmdir";
+      md = "mkdir";
       rm = "rm --interactive";
       du = "dust";
       df = "duf";
