@@ -35,7 +35,7 @@
           "application/x-yaml" = editor;
           "audio/*" = "org.strawberrymusicplayer.strawberry.desktop";
           "image/*" = "imv.desktop";
-          "inode/directory" = "nnn.desktop";
+          "inode/directory" = "xplr.desktop";
           "text/*" = editor;
           "text/html" = browser;
           "video/*" = "mpv.desktop";

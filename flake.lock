@@ -183,6 +183,22 @@
         "type": "github"
       }
     },
+    "context-switch.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1703759679,
+        "narHash": "sha256-ryVvZIMBkG7FpJVpEj0SfibWFDEEsvA8089ptErlqwg=",
+        "owner": "igorepst",
+        "repo": "context-switch.xplr",
+        "rev": "85ac284b33144540741f48a5a42d3366d00acae9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "igorepst",
+        "repo": "context-switch.xplr",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -200,6 +216,54 @@
       "original": {
         "owner": "nix-community",
         "repo": "disko",
+        "type": "github"
+      }
+    },
+    "dragon.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673425908,
+        "narHash": "sha256-FJbyu5kK78XiTJl0NNXcI0KPOdXOPwpbBCWPUEpu5zA=",
+        "owner": "sayanarijit",
+        "repo": "dragon.xplr",
+        "rev": "5fbddcb33f7d75a5abd12d27223ac55589863335",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "dragon.xplr",
+        "type": "github"
+      }
+    },
+    "dua-cli.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1642592187,
+        "narHash": "sha256-XDhXaS8GuY3fuiSEL0WcLFilZ72emmjTVi07kv5c8n8=",
+        "owner": "sayanarijit",
+        "repo": "dua-cli.xplr",
+        "rev": "66ccf983fab7f67d6b00adc0365a2b26550e7f81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "dua-cli.xplr",
+        "type": "github"
+      }
+    },
+    "extra-icons.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1685647292,
+        "narHash": "sha256-9xDK960CSqdHdKKczH5ULpS0s/2KYwl+NgvQCt6FLCs=",
+        "owner": "dtomvan",
+        "repo": "extra-icons.xplr",
+        "rev": "1f27b9a74c23b869fe64d12f3d8c2a1207ff8eb7",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dtomvan",
+        "repo": "extra-icons.xplr",
         "type": "github"
       }
     },
@@ -305,6 +369,43 @@
         "type": "github"
       }
     },
+    "fzf.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1693816942,
+        "narHash": "sha256-dpnta67p3fYEO3/GdvFlqzdyiMaJ9WbsnNmoIRHweMI=",
+        "owner": "sayanarijit",
+        "repo": "fzf.xplr",
+        "rev": "c8991f92946a7c8177d7f82ed939d845746ebaf5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "fzf.xplr",
+        "type": "github"
+      }
+    },
+    "hm-xplr-fix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1696751668,
+        "narHash": "sha256-kKDbyGaf2JbahlecvO7dmiXTC/z0shVmMBTWmoKJoaI=",
+        "owner": "ChanceHarrison",
+        "repo": "home-manager",
+        "rev": "098cbed4af26ff3f9b6184c1b12c602bb081ac3b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ChanceHarrison",
+        "ref": "xplr-plugins",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -384,6 +485,23 @@
       "original": {
         "owner": "hyprwm",
         "repo": "contrib",
+        "type": "github"
+      }
+    },
+    "icons.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688029582,
+        "narHash": "sha256-jIlXalPhnN9JFPax8UZldiJNBwlGX98gs31JHJzyzDE=",
+        "owner": "Ashvith10",
+        "repo": "icons.xplr",
+        "rev": "f42556d6cf7aee3a104c1aa45d37728a0ea5ab24",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Ashvith10",
+        "ref": "fix-nerd-fonts-v3.0.0-changes",
+        "repo": "icons.xplr",
         "type": "github"
       }
     },
@@ -604,6 +722,38 @@
         "type": "github"
       }
     },
+    "offline-docs.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673808727,
+        "narHash": "sha256-MO7AAz15QiA3j3scywRsiPbR0sxSlKSfRHR3V0HbSzQ=",
+        "owner": "sayanarijit",
+        "repo": "offline-docs.xplr",
+        "rev": "46fef87bc72f0cf9ceb771edfa22fd026507fcd8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "offline-docs.xplr",
+        "type": "github"
+      }
+    },
+    "ouch.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1642939935,
+        "narHash": "sha256-YGFQKzIYIlL+UW2Nel2Tw7WC3MESaVbWYlpj5o2FfLs=",
+        "owner": "dtomvan",
+        "repo": "ouch.xplr",
+        "rev": "375edf19ff3e0286bd7a101b9e4dd24fa5abaeb8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dtomvan",
+        "repo": "ouch.xplr",
+        "type": "github"
+      }
+    },
     "plugin-sudope": {
       "flake": false,
       "locked": {
@@ -625,11 +775,18 @@
         "catppuccin": "catppuccin",
         "catppuccin-swaylock": "catppuccin-swaylock",
         "catppuccin-wofi": "catppuccin-wofi",
+        "context-switch.xplr": "context-switch.xplr",
         "disko": "disko",
+        "dragon.xplr": "dragon.xplr",
+        "dua-cli.xplr": "dua-cli.xplr",
+        "extra-icons.xplr": "extra-icons.xplr",
         "fish-bd": "fish-bd",
         "flake-utils": "flake-utils",
+        "fzf.xplr": "fzf.xplr",
+        "hm-xplr-fix": "hm-xplr-fix",
         "home-manager": "home-manager_2",
         "hyprland-contrib": "hyprland-contrib",
+        "icons.xplr": "icons.xplr",
         "impermanence": "impermanence",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
@@ -637,13 +794,37 @@
         "nx-fruit": "nx-fruit",
         "nx-router": "nx-router",
         "nx-search-engines": "nx-search-engines",
+        "offline-docs.xplr": "offline-docs.xplr",
+        "ouch.xplr": "ouch.xplr",
         "plugin-sudope": "plugin-sudope",
+        "scp.xplr": "scp.xplr",
         "spicetify-nix": "spicetify-nix",
         "ssbm-nix": "ssbm-nix",
+        "style.xplr": "style.xplr",
         "stylix": "stylix",
+        "tri-pane.xplr": "tri-pane.xplr",
         "ttf-to-tty": "ttf-to-tty",
+        "type-to-nav.xplr": "type-to-nav.xplr",
         "unison-nix": "unison-nix",
-        "you-should-use": "you-should-use"
+        "wl-clipboard.xplr": "wl-clipboard.xplr",
+        "you-should-use": "you-should-use",
+        "zoxide.xplr": "zoxide.xplr"
+      }
+    },
+    "scp.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1658308492,
+        "narHash": "sha256-1qo2tfh07NtmTtgRZW9+mCE9M0hz4zCitpjmprKz7+Y=",
+        "owner": "sayanarijit",
+        "repo": "scp.xplr",
+        "rev": "5582301ea6508e6477978ef3b3a14e2eceec3ea3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "scp.xplr",
+        "type": "github"
       }
     },
     "slippi-desktop": {
@@ -705,6 +886,22 @@
         "type": "github"
       }
     },
+    "style.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673264402,
+        "narHash": "sha256-eP0+xA3qtbAUJaqBxdY1qDhnCF/tY3MAaq1fZd4SLmA=",
+        "owner": "emsquid",
+        "repo": "style.xplr",
+        "rev": "e1fbd803e8a1dc4a6a1460816b485fb06412e6b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emsquid",
+        "repo": "style.xplr",
+        "type": "github"
+      }
+    },
     "stylix": {
       "inputs": {
         "base16": "base16",
@@ -750,6 +947,22 @@
         "type": "github"
       }
     },
+    "tri-pane.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1688537158,
+        "narHash": "sha256-repzWTUYZirpBwQ+SEe1Gp1EFMHGG5VONSRS00c995c=",
+        "owner": "sayanarijit",
+        "repo": "tri-pane.xplr",
+        "rev": "d90c65eb2bdd182f09db2db8969a99666f90c78b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "tri-pane.xplr",
+        "type": "github"
+      }
+    },
     "ttf-to-tty": {
       "inputs": {
         "nixpkgs": [
@@ -770,6 +983,22 @@
       "original": {
         "owner": "Sigmanificient",
         "repo": "ttf_to_tty",
+        "type": "github"
+      }
+    },
+    "type-to-nav.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1642592721,
+        "narHash": "sha256-BBIGX0gLJeX3F0wn22IGUr/qzlL4ryh0RjsZURJ1xq4=",
+        "owner": "sayanarijit",
+        "repo": "type-to-nav.xplr",
+        "rev": "de817bd19c56b7cbb1c39c05e4412b7f188b548c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "type-to-nav.xplr",
         "type": "github"
       }
     },
@@ -813,6 +1042,22 @@
         "type": "github"
       }
     },
+    "wl-clipboard.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673420590,
+        "narHash": "sha256-I4rh5Zks9hiXozBiPDuRdHwW5I7ppzEpQNtirY0Lcks=",
+        "owner": "sayanarijit",
+        "repo": "wl-clipboard.xplr",
+        "rev": "a3ffc87460c5c7f560bffea689487ae14b36d9c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "wl-clipboard.xplr",
+        "type": "github"
+      }
+    },
     "you-should-use": {
       "flake": false,
       "locked": {
@@ -826,6 +1071,22 @@
       "original": {
         "owner": "paysonwallach",
         "repo": "fish-you-should-use",
+        "type": "github"
+      }
+    },
+    "zoxide.xplr": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1673431760,
+        "narHash": "sha256-ZiOupn9Vq/czXI3JHvXUlAvAFdXrwoO3NqjjiCZXRnY=",
+        "owner": "sayanarijit",
+        "repo": "zoxide.xplr",
+        "rev": "e50fd35db5c05e750a74c8f54761922464c1ad5f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sayanarijit",
+        "repo": "zoxide.xplr",
         "type": "github"
       }
     }

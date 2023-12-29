@@ -36,7 +36,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-
     ttf-to-tty = {
       url = "github:Sigmanificient/ttf_to_tty";
       inputs = {
@@ -116,6 +115,91 @@
     nx-router = {
       url = "github:migalmoreno/nx-router";
       flake = false;
+    };
+
+    # xplr plugins
+    ## Extension
+    "context-switch.xplr" = {
+      # Change back when context-switch.xplr#8 is merged
+      url = "github:igorepst/context-switch.xplr";
+      flake = false;
+    };
+
+    "offline-docs.xplr" = {
+      url = "github:sayanarijit/offline-docs.xplr";
+      flake = false;
+    };
+
+    "tri-pane.xplr" = {
+      url = "github:sayanarijit/tri-pane.xplr";
+      flake = false;
+    };
+
+    "type-to-nav.xplr" = {
+      url = "github:sayanarijit/type-to-nav.xplr";
+      flake = false;
+    };
+
+    "wl-clipboard.xplr" = {
+      url = "github:sayanarijit/wl-clipboard.xplr";
+      flake = false;
+    };
+
+    "style.xplr" = {
+      url = "github:emsquid/style.xplr";
+      flake = false;
+    };
+
+    ## Integration
+    "dragon.xplr" = {
+      url = "github:sayanarijit/dragon.xplr";
+      flake = false;
+    };
+
+    "dua-cli.xplr" = {
+      url = "github:sayanarijit/dua-cli.xplr";
+      flake = false;
+    };
+
+    "fzf.xplr" = {
+      url = "github:sayanarijit/fzf.xplr";
+      flake = false;
+    };
+
+    "ouch.xplr" = {
+      url = "github:dtomvan/ouch.xplr";
+      flake = false;
+    };
+
+    "scp.xplr" = {
+      url = "github:sayanarijit/scp.xplr";
+      flake = false;
+    };
+
+    "zoxide.xplr" = {
+      url = "github:sayanarijit/zoxide.xplr";
+      flake = false;
+    };
+
+    ## Theme
+    "icons.xplr" = {
+      # Move to main repo after icons.xplr#4 or icons.xplr#6 are merged
+      # fork from icons.xplr#6 in use
+      # url = "github:prncss-xyz/icons.xplr";
+      url = "github:Ashvith10/icons.xplr/fix-nerd-fonts-v3.0.0-changes";
+      flake = false;
+    };
+
+    "extra-icons.xplr" = {
+      url = "github:dtomvan/extra-icons.xplr";
+      flake = false;
+    };
+
+    # Fix xplr plugin sourcing
+    # Remove when home-manager#4521 is merged
+    hm-xplr-fix = {
+      url = "github:ChanceHarrison/home-manager/xplr-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 

@@ -19,5 +19,10 @@
         prompt = "#${palette.mauve.hex}";
         "hl+" = "#${palette.red.hex}";
       };
+    defaultOptions = [ ''--preview 'bat --plain --color=always "{}"' '' ];
   };
 }
+
+
+
+

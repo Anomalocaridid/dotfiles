@@ -65,6 +65,8 @@
         imgcat = "wezterm imgcat";
         # tealdeer
         tldr = "PAGER='bat --plain' command tldr";
+        # xplr
+        xcd = "cd (xplr --print-pwd-as-result)";
       };
       plugins = with pkgs;
         let

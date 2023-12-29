@@ -100,7 +100,7 @@
           "float, class:^(wlogout|pavucontrol|nmtui)$"
           "workspace 1, class:^(lutris)$"
           "workspace 2, class:^(nyxt)$"
-          "workspace 3, class:^(nnn)$"
+          "workspace 3, class:^(filemanager)$"
           "workspace 4 silent, class:^(ArmCord)$"
           "workspace 5, title:^(Spotify)$"
           # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
@@ -125,9 +125,10 @@
           "$mainMod, Return, exec, $term"
           "$mainMod, Q, killactive,"
           "$mainMod SHIFT, Q, exec, wlogout"
-          # Launch nnn in a shell so it gets the necessary variables and a custom class
-          # TODO: Figure out how to not need the shell
-          "$mainMod, N, exec, $term --class=nnn -- fish -c '$opener inode/directory'"
+          # Run in shell to ensure file manager sees environment variables
+          # TODO: figure out how to un-hard-code shell
+          # TODO: figure out how to open selected file when exiting without hard-coding xplr
+          "$mainMod, N, exec, $term --class=filemanager -- fish -c 'handlr open (xplr)'"
           "$mainMod, V, togglefloating,"
           "$mainMod, R, exec, wofi --show drun"
           "$mainMod, P, pseudo, # dwindle"
@@ -250,7 +251,7 @@
           "libreoffice" = "󰈙";
           "lutris" = "";
           "Minecraft" = "󰍳";
-          "nnn" = "";
+          "filemanager" = "";
           "nyxt" = "󰖟";
           "org.keepassxc.KeePassXC" = "󰌋";
           "org.prismlauncher.PrismLauncher" = "󰍳";
