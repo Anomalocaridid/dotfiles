@@ -91,6 +91,8 @@
         };
 
         misc = {
+          disable_hyprland_logo = true;
+          disable_splash_rendering = true;
           enable_swallow = true;
           swallow_regex = "^(org.wezfurlong.wezterm)$";
         };
@@ -105,8 +107,6 @@
           "workspace 5, title:^(Spotify)$"
           # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
           "idleinhibit fullscreen, class:^(FreeTube)$"
-          # Required for locking script
-          "fullscreen, class:^(lockman)$"
         ];
 
         "$mainMod" = "SUPER";
@@ -130,18 +130,19 @@
           # TODO: figure out how to open selected file when exiting without hard-coding xplr
           "$mainMod, N, exec, $term --class=filemanager -- fish -c 'handlr open (xplr)'"
           "$mainMod, V, togglefloating,"
-          "$mainMod, R, exec, wofi --show drun"
+          "$mainMod, R, exec, pkill wofi || wofi --show drun"
           "$mainMod, P, pseudo, # dwindle"
           "$mainMod, S, togglesplit, # dwindle"
           "$mainMod, D, exec, hyprctl keyword general:layout dwindle"
           "$mainMod, M, exec, hyprctl keyword general:layout master"
-          "$mainMod, O, exec, nyxt"
+          "$mainMod, O, exec, $opener x-scheme-handle$opener x-scheme-handler/https"
           "$mainMod, G, togglegroup"
           "$mainMod SHIFT, G, lockactivegroup, toggle"
           "$mainMod, bracketleft, changegroupactive, b"
           "$mainMod, bracketright, changegroupactive, f"
           ", Print, exec, screenshot.sh"
           ", XF86AudioPlay, exec, playerctl play-pause"
+          "CTRL ALT, delete, exec, hyprctl kill"
 
           # Move focus with mainMod + direction keys
           # Move active window with mainMod + SHIFT + direction keys
