@@ -104,7 +104,7 @@
           "workspace 2, class:^(nyxt)$"
           "workspace 3, class:^(filemanager)$"
           "workspace 4 silent, class:^(ArmCord)$"
-          "workspace 5, title:^(Spotify)$"
+          "workspace 5, title:^(Spotify.*)$"
           # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
           "idleinhibit fullscreen, class:^(FreeTube)$"
         ];
@@ -275,9 +275,7 @@
         # regex captures support is supported
         # "emerge: (.+?/.+?)-.*" = "{match1}"
 
-        title_in_class."^$" = {
-          "(?i)spotify" = "";
-        };
+        # title_in_class = {};
 
         # title_in_class_active = {};
 
@@ -286,6 +284,10 @@
         # initial_title = {};
 
         # initial_title_active = {};
+
+        initial_title_in_class."^$" = {
+          "(?i)spotify.*" = "";
+        };
 
         # initial_title_in_class = {};
 
