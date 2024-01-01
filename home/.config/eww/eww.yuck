@@ -89,7 +89,7 @@
     (box :space-evenly false
       (label :text "${workspaces}${current-workspace}" :visible false)
       (for workspace in workspaces
-        (eventbox :onclick "hyprctl dispatch workspace ${workspace.id}"
+        (eventbox :onclick { workspace.id >= 0 ? "hyprctl dispatch workspace ${workspace.id}" : ""}
           (box :class "workspace-entry ${workspace.id == current-workspace ? "current" : ""}"
             (label :markup {workspace.name})))))))
 

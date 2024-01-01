@@ -3,6 +3,7 @@
   home.packages = with pkgs; [
     mpvpaper # Live wallpaper
     hyprland-autoname-workspaces
+    scratchpad
     custom.screenshot
   ];
 
@@ -120,6 +121,8 @@
         "$up" = "k";
         "$right" = "l";
 
+        "$scratchpad" = "scratchpad -m 'wofi -dmenu'";
+
         # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
         bind = lib.flatten [
           "$mainMod, Return, exec, $term"
@@ -143,6 +146,8 @@
           ", Print, exec, screenshot.sh"
           ", XF86AudioPlay, exec, playerctl play-pause"
           "CTRL ALT, delete, exec, hyprctl kill"
+          "$mainMod, Z, exec, $scratchpad"
+          "$mainMod SHIFT, Z, exec, $scratchpad -g"
 
           # Move focus with mainMod + direction keys
           # Move active window with mainMod + SHIFT + direction keys
