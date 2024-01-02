@@ -24,10 +24,25 @@
 
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
+    # Hyprland flake
+    # Needed for plugins in external flakes
+    hyprland.url = "github:hyprwm/Hyprland";
+
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
+
     # Hyprland community tools
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Hyprland workspaces overview plugin
+    hycov = {
+      url = "github:DreamMaoMao/hycov";
+      inputs.hyprland.follows = "hyprland";
     };
 
     # Only used for GRUB theme
@@ -223,6 +238,7 @@
     , impermanence
     , nix-index-database
     , flake-utils
+    , hyprland
     , hyprland-contrib
     , stylix
     , catppuccin
@@ -246,6 +262,8 @@
       sharedOverlays = [
         # custom overlay
         (import ./pkgs)
+        # Hyprland
+        hyprland.overlays.default
         # Hyprland community tools
         hyprland-contrib.overlays.default
         # Up to date Unison packages
