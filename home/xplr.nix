@@ -238,7 +238,9 @@
                 BashExecSilently = [===[
                   # Only generate previews for files
                   if [[ -f "$XPLR_FOCUS_PATH" ]]; then
-                    bat --plain --color=always "$XPLR_FOCUS_PATH" > /tmp/xplr-preview.tmp
+                    # Workaround to keep bat from freezing on large binary files
+                    # Exits with error code 124 when timeout
+                    timeout 0.5 bat --plain --color=always "$XPLR_FOCUS_PATH" > /tmp/xplr-preview.tmp
                   fi
                 ]===]
               }
