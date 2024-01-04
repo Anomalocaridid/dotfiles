@@ -248,11 +248,6 @@
           }
         '';
     };
-
-  # Fix xplr plugin sourcing
-  # Remove when home-manager#4521 is merged
-  disabledModules = [ "programs/xplr.nix" ];
-  imports = [ "${inputs.hm-xplr-fix}/modules/programs/xplr.nix" ];
 }
 
 

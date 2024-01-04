@@ -289,18 +289,6 @@
         "type": "github"
       }
     },
-    "fix-fetchDartDeps-patch": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-lCYRqR8K66aK0qSu/zFRlPuzNwWR5tiewyBHQVLqQLE=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/276414.patch"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/276414.patch"
-      }
-    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -400,27 +388,6 @@
       "original": {
         "owner": "sayanarijit",
         "repo": "fzf.xplr",
-        "type": "github"
-      }
-    },
-    "hm-xplr-fix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1704358952,
-        "narHash": "sha256-yazDFmdyKr0JGMqmzQ5bYOW5FWvau8oFvsQ8eSB2f3A=",
-        "owner": "ChanceHarrison",
-        "repo": "home-manager",
-        "rev": "c36cb65c4a0ba17ab9262ab3c30920429348746c",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ChanceHarrison",
-        "ref": "xplr-plugins",
-        "repo": "home-manager",
         "type": "github"
       }
     },
@@ -882,10 +849,8 @@
         "dua-cli.xplr": "dua-cli.xplr",
         "extra-icons.xplr": "extra-icons.xplr",
         "fish-bd": "fish-bd",
-        "fix-fetchDartDeps-patch": "fix-fetchDartDeps-patch",
         "flake-utils": "flake-utils",
         "fzf.xplr": "fzf.xplr",
-        "hm-xplr-fix": "hm-xplr-fix",
         "home-manager": "home-manager",
         "hycov": "hycov",
         "hyprland": "hyprland",

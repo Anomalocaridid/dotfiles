@@ -207,27 +207,12 @@
       flake = false;
     };
 
-    # Fix xplr plugin sourcing
-    # Remove when home-manager#4521 is merged
-    hm-xplr-fix = {
-      url = "github:ChanceHarrison/home-manager/xplr-plugins";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Add advcpmv
     # Remove when nixpkgs#272535 is merged and makes it to nixos-unstable
     advcpmv-patch = {
       url = "https://github.com/NixOS/nixpkgs/pull/272535.patch";
       flake = false;
     };
-
-    # Fix fetchDartDeps (needed for Yubikey authenticator)
-    # Remove when nixpkgs#276414 makes it to nixos-unstable
-    fix-fetchDartDeps-patch = {
-      url = "https://github.com/NixOS/nixpkgs/pull/276414.patch";
-      flake = false;
-    };
-
   };
 
   outputs =
@@ -256,7 +241,6 @@
       # Remove when nixpkgs#272535 is merged and makes it to nixos-unstable
       channels."nixpkgs".patches = [
         inputs.advcpmv-patch
-        inputs.fix-fetchDartDeps-patch
       ];
 
       sharedOverlays = [

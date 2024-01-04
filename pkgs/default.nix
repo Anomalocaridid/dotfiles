@@ -4,14 +4,6 @@ final: prev: {
     withInsults = true;
   };
 
-  # Remove once xplr desktop file is fixed
-  xplr = prev.xplr.overrideAttrs (oldAttrs: {
-    postInstall = (oldAttrs.postInstall or "") + ''
-      mkdir -p $out/share/applications
-      cp assets/desktop/xplr.desktop $out/share/applications
-    '';
-  });
-
   # Remove once $LESSOPEN support is enabled by default
   bat = prev.bat.overrideAttrs (oldAttrs: rec {
     cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
