@@ -2,6 +2,7 @@
   # dependencies for widgets
   home.packages = with pkgs; [
     socat
+    jc # Various scripts and commands
     jq # Various scripts and commands
     playerctl # Music info
   ];
