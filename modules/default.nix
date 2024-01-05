@@ -70,8 +70,6 @@
   services = {
     # Enable CUPS to print documents.
     printing.enable = true;
-    # Enable weechat service
-    weechat.enable = true;
     # Required for udiskie
     udisks2.enable = true;
   };

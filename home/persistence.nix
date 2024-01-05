@@ -18,7 +18,6 @@
       ".runelite" # Runelite settings and cache
       # Other important stuff
       ".config/FreeTube" # Freetube user data
-      ".config/weechat" # .config/weechat/sec.conf has secrets that shouldn't be managed like a normal dotfile 
       "exercism" # Exercism
       ".local/share/nyxt" # Nyxt, history, bookmarks, etc.
       ".mozilla" # Firefox data
@@ -49,7 +48,6 @@
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache
       ".local/share/Tabletop Simulator" # Tabletop Simulator settings
-      ".local/share/weechat" # Weechat logs (plugins too?)
       ".local/share/zathura" # Zathura bookmarks, etc.
       ".local/share/zoxide" # Zoxide history
       "quicklisp" # Quicklisp and related package installation
