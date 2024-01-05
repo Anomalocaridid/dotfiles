@@ -1,5 +1,6 @@
 { writeShellApplication
 , coreutils
+, handlr-regex
 , hyprland
 , swaylock-effects
 , util-linux
@@ -36,6 +37,7 @@ writeShellApplication {
   name = "${scriptName}.sh";
   runtimeInputs = [
     coreutils # provides sleep
+    handlr-regex
     hyprland # provides hyprctl
     swaylock-effects
     util-linux # provides flock
@@ -48,35 +50,38 @@ writeShellApplication {
     pipes-rs
     unimatrix
   ];
-  text = ''
-    # Get paths of commands or else terminal command will not see them
-    readonly SCREENSAVERS=(
-      "$(which asciiquarium) --transparent"
-      "$(which cbonsai) --live --infinite"
-      "$(which loop.sh) $(which neofetch-wrapper.sh)"
-      "$(which pipes-rs)"
-      "$(which unimatrix) --asynchronous --flashers"
-    )
-    # Exit if script is already running (lock exists)
-    exec 3>/tmp/${scriptName}.lock
-    flock --nonblock 3
-    # Move to empty workspace
-    hyprctl dispatch workspace empty
-    # Run screensaver (requires splitting string)
-    # Need to start as new process or else window rules in command will not be applied
-    # shellcheck disable=SC2086
-    hyprctl dispatch exec "[fullscreen]" -- wezterm start --always-new-process --class=${scriptName} -- ''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}
-    # Focus screensaver
-    hyprctl dispatch focuswindow "^(${scriptName})$"
-    # Turn on CRT shader
-    hyprctl keyword decoration:screen_shader ${../../assets/crt.frag};
-    # Lock screen (blocks until unlocked)
-    swaylock
-    # Close screensaver, return to original workspace, and turn off shader
-    hyprctl --batch "dispatch closewindow ^(${scriptName})$; \
-                     dispatch workspace previous; \
-                     reload"
-    # Release lock
-    echo "$$" >&3
-  '';
+  text =
+    let
+      scriptClass = "^(${scriptName})$";
+    in
+    # bash
+    ''
+      readonly SCREENSAVERS=(
+        "asciiquarium --transparent"
+        "cbonsai --live --infinite"
+        "loop.sh neofetch-wrapper.sh"
+        "pipes-rs"
+        "unimatrix --asynchronous --flashers"
+      )
+      # Exit if script is already running (lock exists)
+      exec 3>/tmp/${scriptName}.lock
+      flock --nonblock 3
+      # Move to empty workspace
+      hyprctl dispatch workspace empty
+      # Ensure screensaver will be fullscreen
+      hyprctl keyword windowrulev2 'fullscreen, class:${scriptClass}'
+      # Run screensaver (requires splitting string)
+      # shellcheck disable=SC2086
+      handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- ''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}
+      # Focus screensaver (assumed to be already fullscreened)
+      hyprctl dispatch focuswindow "${scriptClass}"
+      # Turn on CRT shader
+      hyprctl keyword decoration:screen_shader ${../../assets/crt.frag};
+      # Lock screen (blocks until unlocked)
+      swaylock
+      # Close screensaver, return to original workspace, remove fullscreen rule, and turn off shader
+      hyprctl --batch "dispatch closewindow ${scriptClass}; dispatch workspace previous; reload"
+      # Release lock
+      echo "$$" >&3
+    '';
 }
