@@ -16,6 +16,8 @@
       ".local/share/Steam" # Steam games and save data
       ".PySolFC" # PySolFC settings and save data
       ".runelite" # Runelite settings and cache
+      ".cache/vinegar" # Vinegar download cache
+      ".local/share/vinegar" # Vinegar wine data
       # Other important stuff
       ".config/FreeTube" # Freetube user data
       "exercism" # Exercism
