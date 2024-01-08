@@ -25,11 +25,20 @@ in
       };
     colorScheme = config.catppuccin.accent;
     enabledExtensions = with spicePkgs.extensions; [
+      # Official extensions
       keyboardShortcut
       shuffle
-      hidePodcasts
+      # Community extensions
       seekSong
+      goToSong
+      skipStats
+      songStats
+      autoVolume
+      history
+      genre
+      hidePodcasts
       adblock
+      savePlaylists
       playNext
       volumePercentage
     ];
