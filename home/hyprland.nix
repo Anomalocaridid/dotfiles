@@ -143,7 +143,7 @@
             "$mainMod, S, togglesplit, # dwindle"
             "$mainMod, D, exec, hyprctl keyword general:layout dwindle"
             "$mainMod, M, exec, hyprctl keyword general:layout master"
-            "$mainMod, O, exec, $opener x-scheme-handle$opener x-scheme-handler/https"
+            "$mainMod, O, exec, $opener x-scheme-handler/https"
             "$mainMod, G, togglegroup"
             "$mainMod SHIFT, G, lockactivegroup, toggle"
             "$mainMod, bracketleft, changegroupactive, b"
