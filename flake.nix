@@ -62,6 +62,12 @@
     # Catppuccin Theming
     catppuccin.url = "github:Stonks3141/ctp-nix";
 
+    # Catppuccin port creation tools
+    catppuccin-toolbox = {
+      url = "github:catppuccin/toolbox";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Unofficial Catppuccin ports
     catppuccin-swaylock = {
       url = "github:remiposo/swaylock";

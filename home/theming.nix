@@ -1,4 +1,4 @@
-{ lib, pkgs, config, osConfig, ... }: {
+{ lib, pkgs, config, osConfig, inputs, ... }: {
   # Qt theme defined in configuration.nix because it works better at system level
   gtk = {
     enable = true;
@@ -12,8 +12,14 @@
   };
 
   home = {
-    # fallback icon theme
-    packages = with pkgs; [ gnome.adwaita-icon-theme ];
+    packages = with pkgs; [
+      # fallback icon theme
+      gnome.adwaita-icon-theme
+      # Tools for making catppuccin ports
+      inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
+      inputs.catppuccin-toolbox.packages.${pkgs.system}.puccinier
+      inputs.catppuccin-toolbox.packages.${pkgs.system}.whiskers
+    ];
   };
 
   # For some reason, font settings are not carried over automatically

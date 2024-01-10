@@ -173,6 +173,26 @@
         "type": "github"
       }
     },
+    "catppuccin-toolbox": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1703901416,
+        "narHash": "sha256-+JfgIki1TtjEEsSBZiRiCwbLmcmTRoDGk9yiPnhnN+0=",
+        "owner": "catppuccin",
+        "repo": "toolbox",
+        "rev": "1f7baff791546dee39262bc6139c8c3ed36aedf8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "toolbox",
+        "type": "github"
+      }
+    },
     "catppuccin-wofi": {
       "flake": false,
       "locked": {
@@ -842,6 +862,7 @@
         "advcpmv-patch": "advcpmv-patch",
         "catppuccin": "catppuccin",
         "catppuccin-swaylock": "catppuccin-swaylock",
+        "catppuccin-toolbox": "catppuccin-toolbox",
         "catppuccin-wofi": "catppuccin-wofi",
         "context-switch.xplr": "context-switch.xplr",
         "disko": "disko",
