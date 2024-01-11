@@ -135,6 +135,12 @@
       flake = false;
     };
 
+    # Nyxt rss reader
+    demeter = {
+      url = "https://nyxt.atlas.engineer/static/release/demeter.tar.gz";
+      flake = false;
+    };
+
     # xplr plugins
     ## Extension
     "context-switch.xplr" = {

@@ -225,6 +225,19 @@
         "type": "github"
       }
     },
+    "demeter": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1701310893,
+        "narHash": "sha256-VU28Sp0SaDDIEhmWwxHUOJ27tdBtgNUoDV95oeommBY=",
+        "type": "tarball",
+        "url": "https://nyxt.atlas.engineer/static/release/demeter.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://nyxt.atlas.engineer/static/release/demeter.tar.gz"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -865,6 +878,7 @@
         "catppuccin-toolbox": "catppuccin-toolbox",
         "catppuccin-wofi": "catppuccin-wofi",
         "context-switch.xplr": "context-switch.xplr",
+        "demeter": "demeter",
         "disko": "disko",
         "dragon.xplr": "dragon.xplr",
         "dua-cli.xplr": "dua-cli.xplr",

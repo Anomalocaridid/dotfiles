@@ -40,20 +40,6 @@
           (define-configuration status-buffer
             ((glyph-mode-presentation-p t)))
 
-          (defmacro define-glyphs (&rest glyphs)
-            "Helper macro to set `glyph' slot for multiple modes at once."
-            `(progn ,@(loop for (mode glyph raw-p)
-                            in glyphs 
-                            collect `(define-configuration ,(if raw-p
-                                                                mode
-                                                                (read-from-string (format nil "NYXT/MODE/~a:~a-MODE" mode mode)))
-                                       ((glyph ,glyph))))))
-
-          ;;; define glyphs for modes
-          (define-glyphs (blocker         "󰂭")
-                         (reduce-tracking "")
-                         (repl            ""))
-
           ;;; TODO: when extracting into port make sure to use whisker templating
           ;;; to replace +/- colors that are just duplicates of the main color
           ;;; and also account for how +/- are currently calibrated for dark theme
@@ -106,16 +92,37 @@
             `(progn ,@(loop for extension
                             in extensions
                             collect `(nyxt:define-nyxt-user-system-and-load
-                                      ,(alexandria:symbolicate 'nyxt-user/nx- extension '-proxy)
-                                      :description ,(format t "This proxy system saves us if nx-~a fails to load.
+                                      ,(alexandria:symbolicate 'nyxt-user/ extension '-proxy)
+                                      :description ,(format t "This proxy system saves us if ~a fails to load.
                                       Otherwise it will break all the config loading." extension)
-                                      :depends-on (,(alexandria:symbolicate 'nx- extension))
-                                                                      ))))
+                                      :depends-on (,extension)))))
 
-          ; Put extensions in separate files?
-          (load-extensions "fruit"
-                           "search-engines"
-                           "router")
+          ; Put extension configs in separate files?
+          (load-extensions :nx-fruit
+                           :nx-search-engines
+                           :nx-router
+                           :demeter)
+
+          (defmacro define-glyphs (&rest glyphs)
+            "Helper macro to set `glyph' slot for multiple modes at once."
+            `(progn
+              ,@(loop for (mode glyph extension-p)
+                      in glyphs 
+                      collect `(define-configuration
+                                 ,(read-from-string
+                                   (format nil "~a~a:~a-MODE"
+                                               (if extension-p
+                                                 ""
+                                                 "NYXT/MODE/")
+                                               mode
+                                               mode))
+                                 ((glyph ,glyph))))))
+
+          ;;; define glyphs for modes
+          (define-glyphs (blocker         "󰂭")
+                         (reduce-tracking "")
+                         (repl            "")
+                         (demeter         "" t))
 
           ;; search engine config
           (define-configuration (buffer)
@@ -208,6 +215,7 @@
           "${extensionDir}nx-fruit".source = inputs.nx-fruit;
           "${extensionDir}nx-search-engines".source = inputs.nx-search-engines;
           "${extensionDir}nx-router".source = inputs.nx-router;
+          "${extensionDir}demeter".source = inputs.demeter;
         };
     };
 }
