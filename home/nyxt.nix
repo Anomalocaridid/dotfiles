@@ -1,10 +1,16 @@
-{ config, pkgs, inputs, ... }: {
+{ config, lib, pkgs, inputs, ... }: {
   home.packages = with pkgs; [ nyxt ];
   xdg =
     let
       fonts = config.stylix.fonts;
       font = "${fonts.sansSerif.name}";
       palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+      plugins = [
+        "nx-fruit"
+        "nx-search-engines"
+        "nx-router"
+        "demeter"
+      ];
     in
     {
       # configFile."nyxt".source = ./.config/nyxt;
@@ -97,11 +103,7 @@
                                       Otherwise it will break all the config loading." extension)
                                       :depends-on (,extension)))))
 
-          ; Put extension configs in separate files?
-          (load-extensions :nx-fruit
-                           :nx-search-engines
-                           :nx-router
-                           :demeter)
+          (load-extensions ${builtins.concatStringsSep "\n" (map (p: ":" + p) plugins)})
 
           (defmacro define-glyphs (&rest glyphs)
             "Helper macro to set `glyph' slot for multiple modes at once."
@@ -207,16 +209,12 @@
           ; TODO: Figure out how to reverse redirect for copying URLs
           ; TODO: Figure out how to fix cannot open in iframe errors with nyxt::on-signal-notify-uri
         '';
-      dataFile =
-        let
-          extensionDir = "nyxt/extensions/";
-        in
-        {
-          "${extensionDir}nx-fruit".source = inputs.nx-fruit;
-          "${extensionDir}nx-search-engines".source = inputs.nx-search-engines;
-          "${extensionDir}nx-router".source = inputs.nx-router;
-          "${extensionDir}demeter".source = inputs.demeter;
-        };
+
+      dataFile = lib.attrsets.mergeAttrsList (map
+        (extension: {
+          "nyxt/extensions/${extension}".source = inputs.${extension};
+        })
+        plugins);
     };
 }
 
