@@ -145,7 +145,7 @@
                                             :background-color "${palette.base.hex}"
                                             :header-color "${palette.mantle.hex}"
                                             :result-title-font "${font}"
-                                            :result-title-color "${palette.rosewater.hex}"
+                                            :result-title-color "${palette.${config.catppuccin.accent}.hex}"
                                             :result-visited-title-color "${palette.lavender.hex}"
                                             :result-description-color "${palette.text.hex}"
                                             :result-url-color "${palette.rosewater.hex}"
