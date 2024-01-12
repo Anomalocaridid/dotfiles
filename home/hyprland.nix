@@ -145,6 +145,7 @@
             "$mainMod, M, exec, hyprctl keyword general:layout master"
             "$mainMod, O, exec, $opener x-scheme-handler/https"
             "$mainMod, G, togglegroup"
+            "$mainMod, F, fullscreen"
             "$mainMod SHIFT, G, lockactivegroup, toggle"
             "$mainMod, bracketleft, changegroupactive, b"
             "$mainMod, bracketright, changegroupactive, f"
