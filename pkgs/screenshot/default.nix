@@ -12,6 +12,6 @@ writeShellApplication {
   text = ''        
     entries=("Active" "Screen" "Output" "Area")
     selected=$(printf '%s\n' "''${entries[@]}" | wofi --show dmenu --lines 7)
-    grimblast --notify save "''${selected,,}" - | swappy -f -
+    grimblast --wait 1 --notify save "''${selected,,}" - | swappy -f -
   '';
 }
