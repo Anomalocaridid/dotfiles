@@ -10,14 +10,15 @@
       "Videos"
       # Gaming-specific stuff
       ".cache/lutris" # Lutris banner cache
+      ".cache/vinegar" # Vinegar download cache
       ".config/lutris" # Lutris games and settings
+      ".config/unity3d" # Needed for some games' settings
       ".local/share/lutris" # Lutris runtime data
       ".local/share/PrismLauncher" # Prism Launcher data
       ".local/share/Steam" # Steam games and save data
+      ".local/share/vinegar" # Vinegar wine data
       ".PySolFC" # PySolFC settings and save data
       ".runelite" # Runelite settings and cache
-      ".cache/vinegar" # Vinegar download cache
-      ".local/share/vinegar" # Vinegar wine data
       # Other important stuff
       ".config/FreeTube" # Freetube user data
       "exercism" # Exercism
