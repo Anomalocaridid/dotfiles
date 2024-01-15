@@ -68,6 +68,7 @@ final: prev: {
     catppuccin-palette-files = final.callPackage ./catppuccin-palette-files { };
     catppuccin-palette = (builtins.fromJSON (builtins.readFile (final.custom.catppuccin-palette-files + /share/palette-porcelain.json)));
     candy-icons = final.callPackage ./candy-icons { };
+    breeze-hacked-cursor = final.callPackage ./breeze-hacked-cursor { };
     # custom locking script
     lockman = final.callPackage ./lockman { };
     # custom screenshot script
