@@ -3,7 +3,7 @@
     "advcpmv-patch": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-MmcS0TpyplXgHGxyz501UynggMDOMCseCkVjNgRW9Hs=",
+        "narHash": "sha256-xlXSpC/NsUcsprc7OwYeYiMI3wWZZ8MbokoM/NqsT2M=",
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/272535.patch"
       },
