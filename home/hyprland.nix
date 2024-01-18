@@ -16,7 +16,6 @@
       catppuccin.enable = true;
       plugins = [
         inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
-        inputs.hycov.packages.${pkgs.system}.hycov
       ];
       settings =
         {
@@ -219,21 +218,6 @@
 
           bind = , escape, submap, reset
           submap = reset
-
-          # hycov submap
-          bind = ALT, tab, hycov:toggleoverview
-          bind = ALT, tab, submap, hycov
-          submap = hycov
-
-          bind = ALT, tab, hycov:toggleoverview
-          bind = , $left, hycov:movefocus, l
-          bind = , $right, hycov:movefocus, r
-          bind = , $up, hycov:movefocus, u
-          bind = , $down, hycov:movefocus, d
-
-          bind = ALT, tab, submap, reset
-          submap = reset
-
         '';
     };
 

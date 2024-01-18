@@ -39,12 +39,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland workspaces overview plugin
-    hycov = {
-      url = "github:DreamMaoMao/hycov";
-      inputs.hyprland.follows = "hyprland";
-    };
-
     # Only used for GRUB theme
     stylix = {
       url = "github:danth/stylix";
