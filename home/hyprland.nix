@@ -1,10 +1,11 @@
 { config, lib, pkgs, inputs, ... }: {
   # Additional dependencies
   home.packages = with pkgs; [
-    mpvpaper # Live wallpaper
-    hyprland-autoname-workspaces
-    scratchpad
     custom.screenshot
+    hyprland-autoname-workspaces
+    hyprpicker # color picker
+    mpvpaper # Live wallpaper
+    scratchpad
   ];
 
   wayland.windowManager.hyprland =
@@ -145,6 +146,7 @@
             "$mainMod, O, exec, $opener x-scheme-handler/https"
             "$mainMod, G, togglegroup"
             "$mainMod, F, fullscreen"
+            "$mainMod, C, exec, hyprpicker --autocopy"
             "$mainMod SHIFT, G, lockactivegroup, toggle"
             "$mainMod, bracketleft, changegroupactive, b"
             "$mainMod, bracketright, changegroupactive, f"
