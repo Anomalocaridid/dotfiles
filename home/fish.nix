@@ -66,6 +66,8 @@
       tldr = "PAGER='bat --plain' command tldr";
       # xplr
       xcd = "cd (xplr --print-pwd-as-result)";
+      # lazygit
+      lg = "lazygit";
     };
     plugins = with pkgs;
       let

@@ -55,6 +55,16 @@
     };
   };
 
+  programs.lazygit = {
+    enable = true;
+    catppuccin.enable = true;
+    settings = {
+      theme.nerdFontsVersion = 3;
+      update.method = false;
+      disableStartupPopups = true;
+    };
+  };
+
   home.sessionVariables = {
     # Ensure bat's line numbers don't show up and mess things up
     # Also ensure --side-by-side is only used for git diffs
