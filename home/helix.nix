@@ -34,12 +34,9 @@
     };
     languages = {
       language-server = {
-        java-language-server = {
-          command = "java-language-server";
-        };
-        typescript-language-server = {
-          config.format.semicolons = "insert";
-        };
+        java-language-server.command = "java-language-server";
+        nimlsp.command = "nimlsp";
+        typescript-language-server.config.format.semicolons = "insert";
         unison-language-server = {
           command = "netcat";
           args = [ "localhost" "5757" ];
@@ -60,6 +57,7 @@
             "haskell"
             "javascript"
             "lua"
+            "nim"
             "nix"
             "python"
           ]
@@ -93,6 +91,11 @@
             # TODO: replace with jdtls (default) if it gets fixed
             language-servers = [ "java-language-server" ];
             formatter.command = "google-java-format";
+          }
+          {
+            name = "nim";
+            language-servers = [ "nimlsp" ];
+            formatter.command = "nimpretty";
           }
           {
             name = "nix";
