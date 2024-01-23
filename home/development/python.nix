@@ -7,6 +7,7 @@
           pytest # test framework/runner
           python-lsp-black # formatter
           python-lsp-server
+          pyls-isort
         ]
         python-lsp-server.optional-dependencies.flake8 # style checker
         python-lsp-server.optional-dependencies.mccabe # complexity checker
