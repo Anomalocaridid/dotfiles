@@ -52,8 +52,8 @@
       du = "dust";
       df = "duf";
       # advcpmv
-      cp = "cpg --interactive";
-      mv = "mvg --interactive";
+      cp = "cpg --progress-bar --interactive";
+      mv = "mvg --progress-bar --interactive";
       # bat
       bgrep = "batgrep";
       cat = "bat --paging=never";
