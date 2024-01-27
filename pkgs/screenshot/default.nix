@@ -1,6 +1,7 @@
 { writeShellApplication
 , grimblast
 , swappy
+, fuzzel
 , ...
 }:
 writeShellApplication {
@@ -8,10 +9,11 @@ writeShellApplication {
   runtimeInputs = [
     grimblast
     swappy
+    fuzzel
   ];
   text = ''        
     entries=("Active" "Screen" "Output" "Area")
-    selected=$(printf '%s\n' "''${entries[@]}" | wofi --show dmenu --lines 7)
+    selected=$(printf '%s\n' "''${entries[@]}" | fuzzel --dmenu)
     grimblast --wait 1 --notify save "''${selected,,}" - | swappy -f -
   '';
 }

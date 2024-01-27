@@ -52,7 +52,7 @@
       tomlFormat.generate "handlr-config"
         {
           enable_selector = false;
-          selector = "wofi -dmenu -i -p 'Open With: '";
+          selector = "fuzzel --dmenu --prompt='Open With: '";
           term_exec_args = "";
           handlers = [
             {

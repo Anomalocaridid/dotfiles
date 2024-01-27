@@ -68,11 +68,6 @@
       flake = false;
     };
 
-    catppuccin-wofi = {
-      url = "github:quantumfate/wofi";
-      flake = false;
-    };
-
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 

@@ -126,7 +126,9 @@
           "$up" = "k";
           "$right" = "l";
 
-          "$scratchpad" = "scratchpad -m 'wofi -dmenu'";
+          "$menu" = "fuzzel";
+
+          "$scratchpad" = "scratchpad -m '$menu --dmenu'";
 
           # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
           bind = lib.flatten [
@@ -138,7 +140,7 @@
             # TODO: figure out how to open selected file when exiting without hard-coding xplr
             "$mainMod, N, exec, $term --class=filemanager -- fish -c 'handlr open (xplr)'"
             "$mainMod, V, togglefloating,"
-            "$mainMod, R, exec, pkill wofi || wofi --show drun"
+            "$mainMod, R, exec, pkill $menu || $menu"
             "$mainMod, P, pseudo, # dwindle"
             "$mainMod, S, togglesplit, # dwindle"
             "$mainMod, D, exec, hyprctl keyword general:layout dwindle"
