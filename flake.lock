@@ -754,6 +754,22 @@
         "type": "github"
       }
     },
+    "nx-dark-reader": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1687268881,
+        "narHash": "sha256-CKJGCk7ATd0naFhill5rrvay6V2JE4Bstu4tFpaAjB0=",
+        "owner": "aartaka",
+        "repo": "nx-dark-reader",
+        "rev": "57dc1a9482a81d7c15b00c4b9d647bf1b129d8e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aartaka",
+        "repo": "nx-dark-reader",
+        "type": "github"
+      }
+    },
     "nx-fruit": {
       "flake": false,
       "locked": {
@@ -875,6 +891,7 @@
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_3",
+        "nx-dark-reader": "nx-dark-reader",
         "nx-fruit": "nx-fruit",
         "nx-router": "nx-router",
         "nx-search-engines": "nx-search-engines",

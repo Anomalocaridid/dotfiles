@@ -129,6 +129,11 @@
       flake = false;
     };
 
+    nx-dark-reader = {
+      url = "github:aartaka/nx-dark-reader";
+      flake = false;
+    };
+
     # Nyxt rss reader
     demeter = {
       url = "https://nyxt.atlas.engineer/static/release/demeter.tar.gz";

@@ -6,9 +6,10 @@
       font = "${fonts.sansSerif.name}";
       palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
       plugins = [
+        "nx-dark-reader"
         "nx-fruit"
-        "nx-search-engines"
         "nx-router"
+        "nx-search-engines"
         "demeter"
       ];
     in
@@ -22,14 +23,6 @@
             ((restore-session-on-startup-p nil)
              ;; set external editor
              (external-editor-program '("handlr" "open"))))
-
-          ;;; enable default modes
-          (define-configuration buffer
-            ((default-modes (append '(nyxt/mode/blocker:blocker-mode
-                                      nyxt/mode/reduce-tracking:reduce-tracking-mode
-                                      nyxt/mode/password:password-mode
-                                      nyxt/mode/vi:vi-normal-mode)
-                                    %slot-value%))))
 
           ;;; password manager config
           (defmethod initialize-instance :after
@@ -105,16 +98,25 @@
 
           (load-extensions ${builtins.concatStringsSep "\n" (map (p: ":" + p) plugins)})
 
+          ;;; enable default modes
+          (define-configuration buffer
+            ((default-modes (append '(nyxt/mode/blocker:blocker-mode
+                                      nyxt/mode/reduce-tracking:reduce-tracking-mode
+                                      nyxt/mode/password:password-mode
+                                      nyxt/mode/vi:vi-normal-mode
+                                      nx-dark-reader:dark-reader-mode)
+                                    %slot-value%))))
+
           (defmacro define-glyphs (&rest glyphs)
             "Helper macro to set `glyph' slot for multiple modes at once."
             `(progn
-              ,@(loop for (mode glyph extension-p)
+              ,@(loop for (mode glyph prefix)
                       in glyphs 
                       collect `(define-configuration
                                  ,(read-from-string
                                    (format nil "~a~a:~a-MODE"
-                                               (if extension-p
-                                                 ""
+                                               (if prefix
+                                                 prefix
                                                  "NYXT/MODE/")
                                                mode
                                                mode))
@@ -124,8 +126,16 @@
           (define-glyphs (blocker         "󰂭")
                          (reduce-tracking "")
                          (repl            "")
-                         (demeter         "" t))
+                         (demeter         "" "")
+                         (dark-reader     "󰔎" "nx-"))
 
+          ;; dark reader config
+          ;; use catppuccin dark reader colors
+          (define-configuration nx-dark-reader:dark-reader-mode
+            ((nxdr:background-color "#${palette.base.hex}")
+             (nxdr:text-color "#${palette.text.hex}")
+             (nxdr:selection-color "#${palette.surface2.hex}")))
+          
           ;; search engine config
           (define-configuration (buffer)
             ((search-engines
