@@ -1,17 +1,34 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
     (python3.withPackages
-      (ps: with ps; lib.concatLists [
-        [
-          pylsp-mypy # static type checker
-          pytest # test framework/runner
-          python-lsp-black # formatter
-          python-lsp-server
-          pyls-isort
-        ]
-        python-lsp-server.optional-dependencies.flake8 # style checker
-        python-lsp-server.optional-dependencies.mccabe # complexity checker
-        python-lsp-server.optional-dependencies.pycodestyle # PEP 8 style checker
-      ]))
+      (ps: with ps;
+      [
+        pytest # Needed for exercism tests
+      ]
+      ))
   ];
+
+  programs.helix = {
+    extraPackages = with pkgs; [
+      (python3.withPackages
+        (ps: with ps; lib.concatLists [
+          [
+            pylsp-mypy # Static type checker
+            python-lsp-black # Formatter
+            python-lsp-server
+            pyls-isort # Import sorter
+          ]
+          python-lsp-server.optional-dependencies.flake8 # Style checker
+          python-lsp-server.optional-dependencies.mccabe # Complexity checker
+          python-lsp-server.optional-dependencies.pycodestyle # PEP 8 style checker
+        ]))
+    ];
+
+    languages.language = [
+      {
+        name = "python";
+        auto-format = true;
+      }
+    ];
+  };
 }

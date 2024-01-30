@@ -2,7 +2,6 @@
   home = {
     packages = with pkgs; [
       bear # For creating compilation databases for clangd
-      clang-tools # Provides clangd lsp
       cmake # Needed for exercism C++ tests
       gnumake # Needed for exercism C and C++ tests
     ];
@@ -16,5 +15,23 @@
         IndentCaseLabels = true;
         AlignConsecutiveDeclarations = true;
       };
+  };
+  programs.helix = {
+    extraPackages = with pkgs; [
+      clang-tools # Provides clangd lsp
+    ];
+    # Use same config for C and C++
+    languages.language = map
+      (name: {
+        inherit name;
+        auto-format = true;
+        indent = {
+          tab-width = 4;
+          unit = "    ";
+        };
+      }) [
+      "c"
+      "cpp"
+    ];
   };
 }

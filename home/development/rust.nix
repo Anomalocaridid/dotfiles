@@ -1,8 +1,11 @@
 { pkgs, ... }: {
   home.packages = with pkgs; [
-    cargo
-    rust-analyzer
-    rustc
-    rustfmt
+    cargo # Package manager
+    rustc # Compiler
+  ];
+
+  programs.helix.extraPackages = with pkgs;[
+    rust-analyzer # Language server
+    rustfmt # Formatter
   ];
 }

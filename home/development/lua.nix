@@ -3,8 +3,20 @@
     (lua5_4.withPackages
       (ps: with ps;
       [
-        busted
+        busted # Needed for exercism tests
       ]))
-    lua-language-server
   ];
+
+  programs.helix = {
+    extraPackages = with pkgs;[
+      lua-language-server
+    ];
+
+    languages.language = [
+      {
+        name = "lua";
+        auto-format = true;
+      }
+    ];
+  };
 }

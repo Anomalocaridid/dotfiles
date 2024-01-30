@@ -1,8 +1,23 @@
 { pkgs, ... }: {
   home.packages = with pkgs;[
-    bats
-    nodePackages.bash-language-server
-    shellcheck
-    shfmt
+    bats # Needed for exercism tests
   ];
+
+  programs.helix = {
+    extraPackages = with pkgs; [
+      nodePackages.bash-language-server
+      shellcheck # More diagnostics for language server
+    ];
+    languages.language = [
+      {
+        name = "bash";
+        auto-format = true;
+        indent = {
+          tab-width = 4;
+          unit = "    ";
+        };
+        formatter.command = "${pkgs.shfmt}/bin/shfmt";
+      }
+    ];
+  };
 }

@@ -1,15 +1,27 @@
 { pkgs, ... }: {
   home = {
     packages = with pkgs; [
-      cabal-install # package manager
-      ghc
-      haskell-language-server
-      hlint
-      ormolu # formatter
-      stack # package manager
+      cabal-install # Package manager
+      ghc # Compiler
+      stack # Package manager
     ];
     file.".ghci".text = ''
       :set prompt "\ESC[1;35mλ> \ESC[m"
     '';
+  };
+
+  programs.helix = {
+    extraPackages = with pkgs; [
+      haskell-language-server
+      hlint # Linter
+      ormolu # Formatter
+    ];
+
+    languages.language = [
+      {
+        name = "haskell";
+        auto-format = true;
+      }
+    ];
   };
 }
