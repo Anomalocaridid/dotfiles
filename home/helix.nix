@@ -54,6 +54,7 @@
             auto-format = true;
           })
           [
+            "clojure"
             "haskell"
             "javascript"
             "lua"
