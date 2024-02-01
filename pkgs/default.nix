@@ -1,9 +1,5 @@
 final: prev: {
   # Customized packages
-  sudo = prev.sudo.override {
-    withInsults = true;
-  };
-
   # Remove once $LESSOPEN support is enabled by default
   bat = prev.bat.overrideAttrs (oldAttrs: rec {
     cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
