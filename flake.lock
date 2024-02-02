@@ -539,16 +539,16 @@
     "icons.xplr": {
       "flake": false,
       "locked": {
-        "lastModified": 1688029582,
-        "narHash": "sha256-jIlXalPhnN9JFPax8UZldiJNBwlGX98gs31JHJzyzDE=",
-        "owner": "Ashvith10",
+        "lastModified": 1687240439,
+        "narHash": "sha256-KUX7SJqYElpmYtbzyqyPB7rfBXlaBsj8yyRJ7Swn0hE=",
+        "owner": "jbms",
         "repo": "icons.xplr",
-        "rev": "f42556d6cf7aee3a104c1aa45d37728a0ea5ab24",
+        "rev": "2d04b5ba3a9c5c6c886f5f3f1d8facde6e6e7612",
         "type": "github"
       },
       "original": {
-        "owner": "Ashvith10",
-        "ref": "fix-nerd-fonts-v3.0.0-changes",
+        "owner": "jbms",
+        "ref": "nerfonts-v3-update",
         "repo": "icons.xplr",
         "type": "github"
       }

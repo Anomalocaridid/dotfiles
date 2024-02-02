@@ -201,10 +201,9 @@
 
     ## Theme
     "icons.xplr" = {
-      # Move to main repo after icons.xplr#4 or icons.xplr#6 are merged
-      # fork from icons.xplr#6 in use
+      # Move to main repo after icons.xplr#4 is merged
       # url = "github:prncss-xyz/icons.xplr";
-      url = "github:Ashvith10/icons.xplr/fix-nerd-fonts-v3.0.0-changes";
+      url = "github:jbms/icons.xplr/nerfonts-v3-update";
       flake = false;
     };
 
