@@ -35,7 +35,6 @@ in
       songStats
       autoVolume
       history
-      genre
       hidePodcasts
       adblock
       savePlaylists
