@@ -8,7 +8,20 @@
     pysolfc
     runelite
     sgt-puzzles
-    vinegar # roblox client
+    # Use custom wine build
+    # Also prevents build failures if there are issues with patch
+    (vinegar.overrideAttrs (oldAttrs:
+      let
+        wine-ge = inputs.nix-gaming.packages.${pkgs.system}.wine-ge;
+      in
+      {
+        buildInputs = map (x: if x.pname == "wine-wow" then wine-ge else x) oldAttrs.buildInputs;
+
+        postInstall = ''
+          wrapProgram $out/bin/vinegar \
+            --prefix PATH : ${lib.makeBinPath [wine-ge]}
+        '';
+      }))
   ];
 
   # Enable wine-ge's fsync support
@@ -28,9 +41,6 @@
         # Cannot represent hex integers with generated toml
         "vinegar/config.toml".text = #toml
           ''
-            # Use wine-ge instead of default wine build
-            wineroot = "${inputs.nix-gaming.packages.${pkgs.system}.wine-ge}"
-
             # Customize splash screen
             [splash]
             background = 0x${palette.base.hex}
