@@ -3,11 +3,10 @@
   gtk = {
     enable = true;
     catppuccin.enable = true;
-    # Stylix currently sets more things than ctp-nix by default
     cursorTheme = config.stylix.cursor;
     iconTheme = {
       name = "Sweet-Rainbow";
-      package = pkgs.custom.candy-icons;
+      package = pkgs.sweet-folders;
     };
   };
 
@@ -15,6 +14,8 @@
     packages = with pkgs; [
       # fallback icon theme
       gnome.adwaita-icon-theme
+      # needed for Sweet Folders
+      candy-icons
       # Tools for making catppuccin ports
       inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
       inputs.catppuccin-toolbox.packages.${pkgs.system}.puccinier

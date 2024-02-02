@@ -211,13 +211,6 @@
       url = "github:dtomvan/extra-icons.xplr";
       flake = false;
     };
-
-    # Add advcpmv
-    # Remove when nixpkgs#272535 is merged and makes it to nixos-unstable
-    advcpmv-patch = {
-      url = "https://github.com/NixOS/nixpkgs/pull/272535.patch";
-      flake = false;
-    };
   };
 
   outputs =
@@ -242,11 +235,7 @@
 
       channelsConfig.allowUnfree = true;
 
-      # Add advcpmv
-      # Remove when nixpkgs#272535 is merged and makes it to nixos-unstable
-      channels."nixpkgs".patches = [
-        inputs.advcpmv-patch
-      ];
+      # channels."nixpkgs".patches = [ ];
 
       sharedOverlays = [
         # custom overlay
