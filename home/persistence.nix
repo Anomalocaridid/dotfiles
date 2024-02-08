@@ -47,7 +47,6 @@
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
       ".config/syncthing" # Syncthing settings
-      ".julia" # Prevents recompilation for julia repl and lsp
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache
       ".local/share/Tabletop Simulator" # Tabletop Simulator settings
