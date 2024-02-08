@@ -32,7 +32,6 @@
       ".tuxpaint" # Tux Paint saves
       "Zotero" # Zotero databases
       # Non-critical caches and data to persist
-      ".cache/common-lisp" # Prevents recompilation for quicklisp, etc. on first launch of sbcl for every boot
       ".cache/keepassxc" # KeePassXC cache
       ".cache/nyxt" # Nyxt browser cache
       ".cache/spotify" # Spotify cache
@@ -52,7 +51,6 @@
       ".local/share/Tabletop Simulator" # Tabletop Simulator settings
       ".local/share/zathura" # Zathura bookmarks, etc.
       ".local/share/zoxide" # Zoxide history
-      "quicklisp" # Quicklisp and related package installation
       ".unison" # Unison codebase, needs to be persistent as all added code ends up there
     ];
   };
