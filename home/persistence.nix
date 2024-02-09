@@ -51,6 +51,7 @@
       ".local/share/Tabletop Simulator" # Tabletop Simulator settings
       ".local/share/zathura" # Zathura bookmarks, etc.
       ".local/share/zoxide" # Zoxide history
+      ".mix" # Contains hex needed for elixir-ls
       ".unison" # Unison codebase, needs to be persistent as all added code ends up there
     ];
   };
