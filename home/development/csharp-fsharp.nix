@@ -9,7 +9,9 @@
 
   programs.helix = {
     extraPackages = with pkgs; [
-      omnisharp-roslyn
+      omnisharp-roslyn # C# language server
+      fsautocomplete # F# language server
+      fantomas # F# code formatter
     ];
     languages.language = [
       {
