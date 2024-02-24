@@ -32,11 +32,11 @@
       in
       {
         name = "Breeze_Hacked";
-        package = pkgs.custom.breeze-hacked-cursor.override {
+        package = pkgs.breeze-hacked-cursor-theme.override {
           accentColor = "#${palette.${config.catppuccin.accent}.hex}";
           baseColor = "#${palette.base.hex}";
           borderColor = "#${palette.base.hex}";
-          textColor = "#${palette.text.hex}";
+          logoColor = "#${palette.text.hex}";
         };
       };
   };
