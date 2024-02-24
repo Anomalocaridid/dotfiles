@@ -23,23 +23,20 @@
     ];
   };
 
-  # For some reason, font settings are not carried over automatically
-  stylix = {
-    fonts = osConfig.stylix.fonts;
-    cursor =
-      let
-        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
-      in
-      {
-        name = "Breeze_Hacked";
-        package = pkgs.breeze-hacked-cursor-theme.override {
-          accentColor = "#${palette.${config.catppuccin.accent}.hex}";
-          baseColor = "#${palette.base.hex}";
-          borderColor = "#${palette.base.hex}";
-          logoColor = "#${palette.text.hex}";
-        };
+  # Define here instead of globally because there is no global accent option in ctp-nix
+  stylix.cursor =
+    let
+      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+    in
+    {
+      name = "Breeze_Hacked";
+      package = pkgs.breeze-hacked-cursor-theme.override {
+        accentColor = "#${palette.${config.catppuccin.accent}.hex}";
+        baseColor = "#${palette.base.hex}";
+        borderColor = "#${palette.base.hex}";
+        logoColor = "#${palette.text.hex}";
       };
-  };
+    };
 
   catppuccin = {
     flavour = osConfig.catppuccin.flavour;
