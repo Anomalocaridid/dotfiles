@@ -15,7 +15,7 @@
         wine-ge = inputs.nix-gaming.packages.${pkgs.system}.wine-ge;
       in
       {
-        buildInputs = map (x: if x.pname == "wine-wow" then wine-ge else x) oldAttrs.buildInputs;
+        buildInputs = map (x: if x.pname == "wine-wow-staging" then wine-ge else x) oldAttrs.buildInputs;
 
         postInstall = ''
           wrapProgram $out/bin/vinegar \
