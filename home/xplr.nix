@@ -79,42 +79,6 @@
         # Generate code to load plugins based on attrs
         (lib.concatMapStrings renderPlugin pluginArgs) + #lua
         ''
-          local old_render_right = xplr.fn.custom.tri_pane.render_right_pane
-          -- Set right pane to preview files with bat
-          local function render_right_pane(ctx)
-            local n = ctx.app.focused_node
-            -- Ensure that only directories and symlinks
-            -- use default renderer
-            if n.is_dir or n.is_symlink then
-              return old_render_right(ctx)
-            else
-              local file = io.open("/tmp/xplr-preview.tmp")
-
-              if file == nil then
-                return old_render_right(ctx)
-              end
-
-              local i = 0
-              local res = ""
-
-              for line in file:lines() do
-                res = res .. line .. "\n"
-                -- Do not read lines that will not be seen
-                -- Otherwise, significant slowdown for large files
-                if i == ctx.layout_size.height then
-                  break
-                end
-
-                i = i + 1
-              end
-
-              file:close()
-              return res
-              end
-            end
-
-          xplr.fn.custom.tri_pane.render_right_pane = render_right_pane
-
           -- Add context switch pane to tri-pane layout
           xplr.fn.custom.render_active_contexts = function(ctx)
             local res = ""
@@ -221,26 +185,6 @@
                   if [ "$NODES" ]; then
                     echo -e "$NODES" | renamer
                     "$XPLR" -m ExplorePwdAsync
-                  fi
-                ]===]
-              }
-            }
-          }
-
-          return {
-            -- Needed for bat previews
-            -- TODO: Figure out automatic wrapping
-            -- TODO: add line range to bat
-            -- FIXME: Still a bit slow if rapidly scrolling through files
-            -- TODO: Figure out how to run as "async" background process
-            on_focus_change = {
-              {
-                BashExecSilently = [===[
-                  # Only generate previews for files
-                  if [[ -f "$XPLR_FOCUS_PATH" ]]; then
-                    # Workaround to keep bat from freezing on large binary files
-                    # Exits with error code 124 when timeout
-                    timeout 0.5 bat --plain --color=always "$XPLR_FOCUS_PATH" > /tmp/xplr-preview.tmp
                   fi
                 ]===]
               }
