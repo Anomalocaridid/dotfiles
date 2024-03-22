@@ -5,6 +5,7 @@
       # Default directories I care about
       "Documents"
       "Downloads"
+      "Games"
       "Music"
       "Pictures"
       "Videos"
