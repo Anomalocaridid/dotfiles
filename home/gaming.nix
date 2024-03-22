@@ -1,28 +1,30 @@
 { config, lib, pkgs, inputs, ... }: {
-  home.packages = with pkgs; [
-    gamescope # Used by Lutris for control over game resolution
-    lutris
-    packwiz # minecraft modpack creator
-    parsec-bin # Online multiplayer for local multiplayer games
-    prismlauncher
-    pysolfc
-    runelite
-    sgt-puzzles
-    # Use custom wine build
-    # Also prevents build failures if there are issues with patch
-    (vinegar.overrideAttrs (oldAttrs:
-      let
-        wine-ge = inputs.nix-gaming.packages.${pkgs.system}.wine-ge;
-      in
-      {
-        buildInputs = map (x: if x.pname == "wine-wow-staging" then wine-ge else x) oldAttrs.buildInputs;
+  home.packages = with pkgs;
+    let
+      wine-ge = inputs.nix-gaming.packages.${pkgs.system}.wine-ge;
+    in
+    [
+      gamescope # Used by Lutris for control over game resolution
+      lutris
+      packwiz # minecraft modpack creator
+      parsec-bin # Online multiplayer for local multiplayer games
+      prismlauncher
+      pysolfc
+      runelite
+      sgt-puzzles
+      wine-ge # System-level install for Lutris
+      # Use custom wine build
+      # Also prevents build failures if there are issues with patch
+      (vinegar.overrideAttrs (oldAttrs:
+        {
+          buildInputs = map (x: if x.pname == "wine-wow-staging" then wine-ge else x) oldAttrs.buildInputs;
 
-        postInstall = ''
-          wrapProgram $out/bin/vinegar \
-            --prefix PATH : ${lib.makeBinPath [wine-ge]}
-        '';
-      }))
-  ];
+          postInstall = ''
+            wrapProgram $out/bin/vinegar \
+              --prefix PATH : ${lib.makeBinPath [wine-ge]}
+          '';
+        }))
+    ];
 
   # Enable wine-ge's fsync support
   home.sessionVariables.WINEFSYNC = 1;
