@@ -26,7 +26,8 @@
       ".local/share/nyxt" # Nyxt, history, bookmarks, etc.
       ".mozilla" # Firefox data
       "Projects" # Misc. programming
-      "qmk_firmware" # QMK
+      "qmk_firmware" # QMK firmware
+      "qmk_userspace" # QMK userspace
       "Slippi" # Slippi replays
       ".ssh" # SSH key
       "Sync" # Syncthing

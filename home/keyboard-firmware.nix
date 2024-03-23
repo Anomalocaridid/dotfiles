@@ -1,4 +1,8 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+let
+  qmkRepoDir = "${config.home.homeDirectory}/qmk_userspace";
+in
+{
   home.packages = with pkgs; [
     # Needed for QMK
     qmk
@@ -7,29 +11,33 @@
     circup # Easily manage circuitpython libraries
   ];
 
-  # TODO: Ensure master branch is cloned as well
-  systemd.user.services.qmk-clone =
+  # TODO: figure out a way to make qmk_firmware cloning reproducible
+
+  xdg.configFile."qmk/qmk.ini".source =
     let
-      qmkRepoDir = "${config.home.homeDirectory}/qmk_firmware";
+      iniFormat = pkgs.formats.ini { };
     in
-    {
-      Unit = {
-        Description = "Ensure QMK repo is cloned";
-        ConditionPathExists = "!${qmkRepoDir}/readme.md"; # Note: repo dir should already exist because it is persisted
-      };
-      Service =
-        let
-          gitBin = "${pkgs.git}/bin/git";
-          qmkRepoURL = "Anomalocaridid/qmk_firmware.git";
-        in
-        {
-          Type = "oneshot";
-          ExecStart = "${gitBin} clone --recurse-submodules --branch personal-keymap https://github.com/${qmkRepoURL} ${qmkRepoDir}"; # Clone with https
-          ExecStartPost = [
-            "${gitBin} -C ${qmkRepoDir} remote set-url origin git@github.com:${qmkRepoURL}" # But switch to ssh after
-            "${gitBin} -C ${qmkRepoDir} remote add upstream https://github.com/qmk/qmk_firmware" # And also set upstream
-          ];
-        };
-      Install.WantedBy = [ "default.target" ];
+    iniFormat.generate "qmk-config" {
+      user.overlay_dir = qmkRepoDir;
     };
+
+  systemd.user.services.qmk-clone = {
+    Unit = {
+      Description = "Ensure QMK repo is cloned";
+      ConditionPathExists = "!${qmkRepoDir}/readme.md"; # Note: repo dir should already exist because it is persisted
+    };
+    Service =
+      let
+        gitBin = "${pkgs.git}/bin/git";
+        qmkRepoURL = "Anomalocaridid/qmk_userspace.git";
+      in
+      {
+        Type = "oneshot";
+        ExecStart = "${gitBin} clone https://github.com/${qmkRepoURL} ${qmkRepoDir}"; # Clone with https
+        ExecStartPost = [
+          "${gitBin} -C ${qmkRepoDir} remote set-url origin git@github.com:${qmkRepoURL}" # But switch to ssh after
+        ];
+      };
+    Install.WantedBy = [ "default.target" ];
+  };
 }
