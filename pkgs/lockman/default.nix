@@ -2,7 +2,7 @@
 , coreutils
 , handlr-regex
 , hyprland
-, swaylock-effects
+, hyprlock
 , util-linux
 , wezterm
 , neofetch
@@ -39,7 +39,7 @@ writeShellApplication {
     coreutils # provides sleep
     handlr-regex
     hyprland # provides hyprctl
-    swaylock-effects
+    hyprlock
     util-linux # provides flock
     wezterm
     loop # Workaround to infinitely loop programs
@@ -78,7 +78,7 @@ writeShellApplication {
       # Turn on CRT shader
       hyprctl keyword decoration:screen_shader ${../../assets/crt.frag};
       # Lock screen (blocks until unlocked)
-      swaylock
+      hyprlock
       # Close screensaver, return to original workspace, remove fullscreen rule, and turn off shader
       hyprctl --batch "dispatch closewindow ${scriptClass}; dispatch workspace previous; reload"
       # Release lock

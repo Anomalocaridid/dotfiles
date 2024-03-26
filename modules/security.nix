@@ -24,5 +24,7 @@
     };
     # Needed for swaylock to unlock
     pam.services.swaylock = { };
+    # Needed for hyprlock to unlock
+    pam.services.hyprlock = { };
   };
 }

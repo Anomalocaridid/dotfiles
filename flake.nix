@@ -28,6 +28,11 @@
     # Needed for plugins in external flakes
     hyprland.url = "github:hyprwm/Hyprland";
 
+    hyprlock = {
+      url = "github:hyprwm/hyprlock";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
@@ -65,6 +70,11 @@
     # Unofficial Catppuccin ports
     catppuccin-swaylock = {
       url = "github:remiposo/swaylock";
+      flake = false;
+    };
+
+    catppuccin-hyprlock = {
+      url = "github:NikSneMC/hyprlock";
       flake = false;
     };
 
@@ -222,6 +232,7 @@
     , nix-index-database
     , flake-utils
     , hyprland
+    , hyprlock
     , hyprland-contrib
     , stylix
     , catppuccin
@@ -242,6 +253,9 @@
         (import ./pkgs)
         # Hyprland
         hyprland.overlays.default
+        # Hyprlock
+        # Needed for lockman.sh
+        hyprlock.overlays.default
         # Hyprland community tools
         hyprland-contrib.overlays.default
         # Up to date Unison packages
