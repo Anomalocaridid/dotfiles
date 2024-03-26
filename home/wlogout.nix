@@ -4,7 +4,7 @@
     layout = [
       {
         label = "lock";
-        action = "${pkgs.custom.lockman}/bin/lockman.sh";
+        action = "loginctl lock-session";
         text = "Lock";
         keybind = "l";
       }
