@@ -1,13 +1,12 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, ... }: {
   programs = {
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       # Add extra compatibility tools to Steam
-      extraCompatPackages = [
-        # For some reason, nix-gaming overlay does not work
-        inputs.nix-gaming.packages.${pkgs.system}.proton-ge
+      extraCompatPackages = with pkgs; [
+        proton-ge-bin
       ];
     };
     # On-demand system optimization for gaming

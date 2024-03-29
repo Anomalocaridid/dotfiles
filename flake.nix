@@ -277,7 +277,6 @@
           stylix.nixosModules.stylix
           catppuccin.nixosModules.catppuccin
           nix-gaming.nixosModules.pipewireLowLatency
-          nix-gaming.nixosModules.steamCompat
           ssbm-nix.nixosModule
           spicetify-nix.nixosModules.spicetify
         ];
