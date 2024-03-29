@@ -17,7 +17,7 @@
       # Also prevents build failures if there are issues with patch
       (vinegar.overrideAttrs (oldAttrs:
         {
-          buildInputs = map (x: if x.pname == "wine-wow-staging" then wine-ge else x) oldAttrs.buildInputs;
+          buildInputs = map (x: if x.pname == "wine64-staging" then wine-ge else x) oldAttrs.buildInputs;
 
           postInstall = ''
             wrapProgram $out/bin/vinegar \
