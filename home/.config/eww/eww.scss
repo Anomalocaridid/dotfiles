@@ -15,9 +15,8 @@
   border: 0.05rem solid p.$lavender;
 }
 
-.bar {
+.bar, tooltip {
   @include rootContainer;
-  padding: 0.75rem;
 }
 
 // Ensure elements don't go over the sides
@@ -29,10 +28,6 @@
 
 @include sideBar(left);
 @include sideBar(right);
-
-tooltip {
-  @include rootContainer;
-}
 
 scale trough {
   background-color: p.$overlay0;

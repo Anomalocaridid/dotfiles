@@ -76,7 +76,7 @@
 (defwidget time []
   (eventbox :onclick "${EWW_CMD} open --toggle calendar"
             :onrightclick "${EWW_CMD} update military-time=${!military-time}"
-            :spacing 5
+            ; :spacing 5
             :tooltip {formattime(timestamp, "  %b %d, %Y")}
             {formattime(timestamp, "󰅐 ${military-time ? "%T" : "%r"}")}))
 
@@ -230,7 +230,8 @@
     ; TODO: Show all cores on click
     (percent :class "cpu"
              :label "󰘚"
-             :value {jq(EWW_CPU.cores, "[.[].usage] | add / length")}
+             :value {EWW_CPU.avg}
+             ; :value {jq(EWW_CPU.cores, "[.[].usage] | add / length")}
              :reveal-graph show-cpu)
     ; TODO: Show used and free on click
     (percent :class "disk"
