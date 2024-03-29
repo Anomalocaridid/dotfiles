@@ -18,7 +18,8 @@
       firefox # fallback browser
       freetube
       fup-repl
-      gimp-with-plugins
+      gimp # remove when gimp-with-plugins fixed
+      # gimp-with-plugins # uncomment when fixed
       itd
       keepassxc
       killall
