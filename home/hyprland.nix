@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, ... }: {
   # Additional dependencies
   home.packages = with pkgs; [
     custom.screenshot
@@ -15,8 +15,8 @@
     {
       enable = true;
       catppuccin.enable = true;
-      plugins = [
-        inputs.hyprland-plugins.packages.${pkgs.system}.hyprtrails
+      plugins = with pkgs; [
+        hyprtrails
       ];
       settings =
         {

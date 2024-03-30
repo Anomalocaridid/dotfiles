@@ -24,10 +24,6 @@
 
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
-    # Hyprland flake
-    # Needed for plugins in external flakes
-    hyprland.url = "github:hyprwm/Hyprland";
-
     hyprlock = {
       url = "github:hyprwm/hyprlock";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,10 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
+    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
 
     # Hyprland community tools
     hyprland-contrib = {
@@ -236,8 +229,8 @@
     , impermanence
     , nix-index-database
     , flake-utils
-    , hyprland
     , hyprlock
+    , hyprland-plugins
     , hyprland-contrib
     , stylix
     , catppuccin
@@ -256,11 +249,11 @@
       sharedOverlays = [
         # custom overlay
         (import ./pkgs)
-        # Hyprland
-        hyprland.overlays.default
         # Hyprlock
         # Needed for lockman.sh
         hyprlock.overlays.default
+        # Hyprland plugins
+        hyprland-plugins.overlays.default
         # Hyprland community tools
         hyprland-contrib.overlays.default
         # Up to date Unison packages

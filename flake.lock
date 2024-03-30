@@ -491,10 +491,12 @@
       "inputs": {
         "hyprlang": "hyprlang_2",
         "nixpkgs": [
+          "hyprland-plugins",
           "hyprland",
           "nixpkgs"
         ],
         "systems": [
+          "hyprland-plugins",
           "hyprland",
           "systems"
         ]
@@ -546,11 +548,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1711739238,
-        "narHash": "sha256-GoSP6h30o2tsNX0H/6+qphh5FHE08Wvv7ud28MiOwTI=",
+        "lastModified": 1711768162,
+        "narHash": "sha256-TFXPKrAwobDQ13TyBwrc2W81RRisAG338CgNO7bLGuQ=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "54376d7b5f88bffd96ce9ded26637d83d7aa95b1",
+        "rev": "6fb8f502050c269597636c3b0bfcf046f7f6a947",
         "type": "github"
       },
       "original": {
@@ -581,9 +583,7 @@
     },
     "hyprland-plugins": {
       "inputs": {
-        "hyprland": [
-          "hyprland"
-        ],
+        "hyprland": "hyprland",
         "systems": [
           "hyprland-plugins",
           "hyprland",
@@ -607,10 +607,12 @@
     "hyprland-protocols": {
       "inputs": {
         "nixpkgs": [
+          "hyprland-plugins",
           "hyprland",
           "nixpkgs"
         ],
         "systems": [
+          "hyprland-plugins",
           "hyprland",
           "systems"
         ]
@@ -653,6 +655,7 @@
     "hyprlang_2": {
       "inputs": {
         "nixpkgs": [
+          "hyprland-plugins",
           "hyprland",
           "hyprcursor",
           "nixpkgs"
@@ -676,10 +679,12 @@
     "hyprlang_3": {
       "inputs": {
         "nixpkgs": [
+          "hyprland-plugins",
           "hyprland",
           "nixpkgs"
         ],
         "systems": [
+          "hyprland-plugins",
           "hyprland",
           "systems"
         ]
@@ -1073,7 +1078,6 @@
         "fzf.xplr": "fzf.xplr",
         "home-manager": "home-manager",
         "hypridle": "hypridle",
-        "hyprland": "hyprland",
         "hyprland-contrib": "hyprland-contrib",
         "hyprland-plugins": "hyprland-plugins",
         "hyprlock": "hyprlock",
@@ -1449,18 +1453,22 @@
     "xdph": {
       "inputs": {
         "hyprland-protocols": [
+          "hyprland-plugins",
           "hyprland",
           "hyprland-protocols"
         ],
         "hyprlang": [
+          "hyprland-plugins",
           "hyprland",
           "hyprlang"
         ],
         "nixpkgs": [
+          "hyprland-plugins",
           "hyprland",
           "nixpkgs"
         ],
         "systems": [
+          "hyprland-plugins",
           "hyprland",
           "systems"
         ]
