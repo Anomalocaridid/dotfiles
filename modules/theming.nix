@@ -2,6 +2,7 @@
 
   # TTY theming
   console = {
+    catppuccin.enable = true;
     font =
       let
         font = config.stylix.fonts.monospace;
@@ -23,31 +24,6 @@
         ${mkttyfont}/bin/mkttyfont *.ttf ${size} ${dpi}
         cp *.psf $out
       '';
-    colors =
-      let
-        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
-      in
-      [
-        # Normal
-        palette.base.hex
-        palette.red.hex
-        palette.green.hex
-        palette.yellow.hex
-        palette.blue.hex
-        palette.pink.hex
-        palette.teal.hex
-        palette.subtext1.hex
-
-        # Bright
-        palette.surface2.hex
-        palette.red.hex
-        palette.green.hex
-        palette.yellow.hex
-        palette.blue.hex
-        palette.pink.hex
-        palette.teal.hex
-        palette.subtext0.hex
-      ];
   };
 
   # Configure Qt theme
