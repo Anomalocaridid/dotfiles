@@ -15,9 +15,6 @@
     {
       enable = true;
       catppuccin.enable = true;
-      plugins = with pkgs; [
-        hyprtrails
-      ];
       settings =
         {
           # Execute your favorite apps at launch

@@ -34,8 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
-
     # Hyprland community tools
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
@@ -230,7 +228,6 @@
     , nix-index-database
     , flake-utils
     , hyprlock
-    , hyprland-plugins
     , hyprland-contrib
     , stylix
     , catppuccin
@@ -252,8 +249,6 @@
         # Hyprlock
         # Needed for lockman.sh
         hyprlock.overlays.default
-        # Hyprland plugins
-        hyprland-plugins.overlays.default
         # Hyprland community tools
         hyprland-contrib.overlays.default
         # Up to date Unison packages
