@@ -217,6 +217,12 @@
       url = "github:dtomvan/extra-icons.xplr";
       flake = false;
     };
+
+    # Remove when nixpkgs/#297434 is merged
+    ly-module-patch = {
+      url = "https://github.com/NixOS/nixpkgs/pull/297434.patch";
+      flake = false;
+    };
   };
 
   outputs =
@@ -241,7 +247,9 @@
 
       channelsConfig.allowUnfree = true;
 
-      # channels."nixpkgs".patches = [ ];
+      channels."nixpkgs".patches = [
+        inputs.ly-module-patch
+      ];
 
       sharedOverlays = [
         # custom overlay

@@ -642,6 +642,18 @@
         "type": "github"
       }
     },
+    "ly-module-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-jgJ9yKdK+OQZ2Blc5mPjeX5vSPL57iBN/9eLUlw+yD0=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/297434.patch"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/297434.patch"
+      }
+    },
     "nix": {
       "inputs": {
         "lowdown-src": "lowdown-src",
@@ -913,6 +925,7 @@
         "hyprlock": "hyprlock",
         "icons.xplr": "icons.xplr",
         "impermanence": "impermanence",
+        "ly-module-patch": "ly-module-patch",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",

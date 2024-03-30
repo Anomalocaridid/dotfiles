@@ -9,6 +9,7 @@
         "/var/lib/libvirt" # Virtual machine data
       ];
       files = [
+        "/etc/ly/save" # Ly default username and desktop
         "/etc/machine-id" # Unique system id for logging, etc.
       ];
     };
