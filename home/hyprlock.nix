@@ -8,7 +8,7 @@
       enable = true;
 
       sources = [
-        (inputs.catppuccin-hyprlock + "/themes/${config.catppuccin.flavour}/mocha.conf")
+        (inputs.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf")
       ];
       general = {
         grace = 2;

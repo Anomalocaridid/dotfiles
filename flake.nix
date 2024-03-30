@@ -63,14 +63,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Unofficial Catppuccin ports
-    catppuccin-swaylock = {
-      url = "github:remiposo/swaylock";
-      flake = false;
-    };
-
-    catppuccin-hyprlock = {
-      url = "github:NikSneMC/hyprlock";
+    # Needed for hyprlock config
+    # Provides color palette
+    catppuccin-hyprland = {
+      url = "github:catppuccin/hyprland";
       flake = false;
     };
 

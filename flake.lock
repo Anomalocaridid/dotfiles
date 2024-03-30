@@ -162,35 +162,19 @@
         "type": "github"
       }
     },
-    "catppuccin-hyprlock": {
+    "catppuccin-hyprland": {
       "flake": false,
       "locked": {
-        "lastModified": 1711675591,
-        "narHash": "sha256-mcpdK00u7ovVaAd9z7MngVtwoDIipqq94BNe7sCn7Xs=",
-        "owner": "NikSneMC",
-        "repo": "hyprlock",
-        "rev": "cc88f6b973e565746d22d96067f80dc135b822eb",
+        "lastModified": 1702668781,
+        "narHash": "sha256-9BhZq9J1LmHfAPBqOr64chiAEzS+YV6zqe9ma95V3no=",
+        "owner": "catppuccin",
+        "repo": "hyprland",
+        "rev": "fc228737d3d0c12e34a7fa155a0fc3192e5e4017",
         "type": "github"
       },
       "original": {
-        "owner": "NikSneMC",
-        "repo": "hyprlock",
-        "type": "github"
-      }
-    },
-    "catppuccin-swaylock": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1705455043,
-        "narHash": "sha256-e17JVWyj+ES9qII8Ukj6JxZh4bWUK+gOKsTvUIu3Qq4=",
-        "owner": "remiposo",
-        "repo": "swaylock",
-        "rev": "ac089b8b8ae7852816fa709f6d97659221b75e18",
-        "type": "github"
-      },
-      "original": {
-        "owner": "remiposo",
-        "repo": "swaylock",
+        "owner": "catppuccin",
+        "repo": "hyprland",
         "type": "github"
       }
     },
@@ -907,8 +891,7 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
-        "catppuccin-hyprlock": "catppuccin-hyprlock",
-        "catppuccin-swaylock": "catppuccin-swaylock",
+        "catppuccin-hyprland": "catppuccin-hyprland",
         "catppuccin-toolbox": "catppuccin-toolbox",
         "context-switch.xplr": "context-switch.xplr",
         "demeter": "demeter",
