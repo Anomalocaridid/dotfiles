@@ -10,7 +10,9 @@
           window_background_opacity = 0.90;
           exit_behavior = "Close";
           check_for_updates = false;
-          enable_wayland = true;
+          # enable_wayland = true;
+          # Re-enable once wezterm/#5067 is fixed
+          enable_wayland = false;
           enable_kitty_graphics = true;
           window_close_confirmation = "NeverPrompt";
 
