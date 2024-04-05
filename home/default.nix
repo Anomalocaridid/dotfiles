@@ -26,6 +26,7 @@
       neofetch
       pavucontrol # Graphical audio controller
       qalculate-gtk
+      quickemu # Make and run VMs
       strawberry
       tree
       tuxpaint
@@ -46,14 +47,6 @@
     # DON'T TOUCH
     # Use system-level stateVersion
     stateVersion = osConfig.system.stateVersion;
-  };
-
-  # Set qemu as hypervisor for virt-manager
-  dconf.settings = {
-    "org/virt-manager/virt-manager/connections" = rec {
-      uris = lib.hm.gvariant.mkArray "s" [ "qemu:///system" ];
-      autoconnect = uris;
-    };
   };
 
   programs = {

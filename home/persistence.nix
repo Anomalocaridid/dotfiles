@@ -28,6 +28,7 @@
       "Projects" # Misc. programming
       "qmk_firmware" # QMK firmware
       "qmk_userspace" # QMK userspace
+      "quickemu" # quickemu VMs
       "Slippi" # Slippi replays
       ".ssh" # SSH key
       "Sync" # Syncthing

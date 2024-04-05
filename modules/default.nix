@@ -42,6 +42,8 @@
       };
       efi.canTouchEfiVariables = true;
     };
+    # Enable KVM nested virtualization
+    extraModprobeConfig = "options kvm_amd nested=1";
   };
 
   networking = {

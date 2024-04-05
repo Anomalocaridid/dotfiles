@@ -110,6 +110,8 @@
             "workspace 5, title:^(Spotify.*)$"
             # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
             "idleinhibit fullscreen, class:^(FreeTube)$"
+            # Disable floating for QEMU screens
+            "tile, class:^(.qemu-system-x86_64-wrapped)$"
           ];
 
           "$mainMod" = "SUPER";
@@ -262,14 +264,15 @@
           # use double quote the key and the value
           # take class name from 'hyprctl clients'
           # "DEFAULT" = " {class}: {title}";
+          "ArmCord" = "󰙯";
           "blueman-manager" = "";
           "DEFAULT" = "";
           "[Ff]irefox" = "";
+          "filemanager" = "";
           "FreeTube" = "";
           "libreoffice" = "󰈙";
           "lutris" = "";
           "Minecraft" = "󰍳";
-          "filemanager" = "";
           "nyxt" = "󰖟";
           "org.keepassxc.KeePassXC" = "󰌋";
           "org.prismlauncher.PrismLauncher" = "󰍳";
@@ -277,9 +280,8 @@
           "org.wezfurlong.wezterm" = "";
           "pavucontrol" = "󰕾";
           "Py[Ss]ol" = "󰣎";
+          ".qemu-system-x86_64-wrapped" = "󰍺";
           "steam" = "󰓓";
-          "virt-manager" = "󰍺";
-          "ArmCord" = "󰙯";
           ".yubioath-flutter-wrapped_" = "󰌋";
         };
 

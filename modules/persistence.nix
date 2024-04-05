@@ -6,7 +6,6 @@
         "/etc/NetworkManager/system-connections" # Network connections
         "/etc/nixos" # Nix config
         "/var/lib/clamav" # ClamAV signature database
-        "/var/lib/libvirt" # Virtual machine data
       ];
       files = [
         "/etc/ly/save" # Ly default username and desktop

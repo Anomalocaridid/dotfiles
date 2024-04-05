@@ -11,7 +11,6 @@ in
       isNormalUser = true;
       extraGroups = [
         "wheel" # Enable ‘sudo’ for the user
-        "libvirtd" # Allow access to virt-manager
         "networkmanager" # Change network settings
       ];
       hashedPasswordFile = "${passwordDir}/${user}";
