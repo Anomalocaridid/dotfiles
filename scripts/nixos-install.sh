@@ -24,7 +24,7 @@ PS3="Select device config to install: "
 device_list="$(nix "${NIX_FLAGS[@]}" flake show --json $FLAKE |
 	nix "${NIX_FLAGS[@]}" run nixpkgs#jq -- --raw-output ".nixosConfigurations | keys[]")"
 
-select device in "$device_list" "quit"; do
+select device in $device_list "quit"; do
 	case $device in
 	"quit")
 		echo "Aborting install"
