@@ -55,7 +55,7 @@
     };
 
     # Catppuccin Theming
-    catppuccin.url = "github:Stonks3141/ctp-nix";
+    catppuccin.url = "github:catppuccin/nix";
 
     # Catppuccin port creation tools
     catppuccin-toolbox = {
