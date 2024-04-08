@@ -14,7 +14,8 @@
         (ps: with ps; lib.concatLists [
           [
             pylsp-mypy # Static type checker
-            python-lsp-black # Formatter
+            # Commented out because it is broken
+            # python-lsp-black # Formatter
             python-lsp-server
             pyls-isort # Import sorter
           ]
