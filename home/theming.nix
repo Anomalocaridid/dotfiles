@@ -18,7 +18,6 @@
       candy-icons
       # Tools for making catppuccin ports
       inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
-      inputs.catppuccin-toolbox.packages.${pkgs.system}.puccinier
       inputs.catppuccin-toolbox.packages.${pkgs.system}.whiskers
     ];
   };
