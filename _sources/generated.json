@@ -1,4 +1,24 @@
 {
+    "catppuccin-fuzzel": {
+        "cargoLocks": null,
+        "date": "2024-01-24",
+        "extract": null,
+        "name": "catppuccin-fuzzel",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "catppuccin",
+            "repo": "fuzzel",
+            "rev": "eeb4c8d159187ef7eb59a4a99baec67c2e797e9f",
+            "sha256": "sha256-yJvhc4ovgdxEdqFDxWNOkHJHTBF9UaCefetgCGhoG0A=",
+            "type": "github"
+        },
+        "version": "eeb4c8d159187ef7eb59a4a99baec67c2e797e9f"
+    },
     "catppuccin-hyprland": {
         "cargoLocks": null,
         "date": "2024-04-03",
@@ -18,6 +38,46 @@
             "type": "github"
         },
         "version": "b57375545f5da1f7790341905d1049b1873a8bb3"
+    },
+    "catppuccin-prismlauncher": {
+        "cargoLocks": null,
+        "date": "2024-03-30",
+        "extract": null,
+        "name": "catppuccin-prismlauncher",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "catppuccin",
+            "repo": "prismlauncher",
+            "rev": "07e9c3ca0ff8eb7da9fa8b5329a9d2ceec707f24",
+            "sha256": "sha256-/qUqF92e3kYkl59GUMMFRtRTzVgSp5tGPxnXLGeusys=",
+            "type": "github"
+        },
+        "version": "07e9c3ca0ff8eb7da9fa8b5329a9d2ceec707f24"
+    },
+    "catppuccin-wallpapers": {
+        "cargoLocks": null,
+        "date": "2022-08-24",
+        "extract": null,
+        "name": "catppuccin-wallpapers",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "zhichaoh",
+            "repo": "catppuccin-wallpapers",
+            "rev": "1023077979591cdeca76aae94e0359da1707a60e",
+            "sha256": "sha256-h+cFlTXvUVJPRMpk32jYVDDhHu1daWSezFcvhJqDpmU=",
+            "type": "github"
+        },
+        "version": "1023077979591cdeca76aae94e0359da1707a60e"
     },
     "context-switch-xplr": {
         "cargoLocks": null,
@@ -313,6 +373,21 @@
             "type": "github"
         },
         "version": "83919a692bc1194aa322f3627c859fecace5f496"
+    },
+    "roblox-oof": {
+        "cargoLocks": null,
+        "date": null,
+        "extract": null,
+        "name": "roblox-oof",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "name": null,
+            "sha256": "sha256-vcxbfljNxTFS+uFxrV/zKdDWWBBYN2hJIwkN5MN8AH0=",
+            "type": "url",
+            "url": "https://archive.org/download/savetheoof/ouch.ogg"
+        },
+        "version": "latest"
     },
     "scp-xplr": {
         "cargoLocks": null,
