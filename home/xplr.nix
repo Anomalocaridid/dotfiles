@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }: {
+{ lib, pkgs, ... }: {
   home.packages = with pkgs; [
     # Plugin dependencies
     xdragon
@@ -71,7 +71,7 @@
       plugins = lib.trivial.pipe pluginArgs
         [
           (map (plugin: {
-            "${plugin.name}" = inputs."${plugin.name}.xplr";
+            "${plugin.name}" = pkgs.sources."${plugin.name}-xplr";
           }))
           lib.attrsets.mergeAttrsList
         ];

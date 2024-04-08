@@ -1,4 +1,4 @@
-{ lib, pkgs, inputs, ... }: {
+{ lib, pkgs, ... }: {
   programs.fish = {
     enable = true;
     catppuccin.enable = true;
@@ -75,9 +75,9 @@
           inherit name;
           src = fishPlugins."${name}".src;
         };
-        pluginFromInputs = name: {
+        pluginFromSources = name: {
           inherit name;
-          src = inputs."${name}";
+          src = sources."${name}";
         };
       in
       lib.concatLists [
@@ -87,7 +87,7 @@
           "fzf-fish"
           "grc"
         ])
-        (map pluginFromInputs [
+        (map pluginFromSources [
           "fish-bd"
           "plugin-sudope"
           "you-should-use"

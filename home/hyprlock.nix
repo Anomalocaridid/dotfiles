@@ -1,4 +1,4 @@
-{ config, inputs, ... }: {
+{ config, pkgs, ... }: {
   programs.hyprlock =
     let
       transparent = "0x00000000";
@@ -8,7 +8,7 @@
       enable = true;
 
       sources = [
-        (inputs.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf")
+        (pkgs.sources.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf")
       ];
       general = {
         grace = 2;

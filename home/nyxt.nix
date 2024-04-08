@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ config, lib, pkgs, ... }: {
   home.packages = with pkgs; [ nyxt ];
   xdg =
     let
@@ -222,7 +222,7 @@
 
       dataFile = lib.attrsets.mergeAttrsList (map
         (extension: {
-          "nyxt/extensions/${extension}".source = inputs.${extension};
+          "nyxt/extensions/${extension}".source = pkgs.sources.${extension};
         })
         plugins);
     };

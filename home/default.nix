@@ -24,6 +24,7 @@
       keepassxc
       killall
       neofetch
+      nvfetcher
       pavucontrol # Graphical audio controller
       qalculate-gtk
       quickemu # Make and run VMs
