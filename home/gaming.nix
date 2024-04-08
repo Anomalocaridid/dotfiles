@@ -53,10 +53,7 @@
             info = 0x${palette.yellow.hex}
           '';
         # Use the classic Roblox oof
-        "vinegar/overlay/content/sounds/ouch.ogg".source = pkgs.fetchurl {
-          url = "https://archive.org/download/savetheoof/ouch.ogg";
-          hash = "sha256-vcxbfljNxTFS+uFxrV/zKdDWWBBYN2hJIwkN5MN8AH0=";
-        };
+        "vinegar/overlay/content/sounds/ouch.ogg".source = pkgs.sources.roblox-oof;
       };
       dataFile."PrismLauncher/themes/catppuccin-${config.catppuccin.flavour}".source =
         let
@@ -64,30 +61,12 @@
             (lib.strings.toUpper (builtins.substring 0 1 string))
             + (builtins.substring 1 (builtins.stringLength string) string)
           ) config.catppuccin.flavour;
-          themeDirectory = "share/catppuccin-${config.catppuccin.flavour}";
         in
-        (pkgs.stdenvNoCC.mkDerivation rec {
-          name = "catppuccin-prismlauncher-theme";
-          version = "2023-10-17_1697558708";
-          src = pkgs.fetchzip {
-            url = "https://github.com/PrismLauncher/Themes/releases/download/${version}/Catppuccin-${capitalFlavour}.zip";
-            hash = "sha256-QJ1pLSQFDn7p0d68MafSBp4cp5E2Bk5yqBqnOqdbu10=";
-          };
-
-          installPhase = ''
-            runHook preInstall
-
-            mkdir -p $out/${themeDirectory}
-            cp -r $src/* $out/${themeDirectory}
-
-            runHook postInstall
-          '';
-
-          # Inspired by https://github.com/catppuccin/prismlauncher/issues/1
-          postInstall = ''
-            substituteInPlace $out/${themeDirectory}/theme.json \
-              --replace '"Highlight": "#b4befe"' '"Highlight": "#${palette.${config.catppuccin.accent}.hex}"'
-          '';
-        }) + "/${themeDirectory}";
+        pkgs.runCommand "catppuccin-prismlauncher-theme" { } ''
+          mkdir -p $out
+          cp -r ${pkgs.sources.catppuccin-prismlauncher}/themes/${capitalFlavour}/* $out
+          substituteInPlace $out/theme.json \
+            --replace '"Highlight": "#b4befe"' '"Highlight": "#${palette.${config.catppuccin.accent}.hex}"'
+        '';
     };
 }

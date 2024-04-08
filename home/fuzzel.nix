@@ -2,12 +2,7 @@
   programs.fuzzel =
     let
       fonts = config.stylix.fonts;
-      themeFile = (pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "fuzzel";
-        rev = "eeb4c8d159187ef7eb59a4a99baec67c2e797e9f";
-        hash = "sha256-yJvhc4ovgdxEdqFDxWNOkHJHTBF9UaCefetgCGhoG0A=";
-      }) + "/themes/${config.catppuccin.flavour}.ini";
+      themeFile = pkgs.sources.catppuccin-fuzzel + "/themes/${config.catppuccin.flavour}.ini";
       theme =
         let
           inherit (builtins) fromJSON readFile;

@@ -4,6 +4,24 @@
 src.git = "https://github.com/catppuccin/hyprland.git"
 fetch.github = "catppuccin/hyprland"
 
+[catppuccin-prismlauncher]
+src.git = "https://github.com/catppuccin/prismlauncher.git"
+fetch.github = "catppuccin/prismlauncher"
+
+[catppuccin-fuzzel]
+src.git = "https://github.com/catppuccin/fuzzel.git"
+fetch.github = "catppuccin/fuzzel"
+
+# Provides GRUB wallpaper
+[catppuccin-wallpapers]
+src.git = "https://github.com/zhichaoh/catppuccin-wallpapers.git"
+fetch.github = "zhichaoh/catppuccin-wallpapers"
+
+# For vinegar overlay
+[roblox-oof]
+src.manual = "latest"
+fetch.url = "https://archive.org/download/savetheoof/ouch.ogg"
+
 # Fish plugins
 [fish-bd]
 src.git = "https://github.com/0rax/fish-bd.git"
