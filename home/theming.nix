@@ -19,6 +19,7 @@
       # Tools for making catppuccin ports
       inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
       inputs.catppuccin-toolbox.packages.${pkgs.system}.whiskers
+      just
     ];
   };
 
