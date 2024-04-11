@@ -120,3 +120,9 @@ fetch.github = "jbms/icons.xplr"
 [extra-icons-xplr]
 src.git = "https://github.com/dtomvan/extra-icons.xplr.git"
 fetch.github = "dtomvan/extra-icons.xplr"
+
+# Animated wallpaper
+# https://valenberg.tumblr.com/post/142420848259/animated-banner-artwork-for-the-great-rolly
+[wallpaper]
+src.manual = "latest"
+fetch.url = "https://64.media.tumblr.com/c5543874b9cbe98da1d20945a45e989b/tumblr_o5a5r9Z9O71tvppquo1_r1_1280.gifv"

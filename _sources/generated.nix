@@ -281,6 +281,14 @@
     };
     date = "2022-01-19";
   };
+  wallpaper = {
+    pname = "wallpaper";
+    version = "latest";
+    src = fetchurl {
+      url = "https://64.media.tumblr.com/c5543874b9cbe98da1d20945a45e989b/tumblr_o5a5r9Z9O71tvppquo1_r1_1280.gifv";
+      sha256 = "sha256-iU65D6V/VQFELwF8V10jwQk8T8xowjRs8eERzn3B7YA=";
+    };
+  };
   wl-clipboard-xplr = {
     pname = "wl-clipboard-xplr";
     version = "a3ffc87460c5c7f560bffea689487ae14b36d9c3";

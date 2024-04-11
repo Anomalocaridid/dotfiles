@@ -4,8 +4,8 @@
     custom.screenshot
     hyprland-autoname-workspaces
     hyprpicker # color picker
-    mpvpaper # Live wallpaper
     scratchpad
+    swww # wallpaper
   ];
 
   wayland.windowManager.hyprland =
@@ -17,15 +17,16 @@
       catppuccin.enable = true;
       settings =
         {
-          # Execute your favorite apps at launch
           exec-once = [
-            # Set up live wallpaper
-            # https://moewalls.com/pixel-art/cyberpunk-rain-city-pixel-live-wallpaper/
-            "mpvpaper -o 'no-audio loop' HDMI-A-1 '/etc/nixos/assets/wallpaper.mp4'"
+            "swww-daemon"
             "eww open bar"
             "hyprland-autoname-workspaces"
             # "armcord"
             "steam -silent"
+          ];
+
+          exec = [
+            "swww img --transition-type none ${pkgs.sources.wallpaper}"
           ];
 
           general = {
