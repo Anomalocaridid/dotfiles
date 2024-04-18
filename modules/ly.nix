@@ -1,8 +1,5 @@
 { ... }: {
   services = {
-    # Needed for ly to work
-    xserver.enable = true;
-
     displayManager.ly = {
       enable = true;
       settings = {
