@@ -158,5 +158,7 @@
         disk = "/dev/nvme0n1";
         memory = "32G";
       });
+
+      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
     };
 }
