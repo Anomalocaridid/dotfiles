@@ -1,4 +1,10 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
 
   # TTY theming
   console = {
@@ -11,19 +17,18 @@
         dpi = toString 80;
       in
       pkgs.runCommand "${font.name}-${size}.psf"
-        {
-          FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ font.package ]; };
-        } ''
-        export XDG_CACHE_HOME="$(mktemp -d)"
-        # Use fontconfig to select the correct .ttf or .otf file based on name
-        # Command taken from Stylix GRUB module
-        fontPath=$(${pkgs.fontconfig}/bin/fc-match -v "${font.name}" | grep "file:" | cut -d '"' -f 2)
-        cp $fontPath .
-        
-        # Convert font from tty to psf
-        ${mkttyfont}/bin/mkttyfont *.ttf ${size} ${dpi}
-        cp *.psf $out
-      '';
+        { FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ font.package ]; }; }
+        ''
+          export XDG_CACHE_HOME="$(mktemp -d)"
+          # Use fontconfig to select the correct .ttf or .otf file based on name
+          # Command taken from Stylix GRUB module
+          fontPath=$(${pkgs.fontconfig}/bin/fc-match -v "${font.name}" | grep "file:" | cut -d '"' -f 2)
+          cp $fontPath .
+
+          # Convert font from tty to psf
+          ${mkttyfont}/bin/mkttyfont *.ttf ${size} ${dpi}
+          cp *.psf $out
+        '';
   };
 
   # Configure Qt theme

@@ -17,9 +17,7 @@ in
     let
       iniFormat = pkgs.formats.ini { };
     in
-    iniFormat.generate "qmk-config" {
-      user.overlay_dir = qmkRepoDir;
-    };
+    iniFormat.generate "qmk-config" { user.overlay_dir = qmkRepoDir; };
 
   systemd.user.services.qmk-clone = {
     Unit = {

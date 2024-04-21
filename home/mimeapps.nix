@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   xdg = {
     mimeApps = {
       enable = true;
@@ -49,22 +50,21 @@
       let
         tomlFormat = pkgs.formats.toml { };
       in
-      tomlFormat.generate "handlr-config"
-        {
-          enable_selector = false;
-          selector = "fuzzel --dmenu --prompt='Open With: '";
-          term_exec_args = "";
-          handlers = [
-            {
-              exec = "freetube %u";
-              regexes = [ "youtu(be.com|.be)" ];
-            }
-            {
-              exec = "handlr open steam://openurl/%u";
-              regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
-            }
-          ];
-        };
+      tomlFormat.generate "handlr-config" {
+        enable_selector = false;
+        selector = "fuzzel --dmenu --prompt='Open With: '";
+        term_exec_args = "";
+        handlers = [
+          {
+            exec = "freetube %u";
+            regexes = [ "youtu(be.com|.be)" ];
+          }
+          {
+            exec = "handlr open steam://openurl/%u";
+            regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
+          }
+        ];
+      };
   };
 
   home.packages = with pkgs; [
@@ -73,7 +73,7 @@
     (writeShellApplication {
       name = "xdg-open";
       runtimeInputs = [ handlr-regex ];
-      text = #shell
+      text = # shell
         ''
           handlr open "$@"
         '';
@@ -82,21 +82,10 @@
     (writeShellApplication {
       name = "xterm";
       runtimeInputs = [ handlr-regex ];
-      text = #shell
+      text = # shell
         ''
           handlr launch x-scheme-handler/terminal -- "$@"
         '';
     })
   ];
-
 }
-
-
-
-
-
-
-
-
-
-

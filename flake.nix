@@ -96,30 +96,30 @@
   };
 
   outputs =
-    inputs@{ self
-    , nixpkgs
-    , disko
-    , home-manager
-    , impermanence
-    , nix-index-database
-    , flake-utils
-    , hyprlock
-    , hyprland-contrib
-    , stylix
-    , catppuccin
-    , nix-gaming
-    , ssbm-nix
-    , spicetify-nix
-    , unison-nix
-    , ...
-    }: flake-utils.lib.mkFlake rec {
+    inputs@{
+      self,
+      nixpkgs,
+      disko,
+      home-manager,
+      impermanence,
+      nix-index-database,
+      flake-utils,
+      hyprlock,
+      hyprland-contrib,
+      stylix,
+      catppuccin,
+      nix-gaming,
+      ssbm-nix,
+      spicetify-nix,
+      unison-nix,
+      ...
+    }:
+    flake-utils.lib.mkFlake rec {
       inherit self inputs;
 
       channelsConfig.allowUnfree = true;
 
-      channels."nixpkgs".patches = [
-        inputs.ly-module-patch
-      ];
+      channels."nixpkgs".patches = [ inputs.ly-module-patch ];
 
       sharedOverlays = [
         # custom overlay
@@ -154,10 +154,12 @@
       ];
 
       # Expose this to use flake directly with Disko
-      diskoConfigurations.home-pc = (import ./disko-config.nix {
-        disk = "/dev/nvme0n1";
-        memory = "32G";
-      });
+      diskoConfigurations.home-pc = (
+        import ./disko-config.nix {
+          disk = "/dev/nvme0n1";
+          memory = "32G";
+        }
+      );
 
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixfmt-rfc-style;
     };

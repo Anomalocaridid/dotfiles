@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   home.packages = with pkgs; [
     # Plugin dependencies
     xdragon
@@ -49,11 +50,13 @@
         { name = "extra-icons"; }
       ];
       luaFormat = lib.generators.toLua { };
-      renderPlugin = ({ name
-                      , args ? null
-                      , bind ? null
-                      , setup ? true
-                      }:
+      renderPlugin = (
+        {
+          name,
+          args ? null,
+          bind ? null,
+          setup ? true,
+        }:
         let
           inherit (lib.strings) optionalString;
           bindName = optionalString (bind != null) "\n${bind}";
@@ -68,17 +71,17 @@
     in
     {
       enable = true;
-      plugins = lib.trivial.pipe pluginArgs
-        [
-          (map (plugin: {
-            "${plugin.name}" = pkgs.sources."${plugin.name}-xplr";
-          }))
-          lib.attrsets.mergeAttrsList
-        ];
-      extraConfig = #lua
+      plugins = lib.trivial.pipe pluginArgs [
+        (map (plugin: {
+          "${plugin.name}" = pkgs.sources."${plugin.name}-xplr";
+        }))
+        lib.attrsets.mergeAttrsList
+      ];
+      extraConfig = # lua
         # Generate code to load plugins based on attrs
-        (lib.concatMapStrings renderPlugin pluginArgs) + #lua
-        ''
+        (lib.concatMapStrings renderPlugin pluginArgs)
+        # lua
+        + ''
           -- Add context switch pane to tri-pane layout
           xplr.fn.custom.render_active_contexts = function(ctx)
             local res = ""
@@ -193,5 +196,3 @@
         '';
     };
 }
-
-

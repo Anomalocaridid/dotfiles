@@ -21,7 +21,11 @@ final: prev: {
   # Custom-written packages
   custom = {
     catppuccin-palette-files = final.callPackage ./catppuccin-palette-files { };
-    catppuccin-palette = (builtins.fromJSON (builtins.readFile (final.custom.catppuccin-palette-files + /share/palette-porcelain.json)));
+    catppuccin-palette = (
+      builtins.fromJSON (
+        builtins.readFile (final.custom.catppuccin-palette-files + /share/palette-porcelain.json)
+      )
+    );
     # custom locking script
     lockman = final.callPackage ./lockman { };
     # custom screenshot script
@@ -29,12 +33,14 @@ final: prev: {
   };
 
   # Generated sources
-  sources = builtins.mapAttrs (_: p: p.src)
-    ((import ../_sources/generated.nix) {
-      inherit (final) fetchurl fetchgit fetchFromGitHub dockerTools;
-    });
+  sources = builtins.mapAttrs (_: p: p.src) (
+    (import ../_sources/generated.nix) {
+      inherit (final)
+        fetchurl
+        fetchgit
+        fetchFromGitHub
+        dockerTools
+        ;
+    }
+  );
 }
-
-
-
-

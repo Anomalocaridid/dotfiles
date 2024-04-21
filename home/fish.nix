@@ -1,4 +1,5 @@
-{ lib, pkgs, ... }: {
+{ lib, pkgs, ... }:
+{
   programs.fish = {
     enable = true;
     catppuccin.enable = true;
@@ -28,7 +29,7 @@
           bind \cz -M insert 'fg 2>/dev/null; commandline -f repaint'
         '';
     };
-    shellInit = #fish
+    shellInit = # fish
       ''
         # Initialize batpipe
         eval (batpipe)
@@ -66,7 +67,8 @@
       # lazygit
       lg = "lazygit";
     };
-    plugins = with pkgs;
+    plugins =
+      with pkgs;
       let
         pluginFromPkgs = name: {
           inherit name;
@@ -103,4 +105,3 @@
     ripgrep
   ];
 }
-

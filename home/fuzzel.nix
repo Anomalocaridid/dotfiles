@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   programs.fuzzel =
     let
       fonts = config.stylix.fonts;
@@ -7,7 +8,8 @@
         let
           inherit (builtins) fromJSON readFile;
 
-          json = with pkgs;
+          json =
+            with pkgs;
             runCommand "converted.json" { } ''
               ${jc}/bin/jc --ini < ${themeFile} > $out;
             '';

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   home.persistence."/persist/${config.home.homeDirectory}" = {
     allowOther = true;
     directories = [
@@ -58,5 +59,4 @@
       ".unison" # Unison codebase, needs to be persistent as all added code ends up there
     ];
   };
-
 }

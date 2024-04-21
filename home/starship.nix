@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   programs.starship = {
     enable = true;
     catppuccin.enable = true;
@@ -17,49 +18,49 @@
           python = "";
           rust = "";
         };
-        mkLangSeg = name: symbol:
-          {
-            "${name}" = {
-              symbol = symbol;
-              style = "fg:green bg:surface0";
-              format = "[ $symbol ($version)]($style)";
-            };
+        mkLangSeg = name: symbol: {
+          "${name}" = {
+            symbol = symbol;
+            style = "fg:green bg:surface0";
+            format = "[ $symbol ($version)]($style)";
           };
+        };
         langNames = builtins.attrNames langs;
-        langSegments = builtins.foldl'
-          (x: y: x // y)
-          { }
-          (lib.lists.zipListsWith
-            mkLangSeg
-            langNames
-            (builtins.attrValues langs));
+        langSegments = builtins.foldl' (x: y: x // y) { } (
+          lib.lists.zipListsWith mkLangSeg langNames (builtins.attrValues langs)
+        );
       in
-      langSegments // {
-        format = lib.concatStrings ([
-          "[](surface0)"
-          "$username"
-          "$hostname"
-          "[](fg:surface0 bg:surface1)"
-          "$directory"
-          "[](fg:surface1 bg:surface2)"
-          "$git_branch"
-          "$git_status"
-          "[](fg:surface2 bg:surface0)"
-        ] ++ (map (x: "$" + x) langNames) ++ [
-          "[](surface0)"
-          "$fill"
-          "[](surface0)"
-          "$cmd_duration"
-          "[](fg:surface1 bg:surface0)"
-          "$jobs"
-          "[](fg:surface2 bg:surface1)"
-          "$status"
-          "[](fg:surface0 bg:surface2)"
-          "$localip"
-          "[](surface0)"
-          "$line_break"
-          "$character"
-        ]);
+      langSegments
+      // {
+        format = lib.concatStrings (
+          [
+            "[](surface0)"
+            "$username"
+            "$hostname"
+            "[](fg:surface0 bg:surface1)"
+            "$directory"
+            "[](fg:surface1 bg:surface2)"
+            "$git_branch"
+            "$git_status"
+            "[](fg:surface2 bg:surface0)"
+          ]
+          ++ (map (x: "$" + x) langNames)
+          ++ [
+            "[](surface0)"
+            "$fill"
+            "[](surface0)"
+            "$cmd_duration"
+            "[](fg:surface1 bg:surface0)"
+            "$jobs"
+            "[](fg:surface2 bg:surface1)"
+            "$status"
+            "[](fg:surface0 bg:surface2)"
+            "$localip"
+            "[](surface0)"
+            "$line_break"
+            "$character"
+          ]
+        );
 
         # Bottom right only
         right_format = lib.concatStrings [

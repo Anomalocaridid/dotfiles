@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     (rWrapper.override {
       packages = with rPackages; [
@@ -16,9 +17,11 @@
         ];
       })
     ];
-    languages.language = [{
-      name = "r";
-      auto-format = true;
-    }];
+    languages.language = [
+      {
+        name = "r";
+        auto-format = true;
+      }
+    ];
   };
 }

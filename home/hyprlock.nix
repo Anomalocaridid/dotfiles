@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   programs.hyprlock =
     let
       transparent = "0x00000000";
@@ -7,24 +8,21 @@
     {
       enable = true;
 
-      sources = [
-        (pkgs.sources.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf")
-      ];
+      sources = [ (pkgs.sources.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf") ];
       general = {
         grace = 2;
         # Fade out takes a bit too long
         no_fade_out = true;
       };
-      backgrounds = [
-        {
-          color = transparent;
-        }
-      ];
+      backgrounds = [ { color = transparent; } ];
 
       input-fields = [
         # Center circle
         {
-          size = { width = 300; height = 250; };
+          size = {
+            width = 300;
+            height = 250;
+          };
           outline_thickness = 15;
           outer_color = "${opacity}$lavenderAlpha";
           inner_color = "$base";
@@ -39,7 +37,10 @@
           numlock_color = "${opacity}$yellowAlpha";
           bothlock_color = "${opacity}$pinkAlpha";
 
-          position = { x = 0; y = 0; };
+          position = {
+            x = 0;
+            y = 0;
+          };
         }
         # Password dots
         {
@@ -53,7 +54,10 @@
           capslock_color = transparent;
           numlock_color = transparent;
           bothlock_color = transparent;
-          position = { x = 0; y = -85; };
+          position = {
+            x = 0;
+            y = -85;
+          };
         }
       ];
 
@@ -64,7 +68,10 @@
           color = "$maroon";
           font_size = 20;
 
-          position = { x = 0; y = 85; };
+          position = {
+            x = 0;
+            y = 85;
+          };
         }
         # Time
         {
@@ -72,7 +79,10 @@
           color = "$text";
           font_size = 30;
 
-          position = { x = 0; y = 0; };
+          position = {
+            x = 0;
+            y = 0;
+          };
         }
         # Date
         {
@@ -80,7 +90,10 @@
           color = "$text";
           font_size = 20;
 
-          position = { x = 0; y = -50; };
+          position = {
+            x = 0;
+            y = -50;
+          };
         }
       ];
     };

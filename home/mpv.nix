@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   programs.mpv =
     let
       fonts = config.stylix.fonts;

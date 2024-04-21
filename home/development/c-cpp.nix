@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
     packages = with pkgs; [
       bear # For creating compilation databases for clangd
@@ -21,17 +22,19 @@
       clang-tools # Provides clangd lsp
     ];
     # Use same config for C and C++
-    languages.language = map
-      (name: {
-        inherit name;
-        auto-format = true;
-        indent = {
-          tab-width = 4;
-          unit = "    ";
-        };
-      }) [
-      "c"
-      "cpp"
-    ];
+    languages.language =
+      map
+        (name: {
+          inherit name;
+          auto-format = true;
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+        })
+        [
+          "c"
+          "cpp"
+        ];
   };
 }

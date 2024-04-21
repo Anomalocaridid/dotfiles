@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services = {
     # Enable ClamAV
     clamav = {
@@ -11,10 +12,8 @@
 
   security = {
     sudo = {
-      package = pkgs.sudo.override {
-        withInsults = true;
-      };
-      extraConfig = #sudo
+      package = pkgs.sudo.override { withInsults = true; };
+      extraConfig = # sudo
         ''
           # Prevents sudo lecture from appearing after reboot without persisting
           Defaults lecture = never

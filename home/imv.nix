@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   programs.imv =
     let
       fonts = config.stylix.fonts;

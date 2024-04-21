@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   programs.wlogout = {
     enable = true;
     layout = [
@@ -42,7 +48,8 @@
     style =
       let
         palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
-        recolorIcon = (color: icon:
+        recolorIcon = (
+          color: icon:
           let
             iconFile = "${config.programs.wlogout.package}/share/wlogout/icons/${icon}.png";
             recolored = pkgs.runCommand "${icon}-recolored.png" { } ''
@@ -54,7 +61,8 @@
             #${icon} {
               background-image: url("${recolored}");
             }
-          '');
+          ''
+        );
       in
       #css
       ''
@@ -63,11 +71,12 @@
         }
 
         window {
-        	background-color: rgba(${lib.trivial.pipe palette.base.rgb 
-          [
-            (builtins.map toString)
-            (lib.strings.concatStringsSep ", ")
-          ]}, 0.9);
+        	background-color: rgba(${
+           lib.trivial.pipe palette.base.rgb [
+             (builtins.map toString)
+             (lib.strings.concatStringsSep ", ")
+           ]
+         }, 0.9);
         }
 
         button {
@@ -86,10 +95,9 @@
         	outline-style: none;
         }
 
-        ${lib.concatStrings
-          (map
-            (button: recolorIcon "#${palette.text.hex}" button.label) 
-            config.programs.wlogout.layout)}
+        ${lib.concatStrings (
+          map (button: recolorIcon "#${palette.text.hex}" button.label) config.programs.wlogout.layout
+        )}
       '';
   };
 }

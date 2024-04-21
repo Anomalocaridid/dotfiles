@@ -1,4 +1,11 @@
-{ pkgs, config, osConfig, inputs, ... }: {
+{
+  pkgs,
+  config,
+  osConfig,
+  inputs,
+  ...
+}:
+{
   # Qt theme defined in configuration.nix because it works better at system level
   gtk = {
     enable = true;

@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   services.mako =
     let
       fonts = config.stylix.fonts;

@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   programs.bat = {
     enable = true;
     catppuccin.enable = true;
@@ -27,7 +33,12 @@
   # Custom batpipe viewers
   xdg.configFile."batpipe/viewers.d/custom.sh".text =
     let
-      makeViewer = { command, filetype, header ? "" }:
+      makeViewer =
+        {
+          command,
+          filetype,
+          header ? "",
+        }:
         let
           program = builtins.elemAt (lib.strings.splitString " " command) 0;
         in
@@ -51,10 +62,10 @@
             return "$?"
           }
         '';
-      batpipe_archive_header = #sh
-        '' 
-          batpipe_header    "Viewing contents of archive: %{PATH}%s" "$1"
-        	batpipe_subheader "To view files within the archive, add the file path after the archive."
+      batpipe_archive_header = # sh
+        ''
+            batpipe_header    "Viewing contents of archive: %{PATH}%s" "$1"
+          	batpipe_subheader "To view files within the archive, add the file path after the archive."
         '';
       batpipe_document_header = ''batpipe_header "Viewing text of document: %{PATH}%s" "$1"'';
     in

@@ -1,7 +1,6 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    unison-ucm
-  ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ unison-ucm ];
 
   programs.helix = {
     extraPackages = with pkgs; [
@@ -12,7 +11,10 @@
       language-server = {
         unison-language-server = {
           command = "netcat";
-          args = [ "localhost" "5757" ];
+          args = [
+            "localhost"
+            "5757"
+          ];
         };
       };
       language = [

@@ -1,17 +1,18 @@
-{ writeShellApplication
-, coreutils
-, handlr-regex
-, hyprland
-, hyprlock
-, util-linux
-, wezterm
-, neofetch
-, pv
-, asciiquarium-transparent
-, cbonsai
-, pipes-rs
-, unimatrix
-, ...
+{
+  writeShellApplication,
+  coreutils,
+  handlr-regex,
+  hyprland,
+  hyprlock,
+  util-linux,
+  wezterm,
+  neofetch,
+  pv,
+  asciiquarium-transparent,
+  cbonsai,
+  pipes-rs,
+  unimatrix,
+  ...
 }:
 let
   scriptName = "lockman";
@@ -27,7 +28,10 @@ let
   # Workaround to pipe neofetch's output
   neofetch-wrapper = writeShellApplication {
     name = "neofetch-wrapper.sh";
-    runtimeInputs = [ pv neofetch ];
+    runtimeInputs = [
+      pv
+      neofetch
+    ];
     text = ''
       neofetch | pv -qL 200
     '';

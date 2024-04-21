@@ -1,5 +1,6 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs;[
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [
     nixpkgs-review # Used to check rebuilds caused by changes to nixpkgs
   ];
 

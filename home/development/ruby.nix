@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     ruby
     rubyPackages.minitest
@@ -17,8 +18,6 @@
         }
       ];
     };
-    extraPackages = with pkgs; [
-      rubyPackages.solargraph
-    ];
+    extraPackages = with pkgs; [ rubyPackages.solargraph ];
   };
 }

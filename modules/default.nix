@@ -1,16 +1,24 @@
-{ lib, pkgs, inputs, ... }: {
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
   # Import all nix files in directory 
   # Should ignore this file and all non-nix files
-  imports = map
-    (file: ./. + "/${file}")
-    (lib.strings.filter
-      (file: lib.strings.hasSuffix ".nix" file && file != "default.nix")
-      (builtins.attrNames (builtins.readDir ./.))
-    );
+  imports = map (file: ./. + "/${file}") (
+    lib.strings.filter (file: lib.strings.hasSuffix ".nix" file && file != "default.nix") (
+      builtins.attrNames (builtins.readDir ./.)
+    )
+  );
 
   nix = {
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     gc = {
@@ -27,8 +35,7 @@
       # Remove "self" input from registry to not risk messing
       # things up if it is ever used
       ((lib.flip lib.attrsets.removeAttrs) [ "self" ])
-      (lib.mapAttrs
-        (_: flake: { inherit flake; }))
+      (lib.mapAttrs (_: flake: { inherit flake; }))
     ];
   };
 

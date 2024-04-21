@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # Disable pulseaudio in order to use pipewire
   hardware.pulseaudio.enable = false;
   # Needed for pipewire to work in real time

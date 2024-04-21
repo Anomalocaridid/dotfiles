@@ -1,12 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home = {
     packages = with pkgs; [
-      (sbcl.withPackages (ps: with ps; [
-        linedit
-      ]))
+      (sbcl.withPackages (ps: with ps; [ linedit ]))
       gcc # Required to compile linedit
     ];
-    file.".sbclrc".text = #scheme
+    file.".sbclrc".text = # scheme
       ''
         ;;; Load included packages without quicklisp 
         (load (sb-ext:posix-getenv "ASDF"))

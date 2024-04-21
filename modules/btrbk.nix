@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # Daily btrfs snapshots
   services.btrbk.instances.daily.settings = {
     snapshot_preserve = "14d";

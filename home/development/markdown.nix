@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   programs.helix.languages = {
     language-server.zk = {
       command = "zk"; # Already installed for other things

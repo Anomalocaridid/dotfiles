@@ -1,7 +1,6 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    nim
-  ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ nim ];
 
   programs.helix.languages = {
     # TODO: replace with default lsp when added to nixpkgs

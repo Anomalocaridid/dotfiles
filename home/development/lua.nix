@@ -1,16 +1,15 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
-    (lua5_4.withPackages
-      (ps: with ps;
-      [
+    (lua5_4.withPackages (
+      ps: with ps; [
         busted # Needed for exercism tests
-      ]))
+      ]
+    ))
   ];
 
   programs.helix = {
-    extraPackages = with pkgs;[
-      lua-language-server
-    ];
+    extraPackages = with pkgs; [ lua-language-server ];
 
     languages.language = [
       {

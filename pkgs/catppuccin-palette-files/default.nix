@@ -1,6 +1,4 @@
-{ stdenvNoCC
-, fetchFromGitHub
-}:
+{ stdenvNoCC, fetchFromGitHub }:
 stdenvNoCC.mkDerivation {
   name = "catppuccin-palette-files";
 
@@ -18,7 +16,7 @@ stdenvNoCC.mkDerivation {
 
     mkdir -p $out/share
     cp -r $src/* $out/share
-    
+
     runHook postInstall
   '';
 }

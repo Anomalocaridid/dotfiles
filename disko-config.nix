@@ -1,4 +1,5 @@
-{ disk, memory, ... }: {
+{ disk, memory, ... }:
+{
   disko.devices = {
     disk = {
       vda = {
@@ -17,9 +18,7 @@
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [
-                  "defaults"
-                ];
+                mountOptions = [ "defaults" ];
               };
             }
             {
@@ -59,7 +58,13 @@
               # Subvolumes must set a mountpoint in order to be mounted 
               # unless its parent is mounted
               subvolumes =
-                let mountOptions = [ "compress=zstd" "noatime" "nodiratime" "discard" ];
+                let
+                  mountOptions = [
+                    "compress=zstd"
+                    "noatime"
+                    "nodiratime"
+                    "discard"
+                  ];
                 in
                 {
                   "/nix" = {

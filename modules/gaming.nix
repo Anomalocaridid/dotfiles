@@ -1,13 +1,12 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs = {
     steam = {
       enable = true;
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       # Add extra compatibility tools to Steam
-      extraCompatPackages = with pkgs; [
-        proton-ge-bin
-      ];
+      extraCompatPackages = with pkgs; [ proton-ge-bin ];
     };
     # On-demand system optimization for gaming
     gamemode.enable = true;

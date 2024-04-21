@@ -1,4 +1,10 @@
-{ config, lib, pkgs, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+{
   home.packages = with pkgs; [ nyxt ];
   xdg =
     let
@@ -135,7 +141,7 @@
             ((nxdr:background-color "#${palette.base.hex}")
              (nxdr:text-color "#${palette.text.hex}")
              (nxdr:selection-color "#${palette.surface2.hex}")))
-          
+
           ;; search engine config
           (define-configuration (buffer)
             ((search-engines
@@ -220,11 +226,8 @@
           ; TODO: Figure out how to fix cannot open in iframe errors with nyxt::on-signal-notify-uri
         '';
 
-      dataFile = lib.attrsets.mergeAttrsList (map
-        (extension: {
-          "nyxt/extensions/${extension}".source = pkgs.sources.${extension};
-        })
-        plugins);
+      dataFile = lib.attrsets.mergeAttrsList (
+        map (extension: { "nyxt/extensions/${extension}".source = pkgs.sources.${extension}; }) plugins
+      );
     };
 }
-

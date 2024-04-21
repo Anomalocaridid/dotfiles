@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   home.packages = with pkgs; [ zk ];
   xdg.configFile."zk/config.toml".source =
     let
@@ -32,4 +33,3 @@
       # alias = {};
     };
 }
-

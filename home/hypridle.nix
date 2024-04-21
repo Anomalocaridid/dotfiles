@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.hypridle =
     let
       lock = "loginctl lock-session";

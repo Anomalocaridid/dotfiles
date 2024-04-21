@@ -1,4 +1,5 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, ... }:
+{
   # dependencies for widgets
   home.packages = with pkgs; [
     socat
@@ -41,9 +42,9 @@
       # Needed to ensure other files can be inserted into eww directory
       "eww".recursive = true;
       "eww/_palette.scss".text =
-        (builtins.readFile
-          (pkgs.custom.catppuccin-palette-files
-          + "/share/scss/_${config.catppuccin.flavour}.scss"))
+        (builtins.readFile (
+          pkgs.custom.catppuccin-palette-files + "/share/scss/_${config.catppuccin.flavour}.scss"
+        ))
         + "$accent: \$${config.catppuccin.accent};\n"
         + "$font: '${fonts.monospace.name}'";
     };

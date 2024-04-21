@@ -1,5 +1,13 @@
-{ config, lib, pkgs, inputs, ... }: {
-  home.packages = with pkgs;
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  home.packages =
+    with pkgs;
     let
       wine-ge = inputs.nix-gaming.packages.${pkgs.system}.wine-ge;
     in
@@ -15,15 +23,14 @@
       wine-ge # System-level install for Lutris
       # Use custom wine build
       # Also prevents build failures if there are issues with patch
-      (vinegar.overrideAttrs (oldAttrs:
-        {
-          buildInputs = map (x: if x.pname == "wine64-staging" then wine-ge else x) oldAttrs.buildInputs;
+      (vinegar.overrideAttrs (oldAttrs: {
+        buildInputs = map (x: if x.pname == "wine64-staging" then wine-ge else x) oldAttrs.buildInputs;
 
-          postInstall = ''
-            wrapProgram $out/bin/vinegar \
-              --prefix PATH : ${lib.makeBinPath [wine-ge]}
-          '';
-        }))
+        postInstall = ''
+          wrapProgram $out/bin/vinegar \
+            --prefix PATH : ${lib.makeBinPath [ wine-ge ]}
+        '';
+      }))
     ];
 
   # Enable wine-ge's fsync support
@@ -41,7 +48,7 @@
     {
       configFile = {
         # Cannot represent hex integers with generated toml
-        "vinegar/config.toml".text = #toml
+        "vinegar/config.toml".text = # toml
           ''
             # Customize splash screen
             [splash]
@@ -57,10 +64,13 @@
       };
       dataFile."PrismLauncher/themes/catppuccin-${config.catppuccin.flavour}".source =
         let
-          capitalFlavour = (string:
-            (lib.strings.toUpper (builtins.substring 0 1 string))
-            + (builtins.substring 1 (builtins.stringLength string) string)
-          ) config.catppuccin.flavour;
+          capitalFlavour =
+            (
+              string:
+              (lib.strings.toUpper (builtins.substring 0 1 string))
+              + (builtins.substring 1 (builtins.stringLength string) string)
+            )
+              config.catppuccin.flavour;
         in
         pkgs.runCommand "catppuccin-prismlauncher-theme" { } ''
           mkdir -p $out

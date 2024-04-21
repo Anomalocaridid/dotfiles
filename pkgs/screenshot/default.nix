@@ -1,8 +1,9 @@
-{ writeShellApplication
-, grimblast
-, swappy
-, fuzzel
-, ...
+{
+  writeShellApplication,
+  grimblast,
+  swappy,
+  fuzzel,
+  ...
 }:
 writeShellApplication {
   name = "screenshot.sh";
@@ -11,7 +12,7 @@ writeShellApplication {
     swappy
     fuzzel
   ];
-  text = ''        
+  text = ''
     entries=("Active" "Screen" "Output" "Area")
     selected=$(printf '%s\n' "''${entries[@]}" | fuzzel --dmenu)
     grimblast --wait 1 --notify save "''${selected,,}" - | swappy -f -

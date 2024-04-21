@@ -1,4 +1,5 @@
-{ config, lib, ... }: {
+{ config, lib, ... }:
+{
   programs.wezterm = {
     enable = true;
     extraConfig =
@@ -7,7 +8,7 @@
         luaFormat = lib.generators.toLua { };
         lua = luaFormat {
           hide_tab_bar_if_only_one_tab = true;
-          window_background_opacity = 0.90;
+          window_background_opacity = 0.9;
           exit_behavior = "Close";
           check_for_updates = false;
           # enable_wayland = true;
@@ -17,25 +18,27 @@
           window_close_confirmation = "NeverPrompt";
 
           font_size = fonts.sizes.terminal;
-          font = lib.generators.mkLuaInline #lua
-            ''
-                wezterm.font${ luaFormat {
-              		family = fonts.monospace.name;
-              		harfbuzz_features = [
-              			"ss09" # >>= <<= ||= |=
-              			"cv25" # .-
-              			"cv26" # :-
-              			"cv32" # .=
-              			"cv27" # []
-              			"cv28" # {. .}
-                    "ss06" # \\
-              			"ss07" # =~ !~
-              		];
-                } }
-            '';
+          font =
+            lib.generators.mkLuaInline # lua
+              ''
+                wezterm.font${
+                  luaFormat {
+                    family = fonts.monospace.name;
+                    harfbuzz_features = [
+                      "ss09" # >>= <<= ||= |=
+                      "cv25" # .-
+                      "cv26" # :-
+                      "cv32" # .=
+                      "cv27" # []
+                      "cv28" # {. .}
+                      "ss06" # \\
+                      "ss07" # =~ !~
+                    ];
+                  }
+                }
+              '';
           color_scheme = "catppuccin-${config.catppuccin.flavour}";
         };
-
       in
       "return ${lua}";
   };

@@ -24,7 +24,6 @@ in
     "d ${persistDir}/home/${user} 0755 ${user} users"
   ];
 
-
   # /persist is needed for boot because it contains password hashes
   # TODO: See if this line can be moved to disko config
   fileSystems.${persistDir}.neededForBoot = true;

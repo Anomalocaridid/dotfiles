@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   # Enable bluetooth
   hardware.bluetooth.enable = true;
   # Bluetooth manager

@@ -1,5 +1,4 @@
-{ pkgs, ... }: {
-  home.packages = with pkgs; [
-    mars-mips
-  ];
+{ pkgs, ... }:
+{
+  home.packages = with pkgs; [ mars-mips ];
 }

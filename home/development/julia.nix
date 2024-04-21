@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   home.packages = with pkgs; [
     (julia.withPackages [
       # Don't separate LanguageServer into helix's extraPackages
