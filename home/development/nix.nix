@@ -11,7 +11,7 @@
       {
         name = "nix";
         auto-format = true;
-        formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+        formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixfmt-rfc-style";
       }
     ];
   };
