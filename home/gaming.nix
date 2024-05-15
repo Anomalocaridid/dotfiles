@@ -37,7 +37,7 @@
   home.sessionVariables.WINEFSYNC = 1;
 
   ssbm.slippi-launcher = {
-    enable = true;
+    # enable = true;
     isoPath = "${config.home.homeDirectory}/Documents/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).ciso";
   };
 
