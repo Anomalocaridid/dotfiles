@@ -11,21 +11,13 @@
   asciiquarium-transparent,
   cbonsai,
   pipes-rs,
+  ternimal,
   unimatrix,
   ...
 }:
 let
   scriptName = "lockman";
-  # Workaround to infinitely loop programs
-  loop = writeShellApplication {
-    name = "loop.sh";
-    text = ''
-      while true; do
-        "$@"
-      done
-    '';
-  };
-  # Workaround to pipe neofetch's output
+  # Workaround to pipe neofetch's output in a loop
   neofetch-wrapper = writeShellApplication {
     name = "neofetch-wrapper.sh";
     runtimeInputs = [
@@ -33,7 +25,41 @@ let
       neofetch
     ];
     text = ''
-      neofetch | pv -qL 200
+      while true; do
+        neofetch | pv -qL 200
+      done
+    '';
+  };
+  # Workaround to give ternimal terminal dimensions
+  ternimal-wrapper = writeShellApplication {
+    name = "ternimal-wrapper.sh";
+    runtimeInputs = [ ternimal ];
+    text = ''
+      ternimal width="$(tput cols)" height=$(($(tput lines) * 2))
+    '';
+  };
+  # Randomly picks a screensaver
+  pick-screensaver = writeShellApplication {
+    name = "pick-screensaver.sh";
+    runtimeInputs = [
+      asciiquarium-transparent
+      cbonsai
+      neofetch-wrapper # Workaround to pipe neofetch's output
+      pipes-rs
+      ternimal-wrapper # Workaround to give ternimal terminal dimensions
+      unimatrix
+    ];
+    text = ''
+      readonly SCREENSAVERS=(
+        "asciiquarium --transparent"
+        "cbonsai --live --infinite"
+        "neofetch-wrapper.sh"
+        "pipes-rs"
+        "unimatrix --asynchronous --flashers"
+        "ternimal-wrapper.sh"
+      )
+      sleep 0.2
+      ''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}
     '';
   };
 in
@@ -46,13 +72,7 @@ writeShellApplication {
     hyprlock
     util-linux # provides flock
     wezterm
-    loop # Workaround to infinitely loop programs
-    # screensavers
-    asciiquarium-transparent
-    cbonsai
-    neofetch-wrapper # Workaround to pipe neofetch's output
-    pipes-rs
-    unimatrix
+    pick-screensaver # Randomly picks a screensaver
   ];
   text =
     let
@@ -60,13 +80,6 @@ writeShellApplication {
     in
     # bash
     ''
-      readonly SCREENSAVERS=(
-        "asciiquarium --transparent"
-        "cbonsai --live --infinite"
-        "loop.sh neofetch-wrapper.sh"
-        "pipes-rs"
-        "unimatrix --asynchronous --flashers"
-      )
       # Exit if script is already running (lock exists)
       exec 3>/tmp/${scriptName}.lock
       flock --nonblock 3
@@ -74,9 +87,8 @@ writeShellApplication {
       hyprctl dispatch workspace empty
       # Ensure screensaver will be fullscreen
       hyprctl keyword windowrulev2 'fullscreen, class:${scriptClass}'
-      # Run screensaver (requires splitting string)
-      # shellcheck disable=SC2086
-      handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- ''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}
+      # Run screensaver
+      handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- pick-screensaver.sh
       # Focus screensaver (assumed to be already fullscreened)
       hyprctl dispatch focuswindow "${scriptClass}"
       # Turn on CRT shader
