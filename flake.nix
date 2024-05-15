@@ -24,16 +24,6 @@
 
     flake-utils.url = "github:gytis-ivaskevicius/flake-utils-plus";
 
-    hyprlock = {
-      url = "github:hyprwm/hyprlock";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hypridle = {
-      url = "github:hyprwm/hypridle";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Hyprland community tools
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
