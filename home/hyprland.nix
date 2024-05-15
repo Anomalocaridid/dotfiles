@@ -226,7 +226,9 @@
     "hyprland-autoname-workspaces/config.toml".source =
       let
         tomlFormat = pkgs.formats.toml { };
-        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+        palette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavour}.colors;
       in
       tomlFormat.generate "hyprland-autoname-workspaces-config" {
         version = pkgs.hyprland-autoname-workspaces.version;
@@ -248,7 +250,7 @@
           workspace_empty = "{name}"; # {id}, {delim} and {clients} are supported
           # client formatter
           client = "{icon}";
-          client_active = "<span color='#${palette.green.hex}'>${client}</span>";
+          client_active = "<span color='${palette.green.hex}'>${client}</span>";
 
           # deduplicate client formatter
           # client_fullscreen = "[{icon}]";

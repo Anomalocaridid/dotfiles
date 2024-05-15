@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   osConfig,
@@ -33,15 +34,17 @@
   # Define here instead of globally because there is no global accent option in ctp-nix
   stylix.cursor =
     let
-      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+      palette =
+        (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+        .${config.catppuccin.flavour}.colors;
     in
     {
       name = "Breeze_Hacked";
       package = pkgs.breeze-hacked-cursor-theme.override {
-        accentColor = "#${palette.${config.catppuccin.accent}.hex}";
-        baseColor = "#${palette.base.hex}";
-        borderColor = "#${palette.base.hex}";
-        logoColor = "#${palette.text.hex}";
+        accentColor = "${palette.${config.catppuccin.accent}.hex}";
+        baseColor = "${palette.base.hex}";
+        borderColor = "${palette.base.hex}";
+        logoColor = "${palette.text.hex}";
       };
     };
 

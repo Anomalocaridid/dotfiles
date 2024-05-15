@@ -47,7 +47,9 @@
     ];
     style =
       let
-        palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+        palette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavour}.colors;
         recolorIcon = (
           color: icon:
           let
@@ -63,6 +65,7 @@
             }
           ''
         );
+        backgroundRgb = palette.base.rgb;
       in
       #css
       ''
@@ -71,18 +74,13 @@
         }
 
         window {
-        	background-color: rgba(${
-           lib.trivial.pipe palette.base.rgb [
-             (builtins.map toString)
-             (lib.strings.concatStringsSep ", ")
-           ]
-         }, 0.9);
+        	background-color: rgba(${toString backgroundRgb.r}, ${toString backgroundRgb.g}, ${toString backgroundRgb.b}, 0.9);
         }
 
         button {
-          color: #${palette.text.hex};
-        	background-color: #${palette.surface0.hex};
-          border-color: #${palette.lavender.hex};
+          color: ${palette.text.hex};
+        	background-color: ${palette.surface0.hex};
+          border-color: ${palette.lavender.hex};
         	border-style: solid;
         	border-width: 2px;
         	background-repeat: no-repeat;
@@ -91,12 +89,12 @@
         }
 
         button:focus, button:hover, button:active {
-        	background-color: #${palette.surface2.hex};
+        	background-color: ${palette.surface2.hex};
         	outline-style: none;
         }
 
         ${lib.concatStrings (
-          map (button: recolorIcon "#${palette.text.hex}" button.label) config.programs.wlogout.layout
+          map (button: recolorIcon "${palette.text.hex}" button.label) config.programs.wlogout.layout
         )}
       '';
   };

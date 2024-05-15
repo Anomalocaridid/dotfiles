@@ -10,7 +10,9 @@
     let
       fonts = config.stylix.fonts;
       font = "${fonts.sansSerif.name}";
-      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+      palette =
+        (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+        .${config.catppuccin.flavour}.colors;
       plugins = [
         "nx-dark-reader"
         "nx-fruit"
@@ -50,45 +52,45 @@
           ;;; and also account for how +/- are currently calibrated for dark theme
           (define-configuration browser
             ((theme (make-instance 'theme:theme
-                                   :background-color "#${palette.base.hex}"
-                                   :background-color+ "#${palette.mantle.hex}"
-                                   :background-color- "#${palette.surface0.hex}"
+                                   :background-color "${palette.base.hex}"
+                                   :background-color+ "${palette.mantle.hex}"
+                                   :background-color- "${palette.surface0.hex}"
 
-                                   :primary-color "#${palette.text.hex}"
-                                   :primary-color+ "#${palette.text.hex}"
-                                   :primary-color- "#${palette.subtext1.hex}"
+                                   :primary-color "${palette.text.hex}"
+                                   :primary-color+ "${palette.text.hex}"
+                                   :primary-color- "${palette.subtext1.hex}"
 
-                                   :secondary-color "#${palette.surface0.hex}"
-                                   :secondary-color+ "#${palette.surface1.hex}"
-                                   :secondary-color- "#${palette.base.hex}"
+                                   :secondary-color "${palette.surface0.hex}"
+                                   :secondary-color+ "${palette.surface1.hex}"
+                                   :secondary-color- "${palette.base.hex}"
 
-                                   :action-color "#${palette.${config.catppuccin.accent}.hex}"
-                                   :action-color+ "#${palette.${config.catppuccin.accent}.hex}"
-                                   :action-color- "#${palette.${config.catppuccin.accent}.hex}"
+                                   :action-color "${palette.${config.catppuccin.accent}.hex}"
+                                   :action-color+ "${palette.${config.catppuccin.accent}.hex}"
+                                   :action-color- "${palette.${config.catppuccin.accent}.hex}"
 
-                                   :success-color "#${palette.green.hex}"
-                                   :success-color+ "#${palette.green.hex}"
-                                   :success-color- "#${palette.green.hex}"
+                                   :success-color "${palette.green.hex}"
+                                   :success-color+ "${palette.green.hex}"
+                                   :success-color- "${palette.green.hex}"
 
-                                   :warning-color "#${palette.red.hex}"
-                                   :warning-color+ "#${palette.red.hex}"
-                                   :warning-color- "#${palette.red.hex}"
+                                   :warning-color "${palette.red.hex}"
+                                   :warning-color+ "${palette.red.hex}"
+                                   :warning-color- "${palette.red.hex}"
 
-                                   :highlight-color "#${palette.${config.catppuccin.accent}.hex}"
-                                   :highlight-color+ "#${palette.${config.catppuccin.accent}.hex}"
-                                   :highlight-color- "#${palette.${config.catppuccin.accent}.hex}"
+                                   :highlight-color "${palette.${config.catppuccin.accent}.hex}"
+                                   :highlight-color+ "${palette.${config.catppuccin.accent}.hex}"
+                                   :highlight-color- "${palette.${config.catppuccin.accent}.hex}"
 
-                                   :codeblock-color "#${palette.mantle.hex}"
-                                   :codeblock-color+ "#${palette.crust.hex}"
-                                   :codeblock-color- "#${palette.base.hex}"
+                                   :codeblock-color "${palette.mantle.hex}"
+                                   :codeblock-color+ "${palette.crust.hex}"
+                                   :codeblock-color- "${palette.base.hex}"
 
-                                   :text-color "#${palette.text.hex}"
-                                   :text-color+ "#${palette.text.hex}"
-                                   :text-color- "#${palette.subtext1.hex}"
+                                   :text-color "${palette.text.hex}"
+                                   :text-color+ "${palette.text.hex}"
+                                   :text-color- "${palette.subtext1.hex}"
 
-                                   :contrast-text-color "#${palette.mantle.hex}"
-                                   :contrast-text-color+ "#${palette.crust.hex}"
-                                   :contrast-text-color- "#${palette.base.hex}"
+                                   :contrast-text-color "${palette.mantle.hex}"
+                                   :contrast-text-color+ "${palette.crust.hex}"
+                                   :contrast-text-color- "${palette.base.hex}"
 
                                    :font-family "${font}"))))
 

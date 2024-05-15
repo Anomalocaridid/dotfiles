@@ -43,7 +43,10 @@
 
   xdg =
     let
-      palette = pkgs.custom.catppuccin-palette.${config.catppuccin.flavour};
+      palette =
+        (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+        .${config.catppuccin.flavour}.colors;
+      removeFirst = builtins.substring 1 6;
     in
     {
       configFile = {
@@ -52,12 +55,12 @@
           ''
             # Customize splash screen
             [splash]
-            background = 0x${palette.base.hex}
-            foreground = 0x${palette.text.hex}
-            cancel = 0x${palette.red.hex}
-            accent = 0x${palette.${config.catppuccin.accent}.hex}
-            track = 0x${palette.surface0.hex}
-            info = 0x${palette.yellow.hex}
+            background = 0x${removeFirst palette.base.hex}
+            foreground = 0x${removeFirst palette.text.hex}
+            cancel = 0x${removeFirst palette.red.hex}
+            accent = 0x${removeFirst palette.${config.catppuccin.accent}.hex}
+            track = 0x${removeFirst palette.surface0.hex}
+            info = 0x${removeFirst palette.yellow.hex}
           '';
         # Use the classic Roblox oof
         "vinegar/overlay/content/sounds/ouch.ogg".source = pkgs.sources.roblox-oof;
@@ -76,7 +79,7 @@
           mkdir -p $out
           cp -r ${pkgs.sources.catppuccin-prismlauncher}/themes/${capitalFlavour}/* $out
           substituteInPlace $out/theme.json \
-            --replace '"Highlight": "#b4befe"' '"Highlight": "#${palette.${config.catppuccin.accent}.hex}"'
+            --replace '"Highlight": "#b4befe"' '"Highlight": "${palette.${config.catppuccin.accent}.hex}"'
         '';
     };
 }
