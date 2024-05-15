@@ -9,21 +9,19 @@
       enable = true;
 
       settings = {
-        sources = [ (pkgs.sources.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf") ];
+        source = [ (pkgs.sources.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf") ];
         general = {
           grace = 2;
           # Fade out takes a bit too long
           no_fade_out = true;
         };
-        backgrounds = [ { color = transparent; } ];
 
-        input-fields = [
+        background = [ { color = transparent; } ];
+
+        input-field = [
           # Center circle
           {
-            size = {
-              width = 300;
-              height = 250;
-            };
+            size = "300, 250";
             outline_thickness = 15;
             outer_color = "${opacity}$lavenderAlpha";
             inner_color = "$base";
@@ -38,41 +36,40 @@
             numlock_color = "${opacity}$yellowAlpha";
             bothlock_color = "${opacity}$pinkAlpha";
 
-            position = {
-              x = 0;
-              y = 0;
-            };
+            halign = "center";
+            valign = "center";
+            position = "0, 0";
           }
           # Password dots
           {
-            outline_thickness = 1;
+            size = "200, 50";
+            outline_thickness = 0;
             outer_color = transparent;
             inner_color = transparent;
             font_color = "$text";
             placeholder_text = "";
-            check_color = "${opacity}$blueAlpha";
-            fail_color = "${opacity}$maroonAlpha";
+            check_color = transparent;
+            fail_color = transparent;
             capslock_color = transparent;
             numlock_color = transparent;
             bothlock_color = transparent;
-            position = {
-              x = 0;
-              y = -85;
-            };
+
+            halign = "center";
+            valign = "center";
+            position = "0, -85";
           }
         ];
 
-        labels = [
+        label = [
           # Failure attempts
           {
             text = "$ATTEMPTS[]";
             color = "$maroon";
             font_size = 20;
 
-            position = {
-              x = 0;
-              y = 85;
-            };
+            halign = "center";
+            valign = "center";
+            position = "0, 85";
           }
           # Time
           {
@@ -80,10 +77,9 @@
             color = "$text";
             font_size = 30;
 
-            position = {
-              x = 0;
-              y = 0;
-            };
+            halign = "center";
+            valign = "center";
+            position = "0, 0";
           }
           # Date
           {
@@ -91,10 +87,9 @@
             color = "$text";
             font_size = 20;
 
-            position = {
-              x = 0;
-              y = -50;
-            };
+            halign = "center";
+            valign = "center";
+            position = "0, -50";
           }
         ];
       };

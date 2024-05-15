@@ -9,29 +9,31 @@
       enable = true;
 
       settings = {
-        # Only start one instance of locking script
-        lockCmd = "pidof -x lockman.sh || ${lib.getExe pkgs.custom.lockman}";
-        # Lock before suspend
-        beforeSleepCmd = lock;
-        # Avoid having to press multiple keys to turn on screen
-        afterSleepCmd = "${dpms} on";
+        general = {
+          # Only start one instance of locking script
+          lock_cmd = "pidof -x lockman.sh || ${lib.getExe pkgs.custom.lockman}";
+          # Lock before suspend
+          before_sleep_md = lock;
+          # Avoid having to press multiple keys to turn on screen
+          after_sleep_cmd = "${dpms} on";
+        };
 
-        listeners = [
+        listener = [
           # Lock after 5 minutes
           {
             timeout = 300;
-            onTimeout = lock;
+            on-timeout = lock;
           }
           # Turn screen off after 5 minutes, 30 seconds
           {
             timeout = 330;
-            onTimeout = "${dpms} off";
-            onResume = "${dpms} on";
+            on-timeout = "${dpms} off";
+            on-resume = "${dpms} on";
           }
           # Hibernate system after 30 minutes
           {
             timeout = 1800;
-            onTimeout = "systemctl hibernate";
+            on-timeout = "systemctl hibernate";
           }
         ];
       };

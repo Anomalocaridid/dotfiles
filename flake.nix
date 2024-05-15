@@ -94,7 +94,6 @@
       impermanence,
       nix-index-database,
       flake-utils,
-      hyprlock,
       hyprland-contrib,
       stylix,
       catppuccin,
@@ -114,9 +113,6 @@
       sharedOverlays = [
         # custom overlay
         (import ./pkgs)
-        # Hyprlock
-        # Needed for lockman.sh
-        hyprlock.overlays.default
         # Hyprland community tools
         hyprland-contrib.overlays.default
         # Up to date Unison packages
