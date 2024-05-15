@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
     nixpkgs-review # Used to check rebuilds caused by changes to nixpkgs
@@ -12,7 +12,7 @@
       {
         name = "nix";
         auto-format = true;
-        formatter.command = "${pkgs.nixpkgs-fmt}/bin/nixfmt-rfc-style";
+        formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
       }
     ];
   };
