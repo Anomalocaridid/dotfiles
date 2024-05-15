@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.fuzzel =
     let
@@ -8,11 +13,9 @@
         let
           inherit (builtins) fromJSON readFile;
 
-          json =
-            with pkgs;
-            runCommand "converted.json" { } ''
-              ${jc}/bin/jc --ini < ${themeFile} > $out;
-            '';
+          json = pkgs.runCommand "converted.json" { } ''
+            ${lib.getExe pkgs.jc} --ini < ${themeFile} > $out;
+          '';
         in
         fromJSON (readFile json);
     in

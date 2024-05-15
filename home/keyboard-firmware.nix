@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   qmkRepoDir = "${config.home.homeDirectory}/qmk_userspace";
 in
@@ -26,7 +31,7 @@ in
     };
     Service =
       let
-        gitBin = "${pkgs.git}/bin/git";
+        gitBin = lib.getExe pkgs.git;
         qmkRepoURL = "Anomalocaridid/qmk_userspace.git";
       in
       {

@@ -1,16 +1,16 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   services.hypridle =
     let
       lock = "loginctl lock-session";
-      dpms = "${pkgs.hyprland}/bin/hyprctl dispatch dpms";
+      dpms = "${lib.getExe' pkgs.hyprland "hyprctl"} dispatch dpms";
     in
     {
       enable = true;
 
       settings = {
         # Only start one instance of locking script
-        lockCmd = "pidof -x lockman.sh || ${pkgs.custom.lockman}/bin/lockman.sh";
+        lockCmd = "pidof -x lockman.sh || ${lib.getExe pkgs.custom.lockman}";
         # Lock before suspend
         beforeSleepCmd = lock;
         # Avoid having to press multiple keys to turn on screen

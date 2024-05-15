@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
     bats # Needed for exercism tests
@@ -17,7 +17,7 @@
           tab-width = 4;
           unit = "    ";
         };
-        formatter.command = "${pkgs.shfmt}/bin/shfmt";
+        formatter.command = lib.getExe pkgs.shfmt;
       }
     ];
   };

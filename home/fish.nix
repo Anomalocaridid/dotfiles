@@ -4,21 +4,25 @@
     enable = true;
     catppuccin.enable = true;
     functions = {
-      fish_greeting = # fish
+      fish_greeting =
+        let
+          lolcat = lib.getExe pkgs.lolcat;
+        in
+        # fish
         ''
           # Ascii Terminal greeting. 
           # Shows Linux distro and version in rainbow ascii art.
           echo -en "\e[1m"
-          ${pkgs.lsb-release}/bin/lsb_release --description --short | 
+          ${lib.getExe pkgs.lsb-release} --description --short | 
             tr --delete '"' |
-            ${pkgs.toilet}/bin/toilet \
+            ${lib.getExe pkgs.toilet} \
               --termwidth \
               --font smslant \
               --filter border \
               --directory ${pkgs.figlet}/share/figlet |
-              ${pkgs.lolcat}/bin/lolcat
+              ${lolcat}
           echo -e "\e[1m Welcome back, $USER!\e[0m" |
-            ${pkgs.lolcat}/bin/lolcat
+            ${lolcat}
         '';
       fish_user_key_bindings = # fish
         ''

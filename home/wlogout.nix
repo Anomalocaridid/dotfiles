@@ -53,7 +53,7 @@
           let
             iconFile = "${config.programs.wlogout.package}/share/wlogout/icons/${icon}.png";
             recolored = pkgs.runCommand "${icon}-recolored.png" { } ''
-              ${pkgs.imagemagick}/bin/convert ${iconFile} -alpha extract -background "${color}" -alpha shape $out
+              ${lib.getExe' pkgs.imagemagick "convert"} ${iconFile} -alpha extract -background "${color}" -alpha shape $out
             '';
           in
           #css

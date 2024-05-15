@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   ...
@@ -22,11 +23,11 @@
           export XDG_CACHE_HOME="$(mktemp -d)"
           # Use fontconfig to select the correct .ttf or .otf file based on name
           # Command taken from Stylix GRUB module
-          fontPath=$(${pkgs.fontconfig}/bin/fc-match -v "${font.name}" | grep "file:" | cut -d '"' -f 2)
+          fontPath=$(${lib.getExe' pkgs.fontconfig "fc-match"} -v "${font.name}" | grep "file:" | cut -d '"' -f 2)
           cp $fontPath .
 
           # Convert font from tty to psf
-          ${mkttyfont}/bin/mkttyfont *.ttf ${size} ${dpi}
+          ${lib.getExe mkttyfont} *.ttf ${size} ${dpi}
           cp *.psf $out
         '';
   };

@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.packages = with pkgs; [ nim ];
 
   programs.helix.languages = {
     # TODO: replace with default lsp when added to nixpkgs
-    language-server.nimlsp.command = "${pkgs.nimlsp}/bin/nimlsp";
+    language-server.nimlsp.command = lib.getExe' pkgs.nimlsp "nimlsp";
     language = [
       {
         name = "nim";

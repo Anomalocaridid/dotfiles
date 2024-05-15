@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.packages = with pkgs; [ polyml ];
 
@@ -6,7 +6,7 @@
     {
       name = "sml";
       auto-format = true;
-      formatter.command = "${pkgs.smlfmt}/bin/smlfmt";
+      formatter.command = lib.getExe pkgs.smlfmt;
       indent = {
         tab-width = 2;
         unit = "  ";
