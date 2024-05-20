@@ -1,9 +1,3 @@
-## Needed for hyprlock config
-# Provides color palette
-[catppuccin-hyprland]
-src.git = "https://github.com/catppuccin/hyprland.git"
-fetch.github = "catppuccin/hyprland"
-
 [catppuccin-prismlauncher]
 src.git = "https://github.com/catppuccin/prismlauncher.git"
 fetch.github = "catppuccin/prismlauncher"
@@ -45,8 +39,10 @@ src.git = "https://github.com/aartaka/nx-search-engines.git"
 fetch.github = "aartaka/nx-search-engines"
 
 [nx-router]
-src.git = "https://github.com/migalmoreno/nx-router.git"
-fetch.github = "migalmoreno/nx-router"
+src.manual = "0.2.0" # Source does not support shallow clone, which is needed to fetch version
+fetch.git = "https://git.migalmoreno.com/nx-router"
+git.deepClone = true
+git.leaveDotGit = true # Required for deepClone
 
 [nx-dark-reader]
 src.git = "https://github.com/aartaka/nx-dark-reader.git"
