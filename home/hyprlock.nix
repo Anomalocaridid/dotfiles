@@ -9,7 +9,7 @@
       enable = true;
 
       settings = {
-        source = [ (pkgs.sources.catppuccin-hyprland + "/themes/${config.catppuccin.flavour}.conf") ];
+        source = [ (config.catppuccin.sources.hyprland + "/themes/${config.catppuccin.flavour}.conf") ];
         general = {
           grace = 2;
           # Fade out takes a bit too long
