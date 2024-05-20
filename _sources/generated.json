@@ -19,26 +19,6 @@
         },
         "version": "eeb4c8d159187ef7eb59a4a99baec67c2e797e9f"
     },
-    "catppuccin-hyprland": {
-        "cargoLocks": null,
-        "date": "2024-04-03",
-        "extract": null,
-        "name": "catppuccin-hyprland",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "catppuccin",
-            "repo": "hyprland",
-            "rev": "b57375545f5da1f7790341905d1049b1873a8bb3",
-            "sha256": "sha256-XTqpmucOeHUgSpXQ0XzbggBFW+ZloRD/3mFhI+Tq4O8=",
-            "type": "github"
-        },
-        "version": "b57375545f5da1f7790341905d1049b1873a8bb3"
-    },
     "catppuccin-prismlauncher": {
         "cargoLocks": null,
         "date": "2024-03-30",
@@ -276,23 +256,22 @@
     },
     "nx-router": {
         "cargoLocks": null,
-        "date": "2023-08-06",
+        "date": null,
         "extract": null,
         "name": "nx-router",
         "passthru": null,
         "pinned": false,
         "src": {
-            "deepClone": false,
+            "deepClone": true,
             "fetchSubmodules": false,
-            "leaveDotGit": false,
+            "leaveDotGit": true,
             "name": null,
-            "owner": "migalmoreno",
-            "repo": "nx-router",
-            "rev": "ddb3dd3c5cccd1f7718ad6f4424e419f11d69e1f",
-            "sha256": "sha256-hsPVGzsldjZ6/YKsGBoyjtotvaO09Zp2g8r9j3587KY=",
-            "type": "github"
+            "rev": "0.2.0",
+            "sha256": "sha256-H4v90ujqZJaigEodz5d8fr1qKcbIyxzN9sUiy9qkwbA=",
+            "type": "git",
+            "url": "https://git.migalmoreno.com/nx-router"
         },
-        "version": "ddb3dd3c5cccd1f7718ad6f4424e419f11d69e1f"
+        "version": "0.2.0"
     },
     "nx-search-engines": {
         "cargoLocks": null,
