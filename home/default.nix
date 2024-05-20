@@ -28,7 +28,6 @@ rec {
       itd
       keepassxc
       killall
-      neofetch
       nvfetcher
       pavucontrol # Graphical audio controller
       qalculate-gtk

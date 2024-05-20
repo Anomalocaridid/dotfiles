@@ -1,32 +1,35 @@
 {
-  writeShellApplication,
+  asciiquarium-transparent,
+  cbonsai,
   coreutils,
   handlr-regex,
   hyprland,
   hyprlock,
-  util-linux,
-  wezterm,
-  neofetch,
-  pv,
-  asciiquarium-transparent,
-  cbonsai,
+  fastfetch,
   pipes-rs,
+  pv,
   ternimal,
   unimatrix,
+  util-linux,
+  wezterm,
+  writeShellApplication,
   ...
 }:
 let
   scriptName = "lockman";
   # Workaround to pipe neofetch's output in a loop
-  neofetch-wrapper = writeShellApplication {
-    name = "neofetch-wrapper.sh";
+  fetch-wrapper = writeShellApplication {
+    name = "fetch-wrapper.sh";
     runtimeInputs = [
+      fastfetch
       pv
-      neofetch
+      util-linux # provides script
     ];
     text = ''
       while true; do
-        neofetch | pv -qL 200
+        # Script makes fastfetch think it is outputting to a terminal
+        # Necessary to preserve colors
+        script --quiet --flush --command fastfetch | pv -qL 200
       done
     '';
   };
@@ -44,7 +47,7 @@ let
     runtimeInputs = [
       asciiquarium-transparent
       cbonsai
-      neofetch-wrapper # Workaround to pipe neofetch's output
+      fetch-wrapper # Workaround to create effect for fetch program
       pipes-rs
       ternimal-wrapper # Workaround to give ternimal terminal dimensions
       unimatrix
@@ -53,11 +56,12 @@ let
       readonly SCREENSAVERS=(
         "asciiquarium --transparent"
         "cbonsai --live --infinite"
-        "neofetch-wrapper.sh"
+        "fetch-wrapper.sh"
         "pipes-rs"
         "unimatrix --asynchronous --flashers"
         "ternimal-wrapper.sh"
       )
+      # Give terminal a bit of time to properly set dimensions
       sleep 0.2
       ''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}
     '';
