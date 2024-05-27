@@ -6,4 +6,4 @@ hyprctl activewindow -j | jq --raw-output .title
 
 # They are awk arguments, not bash arguments
 # shellcheck disable=SC2016
-socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | stdbuf -o0 awk -F '>>|,' '/^activewindow>>/{print $3}'
+socat -u UNIX-CONNECT:/"$XDG_RUNTIME_DIR"/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - | stdbuf -o0 awk -F '>>|,' '/^activewindow>>/{print $3}'

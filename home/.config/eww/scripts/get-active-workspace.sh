@@ -14,7 +14,7 @@ active-space() {
 
 active-space
 # Get id of active space, when workspace or focused monitor changes
-socat -u UNIX-CONNECT:/tmp/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - |
+socat -u UNIX-CONNECT:/"$XDG_RUNTIME_DIR"/hypr/"$HYPRLAND_INSTANCE_SIGNATURE"/.socket2.sock - |
 	stdbuf -o0 awk -F '>>|,' -e '/^(workspace|focusedmon)>>/' |
 	while read -r _; do
 		active-space
