@@ -4,8 +4,7 @@
     displayManager.ly = {
       enable = true;
       settings = {
-        animate = true;
-        # animation = 0;
+        animation = "doom";
         blank_password = true;
         hide_borders = true;
       };
