@@ -49,7 +49,7 @@
       let
         palette =
           (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-          .${config.catppuccin.flavour}.colors;
+          .${config.catppuccin.flavor}.colors;
         recolorIcon = (
           color: icon:
           let

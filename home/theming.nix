@@ -36,7 +36,7 @@
     let
       palette =
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-        .${config.catppuccin.flavour}.colors;
+        .${config.catppuccin.flavor}.colors;
     in
     {
       name = "Breeze_Hacked";
@@ -49,8 +49,8 @@
     };
 
   catppuccin = {
-    flavour = osConfig.catppuccin.flavour;
-    accent = "mauve";
+    flavor = osConfig.catppuccin.flavor;
+    accent = osConfig.catppuccin.accent;
   };
 
   # Required for btop theme

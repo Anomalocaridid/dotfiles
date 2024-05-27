@@ -8,7 +8,7 @@
   programs.fuzzel =
     let
       fonts = config.stylix.fonts;
-      themeFile = pkgs.sources.catppuccin-fuzzel + "/themes/${config.catppuccin.flavour}.ini";
+      themeFile = pkgs.sources.catppuccin-fuzzel + "/themes/${config.catppuccin.flavor}.ini";
       theme =
         let
           inherit (builtins) fromJSON readFile;

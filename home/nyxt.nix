@@ -12,7 +12,7 @@
       font = "${fonts.sansSerif.name}";
       palette =
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-        .${config.catppuccin.flavour}.colors;
+        .${config.catppuccin.flavor}.colors;
       plugins = [
         "nx-dark-reader"
         "nx-fruit"

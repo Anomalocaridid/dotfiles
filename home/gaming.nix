@@ -45,7 +45,7 @@
     let
       palette =
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-        .${config.catppuccin.flavour}.colors;
+        .${config.catppuccin.flavor}.colors;
       removeFirst = builtins.substring 1 6;
     in
     {
@@ -65,19 +65,19 @@
         # Use the classic Roblox oof
         "vinegar/overlay/content/sounds/ouch.ogg".source = pkgs.sources.roblox-oof;
       };
-      dataFile."PrismLauncher/themes/catppuccin-${config.catppuccin.flavour}".source =
+      dataFile."PrismLauncher/themes/catppuccin-${config.catppuccin.flavor}".source =
         let
-          capitalFlavour =
+          capitalFlavor =
             (
               string:
               (lib.strings.toUpper (builtins.substring 0 1 string))
               + (builtins.substring 1 (builtins.stringLength string) string)
             )
-              config.catppuccin.flavour;
+              config.catppuccin.flavor;
         in
         pkgs.runCommand "catppuccin-prismlauncher-theme" { } ''
           mkdir -p $out
-          cp -r ${pkgs.sources.catppuccin-prismlauncher}/themes/${capitalFlavour}/* $out
+          cp -r ${pkgs.sources.catppuccin-prismlauncher}/themes/${capitalFlavor}/* $out
           substituteInPlace $out/theme.json \
             --replace '"Highlight": "#b4befe"' '"Highlight": "${palette.${config.catppuccin.accent}.hex}"'
         '';

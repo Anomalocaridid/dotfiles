@@ -37,7 +37,7 @@
                   }
                 }
               '';
-          color_scheme = "catppuccin-${config.catppuccin.flavour}";
+          color_scheme = "catppuccin-${config.catppuccin.flavor}";
         };
       in
       "return ${lua}";

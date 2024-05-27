@@ -68,5 +68,8 @@
     };
   };
 
-  catppuccin.flavour = "mocha";
+  catppuccin = {
+    flavor = "mocha";
+    accent = "mauve";
+  };
 }

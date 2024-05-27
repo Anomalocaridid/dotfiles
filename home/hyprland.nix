@@ -228,7 +228,7 @@
         tomlFormat = pkgs.formats.toml { };
         palette =
           (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-          .${config.catppuccin.flavour}.colors;
+          .${config.catppuccin.flavor}.colors;
       in
       tomlFormat.generate "hyprland-autoname-workspaces-config" {
         version = pkgs.hyprland-autoname-workspaces.version;

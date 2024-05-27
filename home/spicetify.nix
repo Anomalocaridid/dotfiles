@@ -13,7 +13,7 @@ in
     # Use pre-refactor (pre-#48) catppuccin theme
     # so that the accent can be declaratively defined
     theme = spicePkgs.themes.catppuccin // rec {
-      name = "catppuccin-${config.catppuccin.flavour}";
+      name = "catppuccin-${config.catppuccin.flavor}";
       src = pkgs.fetchFromGitHub {
         owner = "catppuccin";
         repo = "spicetify";
