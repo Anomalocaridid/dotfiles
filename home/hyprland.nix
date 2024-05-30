@@ -18,12 +18,19 @@
     enable = true;
     catppuccin.enable = true;
     settings = {
-      exec-once = [
+      exec-once = lib.flatten [
         "swww-daemon"
         "eww open bar"
         "hyprland-autoname-workspaces"
         # "armcord"
         "steam -silent"
+
+        # Remove when issue with ly mentioned in nixpkgs#297434 is resolved
+        (builtins.map (x: "systemctl --user restart ${x}.service") [
+          "hypridle"
+          "udiskie"
+          "blueman-applet"
+        ])
       ];
 
       exec = [ "swww img --transition-type none ${pkgs.sources.wallpaper}" ];
