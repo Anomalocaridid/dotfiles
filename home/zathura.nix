@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   programs.zathura = {
     enable = true;
@@ -8,11 +8,11 @@
         fonts = config.stylix.fonts;
       in
       {
-        # Copy to system clipboard
-        selection-clipboard = "clipboard";
         font = "${fonts.sansSerif.name} ${toString fonts.sizes.applications}";
-        window-title-basename = true;
+        recolor = lib.mkForce false;
+        selection-clipboard = "clipboard";
         statusbar-home-tilde = true;
+        window-title-basename = true;
       };
   };
 }
