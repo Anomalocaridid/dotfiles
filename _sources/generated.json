@@ -1,4 +1,24 @@
 {
+    "catppuccin-fractal-wallpapers": {
+        "cargoLocks": null,
+        "date": "2022-08-18",
+        "extract": null,
+        "name": "catppuccin-fractal-wallpapers",
+        "passthru": null,
+        "pinned": false,
+        "src": {
+            "deepClone": false,
+            "fetchSubmodules": false,
+            "leaveDotGit": false,
+            "name": null,
+            "owner": "psylopneunonym",
+            "repo": "Catppuccin-Fractal-Wallpapers",
+            "rev": "cd439e85eb5b81808e5f6dc64adb2c171fc0853f",
+            "sha256": "sha256-udMkIX5etmRR0O+MPWeDAMZH4BW0YS0pDUE0wcwszQI=",
+            "type": "github"
+        },
+        "version": "cd439e85eb5b81808e5f6dc64adb2c171fc0853f"
+    },
     "catppuccin-fuzzel": {
         "cargoLocks": null,
         "date": "2024-01-24",
@@ -38,26 +58,6 @@
             "type": "github"
         },
         "version": "07e9c3ca0ff8eb7da9fa8b5329a9d2ceec707f24"
-    },
-    "catppuccin-wallpapers": {
-        "cargoLocks": null,
-        "date": "2022-08-24",
-        "extract": null,
-        "name": "catppuccin-wallpapers",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "deepClone": false,
-            "fetchSubmodules": false,
-            "leaveDotGit": false,
-            "name": null,
-            "owner": "zhichaoh",
-            "repo": "catppuccin-wallpapers",
-            "rev": "1023077979591cdeca76aae94e0359da1707a60e",
-            "sha256": "sha256-h+cFlTXvUVJPRMpk32jYVDDhHu1daWSezFcvhJqDpmU=",
-            "type": "github"
-        },
-        "version": "1023077979591cdeca76aae94e0359da1707a60e"
     },
     "context-switch-xplr": {
         "cargoLocks": null,

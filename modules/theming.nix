@@ -40,7 +40,7 @@
   };
 
   stylix = {
-    image = pkgs.sources.catppuccin-wallpapers + "/mandelbrot/mandelbrot_gap_magenta.png";
+    image = pkgs.sources.catppuccin-fractal-wallpapers + "/05.png";
 
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     # Just use Stylix for GRUB theme

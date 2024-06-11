@@ -7,9 +7,9 @@ src.git = "https://github.com/catppuccin/fuzzel.git"
 fetch.github = "catppuccin/fuzzel"
 
 # Provides GRUB wallpaper
-[catppuccin-wallpapers]
-src.git = "https://github.com/zhichaoh/catppuccin-wallpapers.git"
-fetch.github = "zhichaoh/catppuccin-wallpapers"
+[catppuccin-fractal-wallpapers]
+src.git = "https://github.com/psylopneunonym/Catppuccin-Fractal-Wallpapers.git"
+fetch.github = "psylopneunonym/Catppuccin-Fractal-Wallpapers"
 
 # For vinegar overlay
 [roblox-oof]
