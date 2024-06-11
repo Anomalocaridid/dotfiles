@@ -13,21 +13,24 @@
     font =
       let
         font = config.stylix.fonts.monospace;
-        size = toString config.stylix.fonts.sizes.terminal;
+        sizes = config.stylix.fonts.sizes;
         mkttyfont = inputs.ttf-to-tty.packages.${pkgs.system}.mkttyfont;
         dpi = toString 80;
       in
-      pkgs.runCommand "${font.name}-${size}.psf"
+      pkgs.runCommand "${font.package.name}.psf"
         { FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ font.package ]; }; }
         ''
-          export XDG_CACHE_HOME="$(mktemp -d)"
           # Use fontconfig to select the correct .ttf or .otf file based on name
-          # Command taken from Stylix GRUB module
-          fontPath=$(${lib.getExe' pkgs.fontconfig "fc-match"} -v "${font.name}" | grep "file:" | cut -d '"' -f 2)
-          cp $fontPath .
+          # Command taken from stylix GRUB module
+          font=$(
+            ${lib.getExe' pkgs.fontconfig "fc-match"} \
+            ${lib.escapeShellArg font.name} \
+            --format=%{file}
+          )
+          cp $font .
 
           # Convert font from tty to psf
-          ${lib.getExe mkttyfont} *.ttf ${size} ${dpi}
+          ${lib.getExe mkttyfont} *.ttf ${toString sizes.terminal} ${dpi}
           cp *.psf $out
         '';
   };
@@ -39,16 +42,28 @@
     style = platformTheme;
   };
 
+  # Configure GRUB theme
+  boot.loader.grub = rec {
+    catppuccin.enable = true;
+    splashImage = lib.mkForce "${theme.content}/background.png";
+    theme = lib.mkForce (
+      pkgs.runCommand "catppuccin-grub-theme" { } ''
+        mkdir -p "$out"
+        cp -r ${config.catppuccin.sources.grub}/src/catppuccin-${config.catppuccin.flavor}-grub-theme/* "$out"/
+
+        # Replace background
+        rm "$out"/background.png
+        cp ${pkgs.sources.catppuccin-fractal-wallpapers + "/05.png"} "$out"/background.png
+      ''
+    );
+  };
+
   stylix = {
+    # Remove when stylix#200 is resolved
     image = pkgs.sources.catppuccin-fractal-wallpapers + "/05.png";
 
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
-    # Just use Stylix for GRUB theme
+    # Just use Stylix for fonts
     autoEnable = false;
-    targets.grub = {
-      enable = true;
-      useImage = true;
-    };
 
     fonts = rec {
       sizes = {
