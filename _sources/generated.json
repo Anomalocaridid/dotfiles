@@ -448,21 +448,6 @@
         },
         "version": "de817bd19c56b7cbb1c39c05e4412b7f188b548c"
     },
-    "wallpaper": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "wallpaper",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "name": null,
-            "sha256": "sha256-iU65D6V/VQFELwF8V10jwQk8T8xowjRs8eERzn3B7YA=",
-            "type": "url",
-            "url": "https://64.media.tumblr.com/c5543874b9cbe98da1d20945a45e989b/tumblr_o5a5r9Z9O71tvppquo1_r1_1280.gifv"
-        },
-        "version": "latest"
-    },
     "wl-clipboard-xplr": {
         "cargoLocks": null,
         "date": "2023-01-11",

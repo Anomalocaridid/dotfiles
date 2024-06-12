@@ -53,13 +53,12 @@
 
         # Replace background
         rm "$out"/background.png
-        cp ${pkgs.sources.catppuccin-fractal-wallpapers + "/05.png"} "$out"/background.png
+        cp ${config.stylix.image} "$out"/background.png
       ''
     );
   };
 
   stylix = {
-    # Remove when stylix#200 is resolved
     image = pkgs.sources.catppuccin-fractal-wallpapers + "/05.png";
 
     # Just use Stylix for fonts

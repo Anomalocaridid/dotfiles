@@ -11,7 +11,6 @@
     hyprland-autoname-workspaces
     hyprpicker # color picker
     scratchpad
-    swww # wallpaper
   ];
 
   wayland.windowManager.hyprland = {
@@ -19,7 +18,6 @@
     catppuccin.enable = true;
     settings = {
       exec-once = lib.flatten [
-        "swww-daemon"
         "eww open bar"
         "hyprland-autoname-workspaces"
         # "armcord"
@@ -28,12 +26,11 @@
         # Remove when issue with ly mentioned in nixpkgs#297434 is resolved
         (builtins.map (x: "systemctl --user restart ${x}.service") [
           "hypridle"
+          "hyprpaper"
           "udiskie"
           "blueman-applet"
         ])
       ];
-
-      exec = [ "swww img --transition-type none ${pkgs.sources.wallpaper}" ];
 
       general = {
         gaps_in = 5;
