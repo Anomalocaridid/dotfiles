@@ -5,21 +5,13 @@
   ...
 }:
 {
-  # Additional dependencies
-  home.packages = with pkgs; [
-    custom.screenshot
-    hyprland-autoname-workspaces
-    hyprpicker # color picker
-    scratchpad
-  ];
-
   wayland.windowManager.hyprland = {
     enable = true;
     catppuccin.enable = true;
     settings = {
       exec-once = lib.flatten [
         "eww open bar"
-        "hyprland-autoname-workspaces"
+        (lib.getExe pkgs.hyprland-autoname-workspaces)
         # "armcord"
         "steam -silent"
 
@@ -134,7 +126,7 @@
 
       "$menu" = "fuzzel";
 
-      "$scratchpad" = "scratchpad -m '$menu --dmenu'";
+      "$scratchpad" = "${lib.getExe pkgs.scratchpad} -m '$menu --dmenu'";
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = lib.flatten [
@@ -154,11 +146,11 @@
         "$mainMod, O, exec, $opener x-scheme-handler/https"
         "$mainMod, G, togglegroup"
         "$mainMod, F, fullscreen"
-        "$mainMod, C, exec, hyprpicker --autocopy"
+        "$mainMod, C, exec, ${lib.getExe pkgs.hyprpicker} --autocopy"
         "$mainMod SHIFT, G, lockactivegroup, toggle"
         "$mainMod, bracketleft, changegroupactive, b"
         "$mainMod, bracketright, changegroupactive, f"
-        ", Print, exec, screenshot.sh"
+        ", Print, exec, ${lib.getExe pkgs.custom.screenshot}"
         ", XF86AudioPlay, exec, playerctl play-pause"
         "CTRL ALT, delete, exec, hyprctl kill"
         "$mainMod, Z, exec, $scratchpad"
