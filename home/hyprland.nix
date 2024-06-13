@@ -32,6 +32,7 @@
         "col.inactive_border" = "0xaa$overlay0Alpha 0xaa$mantleAlpha 45deg";
 
         layout = "dwindle";
+        cursor_inactive_timeout = 60;
       };
 
       decoration = {
@@ -93,10 +94,6 @@
         disable_splash_rendering = true;
         enable_swallow = true;
         swallow_regex = "^(org.wezfurlong.wezterm)$";
-      };
-
-      cursor = {
-        inactive_timeout = 60;
       };
 
       # Window rules
