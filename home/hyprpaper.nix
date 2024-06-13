@@ -1,9 +1,4 @@
-{
-  config,
-  lib,
-  osConfig,
-  ...
-}:
+{ config, lib, ... }:
 {
   services.hyprpaper = {
     enable = true;
@@ -15,10 +10,10 @@
       in
       {
         splash = true;
-        splash_offset = 0.25;
+        splash_offset = 6.5e-2;
         splash_color = palette.text.hex;
 
-        "$wallpaper" = osConfig.stylix.image;
+        "$wallpaper" = config.stylix.image;
         preload = [ "$wallpaper" ];
         wallpaper = [ ",$wallpaper" ];
       };
