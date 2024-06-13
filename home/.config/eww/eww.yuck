@@ -29,10 +29,9 @@
   (box :class "mid-bar"
        :space-evenly false
        :halign "center"
-       (right-sep)
-       (splash :reveal {music == ""})
+       (right-sep :reveal {music != ""})
        (music)
-       (left-sep)))
+       (left-sep :reveal {music != ""})))
 
 (defwidget right-bar []
   (box :class "right-bar"
@@ -47,15 +46,17 @@
        (right-sep)
        (time)))
 
-(defwidget sep [text]
+(defwidget sep [text reveal]
   (label :class "sep"
-         :text text))
+         :text {(reveal ?: true) ? text : ""}))
 
-(defwidget left-sep []
-  (sep :text ""))
+(defwidget left-sep [?reveal]
+  (sep :text ""
+       :reveal reveal))
 
-(defwidget right-sep []
-  (sep :text ""))
+(defwidget right-sep [?reveal]
+  (sep :text ""
+       :reveal reveal))
 
 (defwindow calendar
   :monitor 0
@@ -99,14 +100,6 @@
   (label :text " ${active-window ?: "..."}"
          :limit-width 15
          :tooltip active-window))
-
-(deflisten splash :interval "60m"
-  "hyprctl splash")
-
-(defwidget splash [reveal]
-  (label :text {reveal ? "󱀡 ${splash}" : ""}
-         :limit-width 15
-         :tooltip splash))
 
 (defwindow music
   :monitor 0
