@@ -59,6 +59,7 @@
   };
 
   stylix = {
+    enable = true;
     image = pkgs.sources.catppuccin-fractal-wallpapers + "/05.png";
 
     # Just use Stylix for fonts
