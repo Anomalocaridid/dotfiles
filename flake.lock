@@ -129,23 +129,44 @@
         "type": "github"
       }
     },
-    "catppuccin-toolbox": {
+    "catppuccin-catwalk": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1717975905,
-        "narHash": "sha256-/0K0YS0p3XLJ4jIPz6rvCRZG53qutpNilMJy3/qELeM=",
+        "lastModified": 1718046090,
+        "narHash": "sha256-UEIyX+3Uz9UMFZ+xIjCKv1Tci/aysYVnTUfVbq3mftc=",
         "owner": "catppuccin",
-        "repo": "toolbox",
-        "rev": "21381966172cfaafa8063c2c973e2126535ac730",
+        "repo": "catwalk",
+        "rev": "b1dede25722da515fd1498c6bfb5c83d7ec0f9c5",
         "type": "github"
       },
       "original": {
         "owner": "catppuccin",
-        "repo": "toolbox",
+        "repo": "catwalk",
+        "type": "github"
+      }
+    },
+    "catppuccin-whiskers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1718208215,
+        "narHash": "sha256-5EjED8nDM34BD7c50DZ3KZP97gx/Atjtx7bJWLSfjmM=",
+        "owner": "catppuccin",
+        "repo": "whiskers",
+        "rev": "eb1958e4227d5c8808c9e819837043fe13a7e29c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "whiskers",
         "type": "github"
       }
     },
@@ -205,7 +226,25 @@
     },
     "flake-utils": {
       "inputs": {
-        "flake-utils": "flake-utils_2"
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1705309234,
+        "narHash": "sha256-uNRRNRKmJyCRC/8y1RqBkqWBLM034y4qN7EprSdmgyA=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "1ef2e671c3b0c19053962c07dbda38332dcebf26",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "inputs": {
+        "flake-utils": "flake-utils_3"
       },
       "locked": {
         "lastModified": 1715533576,
@@ -221,9 +260,9 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
+    "flake-utils_3": {
       "inputs": {
-        "systems": "systems"
+        "systems": "systems_2"
       },
       "locked": {
         "lastModified": 1694529238,
@@ -533,9 +572,10 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
-        "catppuccin-toolbox": "catppuccin-toolbox",
+        "catppuccin-catwalk": "catppuccin-catwalk",
+        "catppuccin-whiskers": "catppuccin-whiskers",
         "disko": "disko",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
         "impermanence": "impermanence",
@@ -548,6 +588,28 @@
         "stylix": "stylix",
         "ttf-to-tty": "ttf-to-tty",
         "unison-nix": "unison-nix"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "catppuccin-whiskers",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1717442957,
+        "narHash": "sha256-w0fqHofxM2hf3pGDXCPSdH0A09v6FgHm6I38nCWA96k=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "025e1742de4fa75b3fb63818bd9726d17da6a102",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "slippi-desktop": {
@@ -640,6 +702,21 @@
       }
     },
     "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "systems_2": {
       "locked": {
         "lastModified": 1681028828,
         "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",

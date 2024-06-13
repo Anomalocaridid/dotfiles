@@ -25,8 +25,8 @@
       # needed for Sweet Folders
       candy-icons
       # Tools for making catppuccin ports
-      inputs.catppuccin-toolbox.packages.${pkgs.system}.catwalk
-      inputs.catppuccin-toolbox.packages.${pkgs.system}.whiskers
+      inputs.catppuccin-catwalk.packages.${pkgs.system}.catwalk
+      inputs.catppuccin-whiskers.packages.${pkgs.system}.whiskers
       just
     ];
   };

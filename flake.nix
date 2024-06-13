@@ -48,8 +48,13 @@
     catppuccin.url = "github:catppuccin/nix";
 
     # Catppuccin port creation tools
-    catppuccin-toolbox = {
-      url = "github:catppuccin/toolbox";
+    catppuccin-catwalk = {
+      url = "github:catppuccin/catwalk";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    catppuccin-whiskers = {
+      url = "github:catppuccin/whiskers";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
