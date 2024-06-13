@@ -5,7 +5,7 @@
   ...
 }:
 {
-  home.packages = with pkgs; [ nyxt ];
+  # home.packages = with pkgs; [ nyxt ];
   xdg =
     let
       fonts = config.stylix.fonts;
