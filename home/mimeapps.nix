@@ -36,7 +36,7 @@
           "application/x-yaml" = editor;
           "audio/*" = "org.strawberrymusicplayer.strawberry.desktop";
           "image/*" = "imv.desktop";
-          "inode/directory" = "xplr.desktop";
+          "inode/directory" = "yazi.desktop";
           "text/*" = editor;
           "text/html" = browser;
           "video/*" = "mpv.desktop";

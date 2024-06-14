@@ -133,7 +133,7 @@
         # Run in shell to ensure file manager sees environment variables
         # TODO: figure out how to un-hard-code shell
         # TODO: figure out how to open selected file when exiting without hard-coding xplr
-        "$mainMod, N, exec, $term --class=filemanager -- fish -c 'handlr open (xplr)'"
+        "$mainMod, N, exec, $term --class=filemanager -- $opener inode/directory"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, pkill $menu || $menu"
         "$mainMod, P, pseudo, # dwindle"

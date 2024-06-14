@@ -53,66 +53,41 @@ fetch.github = "aartaka/nx-dark-reader"
 src.manual = "0.1.0"
 fetch.url = "https://nyxt.atlas.engineer/static/release/demeter.tar.gz"
 
-# xplr plugins
-## Extension
-[context-switch-xplr]
-src.git = "https://github.com/igorepst/context-switch.xplr.git"
-fetch.github = "igorepst/context-switch.xplr"
+# yazi plugins
+## Previewers
+[glow-yazi]
+src.git = "https://github.com/Reledia/glow.yazi.git"
+fetch.github = "Reledia/glow.yazi"
 
-[offline-docs-xplr]
-src.git = "https://github.com/sayanarijit/offline-docs.xplr.git"
-fetch.github = "sayanarijit/offline-docs.xplr"
+[miller-yazi]
+src.git = "https://github.com/Reledia/miller.yazi.git"
+fetch.github = "Reledia/miller.yazi"
 
-[tri-pane-xplr]
-src.git = "https://github.com/sayanarijit/tri-pane.xplr.git"
-fetch.github = "sayanarijit/tri-pane.xplr"
+[exifaudio-yazi]
+src.git = "https://github.com/Sonico98/exifaudio.yazi.git"
+fetch.github = "Sonico98/exifaudio.yazi"
 
-[type-to-nav-xplr]
-src.git = "https://github.com/sayanarijit/type-to-nav.xplr.git"
-fetch.github = "sayanarijit/type-to-nav.xplr"
+[ouch-yazi]
+src.git = "https://github.com/ndtoan96/ouch.yazi.git"
+fetch.github = "ndtoan96/ouch.yazi"
 
-[wl-clipboard-xplr]
-src.git = "https://github.com/sayanarijit/wl-clipboard.xplr.git"
-fetch.github = "sayanarijit/wl-clipboard.xplr"
+## Functional Plugins
+### Jumping
+[relative-motions-yazi]
+src.git = "https://github.com/dedukun/relative-motions.yazi.git"
+fetch.github = "dedukun/relative-motions.yazi"
 
-[style-xplr]
-src.git = "https://github.com/emsquid/style.xplr.git"
-fetch.github = "emsquid/style.xplr"
+### filter enhancements
+[yazi-plugins] # Has smart-filter.yazi
+src.git = "https://github.com/yazi-rs/plugins.git"
+fetch.github = "yazi-rs/plugins"
 
-## Integration
-[dragon-xplr]
-src.git = "https://github.com/sayanarijit/dragon.xplr.git"
-fetch.github = "sayanarijit/dragon.xplr"
+### UI enhancements
+[starship-yazi]
+src.git = "https://github.com/Rolv-Apneseth/starship.yazi.git"
+fetch.github = "Rolv-Apneseth/starship.yazi"
 
-[dua-cli-xplr]
-src.git = "https://github.com/sayanarijit/dua-cli.xplr.git"
-fetch.github = "sayanarijit/dua-cli.xplr"
-
-[fzf-xplr]
-src.git = "https://github.com/sayanarijit/fzf.xplr.git"
-fetch.github = "sayanarijit/fzf.xplr"
-
-[ouch-xplr]
-src.git = "https://github.com/dtomvan/ouch.xplr.git"
-fetch.github = "dtomvan/ouch.xplr"
-
-[scp-xplr]
-src.git = "https://github.com/sayanarijit/scp.xplr.git"
-fetch.github = "sayanarijit/scp.xplr"
-
-[zoxide-xplr]
-src.git = "https://github.com/sayanarijit/zoxide.xplr.git"
-fetch.github = "sayanarijit/zoxide.xplr"
-
-## Theme
-[icons-xplr]
-# Move to main repo after icons.xplr#4 is merged
-# src.git = "https://github.com/prncss-xyz/icons.xplr.git"
-# fetch.github = "prncss-xyz/icons.xplr"
-src.branch = "nerfonts-v3-update"
-src.git = "https://github.com/jbms/icons.xplr.git"
-fetch.github = "jbms/icons.xplr"
-
-[extra-icons-xplr]
-src.git = "https://github.com/dtomvan/extra-icons.xplr.git"
-fetch.github = "dtomvan/extra-icons.xplr"
+## Utilities
+[icons-brew-yazi]
+src.git = "https://github.com/lpnh/icons-brew.yazi.git"
+fetch.github = "lpnh/icons-brew"

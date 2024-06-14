@@ -37,18 +37,6 @@
     };
     date = "2024-03-30";
   };
-  context-switch-xplr = {
-    pname = "context-switch-xplr";
-    version = "85ac284b33144540741f48a5a42d3366d00acae9";
-    src = fetchFromGitHub {
-      owner = "igorepst";
-      repo = "context-switch.xplr";
-      rev = "85ac284b33144540741f48a5a42d3366d00acae9";
-      fetchSubmodules = false;
-      sha256 = "sha256-ryVvZIMBkG7FpJVpEj0SfibWFDEEsvA8089ptErlqwg=";
-    };
-    date = "2023-12-28";
-  };
   demeter = {
     pname = "demeter";
     version = "0.1.0";
@@ -57,41 +45,17 @@
       sha256 = "sha256-XjgI0F2QVwV2KSH+7eO3G1lX/NZ6hXPYztCIlXdnOJc=";
     };
   };
-  dragon-xplr = {
-    pname = "dragon-xplr";
-    version = "5fbddcb33f7d75a5abd12d27223ac55589863335";
+  exifaudio-yazi = {
+    pname = "exifaudio-yazi";
+    version = "94329ead8b3a6d3faa2d4975930a3d0378980c7a";
     src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "dragon.xplr";
-      rev = "5fbddcb33f7d75a5abd12d27223ac55589863335";
+      owner = "Sonico98";
+      repo = "exifaudio.yazi";
+      rev = "94329ead8b3a6d3faa2d4975930a3d0378980c7a";
       fetchSubmodules = false;
-      sha256 = "sha256-FJbyu5kK78XiTJl0NNXcI0KPOdXOPwpbBCWPUEpu5zA=";
+      sha256 = "sha256-jz6fVtcLHw9lsxFWECbuxE7tEBttE08Fl4oJSTifaEc=";
     };
-    date = "2023-01-11";
-  };
-  dua-cli-xplr = {
-    pname = "dua-cli-xplr";
-    version = "66ccf983fab7f67d6b00adc0365a2b26550e7f81";
-    src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "dua-cli.xplr";
-      rev = "66ccf983fab7f67d6b00adc0365a2b26550e7f81";
-      fetchSubmodules = false;
-      sha256 = "sha256-XDhXaS8GuY3fuiSEL0WcLFilZ72emmjTVi07kv5c8n8=";
-    };
-    date = "2022-01-19";
-  };
-  extra-icons-xplr = {
-    pname = "extra-icons-xplr";
-    version = "1f27b9a74c23b869fe64d12f3d8c2a1207ff8eb7";
-    src = fetchFromGitHub {
-      owner = "dtomvan";
-      repo = "extra-icons.xplr";
-      rev = "1f27b9a74c23b869fe64d12f3d8c2a1207ff8eb7";
-      fetchSubmodules = false;
-      sha256 = "sha256-9xDK960CSqdHdKKczH5ULpS0s/2KYwl+NgvQCt6FLCs=";
-    };
-    date = "2023-06-01";
+    date = "2024-02-28";
   };
   fish-bd = {
     pname = "fish-bd";
@@ -105,29 +69,41 @@
     };
     date = "2022-03-04";
   };
-  fzf-xplr = {
-    pname = "fzf-xplr";
-    version = "c8991f92946a7c8177d7f82ed939d845746ebaf5";
+  glow-yazi = {
+    pname = "glow-yazi";
+    version = "536185a4e60ac0adc11d238881e78678fdf084ff";
     src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "fzf.xplr";
-      rev = "c8991f92946a7c8177d7f82ed939d845746ebaf5";
+      owner = "Reledia";
+      repo = "glow.yazi";
+      rev = "536185a4e60ac0adc11d238881e78678fdf084ff";
       fetchSubmodules = false;
-      sha256 = "sha256-dpnta67p3fYEO3/GdvFlqzdyiMaJ9WbsnNmoIRHweMI=";
+      sha256 = "sha256-NcMbYjek99XgWFlebU+8jv338Vk1hm5+oW5gwH+3ZbI=";
     };
-    date = "2023-09-04";
+    date = "2024-05-02";
   };
-  icons-xplr = {
-    pname = "icons-xplr";
-    version = "2d04b5ba3a9c5c6c886f5f3f1d8facde6e6e7612";
+  icons-brew-yazi = {
+    pname = "icons-brew-yazi";
+    version = "b72dff8c252154f99bb8ea16305f94fc79978614";
     src = fetchFromGitHub {
-      owner = "jbms";
-      repo = "icons.xplr";
-      rev = "2d04b5ba3a9c5c6c886f5f3f1d8facde6e6e7612";
+      owner = "lpnh";
+      repo = "icons-brew";
+      rev = "b72dff8c252154f99bb8ea16305f94fc79978614";
       fetchSubmodules = false;
-      sha256 = "sha256-KUX7SJqYElpmYtbzyqyPB7rfBXlaBsj8yyRJ7Swn0hE=";
+      sha256 = "sha256-5ptPcsMPFA/uN7JV1T87K61m7ddM9+vPKwbEEw8xz0M=";
     };
-    date = "2023-06-19";
+    date = "2024-06-14";
+  };
+  miller-yazi = {
+    pname = "miller-yazi";
+    version = "75f00026a0425009edb6fedcfbe893f3d2ddedf4";
+    src = fetchFromGitHub {
+      owner = "Reledia";
+      repo = "miller.yazi";
+      rev = "75f00026a0425009edb6fedcfbe893f3d2ddedf4";
+      fetchSubmodules = false;
+      sha256 = "sha256-u8xadj6/s16xXUAWGezYBqnygKaFMnRUsqtjMDr6DZA=";
+    };
+    date = "2024-05-02";
   };
   nx-dark-reader = {
     pname = "nx-dark-reader";
@@ -177,29 +153,17 @@
     };
     date = "2023-06-07";
   };
-  offline-docs-xplr = {
-    pname = "offline-docs-xplr";
-    version = "cba060b5a009696fe1b2ccbdd73d7ba2e2d7b51d";
+  ouch-yazi = {
+    pname = "ouch-yazi";
+    version = "694d149be5f96eaa0af68d677c17d11d2017c976";
     src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "offline-docs.xplr";
-      rev = "cba060b5a009696fe1b2ccbdd73d7ba2e2d7b51d";
+      owner = "ndtoan96";
+      repo = "ouch.yazi";
+      rev = "694d149be5f96eaa0af68d677c17d11d2017c976";
       fetchSubmodules = false;
-      sha256 = "sha256-+ilunEbnPpP8NEhfNlr8rK7fwQhyTHFhsFZnI85TkXk=";
+      sha256 = "sha256-J3vR9q4xHjJt56nlfd+c8FrmMVvLO78GiwSNcLkM4OU=";
     };
-    date = "2024-02-10";
-  };
-  ouch-xplr = {
-    pname = "ouch-xplr";
-    version = "375edf19ff3e0286bd7a101b9e4dd24fa5abaeb8";
-    src = fetchFromGitHub {
-      owner = "dtomvan";
-      repo = "ouch.xplr";
-      rev = "375edf19ff3e0286bd7a101b9e4dd24fa5abaeb8";
-      fetchSubmodules = false;
-      sha256 = "sha256-YGFQKzIYIlL+UW2Nel2Tw7WC3MESaVbWYlpj5o2FfLs=";
-    };
-    date = "2022-01-23";
+    date = "2024-03-26";
   };
   plugin-sudope = {
     pname = "plugin-sudope";
@@ -213,6 +177,18 @@
     };
     date = "2021-04-11";
   };
+  relative-motions-yazi = {
+    pname = "relative-motions-yazi";
+    version = "e223bce4bd2d6b558bbb4660768449a3087f8eb4";
+    src = fetchFromGitHub {
+      owner = "dedukun";
+      repo = "relative-motions.yazi";
+      rev = "e223bce4bd2d6b558bbb4660768449a3087f8eb4";
+      fetchSubmodules = false;
+      sha256 = "sha256-gd7xrSx0V0ZvDpSrqrNgnAXQn9LlF10myWRoAOZzxak=";
+    };
+    date = "2024-05-15";
+  };
   roblox-oof = {
     pname = "roblox-oof";
     version = "latest";
@@ -221,65 +197,29 @@
       sha256 = "sha256-vcxbfljNxTFS+uFxrV/zKdDWWBBYN2hJIwkN5MN8AH0=";
     };
   };
-  scp-xplr = {
-    pname = "scp-xplr";
-    version = "578bfd6bd379b113ce63bb0f73658eef2594c817";
+  starship-yazi = {
+    pname = "starship-yazi";
+    version = "6197e4cca4caed0121654079151632f6abcdcae9";
     src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "scp.xplr";
-      rev = "578bfd6bd379b113ce63bb0f73658eef2594c817";
+      owner = "Rolv-Apneseth";
+      repo = "starship.yazi";
+      rev = "6197e4cca4caed0121654079151632f6abcdcae9";
       fetchSubmodules = false;
-      sha256 = "sha256-E/a1JQX7cKOWpPcEFvew3LDLTCyHwXfbTNDtNw2WiXY=";
+      sha256 = "sha256-oHoBq7BESjGeKsaBnDt0TXV78ggGCdYndLpcwwQ8Zts=";
     };
-    date = "2024-02-10";
+    date = "2024-04-03";
   };
-  style-xplr = {
-    pname = "style-xplr";
-    version = "e1fbd803e8a1dc4a6a1460816b485fb06412e6b8";
+  yazi-plugins = {
+    pname = "yazi-plugins";
+    version = "db660364e92235a272718015292ac579db651d67";
     src = fetchFromGitHub {
-      owner = "emsquid";
-      repo = "style.xplr";
-      rev = "e1fbd803e8a1dc4a6a1460816b485fb06412e6b8";
+      owner = "yazi-rs";
+      repo = "plugins";
+      rev = "db660364e92235a272718015292ac579db651d67";
       fetchSubmodules = false;
-      sha256 = "sha256-eP0+xA3qtbAUJaqBxdY1qDhnCF/tY3MAaq1fZd4SLmA=";
+      sha256 = "sha256-7xpjC86wtRSOvFBZZqR/3iZjtphwLYZtbrRG5Clhjtk=";
     };
-    date = "2023-01-09";
-  };
-  tri-pane-xplr = {
-    pname = "tri-pane-xplr";
-    version = "d90c65eb2bdd182f09db2db8969a99666f90c78b";
-    src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "tri-pane.xplr";
-      rev = "d90c65eb2bdd182f09db2db8969a99666f90c78b";
-      fetchSubmodules = false;
-      sha256 = "sha256-repzWTUYZirpBwQ+SEe1Gp1EFMHGG5VONSRS00c995c=";
-    };
-    date = "2023-07-05";
-  };
-  type-to-nav-xplr = {
-    pname = "type-to-nav-xplr";
-    version = "de817bd19c56b7cbb1c39c05e4412b7f188b548c";
-    src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "type-to-nav.xplr";
-      rev = "de817bd19c56b7cbb1c39c05e4412b7f188b548c";
-      fetchSubmodules = false;
-      sha256 = "sha256-BBIGX0gLJeX3F0wn22IGUr/qzlL4ryh0RjsZURJ1xq4=";
-    };
-    date = "2022-01-19";
-  };
-  wl-clipboard-xplr = {
-    pname = "wl-clipboard-xplr";
-    version = "a3ffc87460c5c7f560bffea689487ae14b36d9c3";
-    src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "wl-clipboard.xplr";
-      rev = "a3ffc87460c5c7f560bffea689487ae14b36d9c3";
-      fetchSubmodules = false;
-      sha256 = "sha256-I4rh5Zks9hiXozBiPDuRdHwW5I7ppzEpQNtirY0Lcks=";
-    };
-    date = "2023-01-11";
+    date = "2024-06-14";
   };
   you-should-use = {
     pname = "you-should-use";
@@ -292,17 +232,5 @@
       sha256 = "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=";
     };
     date = "2022-02-13";
-  };
-  zoxide-xplr = {
-    pname = "zoxide-xplr";
-    version = "e50fd35db5c05e750a74c8f54761922464c1ad5f";
-    src = fetchFromGitHub {
-      owner = "sayanarijit";
-      repo = "zoxide.xplr";
-      rev = "e50fd35db5c05e750a74c8f54761922464c1ad5f";
-      fetchSubmodules = false;
-      sha256 = "sha256-ZiOupn9Vq/czXI3JHvXUlAvAFdXrwoO3NqjjiCZXRnY=";
-    };
-    date = "2023-01-11";
   };
 }
