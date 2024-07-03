@@ -428,7 +428,7 @@
     "ly-module-patch": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-VHagBed9zfE3jNnEuSoSJALHUxYMpO4kIC9ol0sqQtk=",
+        "narHash": "sha256-uJ3+ugOhcE7J8kLMd12Nto5kGouNF+PX9PxmjbUcntI=",
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/297434.patch"
       },
