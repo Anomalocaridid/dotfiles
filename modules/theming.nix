@@ -62,6 +62,10 @@
     enable = true;
     image = pkgs.sources.catppuccin-fractal-wallpapers + "/05.png";
 
+    # Set a theme just so one does not have to be automatically generated
+    # Remove when stylix#248 is resolved.
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+
     # Just use Stylix for fonts
     autoEnable = false;
 
