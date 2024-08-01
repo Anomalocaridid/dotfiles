@@ -59,11 +59,13 @@
     };
 
     # Extra Catppuccin themes
+    # Change to official repo when catppuccin/prismlauncher#6 is merged
     catppuccin-prismlauncher = {
-      url = "github:catppuccin/prismlauncher";
+      url = "github:Anomalocaridid/prismlauncher/whiskers";
       flake = false;
     };
 
+    # Remove when catppuccin/nix#75 is merged
     catppuccin-fuzzel = {
       url = "github:catppuccin/fuzzel";
       flake = false;

@@ -1,6 +1,5 @@
 {
   config,
-  lib,
   pkgs,
   inputs,
   ...
@@ -31,28 +30,6 @@
     isoPath = "${config.home.homeDirectory}/Documents/Super Smash Bros. Melee (USA) (En,Ja) (Rev 2).ciso";
   };
 
-  xdg =
-    let
-      palette =
-        (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-        .${config.catppuccin.flavor}.colors;
-    in
-    {
-      dataFile."PrismLauncher/themes/catppuccin-${config.catppuccin.flavor}".source =
-        let
-          capitalFlavor =
-            (
-              string:
-              (lib.strings.toUpper (builtins.substring 0 1 string))
-              + (builtins.substring 1 (builtins.stringLength string) string)
-            )
-              config.catppuccin.flavor;
-        in
-        pkgs.runCommand "catppuccin-prismlauncher-theme" { } ''
-          mkdir -p $out
-          cp -r ${inputs.catppuccin-prismlauncher}/themes/${capitalFlavor}/* $out
-          substituteInPlace $out/theme.json \
-            --replace '"Highlight": "#b4befe"' '"Highlight": "${palette.${config.catppuccin.accent}.hex}"'
-        '';
-    };
+  xdg.dataFile."PrismLauncher/themes/catppuccin".source =
+    inputs.catppuccin-prismlauncher + /themes/${config.catppuccin.flavor}/${config.catppuccin.accent};
 }
