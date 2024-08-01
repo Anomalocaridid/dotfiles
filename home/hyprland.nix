@@ -100,7 +100,7 @@
       windowrulev2 = [
         "float, class:^(wlogout|pavucontrol|nmtui)$"
         "workspace 1, class:^(lutris)$"
-        "workspace 2, class:^(nyxt)$"
+        "workspace 2, class:^([Ff]irefox)$"
         "workspace 3, class:^(filemanager)$"
         "workspace 4 silent, class:^(ArmCord)$"
         "workspace 5, title:^(Spotify.*)$"
@@ -269,7 +269,6 @@
           "libreoffice" = "󰈙";
           "lutris" = "";
           "Minecraft" = "󰍳";
-          "nyxt" = "󰖟";
           "org.keepassxc.KeePassXC" = "󰌋";
           "org.prismlauncher.PrismLauncher" = "󰍳";
           "org.pwmt.zathura" = "";

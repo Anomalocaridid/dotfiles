@@ -15,47 +15,39 @@
   };
   catppuccin-fuzzel = {
     pname = "catppuccin-fuzzel";
-    version = "eeb4c8d159187ef7eb59a4a99baec67c2e797e9f";
+    version = "125dc68ba79ddfe71e59412257698418c4f05218";
     src = fetchFromGitHub {
       owner = "catppuccin";
       repo = "fuzzel";
-      rev = "eeb4c8d159187ef7eb59a4a99baec67c2e797e9f";
+      rev = "125dc68ba79ddfe71e59412257698418c4f05218";
       fetchSubmodules = false;
-      sha256 = "sha256-yJvhc4ovgdxEdqFDxWNOkHJHTBF9UaCefetgCGhoG0A=";
+      sha256 = "sha256-ut46aEuBdMekkuB72Va3snR9q5tmRLQvYIC4E6rjbYs=";
     };
-    date = "2024-01-24";
+    date = "2024-07-26";
   };
   catppuccin-prismlauncher = {
     pname = "catppuccin-prismlauncher";
-    version = "07e9c3ca0ff8eb7da9fa8b5329a9d2ceec707f24";
+    version = "2edbdf5295bc3c12c3dd53b203ab91028fce2c54";
     src = fetchFromGitHub {
       owner = "catppuccin";
       repo = "prismlauncher";
-      rev = "07e9c3ca0ff8eb7da9fa8b5329a9d2ceec707f24";
+      rev = "2edbdf5295bc3c12c3dd53b203ab91028fce2c54";
       fetchSubmodules = false;
-      sha256 = "sha256-/qUqF92e3kYkl59GUMMFRtRTzVgSp5tGPxnXLGeusys=";
+      sha256 = "sha256-+yGrSZztf2sZ9frPT3ydIJDavo4eXs03cQWfdTAmn3w=";
     };
-    date = "2024-03-30";
-  };
-  demeter = {
-    pname = "demeter";
-    version = "0.1.0";
-    src = fetchurl {
-      url = "https://nyxt.atlas.engineer/static/release/demeter.tar.gz";
-      sha256 = "sha256-XjgI0F2QVwV2KSH+7eO3G1lX/NZ6hXPYztCIlXdnOJc=";
-    };
+    date = "2024-06-11";
   };
   exifaudio-yazi = {
     pname = "exifaudio-yazi";
-    version = "94329ead8b3a6d3faa2d4975930a3d0378980c7a";
+    version = "92366cf0b024a05cb80c9e245408026dcabe94f2";
     src = fetchFromGitHub {
       owner = "Sonico98";
       repo = "exifaudio.yazi";
-      rev = "94329ead8b3a6d3faa2d4975930a3d0378980c7a";
+      rev = "92366cf0b024a05cb80c9e245408026dcabe94f2";
       fetchSubmodules = false;
-      sha256 = "sha256-jz6fVtcLHw9lsxFWECbuxE7tEBttE08Fl4oJSTifaEc=";
+      sha256 = "sha256-QAIUwArdMvTxSRTXDg72rk1E2JresC4KzADqIPXnKLE=";
     };
-    date = "2024-02-28";
+    date = "2024-06-30";
   };
   fish-bd = {
     pname = "fish-bd";
@@ -105,65 +97,17 @@
     };
     date = "2024-05-02";
   };
-  nx-dark-reader = {
-    pname = "nx-dark-reader";
-    version = "57dc1a9482a81d7c15b00c4b9d647bf1b129d8e4";
-    src = fetchFromGitHub {
-      owner = "aartaka";
-      repo = "nx-dark-reader";
-      rev = "57dc1a9482a81d7c15b00c4b9d647bf1b129d8e4";
-      fetchSubmodules = false;
-      sha256 = "sha256-CKJGCk7ATd0naFhill5rrvay6V2JE4Bstu4tFpaAjB0=";
-    };
-    date = "2023-06-20";
-  };
-  nx-fruit = {
-    pname = "nx-fruit";
-    version = "161856d20bccec729a43767bd926aca2e651f100";
-    src = fetchFromGitHub {
-      owner = "atlas-engineer";
-      repo = "nx-fruit";
-      rev = "161856d20bccec729a43767bd926aca2e651f100";
-      fetchSubmodules = false;
-      sha256 = "sha256-mLZ/1LagwsdTj/qOxqTOu3OP6pwByO0ITfwxi547qeg=";
-    };
-    date = "2024-01-03";
-  };
-  nx-router = {
-    pname = "nx-router";
-    version = "0.2.0";
-    src = fetchgit {
-      url = "https://git.migalmoreno.com/nx-router";
-      rev = "0.2.0";
-      fetchSubmodules = false;
-      deepClone = true;
-      leaveDotGit = true;
-      sha256 = "sha256-H4v90ujqZJaigEodz5d8fr1qKcbIyxzN9sUiy9qkwbA=";
-    };
-  };
-  nx-search-engines = {
-    pname = "nx-search-engines";
-    version = "f81f47df82f8e322f0a8919d05fc513297095a0b";
-    src = fetchFromGitHub {
-      owner = "aartaka";
-      repo = "nx-search-engines";
-      rev = "f81f47df82f8e322f0a8919d05fc513297095a0b";
-      fetchSubmodules = false;
-      sha256 = "sha256-Q+6B3lDzlhfHnS306yLh5LpxdIXESdH/Y2D3GJodbXs=";
-    };
-    date = "2023-06-07";
-  };
   ouch-yazi = {
     pname = "ouch-yazi";
-    version = "694d149be5f96eaa0af68d677c17d11d2017c976";
+    version = "251da6930ca8b7ee0384810086c3bf644caede3e";
     src = fetchFromGitHub {
       owner = "ndtoan96";
       repo = "ouch.yazi";
-      rev = "694d149be5f96eaa0af68d677c17d11d2017c976";
+      rev = "251da6930ca8b7ee0384810086c3bf644caede3e";
       fetchSubmodules = false;
-      sha256 = "sha256-J3vR9q4xHjJt56nlfd+c8FrmMVvLO78GiwSNcLkM4OU=";
+      sha256 = "sha256-yLt9aY6hUIOdBI5bMdCs7VYFJGyD3WIkmPxvWKNCskA=";
     };
-    date = "2024-03-26";
+    date = "2024-07-15";
   };
   plugin-sudope = {
     pname = "plugin-sudope";
@@ -179,15 +123,15 @@
   };
   relative-motions-yazi = {
     pname = "relative-motions-yazi";
-    version = "e223bce4bd2d6b558bbb4660768449a3087f8eb4";
+    version = "73f554295f4b69756597c9fe3caf3750a321acea";
     src = fetchFromGitHub {
       owner = "dedukun";
       repo = "relative-motions.yazi";
-      rev = "e223bce4bd2d6b558bbb4660768449a3087f8eb4";
+      rev = "73f554295f4b69756597c9fe3caf3750a321acea";
       fetchSubmodules = false;
-      sha256 = "sha256-gd7xrSx0V0ZvDpSrqrNgnAXQn9LlF10myWRoAOZzxak=";
+      sha256 = "sha256-jahJC6LXOnr974+zHEH9gqI+J1C68O+PvjSt8pelkP0=";
     };
-    date = "2024-05-15";
+    date = "2024-07-19";
   };
   roblox-oof = {
     pname = "roblox-oof";
@@ -199,27 +143,27 @@
   };
   starship-yazi = {
     pname = "starship-yazi";
-    version = "6197e4cca4caed0121654079151632f6abcdcae9";
+    version = "0a141f6dd80a4f9f53af8d52a5802c69f5b4b618";
     src = fetchFromGitHub {
       owner = "Rolv-Apneseth";
       repo = "starship.yazi";
-      rev = "6197e4cca4caed0121654079151632f6abcdcae9";
+      rev = "0a141f6dd80a4f9f53af8d52a5802c69f5b4b618";
       fetchSubmodules = false;
-      sha256 = "sha256-oHoBq7BESjGeKsaBnDt0TXV78ggGCdYndLpcwwQ8Zts=";
+      sha256 = "sha256-OL4kSDa1BuPPg9N8QuMtl+MV/S24qk5R1PbO0jgq2rA=";
     };
-    date = "2024-04-03";
+    date = "2024-07-16";
   };
   yazi-plugins = {
     pname = "yazi-plugins";
-    version = "db660364e92235a272718015292ac579db651d67";
+    version = "06e5fe1c7a2a4009c483b28b298700590e7b6784";
     src = fetchFromGitHub {
       owner = "yazi-rs";
       repo = "plugins";
-      rev = "db660364e92235a272718015292ac579db651d67";
+      rev = "06e5fe1c7a2a4009c483b28b298700590e7b6784";
       fetchSubmodules = false;
-      sha256 = "sha256-7xpjC86wtRSOvFBZZqR/3iZjtphwLYZtbrRG5Clhjtk=";
+      sha256 = "sha256-jg8+GDsHOSIh8QPYxCvMde1c1D9M78El0PljSerkLQc=";
     };
-    date = "2024-06-14";
+    date = "2024-07-18";
   };
   you-should-use = {
     pname = "you-should-use";

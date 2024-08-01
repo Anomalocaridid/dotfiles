@@ -29,30 +29,6 @@ fetch.github = "oh-my-fish/plugin-sudope"
 src.git = "https://github.com/paysonwallach/fish-you-should-use.git"
 fetch.github = "paysonwallach/fish-you-should-use"
 
-# Nyxt plugins
-[nx-fruit]
-src.git = "https://github.com/atlas-engineer/nx-fruit.git"
-fetch.github = "atlas-engineer/nx-fruit"
-
-[nx-search-engines]
-src.git = "https://github.com/aartaka/nx-search-engines.git"
-fetch.github = "aartaka/nx-search-engines"
-
-[nx-router]
-src.manual = "0.2.0" # Source does not support shallow clone, which is needed to fetch version
-fetch.git = "https://git.migalmoreno.com/nx-router"
-git.deepClone = true
-git.leaveDotGit = true # Required for deepClone
-
-[nx-dark-reader]
-src.git = "https://github.com/aartaka/nx-dark-reader.git"
-fetch.github = "aartaka/nx-dark-reader"
-
-# Nyxt rss reader
-[demeter]
-src.manual = "0.1.0"
-fetch.url = "https://nyxt.atlas.engineer/static/release/demeter.tar.gz"
-
 # yazi plugins
 ## Previewers
 [glow-yazi]

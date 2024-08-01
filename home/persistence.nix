@@ -24,7 +24,6 @@
       # Other important stuff
       ".config/FreeTube" # Freetube user data
       "exercism" # Exercism
-      ".local/share/nyxt" # Nyxt, history, bookmarks, etc.
       ".mozilla" # Firefox data
       "Projects" # Misc. programming
       "qmk_firmware" # QMK firmware
@@ -37,7 +36,6 @@
       "Zotero" # Zotero databases
       # Non-critical caches and data to persist
       ".cache/keepassxc" # KeePassXC cache
-      ".cache/nyxt" # Nyxt browser cache
       ".cache/spotify" # Spotify cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
       ".config/ArmCord" # ArmCord user data

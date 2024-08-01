@@ -6,7 +6,7 @@
       defaultApplications =
         let
           editor = "Helix.desktop";
-          browser = "nyxt.desktop";
+          browser = "firefox.desktop";
           pdfViewer = "org.pwmt.zathura-pdf-mupdf.desktop";
           wordProcessor = "writer.desktop";
           spreadsheet = "calc.desktop";
