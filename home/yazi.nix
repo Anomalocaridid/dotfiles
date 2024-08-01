@@ -57,6 +57,13 @@
             ]
           );
       };
+      opener.open = [
+        {
+          run = ''xdg-open "$1"'';
+          desc = "Open";
+          orphan = true; # Ensure it stays open after yazi is closed
+        }
+      ];
     };
     keymap = {
       input.prepend_keymap = [
