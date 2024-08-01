@@ -149,6 +149,54 @@
         "type": "github"
       }
     },
+    "catppuccin-fractal-wallpapers": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1660870156,
+        "narHash": "sha256-udMkIX5etmRR0O+MPWeDAMZH4BW0YS0pDUE0wcwszQI=",
+        "owner": "psylopneunonym",
+        "repo": "Catppuccin-Fractal-Wallpapers",
+        "rev": "cd439e85eb5b81808e5f6dc64adb2c171fc0853f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "psylopneunonym",
+        "repo": "Catppuccin-Fractal-Wallpapers",
+        "type": "github"
+      }
+    },
+    "catppuccin-fuzzel": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1722007827,
+        "narHash": "sha256-ut46aEuBdMekkuB72Va3snR9q5tmRLQvYIC4E6rjbYs=",
+        "owner": "catppuccin",
+        "repo": "fuzzel",
+        "rev": "125dc68ba79ddfe71e59412257698418c4f05218",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "fuzzel",
+        "type": "github"
+      }
+    },
+    "catppuccin-prismlauncher": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718130113,
+        "narHash": "sha256-+yGrSZztf2sZ9frPT3ydIJDavo4eXs03cQWfdTAmn3w=",
+        "owner": "catppuccin",
+        "repo": "prismlauncher",
+        "rev": "2edbdf5295bc3c12c3dd53b203ab91028fce2c54",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "prismlauncher",
+        "type": "github"
+      }
+    },
     "catppuccin-whiskers": {
       "inputs": {
         "nixpkgs": [
@@ -187,6 +235,38 @@
       "original": {
         "owner": "nix-community",
         "repo": "disko",
+        "type": "github"
+      }
+    },
+    "exifaudio-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1719764610,
+        "narHash": "sha256-QAIUwArdMvTxSRTXDg72rk1E2JresC4KzADqIPXnKLE=",
+        "owner": "Sonico98",
+        "repo": "exifaudio.yazi",
+        "rev": "92366cf0b024a05cb80c9e245408026dcabe94f2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Sonico98",
+        "repo": "exifaudio.yazi",
+        "type": "github"
+      }
+    },
+    "fish-bd": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1646360749,
+        "narHash": "sha256-GeWjoakXa0t2TsMC/wpLEmsSVGhHFhBVK3v9eyQdzv0=",
+        "owner": "0rax",
+        "repo": "fish-bd",
+        "rev": "ab686e028bfe95fa561a4f4e57840e36902d4d7d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0rax",
+        "repo": "fish-bd",
         "type": "github"
       }
     },
@@ -294,6 +374,22 @@
         "type": "github"
       }
     },
+    "glow-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714603187,
+        "narHash": "sha256-NcMbYjek99XgWFlebU+8jv338Vk1hm5+oW5gwH+3ZbI=",
+        "owner": "Reledia",
+        "repo": "glow.yazi",
+        "rev": "536185a4e60ac0adc11d238881e78678fdf084ff",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Reledia",
+        "repo": "glow.yazi",
+        "type": "github"
+      }
+    },
     "gnome-shell": {
       "flake": false,
       "locked": {
@@ -394,6 +490,22 @@
         "type": "github"
       }
     },
+    "icons-brew-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718401700,
+        "narHash": "sha256-5ptPcsMPFA/uN7JV1T87K61m7ddM9+vPKwbEEw8xz0M=",
+        "owner": "lpnh",
+        "repo": "icons-brew.yazi",
+        "rev": "b72dff8c252154f99bb8ea16305f94fc79978614",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lpnh",
+        "repo": "icons-brew.yazi",
+        "type": "github"
+      }
+    },
     "impermanence": {
       "locked": {
         "lastModified": 1717932370,
@@ -435,6 +547,22 @@
       "original": {
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/297434.patch"
+      }
+    },
+    "miller-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1714603177,
+        "narHash": "sha256-u8xadj6/s16xXUAWGezYBqnygKaFMnRUsqtjMDr6DZA=",
+        "owner": "Reledia",
+        "repo": "miller.yazi",
+        "rev": "75f00026a0425009edb6fedcfbe893f3d2ddedf4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Reledia",
+        "repo": "miller.yazi",
+        "type": "github"
       }
     },
     "nix": {
@@ -569,25 +697,87 @@
         "type": "github"
       }
     },
+    "ouch-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721057035,
+        "narHash": "sha256-yLt9aY6hUIOdBI5bMdCs7VYFJGyD3WIkmPxvWKNCskA=",
+        "owner": "ndtoan96",
+        "repo": "ouch.yazi",
+        "rev": "251da6930ca8b7ee0384810086c3bf644caede3e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ndtoan96",
+        "repo": "ouch.yazi",
+        "type": "github"
+      }
+    },
+    "plugin-sudope": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1618136089,
+        "narHash": "sha256-pD4rNuqg6TG22L9m8425CO2iqcYm8JaAEXIVa0H/v/U=",
+        "owner": "oh-my-fish",
+        "repo": "plugin-sudope",
+        "rev": "83919a692bc1194aa322f3627c859fecace5f496",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oh-my-fish",
+        "repo": "plugin-sudope",
+        "type": "github"
+      }
+    },
+    "relative-motions-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721384896,
+        "narHash": "sha256-jahJC6LXOnr974+zHEH9gqI+J1C68O+PvjSt8pelkP0=",
+        "owner": "dedukun",
+        "repo": "relative-motions.yazi",
+        "rev": "73f554295f4b69756597c9fe3caf3750a321acea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "dedukun",
+        "repo": "relative-motions.yazi",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
         "catppuccin-catwalk": "catppuccin-catwalk",
+        "catppuccin-fractal-wallpapers": "catppuccin-fractal-wallpapers",
+        "catppuccin-fuzzel": "catppuccin-fuzzel",
+        "catppuccin-prismlauncher": "catppuccin-prismlauncher",
         "catppuccin-whiskers": "catppuccin-whiskers",
         "disko": "disko",
+        "exifaudio-yazi": "exifaudio-yazi",
+        "fish-bd": "fish-bd",
         "flake-utils": "flake-utils_2",
+        "glow-yazi": "glow-yazi",
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
+        "icons-brew-yazi": "icons-brew-yazi",
         "impermanence": "impermanence",
         "ly-module-patch": "ly-module-patch",
+        "miller-yazi": "miller-yazi",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
+        "ouch-yazi": "ouch-yazi",
+        "plugin-sudope": "plugin-sudope",
+        "relative-motions-yazi": "relative-motions-yazi",
         "spicetify-nix": "spicetify-nix",
         "ssbm-nix": "ssbm-nix",
+        "starship-yazi": "starship-yazi",
         "stylix": "stylix",
         "ttf-to-tty": "ttf-to-tty",
-        "unison-nix": "unison-nix"
+        "unison-nix": "unison-nix",
+        "yazi-plugins": "yazi-plugins",
+        "you-should-use": "you-should-use"
       }
     },
     "rust-overlay": {
@@ -668,6 +858,22 @@
       "original": {
         "owner": "djanatyn",
         "repo": "ssbm-nix",
+        "type": "github"
+      }
+    },
+    "starship-yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721084949,
+        "narHash": "sha256-OL4kSDa1BuPPg9N8QuMtl+MV/S24qk5R1PbO0jgq2rA=",
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
+        "rev": "0a141f6dd80a4f9f53af8d52a5802c69f5b4b618",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Rolv-Apneseth",
+        "repo": "starship.yazi",
         "type": "github"
       }
     },
@@ -792,6 +998,38 @@
       "original": {
         "owner": "ceedubs",
         "repo": "unison-nix",
+        "type": "github"
+      }
+    },
+    "yazi-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1721281433,
+        "narHash": "sha256-jg8+GDsHOSIh8QPYxCvMde1c1D9M78El0PljSerkLQc=",
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "rev": "06e5fe1c7a2a4009c483b28b298700590e7b6784",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yazi-rs",
+        "repo": "plugins",
+        "type": "github"
+      }
+    },
+    "you-should-use": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644782383,
+        "narHash": "sha256-MmGDFTgxEFgHdX95OjH3jKsVG1hdwo6bRht+Lvvqe5Y=",
+        "owner": "paysonwallach",
+        "repo": "fish-you-should-use",
+        "rev": "a332823512c0b51e71516ebb8341db0528c87926",
+        "type": "github"
+      },
+      "original": {
+        "owner": "paysonwallach",
+        "repo": "fish-you-should-use",
         "type": "github"
       }
     }

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, ... }:
 {
   programs.fuzzel =
     let
@@ -9,8 +9,7 @@
       settings = {
         main = {
           include =
-            pkgs.sources.catppuccin-fuzzel
-            + "/themes/${config.catppuccin.flavor}/${config.catppuccin.accent}.ini";
+            inputs.catppuccin-fuzzel + "/themes/${config.catppuccin.flavor}/${config.catppuccin.accent}.ini";
           font = "${fonts.monospace.name}:size=${toString fonts.sizes.applications}";
           dpi-aware = "no"; # appears really small otherwise
           icon-theme = config.gtk.iconTheme.name;

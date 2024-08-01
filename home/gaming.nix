@@ -50,7 +50,7 @@
         in
         pkgs.runCommand "catppuccin-prismlauncher-theme" { } ''
           mkdir -p $out
-          cp -r ${pkgs.sources.catppuccin-prismlauncher}/themes/${capitalFlavor}/* $out
+          cp -r ${inputs.catppuccin-prismlauncher}/themes/${capitalFlavor}/* $out
           substituteInPlace $out/theme.json \
             --replace '"Highlight": "#b4befe"' '"Highlight": "${palette.${config.catppuccin.accent}.hex}"'
         '';

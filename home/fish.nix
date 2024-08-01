@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   programs = {
     fish = {
@@ -73,15 +78,14 @@
         lg = "lazygit";
       };
       plugins =
-        with pkgs;
         let
           pluginFromPkgs = name: {
             inherit name;
-            src = fishPlugins."${name}".src;
+            src = pkgs.fishPlugins."${name}".src;
           };
-          pluginFromSources = name: {
+          pluginFromInputs = name: {
             inherit name;
-            src = sources."${name}";
+            src = inputs."${name}";
           };
         in
         lib.concatLists [
@@ -91,7 +95,7 @@
             "fzf-fish"
             "grc"
           ])
-          (map pluginFromSources [
+          (map pluginFromInputs [
             "fish-bd"
             "plugin-sudope"
             "you-should-use"

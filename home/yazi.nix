@@ -1,4 +1,9 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   programs.yazi = {
     enable = true;
@@ -7,7 +12,7 @@
     initLua = ./.config/yazi/init.lua;
     plugins =
       (builtins.mapAttrs (x: _: ./.config/yazi/plugins/${x}) (builtins.readDir ./.config/yazi/plugins))
-      // (with pkgs.sources; {
+      // (with inputs; {
         # Previewers
         "glow.yazi" = glow-yazi;
         "miller.yazi" = miller-yazi;
@@ -108,7 +113,7 @@
     };
     theme =
       let
-        icon = (lib.importTOML (pkgs.sources.icons-brew-yazi + /catppuccin.toml)).icon;
+        icon = (lib.importTOML (inputs.icons-brew-yazi + /catppuccin.toml)).icon;
         exts = builtins.map (ext: ext // { name = "*.${ext.name}"; }) icon.exts;
       in
       {

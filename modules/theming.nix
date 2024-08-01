@@ -60,7 +60,7 @@
 
   stylix = {
     enable = true;
-    image = pkgs.sources.catppuccin-fractal-wallpapers + "/05.png";
+    image = inputs.catppuccin-fractal-wallpapers + "/05.png";
 
     # Set a theme just so one does not have to be automatically generated
     # Remove when stylix#248 is resolved.

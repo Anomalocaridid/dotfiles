@@ -58,6 +58,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Extra Catppuccin themes
+    catppuccin-prismlauncher = {
+      url = "github:catppuccin/prismlauncher";
+      flake = false;
+    };
+
+    catppuccin-fuzzel = {
+      url = "github:catppuccin/fuzzel";
+      flake = false;
+    };
+
+    # Catppuccin wallpapers
+    catppuccin-fractal-wallpapers = {
+      url = "github:psylopneunonym/Catppuccin-Fractal-Wallpapers";
+      flake = false;
+    };
+
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 
@@ -86,6 +103,70 @@
     # Cannot find a way to use this when fetched with nvfetcher.toml
     ly-module-patch = {
       url = "https://github.com/NixOS/nixpkgs/pull/297434.patch";
+      flake = false;
+    };
+
+    # Fish plugins
+    fish-bd = {
+      url = "github:0rax/fish-bd";
+      flake = false;
+    };
+
+    plugin-sudope = {
+      url = "github:oh-my-fish/plugin-sudope";
+      flake = false;
+    };
+
+    you-should-use = {
+      url = "github:paysonwallach/fish-you-should-use";
+      flake = false;
+    };
+
+    # yazi plugins
+    ## Previewers
+    glow-yazi = {
+      url = "github:Reledia/glow.yazi";
+      flake = false;
+    };
+
+    miller-yazi = {
+      url = "github:Reledia/miller.yazi";
+      flake = false;
+    };
+
+    exifaudio-yazi = {
+      url = "github:Sonico98/exifaudio.yazi";
+      flake = false;
+    };
+
+    ouch-yazi = {
+      url = "github:ndtoan96/ouch.yazi";
+      flake = false;
+    };
+
+    ## Functional Plugins
+    ### Jumping
+    relative-motions-yazi = {
+      url = "github:dedukun/relative-motions.yazi";
+      flake = false;
+    };
+
+    ### filter enhancements
+    # Has smart-filter.yazi
+    yazi-plugins = {
+      url = "github:yazi-rs/plugins";
+      flake = false;
+    };
+
+    ### UI enhancements
+    starship-yazi = {
+      url = "github:Rolv-Apneseth/starship.yazi";
+      flake = false;
+    };
+
+    ## Utilities
+    icons-brew-yazi = {
+      url = "github:lpnh/icons-brew.yazi";
       flake = false;
     };
   };
