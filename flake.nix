@@ -80,9 +80,6 @@
     # Gaming tweaks
     nix-gaming.url = "github:fufexan/nix-gaming";
 
-    # Slippi
-    ssbm-nix.url = "github:djanatyn/ssbm-nix";
-
     # Spotify customization
     spicetify-nix = {
       url = "github:the-argus/spicetify-nix";
@@ -186,7 +183,6 @@
       stylix,
       catppuccin,
       nix-gaming,
-      ssbm-nix,
       spicetify-nix,
       unison-nix,
       ...
@@ -217,7 +213,6 @@
           stylix.nixosModules.stylix
           catppuccin.nixosModules.catppuccin
           nix-gaming.nixosModules.pipewireLowLatency
-          ssbm-nix.nixosModule
           spicetify-nix.nixosModules.spicetify
         ];
       };

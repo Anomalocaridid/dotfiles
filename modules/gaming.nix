@@ -17,11 +17,6 @@
   # Support Direct Rendering for 32-bit applications, like Wine
   hardware.opengl.driSupport32Bit = true;
 
-  ssbm = {
-    overlay.enable = true;
-    cache.enable = true;
-  };
-
   # nix-gaming cache
   nix.settings = {
     substituters = [ "https://nix-gaming.cachix.org" ];
