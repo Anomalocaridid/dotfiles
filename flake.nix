@@ -147,7 +147,7 @@
     ## Functional Plugins
     ### Jumping
     relative-motions-yazi = {
-      url = "github:dedukun/relative-motions.yazi";
+      url = "github:dedukun/relative-motions.yazi/0.2.5";
       flake = false;
     };
 
@@ -160,7 +160,7 @@
 
     ### UI enhancements
     starship-yazi = {
-      url = "github:Rolv-Apneseth/starship.yazi";
+      url = "github:Rolv-Apneseth/starship.yazi/6197e4cca4caed0121654079151632f6abcdcae9";
       flake = false;
     };
 
