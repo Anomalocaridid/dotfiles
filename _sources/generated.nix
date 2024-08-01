@@ -133,14 +133,6 @@
     };
     date = "2024-07-19";
   };
-  roblox-oof = {
-    pname = "roblox-oof";
-    version = "latest";
-    src = fetchurl {
-      url = "https://archive.org/download/savetheoof/ouch.ogg";
-      sha256 = "sha256-vcxbfljNxTFS+uFxrV/zKdDWWBBYN2hJIwkN5MN8AH0=";
-    };
-  };
   starship-yazi = {
     pname = "starship-yazi";
     version = "0a141f6dd80a4f9f53af8d52a5802c69f5b4b618";

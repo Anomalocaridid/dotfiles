@@ -11,11 +11,6 @@ fetch.github = "catppuccin/fuzzel"
 src.git = "https://github.com/psylopneunonym/Catppuccin-Fractal-Wallpapers.git"
 fetch.github = "psylopneunonym/Catppuccin-Fractal-Wallpapers"
 
-# For vinegar overlay
-[roblox-oof]
-src.manual = "latest"
-fetch.url = "https://archive.org/download/savetheoof/ouch.ogg"
-
 # Fish plugins
 [fish-bd]
 src.git = "https://github.com/0rax/fish-bd.git"

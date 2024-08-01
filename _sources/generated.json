@@ -219,21 +219,6 @@
         },
         "version": "73f554295f4b69756597c9fe3caf3750a321acea"
     },
-    "roblox-oof": {
-        "cargoLocks": null,
-        "date": null,
-        "extract": null,
-        "name": "roblox-oof",
-        "passthru": null,
-        "pinned": false,
-        "src": {
-            "name": null,
-            "sha256": "sha256-vcxbfljNxTFS+uFxrV/zKdDWWBBYN2hJIwkN5MN8AH0=",
-            "type": "url",
-            "url": "https://archive.org/download/savetheoof/ouch.ogg"
-        },
-        "version": "latest"
-    },
     "starship-yazi": {
         "cargoLocks": null,
         "date": "2024-07-16",
