@@ -5,21 +5,15 @@
   ...
 }:
 {
-  home.packages =
-    with pkgs;
-    let
-      wine-ge = inputs.nix-gaming.packages.${pkgs.system}.wine-ge;
-    in
-    [
-      gamescope # Used by Lutris for control over game resolution
-      lutris
-      packwiz # minecraft modpack creator
-      prismlauncher
-      pysolfc
-      runelite
-      sgt-puzzles
-      wine-ge # System-level install for Lutris
-    ];
+  home.packages = with pkgs; [
+    gamescope # Used by Lutris for control over game resolution
+    lutris
+    packwiz # minecraft modpack creator
+    prismlauncher
+    pysolfc
+    runelite
+    sgt-puzzles
+  ];
 
   # Enable wine-ge's fsync support
   home.sessionVariables.WINEFSYNC = 1;
