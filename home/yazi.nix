@@ -11,19 +11,21 @@
     enableFishIntegration = true;
     initLua = ./.config/yazi/init.lua;
     plugins =
-      (builtins.mapAttrs (x: _: ./.config/yazi/plugins/${x}) (builtins.readDir ./.config/yazi/plugins))
+      (lib.attrsets.mapAttrs' (
+        x: _: lib.attrsets.nameValuePair (lib.strings.removeSuffix ".yazi" x) (./.config/yazi/plugins/${x})
+      ) (builtins.readDir ./.config/yazi/plugins))
       // (with inputs; {
         # Previewers
-        "glow.yazi" = glow-yazi;
-        "miller.yazi" = miller-yazi;
-        "exifaudio.yazi" = exifaudio-yazi;
-        "ouch.yazi" = ouch-yazi;
+        "glow" = glow-yazi;
+        "miller" = miller-yazi;
+        "exifaudio" = exifaudio-yazi;
+        "ouch" = ouch-yazi;
         # Functional Plugins
         ## Jumping
-        "relative-motions.yazi" = relative-motions-yazi;
+        "relative-motions" = relative-motions-yazi;
         ## filter enhancements
-        "smart-filter.yazi" = yazi-plugins + /smart-filter.yazi;
-        "starship.yazi" = starship-yazi;
+        "smart-filter" = yazi-plugins + /smart-filter.yazi;
+        "starship" = starship-yazi;
       });
     settings = {
       plugin = {
