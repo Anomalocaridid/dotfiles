@@ -4,6 +4,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.90.0.tar.gz";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-utils.follows = "flake-utils";
+      };
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -149,6 +157,7 @@
     inputs@{
       self,
       nixpkgs,
+      lix-module,
       disko,
       home-manager,
       impermanence,
@@ -179,6 +188,7 @@
         system = flake-utils.lib.system.x86_64-linux;
         modules = [
           ./modules
+          lix-module.nixosModules.default
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           impermanence.nixosModules.impermanence

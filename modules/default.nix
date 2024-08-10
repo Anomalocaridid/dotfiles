@@ -37,6 +37,8 @@
       ((lib.flip lib.attrsets.removeAttrs) [ "self" ])
       (lib.mapAttrs (_: flake: { inherit flake; }))
     ];
+    # For some reason, lix needs this to replace the nix command
+    package = pkgs.lix;
   };
 
   # Use GRUB
