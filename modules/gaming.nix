@@ -15,7 +15,7 @@
   # Nintendo Pro Controller / Joycon support
   services.joycond.enable = true;
   # Support Direct Rendering for 32-bit applications, like Wine
-  hardware.opengl.driSupport32Bit = true;
+  hardware.graphics.enable32Bit = true;
 
   # nix-gaming cache
   nix.settings = {
