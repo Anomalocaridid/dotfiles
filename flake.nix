@@ -65,12 +65,6 @@
       flake = false;
     };
 
-    # Remove when catppuccin/nix#75 is merged
-    catppuccin-fuzzel = {
-      url = "github:catppuccin/fuzzel";
-      flake = false;
-    };
-
     # Catppuccin wallpapers
     catppuccin-fractal-wallpapers = {
       url = "github:psylopneunonym/Catppuccin-Fractal-Wallpapers";

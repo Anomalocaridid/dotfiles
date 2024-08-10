@@ -165,22 +165,6 @@
         "type": "github"
       }
     },
-    "catppuccin-fuzzel": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1722007827,
-        "narHash": "sha256-ut46aEuBdMekkuB72Va3snR9q5tmRLQvYIC4E6rjbYs=",
-        "owner": "catppuccin",
-        "repo": "fuzzel",
-        "rev": "125dc68ba79ddfe71e59412257698418c4f05218",
-        "type": "github"
-      },
-      "original": {
-        "owner": "catppuccin",
-        "repo": "fuzzel",
-        "type": "github"
-      }
-    },
     "catppuccin-prismlauncher": {
       "flake": false,
       "locked": {
@@ -676,7 +660,6 @@
         "catppuccin": "catppuccin",
         "catppuccin-catwalk": "catppuccin-catwalk",
         "catppuccin-fractal-wallpapers": "catppuccin-fractal-wallpapers",
-        "catppuccin-fuzzel": "catppuccin-fuzzel",
         "catppuccin-prismlauncher": "catppuccin-prismlauncher",
         "catppuccin-whiskers": "catppuccin-whiskers",
         "disko": "disko",
