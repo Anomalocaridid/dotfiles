@@ -10,24 +10,8 @@ in
 {
   programs.spicetify = {
     enable = true;
-    # Use pre-refactor (pre-#48) catppuccin theme
-    # so that the accent can be declaratively defined
-    theme = spicePkgs.themes.catppuccin // rec {
-      name = "catppuccin-${config.catppuccin.flavor}";
-      src = pkgs.fetchFromGitHub {
-        owner = "catppuccin";
-        repo = "spicetify";
-        rev = "0b602142da4a436f7012c07137e846034aea82cb";
-        hash = "sha256-dBJ0vLvCdzpZZNHrsY6V8JQ2t4RB2L5OF/MdHGmIk4Y=";
-      };
-      requiredExtensions = [
-        {
-          src = "${src}/js";
-          name = "${name}.js";
-        }
-      ];
-    };
-    colorScheme = config.catppuccin.accent;
+    theme = spicePkgs.themes.catppuccin;
+    colorScheme = config.catppuccin.flavor;
     enabledExtensions = with spicePkgs.extensions; [
       # Official extensions
       keyboardShortcut
