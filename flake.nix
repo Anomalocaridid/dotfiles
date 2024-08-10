@@ -83,15 +83,6 @@
       };
     };
 
-    # Up to date Unison packages
-    unison-nix = {
-      url = "github:ceedubs/unison-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
-    };
-
     # Fish plugins
     fish-bd = {
       url = "github:0rax/fish-bd";
@@ -171,7 +162,6 @@
       catppuccin,
       nix-gaming,
       spicetify-nix,
-      unison-nix,
       ...
     }:
     flake-utils.lib.mkFlake rec {
@@ -186,8 +176,6 @@
         (import ./pkgs)
         # Hyprland community tools
         hyprland-contrib.overlays.default
-        # Up to date Unison packages
-        unison-nix.overlay
       ];
 
       hostDefaults = {

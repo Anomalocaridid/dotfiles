@@ -433,28 +433,6 @@
         "type": "github"
       }
     },
-    "home-manager_3": {
-      "inputs": {
-        "nixpkgs": [
-          "unison-nix",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1714043624,
-        "narHash": "sha256-Xn2r0Jv95TswvPlvamCC46wwNo8ALjRCMBJbGykdhcM=",
-        "owner": "nix-community",
-        "repo": "home-manager",
-        "rev": "86853e31dc1b62c6eeed11c667e8cdd0285d4411",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "ref": "release-23.11",
-        "repo": "home-manager",
-        "type": "github"
-      }
-    },
     "hyprland-contrib": {
       "inputs": {
         "nixpkgs": [
@@ -682,7 +660,6 @@
         "starship-yazi": "starship-yazi",
         "stylix": "stylix",
         "ttf-to-tty": "ttf-to-tty",
-        "unison-nix": "unison-nix",
         "yazi-plugins": "yazi-plugins",
         "you-should-use": "you-should-use"
       }
@@ -855,47 +832,6 @@
         "submodules": true,
         "type": "git",
         "url": "https://github.com/Open-Wine-Components/umu-launcher/?dir=packaging/nix"
-      }
-    },
-    "unison": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1705440587,
-        "narHash": "sha256-FUP9nld0uhm2A8cisZeTggsrJQU7BlJ7Wkf71srbAZs=",
-        "owner": "unisonweb",
-        "repo": "unison",
-        "rev": "f991abe291b1bf36734d36bb9c9a7196c9ea7ffe",
-        "type": "github"
-      },
-      "original": {
-        "owner": "unisonweb",
-        "repo": "unison",
-        "type": "github"
-      }
-    },
-    "unison-nix": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "home-manager": "home-manager_3",
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "unison": "unison"
-      },
-      "locked": {
-        "lastModified": 1721739307,
-        "narHash": "sha256-KGbUQYy15W820QnQNmcOWuV7q7GJS9jrg1Zdyz3Co7o=",
-        "owner": "ceedubs",
-        "repo": "unison-nix",
-        "rev": "3f10238cfbdc6395ef0b56d8c6e659585df13d6a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ceedubs",
-        "repo": "unison-nix",
-        "type": "github"
       }
     },
     "yazi-plugins": {
