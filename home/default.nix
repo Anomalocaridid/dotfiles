@@ -22,7 +22,6 @@ rec {
       exercism
       firefox # fallback browser
       freetube
-      fup-repl
       gimp # remove when gimp-with-plugins fixed
       # gimp-with-plugins # uncomment when fixed
       itd

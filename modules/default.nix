@@ -20,6 +20,7 @@
         "flakes"
       ];
       auto-optimise-store = true;
+      repl-overlays = [ ../repl-overlay.nix ]; # Lix-specific setting
     };
     gc = {
       automatic = true;
