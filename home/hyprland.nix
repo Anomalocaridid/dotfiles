@@ -32,7 +32,6 @@
         "col.inactive_border" = "0xaa$overlay0Alpha 0xaa$mantleAlpha 45deg";
 
         layout = "dwindle";
-        cursor_inactive_timeout = 60;
       };
 
       decoration = {
@@ -74,7 +73,7 @@
       };
 
       # See https://wiki.hyprland.org/Configuring/Master-Layout/ for more
-      master.new_is_master = true;
+      master.new_status = "master";
 
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
       gestures.workspace_swipe = false;
@@ -201,6 +200,8 @@
         "$mainMod, $LMB, movewindow"
         "$mainMod, $RMB, resizewindow"
       ];
+
+      cursor.inactive_timeout = 60;
     };
     extraConfig = # hypr
       ''
