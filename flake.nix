@@ -98,13 +98,6 @@
       };
     };
 
-    # Remove when nixpkgs/#297434 is merged
-    # Cannot find a way to use this when fetched with nvfetcher.toml
-    ly-module-patch = {
-      url = "https://github.com/NixOS/nixpkgs/pull/297434.patch";
-      flake = false;
-    };
-
     # Fish plugins
     fish-bd = {
       url = "github:0rax/fish-bd";
@@ -192,7 +185,7 @@
 
       channelsConfig.allowUnfree = true;
 
-      channels."nixpkgs".patches = [ inputs.ly-module-patch ];
+      # channels."nixpkgs".patches = [ ];
 
       sharedOverlays = [
         # custom overlay

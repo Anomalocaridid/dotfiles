@@ -522,18 +522,6 @@
         "type": "github"
       }
     },
-    "ly-module-patch": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-S115Bpls/2IjpQofoESy1FH0KDzAslW6ED4Qh8tdN5w=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/297434.patch"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/297434.patch"
-      }
-    },
     "miller-yazi": {
       "flake": false,
       "locked": {
@@ -700,7 +688,6 @@
         "hyprland-contrib": "hyprland-contrib",
         "icons-brew-yazi": "icons-brew-yazi",
         "impermanence": "impermanence",
-        "ly-module-patch": "ly-module-patch",
         "miller-yazi": "miller-yazi",
         "nix-gaming": "nix-gaming",
         "nix-index-database": "nix-index-database",
