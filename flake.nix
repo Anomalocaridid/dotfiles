@@ -76,11 +76,8 @@
 
     # Spotify customization
     spicetify-nix = {
-      url = "github:the-argus/spicetify-nix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-utils.follows = "flake-utils";
-      };
+      url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # Fish plugins
