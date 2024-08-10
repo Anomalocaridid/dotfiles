@@ -21,7 +21,7 @@
   home = {
     packages = with pkgs; [
       # fallback icon theme
-      gnome.adwaita-icon-theme
+      adwaita-icon-theme
       # needed for Sweet Folders
       candy-icons
       # Tools for making catppuccin ports
