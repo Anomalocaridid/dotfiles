@@ -7,11 +7,22 @@
 {
   # Import all nix files in directory 
   # Should ignore this file and all non-nix files
-  imports = map (file: ./. + "/${file}") (
-    lib.strings.filter (file: lib.strings.hasSuffix ".nix" file && file != "default.nix") (
-      builtins.attrNames (builtins.readDir ./.)
+  imports =
+    map (file: ./. + "/${file}") (
+      lib.strings.filter (file: lib.strings.hasSuffix ".nix" file && file != "default.nix") (
+        builtins.attrNames (builtins.readDir ./.)
+      )
     )
-  );
+    ++ [
+      inputs.lix-module.nixosModules.default
+      inputs.disko.nixosModules.disko
+      inputs.home-manager.nixosModules.home-manager
+      inputs.impermanence.nixosModules.impermanence
+      inputs.stylix.nixosModules.stylix
+      inputs.catppuccin.nixosModules.catppuccin
+      inputs.nix-gaming.nixosModules.pipewireLowLatency
+      inputs.spicetify-nix.nixosModules.spicetify
+    ];
 
   nix = {
     settings = {
@@ -33,13 +44,20 @@
       # Flakes have an attribute _type, which equals "flake"
       # while non-flakes lack this attribute
       (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
-      # Remove "self" input from registry to not risk messing
-      # things up if it is ever used
-      ((lib.flip lib.attrsets.removeAttrs) [ "self" ])
       (lib.mapAttrs (_: flake: { inherit flake; }))
     ];
     # For some reason, lix needs this to replace the nix command
     package = pkgs.lix;
+  };
+
+  nixpkgs = {
+    overlays = [
+      # custom overlay
+      (import ../pkgs)
+      # Hyprland community tools
+      inputs.hyprland-contrib.overlays.default
+    ];
+    config.allowUnfree = true;
   };
 
   # Use GRUB

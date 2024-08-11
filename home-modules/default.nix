@@ -1,10 +1,11 @@
 {
   lib,
   pkgs,
+  config,
   osConfig,
   ...
 }:
-rec {
+{
   # Import all nix files in directory 
   # Should ignore this file and all non-nix files
   # Currently, all non-nix files and dirs here are hidden dotfiles
@@ -14,9 +15,8 @@ rec {
     )
   );
 
-  home = rec {
-    username = "anomalocaris";
-    homeDirectory = "/home/${username}";
+  home = {
+    homeDirectory = "/home/${config.home.username}";
     packages = with pkgs; [
       armcord
       exercism
@@ -64,5 +64,5 @@ rec {
     # tray.enable = true;
   };
 
-  systemd.user.tmpfiles.rules = [ "L ${home.homeDirectory}/nixos - - - - /etc/nixos" ];
+  systemd.user.tmpfiles.rules = [ "L ${config.home.homeDirectory}/nixos - - - - /etc/nixos" ];
 }

@@ -1,10 +1,9 @@
 # Implement gytis-ivaskevicius/flake-utils-plus's fup-repl in nix repl
 info: final: prev:
 let
-  currentSystem = info.currentSystem;
   flake = builtins.getFlake "self";
   hostname = (builtins.head (builtins.match "([a-zA-Z0-9\\-]+)\n" (builtins.readFile /etc/hostname)));
-  nixpkgs = flake.pkgs.${currentSystem}.nixpkgs;
+  nixpkgs = import flake.inputs.nixpkgs { };
   nixpkgsOutput = removeAttrs (nixpkgs // nixpkgs.lib) [
     "options"
     "config"

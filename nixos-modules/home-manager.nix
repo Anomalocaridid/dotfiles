@@ -5,7 +5,7 @@
     useUserPackages = true;
     users.anomalocaris = {
       imports = [
-        ../home
+        ../home-modules
         inputs.impermanence.nixosModules.home-manager.impermanence
         inputs.nix-index-database.hmModules.nix-index
         inputs.catppuccin.homeManagerModules.catppuccin

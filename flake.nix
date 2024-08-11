@@ -27,7 +27,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Flake framework
     flake-parts.url = "github:hercules-ci/flake-parts";
+
+    # Flake Parts module for defining configs
+    ez-configs.url = "github:ehllie/ez-configs";
 
     # Hyprland community tools
     hyprland-contrib = {
@@ -149,66 +153,33 @@
 
   outputs =
     inputs@{ nixpkgs, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } (
-      { withSystem, ... }:
-      {
-        flake =
-          let
-            shared = [
-              ./modules
-              inputs.lix-module.nixosModules.default
-              inputs.disko.nixosModules.disko
-              inputs.home-manager.nixosModules.home-manager
-              inputs.impermanence.nixosModules.impermanence
-              inputs.stylix.nixosModules.stylix
-              inputs.catppuccin.nixosModules.catppuccin
-              inputs.nix-gaming.nixosModules.pipewireLowLatency
-              inputs.spicetify-nix.nixosModules.spicetify
-            ];
-          in
-          rec {
-            nixosConfigurations.home-pc = withSystem "x86_64-linux" (
-              { pkgs, system, ... }:
-              nixpkgs.lib.nixosSystem {
-                inherit system;
-                modules = [
-                  ./hosts/home-pc/configuration.nix
-                  diskoConfigurations.home-pc
-                ] ++ shared;
-                specialArgs = {
-                  inherit inputs pkgs;
-                };
-              }
-            );
+    flake-parts.lib.mkFlake { inherit inputs; } rec {
+      imports = [ inputs.ez-configs.flakeModule ];
 
-            # Expose this to use flake directly with Disko
-            diskoConfigurations.home-pc = (
-              import ./disko-config.nix {
-                disk = "/dev/nvme0n1";
-                memory = "32G";
-              }
-            );
-          };
+      ezConfigs = {
+        root = ./.;
+        globalArgs = {
+          inherit inputs;
+          diskoConfigurations = flake.diskoConfigurations;
+        };
+      };
 
-        systems = [ "x86_64-linux" ];
+      flake = {
+        # Expose this to use flake directly with Disko
+        diskoConfigurations.home-pc = (
+          import ./disko-config.nix {
+            disk = "/dev/nvme0n1";
+            memory = "32G";
+          }
+        );
+      };
 
-        perSystem =
-          { pkgs, system, ... }:
-          {
-            # Apply overlay and allow unfree packages
-            _module.args.pkgs = import nixpkgs {
-              inherit system;
-              overlays = [
-                # custom overlay
-                (import ./pkgs)
-                # Hyprland community tools
-                inputs.hyprland-contrib.overlays.default
-              ];
-              config.allowUnfree = true;
-            };
+      systems = [ "x86_64-linux" ];
 
-            formatter = pkgs.nixfmt-rfc-style;
-          };
-      }
-    );
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt-rfc-style;
+        };
+    };
 }
