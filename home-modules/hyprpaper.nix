@@ -1,10 +1,13 @@
 {
-  config,
   lib,
   pkgs,
+  config,
   ...
 }:
 {
+  # Use stylix to automatically set wallpaper
+  stylix.targets.hyprpaper.enable = true;
+
   services.hyprpaper = {
     enable = true;
     settings =
@@ -27,10 +30,6 @@
 
         # Disable ipc because I do not need it and it constantly ticks
         ipc = "off";
-
-        "$wallpaper" = config.stylix.image;
-        preload = [ "$wallpaper" ];
-        wallpaper = [ ",$wallpaper" ];
       };
   };
 }
