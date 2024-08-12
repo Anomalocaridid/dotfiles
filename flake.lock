@@ -524,22 +524,6 @@
         "type": "github"
       }
     },
-    "icons-brew-yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1718401700,
-        "narHash": "sha256-5ptPcsMPFA/uN7JV1T87K61m7ddM9+vPKwbEEw8xz0M=",
-        "owner": "lpnh",
-        "repo": "icons-brew.yazi",
-        "rev": "b72dff8c252154f99bb8ea16305f94fc79978614",
-        "type": "github"
-      },
-      "original": {
-        "owner": "lpnh",
-        "repo": "icons-brew.yazi",
-        "type": "github"
-      }
-    },
     "impermanence": {
       "locked": {
         "lastModified": 1719091691,
@@ -781,7 +765,6 @@
         "glow-yazi": "glow-yazi",
         "home-manager": "home-manager",
         "hyprland-contrib": "hyprland-contrib",
-        "icons-brew-yazi": "icons-brew-yazi",
         "impermanence": "impermanence",
         "lix-module": "lix-module",
         "miller-yazi": "miller-yazi",

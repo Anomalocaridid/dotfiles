@@ -142,12 +142,6 @@
       url = "github:Rolv-Apneseth/starship.yazi";
       flake = false;
     };
-
-    ## Utilities
-    icons-brew-yazi = {
-      url = "github:lpnh/icons-brew.yazi";
-      flake = false;
-    };
   };
 
   outputs =

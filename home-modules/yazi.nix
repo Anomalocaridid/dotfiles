@@ -121,17 +121,6 @@
           }
         ) 9);
     };
-    theme =
-      let
-        icon = (lib.importTOML (inputs.icons-brew-yazi + /catppuccin.toml)).icon;
-        exts = builtins.map (ext: ext // { name = "*.${ext.name}"; }) icon.exts;
-      in
-      {
-        icon.prepend_rules = builtins.map (icon: {
-          inherit (icon) name text;
-          fg = icon.fg_dark;
-        }) (icon.files ++ exts);
-      };
   };
 
   # Dependencies for plugins
