@@ -7,12 +7,19 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
+    plugins = with pkgs.hyprlandPlugins; [
+      hyprexpo # Show workspaces in a grid
+      hyprtrails # Give moving windows trails
+      hyprwinwrap # Set an arbitrary program as a wallpaper
+    ];
     settings = {
       exec-once = lib.flatten [
         "eww open bar"
         (lib.getExe pkgs.hyprland-autoname-workspaces)
         # "armcord"
         "steam -silent"
+        # cava wallpaper
+        "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
 
         # Remove when issue with ly mentioned in nixpkgs#297434 is resolved
         (builtins.map (x: "systemctl --user restart ${x}.service") [
@@ -151,6 +158,9 @@
         "$mainMod, Z, exec, $scratchpad"
         "$mainMod SHIFT, Z, exec, $scratchpad -g"
 
+        # hyprexpo
+        "$mainMod, grave, hyprexpo:expo, toggle"
+
         # Move focus with mainMod + direction keys
         # Move active window with mainMod + SHIFT + direction keys
         (builtins.map
@@ -201,6 +211,16 @@
       ];
 
       cursor.inactive_timeout = 60;
+
+      plugin = {
+        hyprexpo = {
+          bg_col = "$base";
+          # Always start grid with first workspace
+          workspace_method = "first 1";
+        };
+        hyprtrails.color = "$accent";
+        hyprwinwrap.class = "hyprwinwrap";
+      };
     };
     extraConfig = # hypr
       ''
@@ -314,6 +334,7 @@
         exclude = {
           "" = "^$"; # Hide XWayland windows that remain after closing
           "[Ss]team" = "(Friends List.*|^$)"; # will match all Steam window with null title (some popup)
+          "hyprwinwrap" = ".*"; # Hide hyprwinwrap background
         };
 
         # workspaces_name = {
