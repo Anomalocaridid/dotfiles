@@ -7,7 +7,6 @@
   ...
 }:
 {
-  # Qt theme defined in configuration.nix because it works better at system level
   gtk = {
     enable = true;
     catppuccin.enable = true;
@@ -16,6 +15,12 @@
       name = "Sweet-Rainbow";
       package = pkgs.sweet-folders;
     };
+  };
+
+  qt = rec {
+    enable = true;
+    style.name = "kvantum";
+    platformTheme = style;
   };
 
   home = {

@@ -34,13 +34,6 @@
         '';
   };
 
-  # Configure Qt theme
-  qt = rec {
-    enable = true;
-    platformTheme = "gtk2";
-    style = platformTheme;
-  };
-
   # Configure GRUB theme
   boot.loader.grub = rec {
     splashImage = lib.mkForce "${theme.content}/background.png";
