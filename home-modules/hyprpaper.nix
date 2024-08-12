@@ -1,17 +1,32 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.hyprpaper = {
     enable = true;
     settings =
       let
-        palette =
-          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-          .${config.catppuccin.flavor}.colors;
+        # TODO: remove and replace with source if hyprpaper adds ability to source hyprland
+        palette = builtins.fromJSON (
+          builtins.readFile (
+            pkgs.runCommand "converted.json" { } ''
+              ${lib.getExe pkgs.jc} --ini < ${
+                config.catppuccin.sources.hyprland + /themes/${config.catppuccin.flavor}.conf
+              } > $out
+            ''
+          )
+        );
       in
       {
         splash = true;
         splash_offset = 6.5e-2;
-        splash_color = palette.text.hex;
+        splash_color = palette."$text";
+
+        # Disable ipc because I do not need it and it constantly ticks
+        ipc = "off";
 
         "$wallpaper" = config.stylix.image;
         preload = [ "$wallpaper" ];

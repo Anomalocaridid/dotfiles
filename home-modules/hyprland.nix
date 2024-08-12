@@ -159,7 +159,7 @@
         "$mainMod SHIFT, Z, exec, $scratchpad -g"
 
         # hyprexpo
-        "$mainMod, grave, hyprexpo:expo, toggle"
+        "$mainMod ALT, grave, hyprexpo:expo, toggle"
 
         # Move focus with mainMod + direction keys
         # Move active window with mainMod + SHIFT + direction keys
