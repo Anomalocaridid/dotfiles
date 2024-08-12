@@ -29,7 +29,8 @@ let
       while true; do
         # Script makes fastfetch think it is outputting to a terminal
         # Necessary to preserve colors
-        script --quiet --flush --command fastfetch | pv -qL 200
+        # Also make sure to not write output to a file by outputting to /dev/null
+        script --quiet --log-out /dev/null  --command fastfetch | pv -qL 200
       done
     '';
   };
