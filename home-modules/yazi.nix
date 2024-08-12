@@ -25,6 +25,8 @@
         ## filter enhancements
         "smart-filter" = yazi-plugins + /smart-filter.yazi;
         "starship" = starship-yazi;
+        # UI enhancements
+        "full-border" = yazi-plugins + /full-border.yazi;
       });
     settings = {
       plugin = {

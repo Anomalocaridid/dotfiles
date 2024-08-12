@@ -125,22 +125,21 @@
     };
 
     ## Functional Plugins
-    ### Jumping
-    relative-motions-yazi = {
-      url = "github:dedukun/relative-motions.yazi/0.2.5";
-      flake = false;
-    };
-
-    ### filter enhancements
-    # Has smart-filter.yazi
+    ### Has smart-filter.yazi and full-border.yazi
     yazi-plugins = {
       url = "github:yazi-rs/plugins";
       flake = false;
     };
 
+    ### Jumping
+    relative-motions-yazi = {
+      url = "github:dedukun/relative-motions.yazi";
+      flake = false;
+    };
+
     ### UI enhancements
     starship-yazi = {
-      url = "github:Rolv-Apneseth/starship.yazi/6197e4cca4caed0121654079151632f6abcdcae9";
+      url = "github:Rolv-Apneseth/starship.yazi";
       flake = false;
     };
 

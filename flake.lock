@@ -753,16 +753,15 @@
     "relative-motions-yazi": {
       "flake": false,
       "locked": {
-        "lastModified": 1719393012,
-        "narHash": "sha256-S1kdCFPMs1xpjTSBfU49hucPjgtP7J+WcgTH8hijYNU=",
+        "lastModified": 1721384896,
+        "narHash": "sha256-jahJC6LXOnr974+zHEH9gqI+J1C68O+PvjSt8pelkP0=",
         "owner": "dedukun",
         "repo": "relative-motions.yazi",
-        "rev": "a5465c042b9fdffce1096dd553107ab9fc28f6d9",
+        "rev": "73f554295f4b69756597c9fe3caf3750a321acea",
         "type": "github"
       },
       "original": {
         "owner": "dedukun",
-        "ref": "0.2.5",
         "repo": "relative-motions.yazi",
         "type": "github"
       }
@@ -846,17 +845,16 @@
     "starship-yazi": {
       "flake": false,
       "locked": {
-        "lastModified": 1712171228,
-        "narHash": "sha256-oHoBq7BESjGeKsaBnDt0TXV78ggGCdYndLpcwwQ8Zts=",
+        "lastModified": 1723245413,
+        "narHash": "sha256-AwBqOKWtz5BzY7Sye1JljWI2t+JQGGQfOT6oQN7YTOg=",
         "owner": "Rolv-Apneseth",
         "repo": "starship.yazi",
-        "rev": "6197e4cca4caed0121654079151632f6abcdcae9",
+        "rev": "dc9989c2bdd3d04e615d3bbb5f3bf99ed6ce1a35",
         "type": "github"
       },
       "original": {
         "owner": "Rolv-Apneseth",
         "repo": "starship.yazi",
-        "rev": "6197e4cca4caed0121654079151632f6abcdcae9",
         "type": "github"
       }
     },
