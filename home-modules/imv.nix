@@ -6,7 +6,6 @@
     in
     {
       enable = true;
-      catppuccin.enable = true;
       settings = {
         options = {
           overlay = true;

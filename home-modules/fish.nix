@@ -8,7 +8,6 @@
   programs = {
     fish = {
       enable = true;
-      catppuccin.enable = true;
       functions = {
         fish_greeting =
           let

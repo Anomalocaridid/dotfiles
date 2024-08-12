@@ -7,7 +7,6 @@
 {
   programs.yazi = {
     enable = true;
-    catppuccin.enable = true;
     enableFishIntegration = true;
     initLua = ./.config/yazi/init.lua;
     plugins =

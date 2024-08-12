@@ -2,8 +2,6 @@
 {
   home.packages = with pkgs; [ glow ];
 
-  programs.glamour.catppuccin.enable = true;
-
   xdg.configFile = {
     "glow/glow.yml".source =
       let

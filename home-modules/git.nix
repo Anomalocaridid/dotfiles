@@ -7,7 +7,6 @@
 
     delta = {
       enable = true;
-      catppuccin.enable = true;
       options = {
         navigate = true;
         interactive.keep-plus-minus-markers = false;
@@ -24,7 +23,6 @@
 
   programs.lazygit = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
       theme.nerdFontsVersion = 3;
       update.method = false;

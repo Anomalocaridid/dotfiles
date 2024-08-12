@@ -48,10 +48,8 @@
       };
     };
 
-  catppuccin = {
-    flavor = osConfig.catppuccin.flavor;
-    accent = osConfig.catppuccin.accent;
-  };
+  # Inherit system-level settings
+  catppuccin = osConfig.catppuccin;
 
   # Required for btop theme
   xdg.enable = true;

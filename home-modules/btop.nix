@@ -2,7 +2,6 @@
 {
   programs.btop = {
     enable = true;
-    catppuccin.enable = true;
     settings = {
       #* If the theme set background should be shown, set to false if you want terminal background transparency.
       theme_background = false;

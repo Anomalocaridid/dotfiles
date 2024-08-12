@@ -9,7 +9,6 @@
 
   # TTY theming
   console = {
-    catppuccin.enable = true;
     font =
       let
         font = config.stylix.fonts.monospace;
@@ -44,7 +43,6 @@
 
   # Configure GRUB theme
   boot.loader.grub = rec {
-    catppuccin.enable = true;
     splashImage = lib.mkForce "${theme.content}/background.png";
     theme = lib.mkForce (
       pkgs.runCommand "catppuccin-grub-theme" { } ''
@@ -88,6 +86,7 @@
   };
 
   catppuccin = {
+    enable = true;
     flavor = "mocha";
     accent = "mauve";
   };

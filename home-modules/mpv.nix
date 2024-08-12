@@ -6,7 +6,6 @@
     in
     {
       enable = true;
-      catppuccin.enable = true;
       config = {
         osd-font = fonts.sansSerif.name;
         osd-fractions = true;

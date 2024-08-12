@@ -6,7 +6,6 @@
     in
     {
       enable = true;
-      catppuccin.enable = true;
       settings = {
         main = {
           font = "${fonts.monospace.name}:size=${toString fonts.sizes.applications}";
