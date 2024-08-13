@@ -47,24 +47,27 @@
     ];
     style =
       let
-        palette =
-          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-          .${config.catppuccin.flavor}.colors;
-        recolorIcon = (
-          color: icon:
+        # TODO: find a way to use svg icons with wlogout without converting them to png
+        # TODO: find a more general way to get icons from theme
+        convertIcon = (
+          entry: icon:
           let
-            iconFile = "${config.programs.wlogout.package}/share/wlogout/icons/${icon}.png";
-            recolored = pkgs.runCommand "${icon}-recolored.png" { } ''
-              ${lib.getExe' pkgs.imagemagick "convert"} ${iconFile} -alpha extract -background "${color}" -alpha shape $out
+            iconFile = "${pkgs.candy-icons}/share/icons/candy-icons/apps/scalable/${icon}.svg";
+            # NOTE: Ensure icons are high enough quality to not look fuzzy
+            png = pkgs.runCommand "${icon}.png" { } ''
+              ${lib.getExe pkgs.inkscape} ${iconFile} --export-width=1024 --export-height=1024 --export-filename=$out
             '';
           in
           #css
           ''
-            #${icon} {
-              background-image: url("${recolored}");
+            #${entry} {
+              background-image: url("${png}");
             }
           ''
         );
+        palette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavor}.colors;
         backgroundRgb = palette.base.rgb;
       in
       #css
@@ -93,9 +96,12 @@
         	outline-style: none;
         }
 
-        ${lib.concatStrings (
-          map (button: recolorIcon "${palette.text.hex}" button.label) config.programs.wlogout.layout
-        )}
+        ${convertIcon "lock" "system-lock-screen"}
+        ${convertIcon "hibernate" "system-suspend-hibernate"}
+        ${convertIcon "logout" "system-log-out"}
+        ${convertIcon "shutdown" "system-shutdown"}
+        ${convertIcon "suspend" "system-suspend"}
+        ${convertIcon "reboot" "system-reboot"}
       '';
   };
 }
