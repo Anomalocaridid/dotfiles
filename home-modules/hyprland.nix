@@ -134,7 +134,7 @@
       bind = lib.flatten [
         "$mainMod, Return, exec, $term"
         "$mainMod, Q, killactive,"
-        "$mainMod SHIFT, Q, exec, wlogout"
+        "$mainMod SHIFT, Q, exec, wlogout --show-binds"
         # Run in shell to ensure file manager sees environment variables
         # TODO: figure out how to un-hard-code shell
         # TODO: figure out how to open selected file when exiting without hard-coding xplr

@@ -7,44 +7,6 @@
 {
   programs.wlogout = {
     enable = true;
-    layout = [
-      {
-        label = "lock";
-        action = "loginctl lock-session";
-        text = "Lock";
-        keybind = "l";
-      }
-      {
-        label = "hibernate";
-        action = "systemctl hibernate";
-        text = "Hibernate";
-        keybind = "h";
-      }
-      {
-        label = "logout";
-        action = "loginctl terminate-user $USER";
-        text = "lOgout";
-        keybind = "o";
-      }
-      {
-        label = "shutdown";
-        action = "systemctl poweroff";
-        text = "Shutdown";
-        keybind = "s";
-      }
-      {
-        label = "suspend";
-        action = "systemctl suspend";
-        text = "sUspend";
-        keybind = "u";
-      }
-      {
-        label = "reboot";
-        action = "systemctl reboot";
-        text = "Reboot";
-        keybind = "r";
-      }
-    ];
     style =
       let
         # TODO: find a way to use svg icons with wlogout without converting them to png
