@@ -12,8 +12,13 @@
     catppuccin.enable = true;
     cursorTheme = config.stylix.cursor;
     iconTheme = {
-      name = "Sweet-Rainbow";
-      package = pkgs.sweet-folders;
+      name = "candy-icons";
+      # Merge Candy Icons and Sweet Folders into the same package
+      package = pkgs.candy-icons.overrideAttrs (oldAttrs: {
+        postInstall = ''
+          cp ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/* $out/share/icons/candy-icons/places/48
+        '';
+      });
     };
   };
 
@@ -27,8 +32,6 @@
     packages = with pkgs; [
       # fallback icon theme
       adwaita-icon-theme
-      # needed for Sweet Folders
-      candy-icons
       # Tools for making catppuccin ports
       inputs.catppuccin-catwalk.packages.${pkgs.system}.catwalk
       inputs.catppuccin-whiskers.packages.${pkgs.system}.whiskers

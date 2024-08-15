@@ -10,11 +10,10 @@
     style =
       let
         # TODO: find a way to use svg icons with wlogout without converting them to png
-        # TODO: find a more general way to get icons from theme
         convertIcon = (
           entry: icon:
           let
-            iconFile = "${pkgs.candy-icons}/share/icons/candy-icons/apps/scalable/${icon}.svg";
+            iconFile = "${config.gtk.iconTheme.package}/share/icons/${config.gtk.iconTheme.name}/apps/scalable/${icon}.svg";
             # NOTE: Ensure icons are high enough quality to not look fuzzy
             png = pkgs.runCommand "${icon}.png" { } ''
               ${lib.getExe pkgs.inkscape} ${iconFile} --export-width=1024 --export-height=1024 --export-filename=$out
