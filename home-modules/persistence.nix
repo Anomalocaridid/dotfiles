@@ -27,11 +27,9 @@
       "qmk_firmware" # QMK firmware
       "qmk_userspace" # QMK userspace
       "quickemu" # quickemu VMs
-      "Slippi" # Slippi replays
       ".ssh" # SSH key
       "Sync" # Syncthing
       ".tuxpaint" # Tux Paint saves
-      "Zotero" # Zotero databases
       # Non-critical caches and data to persist
       ".cache/keepassxc" # KeePassXC cache
       ".cache/spotify" # Spotify cache

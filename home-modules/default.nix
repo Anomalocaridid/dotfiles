@@ -20,10 +20,9 @@
     packages = with pkgs; [
       armcord
       exercism
-      firefox # fallback browser
+      firefox
       freetube
-      gimp # remove when gimp-with-plugins fixed
-      # gimp-with-plugins # uncomment when fixed
+      gimp-with-plugins
       itd
       keepassxc
       killall
@@ -36,7 +35,6 @@
       ventoy
       wl-clipboard
       yubioath-flutter
-      # zotero
     ];
 
     sessionVariables = {
