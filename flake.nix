@@ -153,19 +153,12 @@
         root = ./.;
         globalArgs = {
           inherit inputs;
-          diskoConfigurations = flake.diskoConfigurations;
+          inherit (flake) diskoConfigurations;
         };
       };
 
-      flake = {
-        # Expose this to use flake directly with Disko
-        diskoConfigurations.home-pc = (
-          import ./disko-config.nix {
-            disk = "/dev/nvme0n1";
-            memory = "32G";
-          }
-        );
-      };
+      # Expose this to use flake directly with Disko
+      flake.diskoConfigurations = import ./disko-configurations;
 
       systems = [ "x86_64-linux" ];
 
