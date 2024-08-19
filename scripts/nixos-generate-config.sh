@@ -9,10 +9,10 @@ set -o errtrace \
 	-o pipefail
 
 # Config constants
-readonly MOUNT_DIR="${2:-}"                                    # Where drive is mounted by disko (set by disko, not config)
-readonly PERSIST_DIR="/persist"                                # Persistent partition mount location
-readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"         # Config location in persistant partition
-readonly HOST_CONFIG_DIR="$CONFIG_DIR/hosts/${1:-$(hostname)}" # Subdirectory containing host-specific config
+readonly MOUNT_DIR="${2:-}"                                                   # Where drive is mounted by disko (set by disko, not config)
+readonly PERSIST_DIR="/persist"                                               # Persistent partition mount location
+readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"                        # Config location in persistant partition
+readonly HOST_CONFIG_DIR="$CONFIG_DIR/nixos-configurations/${1:-$(hostname)}" # Subdirectory containing host-specific config
 
 # Show user where config will be created just in case
 echo "Generating hardware config in $HOST_CONFIG_DIR"
