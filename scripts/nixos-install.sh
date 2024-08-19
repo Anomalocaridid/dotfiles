@@ -66,4 +66,3 @@ echo "Setting password (xtrace disabled)"
 # Install NixOS
 echo "Installing NixOS and rebooting"
 nixos-install --flake "git+file://$CONFIG_DIR#$device" --no-channel-copy --no-root-passwd
-reboot
