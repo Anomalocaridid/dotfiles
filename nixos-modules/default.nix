@@ -74,10 +74,7 @@
     extraModprobeConfig = "options kvm_amd nested=1";
   };
 
-  networking = {
-    hostName = "home-pc";
-    networkmanager.enable = true;
-  };
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/New_York";
 
