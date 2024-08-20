@@ -5,7 +5,7 @@ My personal dotfiles for NixOS
 Run the following command from a NixOS installation medium:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Anomalocaridid/dotfiles/main/scripts/nixos-install.sh | sudo bash
+sudo nix --extra-experimental-features "nix-command flakes" run github:Anomalocaridid/dotfiles#install
 ```
 
-I highly recommend that you read `scripts/nixos-install.sh` BEFORE running it so that you know what it will do in advance.
+I highly recommend that you thoroughly read `scripts/install.nix` BEFORE running it so that you know what it will do in advance.
