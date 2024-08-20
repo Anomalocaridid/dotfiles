@@ -163,9 +163,10 @@
       systems = [ "x86_64-linux" ];
 
       perSystem =
-        { pkgs, ... }:
+        args@{ pkgs, inputs', ... }:
         {
           formatter = pkgs.nixfmt-rfc-style;
+          packages = import ./scripts args;
         };
     };
 }
