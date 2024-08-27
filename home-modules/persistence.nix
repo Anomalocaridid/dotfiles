@@ -40,7 +40,6 @@
       ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
-      ".config/Slippi Launcher" # Slippi user data
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
       ".config/syncthing" # Syncthing settings
