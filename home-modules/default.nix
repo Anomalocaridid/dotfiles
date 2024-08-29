@@ -21,7 +21,6 @@
       armcord
       exercism
       firefox
-      freetube
       gimp-with-plugins
       itd
       keepassxc
