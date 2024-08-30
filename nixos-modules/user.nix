@@ -18,10 +18,11 @@ in
     root.hashedPasswordFile = "${passwordDir}/root";
   };
 
-  # Ensure certain directories have necessary permissions
+  # Ensure certain directories exist and have necessary permissions
   systemd.tmpfiles.rules = [
-    "Z ${persistDir}/etc/nixos    -    ${user} users"
-    "d ${persistDir}/home/${user} 0755 ${user} users"
+    "Z ${persistDir}/etc/nixos                -    ${user} users"
+    "d ${persistDir}/home/${user}             0755 ${user} users"
+    "Z ${persistDir}/home/${user}             -    ${user} users"
   ];
 
   # /persist is needed for boot because it contains password hashes
