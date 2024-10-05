@@ -12,10 +12,12 @@
           exit_behavior = "Close";
           check_for_updates = false;
           # enable_wayland = true;
-          # Re-enable once wezterm/#5067 is fixed
+          # Re-enable once nixpkgs#336069 is fixed
           enable_wayland = false;
           enable_kitty_graphics = true;
           window_close_confirmation = "NeverPrompt";
+          # Remove when nixpkgs#336069 is fixed
+          front_end = "WebGpu";
 
           font_size = fonts.sizes.terminal;
           font =
