@@ -99,7 +99,7 @@
         "workspace 1, class:^(lutris)$"
         "workspace 2, class:^([Ff]irefox)$"
         "workspace 3, class:^(filemanager)$"
-        "workspace 4 silent, class:^(ArmCord)$"
+        "workspace 4 silent, class:^(armcord)$"
         "workspace 5, title:^(Spotify.*)$"
         # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
         "idleinhibit fullscreen, class:^(FreeTube)$"
@@ -272,7 +272,7 @@
           # use double quote the key and the value
           # take class name from 'hyprctl clients'
           # "DEFAULT" = " {class}: {title}";
-          "ArmCord" = "󰙯";
+          "armcord" = "󰙯";
           "blueman-manager" = "";
           "DEFAULT" = "";
           "[Ff]irefox" = "";

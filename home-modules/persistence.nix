@@ -34,7 +34,7 @@
       ".cache/keepassxc" # KeePassXC cache
       ".cache/spotify" # Spotify cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
-      ".config/ArmCord" # ArmCord user data
+      ".config/armcord" # ArmCord user data
       ".config/exercism" # Exercism API key
       ".config/GIMP" # GIMP settings
       ".config/keepassxc" # KeePassXC settings
