@@ -20,14 +20,6 @@
         "steam -silent"
         # cava wallpaper
         # "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
-
-        # Remove when issue with ly mentioned in nixpkgs#297434 is resolved
-        (builtins.map (x: "systemctl --user restart ${x}.service") [
-          "hypridle"
-          "hyprpaper"
-          "udiskie"
-          "blueman-applet"
-        ])
       ];
 
       general = {
