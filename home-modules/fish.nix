@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -77,29 +76,20 @@
         lg = "lazygit";
       };
       plugins =
-        let
-          pluginFromPkgs = name: {
+        map
+          (name: {
             inherit name;
             src = pkgs.fishPlugins."${name}".src;
-          };
-          pluginFromInputs = name: {
-            inherit name;
-            src = inputs."${name}";
-          };
-        in
-        lib.concatLists [
-          (map pluginFromPkgs [
+          })
+          [
             "autopair"
             "done"
+            "fish-bd"
+            "fish-you-should-use"
             "fzf-fish"
             "grc"
-          ])
-          (map pluginFromInputs [
-            "fish-bd"
             "plugin-sudope"
-            "you-should-use"
-          ])
-        ];
+          ];
     };
     ripgrep.enable = true;
     fd.enable = true;

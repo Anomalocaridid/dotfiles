@@ -86,22 +86,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Fish plugins
-    fish-bd = {
-      url = "github:0rax/fish-bd";
-      flake = false;
-    };
-
-    plugin-sudope = {
-      url = "github:oh-my-fish/plugin-sudope";
-      flake = false;
-    };
-
-    you-should-use = {
-      url = "github:paysonwallach/fish-you-should-use";
-      flake = false;
-    };
-
     # yazi plugins
     ## Previewers
     glow-yazi = {
