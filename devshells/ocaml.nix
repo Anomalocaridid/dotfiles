@@ -1,11 +1,13 @@
 { pkgs, ... }:
 {
-  home.packages =
+  packages =
     with pkgs;
     [
       dune_3 # package manager
       dune-release
       ocaml
+      ocamlformat # code formatter
+      ocamlPackages.ocaml-lsp
     ]
     ++ (with ocamlPackages; [
       findlib # needed for everything to work
@@ -13,9 +15,4 @@
       ounit2 # unit test runner
       utop # repl
     ]);
-
-  programs.helix.extraPackages = with pkgs; [
-    ocamlformat
-    ocamlPackages.ocaml-lsp
-  ];
 }

@@ -33,6 +33,12 @@
     # Flake Parts module for defining configs
     ez-configs.url = "github:ehllie/ez-configs";
 
+    # Developer environments
+    devshell = {
+      url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Hyprland community tools
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
@@ -131,7 +137,10 @@
   outputs =
     inputs@{ nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } rec {
-      imports = [ inputs.ez-configs.flakeModule ];
+      imports = [
+        inputs.ez-configs.flakeModule
+        inputs.devshell.flakeModule
+      ];
 
       ezConfigs = {
         root = ./.;
@@ -151,6 +160,9 @@
         {
           formatter = pkgs.nixfmt-rfc-style;
           packages = import ./scripts args;
+          devshells = import ./devshells {
+            inherit pkgs;
+          };
         };
     };
 }
