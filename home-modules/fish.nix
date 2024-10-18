@@ -37,6 +37,11 @@
             bind \cz -M insert 'fg 2>/dev/null; commandline -f repaint'
           '';
       };
+      interactiveShellInit = # fish
+        ''
+          # Use fish for `nix develop`
+          ${lib.getExe pkgs.nix-your-shell} fish | source
+        '';
       shellInit = # fish
         ''
           # Initialize batpipe
