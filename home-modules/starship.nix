@@ -28,7 +28,7 @@
         mkLangSeg = name: {
           "${name}" = {
             style = "fg:green bg:surface0";
-            format = "[ $symbol ($version)]($style)";
+            format = "[$symbol($version)]($style)";
           };
         };
         langSegments = builtins.foldl' (x: y: x // y) { } (builtins.map mkLangSeg langNames);
