@@ -10,7 +10,6 @@
         ## systemd
         "/var/lib/systemd" # Systemd state directory, used for numerous things
         # Other important things
-        "/etc/ly" # Ly default username and desktop, persist entire directory to fix issues with saving session on clean install
         "/etc/NetworkManager/system-connections" # Network connections
         "/etc/nixos" # Nix config
         "/var/lib/clamav" # ClamAV signature database
