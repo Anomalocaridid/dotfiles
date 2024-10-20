@@ -157,6 +157,10 @@
           auto-format = true;
         }
         {
+          name = "scala";
+          auto-format = true;
+        }
+        {
           name = "sml";
           auto-format = true;
           formatter.command = lib.getExe pkgs.smlfmt;
