@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   programs.hyprlock =
     let
@@ -96,24 +96,18 @@
 
   # Screensaver config
   xdg.configFile."pipes-rs/config.toml".source =
-    let
-      tomlFormat = pkgs.formats.toml { };
-    in
-    tomlFormat.generate "pipes-rs-config" {
-      # bold = true;
-      color_mode = "rgb"; # ansi, rgb or none
-      # palette = "default"; # default, darker, pastel or matrix
-      rainbow = 1; # 0-255
-      # delay_ms = 20;
-      # inherit_style = false;
-      kinds = [
-        "heavy"
-        "light"
-        "curved"
-        "outline"
-      ]; # heavy, light, curved, knobby, emoji, outline, dots, blocks, sus
-      num_pipes = 2;
-      # reset_threshold = 0.5; # 0.0–1.0
-      # turn_chance = 0.15; # 0.0–1.0
-    };
+    (inputs.nixago.lib.${pkgs.system}.make {
+      data = {
+        color_mode = "rgb"; # ansi, rgb or none
+        rainbow = 1; # 0-255
+        kinds = [
+          "heavy"
+          "light"
+          "curved"
+          "outline"
+        ];
+        num_pipes = 2;
+      };
+      output = "config.toml";
+    }).configFile;
 }

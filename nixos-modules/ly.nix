@@ -1,4 +1,8 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  inputs,
+  ...
+}:
 {
   services.displayManager.ly = {
     enable = true;
@@ -11,15 +15,14 @@
 
   # Set default session
   environment.etc."ly/save.ini".source =
-    let
-      iniFormat = pkgs.formats.iniWithGlobalSection { };
-    in
-    iniFormat.generate "save.ini" {
-      globalSection = {
+    (inputs.nixago.lib.${pkgs.system}.make {
+      output = "save.ini";
+      data.globalSection = {
         user = "anomalocaris";
         session_index = 2;
       };
-    };
+      format = "iniWithGlobalSection";
+    }).configFile;
 
   # Ensure services start properly
   systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";

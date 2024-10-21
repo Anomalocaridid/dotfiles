@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -19,10 +20,10 @@ in
   # TODO: figure out a way to make qmk_firmware cloning reproducible
 
   xdg.configFile."qmk/qmk.ini".source =
-    let
-      iniFormat = pkgs.formats.ini { };
-    in
-    iniFormat.generate "qmk-config" { user.overlay_dir = qmkRepoDir; };
+    (inputs.nixago.lib.${pkgs.system}.make {
+      data.user.overlay_dir = qmkRepoDir;
+      output = "qmk.ini";
+    }).configFile;
 
   systemd.user.services.qmk-clone = {
     Unit = {

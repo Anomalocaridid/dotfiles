@@ -33,6 +33,12 @@
     # Flake Parts module for defining configs
     ez-configs.url = "github:ehllie/ez-configs";
 
+    # Generate configs
+    nixago = {
+      url = "github:nix-community/nixago";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Developer environments
     devshell = {
       url = "github:numtide/devshell";
@@ -156,12 +162,16 @@
       systems = [ "x86_64-linux" ];
 
       perSystem =
-        args@{ pkgs, inputs', ... }:
+        args@{
+          pkgs,
+          inputs',
+          ...
+        }:
         {
           formatter = pkgs.nixfmt-rfc-style;
           packages = import ./scripts args;
           devshells = import ./devshells {
-            inherit pkgs;
+            inherit pkgs inputs;
           };
         };
     };

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   xdg = {
     mimeApps = {
@@ -34,24 +34,24 @@
     };
 
     configFile."handlr/handlr.toml".source =
-      let
-        tomlFormat = pkgs.formats.toml { };
-      in
-      tomlFormat.generate "handlr-config" {
-        enable_selector = false;
-        selector = "fuzzel --dmenu --prompt='Open With: '";
-        term_exec_args = "";
-        handlers = [
-          {
-            exec = "freetube %u";
-            regexes = [ "youtu(be.com|.be)" ];
-          }
-          {
-            exec = "handlr open steam://openurl/%u";
-            regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
-          }
-        ];
-      };
+      (inputs.nixago.lib.${pkgs.system}.make {
+        data = {
+          enable_selector = false;
+          selector = "fuzzel --dmenu --prompt='Open With: '";
+          term_exec_args = "";
+          handlers = [
+            {
+              exec = "freetube %u";
+              regexes = [ "youtu(be.com|.be)" ];
+            }
+            {
+              exec = "handlr open steam://openurl/%u";
+              regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
+            }
+          ];
+        };
+        output = "handlr.toml";
+      }).configFile;
   };
 
   home.packages = with pkgs; [
@@ -62,7 +62,7 @@
       runtimeInputs = [ handlr-regex ];
       text = # shell
         ''
-          handlr open "$@"
+          handlr open -- "$@"
         '';
     })
     # Use handlr as drop-in replacement for xterm

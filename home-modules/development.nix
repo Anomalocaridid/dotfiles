@@ -1,18 +1,18 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   home.file = {
     # C/C++ formatter config
     ".clang-format".source =
-      let
-        yamlFormat = pkgs.formats.yaml { };
-      in
-      yamlFormat.generate "clang-format" {
-        BasedOnStyle = "LLVM";
-        IndentWidth = 4;
-        IndentCaseLabels = true;
-        AlignConsecutiveDeclarations = true;
-      };
-    # Haskell repl config
+      (inputs.nixago.lib.${pkgs.system}.make {
+        data = {
+          BasedOnStyle = "LLVM";
+          IndentWidth = 4;
+          IndentCaseLabels = true;
+          AlignConsecutiveDeclarations = true;
+        };
+        output = "clang-format";
+        format = "yaml";
+      }).configFile;
     ".ghci".text = ''
       :set prompt "\ESC[1;35mλ> \ESC[m"
     '';
