@@ -99,6 +99,11 @@
           auto-format = true;
         }
         {
+          name = "go";
+          auto-format = true;
+          formatter.command = lib.getExe' pkgs.gotools "goimports";
+        }
+        {
           name = "haskell";
           auto-format = true;
         }
