@@ -19,7 +19,7 @@
       fonts = config.stylix.fonts;
       # TODO: Figure out how to use config.catppuccin.sources.palette instead
       paletteFile = pkgs.fetchurl {
-        url = "https://unpkg.com/@catppuccin/palette@1.1.1/scss/_${config.catppuccin.flavor}.scss";
+        url = "https://unpkg.com/@catppuccin/palette@1.4.0/scss/_${config.catppuccin.flavor}.scss";
         hash = "sha256-5tnz9xd+8LNXQ5Dmxhcm/SkqM51LFKcsZLu/NIN0cxU=";
       };
     in
