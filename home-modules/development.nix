@@ -1,4 +1,10 @@
-{ pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
   home.file = {
     # C/C++ formatter config
@@ -16,6 +22,37 @@
     ".ghci".text = ''
       :set prompt "\ESC[1;35mλ> \ESC[m"
     '';
+    ".julia/config/startup.jl".text =
+      let
+        palette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavor}.colors;
+      in
+      # julia
+      ''
+        using Crayons
+        import OhMyREPL: Passes.SyntaxHighlighter, colorscheme!
+
+        function _create_catppuccin_colorscheme()
+            scheme = SyntaxHighlighter.ColorScheme()
+            SyntaxHighlighter.symbol!(scheme, crayon"${palette.red.hex}")
+            SyntaxHighlighter.comment!(scheme, crayon"${palette.overlay2.hex}")
+            SyntaxHighlighter.string!(scheme, crayon"${palette.green.hex}")
+            SyntaxHighlighter.call!(scheme, crayon"${palette.blue.hex}")
+            SyntaxHighlighter.op!(scheme, crayon"${palette.sky.hex}")
+            SyntaxHighlighter.keyword!(scheme, crayon"${palette.mauve.hex}")
+            SyntaxHighlighter.macro!(scheme, crayon"${palette.blue.hex}")
+            SyntaxHighlighter.function_def!(scheme, crayon"${palette.blue.hex}")
+            SyntaxHighlighter.text!(scheme, crayon"${palette.text.hex}")
+            SyntaxHighlighter.error!(scheme, crayon"${palette.red.hex}")
+            SyntaxHighlighter.argdef!(scheme, crayon"${palette.yellow.hex}")
+            SyntaxHighlighter.number!(scheme, crayon"${palette.peach.hex}")
+            scheme
+        end
+
+        SyntaxHighlighter.add!("Catppuccin", _create_catppuccin_colorscheme())
+        colorscheme!("Catppuccin")
+      '';
     # Common Lisp repl config
     ".sbclrc".text = # scheme
       ''
