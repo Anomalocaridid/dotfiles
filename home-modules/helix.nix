@@ -99,6 +99,11 @@
           auto-format = true;
         }
         {
+          name = "fortran";
+          auto-format = true;
+          formatter.command = lib.getExe pkgs.fprettify;
+        }
+        {
           name = "go";
           auto-format = true;
           formatter.command = lib.getExe' pkgs.gotools "goimports";
