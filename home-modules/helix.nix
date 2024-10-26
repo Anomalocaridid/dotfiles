@@ -57,134 +57,55 @@
           args = [ "lsp" ];
         };
       };
-      language = [
-        {
-          name = "bash";
-          auto-format = true;
-          indent = {
-            tab-width = 4;
-            unit = "    ";
+      language =
+        let
+          common.auto-format = true;
+          indent4Spaces = common // {
+            indent = {
+              tab-width = 4;
+              unit = "    ";
+            };
           };
-        }
-        {
-          name = "c";
-          auto-format = true;
-          indent = {
-            tab-width = 4;
-            unit = "    ";
+          withFormatter = command: common // { formatter.command = command; };
+        in
+        lib.mapAttrsToList (name: value: value // { inherit name; }) {
+          bash = indent4Spaces;
+          c = indent4Spaces;
+          clojure = common;
+          cpp = indent4Spaces;
+          crystal = common;
+          c-sharp = common;
+          elixir = common;
+          fortran = withFormatter (lib.getExe pkgs.fprettify);
+          go = withFormatter (lib.getExe' pkgs.gotools "goimports");
+          haskell = common;
+          java = indent4Spaces;
+          javascript = common;
+          julia = common;
+          lua = common;
+          markdown = indent4Spaces // {
+            # Use zk instead of default lsp
+            roots = [ ".zk" ];
+            language-servers = [ "zk" ];
           };
-        }
-        {
-          name = "clojure";
-          auto-format = true;
-        }
-        {
-          name = "cpp";
-          auto-format = true;
-          indent = {
-            tab-width = 4;
-            unit = "    ";
+          nim = (withFormatter (lib.getExe' pkgs.nim "nimpretty")) // {
+            language-servers = [ "nimlsp" ];
           };
-        }
-        {
-          name = "crystal";
-          auto-format = true;
-        }
-        {
-          name = "c-sharp";
-          auto-format = true;
-        }
-        {
-          name = "elixir";
-          auto-format = true;
-        }
-        {
-          name = "fortran";
-          auto-format = true;
-          formatter.command = lib.getExe pkgs.fprettify;
-        }
-        {
-          name = "go";
-          auto-format = true;
-          formatter.command = lib.getExe' pkgs.gotools "goimports";
-        }
-        {
-          name = "haskell";
-          auto-format = true;
-        }
-        {
-          name = "java";
-          auto-format = true;
-          indent = {
-            tab-width = 4;
-            unit = "    ";
+          nix = withFormatter (lib.getExe pkgs.nixfmt-rfc-style);
+          python = common;
+          r = common;
+          ruby = common;
+          scala = common;
+          sml = (withFormatter (lib.getExe pkgs.smlfmt)) // {
+            indent = {
+              tab-width = 2;
+              unit = "  ";
+            };
           };
-        }
-        {
-          name = "javascript";
-          auto-format = true;
-        }
-        {
-          name = "julia";
-          auto-format = true;
-        }
-        {
-          name = "lua";
-          auto-format = true;
-        }
-        {
-          name = "markdown";
-          auto-format = true;
-          indent = {
-            tab-width = 4;
-            unit = "    ";
+          unison = common // {
+            language-servers = [ "unison-language-server" ];
           };
-          # Use zk instead of default lsp
-          roots = [ ".zk" ];
-          language-servers = [ "zk" ];
-        }
-        {
-          name = "nim";
-          auto-format = true;
-          language-servers = [ "nimlsp" ];
-          formatter.command = lib.getExe' pkgs.nim "nimpretty";
-        }
-        {
-          name = "nix";
-          auto-format = true;
-          formatter.command = lib.getExe pkgs.nixfmt-rfc-style;
-        }
-        {
-          name = "python";
-          auto-format = true;
-        }
-        {
-          name = "r";
-          auto-format = true;
-        }
-        {
-          name = "ruby";
-          auto-format = true;
-        }
-        {
-          name = "scala";
-          auto-format = true;
-        }
-        {
-          name = "sml";
-          auto-format = true;
-          formatter.command = lib.getExe pkgs.smlfmt;
-          indent = {
-            tab-width = 2;
-            unit = "  ";
-          };
-        }
-        {
-          name = "unison";
-          auto-format = true;
-          language-servers = [ "unison-language-server" ];
-        }
-      ];
+        };
     };
   };
 }
