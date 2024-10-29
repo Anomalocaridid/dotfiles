@@ -33,8 +33,8 @@
       # fallback icon theme
       adwaita-icon-theme
       # Tools for making catppuccin ports
-      inputs.catppuccin-catwalk.packages.${pkgs.system}.catwalk
-      inputs.catppuccin-whiskers.packages.${pkgs.system}.whiskers
+      catppuccin-catwalk
+      catppuccin-whiskers
       just
     ];
   };

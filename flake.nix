@@ -65,17 +65,6 @@
     # Catppuccin Theming
     catppuccin.url = "github:catppuccin/nix";
 
-    # Catppuccin port creation tools
-    catppuccin-catwalk = {
-      url = "github:catppuccin/catwalk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    catppuccin-whiskers = {
-      url = "github:catppuccin/whiskers";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Extra Catppuccin themes
     # Change to official repo when catppuccin/prismlauncher#6 is merged
     catppuccin-prismlauncher = {
