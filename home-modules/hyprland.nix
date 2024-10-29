@@ -17,7 +17,6 @@
       exec-once = lib.flatten [
         "eww open bar"
         (lib.getExe pkgs.hyprland-autoname-workspaces)
-        # "armcord"
         "steam -silent"
         # cava wallpaper
         # "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
@@ -100,7 +99,7 @@
         "workspace 1, class:^(lutris)$"
         "workspace 2, class:^([Ff]irefox)$"
         "workspace 3, class:^(filemanager)$"
-        "workspace 4 silent, class:^(armcord)$"
+        "workspace 4 silent, class:^(legcord)$"
         "workspace 5, title:^(Spotify.*)$"
         # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
         "idleinhibit fullscreen, class:^(FreeTube)$"
@@ -264,7 +263,7 @@
             };
 
             class = {
-              "armcord" = "󰙯";
+              "legcord" = "󰙯";
               "blueman-manager" = "";
               "DEFAULT" = "";
               "[Ff]irefox" = "";

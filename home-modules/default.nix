@@ -18,13 +18,13 @@
   home = {
     homeDirectory = "/home/${config.home.username}";
     packages = with pkgs; [
-      armcord
       exercism
       firefox
       gimp-with-plugins
       itd
       keepassxc
       killall
+      legcord
       pavucontrol # Graphical audio controller
       qalculate-gtk
       quickemu # Make and run VMs
