@@ -92,6 +92,7 @@
             language-servers = [ "nimlsp" ];
           };
           nix = withFormatter (lib.getExe pkgs.nixfmt-rfc-style);
+          perl = common;
           python = common;
           r = common;
           ruby = common;
