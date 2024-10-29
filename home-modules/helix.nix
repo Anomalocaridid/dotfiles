@@ -102,6 +102,7 @@
               unit = "  ";
             };
           };
+          typescript = common;
           unison = common // {
             language-servers = [ "unison-language-server" ];
           };

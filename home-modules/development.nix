@@ -5,11 +5,14 @@
   inputs,
   ...
 }:
+let
+  nixagoLib = inputs.nixago.lib.${pkgs.system};
+in
 {
   home.file = {
     # C/C++ formatter config
     ".clang-format".source =
-      (inputs.nixago.lib.${pkgs.system}.make {
+      (nixagoLib.make {
         data = {
           BasedOnStyle = "LLVM";
           IndentWidth = 4;
@@ -69,5 +72,13 @@
               (require :linedit)
               (funcall (intern "INSTALL-REPL" :linedit) :wrap-current t)))
       '';
+    # Yarn config
+    ".yarnrc.yml".source =
+      (nixagoLib.make {
+        # Disable telemetry
+        data.enableTelemetry = 0;
+        output = ".yarnrc.yml";
+        format = "yaml";
+      }).configFile;
   };
 }
