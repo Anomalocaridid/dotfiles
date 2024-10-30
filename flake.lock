@@ -834,15 +834,16 @@
     "relative-motions-yazi": {
       "flake": false,
       "locked": {
-        "lastModified": 1730047890,
-        "narHash": "sha256-ipXXF52JC48SNhjP9s/BmfbphvKGr75R/sE0ZJR/L+E=",
+        "lastModified": 1725879862,
+        "narHash": "sha256-qtjAgH+NS4YFVIwq+x2sC90y4vDSXNI8pGXIZ3FuQMU=",
         "owner": "dedukun",
         "repo": "relative-motions.yazi",
-        "rev": "d8dd68f01ece586877203ba95d45a164079ebee4",
+        "rev": "89d0cb9c84a7bba98d2e7ca4bac706d2458d0c06",
         "type": "github"
       },
       "original": {
         "owner": "dedukun",
+        "ref": "0.3.3",
         "repo": "relative-motions.yazi",
         "type": "github"
       }

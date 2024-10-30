@@ -118,7 +118,8 @@
 
     ### Jumping
     relative-motions-yazi = {
-      url = "github:dedukun/relative-motions.yazi";
+      # Use main branch after next yazi release
+      url = "github:dedukun/relative-motions.yazi/0.3.3";
       flake = false;
     };
 
