@@ -38,6 +38,8 @@
     languages = {
       language-server = {
         rust-analyzer.config.check.command = "clippy";
+        # Scheme lsp
+        scheme-langserver.command = lib.getExe' pkgs.akkuPackages.scheme-langserver "scheme-langserver";
         # Ruby lsp
         solargraph.config = {
           diagnostics = true;
@@ -97,6 +99,9 @@
           r = common;
           ruby = common;
           scala = common;
+          scheme = common // {
+            language-servers = [ "scheme-langserver" ];
+          };
           sml = (withFormatter (lib.getExe pkgs.smlfmt)) // {
             indent = {
               tab-width = 2;
