@@ -1,8 +1,9 @@
 { pkgs, ... }:
 {
   packages = with pkgs; [
-    swift
-    swiftPackages.swiftpm # Needed for `swift test`
     sourcekit-lsp # Swift lsp
+    swift
+    swift-format # Code formatter
+    swiftPackages.swiftpm # Needed for `swift test`
   ];
 }
