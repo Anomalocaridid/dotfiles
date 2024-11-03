@@ -11,7 +11,7 @@
     plugins = with pkgs.hyprlandPlugins; [
       hyprexpo # Show workspaces in a grid
       hyprtrails # Give moving windows trails
-      # hyprwinwrap # Set an arbitrary program as a wallpaper
+      hyprwinwrap # Set an arbitrary program as a wallpaper
     ];
     settings = {
       exec-once = lib.flatten [
@@ -19,7 +19,7 @@
         (lib.getExe pkgs.hyprland-autoname-workspaces)
         "steam -silent"
         # cava wallpaper
-        # "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
+        "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
       ];
 
       general = {
