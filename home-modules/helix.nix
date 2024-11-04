@@ -78,6 +78,7 @@
           crystal = common;
           c-sharp = common;
           elixir = common;
+          # erlang = common; NOTE: erlang formatter mangles code when auto-format = true
           fortran = withFormatter (lib.getExe pkgs.fprettify);
           go = withFormatter (lib.getExe' pkgs.gotools "goimports");
           haskell = common;
