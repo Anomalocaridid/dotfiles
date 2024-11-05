@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 {
@@ -12,17 +11,10 @@
         # TODO: find a way to use svg icons with wlogout without converting them to png
         convertIcon = (
           entry: icon:
-          let
-            iconFile = "${config.gtk.iconTheme.package}/share/icons/${config.gtk.iconTheme.name}/apps/scalable/${icon}.svg";
-            # NOTE: Ensure icons are high enough quality to not look fuzzy
-            png = pkgs.runCommand "${icon}.png" { } ''
-              ${lib.getExe pkgs.inkscape} ${iconFile} --export-width=1024 --export-height=1024 --export-filename=$out
-            '';
-          in
           #css
           ''
             #${entry} {
-              background-image: url("${png}");
+              background-image: url("${config.gtk.iconTheme.package}/share/icons/${config.gtk.iconTheme.name}/apps/scalable/${icon}.svg");
             }
           ''
         );

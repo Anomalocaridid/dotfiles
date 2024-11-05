@@ -90,8 +90,12 @@
     enableRedistributableFirmware = true;
   };
 
-  # Enable ssh agent
-  programs.ssh.startAgent = true;
+  programs = {
+    # Enable ssh agent
+    ssh.startAgent = true;
+    # Allow wlogout svg support
+    gdk-pixbuf.modulePackages = with pkgs; [ librsvg ];
+  };
 
   # List services that you want to enable:
   services = {
