@@ -873,6 +873,7 @@
         "spicetify-nix": "spicetify-nix",
         "starship-yazi": "starship-yazi",
         "stylix": "stylix",
+        "swi-lsp-server": "swi-lsp-server",
         "ttf-to-tty": "ttf-to-tty",
         "yazi-plugins": "yazi-plugins"
       }
@@ -943,6 +944,22 @@
       "original": {
         "owner": "danth",
         "repo": "stylix",
+        "type": "github"
+      }
+    },
+    "swi-lsp-server": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729294871,
+        "narHash": "sha256-9SHHsdNGLqzxbazsfK9Tx+sEOPgNSeR9W/zV3Ppbnq4=",
+        "owner": "jamesnvc",
+        "repo": "lsp_server",
+        "rev": "348decf844618408761804ebfd5fe570f5991ae1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jamesnvc",
+        "repo": "lsp_server",
         "type": "github"
       }
     },

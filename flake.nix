@@ -45,6 +45,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Prolog language server
+    swi-lsp-server = {
+      url = "github:jamesnvc/lsp_server";
+      flake = false;
+    };
+
     # Hyprland community tools
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
