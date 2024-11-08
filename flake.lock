@@ -97,6 +97,22 @@
         "type": "github"
       }
     },
+    "catppuccin-ohmyrepl": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1731030298,
+        "narHash": "sha256-RLPZDeskCkxkyYQNbp4FLTv4edb0w2vfGWQDhaeq8no=",
+        "owner": "catppuccin",
+        "repo": "ohmyrepl",
+        "rev": "fd28345eaa870bc8288df4ba40e70e79ad0632dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "ohmyrepl",
+        "type": "github"
+      }
+    },
     "catppuccin-prismlauncher": {
       "flake": false,
       "locked": {
@@ -852,6 +868,7 @@
       "inputs": {
         "catppuccin": "catppuccin",
         "catppuccin-fractal-wallpapers": "catppuccin-fractal-wallpapers",
+        "catppuccin-ohmyrepl": "catppuccin-ohmyrepl",
         "catppuccin-prismlauncher": "catppuccin-prismlauncher",
         "devshell": "devshell",
         "disko": "disko",

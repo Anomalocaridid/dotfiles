@@ -27,34 +27,15 @@ in
     '';
     ".julia/config/startup.jl".text =
       let
-        palette =
-          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-          .${config.catppuccin.flavor}.colors;
+        mkUpper =
+          str:
+          (lib.toUpper (builtins.substring 0 1 str)) + (builtins.substring 1 (builtins.stringLength str) str);
       in
       # julia
       ''
-        using Crayons
-        import OhMyREPL: Passes.SyntaxHighlighter, colorscheme!
-
-        function _create_catppuccin_colorscheme()
-            scheme = SyntaxHighlighter.ColorScheme()
-            SyntaxHighlighter.symbol!(scheme, crayon"${palette.red.hex}")
-            SyntaxHighlighter.comment!(scheme, crayon"${palette.overlay2.hex}")
-            SyntaxHighlighter.string!(scheme, crayon"${palette.green.hex}")
-            SyntaxHighlighter.call!(scheme, crayon"${palette.blue.hex}")
-            SyntaxHighlighter.op!(scheme, crayon"${palette.sky.hex}")
-            SyntaxHighlighter.keyword!(scheme, crayon"${palette.mauve.hex}")
-            SyntaxHighlighter.macro!(scheme, crayon"${palette.blue.hex}")
-            SyntaxHighlighter.function_def!(scheme, crayon"${palette.blue.hex}")
-            SyntaxHighlighter.text!(scheme, crayon"${palette.text.hex}")
-            SyntaxHighlighter.error!(scheme, crayon"${palette.red.hex}")
-            SyntaxHighlighter.argdef!(scheme, crayon"${palette.yellow.hex}")
-            SyntaxHighlighter.number!(scheme, crayon"${palette.peach.hex}")
-            scheme
-        end
-
-        SyntaxHighlighter.add!("Catppuccin", _create_catppuccin_colorscheme())
-        colorscheme!("Catppuccin")
+        import OhMyREPL
+        include("${inputs.catppuccin-ohmyrepl}/catppuccin.jl")
+        OhMyREPL.colorscheme!("Catppuccin${mkUpper config.catppuccin.flavor}")
       '';
     # Common Lisp repl config
     ".sbclrc".text = # scheme

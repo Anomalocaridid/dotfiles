@@ -72,6 +72,11 @@
     catppuccin.url = "github:catppuccin/nix";
 
     # Extra Catppuccin themes
+    catppuccin-ohmyrepl = {
+      url = "github:catppuccin/ohmyrepl";
+      flake = false;
+    };
+
     # Change to official repo when catppuccin/prismlauncher#6 is merged
     catppuccin-prismlauncher = {
       url = "github:Anomalocaridid/prismlauncher/whiskers";
