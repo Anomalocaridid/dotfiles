@@ -60,22 +60,26 @@
     # Just use Stylix for fonts
     autoEnable = false;
 
-    fonts = rec {
-      sizes = {
-        terminal = 11;
-        popups = 12;
-      };
-      serif = monospace;
-      sansSerif = monospace;
-      monospace =
-        let
-          font = "FiraCode";
-        in
-        {
-          package = pkgs.nerdfonts.override { fonts = [ font ]; };
-          name = "${font} Nerd Font";
+    fonts =
+      let
+        font = "FiraCode";
+        package = pkgs.nerdfonts.override { fonts = [ font ]; };
+        name = "${font} Nerd Font";
+      in
+      rec {
+        sizes = {
+          terminal = 11;
+          popups = 12;
         };
-    };
+        serif = sansSerif;
+        sansSerif = {
+          inherit package;
+          name = "${name} Propo";
+        };
+        monospace = {
+          inherit package name;
+        };
+      };
   };
 
   catppuccin = {
