@@ -3,16 +3,29 @@
   packages =
     with pkgs;
     [
-      dune_3 # package manager
+      dune_3 # Package manager
       dune-release
+      gnumake # Needed for exercism tests
       ocaml
-      ocamlformat # code formatter
+      ocamlformat # Code formatter
       ocamlPackages.ocaml-lsp
     ]
     ++ (with ocamlPackages; [
-      findlib # needed for everything to work
-      odoc # document generator
-      ounit2 # unit test runner
-      utop # repl
+      findlib # Needed for everything to work
+      odoc # Documentation generator
+      ounit2 # Unit test runner
+      utop # Repl
+      core
+      core_extended
     ]);
+
+  # Unfortunately, findlib's setupHook does not propagate to nix develop
+  # This ugly workaround will have to suffice
+  devshell.startup.ocamlpath.text = ''
+    nix-shell --packages ocamlPackages.findlib \
+                         ocamlPackages.ounit2 \
+                         ocamlPackages.core \
+                         ocamlPackages.core_extended
+  '';
+
 }
