@@ -40,6 +40,7 @@
           enabled = true;
           size = 3;
           passes = 1;
+          new_optimizations = false; # Allow hyprwinwrap to be visible through transparent windows
         };
 
         drop_shadow = true;
