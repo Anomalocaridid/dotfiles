@@ -87,4 +87,7 @@
     flavor = "mocha";
     accent = "mauve";
   };
+
+  # Allow svg icons in various places
+  programs.gdk-pixbuf.modulePackages = with pkgs; [ librsvg ];
 }
