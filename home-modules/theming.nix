@@ -3,7 +3,6 @@
   pkgs,
   config,
   osConfig,
-  inputs,
   ...
 }:
 {
@@ -11,15 +10,34 @@
     enable = true;
     catppuccin.enable = true;
     cursorTheme = config.stylix.cursor;
-    iconTheme = {
-      name = "candy-icons";
-      # Merge Candy Icons and Sweet Folders into the same package
-      package = pkgs.candy-icons.overrideAttrs (oldAttrs: {
-        postInstall = ''
-          cp ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/* $out/share/icons/candy-icons/places/48
+    iconTheme =
+      let
+        recolor-icons =
+          pkgs.writers.writePython3 "recolor-icons" { libraries = [ pkgs.custom.color-manager ]; }
+            ''
+              import sys
+              from color_manager import utils
+
+              src = sys.argv[1]
+              dest = sys.argv[2]
+              name = "candy-icons"
+              palettes = "${pkgs.custom.color-manager.src}/palettes/"
+              palette = palettes + "catppuccin_${config.catppuccin.flavor}.json"
+
+              utils.recolor(src, dest, name, palette)
+            '';
+      in
+      {
+        name = "candy-icons";
+        # Merge Candy Icons and Sweet Folders into the same package and recolor
+        package = pkgs.runCommand "recolored-icons" { } ''
+          mkdir tmp
+          cp --recursive --no-preserve=mode ${pkgs.candy-icons}/share/icons/candy-icons/* tmp
+          cp --recursive --no-preserve=mode ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/* tmp/places/48
+          mkdir --parents $out/share/icons
+          ${recolor-icons} tmp $out/share/icons
         '';
-      });
-    };
+      };
   };
 
   qt = rec {
@@ -28,16 +46,14 @@
     platformTheme = style;
   };
 
-  home = {
-    packages = with pkgs; [
-      # fallback icon theme
-      adwaita-icon-theme
-      # Tools for making catppuccin ports
-      catppuccin-catwalk
-      catppuccin-whiskers
-      just
-    ];
-  };
+  home.packages = with pkgs; [
+    # fallback icon theme
+    adwaita-icon-theme
+    # Tools for making catppuccin ports
+    catppuccin-catwalk
+    catppuccin-whiskers
+    just
+  ];
 
   # Define here instead of globally because there is no global accent option in ctp-nix
   stylix.cursor =
