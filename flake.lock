@@ -170,6 +170,22 @@
         "type": "github"
       }
     },
+    "exercism-cli-fish-wrapper": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1731279270,
+        "narHash": "sha256-gwKPQe0GkSnMAKP7Qi7sEUVLArZvdHwtEBubKIBABS8=",
+        "owner": "glennj",
+        "repo": "exercism-cli-fish-wrapper",
+        "rev": "7ae868adc5ecfdefc57a64dadca3b2b430fb2fca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "glennj",
+        "repo": "exercism-cli-fish-wrapper",
+        "type": "github"
+      }
+    },
     "exifaudio-yazi": {
       "flake": false,
       "locked": {
@@ -872,6 +888,7 @@
         "catppuccin-prismlauncher": "catppuccin-prismlauncher",
         "devshell": "devshell",
         "disko": "disko",
+        "exercism-cli-fish-wrapper": "exercism-cli-fish-wrapper",
         "exifaudio-yazi": "exifaudio-yazi",
         "ez-configs": "ez-configs",
         "flake-parts": "flake-parts_2",

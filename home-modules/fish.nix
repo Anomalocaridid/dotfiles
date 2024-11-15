@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -81,7 +82,7 @@
         lg = "lazygit";
       };
       plugins =
-        map
+        (map
           (name: {
             inherit name;
             src = pkgs.fishPlugins."${name}".src;
@@ -94,7 +95,14 @@
             "fzf-fish"
             "grc"
             "plugin-sudope"
-          ];
+          ]
+        )
+        ++ [
+          rec {
+            name = "exercism-cli-fish-wrapper";
+            src = inputs.${name};
+          }
+        ];
     };
     ripgrep.enable = true;
     fd.enable = true;

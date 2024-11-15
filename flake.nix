@@ -98,6 +98,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Fish exercism wrapper
+    exercism-cli-fish-wrapper = {
+      url = "github:glennj/exercism-cli-fish-wrapper";
+      flake = false;
+    };
+
     # yazi plugins
     ## Previewers
     glow-yazi = {
