@@ -99,6 +99,7 @@
           perl = common;
           python = common;
           r = common;
+          racket = common;
           ruby = common;
           scala = common;
           scheme = common // {
