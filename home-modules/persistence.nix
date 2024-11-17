@@ -34,20 +34,20 @@
       ".cache/keepassxc" # KeePassXC cache
       ".cache/spotify" # Spotify cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
-      ".config/legcord" # ArmCord user data
       ".config/exercism" # Exercism API key
       ".config/GIMP" # GIMP settings
       ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
+      ".config/legcord" # ArmCord user data
       ".config/libreoffice" # Libreoffice settings
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
-      ".config/syncthing" # Syncthing settings
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache
       ".local/share/Tabletop Simulator" # Tabletop Simulator settings
       ".local/share/zathura" # Zathura bookmarks, etc.
       ".local/share/zoxide" # Zoxide history
+      ".local/state/syncthing" # Syncthing settings
       ".mix" # Contains hex needed for elixir-ls
       ".unison" # Unison codebase, needs to be persistent as all added code ends up there
     ];
