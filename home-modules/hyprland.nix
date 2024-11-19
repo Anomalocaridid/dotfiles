@@ -272,10 +272,7 @@
               ".qemu-system-x86_64-wrapped" = "󰍺";
               "steam" = "󰓓";
               ".yubioath-flutter-wrapped_" = "󰌋";
-            };
-
-            initial_title_in_class."^$" = {
-              "(?i)spotify.*" = "";
+              "spotify" = "";
             };
 
             exclude = {
