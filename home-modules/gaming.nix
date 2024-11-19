@@ -12,7 +12,6 @@
     prismlauncher
     pysolfc
     runelite
-    sgt-puzzles
   ];
 
   # Enable wine-ge's fsync support
