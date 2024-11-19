@@ -8,12 +8,12 @@
 
 python3.pkgs.buildPythonPackage {
   pname = "color-manager";
-  version = "0-unstable-2024-09-04";
+  version = "0-unstable-2024-11-14";
 
   src = fetchFromGitHub {
-    owner = "NicklassVraa";
+    owner = "NicklasVraa";
     repo = "Color-manager";
-    rev = "d7d9d8f105bc68a6635e41961699e2045d760839";
+    rev = "9e55e0971ecd0e3141ed5d7d9a8377f7052cef96";
     hash = "sha256-kXRjp1sFgSiIQC9+fUQcNRK990Hd5nZwJpRGB7qRYrY=";
   };
 
