@@ -24,8 +24,6 @@
       ];
 
       general = {
-        gaps_in = 5;
-        gaps_out = 20;
         border_size = 2;
         "col.active_border" = "0xee$lavenderAlpha 0xee$accentAlpha 45deg";
         "col.inactive_border" = "0xaa$overlay0Alpha 0xaa$mantleAlpha 45deg";
@@ -38,21 +36,14 @@
         rounding = 10;
 
         blur = {
-          enabled = true;
           size = 3;
-          passes = 1;
           new_optimizations = false; # Allow hyprwinwrap to be visible through transparent windows
         };
 
-        drop_shadow = true;
-        shadow_range = 4;
-        shadow_render_power = 3;
-        "col.shadow" = "$base";
+        shadow.color = "$base";
       };
 
       animations = {
-        enabled = true;
-
         # Some default animations, see https://wiki.hyprland.org/Configuring/Animations/ for more
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
 
@@ -83,9 +74,7 @@
         "col.border_inactive" = "0xaa$overlay0Alpha 0xaa$yellowAlpha 45deg";
         "col.border_locked_active" = "0xee$yellowAlpha 0xee$redAlpha 45deg";
         "col.border_locked_inactive" = "0xaa$overlay0Alpha 0xaa$redAlpha 45deg";
-        groupbar = {
-          text_color = "$text";
-        };
+        groupbar.text_color = "$text";
       };
 
       misc = {

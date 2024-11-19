@@ -19,7 +19,7 @@
       output = "save.ini";
       data.globalSection = {
         user = "anomalocaris";
-        session_index = 2;
+        session_index = 3;
       };
       format = "iniWithGlobalSection";
     }).configFile;
