@@ -88,7 +88,7 @@
       windowrulev2 = [
         "float, class:^(wlogout|pavucontrol|nmtui)$"
         "workspace 1, class:^(lutris)$"
-        "workspace 2, class:^([Ff]irefox)$"
+        "workspace 2, class:^(librewolf)$"
         "workspace 3, class:^(filemanager)$"
         "workspace 4 silent, class:^(legcord)$"
         "workspace 5, title:^(Spotify.*)$"
@@ -254,13 +254,13 @@
             };
 
             class = {
-              "legcord" = "󰙯";
               "blueman-manager" = "";
               "DEFAULT" = "";
-              "[Ff]irefox" = "";
               "filemanager" = "";
               "FreeTube" = "";
+              "legcord" = "󰙯";
               "libreoffice" = "󰈙";
+              "librewolf" = "";
               "lutris" = "";
               "Minecraft" = "󰍳";
               "org.keepassxc.KeePassXC" = "󰌋";
@@ -270,9 +270,9 @@
               "pavucontrol" = "󰕾";
               "Py[Ss]ol" = "󰣎";
               ".qemu-system-x86_64-wrapped" = "󰍺";
+              "spotify" = "";
               "steam" = "󰓓";
               ".yubioath-flutter-wrapped_" = "󰌋";
-              "spotify" = "";
             };
 
             exclude = {

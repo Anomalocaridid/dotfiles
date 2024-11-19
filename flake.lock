@@ -826,6 +826,21 @@
         "type": "github"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1732055209,
+        "narHash": "sha256-9VyOzWcA2qNRJcm1yjiE57ppRmeW2EJhKfC1Q+eMWu8=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "526dd9871b1a85dbc23a7571b6a0b85857218de4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "ouch-yazi": {
       "flake": false,
       "locked": {
@@ -881,6 +896,7 @@
         "nix-index-database": "nix-index-database",
         "nixago": "nixago",
         "nixpkgs": "nixpkgs_3",
+        "nur": "nur",
         "ouch-yazi": "ouch-yazi",
         "relative-motions-yazi": "relative-motions-yazi",
         "spicetify-nix": "spicetify-nix",

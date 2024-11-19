@@ -56,6 +56,8 @@
       (import ../pkgs)
       # Hyprland community tools
       inputs.hyprland-contrib.overlays.default
+      # Nix user repository
+      inputs.nur.overlay
     ];
     config.allowUnfree = true;
   };

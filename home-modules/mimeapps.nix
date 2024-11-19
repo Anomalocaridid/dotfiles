@@ -6,7 +6,7 @@
       defaultApplications =
         let
           editor = "Helix.desktop";
-          browser = "firefox.desktop";
+          browser = "librewolf.desktop";
           pdfViewer = "org.pwmt.zathura-pdf-mupdf.desktop";
           officeSuite = "startcenter.desktop";
         in
@@ -27,8 +27,7 @@
           "text/*" = editor;
           "text/html" = browser;
           "video/*" = "mpv.desktop";
-          "x-scheme-handler/http" = browser;
-          "x-scheme-handler/https" = browser;
+          "x-scheme-handler/http*" = browser;
           "x-scheme-handler/terminal" = "org.wezfurlong.wezterm.desktop";
         };
     };

@@ -33,6 +33,9 @@
     # Flake Parts module for defining configs
     ez-configs.url = "github:ehllie/ez-configs";
 
+    # Nix user repository
+    nur.url = "github:nix-community/NUR";
+
     # Generate configs
     nixago = {
       url = "github:nix-community/nixago";

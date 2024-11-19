@@ -22,7 +22,7 @@
       # Other important stuff
       ".config/FreeTube" # Freetube user data
       "exercism" # Exercism
-      ".mozilla" # Firefox data
+      ".librewolf" # Librewolf data
       "Projects" # Misc. programming
       "qmk_firmware" # QMK firmware
       "qmk_userspace" # QMK userspace

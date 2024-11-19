@@ -19,7 +19,6 @@
     homeDirectory = "/home/${config.home.username}";
     packages = with pkgs; [
       exercism
-      firefox
       gimp-with-plugins
       itd
       keepassxc
