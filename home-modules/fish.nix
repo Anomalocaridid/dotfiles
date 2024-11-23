@@ -64,8 +64,8 @@
         rd = "rmdir";
         md = "mkdir";
         rm = "rm --interactive";
-        du = "${lib.getExe pkgs.du-dust}";
-        df = "${lib.getExe pkgs.duf}";
+        du = lib.getExe pkgs.du-dust;
+        df = lib.getExe pkgs.duf;
         # bat
         bgrep = "batgrep";
         cat = "bat --paging=never";
@@ -76,8 +76,6 @@
         imgcat = "wezterm imgcat";
         # tealdeer
         tldr = "PAGER='bat --plain' command tldr";
-        # xplr
-        xcd = "cd (xplr --print-pwd-as-result)";
         # lazygit
         lg = "lazygit";
       };
