@@ -54,6 +54,13 @@
       flake = false;
     };
 
+    # Purescript overlay
+    # TODO: remove when issue with spago is fixed
+    purescript-overlay = {
+      url = "github:thomashoneyman/purescript-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Hyprland community tools
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
