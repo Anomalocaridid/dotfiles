@@ -96,7 +96,7 @@
           };
           nix = withFormatter (lib.getExe pkgs.nixfmt-rfc-style);
           ocaml = common;
-          perl = common;
+          perl = common; # Also includes raku
           python = common;
           r = common;
           racket = common;
