@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   programs.librewolf =
     let
@@ -14,6 +19,9 @@
     in
     {
       enable = true;
+      nativeMessagingHosts = with pkgs; [
+        keepassxc
+      ];
       package = pkgs.librewolf.override {
         # Set preferences here to ensure they stay set
         extraPrefs = # javascript
@@ -67,74 +75,64 @@
             stylus
             ublacklist
           ];
-          search = {
-            engines = {
-              "Nix Packages" = {
-                urls = [
-                  {
-                    template = "https://search.nixos.org/packages";
-                    params = [
-                      {
-                        name = "type";
-                        value = "packages";
-                      }
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                iconUpdateURL = "https://search.nixos.org/favicon.png";
-                updateInterval = 24 * 60 * 60 * 1000; # every day
-                definedAliases = [ "@np" ];
-              };
+          search =
+            let
+              mkParams = lib.mapAttrsToList lib.nameValuePair;
+            in
+            {
+              engines = {
+                "Nix Packages" = {
+                  urls = [
+                    {
+                      template = "https://search.nixos.org/packages";
+                      params = mkParams {
+                        channel = "unstable";
+                        type = "packages";
+                        query = "{searchTerms}";
+                      };
+                    }
+                  ];
+                  iconUpdateURL = "https://search.nixos.org/favicon.png";
+                  updateInterval = 24 * 60 * 60 * 1000; # every day
+                  definedAliases = [ "@np" ];
+                };
 
-              "NixOS Wiki" = {
-                urls = [
-                  {
-                    template = "https://wiki.nixos.org/index.php";
-                    params = [
-                      {
-                        name = "search";
-                        value = "{searchTerms}";
-                      }
-                    ];
-                  }
-                ];
-                iconUpdateURL = "https://wiki.nixos.org/favicon.ico";
-                updateInterval = 24 * 60 * 60 * 1000; # every day
-                definedAliases = [ "@nw" ];
-              };
+                "NixOS Wiki" = {
+                  urls = [
+                    {
+                      template = "https://wiki.nixos.org/index.php";
+                      params = mkParams {
+                        search = "{searchTerms}";
+                      };
+                    }
+                  ];
+                  iconUpdateURL = "https://wiki.nixos.org/favicon.ico";
+                  updateInterval = 24 * 60 * 60 * 1000; # every day
+                  definedAliases = [ "@nw" ];
+                };
 
-              "Nix Home Manager" = {
-                urls = [
-                  {
-                    template = "https://home-manager-options.extranix.com/";
-                    params = [
-                      {
-                        name = "query";
-                        value = "{searchTerms}";
-                      }
-                      {
-                        name = "release";
-                        value = "master";
-                      }
-                    ];
-                  }
-                ];
-                iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.png";
-                updateInterval = 24 * 60 * 60 * 1000; # every day
-                definedAliases = [ "@nhm" ];
-              };
+                "Nix Home Manager" = {
+                  urls = [
+                    {
+                      template = "https://home-manager-options.extranix.com/";
+                      params = mkParams {
+                        query = "{searchTerms}";
+                        release = "master";
+                      };
+                    }
+                  ];
+                  iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.png";
+                  updateInterval = 24 * 60 * 60 * 1000; # every day
+                  definedAliases = [ "@nhm" ];
+                };
 
-              "Bing".metaData.hidden = true;
-              "Google".metaData.hidden = true;
-              "Wikipedia".metaData.alias = "@w";
+                "Bing".metaData.hidden = true;
+                "Google".metaData.hidden = true;
+                "Wikipedia".metaData.alias = "@w";
+              };
+              force = true;
+              default = "DuckDuckGo";
             };
-            force = true;
-            default = "DuckDuckGo";
-          };
         };
       };
     };
