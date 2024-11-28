@@ -37,6 +37,12 @@
     ];
     languages = {
       language-server = {
+        # TODO: move to python devshell once Helix updates past 24.7
+        # Python linter/formatter lsp
+        ruff = {
+          command = lib.getExe pkgs.ruff;
+          args = [ "server" ];
+        };
         rust-analyzer.config.check.command = "clippy";
         # Scheme lsp
         scheme-langserver.command = lib.getExe' pkgs.akkuPackages.scheme-langserver "scheme-langserver";
@@ -97,7 +103,12 @@
           nix = withFormatter (lib.getExe pkgs.nixfmt-rfc-style);
           ocaml = common;
           perl = common; # Also includes raku
-          python = common;
+          python = common // {
+            language-servers = [
+              "basedpyright"
+              "ruff"
+            ];
+          };
           r = common;
           racket = common;
           ruby = common;
