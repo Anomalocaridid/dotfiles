@@ -18,13 +18,6 @@ in
     root.hashedPasswordFile = "${passwordDir}/root";
   };
 
-  # Ensure certain directories exist and have necessary permissions
-  systemd.tmpfiles.rules = [
-    "Z ${persistDir}/etc/nixos                -    ${user} users"
-    "d ${persistDir}/home/${user}             0755 ${user} users"
-    "Z ${persistDir}/home/${user}             -    ${user} users"
-  ];
-
   # /persist is needed for boot because it contains password hashes
   # TODO: See if this line can be moved to disko config
   fileSystems.${persistDir}.neededForBoot = true;
