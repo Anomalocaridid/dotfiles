@@ -37,6 +37,8 @@
     ];
     languages = {
       language-server = {
+        # TODO: remove or move to devshell once Helix updates past 24.7
+        jq-lsp.command = lib.getExe pkgs.jq-lsp;
         # TODO: move to python devshell once Helix updates past 24.7
         # Python linter/formatter lsp
         ruff = {
@@ -90,6 +92,18 @@
           haskell = common;
           java = indent4Spaces;
           javascript = common;
+          # TODO: remove once Helix updates past 24.7
+          jq = {
+            scope = "source.jq";
+            injection-regex = "jq";
+            file-types = [ "jq" ];
+            comment-token = "#";
+            language-servers = [ "jq-lsp" ];
+            indent = {
+              tab-width = 2;
+              unit = "  ";
+            };
+          };
           julia = common;
           lua = common;
           markdown = indent4Spaces // {
