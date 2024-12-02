@@ -81,6 +81,7 @@
             };
           };
           withFormatter = command: common // { formatter.command = command; };
+          withLanguageServers = lsps: common // { language-servers = lsps; };
         in
         lib.mapAttrsToList (name: value: value // { inherit name; }) {
           bash = indent4Spaces;
@@ -110,33 +111,26 @@
           };
           julia = common;
           lua = common;
-          markdown = indent4Spaces // {
-            # Use zk instead of default lsp
-            roots = [ ".zk" ];
-            language-servers = [ "zk" ];
-          };
-          nim = (withFormatter (lib.getExe' pkgs.nim "nimpretty")) // {
-            language-servers = [ "nimlsp" ];
-          };
+          markdown =
+            indent4Spaces
+            // withLanguageServers [ "zk" ]
+            // {
+              roots = [ ".zk" ];
+            };
+          nim = (withFormatter (lib.getExe' pkgs.nim "nimpretty")) // withLanguageServers [ "nimlsp" ];
           nix = withFormatter (lib.getExe pkgs.nixfmt-rfc-style);
           ocaml = common;
           perl = common; # Also includes raku
-          php = common // {
-            language-servers = [ "phpactor" ];
-          };
-          python = common // {
-            language-servers = [
-              "basedpyright"
-              "ruff"
-            ];
-          };
+          php = withLanguageServers [ "phpactor" ];
+          python = withLanguageServers [
+            "basedpyright"
+            "ruff"
+          ];
           r = common;
           racket = common;
           ruby = common;
           scala = common;
-          scheme = common // {
-            language-servers = [ "scheme-langserver" ];
-          };
+          scheme = withLanguageServers [ "scheme-langserver" ];
           sml = (withFormatter (lib.getExe pkgs.smlfmt)) // {
             indent = {
               tab-width = 2;
@@ -144,9 +138,7 @@
             };
           };
           typescript = common;
-          unison = common // {
-            language-servers = [ "unison-language-server" ];
-          };
+          unison = withLanguageServers [ "unison-language-server" ];
         };
     };
   };
