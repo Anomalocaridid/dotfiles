@@ -37,6 +37,10 @@
     ];
     languages = {
       language-server = {
+        phpactor = {
+          command = lib.getExe pkgs.phpactor;
+          args = [ "language-server" ];
+        };
         # TODO: remove or move to devshell once Helix updates past 24.7
         jq-lsp.command = lib.getExe pkgs.jq-lsp;
         # TODO: move to python devshell once Helix updates past 24.7
@@ -117,6 +121,9 @@
           nix = withFormatter (lib.getExe pkgs.nixfmt-rfc-style);
           ocaml = common;
           perl = common; # Also includes raku
+          php = common // {
+            language-servers = [ "phpactor" ];
+          };
           python = common // {
             language-servers = [
               "basedpyright"
