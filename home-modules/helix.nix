@@ -110,6 +110,7 @@
             };
           };
           julia = common;
+          kotlin = common;
           lua = common;
           markdown =
             indent4Spaces
