@@ -80,6 +80,22 @@
           inherit package name;
         };
       };
+
+    cursor =
+      let
+        palette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavor}.colors;
+      in
+      {
+        name = "Breeze_Hacked";
+        package = pkgs.breeze-hacked-cursor-theme.override {
+          accentColor = "${palette.${config.catppuccin.accent}.hex}";
+          baseColor = "${palette.base.hex}";
+          borderColor = "${palette.base.hex}";
+          logoColor = "${palette.text.hex}";
+        };
+      };
   };
 
   catppuccin = {
