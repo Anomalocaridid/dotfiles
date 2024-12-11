@@ -90,6 +90,7 @@
           cpp = indent4Spaces;
           crystal = common;
           c-sharp = common;
+          d = common;
           elixir = common;
           # erlang = common; NOTE: erlang formatter mangles code when auto-format = true
           fortran = withFormatter (lib.getExe pkgs.fprettify);
