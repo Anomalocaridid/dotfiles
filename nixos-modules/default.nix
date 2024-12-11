@@ -57,7 +57,7 @@
       # Hyprland community tools
       inputs.hyprland-contrib.overlays.default
       # Nix user repository
-      inputs.nur.overlay
+      inputs.nur.overlays.default
     ];
     config.allowUnfree = true;
   };
