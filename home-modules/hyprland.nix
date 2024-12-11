@@ -19,8 +19,7 @@
         (lib.getExe pkgs.hyprland-autoname-workspaces)
         "steam -silent"
         # cava wallpaper
-        # TODO: Re-enable when nixpkgs#355948 makes it to master
-        # "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
+        "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
       ];
 
       general = {
