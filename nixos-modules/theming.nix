@@ -62,9 +62,8 @@
 
     fonts =
       let
-        font = "FiraCode";
-        package = pkgs.nerdfonts.override { fonts = [ font ]; };
-        name = "${font} Nerd Font";
+        package = pkgs.nerd-fonts.fira-code;
+        name = "FiraCode Nerd Font";
       in
       rec {
         sizes = {
