@@ -100,7 +100,6 @@
       "$mainMod" = "SUPER";
 
       "$opener" = "handlr launch";
-      "$term" = "$opener x-scheme-handler/terminal --";
 
       # Vim-style homerow direction keys
       "$left" = "h";
@@ -114,10 +113,10 @@
 
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       bind = lib.flatten [
-        "$mainMod, Return, exec, $term"
+        "$mainMod, Return, exec, $opener x-scheme-handler/terminal --"
         "$mainMod, Q, killactive,"
         "$mainMod SHIFT, Q, exec, wlogout --show-binds"
-        "$mainMod, N, exec, $term --class=filemanager -- $opener inode/directory"
+        "$mainMod, N, exec, $opener inode/directory"
         "$mainMod, V, togglefloating,"
         "$mainMod, R, exec, pkill $menu || $menu"
         "$mainMod, P, pseudo, # dwindle"
