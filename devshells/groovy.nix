@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
   packages = with pkgs; [
-    gradle_6 # Needed for exercism tests, previous version needed for compatibility
+    gradle
     groovy
-    jdk # Java development kit
+    jdk11 # Java development kit, default version too recent for exercism tests
   ];
 }
