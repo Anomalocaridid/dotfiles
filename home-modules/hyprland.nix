@@ -5,6 +5,11 @@
   inputs,
   ...
 }:
+let
+  palette =
+    (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+    .${config.catppuccin.flavor}.colors;
+in
 {
   wayland.windowManager.hyprland = {
     enable = true;
@@ -14,13 +19,20 @@
       hyprwinwrap # Set an arbitrary program as a wallpaper
     ];
     settings = {
-      exec-once = lib.flatten [
-        "eww open bar"
-        (lib.getExe pkgs.hyprland-autoname-workspaces)
-        "steam -silent"
-        # cava wallpaper
-        "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
-      ];
+      exec-once =
+        let
+          noHash = str: builtins.substring 1 (builtins.stringLength str) str;
+        in
+        lib.flatten [
+          "eww open bar"
+          (lib.getExe pkgs.hyprland-autoname-workspaces)
+          "steam -silent"
+          # cava wallpaper
+          "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
+          "${lib.getExe pkgs.wayneko} --background-colour 0x${noHash palette.crust.hex} --outline-colour 0x${
+            noHash palette.${config.catppuccin.accent}.hex
+          } --layer top"
+        ];
 
       general = {
         border_size = 2;
@@ -222,11 +234,6 @@
     in
     {
       "hyprland-autoname-workspaces/config.toml".source =
-        let
-          palette =
-            (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-            .${config.catppuccin.flavor}.colors;
-        in
         (nixagoLib.make {
           data = {
             version = pkgs.hyprland-autoname-workspaces.version;
