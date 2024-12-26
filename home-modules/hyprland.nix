@@ -101,7 +101,7 @@ in
         "workspace 1, class:^(lutris)$"
         "workspace 2, class:^(librewolf)$"
         "workspace 3, class:^(filemanager)$"
-        "workspace 4 silent, class:^(legcord)$"
+        "workspace 4 silent, class:^(vesktop)$"
         "workspace 5, title:^(Spotify.*)$"
         # Inhibit idle on fullscreen programs where keyboard/mouse may not be used for a while
         "idleinhibit fullscreen, class:^(FreeTube)$"
@@ -256,11 +256,10 @@ in
             };
 
             class = {
-              "blueman-manager" = "";
               "DEFAULT" = "";
+              "blueman-manager" = "";
               "filemanager" = "";
               "FreeTube" = "";
-              "legcord" = "󰙯";
               "libreoffice" = "󰈙";
               "librewolf" = "";
               "lutris" = "";
@@ -274,6 +273,7 @@ in
               ".qemu-system-x86_64-wrapped" = "󰍺";
               "spotify" = "";
               "steam" = "󰓓";
+              "vesktop" = "󰙯";
               ".yubioath-flutter-wrapped_" = "󰌋";
             };
 

@@ -6,7 +6,7 @@
   ...
 }:
 {
-  # Import all nix files in directory 
+  # Import all nix files in directory
   # Should ignore this file and all non-nix files
   # Currently, all non-nix files and dirs here are hidden dotfiles
   imports = map (file: ./. + "/${file}") (
@@ -23,7 +23,6 @@
       itd
       keepassxc
       killall
-      legcord
       pavucontrol # Graphical audio controller
       qalculate-gtk
       quickemu # Make and run VMs

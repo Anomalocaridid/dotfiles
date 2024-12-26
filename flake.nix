@@ -111,6 +111,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Discord customization
+    nixcord = {
+      # TODO: change to official repo when nixcord#63 is merged
+      url = "github:Anomalocaridid/nixcord/fix-vesktop-settings";
+      # url = "github:KaylorBen/nixcord";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Fish exercism wrapper
     exercism-cli-fish-wrapper = {
       url = "github:glennj/exercism-cli-fish-wrapper";

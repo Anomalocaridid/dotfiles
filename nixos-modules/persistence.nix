@@ -66,10 +66,10 @@
       ".config/GIMP" # GIMP settings
       ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
-      ".config/legcord" # Legcord user data
       ".config/libreoffice" # Libreoffice settings
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
+      ".config/vesktop/sessionData" # Vesktop user data
       ".local/share/com.yubico.authenticator" # Yubico auth settings (may have secrets?)
       ".local/share/strawberry" # Strawberry cache
       ".local/share/Tabletop Simulator" # Tabletop Simulator settings

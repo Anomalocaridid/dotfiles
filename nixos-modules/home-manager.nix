@@ -9,6 +9,7 @@
         inputs.nix-index-database.hmModules.nix-index
         inputs.catppuccin.homeManagerModules.catppuccin
         inputs.spicetify-nix.homeManagerModules.spicetify
+        inputs.nixcord.homeManagerModules.nixcord
       ];
     };
     extraSpecialArgs = {
