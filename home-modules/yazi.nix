@@ -27,6 +27,7 @@
         "starship" = starship-yazi;
         # UI enhancements
         "full-border" = yazi-plugins + /full-border.yazi;
+        "smart-enter" = yazi-plugins + /smart-enter.yazi;
       });
     settings = {
       plugin = {
@@ -80,12 +81,12 @@
         [
           {
             on = [ "l" ];
-            run = "plugin --sync smart-enter";
+            run = "plugin smart-enter";
             desc = "Enter the child directory, or open the file";
           }
           {
             on = [ "p" ];
-            run = "plugin --sync smart-paste";
+            run = "plugin smart-paste";
             desc = "Paste into the hovered directory or CWD";
           }
           {
@@ -95,12 +96,12 @@
           }
           {
             on = [ "k" ];
-            run = "plugin --sync arrow --args=-1";
+            run = "plugin arrow --args=-1";
             desc = "Move cursor up (wrapping)";
           }
           {
             on = [ "j" ];
-            run = "plugin --sync arrow --args=1";
+            run = "plugin arrow --args=1";
             desc = "Move cursor down (wrapping)";
           }
           {
