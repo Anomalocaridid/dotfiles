@@ -31,10 +31,19 @@
     flake-parts.url = "github:hercules-ci/flake-parts";
 
     # Flake Parts module for defining configs
-    ez-configs.url = "github:ehllie/ez-configs";
+    ez-configs = {
+      url = "github:ehllie/ez-configs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Nix user repository
-    nur.url = "github:nix-community/NUR";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
 
     # Generate configs
     nixago = {
@@ -82,6 +91,7 @@
     };
 
     # Catppuccin Theming
+    # Provides a binary cache, so do not follow inputs
     catppuccin.url = "github:catppuccin/nix";
 
     # Extra Catppuccin themes
@@ -103,6 +113,7 @@
     };
 
     # Gaming tweaks
+    # Provides a binary cache, so do not follow inputs
     nix-gaming.url = "github:fufexan/nix-gaming";
 
     # Spotify customization
