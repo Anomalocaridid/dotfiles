@@ -1,14 +1,10 @@
-{ pkgs, config, ... }:
+{ config, ... }:
 {
   programs.nixcord = {
     enable = true;
     discord.enable = false;
     vesktop = {
       enable = true;
-      # TODO: remove when nixpkgs#368221 is merged
-      package = pkgs.vesktop.overrideAttrs (oldAttrs: {
-        patches = (oldAttrs.patches or [ ]) ++ [ ../assets/readonlyFix.patch ];
-      });
       settings = {
         discordBranch = "stable";
         staticTitle = true;
