@@ -1,14 +1,15 @@
 {
-  lib,
   pkgs,
   config,
   osConfig,
   ...
 }:
 {
+  # Does not use global enable option for some reason
+  catppuccin.gtk.enable = true;
+
   gtk = {
     enable = true;
-    catppuccin.enable = true;
     cursorTheme = config.stylix.cursor;
     iconTheme =
       let
@@ -56,7 +57,14 @@
   ];
 
   # Inherit system-level settings
-  catppuccin = osConfig.catppuccin;
+  catppuccin = {
+    inherit (osConfig.catppuccin)
+      enable
+      cache
+      flavor
+      accent
+      ;
+  };
 
   # Required for btop theme
   xdg.enable = true;

@@ -35,12 +35,11 @@
   };
 
   # Configure GRUB theme
-  boot.loader.grub = rec {
-    splashImage = lib.mkForce "${theme.content}/background.png";
+  boot.loader.grub = {
+    splashImage = lib.mkForce config.stylix.image;
     theme = lib.mkForce (
-      pkgs.runCommand "catppuccin-grub-theme" { } ''
-        mkdir -p "$out"
-        cp -r ${config.catppuccin.sources.grub}/src/catppuccin-${config.catppuccin.flavor}-grub-theme/* "$out"/
+      pkgs.runCommand "catppuccin-grub-background" { } ''
+        cp --recursive --no-preserve=mode ${config.catppuccin.sources.grub}/share/grub/themes/catppuccin-${config.catppuccin.flavor}-grub-theme/ "$out"
 
         # Replace background
         rm "$out"/background.png
@@ -99,6 +98,7 @@
 
   catppuccin = {
     enable = true;
+    cache.enable = true;
     flavor = "mocha";
     accent = "mauve";
   };

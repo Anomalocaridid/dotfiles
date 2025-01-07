@@ -17,7 +17,7 @@
           builtins.readFile (
             pkgs.runCommand "converted.json" { } ''
               ${lib.getExe pkgs.jc} --ini < ${
-                config.catppuccin.sources.hyprland + /themes/${config.catppuccin.flavor}.conf
+                config.catppuccin.sources.hyprland + /${config.catppuccin.flavor}.conf
               } > $out
             ''
           )
