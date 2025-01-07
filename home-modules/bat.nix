@@ -23,21 +23,21 @@
     config = {
       "lessopen" = true;
     };
-    # Remove once $LESSOPEN support is enabled by default
+    # TODO: Remove once $LESSOPEN support is enabled by default
     package = pkgs.bat.overrideAttrs (oldAttrs: rec {
       cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
-      # Remove once bat#2805 is merged and bat has a new release
-      version = "unstable-2023-12-18";
+      # TODO: Remove when NixOS/nixpkgs/pull/371913 makes it to unstable
+      version = "v0.25.0";
       src = pkgs.fetchFromGitHub {
-        owner = "Anomalocaridid";
+        owner = "sharkdp";
         repo = oldAttrs.pname;
-        rev = "11e40104b4f85cb4da04f3e2fab3ec76ae673aeb";
-        hash = "sha256-kWpqTEqiZuI4j1tG/fk+Xw252O2ryrNdZqjbqCRYCrk=";
+        rev = version;
+        hash = "sha256-82IhLhw0TdaMh21phBxcUZ5JI5xOXb0DrwnBmPwyfAQ=";
       };
       cargoDeps = oldAttrs.cargoDeps.overrideAttrs (oldDeps: {
         inherit src;
         lockFile = "${src}/Cargo.lock";
-        outputHash = "sha256-WAfCEbhJXvWOvALhCg0QCmKtI3lb9rvTyywqwpCKHWY=";
+        outputHash = "sha256-r2ERUUP6/qmej8RjmOsRvYeCa9zAo3xHCU2c3+ZFkjQ=";
       });
     });
   };
