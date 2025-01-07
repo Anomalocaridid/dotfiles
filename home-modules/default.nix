@@ -24,7 +24,8 @@
       killall
       pavucontrol # Graphical audio controller
       qalculate-gtk
-      quickemu # Make and run VMs
+      # TODO: Uncomment when NixOS/nixpkgs/pull/369622 makes it to unstable
+      # quickemu # Make and run VMs
       strawberry
       tree
       tuxpaint
