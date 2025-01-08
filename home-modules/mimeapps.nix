@@ -28,7 +28,7 @@
           "text/html" = browser;
           "video/*" = "mpv.desktop";
           "x-scheme-handler/http*" = browser;
-          "x-scheme-handler/terminal" = "org.wezfurlong.wezterm.desktop";
+          "x-scheme-handler/terminal" = "com.mitchellh.ghostty.desktop";
         };
     };
 
@@ -37,7 +37,6 @@
         data = {
           enable_selector = false;
           selector = "fuzzel --dmenu --prompt='Open With: '";
-          term_exec_args = "";
           handlers = [
             {
               exec = "freetube %u";

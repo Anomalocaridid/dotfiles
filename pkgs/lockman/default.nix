@@ -2,6 +2,7 @@
   asciiquarium-transparent,
   cbonsai,
   coreutils,
+  ghostty,
   handlr-regex,
   hyprland,
   hyprlock,
@@ -11,7 +12,6 @@
   ternimal,
   unimatrix,
   util-linux,
-  wezterm,
   writeShellApplication,
   ...
 }:
@@ -72,16 +72,17 @@ writeShellApplication {
   name = "${scriptName}.sh";
   runtimeInputs = [
     coreutils # provides sleep
+    ghostty
     handlr-regex
     hyprland # provides hyprctl
     hyprlock
     util-linux # provides flock
-    wezterm
     pick-screensaver # Randomly picks a screensaver
   ];
   text =
     let
-      scriptClass = "^(${scriptName})$";
+      # Because ghostty uses gtk to set the class, it has to look like a domain
+      scriptClass = "com.terminal.${scriptName}";
     in
     # bash
     ''
@@ -93,15 +94,15 @@ writeShellApplication {
       # Ensure screensaver will be fullscreen
       hyprctl keyword windowrulev2 'fullscreen, class:${scriptClass}'
       # Run screensaver
-      handlr launch x-scheme-handler/terminal -- --class=${scriptName} -- pick-screensaver.sh
+      handlr launch x-scheme-handler/terminal -- --class=${scriptClass} -e pick-screensaver.sh
       # Focus screensaver (assumed to be already fullscreened)
-      hyprctl dispatch focuswindow "${scriptClass}"
+      hyprctl dispatch focuswindow class:"${scriptClass}"
       # Turn on CRT shader
       hyprctl keyword decoration:screen_shader ${../../assets/crt.frag};
       # Lock screen (blocks until unlocked)
       hyprlock
       # Close screensaver, return to original workspace, remove fullscreen rule, and turn off shader
-      hyprctl --batch "dispatch closewindow ${scriptClass}; dispatch workspace previous; reload"
+      hyprctl --batch "dispatch closewindow class:${scriptClass}; dispatch workspace previous; reload"
       # Release lock
       echo "$$" >&3
     '';

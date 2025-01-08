@@ -72,8 +72,6 @@
         less = "bat --paging=always";
         man = "batman";
         diff = "batdiff";
-        # wezterm
-        imgcat = "wezterm imgcat";
         # tealdeer
         tldr = "PAGER='bat --plain' command tldr";
         # lazygit

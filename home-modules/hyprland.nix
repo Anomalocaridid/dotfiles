@@ -27,8 +27,8 @@ in
           "eww open bar"
           (lib.getExe pkgs.hyprland-autoname-workspaces)
           "steam -silent"
-          # cava wallpaper
-          "wezterm --config window_background_opacity=0 start --class hyprwinwrap -- cava"
+          # Because ghostty uses gtk to set the class, it has to look like a domain
+          "ghostty --background-opacity=0 --class=com.terminal.hyprwinwrap -e fish -c cava"
           "${lib.getExe pkgs.wayneko} --background-colour 0x${noHash palette.crust.hex} --outline-colour 0x${
             noHash palette.${config.catppuccin.accent}.hex
           } --layer top"
@@ -92,7 +92,7 @@ in
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
         enable_swallow = true;
-        swallow_regex = "^(org.wezfurlong.wezterm)$";
+        swallow_regex = "^(com.mitchellh.ghostty)$";
       };
 
       # Window rules
@@ -209,7 +209,7 @@ in
           workspace_method = "first 1";
         };
         hyprtrails.color = "$accent";
-        hyprwinwrap.class = "hyprwinwrap";
+        hyprwinwrap.class = "com.terminal.hyprwinwrap";
       };
     };
     extraConfig = # hypr
@@ -267,7 +267,7 @@ in
               "org.keepassxc.KeePassXC" = "󰌋";
               "org.prismlauncher.PrismLauncher" = "󰍳";
               "org.pwmt.zathura" = "";
-              "org.wezfurlong.wezterm" = "";
+              "com.mitchellh.ghostty" = "";
               "pavucontrol" = "󰕾";
               "Py[Ss]ol" = "󰣎";
               ".qemu-system-x86_64-wrapped" = "󰍺";
