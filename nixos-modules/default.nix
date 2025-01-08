@@ -5,7 +5,7 @@
   ...
 }:
 {
-  # Import all nix files in directory 
+  # Import all nix files in directory
   # Should ignore this file and all non-nix files
   imports =
     map (file: ./. + "/${file}") (
@@ -32,6 +32,7 @@
       ];
       auto-optimise-store = true;
       repl-overlays = [ ../repl-overlay.nix ]; # Lix-specific setting
+      trusted-users = [ "anomalocaris" ]; # Fixes issue with not being able to use trustrusted-public-keys sometimes
     };
     gc = {
       automatic = true;
