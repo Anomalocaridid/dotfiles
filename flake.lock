@@ -727,6 +727,26 @@
         "type": "github"
       }
     },
+    "ignis": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1737736198,
+        "narHash": "sha256-BCik0IFgTnpPu+mc8EGIIn5F+SOrlaymokFrT2NFi9I=",
+        "owner": "linkfrg",
+        "repo": "ignis",
+        "rev": "d3a63c0e5e3dfb26c9c500f5247f23fead7fbe49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "linkfrg",
+        "repo": "ignis",
+        "type": "github"
+      }
+    },
     "impermanence": {
       "locked": {
         "lastModified": 1734945620,
@@ -1225,6 +1245,7 @@
         "glow-yazi": "glow-yazi",
         "home-manager": "home-manager_2",
         "hyprland-contrib": "hyprland-contrib",
+        "ignis": "ignis",
         "impermanence": "impermanence",
         "lix-module": "lix-module",
         "miller-yazi": "miller-yazi",

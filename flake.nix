@@ -128,6 +128,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Widget framework
+    ignis = {
+      url = "github:linkfrg/ignis";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Fish exercism wrapper
     exercism-cli-fish-wrapper = {
       url = "github:glennj/exercism-cli-fish-wrapper";

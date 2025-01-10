@@ -59,6 +59,8 @@
       inputs.hyprland-contrib.overlays.default
       # Nix user repository
       inputs.nur.overlays.default
+      # Ignis widgets
+      inputs.ignis.overlays.default
     ];
     config.allowUnfree = true;
   };

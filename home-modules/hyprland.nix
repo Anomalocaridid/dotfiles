@@ -24,7 +24,7 @@ in
           noHash = str: builtins.substring 1 (builtins.stringLength str) str;
         in
         lib.flatten [
-          "eww open bar"
+          "ignis init"
           (lib.getExe pkgs.hyprland-autoname-workspaces)
           "steam -silent"
           # Because ghostty uses gtk to set the class, it has to look like a domain

@@ -1,0 +1,117 @@
+// Constants
+
+$padding: 0.4rem;
+
+// Mixins
+
+// Make sure to match window manager's borders
+@mixin border {
+	border: 2px solid unquote("@accent_color");
+	border-radius: 0.6rem;
+}
+
+// Ensure elements don't go over the sides
+@mixin side($side) {
+  .#{$side} {
+    padding-#{$side}: $padding;
+  }
+}
+
+@include side(left);
+@include side(right);
+
+
+// Apply to everything
+* {
+	border-width: 0;
+	padding: 0;
+}
+
+// Built-In Widgets
+
+tooltip {
+	@include border;
+	padding: $padding;
+	background-color: unquote("@theme_bg_color");
+}
+
+window {
+	@include border;
+}
+
+scale {
+	$border-radius: 0.74rem;
+
+  min-width: 3.75rem;
+
+	highlight {
+		border-radius: $border-radius;
+	}
+
+	trough {
+		min-height: 0.3rem;
+		border-radius: $border-radius;
+	}
+
+	slider {
+		all: unset;
+	}
+}
+
+popover {
+	* {
+		background-color: unquote("@theme_bg_color");
+	}
+
+	label {
+		padding: 0 $padding;
+	}
+
+	/* Only draw a border around the arrow that points to the icon */
+	& > arrow {
+		@include border
+	}
+
+	contents {
+		@include border
+	}
+
+	stack *:hover {
+		color: unquote("@accent_color");
+		font-weight: bold;
+	}
+}
+
+// Libadwaita Style Classes
+
+// Make sure flat buttons do not take up extra space
+.flat {
+	min-width: 0;
+	min-height: 0;
+}
+
+// Custom Classes
+
+.player {
+	padding: $padding;
+}
+
+$statColors: (
+  "memory": "@orange_1",
+  "cpu": "@green_1",
+  "disk": "@blue_1",
+  "temperature": "@purple_1",
+);
+
+@each $class, $color in $statColors {
+  .#{$class} {
+    color: unquote($color);
+	}
+}
+
+.active {
+	color: unquote("@accent_color");
+  font-weight: bold;
+}
+
+
