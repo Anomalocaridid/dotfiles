@@ -27,6 +27,7 @@ in
           "ignis init"
           (lib.getExe pkgs.hyprland-autoname-workspaces)
           "steam -silent"
+          "wpaperd"
           # Because ghostty uses gtk to set the class, it has to look like a domain
           "ghostty --background-opacity=0 --class=com.terminal.hyprwinwrap -e fish -c cava"
           "${lib.getExe pkgs.wayneko} --background-colour 0x${noHash palette.crust.hex} --outline-colour 0x${
