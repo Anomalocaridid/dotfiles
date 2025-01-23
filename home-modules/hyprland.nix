@@ -16,7 +16,6 @@ in
     plugins = with pkgs.hyprlandPlugins; [
       hyprexpo # Show workspaces in a grid
       hyprtrails # Give moving windows trails
-      hyprwinwrap # Set an arbitrary program as a wallpaper
     ];
     settings = {
       exec-once =
@@ -28,8 +27,7 @@ in
           (lib.getExe pkgs.hyprland-autoname-workspaces)
           "steam -silent"
           "wpaperd"
-          # Because ghostty uses gtk to set the class, it has to look like a domain
-          "ghostty --background-opacity=0 --class=com.terminal.hyprwinwrap -e fish -c cava"
+          "${lib.getExe pkgs.custom.windowtolayer} handlr launch x-scheme-handler/terminal -- --background-opacity=0 -e fish -c cava"
           "${lib.getExe pkgs.wayneko} --background-colour 0x${noHash palette.crust.hex} --outline-colour 0x${
             noHash palette.${config.catppuccin.accent}.hex
           } --layer top"
@@ -47,10 +45,7 @@ in
         # See https://wiki.hyprland.org/Configuring/Variables/ for more
         rounding = 10;
 
-        blur = {
-          size = 3;
-          new_optimizations = false; # Allow hyprwinwrap to be visible through transparent windows
-        };
+        blur.size = 3;
 
         shadow.color = "$base";
       };
@@ -210,7 +205,6 @@ in
           workspace_method = "first 1";
         };
         hyprtrails.color = "$accent";
-        hyprwinwrap.class = "com.terminal.hyprwinwrap";
       };
     };
     extraConfig = # hypr
