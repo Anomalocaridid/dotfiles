@@ -1,5 +1,13 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  config,
+  ...
+}:
+{
+  # Hack to ensure screen locker works properly
+  # Otherwise, nothing would be accessible from swayidle's environment
+  systemd.user.services.swayidle.Service.Environment = lib.mkForce [ ];
   services.swayidle =
     let
       lock = "loginctl lock-session";
@@ -29,8 +37,25 @@
       events = [
         {
           event = "lock";
-          # Only start one instance of locking script
-          command = "pidof -x lockman.sh || ${lib.getExe pkgs.custom.lockman}";
+          # NOTE: Run ignis commands outside of swaylock-plugin because nested compositor causes issues
+          # and run hyprctl commands outside of swaylock-plugin so the first one is only run once even if screensaver changes
+          # TODO: generalize ignis commands to multiple monitors
+          command = lib.getExe (
+            pkgs.writeShellApplication {
+              name = "swaylock-wrapper.sh";
+              runtimeInputs = with pkgs; [
+                hyprland
+                ignis
+              ];
+              text = ''
+                hyprctl dispatch workspace empty
+                ignis close ignis_bar_0
+                ${lib.getExe config.programs.swaylock.package}
+                ignis open ignis_bar_0
+                hyprctl dispatch workspace previous
+              '';
+            }
+          );
         }
         {
           event = "before-sleep";

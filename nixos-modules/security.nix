@@ -21,7 +21,8 @@
           Defaults insults
         '';
     };
-    # Needed for hyprlock to unlock
-    pam.services.hyprlock = { };
+
+    # Needed for swaylock-plugin to unlock
+    pam.services.swaylock-plugin = { };
   };
 }
