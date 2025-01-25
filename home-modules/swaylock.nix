@@ -18,8 +18,10 @@ let
       asciiquarium-transparent
       cbonsai
       fastfetch
+      lavat
       pipes-rs
       pv
+      sssnake
       ternimal
       unimatrix
       util-linux # provides script
@@ -32,12 +34,12 @@ let
       readonly SCREENSAVERS=(
         "asciiquarium --transparent"
         "cbonsai --live --infinite"
+        "lavat -s 10 -c red -k magenta"
         "pipes-rs"
-        "unimatrix --asynchronous --flashers"
+        "sssnake --mode=screensaver --speed=20 --try-hard=1"
         "ternimal width=$(tput cols) height=$(($(tput lines) * 2))"
-        # Script makes fastfetch think it is outputting to a terminal
-        # Necessary to preserve colors
-        # Also make sure to not write output to a file by outputting to /dev/null
+        "unimatrix --asynchronous --flashers"
+        # script makes fastfetch think it is outputting to a terminal, which is necessary to preserve colors
         "while true; do script --quiet --log-out /dev/null  --command fastfetch | pv -qL 200; done"
       )
 
