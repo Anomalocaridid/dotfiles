@@ -70,11 +70,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Hyprland community tools
-    hyprland-contrib = {
-      url = "github:hyprwm/contrib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # Niri compositor
+    # Provides a binary cache, so do not follow inputs
+    niri.url = "github:sodiboo/niri-flake";
 
     # Only used for GRUB theme
     stylix = {

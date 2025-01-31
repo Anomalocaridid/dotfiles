@@ -18,6 +18,7 @@
       inputs.disko.nixosModules.disko
       inputs.home-manager.nixosModules.home-manager
       inputs.impermanence.nixosModules.impermanence
+      inputs.niri.nixosModules.niri
       inputs.stylix.nixosModules.stylix
       inputs.catppuccin.nixosModules.catppuccin
       inputs.nix-gaming.nixosModules.pipewireLowLatency
@@ -55,8 +56,6 @@
     overlays = [
       # custom overlay
       (import ../pkgs)
-      # Hyprland community tools
-      inputs.hyprland-contrib.overlays.default
       # Nix user repository
       inputs.nur.overlays.default
       # Ignis widgets
@@ -105,6 +104,9 @@
     # Required for udiskie
     udisks2.enable = true;
   };
+
+  # Tell electron apps to use Wayland
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

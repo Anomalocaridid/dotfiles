@@ -7,7 +7,7 @@ from time import gmtime, strftime
 import psutil  # Not included by default
 from ignis.app import IgnisApp
 from ignis.services.audio import AudioService
-from ignis.services.hyprland import HyprlandService
+from ignis.services.niri import NiriService
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.services.network import NetworkService, WifiDevice
 from ignis.services.system_tray import SystemTrayItem, SystemTrayService
@@ -19,7 +19,7 @@ app = IgnisApp.get_default()
 app.apply_css(f"{Utils.get_current_dir()}/style.scss", "user")
 
 audio = AudioService.get_default()
-hyprland = HyprlandService.get_default()
+niri = NiriService.get_default()
 mpris = MprisService.get_default()
 network = NetworkService.get_default()
 system_tray = SystemTrayService.get_default()
@@ -30,10 +30,12 @@ WIDGET_SPACING = 5
 ICON_SPACING = 2
 
 # Make sure to match window manager gaps
-GAPS_IN = 5
-GAPS_OUT = 20
+# Also account for border thickness for alignment
+BORDER_THICKNESS = 4
+GAPS_IN = 5 + BORDER_THICKNESS
+GAPS_OUT = 16 - BORDER_THICKNESS
 
-TERMINAL = "handlr launch x-scheme-handler/terminal -- -e"
+TERMINAL = "handlr launch x-scheme-handler/terminal --"
 
 # Global variables
 show_calendar = Variable(value=False)
@@ -47,32 +49,37 @@ def toggle_variable(var: Variable):
     return _inner
 
 
-@Utils.debounce(75)
-def scroll_workspaces(step: int) -> None:
-    current = hyprland.active_workspace["id"]
-    hyprland.switch_to_workspace(min(max(current + step, 0), 10))
+# NOTE: Match with window manager scroll cooldown
+@Utils.debounce(150)
+def scroll_workspaces(monitor_name: str, step: int) -> None:
+    current = list(
+        filter(
+            lambda w: w["is_active"] and w["output"] == monitor_name, niri.workspaces
+        )
+    )[0]["idx"]
+    niri.switch_to_workspace(min(max(current + step, 0), 10))
 
 
-def workspace_button(workspace: dict[str, int]) -> Widget.Button:
+def workspace_button(workspace: dict) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["flat"],
-        on_click=lambda _, id=workspace["id"]: hyprland.switch_to_workspace(id),
-        child=Widget.Label(label=str(workspace["id"])),
+        on_click=lambda _, id=workspace["idx"]: niri.switch_to_workspace(id),
+        child=Widget.Label(label=str(workspace["idx"])),
     )
 
-    if workspace["id"] == hyprland.active_workspace["id"]:
+    if workspace["is_active"]:
         widget.add_css_class("active")
 
     return widget
 
 
 # TODO: get icons of open programs
-def workspaces() -> Widget.EventBox:
+def workspaces(monitor_name: str) -> Widget.EventBox:
     return Widget.EventBox(
-        on_scroll_up=lambda _: scroll_workspaces(-1),
-        on_scroll_down=lambda _: scroll_workspaces(1),
+        on_scroll_up=lambda _: scroll_workspaces(monitor_name, -1),
+        on_scroll_down=lambda _: scroll_workspaces(monitor_name, 1),
         spacing=WIDGET_SPACING,
-        child=hyprland.bind(
+        child=niri.bind(
             "workspaces",
             transform=lambda value: [workspace_button(i) for i in value],
         ),
@@ -80,14 +87,17 @@ def workspaces() -> Widget.EventBox:
 
 
 # TODO: get icon of active window
-def active_window() -> Widget.Box:
-    title = hyprland.bind(
+def active_window(monitor_name: str) -> Widget.Box:
+    title = niri.bind(
         "active_window",
-        transform=lambda window: window.get("title", ""),
+        transform=lambda value: "" if value is None else value["title"],
     )
 
     return Widget.Box(
         spacing=WIDGET_SPACING,
+        visible=niri.bind(
+            "active_output", lambda active_output: active_output["name"] == monitor_name
+        ),
         child=[
             Widget.Icon(image="desktop"),
             Widget.Label(
@@ -245,7 +255,9 @@ def connections() -> Widget.EventBox:
         ],
         on_hover=lambda _: ssid_revealer.set_reveal_child(True),
         on_hover_lost=lambda _: ssid_revealer.set_reveal_child(False),
-        on_click=lambda _: Utils.exec_sh_async(f"{TERMINAL} nmtui"),
+        on_click=lambda _: Utils.exec_sh_async(
+            f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui"
+        ),
     )
 
 
@@ -379,22 +391,24 @@ def left_arrow() -> Widget.Arrow:
 
 
 def bar(monitor_id: int) -> Widget.Window:
+    monitor_name = Utils.get_monitor(monitor_id).get_connector()
     Widget.Window(
         namespace=f"ignis_bar_{monitor_id}",
         monitor=monitor_id,
         exclusivity="exclusive",
         anchor=["left", "top", "right"],
-        # NOTE: margin_top is different because it looks a bit nicer
-        margin_top=15,
+        # NOTE: bottom margin is different because it looks a bit nicer
+        margin_top=GAPS_OUT,
+        margin_bottom=GAPS_IN,
         margin_left=GAPS_OUT,
         margin_right=GAPS_OUT,
         child=Widget.CenterBox(
             start_widget=Widget.Box(
                 css_classes=["left"],
                 child=[
-                    workspaces(),
+                    workspaces(monitor_name),
                     right_arrow(),
-                    active_window(),
+                    active_window(monitor_name),
                     right_arrow(),
                 ],
             ),
@@ -433,7 +447,7 @@ def calendar(monitor_id: int) -> Widget.Window:
         exclusivity="normal",
         anchor=["top", "right"],
         margin_top=GAPS_OUT,
-        margin_right=GAPS_IN + GAPS_OUT,
+        margin_right=GAPS_OUT,
         child=Widget.Calendar(),
     )
 

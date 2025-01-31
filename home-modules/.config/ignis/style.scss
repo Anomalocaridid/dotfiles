@@ -4,10 +4,10 @@ $padding: 0.4rem;
 
 // Mixins
 
-// Make sure to match window manager's borders
+// NOTE: Match window manager's borders and corners
 @mixin border {
-	border: 2px solid unquote("@accent_color");
-	border-radius: 0.6rem;
+	border: 4px solid unquote("@accent_color");
+	border-radius: 12px;
 }
 
 // Ensure elements don't go over the sides

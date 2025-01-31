@@ -11,7 +11,10 @@
         icon_theme = config.gtk.iconTheme.name;
         enable_recursive_icon_lookup = true;
         dmenu = "fuzzel --dmenu --prompt='dunst'";
-        corner_radius = 3;
+        # NOTE: Match with window manager corner radius
+        corner_radius = 12;
+        # NOTE: Match with window manager border width
+        frame_width = 4;
       };
     };
 }
