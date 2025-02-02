@@ -92,6 +92,11 @@ popover {
 
 // Custom Classes
 
+.focused {
+	@include border;
+	border-width: 1px;
+}
+
 .player {
 	padding: $padding;
 }

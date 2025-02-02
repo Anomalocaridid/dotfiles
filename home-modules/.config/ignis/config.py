@@ -1,27 +1,34 @@
+import json
 import math
 import shutil
+from collections import Counter, defaultdict
 from collections.abc import Callable
 from datetime import datetime
 from time import gmtime, strftime
+from typing import Any
 
 import psutil  # Not included by default
+import unicodeit  # Not included by default
 from ignis.app import IgnisApp
+from ignis.services.applications import ApplicationsService
 from ignis.services.audio import AudioService
-from ignis.services.niri import NiriService
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.services.network import NetworkService, WifiDevice
+from ignis.services.niri import NiriService
 from ignis.services.system_tray import SystemTrayItem, SystemTrayService
 from ignis.utils import Utils
 from ignis.variable import Variable
 from ignis.widgets import Widget
+from immutabledict import immutabledict  # Not included by default
 
 app = IgnisApp.get_default()
 app.apply_css(f"{Utils.get_current_dir()}/style.scss", "user")
 
+applications = ApplicationsService.get_default()
 audio = AudioService.get_default()
-niri = NiriService.get_default()
 mpris = MprisService.get_default()
 network = NetworkService.get_default()
+niri = NiriService.get_default()
 system_tray = SystemTrayService.get_default()
 
 # Global constants
@@ -60,11 +67,52 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
     niri.switch_to_workspace(min(max(current + step, 0), 10))
 
 
-def workspace_button(workspace: dict) -> Widget.Button:
+# TODO: Improve app icon name detection?
+def get_icon_name_from_window(window: None | dict[str, Any]) -> str:
+    # Mainly just for active window widget
+    # If no window is focused, you just see the desktop
+    if window is None:
+        return "desktop"
+
+    app_results = applications.search(applications.apps, window["app_id"])
+
+    # If there is a desktop file for the open application, return the icon name
+    if app_results:
+        return app_results[0].icon
+    else:
+        # Otherwise, fall back to window's app id
+        return window["app_id"]
+
+
+# TODO: Make focused app show up first
+# TODO: Preserve ordering of windows (might not be possible yet with Niri IPC?)
+def workspace_button(
+    workspace: dict[str, Any],
+    window_counts: dict[dict[str, Any], int],
+) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["flat"],
         on_click=lambda _, id=workspace["idx"]: niri.switch_to_workspace(id),
-        child=Widget.Label(label=str(workspace["idx"])),
+        child=Widget.Box(
+            child=[
+                Widget.Label(label=f"{workspace["idx"]}{":" if window_counts else ""}")
+            ]
+            + [
+                Widget.Box(
+                    child=[
+                        Widget.Icon(
+                            image=get_icon_name_from_window(window),
+                            css_classes=["focused"] if window["is_focused"] else [],
+                        ),
+                        # Show count in superscript
+                        Widget.Label(label=unicodeit.replace(f"^{{{count}}}"))
+                        if count > 1
+                        else None,
+                    ]
+                )
+                for window, count in window_counts.items()
+            ]
+        ),
     )
 
     if workspace["is_active"]:
@@ -73,24 +121,50 @@ def workspace_button(workspace: dict) -> Widget.Button:
     return widget
 
 
-# TODO: get icons of open programs
+def window_to_workspace_idx(
+    workspaces: list[dict[str, Any]], window: dict[str, Any]
+) -> int:
+    return list(filter(lambda ws: ws["id"] == window["workspace_id"], workspaces))[0][
+        "idx"
+    ]
+
+
+def format_workspaces(workspaces: list[dict[str, Any]]) -> list[Widget.Button]:
+    # Get the entire data here and pass the relevant part along for each workspace
+    # so only one ipc request is made rather than once for every workspace
+    response: dict[str, Any] = json.loads(niri.send_command('"Windows"\n'))
+
+    windows_by_workspace = defaultdict(Counter)
+    if "Ok" in response:
+        for window in response["Ok"]["Windows"]:
+            # Only keep relevant information so that using Counter works as intended
+            windows_by_workspace[window_to_workspace_idx(workspaces, window)].update(
+                # Use an immutabledict so it can be hashed and counted
+                # Also wrap it in a list so the dict as a whole is counted, not its keys
+                [immutabledict({key: window[key] for key in ("app_id", "is_focused")})]
+            )
+    return [workspace_button(ws, windows_by_workspace[ws["idx"]]) for ws in workspaces]
+
+
 def workspaces(monitor_name: str) -> Widget.EventBox:
     return Widget.EventBox(
-        on_scroll_up=lambda _: scroll_workspaces(monitor_name, -1),
-        on_scroll_down=lambda _: scroll_workspaces(monitor_name, 1),
+        on_scroll_up=lambda _: scroll_workspaces(monitor_name, 1),
+        on_scroll_down=lambda _: scroll_workspaces(monitor_name, -1),
         spacing=WIDGET_SPACING,
-        child=niri.bind(
-            "workspaces",
-            transform=lambda value: [workspace_button(i) for i in value],
+        # Bind to active_window also to ensure focused window is up to date
+        child=niri.bind_many(
+            ["workspaces", "active_window"],
+            transform=lambda workspaces, _: format_workspaces(workspaces),
         ),
     )
 
 
-# TODO: get icon of active window
 def active_window(monitor_name: str) -> Widget.Box:
     title = niri.bind(
         "active_window",
-        transform=lambda value: "" if value is None else value["title"],
+        transform=lambda active_window: ""
+        if active_window is None
+        else active_window["title"],
     )
 
     return Widget.Box(
@@ -99,7 +173,9 @@ def active_window(monitor_name: str) -> Widget.Box:
             "active_output", lambda active_output: active_output["name"] == monitor_name
         ),
         child=[
-            Widget.Icon(image="desktop"),
+            Widget.Icon(
+                image=niri.bind("active_window", transform=get_icon_name_from_window)
+            ),
             Widget.Label(
                 ellipsize="end",
                 max_width_chars=15,
