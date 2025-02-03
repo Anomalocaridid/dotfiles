@@ -63,13 +63,6 @@
       flake = false;
     };
 
-    # Purescript overlay
-    # TODO: remove when issue with spago is fixed
-    purescript-overlay = {
-      url = "github:thomashoneyman/purescript-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Niri compositor
     # Provides a binary cache, so do not follow inputs
     niri.url = "github:sodiboo/niri-flake";
