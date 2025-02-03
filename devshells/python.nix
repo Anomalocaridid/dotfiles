@@ -7,5 +7,6 @@
       ]
     ))
     basedpyright # Python typechecker lsp
+    ruff # Python linter/formatter lsp
   ];
 }

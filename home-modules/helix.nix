@@ -41,12 +41,6 @@
           command = lib.getExe pkgs.phpactor;
           args = [ "language-server" ];
         };
-        # TODO: move to python devshell once Helix updates past 24.7
-        # Python linter/formatter lsp
-        ruff = {
-          command = lib.getExe pkgs.ruff;
-          args = [ "server" ];
-        };
         rust-analyzer.config.check.command = "clippy";
         # Scheme lsp
         scheme-langserver.command = lib.getExe' pkgs.akkuPackages.scheme-langserver "scheme-langserver";
