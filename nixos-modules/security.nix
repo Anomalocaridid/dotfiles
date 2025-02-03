@@ -5,6 +5,8 @@
     clamav = {
       daemon.enable = true;
       updater.enable = true;
+      # Unofficial updater for extra malware signatures
+      fangfrisch.enable = true;
     };
     # Enable Yubikey support
     pcscd.enable = true;
