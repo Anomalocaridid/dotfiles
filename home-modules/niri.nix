@@ -125,7 +125,7 @@
           "Mod+Shift+Slash".action = actions.show-hotkey-overlay;
 
           "Mod+T".action.spawn = terminal;
-          "Mod+D".action = actions.spawn "fuzzel";
+          "Mod+D".action = sh "pkill fuzzel || fuzzel";
           "Mod+O".action.spawn = launch "x-scheme-handler/https";
           "Mod+N".action.spawn = launch "inode/directory";
           "Super+Alt+L".action = actions.spawn "wlogout" "--show-binds";
