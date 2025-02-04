@@ -53,10 +53,13 @@
     home-manager.enable = true; # lets Home Manager manage itself
   };
 
-  services.syncthing = {
-    enable = true;
-    # Reenable after getting a tray service
-    # tray.enable = true;
+  services = {
+    cliphist.enable = true;
+    syncthing = {
+      enable = true;
+      # TODO: Enable and figure out how to configure declaratively
+      # tray.enable = true;
+    };
   };
 
   systemd.user.tmpfiles.rules = [ "L ${config.home.homeDirectory}/nixos - - - - /etc/nixos" ];
