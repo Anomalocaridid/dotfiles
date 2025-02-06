@@ -125,51 +125,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Yazi plugins
+    nix-yazi-plugins = {
+      # url = "github:lordkekz/nix-yazi-plugins";
+      url = "github:Anomalocaridid/nix-yazi-plugins/extraconfig-option";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Fish exercism wrapper
     exercism-cli-fish-wrapper = {
       url = "github:glennj/exercism-cli-fish-wrapper";
-      flake = false;
-    };
-
-    # yazi plugins
-    ## Previewers
-    glow-yazi = {
-      url = "github:Reledia/glow.yazi";
-      flake = false;
-    };
-
-    miller-yazi = {
-      url = "github:Reledia/miller.yazi";
-      flake = false;
-    };
-
-    exifaudio-yazi = {
-      url = "github:Sonico98/exifaudio.yazi";
-      flake = false;
-    };
-
-    ouch-yazi = {
-      url = "github:ndtoan96/ouch.yazi";
-      flake = false;
-    };
-
-    ## Functional Plugins
-    ### Has smart-filter.yazi and full-border.yazi
-    yazi-plugins = {
-      url = "github:yazi-rs/plugins";
-      flake = false;
-    };
-
-    ### Jumping
-    relative-motions-yazi = {
-      # Use main branch after next yazi release
-      url = "github:dedukun/relative-motions.yazi/0.3.3";
-      flake = false;
-    };
-
-    ### UI enhancements
-    starship-yazi = {
-      url = "github:Rolv-Apneseth/starship.yazi";
       flake = false;
     };
   };

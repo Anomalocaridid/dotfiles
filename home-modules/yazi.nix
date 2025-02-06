@@ -1,49 +1,8 @@
-{
-  lib,
-  pkgs,
-  inputs,
-  ...
-}:
+{ lib, pkgs, ... }:
 {
   programs.yazi = {
     enable = true;
     enableFishIntegration = true;
-    initLua =
-      #lua
-      ''
-        require("full-border"):setup()
-        require("relative-motions"):setup { show_numbers = "relative_absolute", show_motion = "true" }
-        require("starship"):setup()
-
-        function Status:name()
-          local h = cx.active.current.hovered
-          if not h then
-            return ui.Span("")
-          end
-
-          -- Modified to show symlink in status bar
-          local linked = ""
-          if h.link_to ~= nil then
-            linked = " -> " .. tostring(h.link_to)
-          end
-          return ui.Span(" " .. h.name .. linked)
-        end
-
-        -- Add user/group of files in status bar
-        Status:children_add(function()
-          local h = cx.active.current.hovered
-          if h == nil or ya.target_family() ~= "unix" then
-            return ui.Line {}
-          end
-
-          return ui.Line {
-            ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("magenta"),
-            ui.Span(":"),
-            ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("magenta"),
-            ui.Span(" "),
-          }
-        end, 500, Status.RIGHT)
-      '';
     plugins =
       let
         writePlugin =
@@ -54,23 +13,14 @@
             destination = "/${name}";
           };
       in
-      with inputs;
       {
         # Previewers
-        "glow" = glow-yazi;
-        "miller" = miller-yazi;
-        "exifaudio" = exifaudio-yazi;
-        "ouch" = ouch-yazi;
-        # Functional Plugins
-        ## Jumping
-        "relative-motions" = relative-motions-yazi;
-        ## filter enhancements
-        "smart-filter" = yazi-plugins + /smart-filter.yazi;
-        "starship" = starship-yazi;
+        "glow" = pkgs.yaziPlugins.glow;
+        "exifaudio" = pkgs.yaziPlugins.exifaudio;
+        "ouch" = pkgs.yaziPlugins.ouch;
         # UI enhancements
-        "full-border" = yazi-plugins + /full-border.yazi;
-        "smart-enter" = yazi-plugins + /smart-enter.yazi;
-        # Custom
+        "smart-enter" = pkgs.yaziPlugins.smart-filter.src + /smart-enter.yazi;
+        # Snippets
         "arrow" =
           writePlugin
             # lua
@@ -110,10 +60,6 @@
             {
               name = "*.md";
               run = "glow";
-            }
-            {
-              mime = "text/csv";
-              run = "miller";
             }
             {
               mime = "audio/*";
@@ -178,11 +124,6 @@
             run = "plugin arrow --args=1";
             desc = "Move cursor down (wrapping)";
           }
-          {
-            on = [ "f" ];
-            run = "plugin smart-filter";
-            desc = "Smart filter";
-          }
         ]
         ++ (builtins.genList (
           x:
@@ -196,13 +137,58 @@
           }
         ) 9);
     };
+
+    yaziPlugins = {
+      enable = true;
+      plugins = {
+        starship.enable = true;
+        full-border.enable = true;
+        relative-motions = {
+          enable = true;
+          show_numbers = "relative_absolute";
+          show_motion = true;
+        };
+        smart-filter.enable = true;
+      };
+      extraConfig =
+        #lua
+        ''
+          function Status:name()
+            local h = cx.active.current.hovered
+            if not h then
+              return ui.Span("")
+            end
+
+            -- Modified to show symlink in status bar
+            local linked = ""
+            if h.link_to ~= nil then
+              linked = " -> " .. tostring(h.link_to)
+            end
+            return ui.Span(" " .. h.name .. linked)
+          end
+
+          -- Add user/group of files in status bar
+          Status:children_add(function()
+            local h = cx.active.current.hovered
+            if h == nil or ya.target_family() ~= "unix" then
+              return ui.Line {}
+            end
+
+            return ui.Line {
+              ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("magenta"),
+              ui.Span(":"),
+              ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("magenta"),
+              ui.Span(" "),
+            }
+          end, 500, Status.RIGHT)
+        '';
+    };
   };
 
   # Dependencies for plugins
   home.packages = with pkgs; [
     # Previewers
     glow
-    miller
     exiftool
     ouch
   ];
