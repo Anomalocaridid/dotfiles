@@ -36,26 +36,8 @@
       events = [
         {
           event = "lock";
-          # NOTE: Run ignis commands outside of swaylock-plugin because nested compositor causes issues
-          # and run window manager commands outside of swaylock-plugin so the first one is only run once even if screensaver changes
-          # TODO: generalize ignis commands to multiple monitors
-          command = lib.getExe (
-            pkgs.writeShellApplication {
-              name = "swaylock-wrapper.sh";
-              runtimeInputs = with pkgs; [
-                niri
-                ignis
-              ];
-              text = ''
-                # Go to empty workspace (last one is always empty)
-                niri msg action focus-workspace 255
-                ignis close ignis_bar_0
-                ${lib.getExe config.programs.swaylock.package}
-                ignis open ignis_bar_0
-                niri msg action focus-workspace-previous
-              '';
-            }
-          );
+          # NOTE: niri does not support transparency for lock screens
+          command = lib.getExe config.programs.swaylock.package;
         }
         {
           event = "before-sleep";
