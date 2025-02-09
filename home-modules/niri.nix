@@ -18,7 +18,6 @@
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
         .${config.catppuccin.flavor}.colors;
       accent = palette.${config.catppuccin.accent}.hex;
-      noHash = str: builtins.substring 1 (builtins.stringLength str) str;
       workspaces = 10;
     in
     {
@@ -90,15 +89,19 @@
             ];
         }
         {
-          command = [
-            "${lib.getExe pkgs.wayneko}"
-            "--background-colour"
-            "0x${noHash palette.crust.hex}"
-            "--outline-colour"
-            "0x${noHash accent}"
-            "--layer"
-            "top"
-          ];
+          command =
+            let
+              noHash = str: "0x${builtins.substring 1 (builtins.stringLength str) str}";
+            in
+            [
+              (lib.getExe pkgs.wayneko)
+              "--background-colour"
+              (noHash palette.crust.hex)
+              "--outline-colour"
+              (noHash accent)
+              "--layer"
+              "top"
+            ];
         }
         {
           command = [
