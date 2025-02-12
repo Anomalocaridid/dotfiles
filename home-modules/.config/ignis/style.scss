@@ -1,14 +1,12 @@
+@use "wm";
+
+@use "sass:string";
+
 // Constants
 
 $padding: 0.4rem;
 
 // Mixins
-
-// NOTE: Match window manager's borders and corners
-@mixin border {
-	border: 4px solid unquote("@accent_color");
-	border-radius: 12px;
-}
 
 // Ensure elements don't go over the sides
 @mixin side($side) {
@@ -30,13 +28,13 @@ $padding: 0.4rem;
 // Built-In Widgets
 
 tooltip {
-	@include border;
+	@include wm.border;
 	padding: $padding;
-	background-color: unquote("@theme_bg_color");
+	background-color: string.unquote("@theme_bg_color");
 }
 
 window {
-	@include border;
+	@include wm.border;
 }
 
 scale {
@@ -60,7 +58,7 @@ scale {
 
 popover {
 	* {
-		background-color: unquote("@theme_bg_color");
+		background-color: string.unquote("@theme_bg_color");
 	}
 
 	label {
@@ -69,15 +67,15 @@ popover {
 
 	/* Only draw a border around the arrow that points to the icon */
 	& > arrow {
-		@include border
+		@include wm.border
 	}
 
 	contents {
-		@include border
+		@include wm.border
 	}
 
 	stack *:hover {
-		color: unquote("@accent_color");
+		color: string.unquote("@accent_color");
 		font-weight: bold;
 	}
 }
@@ -93,7 +91,7 @@ popover {
 // Custom Classes
 
 .focused {
-	@include border;
+	@include wm.border;
 	border-width: 1px;
 }
 
@@ -110,12 +108,12 @@ $statColors: (
 
 @each $class, $color in $statColors {
   .#{$class} {
-    color: unquote($color);
+    color: string.unquote($color);
 	}
 }
 
 .active {
-	color: unquote("@accent_color");
+	color: string.unquote("@accent_color");
   font-weight: bold;
 }
 

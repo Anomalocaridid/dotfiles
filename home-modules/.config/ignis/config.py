@@ -1,3 +1,5 @@
+import wm
+
 import json
 import math
 import shutil
@@ -35,14 +37,6 @@ system_tray = SystemTrayService.get_default()
 BAR_SPACING = 10
 WIDGET_SPACING = 5
 ICON_SPACING = 2
-
-# NOTE: Make sure to match window manager gaps
-# NOTE: The margin between the bar and windows is an outer gap for spacing purposes
-# Also account for border thickness for alignment
-# Also, keep decoupled because each window's margins seem to handle borders a bit differently
-BORDER_THICKNESS = 4
-GAPS_IN = 5
-GAPS_OUT = 16
 
 TERMINAL = "handlr launch x-scheme-handler/terminal --"
 
@@ -475,11 +469,11 @@ def bar(monitor_id: int) -> Widget.Window:
         monitor=monitor_id,
         exclusivity="exclusive",
         anchor=["left", "top", "right"],
-        # NOTE: bottom margin is different because it looks a bit nicer
-        margin_top=GAPS_OUT - BORDER_THICKNESS,
-        margin_bottom=GAPS_IN + BORDER_THICKNESS,
-        margin_left=GAPS_OUT - BORDER_THICKNESS,
-        margin_right=GAPS_OUT - BORDER_THICKNESS,
+        margin_top=wm.GAP_WIDTH,
+        # This one is different because it looks a bit nicer
+        margin_bottom=wm.GAP_WIDTH - wm.BORDER_WIDTH,
+        margin_left=wm.GAP_WIDTH,
+        margin_right=wm.GAP_WIDTH,
         child=Widget.CenterBox(
             start_widget=Widget.Box(
                 css_classes=["left"],
@@ -524,8 +518,9 @@ def calendar(monitor_id: int) -> Widget.Window:
         monitor=monitor_id,
         exclusivity="normal",
         anchor=["top", "right"],
-        margin_top=GAPS_OUT - BORDER_THICKNESS,
-        margin_right=GAPS_OUT + BORDER_THICKNESS,
+        margin_top=wm.GAP_WIDTH,
+        # NOTE: This one needs to be different to line up for some reason
+        margin_right=wm.GAP_WIDTH + 2 * wm.BORDER_WIDTH,
         child=Widget.Calendar(),
     )
 
@@ -629,7 +624,7 @@ def media_player(monitor_id: int) -> Widget.Window:
         monitor=monitor_id,
         exclusivity="normal",
         anchor=["top"],
-        margin_top=GAPS_OUT - BORDER_THICKNESS,
+        margin_top=wm.GAP_WIDTH,
         child=Widget.Box(
             setup=lambda self: mpris.connect(
                 "player-added", lambda _, player: self.append(mpris_player(player))
