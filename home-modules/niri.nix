@@ -120,6 +120,10 @@
           curve = "linear";
           duration-ms = 500;
         };
+        window-resize.easing = {
+          curve = "linear";
+          duration-ms = 250;
+        };
         shaders = {
           window-open =
             # glsl
@@ -185,6 +189,29 @@
               // This is the function that you must define.
               vec4 close_color(vec3 coords_geo, vec3 size_geo) {
                   return fall_and_rotate(coords_geo, size_geo);
+              }
+            '';
+          window-resize =
+            # glsl
+            ''
+              // Example: crossfade between previous and next texture, stretched to the
+              // current geometry.
+              vec4 crossfade(vec3 coords_curr_geo, vec3 size_curr_geo) {
+                  // Convert coordinates into the texture space for sampling.
+                  vec3 coords_tex_prev = niri_geo_to_tex_prev * coords_curr_geo;
+                  vec4 color_prev = texture2D(niri_tex_prev, coords_tex_prev.st);
+
+                  // Convert coordinates into the texture space for sampling.
+                  vec3 coords_tex_next = niri_geo_to_tex_next * coords_curr_geo;
+                  vec4 color_next = texture2D(niri_tex_next, coords_tex_next.st);
+
+                  vec4 color = mix(color_prev, color_next, niri_clamped_progress);
+                  return color;
+              }
+
+              // This is the function that you must define.
+              vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
+                  return crossfade(coords_curr_geo, size_curr_geo);
               }
             '';
         };
