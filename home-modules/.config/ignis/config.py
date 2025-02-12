@@ -36,11 +36,13 @@ BAR_SPACING = 10
 WIDGET_SPACING = 5
 ICON_SPACING = 2
 
-# Make sure to match window manager gaps
+# NOTE: Make sure to match window manager gaps
+# NOTE: The margin between the bar and windows is an outer gap for spacing purposes
 # Also account for border thickness for alignment
+# Also, keep decoupled because each window's margins seem to handle borders a bit differently
 BORDER_THICKNESS = 4
-GAPS_IN = 5 + BORDER_THICKNESS
-GAPS_OUT = 16 - BORDER_THICKNESS
+GAPS_IN = 5
+GAPS_OUT = 16
 
 TERMINAL = "handlr launch x-scheme-handler/terminal --"
 
@@ -474,10 +476,10 @@ def bar(monitor_id: int) -> Widget.Window:
         exclusivity="exclusive",
         anchor=["left", "top", "right"],
         # NOTE: bottom margin is different because it looks a bit nicer
-        margin_top=GAPS_OUT,
-        margin_bottom=GAPS_IN,
-        margin_left=GAPS_OUT,
-        margin_right=GAPS_OUT,
+        margin_top=GAPS_OUT - BORDER_THICKNESS,
+        margin_bottom=GAPS_IN + BORDER_THICKNESS,
+        margin_left=GAPS_OUT - BORDER_THICKNESS,
+        margin_right=GAPS_OUT - BORDER_THICKNESS,
         child=Widget.CenterBox(
             start_widget=Widget.Box(
                 css_classes=["left"],
@@ -522,8 +524,8 @@ def calendar(monitor_id: int) -> Widget.Window:
         monitor=monitor_id,
         exclusivity="normal",
         anchor=["top", "right"],
-        margin_top=GAPS_OUT,
-        margin_right=GAPS_OUT,
+        margin_top=GAPS_OUT - BORDER_THICKNESS,
+        margin_right=GAPS_OUT + BORDER_THICKNESS,
         child=Widget.Calendar(),
     )
 
@@ -627,7 +629,7 @@ def media_player(monitor_id: int) -> Widget.Window:
         monitor=monitor_id,
         exclusivity="normal",
         anchor=["top"],
-        margin_top=GAPS_OUT,
+        margin_top=GAPS_OUT - BORDER_THICKNESS,
         child=Widget.Box(
             setup=lambda self: mpris.connect(
                 "player-added", lambda _, player: self.append(mpris_player(player))
