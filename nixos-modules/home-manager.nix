@@ -3,6 +3,7 @@
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "bak";
     users.anomalocaris = {
       imports = [
         ../home-modules
