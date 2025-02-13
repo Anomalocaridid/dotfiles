@@ -137,6 +137,12 @@
       url = "github:glennj/exercism-cli-fish-wrapper";
       flake = false;
     };
+
+    # Shaders for ghostty terminal
+    ghostty-shaders = {
+      url = "github:hackr-sh/ghostty-shaders";
+      flake = false;
+    };
   };
 
   outputs =
