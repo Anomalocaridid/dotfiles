@@ -10,43 +10,6 @@ let
   palette =
     (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
     .${config.catppuccin.flavor}.colors;
-  # Randomly picks a screensaver
-  # Has to be its own script so it can sleep for a bit and give the terminal time to set dimensions
-  pick-screensaver = pkgs.writeShellApplication {
-    name = "pick-screensaver.sh";
-    runtimeInputs = with pkgs; [
-      asciiquarium-transparent
-      cbonsai
-      fastfetch
-      lavat
-      pipes-rs
-      pv
-      sssnake
-      ternimal
-      unimatrix
-      util-linux # provides script
-    ];
-    text = ''
-      # Give terminal a bit of time to properly set dimensions
-      # Needs to be before the declaration of $SCREENSAVERS because some screensaver commands rely on it
-      sleep 0.2
-
-      readonly SCREENSAVERS=(
-        "asciiquarium --transparent"
-        "cbonsai --live --infinite"
-        "lavat -s 10 -c red -k magenta"
-        "pipes-rs"
-        "sssnake --mode=screensaver --speed=20 --try-hard=1"
-        "ternimal width=$(tput cols) height=$(($(tput lines) * 2))"
-        "unimatrix --asynchronous --flashers"
-        # script makes fastfetch think it is outputting to a terminal, which is necessary to preserve colors
-        "while true; do script --quiet --log-out /dev/null  --command fastfetch | pv -qL 200; done"
-      )
-
-      # eval is needed to use shell features in screensaver commands
-      eval "''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}"
-    '';
-  };
 in
 {
   # Needed for weird technical reasons because `home.stateVersion` < 23.05
@@ -77,12 +40,36 @@ in
           runtimeInputs = with pkgs; [
             handlr-regex
             custom.windowtolayer
-            pick-screensaver
+            asciiquarium-transparent
+            cbonsai
+            fastfetch
+            lavat
+            pipes-rs
+            pv
+            sssnake
+            ternimal
+            unimatrix
+            util-linux # provides script
           ];
           text =
             # bash
             ''
-              timeout 60 windowtolayer handlr launch x-scheme-handler/terminal -- -e pick-screensaver.sh
+              readonly SCREENSAVERS=(
+                "asciiquarium --transparent"
+                "cbonsai --live --infinite"
+                "lavat -s 10 -c red -k magenta"
+                "pipes-rs"
+                "sssnake --mode=screensaver --speed=20 --try-hard=1"
+                # ternimal needs the terminal dimensions to be explicitly passed
+                "ternimal width=$(tput cols) height=$(($(tput lines) * 2))"
+                "unimatrix --asynchronous --flashers"
+                # script makes fastfetch think it is outputting to a terminal, which is necessary to preserve colors
+                # pv throttles the data so it looks like it is being typed out
+                "while true; do script --quiet --log-out /dev/null --command fastfetch | pv -qL 200; done"
+              )
+
+              # sleep for a bit so the terminal has time to set its dimensions
+              timeout 60 windowtolayer handlr launch x-scheme-handler/terminal -- -e "sleep 0.2 && ''${SCREENSAVERS[(($RANDOM % ''${#SCREENSAVERS[@]}))]}"
             '';
         }
       );
