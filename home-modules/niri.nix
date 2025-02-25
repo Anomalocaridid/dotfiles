@@ -77,7 +77,7 @@
         {
           command =
             [
-              "${lib.getExe pkgs.custom.windowtolayer}"
+              "${lib.getExe pkgs.windowtolayer}"
             ]
             ++ terminal
             ++ [

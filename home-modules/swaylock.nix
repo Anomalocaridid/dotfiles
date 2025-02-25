@@ -39,7 +39,7 @@ in
           name = "lockman.sh";
           runtimeInputs = with pkgs; [
             handlr-regex
-            custom.windowtolayer
+            windowtolayer
             asciiquarium-transparent
             cbonsai
             fastfetch
