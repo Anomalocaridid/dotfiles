@@ -5,8 +5,6 @@
   ...
 }:
 {
-  # For some reason, keepassxc's browser extension only works on librewolf if the native messaging host is installed for firefox as well
-  home.file.".mozilla/native-messaging-hosts".source = "${pkgs.keepassxc}/lib/mozilla/native-messaging-hosts";
   programs.librewolf =
     let
       inherit (pkgs.nur.repos.rycee) firefox-addons;
