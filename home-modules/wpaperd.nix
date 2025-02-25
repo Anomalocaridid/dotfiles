@@ -4,5 +4,5 @@
   # Stylix.autoenable is set to false
   stylix.targets.wpaperd.enable = true;
 
-  programs.wpaperd.enable = true;
+  services.wpaperd.enable = true;
 }
