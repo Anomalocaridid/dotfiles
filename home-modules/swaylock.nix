@@ -16,7 +16,7 @@ in
   catppuccin.swaylock.enable = true;
   programs.swaylock = {
     enable = true;
-    package = pkgs.custom.swaylock-plugin;
+    package = pkgs.swaylock-plugin;
     settings = {
       indicator-caps-lock = true;
       font = fonts.sansSerif.name;
