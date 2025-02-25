@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -51,6 +52,10 @@
           # width=20 so delta decorations don't wrap around small fzf preview pane
           # also disable side-by-side
           set -g fzf_diff_highlighter DELTA_FEATURES="+" delta --paging=never --width=20
+
+          # TODO: remove when nix-community/home-manager/pull/6045 is merged
+          # Use vivid to set $LS_COLORS
+          set -gx LS_COLORS (${lib.getExe pkgs.vivid} generate catppuccin-${config.catppuccin.flavor})
         '';
       shellAbbrs = {
         # Pipe every command run with --help through bat
