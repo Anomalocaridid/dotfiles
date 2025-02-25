@@ -133,12 +133,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # Fish exercism wrapper
-    exercism-cli-fish-wrapper = {
-      url = "github:glennj/exercism-cli-fish-wrapper";
-      flake = false;
-    };
-
     # Shaders for ghostty terminal
     ghostty-shaders = {
       url = "github:hackr-sh/ghostty-shaders";
