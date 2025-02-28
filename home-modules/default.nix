@@ -20,7 +20,6 @@
     packages = with pkgs; [
       exercism
       itd
-      keepassxc
       killall
       pavucontrol # Graphical audio controller
       qalculate-gtk

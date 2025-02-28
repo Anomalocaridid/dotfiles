@@ -59,12 +59,10 @@
       }
 
       # Non-critical caches and data to persist
-      ".cache/keepassxc" # KeePassXC cache
       ".cache/spotify" # Spotify cache
       ".cache/tealdeer" # Tldr pages, prevents tealdeer redownloading them every time
       ".config/exercism" # Exercism API key
       ".config/GIMP" # GIMP settings
-      ".config/keepassxc" # KeePassXC settings
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
       ".config/spotify" # Spotify user data
