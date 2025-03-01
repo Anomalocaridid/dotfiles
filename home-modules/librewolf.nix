@@ -16,6 +16,15 @@
         addonId = "{76aabc99-c1a8-4c1e-832b-d4f2941d5a7a}";
         meta = { };
       };
+
+      # Generate file for locked settings
+      mkAutoconfigJs =
+        prefs:
+        lib.concatStrings (
+          lib.mapAttrsToList (name: value: ''
+            lockPref("${name}", ${builtins.toJSON value}); 
+          '') prefs
+        );
     in
     {
       enable = true;
@@ -24,33 +33,32 @@
       ];
       package = pkgs.librewolf.override {
         # Set preferences here to ensure they stay set
-        extraPrefs = # javascript
-          ''
-            // Only sync bookmarks and tabs
-            // Some of these are set by default, but they should be locked just in case
-            lockPref("services.sync.engine.bookmarks", true)
-            lockPref("services.sync.engine.tabs", true)
-            lockPref("services.sync.engine.addons", false);
-            lockPref("services.sync.engine.addresses", false);
-            lockPref("services.sync.engine.addresses.available", false);
-            lockPref("services.sync.engine.creditcards", false);
-            lockPref("services.sync.engine.creditcards.available", false);
-            lockPref("services.sync.engine.history", false);
-            lockPref("services.sync.engine.passwords", false);
-            lockPref("services.sync.engine.prefs", false);
-            // Enable sync
-            lockPref("identity.fxaccounts.enabled", true);
-            // Automatically enable installed extensions
-            lockPref("extensions.autoDisableScopes", 0);
-            // Set theme
-            lockPref("extensions.activeThemeID", "${catppuccin-firefox.addonId}");
-            // Use same search engine for private browsing
-            lockPref("browser.search.separatePrivateDefault", false);
-            // Clear history on shutdown
-            // This should be on by default but is not for some reason
-            lockPref("privacy.clearOnShutdown.history", true);
-            lockPref("privacy.clearOnShutdown_v2.historyFormDataAndDownloads", true);
-          '';
+        extraPrefs = mkAutoconfigJs {
+          # Only sync bookmarks and tabs
+          # Some of these are set by default, but they should be locked just in case
+          "services.sync.engine.bookmarks" = true;
+          "services.sync.engine.tabs" = true;
+          "services.sync.engine.addons" = false;
+          "services.sync.engine.addresses" = false;
+          "services.sync.engine.addresses.available" = false;
+          "services.sync.engine.creditcards" = false;
+          "services.sync.engine.creditcards.available" = false;
+          "services.sync.engine.history" = false;
+          "services.sync.engine.passwords" = false;
+          "services.sync.engine.prefs" = false;
+          # Enable sync
+          "identity.fxaccounts.enabled" = true;
+          # Automatically enable installed extensions
+          "extensions.autoDisableScopes" = 0;
+          # Set theme
+          "extensions.activeThemeID" = "${catppuccin-firefox.addonId}";
+          # Use same search engine for private browsing
+          "browser.search.separatePrivateDefault" = false;
+          # Clear history on shutdown
+          # This should be on by default but is not for some reason
+          "privacy.clearOnShutdown.history" = true;
+          "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = true;
+        };
       };
       profiles = {
         # Separate profile to enable WebGL because it allows more fingerprinting
