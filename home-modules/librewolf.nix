@@ -58,6 +58,71 @@
           # This should be on by default but is not for some reason
           "privacy.clearOnShutdown.history" = true;
           "privacy.clearOnShutdown_v2.historyFormDataAndDownloads" = true;
+          # Customize toolbar
+          # NOTE: needs to be set as a string here so it is formatted properly in the config
+          "browser.uiCustomization.state" = builtins.toJSON {
+            placements = {
+              # Overflow dropdown
+              widget-overflow-fixed-list = [ ];
+              # Extensions dropdown
+              unified-extensions-area = [
+                "redirector_einaregilsson_com-browser-action"
+                "_bbb880ce-43c9-47ae-b746-c3e0096c5b76_-browser-action"
+                "_ublacklist-browser-action"
+                "addon_darkreader_org-browser-action"
+                "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
+                "_cb31ec5d-c49a-4e5a-b240-16c767444f62_-browser-action"
+              ];
+              # Toolbar
+              nav-bar = [
+                "back-button"
+                "forward-button"
+                "stop-reload-button"
+                "sidebar-button"
+                "customizableui-special-spring1"
+                "vertical-spacer"
+                "urlbar-container"
+                "customizableui-special-spring2"
+                "screenshot-button"
+                "downloads-button"
+                "fxa-toolbar-menu-button"
+                "ublock0_raymondhill_net-browser-action"
+                "keepassxc-browser_keepassxc_org-browser-action"
+                "unified-extensions-button"
+              ];
+              toolbar-menubar = [
+                "menubar-items"
+              ];
+              TabsToolbar = [
+                "firefox-view-button"
+                "tabbrowser-tabs"
+                "new-tab-button"
+                "alltabs-button"
+              ];
+              vertical-tabs = [ ];
+              PersonalToolbar = [
+                "personal-bookmarks"
+              ];
+            };
+            seen = [
+              "redirector_einaregilsson_com-browser-action"
+              "_bbb880ce-43c9-47ae-b746-c3e0096c5b76_-browser-action"
+              "_ublacklist-browser-action"
+              "addon_darkreader_org-browser-action"
+              "keepassxc-browser_keepassxc_org-browser-action"
+              "ublock0_raymondhill_net-browser-action"
+              "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
+              "_cb31ec5d-c49a-4e5a-b240-16c767444f62_-browser-action"
+              "developer-button"
+            ];
+            dirtyAreaCache = [
+              "unified-extensions-area"
+              "nav-bar"
+              "vertical-tabs"
+            ];
+            currentVersion = 21;
+            newElementCount = 4;
+          };
         };
       };
       profiles = {
