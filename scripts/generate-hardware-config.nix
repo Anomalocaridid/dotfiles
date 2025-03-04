@@ -1,7 +1,15 @@
-{ writeShellApplication, nixos-install-tools, ... }:
+{
+  writeShellApplication,
+  nixos-install-tools,
+  git,
+  ...
+}:
 writeShellApplication {
   name = "generate-hardware-config.sh";
-  runtimeInputs = [ nixos-install-tools ];
+  runtimeInputs = [
+    nixos-install-tools
+    git
+  ];
   text = ''
     # Sanity options for safety
     set -o errtrace \
@@ -20,5 +28,7 @@ writeShellApplication {
     echo "Generating hardware config in $HOST_CONFIG_DIR"
     # Will either leave config untouched or update hardware-configuration.nix and nothing else
     nixos-generate-config --no-filesystems --root "$MOUNT_DIR" --dir "$HOST_CONFIG_DIR"
+    # Do not assume hardware config already existed and added to git repo
+    git -C "$CONFIG_DIR" add "$HOST_CONFIG_DIR/hardware-configuration.nix"
   '';
 }
