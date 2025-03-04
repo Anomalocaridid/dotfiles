@@ -60,5 +60,13 @@
     };
   };
 
-  systemd.user.tmpfiles.rules = [ "L ${config.home.homeDirectory}/nixos - - - - /etc/nixos" ];
+  systemd.user.tmpfiles.rules = [
+    # Create a link to /etc/nixos, where the config is in the home directory
+    "L ${config.home.homeDirectory}/nixos -   -            -     - /etc/nixos"
+    # Ensure SSH keys have proper permissions.
+    # NOTE: persistence permissions only seem to apply upon creating a bind mount
+    # NOTE: Directory and contents need to have permissions set separately or else it gets set to root permissions for some reason
+    "z ${config.home.homeDirectory}/.ssh 0700 ${config.home.username} users - -"
+    "Z ${config.home.homeDirectory}/.ssh/* 0600 ${config.home.username} users - -"
+  ];
 }

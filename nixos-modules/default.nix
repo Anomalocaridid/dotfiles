@@ -110,6 +110,10 @@
   # Tell electron apps to use Wayland
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # Ensure that nixos config has proper permissions
+  # NOTE: persistence permissions only seem to apply upon creating a bind mount
+  systemd.tmpfiles.rules = [ "Z /etc/nixos - anomalocaris users -" ];
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave
