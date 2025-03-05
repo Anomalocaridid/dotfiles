@@ -134,6 +134,7 @@
           extensions.packages = with firefox-addons; [
             canvasblocker # Recommended for enabled WebGL
             keepassxc-browser
+            ublock-origin
           ];
         };
         default = {
@@ -154,6 +155,7 @@
               redirector
               stylus
               ublacklist
+              ublock-origin # NOTE: use policies instead if this needs to be configured
             ];
             settings =
               let
