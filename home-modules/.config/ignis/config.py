@@ -67,7 +67,7 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
 def get_icon_name_from_window(window: None | dict[str, Any]) -> str:
     # Mainly just for active window widget
     # If no window is focused, you just see the desktop
-    if window is None:
+    if window is None or window["app_id"] is None:
         return "desktop"
 
     app_results = applications.search(applications.apps, window["app_id"])
@@ -91,7 +91,7 @@ def workspace_button(
         on_click=lambda _, id=workspace["idx"]: niri.switch_to_workspace(id),
         child=Widget.Box(
             child=[
-                Widget.Label(label=f"{workspace["idx"]}{":" if window_counts else ""}")
+                Widget.Label(label=f"{workspace['idx']}{':' if window_counts else ''}")
             ]
             + [
                 Widget.Box(
@@ -186,7 +186,7 @@ def track_progress(player: MprisPlayer):
     return player.bind_many(
         ["position", "length"],
         transform=lambda position,
-        length: f"{strftime("%M:%S", gmtime(position))} / {strftime("%M:%S", gmtime(length))}",
+        length: f"{strftime('%M:%S', gmtime(position))} / {strftime('%M:%S', gmtime(length))}",
     )
 
 
@@ -286,15 +286,30 @@ def volume() -> Widget.EventBox:
 
 
 def format_bitrate(kbits: int) -> str:
-    magnitude = math.floor(math.log(kbits, 1000))
-    prefix = "K"
-    # Higher magnitudes are too high to ever come up in practice
-    match magnitude:
-        case 1:
-            prefix = "M"
-        case 2:
-            prefix = "G"
-    return f"󰓅 {round(kbits / (1000 * magnitude))} {prefix}bit/s"
+    prefix = ""
+    magnitude = 0
+
+    # NOTE: log undefined for zero
+    if kbits > 0:
+        magnitude = math.floor(math.log(kbits, 1000))
+
+        # Higher magnitudes are too high to ever come up in practice
+        match magnitude:
+            case 0:
+                prefix = "K"
+            case 1:
+                prefix = "M"
+            case 2:
+                prefix = "G"
+            case _:
+                pass
+
+    if magnitude == 0:
+        value = kbits
+    else:
+        value = round(kbits / (1000 * magnitude))
+
+    return f"󰓅 {value} {prefix}bit/s"
 
 
 def connection_name(device: WifiDevice) -> Widget.Box:
