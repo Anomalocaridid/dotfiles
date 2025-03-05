@@ -72,9 +72,6 @@
       spawn-at-startup = [
         { command = [ (lib.getExe pkgs.xwayland-satellite) ]; }
         {
-          command = [ "wpaperd" ];
-        }
-        {
           command =
             [
               "${lib.getExe pkgs.windowtolayer}"
