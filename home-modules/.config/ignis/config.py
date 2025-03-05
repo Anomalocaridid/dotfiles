@@ -406,7 +406,11 @@ def statistics() -> Widget.Box:
             statistic(
                 "temperature",
                 "thermal-monitor",
-                lambda: psutil.sensors_temperatures()["k10temp"][1].current,
+                lambda: [
+                    temp
+                    for temp in psutil.sensors_temperatures()["k10temp"]
+                    if temp.label == "Tctl"
+                ][0].current,
                 "°C",
                 60,
                 75,
