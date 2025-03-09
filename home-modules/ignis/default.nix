@@ -35,6 +35,8 @@ in
         ''
           BORDER_WIDTH = ${borderWidth}
           GAP_WIDTH = ${toString niriSettings.layout.gaps} - BORDER_WIDTH
+          # Assume scrolling both up and down have the same cooldown
+          SCROLL_COOLDOWN_MS = ${toString niriSettings.binds."Mod+WheelScrollUp".cooldown-ms}
         '';
 
       "ignis/wm.scss".text =
@@ -63,7 +65,6 @@ in
       ];
       # NOTE: will error if wayland compositor is not started first
       # NOTE: will also cause dependency issues if after graphical-session.target
-      # TODO: make window-manager-agnostic
       After = "niri.service";
       BindsTo = "graphical-session.target";
     };

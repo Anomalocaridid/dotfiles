@@ -56,8 +56,7 @@ def toggle_window(window: Widget.Window):
     return _inner
 
 
-# NOTE: Match with window manager scroll cooldown
-@Utils.debounce(150)
+@Utils.debounce(wm.SCROLL_COOLDOWN_MS)
 def scroll_workspaces(monitor_name: str, step: int) -> None:
     current = list(
         filter(
