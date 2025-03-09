@@ -1,5 +1,3 @@
-import wm
-
 import json
 import math
 import shutil
@@ -11,9 +9,11 @@ from typing import Any
 
 import psutil  # Not included by default
 import unicodeit  # Not included by default
+import wm  # Custom module with constants from window manager config
 from ignis.app import IgnisApp
 from ignis.services.applications import ApplicationsService
 from ignis.services.audio import AudioService
+from ignis.services.fetch import FetchService
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.services.network import NetworkService, WifiDevice
 from ignis.services.niri import NiriService
@@ -28,6 +28,7 @@ app.apply_css(f"{Utils.get_current_dir()}/style.scss", "user")
 
 applications = ApplicationsService.get_default()
 audio = AudioService.get_default()
+fetch = FetchService.get_default()
 mpris = MprisService.get_default()
 network = NetworkService.get_default()
 niri = NiriService.get_default()
@@ -40,14 +41,17 @@ ICON_SPACING = 2
 
 TERMINAL = "handlr launch x-scheme-handler/terminal --"
 
-# Global variables
-show_calendar = Variable(value=False)
-show_media_info = Variable(value=False)
-
 
 def toggle_variable(var: Variable):
     def _inner(_) -> None:
         var.value = not var.value
+
+    return _inner
+
+
+def toggle_window(window: Widget.Window):
+    def _inner(_) -> None:
+        window.visible = not window.visible
 
     return _inner
 
@@ -190,7 +194,9 @@ def track_progress(player: MprisPlayer):
     )
 
 
-def mpris_title(player: MprisPlayer) -> Widget.EventBox:
+def mpris_title(
+    player: MprisPlayer, media_player_window: Widget.Window
+) -> Widget.EventBox:
     artist_revealer = Widget.Revealer(
         child=Widget.Box(
             spacing=WIDGET_SPACING,
@@ -234,15 +240,111 @@ def mpris_title(player: MprisPlayer) -> Widget.EventBox:
         tooltip_text=track_progress(player),
         on_hover=lambda _: artist_revealer.set_reveal_child(True),
         on_hover_lost=lambda _: artist_revealer.set_reveal_child(False),
-        on_click=toggle_variable(show_media_info),
+        on_click=toggle_window(media_player_window),
     )
 
 
-def media() -> Widget.Box:
+def mpris_player(player: MprisPlayer) -> Widget.Box:
+    return Widget.Box(
+        spacing=WIDGET_SPACING,
+        setup=lambda self: player.connect(
+            "closed",
+            lambda _: self.unparent(),  # remove widget when player is closed
+        ),
+        css_classes=["player"],
+        child=[
+            Widget.Picture(
+                image=player.bind(
+                    "art_url",
+                    transform=lambda art_url: "applications-multimedia"
+                    if art_url is None
+                    else art_url,
+                ),
+                width=100,
+                height=100,
+            ),
+            Widget.Box(
+                spacing=WIDGET_SPACING,
+                vertical=True,
+                child=[
+                    Widget.Label(
+                        css_classes=["title-4", "accent"], label=player.bind("title")
+                    ),
+                    Widget.Label(label=player.bind("artist")),
+                    Widget.Label(label=player.bind("album")),
+                    Widget.Scale(
+                        max=player.bind("length"),
+                        value=player.bind("position"),
+                        on_change=lambda self: player.set_property(
+                            "position", self.value
+                        ),
+                    ),
+                    Widget.Label(label=track_progress(player)),
+                    Widget.Box(
+                        spacing=WIDGET_SPACING,
+                        visible=player.bind("can_control"),
+                        homogeneous=True,
+                        child=[
+                            mpris_button(
+                                player,
+                                "media-skip-backward",
+                                player.previous,
+                                "can_go_previous",
+                            ),
+                            mpris_button(
+                                player,
+                                player.bind(
+                                    "playback_status",
+                                    transform=lambda playback_status: "media-playback-paused"
+                                    if playback_status == "Playing"
+                                    else "media-playback-playing",
+                                ),
+                                player.play_pause,
+                                "can_pause",
+                            ),
+                            mpris_button(
+                                player,
+                                "media-playback-stopped",
+                                player.stop,
+                            ),
+                            mpris_button(
+                                player,
+                                "media-skip-forward",
+                                player.next,
+                                "can_go_next",
+                            ),
+                        ],
+                    ),
+                ],
+            ),
+        ],
+    )
+
+
+# TODO: give each player its own window
+def media_player(monitor_id: int) -> Widget.Window:
+    return Widget.Window(
+        visible=False,
+        namespace=f"ignis_popup_media_info_{monitor_id}",
+        monitor=monitor_id,
+        exclusivity="normal",
+        anchor=["top"],
+        margin_top=wm.GAP_WIDTH,
+        child=Widget.Box(
+            setup=lambda self: mpris.connect(
+                "player-added", lambda _, player: self.append(mpris_player(player))
+            ),
+        ),
+    )
+
+
+def media(monitor_id: int) -> Widget.Box:
+    media_player_window = media_player(monitor_id)
     return Widget.Box(
         spacing=WIDGET_SPACING,
         setup=lambda self: mpris.connect(
-            "player-added", lambda _, player: self.append(mpris_title(player))
+            "player-added",
+            lambda _, player: self.append(mpris_title(player, media_player_window)),
         ),
     )
 
@@ -356,27 +458,29 @@ def statistic(
     urgent: int = 70,
     critical: int = 90,
 ) -> Widget.Box:
-    css_classes = Variable(value=[])
-    label = Widget.Label()
-
-    def update(_) -> None:
-        latest = data()
-
-        css_classes.value = [css_class]
-
-        if latest >= critical:
-            css_classes.value += ["error"]
-        elif latest >= urgent:
-            css_classes.value += ["warning"]
-
-        label.set_label("{:02d}{}".format(round(latest), unit))
-
-    Utils.Poll(2000, update)
+    poll = Utils.Poll(2000, lambda _: data())
 
     return Widget.Box(
         spacing=ICON_SPACING,
-        css_classes=css_classes.bind("value"),
-        child=[Widget.Icon(image=icon_name), label],
+        css_classes=poll.bind(
+            "output",
+            transform=lambda output: [
+                "error"
+                if output >= critical
+                else "warning"
+                if output >= urgent
+                else css_class,
+            ],
+        ),
+        child=[
+            Widget.Icon(image=icon_name),
+            Widget.Label(
+                label=poll.bind(
+                    "output",
+                    transform=lambda output: "{:02d}{}".format(round(output), unit),
+                )
+            ),
+        ],
     )
 
 
@@ -391,7 +495,7 @@ def statistics() -> Widget.Box:
             statistic(
                 "memory",
                 "utilities-system-monitor",
-                lambda: psutil.virtual_memory().percent,
+                lambda: fetch.mem_used / fetch.mem_total * 100,
             ),
             statistic(
                 "cpu",
@@ -449,7 +553,21 @@ def tray() -> Widget.Box:
     )
 
 
-def clock() -> Widget.EventBox:
+def calendar(monitor_id: int) -> Widget.Window:
+    return Widget.Window(
+        visible=False,
+        namespace=f"ignis_popup_calendar_{monitor_id}",
+        monitor=monitor_id,
+        exclusivity="normal",
+        anchor=["top", "right"],
+        margin_top=wm.GAP_WIDTH,
+        # NOTE: This one needs to be different to line up for some reason
+        margin_right=wm.GAP_WIDTH + 2 * wm.BORDER_WIDTH,
+        child=Widget.Calendar(),
+    )
+
+
+def clock(monitor_id: int) -> Widget.EventBox:
     clock_label = Widget.Label()
     military_time = Variable(value=False)
 
@@ -464,10 +582,13 @@ def clock() -> Widget.EventBox:
     # Instantly update the clock when it changes to military time
     military_time.connect("notify::value", update_clock)
 
+    # Calendar window widget
+    calendar_window = calendar(monitor_id)
+
     return Widget.EventBox(
         spacing=WIDGET_SPACING,
         child=[Widget.Icon(image="accessories-clock"), clock_label],
-        on_click=toggle_variable(show_calendar),
+        on_click=toggle_window(calendar_window),
         on_right_click=toggle_variable(military_time),
         tooltip_text=datetime.now().strftime(" %a, %b %d, %Y"),
     )
@@ -507,7 +628,7 @@ def bar(monitor_id: int) -> Widget.Window:
                 visible=mpris.bind("players", lambda value: len(value) != 0),
                 child=[
                     left_arrow(),
-                    media(),
+                    media(monitor_id),
                     right_arrow(),
                 ],
             ),
@@ -523,24 +644,10 @@ def bar(monitor_id: int) -> Widget.Window:
                     left_arrow(),
                     tray(),
                     left_arrow(),
-                    clock(),
+                    clock(monitor_id),
                 ],
             ),
         ),
-    )
-
-
-def calendar(monitor_id: int) -> Widget.Window:
-    return Widget.Window(
-        visible=show_calendar.bind("value"),
-        namespace=f"ignis_popup_calendar_{monitor_id}",
-        monitor=monitor_id,
-        exclusivity="normal",
-        anchor=["top", "right"],
-        margin_top=wm.GAP_WIDTH,
-        # NOTE: This one needs to be different to line up for some reason
-        margin_right=wm.GAP_WIDTH + 2 * wm.BORDER_WIDTH,
-        child=Widget.Calendar(),
     )
 
 
@@ -558,101 +665,5 @@ def mpris_button(
     )
 
 
-def mpris_player(player: MprisPlayer) -> Widget.Box:
-    return Widget.Box(
-        spacing=WIDGET_SPACING,
-        setup=lambda self: player.connect(
-            "closed",
-            lambda _: self.unparent(),  # remove widget when player is closed
-        ),
-        css_classes=["player"],
-        child=[
-            Widget.Picture(
-                image=player.bind(
-                    "art_url",
-                    transform=lambda art_url: "applications-multimedia"
-                    if art_url is None
-                    else art_url,
-                ),
-                width=100,
-                height=100,
-            ),
-            Widget.Box(
-                spacing=WIDGET_SPACING,
-                vertical=True,
-                child=[
-                    Widget.Label(
-                        css_classes=["title-4", "accent"], label=player.bind("title")
-                    ),
-                    Widget.Label(label=player.bind("artist")),
-                    Widget.Label(label=player.bind("album")),
-                    Widget.Scale(
-                        max=player.bind("length"),
-                        value=player.bind("position"),
-                        on_change=lambda self: player.set_property(
-                            "position", self.value
-                        ),
-                    ),
-                    Widget.Label(label=track_progress(player)),
-                    Widget.Box(
-                        spacing=WIDGET_SPACING,
-                        visible=player.bind("can_control"),
-                        homogeneous=True,
-                        child=[
-                            mpris_button(
-                                player,
-                                "media-skip-backward",
-                                player.previous,
-                                "can_go_previous",
-                            ),
-                            mpris_button(
-                                player,
-                                player.bind(
-                                    "playback_status",
-                                    transform=lambda playback_status: "media-playback-paused"
-                                    if playback_status == "Playing"
-                                    else "media-playback-playing",
-                                ),
-                                player.play_pause,
-                                "can_pause",
-                            ),
-                            mpris_button(
-                                player,
-                                "media-playback-stopped",
-                                player.stop,
-                            ),
-                            mpris_button(
-                                player,
-                                "media-skip-forward",
-                                player.next,
-                                "can_go_next",
-                            ),
-                        ],
-                    ),
-                ],
-            ),
-        ],
-    )
-
-
-# TODO: give each player its own window
-def media_player(monitor_id: int) -> Widget.Window:
-    return Widget.Window(
-        visible=show_media_info.bind("value"),
-        namespace=f"ignis_popup_media_info_{monitor_id}",
-        monitor=monitor_id,
-        exclusivity="normal",
-        anchor=["top"],
-        margin_top=wm.GAP_WIDTH,
-        child=Widget.Box(
-            setup=lambda self: mpris.connect(
-                "player-added", lambda _, player: self.append(mpris_player(player))
-            ),
-        ),
-    )
-
-
 for i in range(Utils.get_n_monitors()):
     bar(i)
-    calendar(i)
-    media_player(i)
