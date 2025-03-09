@@ -49,7 +49,7 @@ in
           }
         '';
       ignis = {
-        source = ./.config/ignis;
+        source = ./config/ignis;
         recursive = true;
       };
     };
