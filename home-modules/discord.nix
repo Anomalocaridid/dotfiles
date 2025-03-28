@@ -1,18 +1,34 @@
-{ config, ... }:
+{ config, lib, ... }:
 {
   programs.nixcord = {
     enable = true;
     discord.enable = false;
     vesktop = {
       enable = true;
-      settings = {
-        discordBranch = "stable";
-        staticTitle = true;
-        splashTheming = true;
-        minimizeToTray = true;
-        clickTrayToShowHide = true;
-        arRPC = true;
-      };
+      settings =
+        let
+          palette =
+            (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+            .${config.catppuccin.flavor}.colors;
+          rgb =
+            {
+              r,
+              g,
+              b,
+            }:
+            "rgb(${toString r}, ${toString g}, ${toString b})";
+        in
+        {
+          discordBranch = "stable";
+          staticTitle = true;
+          splashTheming = true;
+          splashColor = rgb palette.text.rgb;
+          splashBackground = rgb palette.base.rgb;
+          enableSplashScreen = false;
+          minimizeToTray = true;
+          clickTrayToShowHide = true;
+          arRPC = true;
+        };
       state = {
         firstLaunch = false;
       };
