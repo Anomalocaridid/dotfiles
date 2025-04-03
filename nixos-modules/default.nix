@@ -105,6 +105,8 @@
     printing.enable = true;
     # Required for udiskie
     udisks2.enable = true;
+    # Required for ignis
+    gvfs.enable = true;
   };
 
   # Tell electron apps to use Wayland

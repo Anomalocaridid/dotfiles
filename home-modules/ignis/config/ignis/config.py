@@ -1,4 +1,4 @@
-import json
+import asyncio
 import math
 import shutil
 from collections import Counter, defaultdict
@@ -16,7 +16,7 @@ from ignis.services.audio import AudioService
 from ignis.services.fetch import FetchService
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.services.network import NetworkService, WifiDevice
-from ignis.services.niri import NiriService
+from ignis.services.niri import NiriService, NiriWindow, NiriWorkspace
 from ignis.services.system_tray import SystemTrayItem, SystemTrayService
 from ignis.utils import Utils
 from ignis.variable import Variable
@@ -59,48 +59,27 @@ def toggle_window(window: Widget.Window):
 @Utils.debounce(wm.SCROLL_COOLDOWN_MS)
 def scroll_workspaces(monitor_name: str, step: int) -> None:
     current = list(
-        filter(
-            lambda w: w["is_active"] and w["output"] == monitor_name, niri.workspaces
-        )
-    )[0]["idx"]
+        filter(lambda w: w.is_active and w.output == monitor_name, niri.workspaces)
+    )[0].idx
     niri.switch_to_workspace(min(max(current + step, 0), 10))
-
-
-# TODO: Improve app icon name detection?
-def get_icon_name_from_window(window: None | dict[str, Any]) -> str:
-    # Mainly just for active window widget
-    # If no window is focused, you just see the desktop
-    if window is None or window["app_id"] is None:
-        return "desktop"
-
-    app_results = applications.search(applications.apps, window["app_id"])
-
-    # If there is a desktop file for the open application, return the icon name
-    if app_results:
-        return app_results[0].icon
-    else:
-        # Otherwise, fall back to window's app id
-        return window["app_id"]
 
 
 # TODO: Make focused app show up first
 # TODO: Preserve ordering of windows (might not be possible yet with Niri IPC?)
 def workspace_button(
-    workspace: dict[str, Any],
+    workspace: NiriWorkspace,
     window_counts: dict[dict[str, Any], int],
 ) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["flat"],
-        on_click=lambda _, id=workspace["idx"]: niri.switch_to_workspace(id),
+        on_click=lambda _, id=workspace.idx: niri.switch_to_workspace(id),
         child=Widget.Box(
-            child=[
-                Widget.Label(label=f"{workspace['idx']}{':' if window_counts else ''}")
-            ]
+            child=[Widget.Label(label=f"{workspace.idx}{':' if window_counts else ''}")]
             + [
                 Widget.Box(
                     child=[
                         Widget.Icon(
-                            image=get_icon_name_from_window(window),
+                            image=Utils.get_app_icon_name(window["app_id"]),
                             css_classes=["focused"] if window["is_focused"] else [],
                         ),
                         # Show count in superscript
@@ -114,35 +93,33 @@ def workspace_button(
         ),
     )
 
-    if workspace["is_active"]:
+    if workspace.is_active:
         widget.add_css_class("active")
 
     return widget
 
 
-def window_to_workspace_idx(
-    workspaces: list[dict[str, Any]], window: dict[str, Any]
-) -> int:
-    return list(filter(lambda ws: ws["id"] == window["workspace_id"], workspaces))[0][
-        "idx"
-    ]
+def window_to_workspace_idx(workspaces: list[NiriWorkspace], window: NiriWindow) -> int:
+    return list(filter(lambda ws: ws.id == window.workspace_id, workspaces))[0].idx
 
 
-def format_workspaces(workspaces: list[dict[str, Any]]) -> list[Widget.Button]:
-    # Get the entire data here and pass the relevant part along for each workspace
-    # so only one ipc request is made rather than once for every workspace
-    response: dict[str, Any] = json.loads(niri.send_command('"Windows"\n'))
-
+def format_workspaces(
+    workspaces: list[NiriWorkspace], windows: list[NiriWindow]
+) -> list[Widget.Button]:
     windows_by_workspace = defaultdict(Counter)
-    if "Ok" in response:
-        for window in response["Ok"]["Windows"]:
-            # Only keep relevant information so that using Counter works as intended
-            windows_by_workspace[window_to_workspace_idx(workspaces, window)].update(
-                # Use an immutabledict so it can be hashed and counted
-                # Also wrap it in a list so the dict as a whole is counted, not its keys
-                [immutabledict({key: window[key] for key in ("app_id", "is_focused")})]
-            )
-    return [workspace_button(ws, windows_by_workspace[ws["idx"]]) for ws in workspaces]
+
+    for window in windows:
+        # Only keep relevant information so that using Counter works as intended
+        windows_by_workspace[window_to_workspace_idx(workspaces, window)].update(
+            # Use an immutabledict so it can be hashed and counted
+            # Also wrap it in a list so the dict as a whole is counted, not its keys
+            [
+                immutabledict(
+                    {key: getattr(window, key) for key in ("app_id", "is_focused")}
+                )
+            ]
+        )
+    return [workspace_button(ws, windows_by_workspace[ws.idx]) for ws in workspaces]
 
 
 def workspaces(monitor_name: str) -> Widget.EventBox:
@@ -152,8 +129,10 @@ def workspaces(monitor_name: str) -> Widget.EventBox:
         spacing=WIDGET_SPACING,
         # Bind to active_window also to ensure focused window is up to date
         child=niri.bind_many(
-            ["workspaces", "active_window"],
-            transform=lambda workspaces, _: format_workspaces(workspaces),
+            ["workspaces", "windows"],
+            transform=lambda workspaces, windows: format_workspaces(
+                workspaces, windows
+            ),
         ),
     )
 
@@ -161,19 +140,22 @@ def workspaces(monitor_name: str) -> Widget.EventBox:
 def active_window(monitor_name: str) -> Widget.Box:
     title = niri.bind(
         "active_window",
-        transform=lambda active_window: ""
-        if active_window is None
-        else active_window["title"],
+        transform=lambda active_window: active_window.title,
     )
 
     return Widget.Box(
         spacing=WIDGET_SPACING,
         visible=niri.bind(
-            "active_output", lambda active_output: active_output["name"] == monitor_name
+            "active_output", lambda active_output: active_output == monitor_name
         ),
         child=[
             Widget.Icon(
-                image=niri.bind("active_window", transform=get_icon_name_from_window)
+                image=niri.bind(
+                    "active_window",
+                    transform=lambda active_window: Utils.get_app_icon_name(
+                        active_window.app_id
+                    ),
+                )
             ),
             Widget.Label(
                 ellipsize="end",
@@ -382,7 +364,9 @@ def volume() -> Widget.EventBox:
         ],
         on_hover=lambda _: slider_revealer.set_reveal_child(True),
         on_hover_lost=lambda _: slider_revealer.set_reveal_child(False),
-        on_right_click=lambda _: Utils.exec_sh_async("pavucontrol"),
+        on_right_click=lambda _: asyncio.create_task(
+            Utils.exec_sh_async("pavucontrol")
+        ),
     )
 
 
@@ -439,12 +423,12 @@ def connections() -> Widget.EventBox:
             Widget.Icon(image=network.vpn.bind("icon_name", transform=desymbolize)),
         ],
         on_right_click=lambda _: [
-            c.toggle_connection() for c in network.vpn.connections
+            asyncio.create_task(c.toggle_connection()) for c in network.vpn.connections
         ],
         on_hover=lambda _: ssid_revealer.set_reveal_child(True),
         on_hover_lost=lambda _: ssid_revealer.set_reveal_child(False),
-        on_click=lambda _: Utils.exec_sh_async(
-            f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui"
+        on_click=lambda _: asyncio.create_task(
+            Utils.exec_sh_async(f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui")
         ),
     )
 
@@ -509,11 +493,7 @@ def statistics() -> Widget.Box:
             statistic(
                 "temperature",
                 "thermal-monitor",
-                lambda: [
-                    temp
-                    for temp in psutil.sensors_temperatures()["k10temp"]
-                    if temp.label == "Tctl"
-                ][0].current,
+                lambda: fetch.cpu_temp,
                 "°C",
                 60,
                 75,
@@ -560,8 +540,7 @@ def calendar(monitor_id: int) -> Widget.Window:
         exclusivity="normal",
         anchor=["top", "right"],
         margin_top=wm.GAP_WIDTH,
-        # NOTE: This one needs to be different to line up for some reason
-        margin_right=wm.GAP_WIDTH + 2 * wm.BORDER_WIDTH,
+        margin_right=wm.GAP_WIDTH,
         child=Widget.Calendar(),
     )
 
@@ -608,9 +587,8 @@ def bar(monitor_id: int) -> Widget.Window:
         monitor=monitor_id,
         exclusivity="exclusive",
         anchor=["left", "top", "right"],
+        # NOTE: no margin_bottom because windows already have spacing
         margin_top=wm.GAP_WIDTH,
-        # This one is different because it looks a bit nicer
-        margin_bottom=wm.GAP_WIDTH - wm.BORDER_WIDTH,
         margin_left=wm.GAP_WIDTH,
         margin_right=wm.GAP_WIDTH,
         child=Widget.CenterBox(
