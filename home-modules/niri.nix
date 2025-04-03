@@ -335,7 +335,8 @@
           "Mod+Shift+V".action = actions.switch-focus-between-floating-and-tiling;
 
           "Print".action = actions.screenshot;
-          "Ctrl+Print".action = actions.screenshot-screen;
+          # TODO: wait for upstream fix, see sodiboo/niri-flake#922
+          "Ctrl+Print".action.screenshot-screen = [ ];
           "Alt+Print".action = actions.screenshot-window;
 
           # The quit action will show a confirmation dialog to avoid accidental exits.
