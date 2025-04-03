@@ -87,6 +87,7 @@
       in
       {
         name = "Breeze_Hacked";
+        size = 24;
         package = pkgs.breeze-hacked-cursor-theme.override {
           accentColor = "${palette.${config.catppuccin.accent}.hex}";
           baseColor = "${palette.base.hex}";
