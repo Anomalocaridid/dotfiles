@@ -784,16 +784,15 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1739901731,
-        "narHash": "sha256-+cBmgE5LGFNYm6S3Id70a6Uxhqq9wIRkek6q8YKvVtI=",
-        "owner": "Anomalocaridid",
+        "lastModified": 1742573336,
+        "narHash": "sha256-7cVQTyMA9V1YqqVXwaxmrsUKE8LjnBdIj6fvpKKuAxo=",
+        "owner": "lordkekz",
         "repo": "nix-yazi-plugins",
-        "rev": "cbd1c16e1c8495e94ea96bbd7745b925e0d465b2",
+        "rev": "76e0104f5bfc2517d86cae0332ede54c6d5ba4e8",
         "type": "github"
       },
       "original": {
-        "owner": "Anomalocaridid",
-        "ref": "extraconfig-option",
+        "owner": "lordkekz",
         "repo": "nix-yazi-plugins",
         "type": "github"
       }

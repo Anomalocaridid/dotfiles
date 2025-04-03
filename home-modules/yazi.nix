@@ -9,7 +9,7 @@
           text:
           pkgs.writeTextFile rec {
             inherit text;
-            name = "init.lua";
+            name = "main.lua";
             destination = "/${name}";
           };
       in
@@ -116,12 +116,12 @@
           }
           {
             on = [ "k" ];
-            run = "plugin arrow --args=-1";
+            run = "plugin arrow -1";
             desc = "Move cursor up (wrapping)";
           }
           {
             on = [ "j" ];
-            run = "plugin arrow --args=1";
+            run = "plugin arrow 1";
             desc = "Move cursor down (wrapping)";
           }
         ]

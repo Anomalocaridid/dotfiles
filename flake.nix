@@ -128,8 +128,7 @@
 
     # Yazi plugins
     nix-yazi-plugins = {
-      # url = "github:lordkekz/nix-yazi-plugins";
-      url = "github:Anomalocaridid/nix-yazi-plugins/extraconfig-option";
+      url = "github:lordkekz/nix-yazi-plugins";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
