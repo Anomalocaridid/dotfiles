@@ -10,7 +10,8 @@
     lutris
     packwiz # minecraft modpack creator
     prismlauncher
-    pysolfc
+    # TODO: uncomment when package no longer uses python311Packages rather than individual packages
+    # pysolfc
     runelite
   ];
 
