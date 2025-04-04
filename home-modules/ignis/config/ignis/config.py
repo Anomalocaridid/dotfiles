@@ -5,7 +5,6 @@ from collections import Counter, defaultdict
 from collections.abc import Callable
 from datetime import datetime
 from time import gmtime, strftime
-from typing import Any
 
 import psutil  # Not included by default
 import unicodeit  # Not included by default
@@ -21,7 +20,6 @@ from ignis.services.system_tray import SystemTrayItem, SystemTrayService
 from ignis.utils import Utils
 from ignis.variable import Variable
 from ignis.widgets import Widget
-from immutabledict import immutabledict  # Not included by default
 
 app = IgnisApp.get_default()
 app.apply_css(f"{Utils.get_current_dir()}/style.scss", "user")
@@ -64,11 +62,11 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
     niri.switch_to_workspace(min(max(current + step, 0), 10))
 
 
-# TODO: Make focused app show up first
-# TODO: Preserve ordering of windows (might not be possible yet with Niri IPC?)
+# TODO: Preserve ordering of windows after that information is exposed in Niri IPC
+# see: https://github.com/YaLTeR/niri/pull/1265
 def workspace_button(
     workspace: NiriWorkspace,
-    window_counts: dict[dict[str, Any], int],
+    window_counts: dict[tuple[str, bool], int],
 ) -> Widget.Button:
     widget = Widget.Button(
         css_classes=["flat"],
@@ -79,8 +77,8 @@ def workspace_button(
                 Widget.Box(
                     child=[
                         Widget.Icon(
-                            image=Utils.get_app_icon_name(window["app_id"]),
-                            css_classes=["focused"] if window["is_focused"] else [],
+                            image=Utils.get_app_icon_name(app_id),
+                            css_classes=["focused"] if is_focused else [],
                         ),
                         # Show count in superscript
                         Widget.Label(label=unicodeit.replace(f"^{{{count}}}"))
@@ -88,7 +86,7 @@ def workspace_button(
                         else None,
                     ]
                 )
-                for window, count in window_counts.items()
+                for (app_id, is_focused), count in window_counts.items()
             ]
         ),
     )
@@ -109,15 +107,9 @@ def format_workspaces(
     windows_by_workspace = defaultdict(Counter)
 
     for window in windows:
-        # Only keep relevant information so that using Counter works as intended
+        # Only keep relevant information so that using windows are not counted as unique
         windows_by_workspace[window_to_workspace_idx(workspaces, window)].update(
-            # Use an immutabledict so it can be hashed and counted
-            # Also wrap it in a list so the dict as a whole is counted, not its keys
-            [
-                immutabledict(
-                    {key: getattr(window, key) for key in ("app_id", "is_focused")}
-                )
-            ]
+            [(window.app_id, window.is_focused)]
         )
     return [workspace_button(ws, windows_by_workspace[ws.idx]) for ws in workspaces]
 
