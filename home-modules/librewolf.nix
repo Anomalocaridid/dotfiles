@@ -243,7 +243,7 @@
                       };
                     }
                   ];
-                  iconUpdateURL = "https://search.nixos.org/favicon.png";
+                  icon = "https://search.nixos.org/favicon.png";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = [ "@np" ];
                 };
@@ -257,7 +257,7 @@
                       };
                     }
                   ];
-                  iconUpdateURL = "https://wiki.nixos.org/favicon.ico";
+                  icon = "https://wiki.nixos.org/favicon.ico";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = [ "@nw" ];
                 };
@@ -272,17 +272,17 @@
                       };
                     }
                   ];
-                  iconUpdateURL = "https://home-manager-options.extranix.com/images/favicon.png";
+                  icon = "https://home-manager-options.extranix.com/images/favicon.png";
                   updateInterval = 24 * 60 * 60 * 1000; # every day
                   definedAliases = [ "@nhm" ];
                 };
 
-                "Bing".metaData.hidden = true;
-                "Google".metaData.hidden = true;
-                "Wikipedia".metaData.alias = "@w";
+                bing.metaData.hidden = true;
+                google.metaData.hidden = true;
+                wikipedia.metaData.alias = "@w";
               };
               force = true;
-              default = "DuckDuckGo";
+              default = "ddg";
             };
         };
       };
