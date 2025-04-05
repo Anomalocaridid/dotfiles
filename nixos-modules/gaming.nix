@@ -1,5 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
+  imports = [ inputs.nix-gaming.nixosModules.pipewireLowLatency ];
+
   programs = {
     steam = {
       enable = true;

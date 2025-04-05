@@ -16,13 +16,6 @@
     ++ [
       inputs.lix-module.nixosModules.default
       inputs.disko.nixosModules.disko
-      inputs.home-manager.nixosModules.home-manager
-      inputs.impermanence.nixosModules.impermanence
-      inputs.niri.nixosModules.niri
-      inputs.stylix.nixosModules.stylix
-      inputs.catppuccin.nixosModules.catppuccin
-      inputs.nix-gaming.nixosModules.pipewireLowLatency
-      inputs.spicetify-nix.nixosModules.spicetify
     ];
 
   nix = {

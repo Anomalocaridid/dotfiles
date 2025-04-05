@@ -1,10 +1,14 @@
 {
-  pkgs,
   config,
+  pkgs,
   osConfig,
+  inputs,
   ...
 }:
 {
+
+  imports = [ inputs.catppuccin.homeModules.catppuccin ];
+
   # Does not use global enable option for some reason
   catppuccin.gtk.enable = true;
 

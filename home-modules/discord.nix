@@ -1,5 +1,12 @@
-{ config, lib, ... }:
 {
+  config,
+  lib,
+  inputs,
+  ...
+}:
+{
+  imports = [ inputs.nixcord.homeManagerModules.nixcord ];
+
   programs.nixcord = {
     enable = true;
     discord.enable = false;
