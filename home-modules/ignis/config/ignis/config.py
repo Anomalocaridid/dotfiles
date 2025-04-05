@@ -5,6 +5,7 @@ from collections import Counter, defaultdict
 from collections.abc import Callable
 from datetime import datetime
 from time import gmtime, strftime
+from typing import Any, Awaitable
 
 import psutil  # Not included by default
 import unicodeit  # Not included by default
@@ -217,6 +218,20 @@ def mpris_title(
     )
 
 
+def mpris_button(
+    player: MprisPlayer,
+    icon_name: str,
+    on_click: Callable[[], asyncio.Task[None]],
+    visible_when: str = "can_control",
+) -> Widget.Button:
+    return Widget.Button(
+        css_classes=["circular"],
+        visible=player.bind(visible_when),
+        child=Widget.Icon(pixel_size=32, image=icon_name),
+        on_click=lambda _: on_click(),
+    )
+
+
 def mpris_player(player: MprisPlayer) -> Widget.Box:
     return Widget.Box(
         spacing=WIDGET_SPACING,
@@ -248,8 +263,8 @@ def mpris_player(player: MprisPlayer) -> Widget.Box:
                     Widget.Scale(
                         max=player.bind("length"),
                         value=player.bind("position"),
-                        on_change=lambda self: player.set_property(
-                            "position", self.value
+                        on_change=lambda self: asyncio.create_task(
+                            player.set_position_async(self.value)
                         ),
                     ),
                     Widget.Label(label=track_progress(player)),
@@ -261,7 +276,7 @@ def mpris_player(player: MprisPlayer) -> Widget.Box:
                             mpris_button(
                                 player,
                                 "media-skip-backward",
-                                player.previous,
+                                lambda: asyncio.create_task(player.previous_async()),
                                 "can_go_previous",
                             ),
                             mpris_button(
@@ -272,18 +287,18 @@ def mpris_player(player: MprisPlayer) -> Widget.Box:
                                     if playback_status == "Playing"
                                     else "media-playback-playing",
                                 ),
-                                player.play_pause,
+                                lambda: asyncio.create_task(player.play_pause_async()),
                                 "can_pause",
                             ),
                             mpris_button(
                                 player,
                                 "media-playback-stopped",
-                                player.stop,
+                                lambda: asyncio.create_task(player.stop_async()),
                             ),
                             mpris_button(
                                 player,
                                 "media-skip-forward",
-                                player.next,
+                                lambda: asyncio.create_task(player.next_async()),
                                 "can_go_next",
                             ),
                         ],
@@ -617,20 +632,6 @@ def bar(monitor_id: int) -> Widget.Window:
                 ],
             ),
         ),
-    )
-
-
-def mpris_button(
-    player: MprisPlayer,
-    icon_name: str,
-    on_click: Callable[[], None],
-    visible_when: str = "can_control",
-) -> Widget.Button:
-    return Widget.Button(
-        css_classes=["circular"],
-        visible=player.bind(visible_when),
-        child=Widget.Icon(pixel_size=32, image=icon_name),
-        on_click=lambda _: on_click(),
     )
 
 
