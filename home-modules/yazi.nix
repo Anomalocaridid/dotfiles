@@ -1,4 +1,5 @@
 {
+  config,
   lib,
   pkgs,
   inputs,
@@ -27,6 +28,9 @@
         "ouch" = pkgs.yaziPlugins.ouch;
         # UI enhancements
         "smart-enter" = pkgs.yaziPlugins.smart-filter.src + /smart-enter.yazi;
+        "yatline" = inputs."yatline.yazi";
+        "yatline-catppuccin" = inputs."yatline-catppuccin.yazi";
+        "yatline-githead" = inputs."yatline-githead.yazi";
         # Snippets
         "arrow" =
           writePlugin
@@ -148,7 +152,6 @@
     yaziPlugins = {
       enable = true;
       plugins = {
-        starship.enable = true;
         full-border.enable = true;
         relative-motions = {
           enable = true;
@@ -158,36 +161,152 @@
         smart-filter.enable = true;
       };
       extraConfig =
+        let
+          luaFormat = lib.generators.toLua { };
+        in
         #lua
         ''
-          function Status:name()
-            local h = cx.active.current.hovered
-            if not h then
-              return ui.Span("")
-            end
+          local yatline_theme = require("yatline-catppuccin"):setup("${config.catppuccin.flavor}")
 
-            -- Modified to show symlink in status bar
-            local linked = ""
-            if h.link_to ~= nil then
-              linked = " -> " .. tostring(h.link_to)
-            end
-            return ui.Span(" " .. h.name .. linked)
-          end
+          require("yatline"):setup(${
+            luaFormat {
+              theme = lib.generators.mkLuaInline "yatline_theme";
+              show_background = false;
 
-          -- Add user/group of files in status bar
-          Status:children_add(function()
-            local h = cx.active.current.hovered
-            if h == nil or ya.target_family() ~= "unix" then
-              return ui.Line {}
-            end
+              header_line = {
+                left = {
+                  section_a = [
+                    {
+                      type = "line";
+                      custom = false;
+                      name = "tabs";
+                      params = [ "left" ];
+                    }
+                  ];
+                  section_b = [ ];
+                  section_c = [ ];
+                };
+                right = {
+                  section_a = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "date";
+                      params = [ " %a, %b %d, %Y" ];
+                    }
+                  ];
+                  section_b = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "date";
+                      params = [ " %X" ];
+                    }
+                  ];
+                  section_c = [
+                    {
+                      type = "coloreds";
+                      custom = false;
+                      name = "task_states";
+                    }
+                    {
+                      type = "coloreds";
+                      custom = false;
+                      name = "task_workload";
+                    }
+                  ];
+                };
+              };
 
-            return ui.Line {
-              ui.Span(ya.user_name(h.cha.uid) or tostring(h.cha.uid)):fg("magenta"),
-              ui.Span(":"),
-              ui.Span(ya.group_name(h.cha.gid) or tostring(h.cha.gid)):fg("magenta"),
-              ui.Span(" "),
+              status_line = {
+                left = {
+                  section_a = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "tab_mode";
+                    }
+                  ];
+                  section_b = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "hovered_size";
+                    }
+                  ];
+                  section_c = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "hovered_path";
+                    }
+                    {
+                      type = "coloreds";
+                      custom = false;
+                      name = "githead";
+                    }
+                    {
+                      type = "coloreds";
+                      custom = false;
+                      name = "count";
+                      # Add filter count
+                      params = [ true ];
+                    }
+                  ];
+                };
+                right = {
+                  section_a = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "cursor_position";
+                    }
+                  ];
+                  section_b = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "cursor_percentage";
+                    }
+                  ];
+                  section_c = [
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "hovered_file_extension";
+                      params = [ true ];
+                    }
+                    {
+                      type = "coloreds";
+                      custom = false;
+                      name = "permissions";
+                    }
+                    {
+                      type = "string";
+                      custom = false;
+                      name = "hovered_ownership";
+                    }
+                  ];
+                };
+              };
             }
-          end, 500, Status.RIGHT)
+          })
+
+          require("yatline-githead"):setup(${
+            luaFormat {
+              theme = lib.generators.mkLuaInline "yatline_theme";
+
+              branch_symbol = "";
+              commit_symbol = "󰜘";
+              behind_symbol = "";
+              ahead_symbol = "";
+              stashes_symbol = "󱉙";
+              state_symbol = "";
+              staged_symbol = "󰩍";
+              unstaged_symbol = "";
+              untracked_symbol = "";
+            }
+          })
         '';
     };
   };

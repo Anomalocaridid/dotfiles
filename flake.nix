@@ -132,6 +132,21 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    "yatline.yazi" = {
+      url = "github:imsi32/yatline.yazi";
+      flake = false;
+    };
+
+    "yatline-githead.yazi" = {
+      url = "github:imsi32/yatline-githead.yazi";
+      flake = false;
+    };
+
+    "yatline-catppuccin.yazi" = {
+      url = "github:imsi32/yatline-catppuccin.yazi";
+      flake = false;
+    };
+
     # Shaders for ghostty terminal
     ghostty-shaders = {
       url = "github:hackr-sh/ghostty-shaders";

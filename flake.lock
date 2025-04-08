@@ -1100,7 +1100,10 @@
         "spicetify-nix": "spicetify-nix",
         "stylix": "stylix",
         "swi-lsp-server": "swi-lsp-server",
-        "ttf-to-tty": "ttf-to-tty"
+        "ttf-to-tty": "ttf-to-tty",
+        "yatline-catppuccin.yazi": "yatline-catppuccin.yazi",
+        "yatline-githead.yazi": "yatline-githead.yazi",
+        "yatline.yazi": "yatline.yazi"
       }
     },
     "spicetify-nix": {
@@ -1463,6 +1466,54 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
+        "type": "github"
+      }
+    },
+    "yatline-catppuccin.yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741193477,
+        "narHash": "sha256-Wz53zjwFyflnxCIMjAv+nzcgDriJwVYBX81pFXJUzc4=",
+        "owner": "imsi32",
+        "repo": "yatline-catppuccin.yazi",
+        "rev": "8cc4773ecab8ee8995485d53897e1c46991a7fea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "imsi32",
+        "repo": "yatline-catppuccin.yazi",
+        "type": "github"
+      }
+    },
+    "yatline-githead.yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741195944,
+        "narHash": "sha256-OmaDmQzn3dCIA9EoSCZOiRQFJu/b6txc1tl/a/TWtKc=",
+        "owner": "imsi32",
+        "repo": "yatline-githead.yazi",
+        "rev": "3b0eb7c8e5da1639dbd87b6c63b95b33d08c1b53",
+        "type": "github"
+      },
+      "original": {
+        "owner": "imsi32",
+        "repo": "yatline-githead.yazi",
+        "type": "github"
+      }
+    },
+    "yatline.yazi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1741193316,
+        "narHash": "sha256-JiUik4umi+ujsJmHliUbLsIj7ZTKayrWAAM8HmRdjwk=",
+        "owner": "imsi32",
+        "repo": "yatline.yazi",
+        "rev": "6b0fc1ef5eca034460b4c69cb87c424103227a2e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "imsi32",
+        "repo": "yatline.yazi",
         "type": "github"
       }
     }
