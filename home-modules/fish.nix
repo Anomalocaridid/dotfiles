@@ -11,7 +11,9 @@
       functions = {
         fish_greeting =
           let
-            lolcat = lib.getExe pkgs.lolcat;
+            # TODO: Uncomment after nixpkgs#400243 is resolved
+            # lolcat = lib.getExe pkgs.lolcat;
+            lolcat = "${lib.getExe pkgs.lolcat} 2> /dev/null";
           in
           # fish
           ''
