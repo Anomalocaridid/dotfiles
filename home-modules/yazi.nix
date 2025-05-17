@@ -23,11 +23,9 @@
       in
       {
         # Previewers
-        "glow" = pkgs.yaziPlugins.glow;
         "exifaudio" = pkgs.yaziPlugins.exifaudio;
         "ouch" = pkgs.yaziPlugins.ouch;
         # UI enhancements
-        "smart-enter" = pkgs.yaziPlugins.smart-filter.src + /smart-enter.yazi;
         "yatline" = inputs."yatline.yazi";
         "yatline-catppuccin" = inputs."yatline-catppuccin.yazi";
         "yatline-githead" = inputs."yatline-githead.yazi";
@@ -69,10 +67,6 @@
         prepend_previewers =
           [
             {
-              name = "*.md";
-              run = "glow";
-            }
-            {
               mime = "audio/*";
               run = "exifaudio";
             }
@@ -111,11 +105,6 @@
       manager.prepend_keymap =
         [
           {
-            on = [ "l" ];
-            run = "plugin smart-enter";
-            desc = "Enter the child directory, or open the file";
-          }
-          {
             on = [ "p" ];
             run = "plugin smart-paste";
             desc = "Paste into the hovered directory or CWD";
@@ -153,13 +142,20 @@
       enable = true;
       plugins = {
         full-border.enable = true;
+        glow.enable = true;
         relative-motions = {
           enable = true;
           show_numbers = "relative_absolute";
           show_motion = true;
         };
+        smart-enter.enable = true;
         smart-filter.enable = true;
       };
+      runtimeDeps = with pkgs; [
+        # Previewers
+        exiftool
+        ouch
+      ];
       extraConfig =
         let
           luaFormat = lib.generators.toLua { };
@@ -310,12 +306,4 @@
         '';
     };
   };
-
-  # Dependencies for plugins
-  home.packages = with pkgs; [
-    # Previewers
-    glow
-    exiftool
-    ouch
-  ];
 }
