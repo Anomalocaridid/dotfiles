@@ -354,7 +354,8 @@
             in
             {
               "Mod+${key}".action = actions.focus-workspace workspace;
-              "Mod+Ctrl+${key}".action = actions.move-column-to-workspace workspace;
+              # TODO: wait for upstream fix, see sodiboo/niri-flake#1018
+              "Mod+Ctrl+${key}".action.move-column-to-workspace = workspace;
             }
           ) workspaces
         );
