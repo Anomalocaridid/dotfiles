@@ -148,7 +148,7 @@
             force = true;
             packages = with firefox-addons; [
               catppuccin-firefox
-              catppuccin-gh-file-explorer
+              catppuccin-web-file-icons
               darkreader
               indie-wiki-buddy
               keepassxc-browser # NOTE: needs mutable settings
