@@ -2,21 +2,16 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
-  ignisPackage = pkgs.ignis.overrideAttrs (oldAttrs: {
-    propagatedBuildInputs =
-      (oldAttrs.propagatedBuildInputs or [ ])
-      ++ (with pkgs; [
-        (python312.withPackages (
-          ps: with ps; [
-            psutil
-            unicodeit
-          ]
-        ))
-      ]);
-  });
+  ignisPackage = inputs.ignis.packages.${pkgs.system}.ignis.override {
+    extraPackages = with pkgs.python312Packages; [
+      psutil
+      unicodeit
+    ];
+  };
 in
 {
   home.packages = [

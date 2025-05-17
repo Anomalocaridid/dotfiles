@@ -51,8 +51,6 @@
       (import ../pkgs)
       # Nix user repository
       inputs.nur.overlays.default
-      # Ignis widgets
-      inputs.ignis.overlays.default
       # Yazi plugins
       inputs.nix-yazi-plugins.overlays.default
     ];
