@@ -33,7 +33,10 @@
     # Flake Parts module for defining configs
     ez-configs = {
       url = "github:ehllie/ez-configs";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     # Nix user repository
@@ -74,6 +77,7 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
         nur.follows = "nur";
+        flake-parts.follows = "flake-parts";
       };
     };
 
