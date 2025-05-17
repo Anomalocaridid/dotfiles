@@ -32,7 +32,6 @@
       strawberry
       tree
       tuxpaint
-      ventoy
       wl-clipboard
       yubioath-flutter
     ];
