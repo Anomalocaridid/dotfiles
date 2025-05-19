@@ -18,6 +18,7 @@
         (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
         .${config.catppuccin.flavor}.colors;
       accent = palette.${config.catppuccin.accent}.hex;
+      niriSettings = config.programs.niri.settings;
       workspaces = 10;
     in
     {
@@ -34,38 +35,121 @@
 
         focus-ring.active.gradient = {
           from = accent;
-          to = palette.lavender.hex;
+          to = accent;
           angle = 45;
           relative-to = "workspace-view";
           in' = "oklch longer hue";
         };
 
+        shadow = {
+          enable = true;
+          color = palette.base.hex;
+        };
+
       };
 
-      window-rules = [
-        {
-          # Lets clients without xdg-decoration protocols have transparent backgrounds
-          draw-border-with-background = false;
-          geometry-corner-radius =
-            let
-              radius = 12.0;
-            in
-            {
-              bottom-left = radius;
-              bottom-right = radius;
-              top-left = radius;
-              top-right = radius;
+      window-rules =
+        let
+          niriLayout = niriSettings.layout;
+          outerGap = niriLayout.gaps - niriLayout.border.width;
+          # Move to the corner, do not focus, and give a border;
+          notificationLike =
+            pos: rest:
+            rest
+            // {
+              focus-ring.enable = false;
+              border = {
+                enable = true;
+                inactive.color = accent;
+                active = niriLayout.focus-ring.active;
+              };
+              open-focused = false;
+              default-floating-position = {
+                x = outerGap;
+                y = outerGap;
+                relative-to = pos;
+              };
             };
-          clip-to-geometry = true;
-          # Open clients to take up maximum space by default
-          open-maximized = true;
-        }
+        in
+        [
+          {
+            # Lets clients without xdg-decoration protocols have transparent backgrounds
+            draw-border-with-background = false;
+            geometry-corner-radius =
+              let
+                radius = 12.0;
+              in
+              {
+                bottom-left = radius;
+                bottom-right = radius;
+                top-left = radius;
+                top-right = radius;
+              };
+            clip-to-geometry = true;
+            # Open clients to take up maximum space by default
+            open-maximized = true;
+          }
+          {
+            matches = [
+              { app-id = "^org\.pulseaudio\.pavucontrol$"; }
+              { app-id = "^com\.terminal\.nmtui$"; }
+            ];
+            open-floating = true;
+          }
+          # Hide password manager from screencasts
+          {
+            matches = [ { app-id = "^org\.keepassxc\.KeePassXC$"; } ];
+            block-out-from = "screencast";
+          }
+          # Indicate screencasted windows
+          {
+            matches = [
+              { is-window-cast-target = true; }
+            ];
+            focus-ring = {
+              active.color = palette.pink.hex;
+              inactive.color = palette.red.hex;
+            };
+            shadow.color = palette.red.hex;
+            tab-indicator = {
+              active.color = palette.pink.hex;
+              inactive.color = palette.red.hex;
+            };
+          }
+          # Steam notifications
+          (notificationLike "bottom-right" {
+            matches = [
+              {
+                app-id = "steam";
+                title = "^notificationtoasts_\\d+_desktop$";
+              }
+            ];
+          })
+          # Dragon windows
+          (notificationLike "top-left" {
+            matches = [
+              {
+                app-id = "^dragon-drop$";
+                title = "dragon";
+              }
+            ];
+          })
+          {
+            matches = [ { is-floating = true; } ];
+          }
+        ];
+
+      layer-rules = [
+        # Let various UI components have shadows
         {
           matches = [
-            { app-id = "^org.pulseaudio.pavucontrol$"; }
-            { app-id = "^com.terminal.nmtui$"; }
+            { namespace = "^launcher$"; }
+            { namespace = "^notifications$"; }
           ];
-          open-floating = true;
+
+          shadow.enable = true;
+          # All of these are configured to use niri's corner radius like this anyways
+          geometry-corner-radius = (builtins.elemAt niriSettings.window-rules 0).geometry-corner-radius;
         }
       ];
 
@@ -73,9 +157,7 @@
         { command = [ (lib.getExe pkgs.xwayland-satellite) ]; }
         {
           command =
-            [
-              "${lib.getExe pkgs.windowtolayer}"
-            ]
+            [ "${lib.getExe pkgs.windowtolayer}" ]
             ++ terminal
             ++ [
               "--background-opacity=0"
@@ -322,6 +404,7 @@
           "Mod+F".action = actions.maximize-column;
           "Mod+Shift+F".action = actions.fullscreen-window;
           "Mod+C".action = actions.center-column;
+          "Mod+W".action = actions.toggle-column-tabbed-display;
 
           "Mod+Minus".action = actions.set-column-width "-10%";
           "Mod+Equal".action = actions.set-column-width "+10%";
