@@ -116,18 +116,22 @@ def format_workspaces(
 
 
 def workspaces(monitor_name: str) -> Widget.EventBox:
-    return Widget.EventBox(
-        on_scroll_up=lambda _: scroll_workspaces(monitor_name, 1),
-        on_scroll_down=lambda _: scroll_workspaces(monitor_name, -1),
-        spacing=WIDGET_SPACING,
-        # Bind to active_window also to ensure focused window is up to date
-        child=niri.bind_many(
-            ["workspaces", "windows"],
-            transform=lambda workspaces, windows: format_workspaces(
-                workspaces, windows
+    # Make sure to gracefully handle niri not being available
+    if niri.is_available:
+        return Widget.EventBox(
+            on_scroll_up=lambda _: scroll_workspaces(monitor_name, 1),
+            on_scroll_down=lambda _: scroll_workspaces(monitor_name, -1),
+            spacing=WIDGET_SPACING,
+            # Bind to active_window also to ensure focused window is up to date
+            child=niri.bind_many(
+                ["workspaces", "windows"],
+                transform=lambda workspaces, windows: format_workspaces(
+                    workspaces, windows
+                ),
             ),
-        ),
-    )
+        )
+    else:
+        return Widget.EventBox()
 
 
 def active_window(monitor_name: str) -> Widget.Box:
