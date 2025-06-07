@@ -67,6 +67,7 @@
       ".config/GIMP" # GIMP settings
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings
+      ".config/OrcaSlicer" # Bambu Studio login and printer settings
       ".config/spotify" # Spotify user data
       ".config/strawberry" # Strawberry settings
       ".config/vesktop/sessionData" # Vesktop user data

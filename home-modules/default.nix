@@ -26,6 +26,7 @@
       exercism
       itd
       killall
+      orca-slicer # 3D Printer Slicer
       pavucontrol # Graphical audio controller
       qalculate-gtk
       quickemu # Make and run VMs
