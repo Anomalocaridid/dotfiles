@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -25,6 +26,32 @@
             lockPref("${name}", ${builtins.toJSON value}); 
           '') prefs
         );
+
+      # Precompiled stylus settings with catppuccin themes
+      inherit (inputs.catppuccin-userstyles-nix.packages.${pkgs.system}) catppuccin-stylus-storage;
+
+      userstylesOptions = {
+        # Apply settings globally
+        global = {
+          lightFlavor = "latte";
+          darkFlavor = "mocha";
+          accentColor = "red";
+        };
+
+        # Apply settings per userstyle
+        # "Userstyle GitHub Catppuccin" = {
+        #   darkFlavor = "frappe";
+        #   accentColor = "mauve";
+        # };
+      };
+
+      stylusCatppuccinSettings =
+        lib.pipe (catppuccin-stylus-storage.override { inherit userstylesOptions; })
+          [
+            (dir: dir + /share/storage.js)
+            builtins.readFile
+            builtins.fromJSON
+          ];
     in
     {
       enable = true;
@@ -201,11 +228,10 @@
                 };
 
                 # Stylus
-                # TODO: figure out how to populate with Catppuccin userstyles
                 "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" = {
                   force = true;
-                  settings = {
-                    dbInChromeStorage = true; # required for Stylus
+                  settings = stylusCatppuccinSettings // {
+                    # (Optional) Set extra settings here
                   };
                 };
 

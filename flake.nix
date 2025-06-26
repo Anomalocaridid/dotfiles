@@ -90,6 +90,12 @@
     # Provides a binary cache, so do not follow inputs
     catppuccin.url = "github:catppuccin/nix";
 
+    # Pre-compiled Stylus Catppuccin userstyles
+    catppuccin-userstyles-nix = {
+      url = "github:different-name/catppuccin-userstyles-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Extra Catppuccin themes
     catppuccin-ohmyrepl = {
       url = "github:catppuccin/ohmyrepl";
