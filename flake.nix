@@ -121,7 +121,10 @@
     # Discord customization
     nixcord = {
       url = "github:KaylorBen/nixcord";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
     };
 
     # Widget framework
