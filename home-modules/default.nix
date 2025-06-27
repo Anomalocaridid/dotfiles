@@ -8,14 +8,14 @@
 }:
 {
   # Import all nix files in directory
-  # Should ignore this file and all non-nix files
-  # Currently, all non-nix files and dirs here are hidden dotfiles
+  # Should ignore this file and all non-nix files, but keep directories
   imports =
-    (map (file: ./. + "/${file}") (
-      lib.strings.filter (file: !lib.strings.hasPrefix "." file && file != "default.nix") (
-        builtins.attrNames (builtins.readDir ./.)
-      )
-    ))
+    (
+      builtins.readDir ./.
+      |> builtins.attrNames
+      |> lib.strings.filter (file: file != "default.nix")
+      |> map (file: ./. + "/${file}")
+    )
     ++ [
       inputs.nix-index-database.hmModules.nix-index
     ];

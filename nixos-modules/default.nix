@@ -8,10 +8,11 @@
   # Import all nix files in directory
   # Should ignore this file and all non-nix files
   imports =
-    map (file: ./. + "/${file}") (
-      lib.strings.filter (file: lib.strings.hasSuffix ".nix" file && file != "default.nix") (
-        builtins.attrNames (builtins.readDir ./.)
-      )
+    (
+      builtins.readDir ./.
+      |> builtins.attrNames
+      |> lib.strings.filter (file: lib.strings.hasSuffix ".nix" file && file != "default.nix")
+      |> map (file: ./. + "/${file}")
     )
     ++ [
       inputs.lix-module.nixosModules.default
@@ -23,10 +24,11 @@
       experimental-features = [
         "nix-command"
         "flakes"
+        "pipe-operator" # Lix-specific feature
       ];
       auto-optimise-store = true;
       repl-overlays = [ ../repl-overlay.nix ]; # Lix-specific setting
-      trusted-users = [ "anomalocaris" ]; # Fixes issue with not being able to use trustrusted-public-keys sometimes
+      trusted-users = [ "anomalocaris" ]; # Fixes issue with not being able to use trusted-public-keys sometimes
     };
     gc = {
       automatic = true;
@@ -34,15 +36,13 @@
       options = "--delete-older-than 14d";
     };
     # Set system registry to flake inputs
-    registry = lib.pipe inputs [
-      # Remove non flake inputs, which cause errors
-      # Flakes have an attribute _type, which equals "flake"
-      # while non-flakes lack this attribute
-      (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
-      (lib.mapAttrs (_: flake: { inherit flake; }))
-    ];
-    # For some reason, lix needs this to replace the nix command
-    package = pkgs.lix;
+    # Remove non flake inputs, which cause errors
+    # Flakes have an attribute _type, which equals "flake"
+    # while non-flakes lack this attribute
+    registry =
+      inputs
+      |> (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
+      |> (lib.mapAttrs (_: flake: { inherit flake; }));
   };
 
   nixpkgs = {
