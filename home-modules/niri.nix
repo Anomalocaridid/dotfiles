@@ -191,20 +191,12 @@
       ];
 
       animations = {
-        window-open.easing = {
-          curve = "linear";
-          duration-ms = 350;
-        };
-        window-close.easing = {
-          curve = "linear";
-          duration-ms = 500;
-        };
-        window-resize.easing = {
-          curve = "linear";
-          duration-ms = 250;
-        };
-        shaders = {
-          window-open =
+        window-open = {
+          kind.easing = {
+            curve = "linear";
+            duration-ms = 350;
+          };
+          custom-shader =
             # glsl
             ''
               // Example: show the window as an expanding circle.
@@ -227,7 +219,13 @@
                   return expanding_circle(coords_geo, size_geo);
               }
             '';
-          window-close =
+        };
+        window-close = {
+          kind.easing = {
+            curve = "linear";
+            duration-ms = 500;
+          };
+          custom-shader =
             # glsl
             ''
               // Example: make the window 'fall down' with slight rotation.
@@ -270,7 +268,13 @@
                   return fall_and_rotate(coords_geo, size_geo);
               }
             '';
-          window-resize =
+        };
+        window-resize = {
+          kind.easing = {
+            curve = "linear";
+            duration-ms = 250;
+          };
+          custom-shader =
             # glsl
             ''
               // Example: crossfade between previous and next texture, stretched to the
@@ -294,7 +298,6 @@
               }
             '';
         };
-
       };
 
       binds =
