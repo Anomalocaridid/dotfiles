@@ -5,27 +5,25 @@ from collections import Counter, defaultdict
 from collections.abc import Callable
 from datetime import datetime
 from time import gmtime, strftime
-from typing import Any, Awaitable
 
 import psutil  # Not included by default
 import unicodeit  # Not included by default
 import wm  # Custom module with constants from window manager config
 from ignis.app import IgnisApp
-from ignis.services.applications import ApplicationsService
+
 from ignis.services.audio import AudioService
 from ignis.services.fetch import FetchService
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.services.network import NetworkService, WifiDevice
 from ignis.services.niri import NiriService, NiriWindow, NiriWorkspace
 from ignis.services.system_tray import SystemTrayItem, SystemTrayService
-from ignis.utils import Utils
+from ignis import utils
 from ignis.variable import Variable
-from ignis.widgets import Widget
+from ignis import widgets
 
 app = IgnisApp.get_default()
-app.apply_css(f"{Utils.get_current_dir()}/style.scss", "user")
+app.apply_css(f"{utils.get_current_dir()}/style.scss", "user")
 
-applications = ApplicationsService.get_default()
 audio = AudioService.get_default()
 fetch = FetchService.get_default()
 mpris = MprisService.get_default()
@@ -48,14 +46,14 @@ def toggle_variable(var: Variable):
     return _inner
 
 
-def toggle_window(window: Widget.Window):
+def toggle_window(window: widgets.Window):
     def _inner(_) -> None:
         window.visible = not window.visible
 
     return _inner
 
 
-@Utils.debounce(wm.SCROLL_COOLDOWN_MS)
+@utils.debounce(wm.SCROLL_COOLDOWN_MS)
 def scroll_workspaces(monitor_name: str, step: int) -> None:
     current = list(
         filter(lambda w: w.is_active and w.output == monitor_name, niri.workspaces)
@@ -68,21 +66,23 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
 def workspace_button(
     workspace: NiriWorkspace,
     window_counts: dict[tuple[str, bool], int],
-) -> Widget.Button:
-    widget = Widget.Button(
+) -> widgets.Button:
+    widget = widgets.Button(
         css_classes=["flat"],
         on_click=lambda _, id=workspace.idx: niri.switch_to_workspace(id),
-        child=Widget.Box(
-            child=[Widget.Label(label=f"{workspace.idx}{':' if window_counts else ''}")]
+        child=widgets.Box(
+            child=[
+                widgets.Label(label=f"{workspace.idx}{':' if window_counts else ''}")
+            ]
             + [
-                Widget.Box(
+                widgets.Box(
                     child=[
-                        Widget.Icon(
-                            image=Utils.get_app_icon_name(app_id),
+                        widgets.Icon(
+                            image=utils.get_app_icon_name(app_id),
                             css_classes=["focused"] if is_focused else [],
                         ),
                         # Show count in superscript
-                        Widget.Label(label=unicodeit.replace(f"^{{{count}}}"))
+                        widgets.Label(label=unicodeit.replace(f"^{{{count}}}"))
                         if count > 1
                         else None,
                     ]
@@ -104,7 +104,7 @@ def window_to_workspace_idx(workspaces: list[NiriWorkspace], window: NiriWindow)
 
 def format_workspaces(
     workspaces: list[NiriWorkspace], windows: list[NiriWindow]
-) -> list[Widget.Button]:
+) -> list[widgets.Button]:
     windows_by_workspace = defaultdict(Counter)
 
     for window in windows:
@@ -115,10 +115,10 @@ def format_workspaces(
     return [workspace_button(ws, windows_by_workspace[ws.idx]) for ws in workspaces]
 
 
-def workspaces(monitor_name: str) -> Widget.EventBox:
+def workspaces(monitor_name: str) -> widgets.EventBox:
     # Make sure to gracefully handle niri not being available
     if niri.is_available:
-        return Widget.EventBox(
+        return widgets.EventBox(
             on_scroll_up=lambda _: scroll_workspaces(monitor_name, 1),
             on_scroll_down=lambda _: scroll_workspaces(monitor_name, -1),
             spacing=WIDGET_SPACING,
@@ -131,30 +131,30 @@ def workspaces(monitor_name: str) -> Widget.EventBox:
             ),
         )
     else:
-        return Widget.EventBox()
+        return widgets.EventBox()
 
 
-def active_window(monitor_name: str) -> Widget.Box:
+def active_window(monitor_name: str) -> widgets.Box:
     title = niri.bind(
         "active_window",
         transform=lambda active_window: active_window.title,
     )
 
-    return Widget.Box(
+    return widgets.Box(
         spacing=WIDGET_SPACING,
         visible=niri.bind(
             "active_output", lambda active_output: active_output == monitor_name
         ),
         child=[
-            Widget.Icon(
+            widgets.Icon(
                 image=niri.bind(
                     "active_window",
-                    transform=lambda active_window: Utils.get_app_icon_name(
+                    transform=lambda active_window: utils.get_app_icon_name(
                         active_window.app_id
                     ),
                 )
             ),
-            Widget.Label(
+            widgets.Label(
                 ellipsize="end",
                 max_width_chars=15,
                 label=title,
@@ -173,18 +173,18 @@ def track_progress(player: MprisPlayer):
 
 
 def mpris_title(
-    player: MprisPlayer, media_player_window: Widget.Window
-) -> Widget.EventBox:
-    artist_revealer = Widget.Revealer(
-        child=Widget.Box(
+    player: MprisPlayer, media_player_window: widgets.Window
+) -> widgets.EventBox:
+    artist_revealer = widgets.Revealer(
+        child=widgets.Box(
             spacing=WIDGET_SPACING,
             child=[
-                Widget.Label(
+                widgets.Label(
                     label=player.bind("artist"),
                     ellipsize="end",
                     max_width_chars=20,
                 ),
-                Widget.Label(
+                widgets.Label(
                     # Only show if there is an artist
                     visible=player.bind(
                         "artist",
@@ -198,16 +198,16 @@ def mpris_title(
         transition_type="slide_right",
     )
 
-    return Widget.EventBox(
+    return widgets.EventBox(
         spacing=WIDGET_SPACING,
         setup=lambda self: player.connect(
             "closed",
             lambda _: self.unparent(),  # remove widget when player is closed
         ),
         child=[
-            Widget.Icon(image="audio-x-generic"),
+            widgets.Icon(image="audio-x-generic"),
             artist_revealer,
-            Widget.Label(
+            widgets.Label(
                 ellipsize="end",
                 max_width_chars=20,
                 label=player.bind(
@@ -227,17 +227,17 @@ def mpris_button(
     icon_name: str,
     on_click: Callable[[], asyncio.Task[None]],
     visible_when: str = "can_control",
-) -> Widget.Button:
-    return Widget.Button(
+) -> widgets.Button:
+    return widgets.Button(
         css_classes=["circular"],
         visible=player.bind(visible_when),
-        child=Widget.Icon(pixel_size=32, image=icon_name),
+        child=widgets.Icon(pixel_size=32, image=icon_name),
         on_click=lambda _: on_click(),
     )
 
 
-def mpris_player(player: MprisPlayer) -> Widget.Box:
-    return Widget.Box(
+def mpris_player(player: MprisPlayer) -> widgets.Box:
+    return widgets.Box(
         spacing=WIDGET_SPACING,
         setup=lambda self: player.connect(
             "closed",
@@ -245,7 +245,7 @@ def mpris_player(player: MprisPlayer) -> Widget.Box:
         ),
         css_classes=["player"],
         child=[
-            Widget.Picture(
+            widgets.Picture(
                 image=player.bind(
                     "art_url",
                     transform=lambda art_url: "applications-multimedia"
@@ -255,24 +255,24 @@ def mpris_player(player: MprisPlayer) -> Widget.Box:
                 width=100,
                 height=100,
             ),
-            Widget.Box(
+            widgets.Box(
                 spacing=WIDGET_SPACING,
                 vertical=True,
                 child=[
-                    Widget.Label(
+                    widgets.Label(
                         css_classes=["title-4", "accent"], label=player.bind("title")
                     ),
-                    Widget.Label(label=player.bind("artist")),
-                    Widget.Label(label=player.bind("album")),
-                    Widget.Scale(
+                    widgets.Label(label=player.bind("artist")),
+                    widgets.Label(label=player.bind("album")),
+                    widgets.Scale(
                         max=player.bind("length"),
                         value=player.bind("position"),
                         on_change=lambda self: asyncio.create_task(
                             player.set_position_async(self.value)
                         ),
                     ),
-                    Widget.Label(label=track_progress(player)),
-                    Widget.Box(
+                    widgets.Label(label=track_progress(player)),
+                    widgets.Box(
                         spacing=WIDGET_SPACING,
                         visible=player.bind("can_control"),
                         homogeneous=True,
@@ -314,15 +314,15 @@ def mpris_player(player: MprisPlayer) -> Widget.Box:
 
 
 # TODO: give each player its own window
-def media_player(monitor_id: int) -> Widget.Window:
-    return Widget.Window(
+def media_player(monitor_id: int) -> widgets.Window:
+    return widgets.Window(
         visible=False,
         namespace=f"ignis_popup_media_info_{monitor_id}",
         monitor=monitor_id,
         exclusivity="normal",
         anchor=["top"],
         margin_top=wm.GAP_WIDTH,
-        child=Widget.Box(
+        child=widgets.Box(
             setup=lambda self: mpris.connect(
                 "player-added", lambda _, player: self.append(mpris_player(player))
             ),
@@ -330,9 +330,9 @@ def media_player(monitor_id: int) -> Widget.Window:
     )
 
 
-def media(monitor_id: int) -> Widget.Box:
+def media(monitor_id: int) -> widgets.Box:
     media_player_window = media_player(monitor_id)
-    return Widget.Box(
+    return widgets.Box(
         spacing=WIDGET_SPACING,
         setup=lambda self: mpris.connect(
             "player-added",
@@ -349,9 +349,9 @@ def desymbolize(icon_name: str | None) -> str:
         return "-".join(icon_name.split("-")[:-1])
 
 
-def volume() -> Widget.EventBox:
-    slider_revealer = Widget.Revealer(
-        child=Widget.Scale(
+def volume() -> widgets.EventBox:
+    slider_revealer = widgets.Revealer(
+        child=widgets.Scale(
             value=audio.speaker.bind_many(
                 ["volume", "is_muted"],
                 lambda volume, is_muted: 0 if is_muted else volume,
@@ -361,12 +361,12 @@ def volume() -> Widget.EventBox:
         transition_type="slide_left",
         reveal_child=False,
     )
-    return Widget.EventBox(
+    return widgets.EventBox(
         child=[
-            Widget.Icon(
+            widgets.Icon(
                 image=audio.speaker.bind("icon_name", transform=desymbolize),
             ),
-            Widget.Label(
+            widgets.Label(
                 label=audio.speaker.bind(
                     "volume", transform=lambda volume: f"{volume}%"
                 )
@@ -376,7 +376,7 @@ def volume() -> Widget.EventBox:
         on_hover=lambda _: slider_revealer.set_reveal_child(True),
         on_hover_lost=lambda _: slider_revealer.set_reveal_child(False),
         on_right_click=lambda _: asyncio.create_task(
-            Utils.exec_sh_async("pavucontrol")
+            utils.exec_sh_async("pavucontrol")
         ),
     )
 
@@ -408,16 +408,16 @@ def format_bitrate(kbits: int) -> str:
     return f"󰓅 {value} {prefix}bit/s"
 
 
-def connection_name(device: WifiDevice) -> Widget.Box:
-    return Widget.Box(
-        child=[Widget.Label(label=device.ap.bind("ssid"))],
+def connection_name(device: WifiDevice) -> widgets.Box:
+    return widgets.Box(
+        child=[widgets.Label(label=device.ap.bind("ssid"))],
         tooltip_text=device.ap.bind("max_bitrate", transform=format_bitrate),
     )
 
 
-def connections() -> Widget.EventBox:
-    ssid_revealer = Widget.Revealer(
-        child=Widget.Box(
+def connections() -> widgets.EventBox:
+    ssid_revealer = widgets.Revealer(
+        child=widgets.Box(
             spacing=WIDGET_SPACING,
             child=network.wifi.bind(
                 "devices",
@@ -427,11 +427,11 @@ def connections() -> Widget.EventBox:
         transition_type="slide_left",
         reveal_child=False,
     )
-    return Widget.EventBox(
+    return widgets.EventBox(
         child=[
-            Widget.Icon(image=network.wifi.bind("icon_name", transform=desymbolize)),
+            widgets.Icon(image=network.wifi.bind("icon_name", transform=desymbolize)),
             ssid_revealer,
-            Widget.Icon(image=network.vpn.bind("icon_name", transform=desymbolize)),
+            widgets.Icon(image=network.vpn.bind("icon_name", transform=desymbolize)),
         ],
         on_right_click=lambda _: [
             asyncio.create_task(c.toggle_connection()) for c in network.vpn.connections
@@ -439,7 +439,7 @@ def connections() -> Widget.EventBox:
         on_hover=lambda _: ssid_revealer.set_reveal_child(True),
         on_hover_lost=lambda _: ssid_revealer.set_reveal_child(False),
         on_click=lambda _: asyncio.create_task(
-            Utils.exec_sh_async(f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui")
+            utils.exec_sh_async(f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui")
         ),
     )
 
@@ -451,10 +451,10 @@ def statistic(
     unit: str = "%",
     urgent: int = 70,
     critical: int = 90,
-) -> Widget.Box:
-    poll = Utils.Poll(2000, lambda _: data())
+) -> widgets.Box:
+    poll = utils.Poll(2000, lambda _: data())
 
-    return Widget.Box(
+    return widgets.Box(
         spacing=ICON_SPACING,
         css_classes=poll.bind(
             "output",
@@ -467,8 +467,8 @@ def statistic(
             ],
         ),
         child=[
-            Widget.Icon(image=icon_name),
-            Widget.Label(
+            widgets.Icon(image=icon_name),
+            widgets.Label(
                 label=poll.bind(
                     "output",
                     transform=lambda output: "{:02d}{}".format(round(output), unit),
@@ -478,12 +478,12 @@ def statistic(
     )
 
 
-def statistics() -> Widget.Box:
+def statistics() -> widgets.Box:
     def disk_usage() -> float:
         total, usage, _ = shutil.disk_usage("/persist")
         return usage / total * 100
 
-    return Widget.Box(
+    return widgets.Box(
         spacing=WIDGET_SPACING,
         child=[
             statistic(
@@ -513,16 +513,16 @@ def statistics() -> Widget.Box:
     )
 
 
-def tray_item(item: SystemTrayItem) -> Widget.Button:
+def tray_item(item: SystemTrayItem) -> widgets.Button:
     if item.menu:
         menu = item.menu.copy()
     else:
         menu = None
 
-    return Widget.Button(
-        child=Widget.Box(
+    return widgets.Button(
+        child=widgets.Box(
             child=[
-                Widget.Icon(image=item.bind("icon")),
+                widgets.Icon(image=item.bind("icon")),
                 menu,
             ]
         ),
@@ -534,8 +534,8 @@ def tray_item(item: SystemTrayItem) -> Widget.Button:
     )
 
 
-def tray() -> Widget.Box:
-    return Widget.Box(
+def tray() -> widgets.Box:
+    return widgets.Box(
         spacing=WIDGET_SPACING,
         setup=lambda self: system_tray.connect(
             "added", lambda _, item: self.append(tray_item(item))
@@ -543,8 +543,8 @@ def tray() -> Widget.Box:
     )
 
 
-def calendar(monitor_id: int) -> Widget.Window:
-    return Widget.Window(
+def calendar(monitor_id: int) -> widgets.Window:
+    return widgets.Window(
         visible=False,
         namespace=f"ignis_popup_calendar_{monitor_id}",
         monitor=monitor_id,
@@ -552,12 +552,12 @@ def calendar(monitor_id: int) -> Widget.Window:
         anchor=["top", "right"],
         margin_top=wm.GAP_WIDTH,
         margin_right=wm.GAP_WIDTH,
-        child=Widget.Calendar(),
+        child=widgets.Calendar(),
     )
 
 
-def clock(monitor_id: int) -> Widget.EventBox:
-    clock_label = Widget.Label()
+def clock(monitor_id: int) -> widgets.EventBox:
+    clock_label = widgets.Label()
     military_time = Variable(value=False)
 
     def update_clock(*_args) -> None:
@@ -566,7 +566,7 @@ def clock(monitor_id: int) -> Widget.EventBox:
         )
 
     # Update the clock once per second
-    Utils.Poll(1000, update_clock)
+    utils.Poll(1000, update_clock)
 
     # Instantly update the clock when it changes to military time
     military_time.connect("notify::value", update_clock)
@@ -574,26 +574,26 @@ def clock(monitor_id: int) -> Widget.EventBox:
     # Calendar window widget
     calendar_window = calendar(monitor_id)
 
-    return Widget.EventBox(
+    return widgets.EventBox(
         spacing=WIDGET_SPACING,
-        child=[Widget.Icon(image="accessories-clock"), clock_label],
+        child=[widgets.Icon(image="accessories-clock"), clock_label],
         on_click=toggle_window(calendar_window),
         on_right_click=toggle_variable(military_time),
         tooltip_text=datetime.now().strftime(" %a, %b %d, %Y"),
     )
 
 
-def right_arrow() -> Widget.Arrow:
-    return Widget.Icon(image="go-next")
+def right_arrow() -> widgets.Arrow:
+    return widgets.Icon(image="go-next")
 
 
-def left_arrow() -> Widget.Arrow:
-    return Widget.Icon(image="go-previous")
+def left_arrow() -> widgets.Arrow:
+    return widgets.Icon(image="go-previous")
 
 
-def bar(monitor_id: int) -> Widget.Window:
-    monitor_name = Utils.get_monitor(monitor_id).get_connector()
-    Widget.Window(
+def bar(monitor_id: int) -> widgets.Window:
+    monitor_name = utils.get_monitor(monitor_id).get_connector()
+    widgets.Window(
         namespace=f"ignis_bar_{monitor_id}",
         monitor=monitor_id,
         exclusivity="exclusive",
@@ -602,8 +602,8 @@ def bar(monitor_id: int) -> Widget.Window:
         margin_top=wm.GAP_WIDTH,
         margin_left=wm.GAP_WIDTH,
         margin_right=wm.GAP_WIDTH,
-        child=Widget.CenterBox(
-            start_widget=Widget.Box(
+        child=widgets.CenterBox(
+            start_widget=widgets.Box(
                 css_classes=["left"],
                 child=[
                     workspaces(monitor_name),
@@ -612,7 +612,7 @@ def bar(monitor_id: int) -> Widget.Window:
                     right_arrow(),
                 ],
             ),
-            center_widget=Widget.Box(
+            center_widget=widgets.Box(
                 visible=mpris.bind("players", lambda value: len(value) != 0),
                 child=[
                     left_arrow(),
@@ -620,7 +620,7 @@ def bar(monitor_id: int) -> Widget.Window:
                     right_arrow(),
                 ],
             ),
-            end_widget=Widget.Box(
+            end_widget=widgets.Box(
                 css_classes=["right"],
                 child=[
                     left_arrow(),
@@ -639,5 +639,5 @@ def bar(monitor_id: int) -> Widget.Window:
     )
 
 
-for i in range(Utils.get_n_monitors()):
+for i in range(utils.get_n_monitors()):
     bar(i)
