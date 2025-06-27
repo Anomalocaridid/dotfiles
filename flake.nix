@@ -97,6 +97,12 @@
       flake = false;
     };
 
+    # Catppuccin userstyles for Stylus
+    catppuccin-userstyles-nix = {
+      url = "github:different-name/catppuccin-userstyles-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Gaming tweaks
     # Provides a binary cache, so do not follow inputs
     nix-gaming.url = "github:fufexan/nix-gaming";

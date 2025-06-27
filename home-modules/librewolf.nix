@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -200,11 +201,14 @@
                 };
 
                 # Stylus
-                # TODO: figure out how to populate with Catppuccin userstyles
                 "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" = {
                   force = true;
-                  settings = {
-                    dbInChromeStorage = true; # required for Stylus
+                  settings = inputs.catppuccin-userstyles-nix.stylusSettings.${pkgs.system} {
+                    global = {
+                      lightFlavor = config.catppuccin.flavor;
+                      darkFlavor = config.catppuccin.flavor;
+                      accentColor = config.catppuccin.accent;
+                    };
                   };
                 };
 
