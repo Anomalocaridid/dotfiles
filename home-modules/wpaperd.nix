@@ -1,8 +1,9 @@
-{ ... }:
+{ inputs, ... }:
 {
-  # Use stylix to automatically set wallpaper
-  # Stylix.autoenable is set to false
-  stylix.targets.wpaperd.enable = true;
-
-  services.wpaperd.enable = true;
+  services.wpaperd = {
+    enable = true;
+    settings.any = {
+      path = inputs.catppuccin-fractal-wallpapers + "/05.png";
+    };
+  };
 }

@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   osConfig,
   inputs,
@@ -14,7 +15,6 @@
 
   gtk = {
     enable = true;
-    cursorTheme = config.stylix.cursor;
     iconTheme =
       let
         recolor-icons =
@@ -51,14 +51,36 @@
     platformTheme = style;
   };
 
-  home.packages = with pkgs; [
-    # fallback icon theme
-    adwaita-icon-theme
-    # Tools for making catppuccin ports
-    catppuccin-catwalk
-    catppuccin-whiskers
-    just
-  ];
+  fonts.fontconfig.defaultFonts = osConfig.fonts.fontconfig.defaultFonts;
+
+  home = {
+    pointerCursor =
+      let
+        palette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavor}.colors;
+      in
+      {
+        enable = true;
+        gtk.enable = true;
+        name = "Breeze_Hacked";
+        size = 24;
+        package = pkgs.breeze-hacked-cursor-theme.override {
+          accentColor = "${palette.${config.catppuccin.accent}.hex}";
+          baseColor = "${palette.base.hex}";
+          borderColor = "${palette.base.hex}";
+          logoColor = "${palette.text.hex}";
+        };
+      };
+    packages = with pkgs; [
+      # fallback icon theme
+      adwaita-icon-theme
+      # Tools for making catppuccin ports
+      catppuccin-catwalk
+      catppuccin-whiskers
+      just
+    ];
+  };
 
   # Inherit system-level settings
   catppuccin = {

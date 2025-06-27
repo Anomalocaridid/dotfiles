@@ -6,7 +6,6 @@
   ...
 }:
 let
-  fonts = config.stylix.fonts;
   palette =
     (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
     .${config.catppuccin.flavor}.colors;
@@ -19,7 +18,6 @@ in
     package = pkgs.swaylock-plugin;
     settings = {
       indicator-caps-lock = true;
-      font = fonts.sansSerif.name;
       font-size = 20;
       ignore-empty-password = true;
       show-failed-attempts = true;

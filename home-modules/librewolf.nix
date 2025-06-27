@@ -159,7 +159,6 @@
             ];
             settings =
               let
-                fonts = config.stylix.fonts;
                 accent = config.catppuccin.accent;
                 palette =
                   (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
@@ -171,7 +170,7 @@
                   settings = {
                     syncSettings = false;
                     theme = {
-                      fontFamily = fonts.sansSerif.name;
+                      fontFamily = builtins.head config.fonts.fontconfig.defaultFonts.monospace;
                       darkSchemeBackgroundColor = palette.base.hex;
                       darkSchemeTextColor = palette.text.hex;
                       selectionColor = palette.surface2.hex;

@@ -70,17 +70,6 @@
     # Provides a binary cache, so do not follow inputs
     niri.url = "github:sodiboo/niri-flake";
 
-    # Only used for GRUB theme
-    stylix = {
-      url = "github:danth/stylix";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        home-manager.follows = "home-manager";
-        nur.follows = "nur";
-        flake-parts.follows = "flake-parts";
-      };
-    };
-
     ttf-to-tty = {
       url = "github:Sigmanificient/ttf_to_tty";
       inputs.nixpkgs.follows = "nixpkgs";
