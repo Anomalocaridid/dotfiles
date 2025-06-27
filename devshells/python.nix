@@ -1,9 +1,16 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   packages = with pkgs; [
     (python3.withPackages (
       ps: with ps; [
         pytest # Needed for exercism tests
+        (inputs.ignis.packages.${pkgs.system}.ignis.override {
+          python312Packages = pkgs.python313Packages;
+          extraPackages = with pkgs.python313Packages; [
+            psutil
+            unicodeit
+          ];
+        })
       ]
     ))
     basedpyright # Python typechecker lsp
