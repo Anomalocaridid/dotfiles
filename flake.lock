@@ -93,15 +93,16 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1751092982,
-        "narHash": "sha256-9za67Wu6iPpzhzO9YWtHVaq/bh9wOqGy3j4WlkLsA3Q=",
+        "lastModified": 1751069548,
+        "narHash": "sha256-noCgVJjarP7AzQ3HhZLBPABV1Ap9UNcHEDTFCTCBrno=",
         "owner": "different-name",
         "repo": "catppuccin-userstyles-nix",
-        "rev": "02fdea4a171f3f1d87d7a436cb54f9b545e15d4b",
+        "rev": "b347a087e34ddb4ce645014744b101f217350209",
         "type": "github"
       },
       "original": {
         "owner": "different-name",
+        "ref": "b347a08",
         "repo": "catppuccin-userstyles-nix",
         "type": "github"
       }

@@ -99,7 +99,7 @@
 
     # Catppuccin userstyles for Stylus
     catppuccin-userstyles-nix = {
-      url = "github:different-name/catppuccin-userstyles-nix";
+      url = "github:different-name/catppuccin-userstyles-nix?rev=b347a08";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
