@@ -6,9 +6,7 @@
   ...
 }:
 let
-  # TODO: Fix when https://github.com/ignis-sh/ignis/issues/333 is resolved
   ignisPackage = inputs.ignis.packages.${pkgs.system}.ignis.override {
-    python312Packages = pkgs.python313Packages;
     extraPackages = with pkgs.python313Packages; [
       psutil
       unicodeit
