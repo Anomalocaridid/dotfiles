@@ -33,6 +33,9 @@
       layout = {
         always-center-single-column = true;
 
+        # Show backdrop as wallpaper
+        background-color = "transparent";
+
         focus-ring.active.gradient = {
           from = accent;
           to = accent;
@@ -45,8 +48,9 @@
           enable = true;
           color = palette.base.hex;
         };
-
       };
+
+      overview.workspace-shadow.enable = false;
 
       window-rules =
         let
@@ -150,6 +154,14 @@
           shadow.enable = true;
           # All of these are configured to use niri's corner radius like this anyways
           geometry-corner-radius = (builtins.elemAt niriSettings.window-rules 0).geometry-corner-radius;
+        }
+        # Put wallpapers in overview
+        {
+          matches = [
+            { namespace = "^$"; } # cava in windowtolayer
+            { namespace = "^wpaperd.*$"; }
+          ];
+          place-within-backdrop = true;
         }
       ];
 
@@ -318,7 +330,7 @@
 
           "Mod+T".action.spawn = terminal;
           "Mod+D".action = sh "pkill fuzzel || fuzzel";
-          "Mod+O".action.spawn = launch "x-scheme-handler/https";
+          "Mod+B".action.spawn = launch "x-scheme-handler/https";
           "Mod+N".action.spawn = launch "inode/directory";
           "Super+Alt+L".action = actions.spawn "wlogout" "--show-binds";
           "Mod+Ctrl+C".action = sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
@@ -408,6 +420,7 @@
           "Mod+Shift+F".action = actions.fullscreen-window;
           "Mod+C".action = actions.center-column;
           "Mod+W".action = actions.toggle-column-tabbed-display;
+          "Mod+O".action = actions.toggle-overview;
 
           "Mod+Minus".action = actions.set-column-width "-10%";
           "Mod+Equal".action = actions.set-column-width "+10%";
