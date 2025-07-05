@@ -35,16 +35,13 @@ in
       shuffle
       # Community extensions
       seekSong
-      goToSong
-      skipStats
-      songStats
       autoVolume
       history
       hidePodcasts
       adblock
-      savePlaylists
-      playNext
       volumePercentage
+      queueTime
+      allOfArtist
     ];
   };
 }
