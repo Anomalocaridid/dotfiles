@@ -28,7 +28,6 @@
       ];
       auto-optimise-store = true;
       repl-overlays = [ ../repl-overlay.nix ]; # Lix-specific setting
-      trusted-users = [ "anomalocaris" ]; # Fixes issue with not being able to use trusted-public-keys sometimes
     };
     gc = {
       automatic = true;

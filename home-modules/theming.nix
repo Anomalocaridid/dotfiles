@@ -83,10 +83,10 @@
   };
 
   # Inherit system-level settings
+  # Do not inherit cache setting or else the other system-level caches will not be used
   catppuccin = {
     inherit (osConfig.catppuccin)
       enable
-      cache
       flavor
       accent
       ;
