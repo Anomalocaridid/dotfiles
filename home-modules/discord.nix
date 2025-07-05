@@ -78,7 +78,6 @@
         noF1.enable = true;
         silentTyping.enable = true;
         typingIndicator.enable = true;
-        typingTweaks.enable = true;
         viewIcons.enable = true;
         viewRaw.enable = true;
         volumeBooster.enable = true;
