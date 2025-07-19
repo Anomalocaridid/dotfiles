@@ -356,6 +356,7 @@
             "@DEFAULT_AUDIO_SOURCE@"
             "toggle"
           ];
+          XF86AudioPlay.action = actions.spawn (lib.getExe pkgs.playerctl) "play-pause";
 
           "Mod+Q".action = actions.close-window;
 
