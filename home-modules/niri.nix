@@ -339,12 +339,16 @@
           XF86AudioRaiseVolume = wpctl [
             "set-volume"
             "@DEFAULT_AUDIO_SINK@"
-            "0.1+"
+            "0.05+"
+            "--limit"
+            "1"
           ];
           XF86AudioLowerVolume = wpctl [
             "set-volume"
             "@DEFAULT_AUDIO_SINK@"
-            "0.1-"
+            "0.05-"
+            "--limit"
+            "1"
           ];
           XF86AudioMute = wpctl [
             "set-mute"
