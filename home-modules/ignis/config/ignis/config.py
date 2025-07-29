@@ -352,6 +352,7 @@ def desymbolize(icon_name: str | None) -> str:
 def volume() -> widgets.EventBox:
     slider_revealer = widgets.Revealer(
         child=widgets.Scale(
+            step=5,
             value=audio.speaker.bind_many(
                 ["volume", "is_muted"],
                 lambda volume, is_muted: 0 if is_muted else volume,
