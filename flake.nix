@@ -30,14 +30,8 @@
     # Flake framework
     flake-parts.url = "github:hercules-ci/flake-parts";
 
-    # Flake Parts module for defining configs
-    ez-configs = {
-      url = "github:ehllie/ez-configs";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        flake-parts.follows = "flake-parts";
-      };
-    };
+    # Import file trees
+    import-tree.url = "github:vic/import-tree";
 
     # Nix user repository
     nur = {
@@ -158,37 +152,17 @@
 
   outputs =
     inputs@{ nixpkgs, flake-parts, ... }:
-    flake-parts.lib.mkFlake { inherit inputs; } rec {
+    flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
-        inputs.ez-configs.flakeModule
+        inputs.flake-parts.flakeModules.modules
         inputs.devshell.flakeModule
+        (inputs.import-tree ./modules)
+        # TODO: replace with import-tree when NixOS Facter is used
+        ./hosts/desktop
+        ./hosts/laptop
+        (inputs.import-tree ./scripts)
       ];
 
-      ezConfigs = {
-        root = ./.;
-        globalArgs = {
-          inherit inputs;
-          inherit (flake) diskoConfigurations;
-        };
-      };
-
-      # Expose this to use flake directly with Disko
-      flake.diskoConfigurations = import ./disko-configurations;
-
       systems = [ "x86_64-linux" ];
-
-      perSystem =
-        args@{
-          pkgs,
-          inputs',
-          ...
-        }:
-        {
-          formatter = pkgs.nixfmt-rfc-style;
-          packages = import ./scripts args;
-          devshells = import ./devshells {
-            inherit pkgs inputs;
-          };
-        };
     };
 }

@@ -147,29 +147,6 @@
         "type": "github"
       }
     },
-    "ez-configs": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1750178074,
-        "narHash": "sha256-+ACS/Ris0V0a3BB6vEI/vTGk5huztx7a5f7eHJK1FaQ=",
-        "owner": "ehllie",
-        "repo": "ez-configs",
-        "rev": "eb320b3a6032a30e5fa67bebbaf381e6552f9441",
-        "type": "github"
-      },
-      "original": {
-        "owner": "ehllie",
-        "repo": "ez-configs",
-        "type": "github"
-      }
-    },
     "flake-compat": {
       "locked": {
         "lastModified": 1733328505,
@@ -522,6 +499,21 @@
       "original": {
         "owner": "nix-community",
         "repo": "impermanence",
+        "type": "github"
+      }
+    },
+    "import-tree": {
+      "locked": {
+        "lastModified": 1752730890,
+        "narHash": "sha256-GES8fapSLGz36MMPRVNkSUWXUTtqvGQNXHjRmRLfJUY=",
+        "owner": "vic",
+        "repo": "import-tree",
+        "rev": "6ebb8cb87987b20264c09296166543fd3761d274",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "import-tree",
         "type": "github"
       }
     },
@@ -966,12 +958,12 @@
         "catppuccin-userstyles-nix": "catppuccin-userstyles-nix",
         "devshell": "devshell",
         "disko": "disko",
-        "ez-configs": "ez-configs",
         "flake-parts": "flake-parts",
         "ghostty-shaders": "ghostty-shaders",
         "home-manager": "home-manager",
         "ignis": "ignis",
         "impermanence": "impermanence",
+        "import-tree": "import-tree",
         "lix-module": "lix-module",
         "niri": "niri",
         "nix-gaming": "nix-gaming",

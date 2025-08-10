@@ -1,4 +1,0 @@
-{ ... }:
-{
-  home.username = "anomalocaris";
-}
