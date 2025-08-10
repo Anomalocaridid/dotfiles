@@ -12,13 +12,7 @@
       bat-extras.batgrep
       bat-extras.batman
       bat-extras.batpipe
-      # required for batpipe
-      glow
-      odt2txt
-      pdfminer # provides pdf2txt
-      python3Packages.docx2txt
-      unrar
-      unzip # default viewer
+      unzip # default batpipe viewer
     ];
     config = {
       "lessopen" = true;
@@ -74,27 +68,26 @@
     in
     lib.strings.concatMapStrings makeViewer [
       {
-        command = ''docx2txt "$1"'';
+        command = ''${lib.getExe pkgs.python3Packages.docx2txt} "$1"'';
         filetype = "*.docx";
         header = batpipe_document_header;
       }
       {
-        # FIXME: Does not work with bat for some reason
-        command = ''glow --style ${config.home.sessionVariables.GLAMOUR_STYLE} "$1"'';
+        command = ''${lib.getExe pkgs.glow} --style ${config.home.sessionVariables.GLAMOUR_STYLE} "$1"'';
         filetype = "*.md";
       }
       {
-        command = ''odt2txt "$1"'';
+        command = ''${lib.getExe pkgs.odt2txt} "$1"'';
         filetype = "*.odt";
         header = batpipe_document_header;
       }
       {
-        command = ''pdf2txt "$1"'';
+        command = ''${lib.getExe' pkgs.pdfminer "pdf2txt"} "$1"'';
         filetype = "*.pdf";
         header = batpipe_document_header;
       }
       {
-        command = ''unrar "$1"'';
+        command = ''${lib.getExe pkgs.unrar} "$1"'';
         filetype = "*.rar";
         header = batpipe_archive_header;
       }
