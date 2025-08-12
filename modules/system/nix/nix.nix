@@ -4,7 +4,10 @@
     nixos.nix =
       { lib, ... }:
       {
-        imports = [ inputs.lix-module.nixosModules.default ];
+        imports = [
+          inputs.lix-module.nixosModules.default
+          inputs.nixos-facter-modules.nixosModules.facter
+        ];
 
         nix = {
           settings = {

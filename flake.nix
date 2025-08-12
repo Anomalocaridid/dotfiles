@@ -14,6 +14,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Hardware feature detection
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -156,11 +159,11 @@
       imports = [
         inputs.flake-parts.flakeModules.modules
         inputs.devshell.flakeModule
-        (inputs.import-tree ./modules)
-        # TODO: replace with import-tree when NixOS Facter is used
-        ./hosts/desktop
-        ./hosts/laptop
-        (inputs.import-tree ./scripts)
+        (inputs.import-tree [
+          ./hosts
+          ./modules
+          ./scripts
+        ])
       ];
 
       systems = [ "x86_64-linux" ];

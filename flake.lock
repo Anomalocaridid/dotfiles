@@ -815,6 +815,21 @@
         "type": "github"
       }
     },
+    "nixos-facter-modules": {
+      "locked": {
+        "lastModified": 1755011698,
+        "narHash": "sha256-yDpjtMvQD6H5xk23eCnE6rqZ0QXFh+/8vY7lK0NRR24=",
+        "owner": "numtide",
+        "repo": "nixos-facter-modules",
+        "rev": "ff8e2cc94425e0e747acd54266f76f95055609c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "nixos-facter-modules",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1744463964,
@@ -971,6 +986,7 @@
         "nix-yazi-plugins": "nix-yazi-plugins",
         "nixago": "nixago",
         "nixcord": "nixcord",
+        "nixos-facter-modules": "nixos-facter-modules",
         "nixpkgs": "nixpkgs_4",
         "nur": "nur",
         "spicetify-nix": "spicetify-nix",

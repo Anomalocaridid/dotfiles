@@ -15,8 +15,7 @@
           nix
           nixos-install-tools
           disko
-          # Custom scripts
-          self'.packages.generate-hardware-config
+          # Custom script
           self'.packages.chpasswd
         ];
         text = ''
@@ -63,9 +62,6 @@
           echo "Cloning config repo"
           git clone "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
           git -C "$CONFIG_DIR" remote set-url origin "git@github.com:$CONFIG_REPO.git"
-
-          echo "Generating hardware config"
-          generate-hardware-config.sh "$device" "$MOUNT_DIR"
 
           echo "Setting password (xtrace disabled)"
           chpasswd.sh "$MOUNT_DIR"
