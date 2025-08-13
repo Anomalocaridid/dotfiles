@@ -60,7 +60,7 @@
     home =
       { config, osConfig, ... }:
       {
-        imports = [ inputs.nix-index-database.hmModules.nix-index ];
+        imports = [ inputs.nix-index-database.homeModules.nix-index ];
 
         # Use nix-index to locate missing commands
         programs.nix-index.enable = true;
