@@ -502,11 +502,11 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1751825501,
-        "narHash": "sha256-6Jve3xCvRJGkz0A9D8dXH/DMWYE8MkFt+KJWQs9cLkw=",
-        "rev": "378b360bf8e0d04e8dd3733acd20d7a9b70360f1",
+        "lastModified": 1755000875,
+        "narHash": "sha256-bCyz75cXV4ZBGgGCouppIt9P3ZxA752eTMpewwijVdg=",
+        "rev": "4a119e6e46f275c3bb7868c6c688ebb75af62b3b",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/378b360bf8e0d04e8dd3733acd20d7a9b70360f1.tar.gz?rev=378b360bf8e0d04e8dd3733acd20d7a9b70360f1"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/4a119e6e46f275c3bb7868c6c688ebb75af62b3b.tar.gz?rev=4a119e6e46f275c3bb7868c6c688ebb75af62b3b"
       },
       "original": {
         "type": "tarball",
@@ -517,7 +517,9 @@
       "inputs": {
         "flake-utils": "flake-utils_2",
         "flakey-profile": "flakey-profile",
-        "lix": "lix",
+        "lix": [
+          "lix"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -960,6 +962,7 @@
         "ignis": "ignis",
         "impermanence": "impermanence",
         "import-tree": "import-tree",
+        "lix": "lix",
         "lix-module": "lix-module",
         "niri": "niri",
         "nix-gaming": "nix-gaming",
