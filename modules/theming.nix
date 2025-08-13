@@ -9,34 +9,7 @@
         ...
       }:
       {
-
         imports = [ inputs.catppuccin.nixosModules.catppuccin ];
-
-        # TTY theming
-        console.font =
-          let
-            font_family = builtins.head config.fonts.fontconfig.defaultFonts.monospace;
-            font_size = toString 11;
-            font_pkg = builtins.head config.fonts.packages;
-            mkttyfont = inputs.ttf-to-tty.packages.${pkgs.system}.mkttyfont;
-            dpi = toString 80;
-          in
-          pkgs.runCommand "${font_family}.psf"
-            { FONTCONFIG_FILE = pkgs.makeFontsConf { fontDirectories = [ font_pkg ]; }; }
-            ''
-              # Use fontconfig to select the correct .ttf or .otf file based on name
-              # Command taken from stylix GRUB module
-              font=$(
-                ${lib.getExe' pkgs.fontconfig "fc-match"} \
-                ${lib.escapeShellArg font_family} \
-                --format=%{file}
-              )
-              cp $font .
-
-              # Convert font from tty to psf
-              ${lib.getExe mkttyfont} *.ttf ${font_size} ${dpi}
-              cp *.psf $out
-            '';
 
         fonts = {
           packages = with pkgs; [ nerd-fonts.fira-code ];

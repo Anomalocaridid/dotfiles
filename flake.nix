@@ -77,11 +77,6 @@
     # Provides a binary cache, so do not follow inputs
     niri.url = "github:sodiboo/niri-flake";
 
-    ttf-to-tty = {
-      url = "github:Sigmanificient/ttf_to_tty";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # Catppuccin Theming
     # Provides a binary cache, so do not follow inputs
     catppuccin.url = "github:catppuccin/nix";
