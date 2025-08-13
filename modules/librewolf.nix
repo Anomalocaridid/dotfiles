@@ -134,11 +134,15 @@
               id = 1;
               # Un-break certain websites
               settings."webgl.disabled" = false;
-              extensions.packages = with firefox-addons; [
-                canvasblocker # Recommended for enabled WebGL
-                keepassxc-browser
-                ublock-origin
-              ];
+              extensions = {
+                # Needed because of above settings
+                force = true;
+                packages = with firefox-addons; [
+                  canvasblocker # Recommended for enabled WebGL
+                  keepassxc-browser
+                  ublock-origin
+                ];
+              };
             };
             default = {
               # Needed to make config files
