@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.pipewire = {
+  unify.modules.pipewire.nixos = {
     # Needed for pipewire to work in real time
     security.rtkit.enable = true;
 

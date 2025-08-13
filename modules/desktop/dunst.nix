@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.dunst =
+  unify.modules.dunst.home =
     { config, ... }:
     {
       services.dunst =

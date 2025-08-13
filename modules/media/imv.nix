@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.imv.programs.imv = {
+  unify.modules.imv.home.programs.imv = {
     enable = true;
     settings = {
       options = {

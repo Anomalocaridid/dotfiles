@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.starship =
+  unify.modules.starship.home =
     { config, lib, ... }:
     {
       programs.starship = {

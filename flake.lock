@@ -992,6 +992,7 @@
         "spicetify-nix": "spicetify-nix",
         "swi-lsp-server": "swi-lsp-server",
         "ttf-to-tty": "ttf-to-tty",
+        "unify": "unify",
         "yatline-catppuccin.yazi": "yatline-catppuccin.yazi",
         "yatline-githead.yazi": "yatline-githead.yazi",
         "yatline.yazi": "yatline.yazi"
@@ -1164,6 +1165,32 @@
         "owner": "Sigmanificient",
         "repo": "ttf_to_tty",
         "type": "github"
+      }
+    },
+    "unify": {
+      "inputs": {
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "home-manager": [
+          "home-manager"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1751426491,
+        "narHash": "sha256-R/YCo0/OtIdAWmJwhH5S/mKUGJrW1JWyCTup1LahSSs=",
+        "ref": "refs/heads/main",
+        "rev": "694cfe75069afd4c6e2b6045754fdaecac124acb",
+        "revCount": 37,
+        "type": "git",
+        "url": "https://codeberg.org/quasigod/unify"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://codeberg.org/quasigod/unify"
       }
     },
     "utils": {

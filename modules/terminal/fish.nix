@@ -1,12 +1,12 @@
 {
-  flake.modules = {
-    nixos.fish.programs.fish = {
+  unify.modules.fish = {
+    nixos.programs.fish = {
       # Need to enable fish at system level to use as shell
       enable = true;
       # Translate bash scripts into fish rather than wrapping them with foreign-env, which is slower
       useBabelfish = true;
     };
-    homeManager.fish =
+    home =
       {
         config,
         lib,

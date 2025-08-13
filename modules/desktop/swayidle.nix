@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.swayidle =
+  unify.modules.swayidle.home =
     { config, lib, ... }:
     {
       # Hack to ensure screen locker works properly

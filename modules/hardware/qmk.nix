@@ -1,8 +1,8 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.qmk.hardware.keyboard.qmk.enable = true;
-    homeManager.qmk =
+  unify.modules.qmk = {
+    nixos.hardware.keyboard.qmk.enable = true;
+    home =
       { config, pkgs, ... }:
       {
         home.packages = with pkgs; [ qmk ];

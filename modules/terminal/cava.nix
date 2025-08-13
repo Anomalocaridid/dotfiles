@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.cava =
+  unify.modules.cava.home =
     { lib, ... }:
     {
       programs.cava = {

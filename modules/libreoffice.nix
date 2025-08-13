@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.libreoffice =
+  unify.modules.libreoffice.home =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [

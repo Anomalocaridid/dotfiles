@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.glow =
+  unify.modules.glow.home =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [ glow ];

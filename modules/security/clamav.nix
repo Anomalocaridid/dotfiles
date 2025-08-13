@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.clamav.services.clamav = {
+  unify.modules.clamav.nixos.services.clamav = {
     daemon.enable = true;
     updater.enable = true;
     # Unofficial updater for extra malware signatures

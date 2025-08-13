@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.wlogout =
+  unify.modules.wlogout.home =
     { config, lib, ... }:
     {
       programs.wlogout.enable = true;

@@ -1,11 +1,11 @@
 {
-  flake.modules =
+  unify.modules.user =
     let
       user = "anomalocaris";
     in
     {
-      nixos.user =
-        { pkgs, ... }:
+      nixos =
+        { pkgs, hostConfig, ... }:
         let
           persistDir = "/persist";
           passwordDir = "/${persistDir}/passwords";
@@ -28,6 +28,6 @@
           # TODO: See if this line can be moved to disko config
           fileSystems.${persistDir}.neededForBoot = true;
         };
-      homeManager.user.home.username = user;
+      home.home.username = user;
     };
 }

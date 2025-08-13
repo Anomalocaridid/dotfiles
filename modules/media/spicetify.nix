@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.spicetify =
+  unify.modules.spicetify.home =
     { config, pkgs, ... }:
     let
       spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};

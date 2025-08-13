@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.fastfetch =
+  unify.modules.fastfetch.home =
     { lib, ... }:
     {
       programs.fastfetch = {

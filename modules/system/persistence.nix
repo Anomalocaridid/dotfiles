@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.persistence =
+  unify.modules.persistence.nixos =
     { config, ... }:
     {
       imports = [ inputs.impermanence.nixosModules.impermanence ];

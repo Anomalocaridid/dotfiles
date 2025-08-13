@@ -7,7 +7,7 @@ in
     {
       formatter = pkgs.${nixFormatter};
     };
-  flake.modules.homeManager.helix =
+  unify.modules.helix.home =
     { lib, pkgs, ... }:
     {
       programs.helix = {

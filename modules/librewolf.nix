@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.librewolf =
+  unify.modules.librewolf.home =
     {
       config,
       lib,

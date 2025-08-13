@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.zathura.programs.zathura = {
+  unify.modules.zathura.home.programs.zathura = {
     enable = true;
     options = {
       recolor = false;

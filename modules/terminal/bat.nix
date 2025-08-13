@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.bat =
+  unify.modules.bat.home =
     {
       config,
       lib,

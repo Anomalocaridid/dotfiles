@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.nix =
+  unify.modules.nix = {
+    nixos =
       { lib, ... }:
       {
         imports = [
@@ -57,7 +57,7 @@
         # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
         system.stateVersion = "22.11"; # Did you read the comment?
       };
-    homeManager.nix =
+    home =
       { config, osConfig, ... }:
       {
         imports = [ inputs.nix-index-database.hmModules.nix-index ];

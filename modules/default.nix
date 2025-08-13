@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.default =
+  unify.modules.default = {
+    nixos =
       { lib, pkgs, ... }:
       {
         imports = [ inputs.disko.nixosModules.disko ];
@@ -31,7 +31,7 @@
         # Tell electron apps to use Wayland
         environment.sessionVariables.NIXOS_OZONE_WL = "1";
       };
-    homeManager.default =
+    home =
       {
         config,
         pkgs,

@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.mimeapps =
+  unify.modules.mimeapps.home =
     { pkgs, ... }:
     {
       xdg = {

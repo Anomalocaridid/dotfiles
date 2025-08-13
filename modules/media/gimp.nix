@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.gimp =
+  unify.modules.gimp.home =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [ gimp3-with-plugins ];

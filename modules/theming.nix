@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.theming =
+  unify.modules.theming = {
+    nixos =
       {
         config,
         lib,
@@ -78,7 +78,7 @@
         # Allow svg icons in various places
         programs.gdk-pixbuf.modulePackages = with pkgs; [ librsvg ];
       };
-    homeManager.theming =
+    home =
       {
         config,
         lib,

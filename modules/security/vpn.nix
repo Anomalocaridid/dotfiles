@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.vpn.networking.firewall = {
+  unify.modules.vpn.nixos.networking.firewall = {
     # if packets are still dropped, they will show up in dmesg
     logReversePathDrops = true;
     # wireguard trips rpfilter up

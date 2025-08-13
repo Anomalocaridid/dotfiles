@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.zoxide.programs.zoxide = {
+  unify.modules.zoxide.home.programs.zoxide = {
     enable = true;
     # Alias as cd
     options = [ "--cmd cd" ];

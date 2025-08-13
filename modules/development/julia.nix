@@ -11,7 +11,7 @@
         ])
       ];
     };
-  flake.modules.homeManager.development =
+  unify.modules.development.home =
     { config, lib, ... }:
     {
       home.file.".julia/config/startup.jl".text =

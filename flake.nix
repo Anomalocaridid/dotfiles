@@ -36,6 +36,16 @@
     # Import file trees
     import-tree.url = "github:vic/import-tree";
 
+    # Configuration framework
+    unify = {
+      url = "git+https://codeberg.org/quasigod/unify";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        home-manager.follows = "home-manager";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
     # Nix user repository
     nur = {
       url = "github:nix-community/NUR";
@@ -158,6 +168,7 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         inputs.flake-parts.flakeModules.modules
+        inputs.unify.flakeModule
         inputs.devshell.flakeModule
         (inputs.import-tree [
           ./hosts

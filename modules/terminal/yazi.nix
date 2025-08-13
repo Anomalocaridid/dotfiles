@@ -1,8 +1,8 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.yazi.nixpkgs.overlays = [ inputs.nix-yazi-plugins.overlays.default ];
-    homeManager.yazi =
+  unify.modules.yazi = {
+    nixos.nixpkgs.overlays = [ inputs.nix-yazi-plugins.overlays.default ];
+    home =
       {
         config,
         lib,

@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.zk =
+  unify.modules.zk.home =
     {
       config,
       lib,

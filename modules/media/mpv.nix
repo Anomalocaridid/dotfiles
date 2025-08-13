@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.mpv.programs.mpv = {
+  unify.modules.mpv.home.programs.mpv = {
     enable = true;
     config = {
       osd-fractions = true;

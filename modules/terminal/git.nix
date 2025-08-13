@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.git = {
+  unify.modules.git.home = {
     programs.git = {
       enable = true;
       userEmail = "29845794+Anomalocaridid@users.noreply.github.com";

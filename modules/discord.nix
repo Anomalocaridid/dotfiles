@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.discord =
+  unify.modules.discord.home =
     { config, lib, ... }:
     {
       imports = [ inputs.nixcord.homeModules.nixcord ];

@@ -8,7 +8,7 @@
         nodePackages.typescript-language-server
       ];
     };
-  flake.modules.homeManager.development =
+  unify.modules.development.home =
     { pkgs, ... }:
     {
       home.file = {

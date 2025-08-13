@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.grub =
+  unify.modules.grub.nixos =
     {
       config,
       lib,

@@ -1,9 +1,9 @@
 { lib, inputs, ... }:
 {
-  flake.modules = {
+  unify.modules.ignis = {
     # Required for ignis
-    nixos.ignis.services.gvfs.enable = true;
-    homeManager.ignis =
+    nixos.services.gvfs.enable = true;
+    home =
       { config, pkgs, ... }:
       let
         ignisPackage = inputs.ignis.packages.${pkgs.system}.ignis.override {

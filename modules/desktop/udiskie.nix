@@ -1,8 +1,8 @@
 {
-  flake.modules = {
+  unify.modules.udiskie = {
     # Required for udiskie
-    nixos.udiskie.services.udisks2.enable = true;
-    homeManager.udiskie =
+    nixos.services.udisks2.enable = true;
+    home =
       { lib, pkgs, ... }:
       {
         services.udiskie = {

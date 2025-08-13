@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.homeManager.keepassxc =
+  unify.modules.keepassxc.home =
     { config, pkgs, ... }:
     {
       programs.keepassxc = {

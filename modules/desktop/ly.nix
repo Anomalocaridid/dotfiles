@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.ly =
+  unify.modules.ly.nixos =
     { pkgs, ... }:
     {
       services.displayManager.ly = {

@@ -11,7 +11,7 @@
         stack # Package manager
       ];
     };
-  flake.modules.homeManager.development.home.file.".ghci".text = ''
+  unify.modules.development.home.home.file.".ghci".text = ''
     :set prompt "\ESC[1;35mλ> \ESC[m"
   '';
 }

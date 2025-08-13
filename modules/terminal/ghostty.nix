@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.ghostty =
+  unify.modules.ghostty.home =
     { config, ... }:
     {
       programs.ghostty = {

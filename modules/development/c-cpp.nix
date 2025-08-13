@@ -11,7 +11,7 @@
         gnumake # Needed for exercism C and C++ tests
       ];
     };
-  flake.modules.homeManager.development =
+  unify.modules.development.home =
     { pkgs, ... }:
     {
       home.file.".clang-format".source =

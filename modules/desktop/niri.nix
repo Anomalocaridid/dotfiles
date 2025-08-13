@@ -1,11 +1,11 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.niri = {
+  unify.modules.niri = {
+    nixos = {
       imports = [ inputs.niri.nixosModules.niri ];
       programs.niri.enable = true;
     };
-    homeManager.niri =
+    home =
       {
         config,
         lib,

@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.freetube.programs.freetube = {
+  unify.modules.freetube.home.programs.freetube = {
     enable = true;
     settings = {
       # General Settings

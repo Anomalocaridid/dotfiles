@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
-  flake.modules = {
-    nixos.home-manager =
+  unify.modules.home-manager = {
+    nixos =
       { lib, ... }:
       {
         imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -10,10 +10,9 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           backupFileExtension = "bak";
-          users.anomalocaris.imports = lib.attrsets.attrValues inputs.self.modules.homeManager;
         };
       };
     # Lets Home Manager manage itself
-    homeManager.home-manager.programs.home-manager.enable = true;
+    home.programs.home-manager.enable = true;
   };
 }

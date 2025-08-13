@@ -1,9 +1,9 @@
 { inputs, ... }:
 {
-  flake.modules = {
+  unify.modules.swaylock = {
     # Needed for swaylock-plugin to unlock
-    nixos.swaylock.security.pam.services.swaylock-plugin = { };
-    homeManager.swaylock =
+    nixos.security.pam.services.swaylock-plugin = { };
+    home =
       {
         config,
         lib,

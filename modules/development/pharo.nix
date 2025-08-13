@@ -4,7 +4,7 @@
     {
       devshells.pharo.packages = with pkgs; [ pharo ];
     };
-  flake.modules.homeManager.development =
+  unify.modules.development.home =
     { config, ... }:
     {
       xdg.configFile."pharo/startup.st".text = ''
