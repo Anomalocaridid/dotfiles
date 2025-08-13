@@ -151,6 +151,8 @@
             flavor
             accent
             ;
+          # Disable Catppuccin icons because I want to use a different theme
+          gtk.icon.enable = false;
         };
 
         xdg = {
