@@ -10,7 +10,7 @@
             let
               editor = "Helix.desktop";
               browser = "librewolf.desktop";
-              pdfViewer = "org.pwmt.zathura-pdf-mupdf.desktop";
+              pdfViewer = "sioyek.desktop";
               officeSuite = "startcenter.desktop";
             in
             {
