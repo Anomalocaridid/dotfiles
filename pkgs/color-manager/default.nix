@@ -22,6 +22,9 @@ python3.pkgs.buildPythonPackage {
     custom.basic-colormath
   ];
 
+  pyproject = true;
+  build-system = with python3Packages; [ setuptools ];
+
   meta = {
     description = "Recolor icon packs, themes, wallpapers and assets with a few clicks or lines of code";
     homepage = "https://github.com/NicklasVraa/Color-manager";
