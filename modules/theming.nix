@@ -62,11 +62,20 @@
       {
         imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-        # Does not use global enable option for some reason
-        catppuccin.gtk.enable = true;
-
         gtk = {
           enable = true;
+          theme =
+            let
+              size = "standard";
+            in
+            {
+              name = "catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}-${size}";
+              package = pkgs.catppuccin-gtk.override {
+                accents = [ config.catppuccin.accent ];
+                inherit size;
+                variant = config.catppuccin.flavor;
+              };
+            };
           iconTheme =
             let
               recolor-icons =
@@ -144,8 +153,20 @@
             ;
         };
 
-        # Required for btop theme
-        xdg.enable = true;
+        xdg = {
+          # Required for btop theme
+          enable = true;
+          # Manually link gtk theme accents
+          configFile =
+            let
+              gtk4Dir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
+            in
+            {
+              "gtk-4.0/assets".source = "${gtk4Dir}/assets";
+              "gtk-4.0/gtk.css".source = "${gtk4Dir}/gtk.css";
+              "gtk-4.0/gtk-dark.css".source = "${gtk4Dir}/gtk-dark.css";
+            };
+        };
       };
   };
 }
