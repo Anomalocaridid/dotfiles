@@ -975,10 +975,7 @@
         "nur": "nur",
         "spicetify-nix": "spicetify-nix",
         "swi-lsp-server": "swi-lsp-server",
-        "unify": "unify",
-        "yatline-catppuccin.yazi": "yatline-catppuccin.yazi",
-        "yatline-githead.yazi": "yatline-githead.yazi",
-        "yatline.yazi": "yatline.yazi"
+        "unify": "unify"
       }
     },
     "spicetify-nix": {
@@ -1134,54 +1131,6 @@
       "original": {
         "owner": "Supreeeme",
         "repo": "xwayland-satellite",
-        "type": "github"
-      }
-    },
-    "yatline-catppuccin.yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1741193477,
-        "narHash": "sha256-Wz53zjwFyflnxCIMjAv+nzcgDriJwVYBX81pFXJUzc4=",
-        "owner": "imsi32",
-        "repo": "yatline-catppuccin.yazi",
-        "rev": "8cc4773ecab8ee8995485d53897e1c46991a7fea",
-        "type": "github"
-      },
-      "original": {
-        "owner": "imsi32",
-        "repo": "yatline-catppuccin.yazi",
-        "type": "github"
-      }
-    },
-    "yatline-githead.yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1748674817,
-        "narHash": "sha256-Cs8zSYtUfdCmKwIkJwQGyQNeSOmmpPvObCMnGm+32zg=",
-        "owner": "imsi32",
-        "repo": "yatline-githead.yazi",
-        "rev": "f8f969e84c39ad4215334ea5012183a2a5a6160b",
-        "type": "github"
-      },
-      "original": {
-        "owner": "imsi32",
-        "repo": "yatline-githead.yazi",
-        "type": "github"
-      }
-    },
-    "yatline.yazi": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1749709910,
-        "narHash": "sha256-RkQKZQAa5U9eMWk1Q0doueJZiuP4elUJ0dM1XKLSnDo=",
-        "owner": "imsi32",
-        "repo": "yatline.yazi",
-        "rev": "88bd1c58357d472fe7e8daf9904936771fc49795",
-        "type": "github"
-      },
-      "original": {
-        "owner": "imsi32",
-        "repo": "yatline.yazi",
         "type": "github"
       }
     }

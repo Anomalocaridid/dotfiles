@@ -27,27 +27,16 @@
                 };
             in
             {
-              # Previewers
-              "exifaudio" = pkgs.yaziPlugins.exifaudio;
-              "ouch" = pkgs.yaziPlugins.ouch;
-              # UI enhancements
-              "yatline" = inputs."yatline.yazi";
-              "yatline-catppuccin" = inputs."yatline-catppuccin.yazi";
-              "yatline-githead" = inputs."yatline-githead.yazi";
+              inherit (pkgs.yaziPlugins)
+                # Previewers
+                exifaudio
+                ouch
+                # UI enhancements
+                yatline
+                yatline-catppuccin
+                yatline-githead
+                ;
               # Snippets
-              "arrow" =
-                writePlugin
-                  # lua
-                  ''
-                    --- @sync entry
-                    return {
-                      entry = function(_, job)
-                        local current = cx.active.current
-                        local new = (current.cursor + job.args[1]) % #current.files
-                        ya.manager_emit("arrow", { new - current.cursor })
-                      end,
-                    }
-                  '';
               "smart-paste" =
                 writePlugin
                   # lua
@@ -69,27 +58,26 @@
             };
           settings = {
             plugin = {
-              prepend_previewers =
+              prepend_previewers = [
+                {
+                  mime = "audio/*";
+                  run = "exifaudio";
+                }
+              ]
+              ++ (builtins.map
+                (type: {
+                  mime = "application/${type}";
+                  run = "ouch";
+                })
                 [
-                  {
-                    mime = "audio/*";
-                    run = "exifaudio";
-                  }
+                  "*zip"
+                  "x-tar"
+                  "x-bzip2"
+                  "x-7z-compressed"
+                  "x-rar"
+                  "x-xz"
                 ]
-                ++ (builtins.map
-                  (type: {
-                    mime = "application/${type}";
-                    run = "ouch";
-                  })
-                  [
-                    "*zip"
-                    "x-tar"
-                    "x-bzip2"
-                    "x-7z-compressed"
-                    "x-rar"
-                    "x-xz"
-                  ]
-                );
+              );
             };
             opener.open = [
               {
@@ -107,40 +95,29 @@
                 desc = "Cancel input";
               }
             ];
-            manager.prepend_keymap =
-              [
-                {
-                  on = [ "p" ];
-                  run = "plugin smart-paste";
-                  desc = "Paste into the hovered directory or CWD";
-                }
-                {
-                  on = [ "<C-n>" ];
-                  run = ''shell '${lib.getExe pkgs.xdragon} --and-exit --all --on-top "$@"' --confirm'';
-                  desc = "Drag and drop selected files with dragon";
-                }
-                {
-                  on = [ "k" ];
-                  run = "plugin arrow -1";
-                  desc = "Move cursor up (wrapping)";
-                }
-                {
-                  on = [ "j" ];
-                  run = "plugin arrow 1";
-                  desc = "Move cursor down (wrapping)";
-                }
-              ]
-              ++ (builtins.genList (
-                x:
-                let
-                  i = toString (x + 1);
-                in
-                {
-                  on = [ "${i}" ];
-                  run = "plugin relative-motions --args=${i}";
-                  desc = "Move in relative steps";
-                }
-              ) 9);
+            mgr.prepend_keymap = [
+              {
+                on = [ "p" ];
+                run = "plugin smart-paste";
+                desc = "Paste into the hovered directory or CWD";
+              }
+              {
+                on = [ "<C-n>" ];
+                run = ''shell -- ${lib.getExe pkgs.xdragon} --and-exit --all --on-top "$@"'';
+                desc = "Drag and drop selected files with dragon";
+              }
+            ]
+            ++ (builtins.genList (
+              x:
+              let
+                i = toString (x + 1);
+              in
+              {
+                on = [ "${i}" ];
+                run = "plugin relative-motions --args=${i}";
+                desc = "Move in relative steps";
+              }
+            ) 9);
           };
 
           yaziPlugins = {
