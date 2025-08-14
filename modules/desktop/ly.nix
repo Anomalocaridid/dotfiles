@@ -1,13 +1,23 @@
 { inputs, ... }:
 {
   unify.modules.ly.nixos =
-    { pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       services.displayManager.ly = {
         enable = true;
         settings = {
-          animation = "doom";
-          blank_password = true;
+          animation = "colormix";
+          asterisk = "0x2022"; # •
+          bigclock = "en";
+          clear_password = true;
+          colormix_col1 = "0x0006"; # Magenta
+          colormix_col2 = "0x0005"; # Blue
+          colormix_col3 = "0x0007"; # Cyan
           hide_borders = true;
         };
       };
