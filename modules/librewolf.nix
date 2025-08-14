@@ -8,18 +8,11 @@
       ...
     }:
     {
+      # Force Firefox Color settings
+      catppuccin.librewolf.force = true;
       programs.librewolf =
         let
           inherit (pkgs.nur.repos.rycee) firefox-addons;
-          catppuccin-firefox = firefox-addons.buildFirefoxXpiAddon {
-            pname = "catppuccin-firefox";
-            version = "old";
-            url = "https://github.com/catppuccin/firefox/releases/download/old/catppuccin_${config.catppuccin.flavor}_${config.catppuccin.accent}.xpi";
-            sha256 = "sha256-pSlzVe7XbTbrC76iAinYrr7qIl69OpH3Wk00MoAIe74=";
-            addonId = "{76aabc99-c1a8-4c1e-832b-d4f2941d5a7a}";
-            meta = { };
-          };
-
           # Generate file for locked settings
           mkAutoconfigJs =
             prefs:
@@ -54,7 +47,7 @@
               # Automatically enable installed extensions
               "extensions.autoDisableScopes" = 0;
               # Set theme
-              "extensions.activeThemeID" = "${catppuccin-firefox.addonId}";
+              # "extensions.activeThemeID" = "${catppuccin-firefox.addonId}";
               # Use same search engine for private browsing
               "browser.search.separatePrivateDefault" = false;
               # Clear history on shutdown
@@ -138,6 +131,7 @@
                 # Needed because of above settings
                 force = true;
                 packages = with firefox-addons; [
+                  firefox-color # Required for catppuccin theme
                   canvasblocker # Recommended for enabled WebGL
                   keepassxc-browser
                   ublock-origin
@@ -154,7 +148,7 @@
                 # NOTE: Each extension also needs `force = true` to prevent file conflicts
                 force = true;
                 packages = with firefox-addons; [
-                  catppuccin-firefox
+                  firefox-color # Required for catppuccin theme
                   catppuccin-web-file-icons
                   darkreader
                   indie-wiki-buddy
