@@ -102,8 +102,8 @@
       },
       "original": {
         "owner": "different-name",
-        "ref": "b347a08",
         "repo": "catppuccin-userstyles-nix",
+        "rev": "b347a087e34ddb4ce645014744b101f217350209",
         "type": "github"
       }
     },
