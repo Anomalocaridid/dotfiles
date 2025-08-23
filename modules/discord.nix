@@ -12,9 +12,7 @@
           enable = true;
           settings =
             let
-              palette =
-                (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-                .${config.catppuccin.flavor}.colors;
+              palette = config.catppuccin.sources.parsedPalette;
               rgb =
                 {
                   r,

@@ -11,9 +11,7 @@
         ...
       }:
       let
-        palette =
-          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-          .${config.catppuccin.flavor}.colors;
+        palette = config.catppuccin.sources.parsedPalette;
       in
       {
         # Needed for weird technical reasons because `home.stateVersion` < 23.05

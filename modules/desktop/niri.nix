@@ -22,9 +22,7 @@
               "--"
             ];
             terminal = launch "x-scheme-handler/terminal";
-            palette =
-              (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-              .${config.catppuccin.flavor}.colors;
+            palette = config.catppuccin.sources.parsedPalette;
             accent = palette.${config.catppuccin.accent}.hex;
             niriSettings = config.programs.niri.settings;
             workspaces = 10;
@@ -176,16 +174,17 @@
             spawn-at-startup = [
               { command = [ (lib.getExe pkgs.xwayland-satellite) ]; }
               {
-                command =
-                  [ "${lib.getExe pkgs.windowtolayer}" ]
-                  ++ terminal
-                  ++ [
-                    "--background-opacity=0"
-                    "-e"
-                    "fish"
-                    "-c"
-                    "cava"
-                  ];
+                command = [
+                  "${lib.getExe pkgs.windowtolayer}"
+                ]
+                ++ terminal
+                ++ [
+                  "--background-opacity=0"
+                  "-e"
+                  "fish"
+                  "-c"
+                  "cava"
+                ];
               }
               {
                 command =

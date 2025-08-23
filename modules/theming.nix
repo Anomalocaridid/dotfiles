@@ -46,6 +46,9 @@
           cache.enable = true;
           flavor = "mocha";
           accent = "mauve";
+          sources.parsedPalette =
+            (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+            .${config.catppuccin.flavor}.colors;
         };
 
         # Allow svg icons in various places
@@ -117,9 +120,7 @@
         home = {
           pointerCursor =
             let
-              palette =
-                (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-                .${config.catppuccin.flavor}.colors;
+              palette = config.catppuccin.sources.parsedPalette;
             in
             {
               enable = true;
@@ -150,6 +151,7 @@
             enable
             flavor
             accent
+            sources
             ;
           # Disable Catppuccin icons because I want to use a different theme
           gtk.icon.enable = false;

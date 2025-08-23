@@ -161,9 +161,7 @@
                 settings =
                   let
                     accent = config.catppuccin.accent;
-                    palette =
-                      (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-                      .${config.catppuccin.flavor}.colors;
+                    palette = config.catppuccin.sources.parsedPalette;
                   in
                   {
                     "addon@darkreader.org" = {
