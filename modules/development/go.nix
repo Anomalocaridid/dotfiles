@@ -10,4 +10,16 @@
         gopls # Language Server
       ];
     };
+
+  unify.modules.development.home =
+    { lib, pkgs, ... }:
+    {
+      programs.helix.languages.language = [
+        {
+          name = "go";
+          auto-format = true;
+          formatter.command = lib.getExe' pkgs.gotools "goimports";
+        }
+      ];
+    };
 }

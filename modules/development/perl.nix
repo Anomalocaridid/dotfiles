@@ -9,4 +9,11 @@
         perlnavigator # Language server
       ];
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "perl";
+      auto-format = true;
+    }
+  ];
 }

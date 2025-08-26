@@ -5,11 +5,17 @@
       devshells.lua.packages = with pkgs; [
         # TODO: Change when Lua 5.4 becomes the default version
         (lua5_4.withPackages (
-          ps: with ps; [
-            busted # Needed for exercism tests
-          ]
+          # Needed for exercism tests
+          ps: with ps; [ busted ]
         ))
         lua-language-server
       ];
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "lua";
+      auto-format = true;
+    }
+  ];
 }

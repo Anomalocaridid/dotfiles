@@ -8,7 +8,7 @@
           metals # Language server
           sbt # Build tool, required for exercism tests
           scala
-          # scalafmt # Code formatter
+          scalafmt # Code formatter
         ];
 
         # Scalafmt config (no global location is available)
@@ -23,4 +23,11 @@
           }).shellHook;
       };
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "scala";
+      auto-format = true;
+    }
+  ];
 }

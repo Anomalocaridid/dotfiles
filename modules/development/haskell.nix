@@ -11,7 +11,16 @@
         stack # Package manager
       ];
     };
-  unify.modules.development.home.home.file.".ghci".text = ''
-    :set prompt "\ESC[1;35mλ> \ESC[m"
-  '';
+
+  unify.modules.development.home = {
+    home.file.".ghci".text = ''
+      :set prompt "\ESC[1;35mλ> \ESC[m"
+    '';
+    programs.helix.languages.language = [
+      {
+        name = "haskell";
+        auto-format = true;
+      }
+    ];
+  };
 }

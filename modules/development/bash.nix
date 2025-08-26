@@ -9,4 +9,14 @@
         shfmt # Formatter
       ];
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "bash";
+      indent = {
+        tab-width = 4;
+        unit = "    ";
+      };
+    }
+  ];
 }

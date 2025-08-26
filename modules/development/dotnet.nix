@@ -36,4 +36,11 @@
           };
         };
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "c-sharp";
+      auto-format = true;
+    }
+  ];
 }

@@ -8,4 +8,11 @@
         kotlin-language-server
       ];
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "kotlin";
+      auto-format = true;
+    }
+  ];
 }

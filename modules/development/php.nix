@@ -7,4 +7,22 @@
         phpunit # Unit testing framework
       ];
     };
+
+  unify.modules.development.home =
+    { lib, pkgs, ... }:
+    {
+      programs.helix.languages = {
+        language-server.phpactor = {
+          command = lib.getExe pkgs.phpactor;
+          args = [ "language-server" ];
+        };
+        language = [
+          {
+            name = "php";
+            auto-format = true;
+            language-servers = [ "phpactor" ];
+          }
+        ];
+      };
+    };
 }

@@ -33,4 +33,11 @@
 
       };
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "ocaml";
+      auto-format = true;
+    }
+  ];
 }

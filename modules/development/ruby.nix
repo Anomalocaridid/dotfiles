@@ -8,4 +8,19 @@
         rubyPackages.solargraph # ruby language server
       ];
     };
+
+  unify.modules.development.home = {
+    programs.helix.languages = {
+      language-server.solargraph.config = {
+        diagnostics = true;
+        formatting = true;
+      };
+      languages = [
+        {
+          name = "ruby";
+          auto-format = true;
+        }
+      ];
+    };
+  };
 }

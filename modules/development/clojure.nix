@@ -8,4 +8,11 @@
         leiningen # Needed for exercism tests
       ];
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "clojure";
+      auto-format = true;
+    }
+  ];
 }

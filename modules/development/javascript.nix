@@ -8,6 +8,7 @@
         nodePackages.typescript-language-server
       ];
     };
+
   unify.modules.development.home =
     { pkgs, ... }:
     {
@@ -20,6 +21,20 @@
             output = ".yarnrc.yml";
             format = "yaml";
           }).configFile;
+      };
+
+      programs.helix.languages = {
+        language-server.typescript-language-server.config.format.semicolons = "insert";
+        language = [
+          {
+            name = "javascript";
+            auto-format = true;
+          }
+          {
+            name = "typescript";
+            auto-format = true;
+          }
+        ];
       };
     };
 }

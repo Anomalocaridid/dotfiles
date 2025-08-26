@@ -11,6 +11,7 @@
         ])
       ];
     };
+
   unify.modules.development.home =
     { config, lib, ... }:
     {
@@ -26,5 +27,12 @@
           include("${inputs.catppuccin-ohmyrepl}/catppuccin.jl")
           OhMyREPL.colorscheme!("Catppuccin${mkUpper config.catppuccin.flavor}")
         '';
+
+      programs.helix.languages.language = [
+        {
+          name = "julia";
+          auto-format = true;
+        }
+      ];
     };
 }

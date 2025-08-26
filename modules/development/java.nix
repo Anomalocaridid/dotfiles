@@ -8,4 +8,15 @@
         jdt-language-server
       ];
     };
+
+  unify.modules.development.home.programs.helix.languages.language = [
+    {
+      name = "java";
+      auto-format = true;
+      indent = {
+        tab-width = 4;
+        unit = "    ";
+      };
+    }
+  ];
 }
