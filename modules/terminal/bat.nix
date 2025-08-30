@@ -8,25 +8,19 @@
     }:
     {
       home.shellAliases = {
-        bgrep = "batgrep";
         cat = "bat --paging=never";
         less = "bat --paging=always";
-        man = "batman";
-        diff = "batdiff";
+        bgrep = lib.getExe pkgs.bat-extras.batgrep;
+        man = lib.getExe pkgs.bat-extras.batman;
+        diff = lib.getExe pkgs.bat-extras.batpipe;
       };
 
       programs.bat = {
         enable = true;
         extraPackages = with pkgs; [
-          bat-extras.batdiff
-          bat-extras.batgrep
-          bat-extras.batman
-          bat-extras.batpipe
-          unzip # default batpipe viewer
+          unzip # required by default batpipe viewer
         ];
-        config = {
-          "lessopen" = true;
-        };
+        config.lessopen = true;
         # TODO: Remove once $LESSOPEN support is enabled by default
         package = pkgs.bat.overrideAttrs (oldAttrs: {
           cargoBuildFeatures = (oldAttrs.cargoBuildFeatures or [ ]) ++ [ "lessopen" ];
@@ -47,19 +41,16 @@
               header ? "",
             }:
             let
-              program = builtins.elemAt (lib.strings.splitString " " command) 0;
+              program = lib.strings.splitString " " command |> builtins.head |> builtins.baseNameOf;
             in
             #sh
             ''
               BATPIPE_VIEWERS+=("${program}")
 
               viewer_${program}_supports() {
-                command -v "${program}" $> /dev/null || return 1
-
                 case "$1" in
                   ${filetype}) return 0;;
                 esac
-
                 return 1
               }
 
@@ -71,10 +62,13 @@
             '';
           batpipe_archive_header = # sh
             ''
-                batpipe_header    "Viewing contents of archive: %{PATH}%s" "$1"
-              	batpipe_subheader "To view files within the archive, add the file path after the archive."
+              batpipe_header    "Viewing contents of archive: %{PATH}%s" "$1"
+              batpipe_subheader "To view files within the archive, add the file path after the archive."
             '';
-          batpipe_document_header = ''batpipe_header "Viewing text of document: %{PATH}%s" "$1"'';
+          batpipe_document_header = # sh
+            ''
+              batpipe_header "Viewing text of document: %{PATH}%s" "$1"
+            '';
         in
         lib.strings.concatMapStrings makeViewer [
           {

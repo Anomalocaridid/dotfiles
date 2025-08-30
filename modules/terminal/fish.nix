@@ -55,7 +55,7 @@
             shellInit = # fish
               ''
                 # Initialize batpipe
-                eval (batpipe)
+                eval (${lib.getExe pkgs.bat-extras.batpipe})
 
                 # fzf-fish settings
                 # width=20 so delta decorations don't wrap around small fzf preview pane
