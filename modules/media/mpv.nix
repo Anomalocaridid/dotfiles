@@ -1,18 +1,22 @@
 {
-  unify.modules.mpv.home.programs.mpv = {
-    enable = true;
-    config = {
-      osd-fractions = true;
-      volume = 40;
-    };
+  unify.modules.mpv.home = {
+    xdg.mimeApps.defaultApplications."video/*" = "mpv.desktop";
 
-    profiles = {
-      eye-cancer = {
-        sharpen = 5;
-        osd-font = "Comic Sans MS";
+    programs.mpv = {
+      enable = true;
+      config = {
+        osd-fractions = true;
+        volume = 40;
       };
-    };
 
-    scriptOpts.osc.seekbarstyle = "diamond";
+      profiles = {
+        eye-cancer = {
+          sharpen = 5;
+          osd-font = "Comic Sans MS";
+        };
+      };
+
+      scriptOpts.osc.seekbarstyle = "diamond";
+    };
   };
 }

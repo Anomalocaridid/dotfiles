@@ -4,36 +4,7 @@
     { pkgs, ... }:
     {
       xdg = {
-        mimeApps = {
-          enable = true;
-          defaultApplications =
-            let
-              editor = "Helix.desktop";
-              browser = "librewolf.desktop";
-              pdfViewer = "sioyek.desktop";
-              officeSuite = "startcenter.desktop";
-            in
-            {
-              "application/epub+zip" = pdfViewer;
-              "application/msword" = "writer.desktop";
-              "application/oxps" = pdfViewer;
-              "application/pdf" = pdfViewer;
-              "application/toml" = editor;
-              "application/vnd.ms-excel" = "calc.desktop";
-              "application/vnd.ms-powerpoint" = "impress.desktop";
-              "application/vnd.oasis.opendocument.*" = officeSuite;
-              "application/vnd.openxmlformats-officedocument.*" = officeSuite;
-              "application/x-yaml" = editor;
-              "audio/*" = "org.strawberrymusicplayer.strawberry.desktop";
-              "image/*" = "imv.desktop";
-              "inode/directory" = "yazi.desktop";
-              "text/*" = editor;
-              "text/html" = browser;
-              "video/*" = "mpv.desktop";
-              "x-scheme-handler/http*" = browser;
-              "x-scheme-handler/terminal" = "com.mitchellh.ghostty.desktop";
-            };
-        };
+        mimeApps.enable = true;
 
         configFile."handlr/handlr.toml".source =
           (inputs.nixago.lib.${pkgs.system}.make {

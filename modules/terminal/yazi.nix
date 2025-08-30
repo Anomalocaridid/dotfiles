@@ -13,6 +13,8 @@
         # For some reason, using ${pkgs.system} for the system causes infinite recursion
         imports = [ inputs.nix-yazi-plugins.legacyPackages.x86_64-linux.homeManagerModules.default ];
 
+        xdg.mimeApps.defaultApplications."inode/directory" = "yazi.desktop";
+
         programs.yazi = {
           enable = true;
           enableFishIntegration = true;

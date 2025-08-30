@@ -51,7 +51,6 @@
             pavucontrol # Graphical audio controller
             qalculate-gtk
             quickemu # Make and run VMs
-            strawberry
             tree
             tuxpaint
             wl-clipboard

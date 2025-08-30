@@ -10,6 +10,16 @@
     {
       # Force Firefox Color settings
       catppuccin.librewolf.force = true;
+
+      xdg.mimeApps.defaultApplications =
+        let
+          desktopFile = "librewolf.desktop";
+        in
+        {
+          "text/html" = desktopFile;
+          "x-scheme-handler/http*" = desktopFile;
+        };
+
       programs.librewolf =
         let
           inherit (pkgs.nur.repos.rycee) firefox-addons;
