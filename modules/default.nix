@@ -29,10 +29,8 @@
 
         # Enable CUPS to print documents.
         services.printing.enable = true;
-
-        # Tell electron apps to use Wayland
-        environment.sessionVariables.NIXOS_OZONE_WL = "1";
       };
+
     home =
       {
         config,
@@ -55,14 +53,6 @@
             tuxpaint
             wl-clipboard
           ];
-
-          sessionVariables = {
-            # Some things require $EDITOR to be a single command with no args
-            EDITOR = "xdg-open";
-            VISUAL = "$EDITOR";
-            PAGER = "bat";
-            MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
-          };
         };
 
         services = {

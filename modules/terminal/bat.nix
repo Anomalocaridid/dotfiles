@@ -7,12 +7,18 @@
       ...
     }:
     {
-      home.shellAliases = {
-        cat = "bat --paging=never";
-        less = "bat --paging=always";
-        bgrep = lib.getExe pkgs.bat-extras.batgrep;
-        man = lib.getExe pkgs.bat-extras.batman;
-        diff = lib.getExe pkgs.bat-extras.batpipe;
+      home = {
+        shellAliases = {
+          cat = "bat --paging=never";
+          less = "bat --paging=always";
+          bgrep = lib.getExe pkgs.bat-extras.batgrep;
+          man = lib.getExe pkgs.bat-extras.batman;
+          diff = lib.getExe pkgs.bat-extras.batpipe;
+        };
+        sessionVariables = {
+          PAGER = "bat";
+          MANPAGER = "sh -c 'col --no-backspaces --spaces | bat --plain --language=man'";
+        };
       };
 
       programs.bat = {

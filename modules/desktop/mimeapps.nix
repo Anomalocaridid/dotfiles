@@ -26,26 +26,34 @@
           }).configFile;
       };
 
-      home.packages = with pkgs; [
-        handlr-regex
-        # Use handlr as drop-in replacement for xdg-open
-        (writeShellApplication {
-          name = "xdg-open";
-          runtimeInputs = [ handlr-regex ];
-          text = # shell
-            ''
-              handlr open -- "$@"
-            '';
-        })
-        # Use handlr as drop-in replacement for xterm
-        (writeShellApplication {
-          name = "xterm";
-          runtimeInputs = [ handlr-regex ];
-          text = # shell
-            ''
-              handlr launch x-scheme-handler/terminal -- "$@"
-            '';
-        })
-      ];
+      home = {
+        # Some things require $EDITOR to be a single command with no args
+        sessionVariables = rec {
+          EDITOR = "xdg-open";
+          VISUAL = EDITOR;
+        };
+
+        packages = with pkgs; [
+          handlr-regex
+          # Use handlr as drop-in replacement for xdg-open
+          (writeShellApplication {
+            name = "xdg-open";
+            runtimeInputs = [ handlr-regex ];
+            text = # shell
+              ''
+                handlr open -- "$@"
+              '';
+          })
+          # Use handlr as drop-in replacement for xterm
+          (writeShellApplication {
+            name = "xterm";
+            runtimeInputs = [ handlr-regex ];
+            text = # shell
+              ''
+                handlr launch x-scheme-handler/terminal -- "$@"
+              '';
+          })
+        ];
+      };
     };
 }
