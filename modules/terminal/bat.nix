@@ -7,6 +7,14 @@
       ...
     }:
     {
+      home.shellAliases = {
+        bgrep = "batgrep";
+        cat = "bat --paging=never";
+        less = "bat --paging=always";
+        man = "batman";
+        diff = "batdiff";
+      };
+
       programs.bat = {
         enable = true;
         extraPackages = with pkgs; [

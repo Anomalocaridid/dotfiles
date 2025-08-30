@@ -73,23 +73,6 @@
                 expansion = "--help | bat --plain --language=help";
               };
             };
-            shellAliases = {
-              rd = "rmdir";
-              md = "mkdir";
-              rm = "rm --interactive";
-              du = lib.getExe pkgs.du-dust;
-              df = lib.getExe pkgs.duf;
-              # bat
-              bgrep = "batgrep";
-              cat = "bat --paging=never";
-              less = "bat --paging=always";
-              man = "batman";
-              diff = "batdiff";
-              # tealdeer
-              tldr = "PAGER='bat --plain' command tldr";
-              # lazygit
-              lg = "lazygit";
-            };
             plugins =
               map
                 (name: {
@@ -112,10 +95,19 @@
         };
 
         # Needed for plugins
-        home.packages = with pkgs; [
-          libnotify # Needed for done
-          grc # Needed for grc
-        ];
+        home = {
+          packages = with pkgs; [
+            libnotify # Needed for done
+            grc # Needed for grc
+          ];
+          shellAliases = {
+            rd = "rmdir";
+            md = "mkdir";
+            rm = "rm --interactive";
+            du = lib.getExe pkgs.du-dust;
+            df = lib.getExe pkgs.duf;
+          };
+        };
       };
   };
 }

@@ -42,11 +42,14 @@
       };
     };
 
-    home.sessionVariables = {
-      # Ensure bat's line numbers don't show up and mess things up
-      DELTA_PAGER = "bat --plain";
-      # Ensure --side-by-side is only used for `git diff`
-      DELTA_FEATURES = "+side-by-side";
+    home = {
+      shellAliases.lg = "lazygit";
+      sessionVariables = {
+        # Ensure bat's line numbers don't show up and mess things up
+        DELTA_PAGER = "bat --plain";
+        # Ensure --side-by-side is only used for `git diff`
+        DELTA_FEATURES = "+side-by-side";
+      };
     };
   };
 }

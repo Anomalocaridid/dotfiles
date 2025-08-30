@@ -1,12 +1,16 @@
 {
-  unify.modules.teeldeer.home.programs.tealdeer = {
-    enable = true;
-    settings = {
-      display = {
-        use_pager = true;
-        compact = true;
+  unify.modules.teeldeer.home = {
+    programs.tealdeer = {
+      enable = true;
+      settings = {
+        display = {
+          use_pager = true;
+          compact = true;
+        };
+        updates.auto_update = true;
       };
-      updates.auto_update = true;
     };
+
+    home.shellAliases.tldr = "PAGER='bat --plain' command tldr";
   };
 }
