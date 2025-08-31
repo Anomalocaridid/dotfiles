@@ -488,7 +488,7 @@ def statistic(
 
 def statistics() -> widgets.Box:
     def disk_usage() -> float:
-        total, usage, _ = shutil.disk_usage("/persist")
+        total, usage, _ = shutil.disk_usage(wm.PERSIST_DIR)
         return usage / total * 100
 
     return widgets.Box(

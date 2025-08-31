@@ -12,8 +12,8 @@ rec {
       imports = [ flake.diskoConfigurations.${hostname} ];
       facter.reportPath = facterReportPath;
     };
-    users.anomalocaris.modules = config.unify.hosts.nixos.${hostname}.modules;
+    users.${config.flake.meta.username}.modules = config.unify.hosts.nixos.${hostname}.modules;
   };
 
-  flake.diskoConfigurations.${hostname} = diskoConfig;
+  flake.diskoConfigurations.${hostname} = diskoConfig { inherit (config.flake.meta) persistDir; };
 }

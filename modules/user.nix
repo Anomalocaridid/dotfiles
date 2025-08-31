@@ -1,33 +1,32 @@
+{ config, ... }:
 {
+  flake.meta.username = "anomalocaris";
+
   unify.modules.user =
     let
-      user = "anomalocaris";
+      inherit (config.flake.meta) username persistDir passwordDir;
     in
     {
       nixos =
         { pkgs, hostConfig, ... }:
-        let
-          persistDir = "/persist";
-          passwordDir = "/${persistDir}/passwords";
-        in
         {
           users.users = {
-            ${user} = {
+            ${username} = {
               shell = pkgs.fish;
               isNormalUser = true;
               extraGroups = [
                 "wheel" # Enable ‘sudo’ for the user
                 "networkmanager" # Change network settings
               ];
-              hashedPasswordFile = "${passwordDir}/${user}";
+              hashedPasswordFile = "${passwordDir}/${username}";
             };
             root.hashedPasswordFile = "${passwordDir}/root";
           };
 
-          # /persist is needed for boot because it contains password hashes
-          # TODO: See if this line can be moved to disko config
+          # persistDir is needed for boot because it contains password hashes
           fileSystems.${persistDir}.neededForBoot = true;
         };
-      home.home.username = user;
+
+      home.home.username = username;
     };
 }

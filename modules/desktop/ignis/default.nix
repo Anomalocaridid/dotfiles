@@ -1,4 +1,12 @@
-{ lib, inputs, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
+let
+  inherit (config.flake.meta) persistDir;
+in
 {
   unify.modules.ignis.home =
     { config, pkgs, ... }:
@@ -33,6 +41,7 @@
           "ignis/wm.py".text =
             # python
             ''
+              PERSIST_DIR = "${persistDir}"
               BORDER_WIDTH = ${borderWidth}
               GAP_WIDTH = ${toString niriSettings.layout.gaps} - BORDER_WIDTH
               # Assume scrolling both up and down have the same cooldown

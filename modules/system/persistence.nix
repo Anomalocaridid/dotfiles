@@ -1,11 +1,19 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
+let
+  inherit (config.flake.meta) username persistDir;
+in
 {
+  flake.meta = rec {
+    persistDir = "/persist";
+    passwordDir = "${persistDir}/passwords";
+  };
+
   unify.modules.persistence.nixos =
     { config, ... }:
     {
       imports = [ inputs.impermanence.nixosModules.impermanence ];
 
-      environment.persistence."/persist" = {
+      environment.persistence.${persistDir} = {
         hideMounts = true;
         directories = [
           # Necessary system state
@@ -17,10 +25,10 @@
           "/etc/NetworkManager/system-connections" # Network connections
           "/var/lib/clamav" # ClamAV signature database
           # Nix config
-          rec {
+          {
             directory = "/etc/nixos";
-            user = "anomalocaris";
-            group = config.users.users.${user}.group;
+            user = username;
+            group = config.users.users.${username}.group;
           }
         ];
         files = [
@@ -28,7 +36,7 @@
           ## systemd
           "/etc/machine-id" # Unique system id for logging, etc.
         ];
-        users.anomalocaris.directories = [
+        users.${username}.directories = [
           # Default directories I care about
           "Documents"
           "Downloads"

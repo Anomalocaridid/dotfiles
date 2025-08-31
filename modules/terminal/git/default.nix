@@ -1,8 +1,11 @@
+{ config, ... }:
 {
+  flake.meta.gitHubUsername = "Anomalocaridid";
+
   unify.modules.git.home.programs.git = {
     enable = true;
     userEmail = "29845794+Anomalocaridid@users.noreply.github.com";
-    userName = "Anomalocaridid";
+    userName = config.flake.meta.gitHubUsername;
     extraConfig = {
       init.defaultBranch = "main";
       core.autocrlf = "input";

@@ -1,4 +1,5 @@
 { disk, memory }:
+{ persistDir }:
 {
   disko.devices = {
     disk.main = {
@@ -46,7 +47,7 @@
           content = {
             type = "btrfs";
             extraArgs = [ "-f" ]; # Override existing partition
-            # Subvolumes must set a mountpoint in order to be mounted 
+            # Subvolumes must set a mountpoint in order to be mounted
             # unless its parent is mounted
             subvolumes =
               let

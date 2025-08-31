@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
+let
+  inherit (config.flake.meta) username;
+in
 {
   unify.modules.ly.nixos =
     {
@@ -27,7 +30,7 @@
         (inputs.nixago.lib.${pkgs.system}.make {
           output = "save.ini";
           data.globalSection = {
-            user = "anomalocaris";
+            user = username;
             session_index = 2;
           };
           format = "iniWithGlobalSection";

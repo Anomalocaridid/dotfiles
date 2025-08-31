@@ -1,10 +1,14 @@
+{ config, ... }:
+let
+  inherit (config.flake.meta) persistDir;
+in
 {
   unify.modules.btrbk.nixos = {
     # Daily btrfs snapshots
     services.btrbk.instances.daily.settings = {
       snapshot_preserve = "14d";
       snapshot_preserve_min = "2d";
-      volume."/persist" = {
+      volume.${persistDir} = {
         subvolume = ".";
         snapshot_dir = "btrbk_snapshots";
       };
@@ -15,7 +19,7 @@
       btrbk-daily-init =
         let
           btrbkServices = [ "btrbk-daily.service" ];
-          snapshotDir = "/persist/btrbk_snapshots";
+          snapshotDir = "${persistDir}/btrbk_snapshots";
         in
         {
           description = "Ensure btrbk snapshot dir exists";

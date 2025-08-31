@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   perSystem =
     {
@@ -27,11 +28,11 @@
           	-o pipefail
 
           # Config constants
-          readonly CONFIG_REPO="Anomalocaridid/dotfiles"         # Dotfile config repo name
-          readonly FLAKE="github:$CONFIG_REPO"                   # Flake URL
-          readonly MOUNT_DIR="/mnt"                              # Where drive is mounted by disko (set by disko, not config)
-          readonly PERSIST_DIR="/persist"                        # Persistent partition mount location
-          readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos" # Config location in persistant partition
+          readonly CONFIG_REPO="${config.flake.meta.gitHubUsername}/dotfiles" # Dotfile config repo name
+          readonly FLAKE="github:$CONFIG_REPO"                                # Flake URL
+          readonly MOUNT_DIR="/mnt"                                           # Where drive is mounted by disko (set by disko, not config)
+          readonly PERSIST_DIR="${config.flake.meta.persistDir}"              # Persistent partition mount location
+          readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"              # Config location in persistant partition
 
           # Select config from flake to install
           PS3="Select device config to install: "

@@ -1,3 +1,4 @@
+{ config, ... }:
 {
   perSystem =
     { lib, pkgs, ... }:
@@ -14,9 +15,8 @@
           	-o pipefail
 
           # Config constants
-          readonly USERNAME="anomalocaris"                          # Main user username
-          readonly PERSIST_DIR="/persist"                           # Persistent partition mount location
-          readonly PASSWORD_HASH_DIR="''${1:-}$PERSIST_DIR/passwords" # Directory where password hashes are written to
+          readonly USERNAME="${config.flake.meta.username}"                     # Main user username
+          readonly PASSWORD_HASH_DIR="''${1:-}${config.flake.meta.passwordDir}" # Directory where password hashes are written to
 
           # Show user where hashes will be created just in case
           echo "Writing password hashes to $PASSWORD_HASH_DIR"

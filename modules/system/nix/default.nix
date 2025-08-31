@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   unify.modules.nix = {
     nixos =
@@ -47,7 +47,7 @@
 
         # Ensure that nixos config has proper permissions
         # NOTE: persistence permissions only seem to apply upon creating a bind mount
-        systemd.tmpfiles.rules = [ "Z /etc/nixos - anomalocaris users -" ];
+        systemd.tmpfiles.rules = [ "Z /etc/nixos - ${config.flake.meta.username} users -" ];
 
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
