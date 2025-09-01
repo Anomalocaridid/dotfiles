@@ -1,38 +1,48 @@
+{ config, ... }:
+let
+  inherit (config.flake.meta) username persistDir;
+in
 {
-  unify.modules.freetube.home.programs.freetube = {
-    enable = true;
-    settings = {
-      # General Settings
-      checkForUpdates = false;
-      checkForBlogPosts = false;
+  unify.modules.freetube = {
+    # Freetube user data
+    nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".config/FreeTube" ];
 
-      # Distraction Free Settings
-      ## Side Bar
-      hideTrendingVideos = true;
-      hidePopularVideos = true;
+    home.programs.freetube = {
+      enable = true;
+      settings = {
+        # General Settings
+        checkForUpdates = false;
+        checkForBlogPosts = false;
 
-      ## Subscriptions Page
-      hideSubscriptionsLive = true;
-      hideSubscriptionsShorts = true;
-      hideSubscriptionsCommunity = true;
+        # Distraction Free Settings
+        ## Side Bar
+        hideTrendingVideos = true;
+        hidePopularVideos = true;
 
-      ## Watch Page
-      hideVideoLikesAndDislikes = true;
-      hideLiveChat = true;
-      hideRecommendedVideos = true;
-      hideComments = true;
+        ## Subscriptions Page
+        hideSubscriptionsLive = true;
+        hideSubscriptionsShorts = true;
+        hideSubscriptionsCommunity = true;
 
-      ## General
-      hideVideoViews = true;
-      hideChannelSubscriptions = true;
+        ## Watch Page
+        hideVideoLikesAndDislikes = true;
+        hideLiveChat = true;
+        hideRecommendedVideos = true;
+        hideComments = true;
 
-      # Download Settings
-      downloadBehavior = "download";
+        ## General
+        hideVideoViews = true;
+        hideChannelSubscriptions = true;
 
-      # SponsorBlock Settings
-      useSponsorBlock = true;
-      useDeArrowTitles = true;
-      useDeArrowThumbnails = true;
+        # Download Settings
+        downloadBehavior = "download";
+
+        # SponsorBlock Settings
+        useSponsorBlock = true;
+        useDeArrowTitles = true;
+        useDeArrowThumbnails = true;
+      };
+
     };
   };
 }

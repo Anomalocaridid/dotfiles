@@ -1,7 +1,19 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   unify.modules.qmk = {
-    nixos.hardware.keyboard.qmk.enable = true;
+    nixos =
+      let
+        inherit (config.flake.meta) username persistDir;
+      in
+      {
+        hardware.keyboard.qmk.enable = true;
+
+        environment.persistence.${persistDir}.users.${username}.directories = [
+          "qmk_firmware" # QMK firmware
+          "qmk_userspace" # QMK userspace
+        ];
+      };
+
     home =
       { config, pkgs, ... }:
       {

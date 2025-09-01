@@ -1,7 +1,17 @@
+{ config, ... }:
+let
+  inherit (config.flake.meta) persistDir username;
+in
 {
-  unify.modules.zoxide.home.programs.zoxide = {
-    enable = true;
-    # Alias as cd
-    options = [ "--cmd cd" ];
+  unify.modules.zoxide = {
+    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
+      ".local/share/zoxide" # Zoxide history
+    ];
+
+    home.programs.zoxide = {
+      enable = true;
+      # Alias as cd
+      options = [ "--cmd cd" ];
+    };
   };
 }

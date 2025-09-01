@@ -1,16 +1,25 @@
+{ config, ... }:
+let
+  inherit (config.flake.meta) persistDir username;
+in
 {
-  unify.modules.teeldeer.home = {
-    programs.tealdeer = {
-      enable = true;
-      settings = {
-        display = {
-          use_pager = true;
-          compact = true;
-        };
-        updates.auto_update = true;
-      };
-    };
+  unify.modules.teeldeer = {
+    # Tldr pages, prevents tealdeer redownloading them every time
+    nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".cache/tealdeer" ];
 
-    home.shellAliases.tldr = "PAGER='bat --plain' command tldr";
+    home = {
+      programs.tealdeer = {
+        enable = true;
+        settings = {
+          display = {
+            use_pager = true;
+            compact = true;
+          };
+          updates.auto_update = true;
+        };
+      };
+
+      home.shellAliases.tldr = "PAGER='bat --plain' command tldr";
+    };
   };
 }

@@ -1,46 +1,56 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
+let
+  inherit (config.flake.meta) persistDir username;
+in
 {
-  unify.modules.spicetify.home =
-    { config, pkgs, ... }:
-    let
-      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
-    in
-    {
-      imports = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
+  unify.modules.spicetify = {
+    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
+      ".cache/spotify" # Spotify cache
+      ".config/spotify" # Spotify user data
+    ];
 
-      programs.spicetify = {
-        enable = true;
-        theme = spicePkgs.themes.catppuccin // {
-          requiredExtensions =
-            let
-              name = "accent.js";
-            in
-            [
-              {
-                src =
-                  pkgs.writeTextDir name # javascript
-                    ''
-                      localStorage.setItem("catppuccin-accentColor", "${config.catppuccin.accent}");
-                    '';
-                inherit name;
-              }
-            ];
+    home =
+      { config, pkgs, ... }:
+      let
+        spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.system};
+      in
+      {
+        imports = [ inputs.spicetify-nix.homeManagerModules.spicetify ];
+
+        programs.spicetify = {
+          enable = true;
+          theme = spicePkgs.themes.catppuccin // {
+            requiredExtensions =
+              let
+                name = "accent.js";
+              in
+              [
+                {
+                  src =
+                    pkgs.writeTextDir name # javascript
+                      ''
+                        localStorage.setItem("catppuccin-accentColor", "${config.catppuccin.accent}");
+                      '';
+                  inherit name;
+                }
+              ];
+          };
+          colorScheme = config.catppuccin.flavor;
+          enabledExtensions = with spicePkgs.extensions; [
+            # Official extensions
+            keyboardShortcut
+            shuffle
+            # Community extensions
+            seekSong
+            autoVolume
+            history
+            hidePodcasts
+            adblock
+            volumePercentage
+            queueTime
+            allOfArtist
+          ];
         };
-        colorScheme = config.catppuccin.flavor;
-        enabledExtensions = with spicePkgs.extensions; [
-          # Official extensions
-          keyboardShortcut
-          shuffle
-          # Community extensions
-          seekSong
-          autoVolume
-          history
-          hidePodcasts
-          adblock
-          volumePercentage
-          queueTime
-          allOfArtist
-        ];
       };
-    };
+  };
 }

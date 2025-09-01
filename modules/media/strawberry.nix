@@ -1,11 +1,22 @@
+{ config, ... }:
+let
+  inherit (config.flake.meta) persistDir username;
+in
 {
-  unify.modules.strawberry.home =
-    { pkgs, ... }:
-    {
-      home.packages = with pkgs; [
-        strawberry
-      ];
+  unify.modules.strawberry = {
+    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
+      ".config/strawberry" # Strawberry settings
+      ".local/share/strawberry" # Strawberry cache
+    ];
 
-      xdg.mimeApps.defaultApplications."audio/*" = "org.strawberrymusicplayer.strawberry.desktop";
-    };
+    home =
+      { pkgs, ... }:
+      {
+        home.packages = with pkgs; [
+          strawberry
+        ];
+
+        xdg.mimeApps.defaultApplications."audio/*" = "org.strawberrymusicplayer.strawberry.desktop";
+      };
+  };
 }
