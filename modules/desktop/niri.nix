@@ -1,11 +1,20 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   unify.modules.niri = {
     nixos = {
       imports = [ inputs.niri.nixosModules.niri ];
       programs.niri.enable = true;
       # Tell electron apps to use Wayland
-      environment.sessionVariables.NIXOS_OZONE_WL = "1";
+      environment =
+        let
+          inherit (config.flake.meta) persistDir username;
+        in
+        {
+          sessionVariables.NIXOS_OZONE_WL = "1";
+          # sunsetr location info
+          # NOTE: contains private location data
+          persistence.${persistDir}.users.${username}.files = [ ".config/sunsetr/geo.toml" ];
+        };
     };
 
     home =
@@ -35,6 +44,7 @@
             prefer-no-csd = true;
 
             # Needed for xwayland-satellite
+            # TODO: remove in favor of automatic xwayland-satellite integration after updating to niri v25.08
             environment.DISPLAY = ":0";
 
             hotkey-overlay.skip-at-startup = true;
@@ -175,10 +185,13 @@
             ];
 
             spawn-at-startup = [
+              # Automatic blue light filter
+              { command = [ (lib.getExe pkgs.sunsetr) ]; }
+              # TODO: remove in favor of automatic xwayland-satellite integration after updating to niri v25.08
               { command = [ (lib.getExe pkgs.xwayland-satellite) ]; }
               {
                 command = [
-                  "${lib.getExe pkgs.windowtolayer}"
+                  (lib.getExe pkgs.windowtolayer)
                 ]
                 ++ terminal
                 ++ [
