@@ -21,8 +21,6 @@ in
           "/var/lib/nixos" # Holds state needed for stable uids and gids for users and groups
           ## systemd
           "/var/lib/systemd" # Systemd state directory, used for numerous things
-          # Other important things
-          "/etc/NetworkManager/system-connections" # Network connections
           # Nix config
           {
             directory = "/etc/nixos";

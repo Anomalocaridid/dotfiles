@@ -12,10 +12,6 @@
           extraModprobeConfig = "options kvm_amd nested=1";
         };
 
-        networking.networkmanager.enable = true;
-        # Prevent nixos-rebuild from freezing until this times out
-        systemd.network.enable = lib.mkForce false;
-
         time.timeZone = "America/New_York";
 
         # Select internationalisation properties.

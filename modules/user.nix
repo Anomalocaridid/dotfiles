@@ -15,7 +15,6 @@
               isNormalUser = true;
               extraGroups = [
                 "wheel" # Enable ‘sudo’ for the user
-                "networkmanager" # Change network settings
               ];
               hashedPasswordFile = "${passwordDir}/${username}";
             };

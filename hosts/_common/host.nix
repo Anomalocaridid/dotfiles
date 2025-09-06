@@ -9,7 +9,6 @@ rec {
   unify.hosts.nixos.${hostname} = {
     inherit modules;
     nixos = {
-      networking.hostName = hostname;
       imports = [ flake.diskoConfigurations.${hostname} ];
       facter.reportPath = facterReportPath;
     };
