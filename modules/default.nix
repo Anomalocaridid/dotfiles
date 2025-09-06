@@ -1,11 +1,8 @@
-{ inputs, ... }:
 {
   unify.modules.general = {
     nixos =
       { lib, pkgs, ... }:
       {
-        imports = [ inputs.disko.nixosModules.disko ];
-
         boot = {
           kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
           # Enable KVM nested virtualization

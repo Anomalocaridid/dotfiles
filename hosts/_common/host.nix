@@ -4,12 +4,20 @@
   diskoConfig,
   facterReportPath,
 }:
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  inputs,
+  ...
+}:
 rec {
   unify.hosts.nixos.${hostname} = {
     inherit modules;
     nixos = {
-      imports = [ flake.diskoConfigurations.${hostname} ];
+      imports = [
+        inputs.disko.nixosModules.disko
+        flake.diskoConfigurations.${hostname}
+      ];
       facter.reportPath = facterReportPath;
     };
     users.${config.flake.meta.username}.modules = config.unify.hosts.nixos.${hostname}.modules;
