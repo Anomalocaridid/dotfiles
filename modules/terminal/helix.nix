@@ -1,5 +1,5 @@
 {
-  unify.modules.helix.home = {
+  unify.modules.general.home = {
     xdg.mimeApps.defaultApplications =
       let
         desktopFile = "Helix.desktop";

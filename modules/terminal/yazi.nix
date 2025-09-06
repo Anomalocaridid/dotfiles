@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.yazi = {
+  unify.modules.general = {
     nixos.nixpkgs.overlays = [ inputs.nix-yazi-plugins.overlays.default ];
     home =
       {

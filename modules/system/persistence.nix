@@ -8,7 +8,7 @@ in
     passwordDir = "${persistDir}/passwords";
   };
 
-  unify.modules.persistence.nixos =
+  unify.modules.general.nixos =
     { config, ... }:
     {
       imports = [ inputs.impermanence.nixosModules.impermanence ];

@@ -1,12 +1,13 @@
 {
   hostname,
+  modules,
   diskoConfig,
   facterReportPath,
 }:
 { config, lib, ... }:
 rec {
   unify.hosts.nixos.${hostname} = {
-    modules = lib.attrsets.attrValues config.unify.modules;
+    inherit modules;
     nixos = {
       networking.hostName = hostname;
       imports = [ flake.diskoConfigurations.${hostname} ];

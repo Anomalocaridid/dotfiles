@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) username;
 in
 {
-  unify.modules.ly.nixos =
+  unify.modules.general.nixos =
     {
       config,
       lib,

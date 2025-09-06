@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  unify.modules.fish = {
+  unify.modules.general = {
     nixos =
       { pkgs, ... }:
       {

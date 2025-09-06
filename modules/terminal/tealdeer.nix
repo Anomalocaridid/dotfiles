@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.teeldeer = {
+  unify.modules.general = {
     # Tldr pages, prevents tealdeer redownloading them every time
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".cache/tealdeer" ];
 

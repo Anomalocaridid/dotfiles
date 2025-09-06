@@ -5,7 +5,7 @@
       devshells.unison.packages = with pkgs; [ unison-ucm ];
     };
 
-  unify.modules.development.home =
+  unify.modules.general.home =
     { lib, pkgs, ... }:
     {
       programs.helix.languages = {

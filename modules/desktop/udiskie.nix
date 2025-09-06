@@ -1,5 +1,5 @@
 {
-  unify.modules.udiskie = {
+  unify.modules.general = {
     # Required for udiskie
     nixos.services.udisks2.enable = true;
     home =

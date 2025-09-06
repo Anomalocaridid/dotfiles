@@ -4,7 +4,8 @@
     {
       devshells.pharo.packages = with pkgs; [ pharo ];
     };
-  unify.modules.development.home =
+
+  unify.modules.general.home =
     { config, ... }:
     {
       xdg.configFile."pharo/startup.st".text = ''

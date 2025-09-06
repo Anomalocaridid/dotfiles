@@ -1,5 +1,5 @@
 {
-  unify.modules.mpv.home = {
+  unify.modules.general.home = {
     xdg.mimeApps.defaultApplications."video/*" = "mpv.desktop";
 
     programs.mpv = {

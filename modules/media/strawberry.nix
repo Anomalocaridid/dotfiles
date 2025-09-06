@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.strawberry = {
+  unify.modules.general = {
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [
       ".config/strawberry" # Strawberry settings
       ".local/share/strawberry" # Strawberry cache

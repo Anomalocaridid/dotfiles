@@ -2,7 +2,7 @@
 {
   flake.meta.username = "anomalocaris";
 
-  unify.modules.user =
+  unify.modules.general =
     let
       inherit (config.flake.meta) username persistDir passwordDir;
     in

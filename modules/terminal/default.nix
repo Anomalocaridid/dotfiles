@@ -1,5 +1,5 @@
 {
-  unify.modules.terminal.home =
+  unify.modules.general.home =
     { lib, pkgs, ... }:
     {
       home.shellAliases = {

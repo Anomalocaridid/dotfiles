@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.keepassxc.home =
+  unify.modules.general.home =
     { config, pkgs, ... }:
     {
       programs.keepassxc = {

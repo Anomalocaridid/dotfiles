@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.discord = {
+  unify.modules.general = {
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [
       ".config/vesktop/sessionData" # Vesktop user data
     ];

@@ -1,5 +1,5 @@
 {
-  unify.modules.ghostty.home =
+  unify.modules.general.home =
     { config, ... }:
     {
       xdg.mimeApps.defaultApplications."x-scheme-handler/terminal" = "com.mitchellh.ghostty.desktop";

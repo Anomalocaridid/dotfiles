@@ -1,5 +1,5 @@
 {
-  unify.modules.git.home = {
+  unify.modules.general.home = {
     programs.git.delta = {
       enable = true;
       options = {

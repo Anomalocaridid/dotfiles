@@ -12,7 +12,7 @@
       ];
     };
 
-  unify.modules.development.home =
+  unify.modules.general.home =
     { config, lib, ... }:
     {
       home.file.".julia/config/startup.jl".text =

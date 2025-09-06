@@ -1,6 +1,6 @@
 { config, inputs, ... }:
 {
-  unify.modules.gaming = {
+  unify.modules.general = {
     nixos =
       { pkgs, ... }:
       let

@@ -1,5 +1,5 @@
 {
-  unify.modules.sudo.nixos =
+  unify.modules.general.nixos =
     { pkgs, ... }:
     {
       security.sudo = {

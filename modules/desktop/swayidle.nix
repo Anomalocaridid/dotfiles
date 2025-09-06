@@ -1,5 +1,5 @@
 {
-  unify.modules.swayidle.home =
+  unify.modules.general.home =
     { config, lib, ... }:
     {
       # Hack to ensure screen locker works properly

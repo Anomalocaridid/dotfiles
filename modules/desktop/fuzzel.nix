@@ -1,5 +1,5 @@
 {
-  unify.modules.fuzzel.home =
+  unify.modules.general.home =
     { config, ... }:
     {
       programs.fuzzel =

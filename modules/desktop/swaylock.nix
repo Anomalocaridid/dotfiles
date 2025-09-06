@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.swaylock = {
+  unify.modules.general = {
     # Needed for swaylock-plugin to unlock
     nixos.security.pam.services.swaylock-plugin = { };
     home =

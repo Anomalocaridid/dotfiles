@@ -7,7 +7,7 @@
       formatter = pkgs.nixfmt-rfc-style;
     };
 
-  unify.modules.helix.home = moduleWithSystem (
+  unify.modules.general.home = moduleWithSystem (
     { self', ... }:
     { lib, pkgs, ... }:
     {

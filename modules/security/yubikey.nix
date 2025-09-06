@@ -1,12 +1,12 @@
 { config, ... }:
 {
-  unify.modules.yubikey = {
-    # Enable Yubikey support
+  unify.modules.general = {
     nixos =
       let
         inherit (config.flake.meta) persistDir username;
       in
       {
+        # Enable Yubikey support
         services.pcscd.enable = true;
 
         environment.persistence.${persistDir}.users.${username}.directories = [

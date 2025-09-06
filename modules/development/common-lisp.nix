@@ -17,8 +17,9 @@
         '';
       };
     };
+
   # Common Lisp repl config
-  unify.modules.development.home.home.file.".sbclrc".text = # scheme
+  unify.modules.general.home.home.file.".sbclrc".text = # scheme
     ''
       ;;; Load included packages without quicklisp 
       (load (sb-ext:posix-getenv "ASDF"))

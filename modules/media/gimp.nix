@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.gimp = {
+  unify.modules.general = {
     # GIMP settings
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".config/GIMP" ];
 

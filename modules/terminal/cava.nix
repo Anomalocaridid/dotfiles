@@ -1,5 +1,5 @@
 {
-  unify.modules.cava.home =
+  unify.modules.general.home =
     { lib, ... }:
     {
       programs.cava = {

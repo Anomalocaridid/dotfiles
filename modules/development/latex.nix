@@ -8,7 +8,7 @@
       ];
     };
 
-  unify.modules.development.home =
+  unify.modules.general.home =
     { lib, pkgs, ... }:
     {
       # NOTE: only works for standalone LaTeX files, not Tectonic projects

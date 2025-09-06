@@ -12,7 +12,7 @@
       ];
     };
 
-  unify.modules.development.home = {
+  unify.modules.general.home = {
     home.file.".ghci".text = ''
       :set prompt "\ESC[1;35mλ> \ESC[m"
     '';

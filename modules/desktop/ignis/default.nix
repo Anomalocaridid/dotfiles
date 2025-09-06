@@ -8,7 +8,7 @@ let
   inherit (config.flake.meta) persistDir;
 in
 {
-  unify.modules.ignis.home =
+  unify.modules.general.home =
     { config, pkgs, ... }:
     {
       imports = [ inputs.ignis.homeManagerModules.default ];

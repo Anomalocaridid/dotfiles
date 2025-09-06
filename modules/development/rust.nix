@@ -12,6 +12,6 @@
       ];
     };
 
-  unify.modules.development.home.programs.helix.languages.language-server.rust-analyzer.config.check.command =
+  unify.modules.general.home.programs.helix.languages.language-server.rust-analyzer.config.check.command =
     "clippy";
 }

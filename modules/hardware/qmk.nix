@@ -1,6 +1,6 @@
 { config, inputs, ... }:
 {
-  unify.modules.qmk = {
+  unify.modules.general = {
     nixos =
       let
         inherit (config.flake.meta) username persistDir;

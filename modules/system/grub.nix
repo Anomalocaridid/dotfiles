@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.grub.nixos =
+  unify.modules.general.nixos =
     {
       config,
       lib,

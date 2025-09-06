@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.default = {
+  unify.modules.general = {
     nixos =
       { lib, pkgs, ... }:
       {

@@ -1,5 +1,5 @@
 {
-  unify.modules.bat.home =
+  unify.modules.general.home =
     {
       config,
       lib,

@@ -1,5 +1,5 @@
 {
-  unify.modules.fastfetch.home =
+  unify.modules.general.home =
     { lib, ... }:
     {
       programs.fastfetch = {

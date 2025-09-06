@@ -1,5 +1,5 @@
 {
-  unify.modules.zk.home =
+  unify.modules.general.home =
     {
       config,
       lib,

@@ -9,7 +9,7 @@
       ];
     };
 
-  unify.modules.development.home =
+  unify.modules.general.home =
     { pkgs, ... }:
     {
       home.file = {

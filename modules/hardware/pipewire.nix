@@ -1,5 +1,5 @@
 {
-  unify.modules.pipewire.nixos = {
+  unify.modules.general.nixos = {
     # Needed for pipewire to work in real time
     security.rtkit.enable = true;
 

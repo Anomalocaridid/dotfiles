@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.libreoffice = {
+  unify.modules.general = {
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [
       ".config/LanguageTool" # LanguageTool settings
       ".config/libreoffice" # Libreoffice settings

@@ -7,7 +7,7 @@
       ];
     };
 
-  unify.modules.development.home =
+  unify.modules.general.home =
     { lib, pkgs, ... }:
     {
       programs.helix.languages.language = [

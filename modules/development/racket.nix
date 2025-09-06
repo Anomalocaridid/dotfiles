@@ -14,7 +14,7 @@
       };
     };
 
-  unify.modules.development.home.programs.helix.languages.language = [
+  unify.modules.general.home.programs.helix.languages.language = [
     {
       name = "racket";
       auto-format = true;

@@ -1,5 +1,5 @@
 {
-  unify.modules.eza.home.programs.eza = {
+  unify.modules.general.home.programs.eza = {
     enable = true;
     git = true;
     icons = "auto";

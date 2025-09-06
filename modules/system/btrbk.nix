@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir;
 in
 {
-  unify.modules.btrbk.nixos = {
+  unify.modules.general.nixos = {
     # Daily btrfs snapshots
     services.btrbk.instances.daily.settings = {
       snapshot_preserve = "14d";

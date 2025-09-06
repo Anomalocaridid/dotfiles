@@ -9,7 +9,7 @@
       ];
     };
 
-  unify.modules.development.home.programs.helix.languages.language = [
+  unify.modules.general.home.programs.helix.languages.language = [
     {
       name = "java";
       auto-format = true;

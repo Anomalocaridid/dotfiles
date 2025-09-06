@@ -12,7 +12,7 @@
       ];
     };
 
-  unify.modules.development.home =
+  unify.modules.general.home =
     let
       indentWidth = 4;
     in

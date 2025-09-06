@@ -9,7 +9,7 @@
       ];
     };
 
-  unify.modules.development.home = {
+  unify.modules.general.home = {
     programs.helix.languages = {
       language-server.solargraph.config = {
         diagnostics = true;

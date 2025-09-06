@@ -1,5 +1,5 @@
 {
-  unify.modules.imv.home = {
+  unify.modules.general.home = {
     programs.imv = {
       enable = true;
       settings = {

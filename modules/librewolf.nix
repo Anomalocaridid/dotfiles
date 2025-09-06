@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.librewolf = {
+  unify.modules.general = {
     # Librewolf data
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".librewolf" ];
 

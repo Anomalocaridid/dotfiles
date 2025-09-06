@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.home-manager = {
+  unify.modules.general = {
     nixos =
       { lib, ... }:
       {
@@ -12,6 +12,7 @@
           backupFileExtension = "bak";
         };
       };
+
     # Lets Home Manager manage itself
     home.programs.home-manager.enable = true;
   };

@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.mimeapps.home =
+  unify.modules.general.home =
     { pkgs, ... }:
     {
       xdg = {

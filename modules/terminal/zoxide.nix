@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.zoxide = {
+  unify.modules.general = {
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [
       ".local/share/zoxide" # Zoxide history
     ];

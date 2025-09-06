@@ -1,6 +1,6 @@
 { config, inputs, ... }:
 {
-  unify.modules.niri = {
+  unify.modules.general = {
     nixos = {
       imports = [ inputs.niri.nixosModules.niri ];
       programs.niri.enable = true;

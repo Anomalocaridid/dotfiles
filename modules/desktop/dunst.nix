@@ -1,5 +1,5 @@
 {
-  unify.modules.dunst.home =
+  unify.modules.general.home =
     { config, ... }:
     {
       services.dunst =

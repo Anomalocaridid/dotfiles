@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  unify.modules.printing = {
+  unify.modules.general = {
     nixos =
       { pkgs, ... }:
       {

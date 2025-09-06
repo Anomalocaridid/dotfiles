@@ -1,5 +1,5 @@
 {
-  unify.modules.starship.home =
+  unify.modules.general.home =
     { config, lib, ... }:
     {
       programs.starship = {

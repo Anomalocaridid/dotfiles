@@ -1,5 +1,5 @@
 {
-  unify.modules.wlogout.home =
+  unify.modules.general.home =
     { config, lib, ... }:
     {
       programs.wlogout.enable = true;

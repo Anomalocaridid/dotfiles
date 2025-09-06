@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.theming = {
+  unify.modules.general = {
     nixos =
       {
         config,

@@ -2,7 +2,7 @@
 {
   flake.meta.gitHubUsername = "Anomalocaridid";
 
-  unify.modules.git.home.programs.git = {
+  unify.modules.general.home.programs.git = {
     enable = true;
     userEmail = "29845794+Anomalocaridid@users.noreply.github.com";
     userName = config.flake.meta.gitHubUsername;

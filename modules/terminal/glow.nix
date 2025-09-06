@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.glow.home =
+  unify.modules.general.home =
     { pkgs, ... }:
     {
       home.packages = with pkgs; [ glow ];
