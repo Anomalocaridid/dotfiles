@@ -16,9 +16,6 @@
 
         # use xkbOptions in tty.
         console.useXkbConfig = true;
-
-        # Enable AMD microcode updates
-        hardware.enableRedistributableFirmware = true;
       };
 
     home =
