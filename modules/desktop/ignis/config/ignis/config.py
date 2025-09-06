@@ -65,7 +65,7 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
     current = list(
         filter(lambda w: w.is_active and w.output == monitor_name, niri.workspaces)
     )[0].idx
-    niri.switch_to_workspace(min(max(current + step, 0), 10))
+    niri.switch_to_workspace(min(max(current + step, 0), wm.WORKSPACES))
 
 
 # TODO: Preserve ordering of windows after that information is exposed in Niri IPC

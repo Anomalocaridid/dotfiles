@@ -1,3 +1,7 @@
+{ config, ... }:
+let
+  inherit (config.flake.meta) wm;
+in
 {
   unify.modules.general.home =
     { config, lib, ... }:
@@ -6,9 +10,6 @@
 
       catppuccin.wlogout.extraStyle =
         let
-          niriSettings = config.programs.niri.settings;
-          borderRadius = (builtins.elemAt niriSettings.window-rules 0).geometry-corner-radius;
-          borderWidth = "${toString niriSettings.layout.border.width}px";
           override =
             entry: icon: vertBorder: horiBorder:
             #css
@@ -20,12 +21,10 @@
                 ${lib.optionalString (horiBorder != null)
                   #css
                   ''
-                    border-${vertBorder}-${horiBorder}-radius: ${
-                      toString (builtins.ceil borderRadius."${vertBorder}-${horiBorder}")
-                    };
-                    border-${horiBorder}-width: ${borderWidth};''
+                    border-${vertBorder}-${horiBorder}-radius: ${toString wm.windowCornerRadius};
+                    border-${horiBorder}-width: ${toString wm.borderWidth}px;''
                 }
-                border-${vertBorder}-width: ${borderWidth};
+                border-${vertBorder}-width: ${toString wm.borderWidth}px;
               }
             '';
         in

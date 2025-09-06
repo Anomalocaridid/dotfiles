@@ -5,7 +5,7 @@
   ...
 }:
 let
-  inherit (config.flake.meta) persistDir;
+  inherit (config.flake.meta) persistDir wm;
 in
 {
   unify.modules.general.home =
@@ -32,36 +32,30 @@ in
         ];
       };
 
-      xdg.configFile =
-        let
-          niriSettings = config.programs.niri.settings;
-          borderWidth = toString niriSettings.layout.border.width;
-        in
-        {
-          "ignis/wm.py".text =
-            # python
-            ''
-              PERSIST_DIR = "${persistDir}"
-              BORDER_WIDTH = ${borderWidth}
-              GAP_WIDTH = ${toString niriSettings.layout.gaps} - BORDER_WIDTH
-              # Assume scrolling both up and down have the same cooldown
-              SCROLL_COOLDOWN_MS = ${toString niriSettings.binds."Mod+WheelScrollUp".cooldown-ms}
-            '';
+      xdg.configFile = {
+        "ignis/wm.py".text =
+          # python
+          ''
+            PERSIST_DIR = "${persistDir}"
+            GAP_WIDTH = ${toString wm.gapMinusBorder}
+            # Assume scrolling both up and down have the same cooldown
+            SCROLL_COOLDOWN_MS = ${toString wm.mouseCooldownMs}
+            WORKSPACES = ${toString wm.workspaces}
+          '';
 
-          "ignis/wm.scss".text =
-            # scss
-            ''
-              @use "sass:string";
+        "ignis/wm.scss".text =
+          # scss
+          ''
+            @use "sass:string";
 
-              @mixin border {
-              	border: ${borderWidth}px solid string.unquote("@accent_color");
-                // NOTE: Depends on window-rule order, chooses corner that it should match up with
-              	border-radius: ${toString (builtins.ceil (builtins.elemAt niriSettings.window-rules 0).geometry-corner-radius.top-right)}px;
-              }
-            '';
-          # Needed to include above files
-          ignis.recursive = true;
-        };
+            @mixin border {
+            	border: ${toString wm.borderWidth}px solid string.unquote("@accent_color");
+            	border-radius: ${toString wm.windowCornerRadius}px;
+            }
+          '';
+        # Needed to include above files
+        ignis.recursive = true;
+      };
 
       # This lets the Ignis bar count as a tray for programs that rely on tray.target
       systemd.user.services.ignis = {

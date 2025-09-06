@@ -1,5 +1,21 @@
 { config, inputs, ... }:
+let
+  inherit (config.flake.meta) wm;
+in
 {
+  # Needed for various programs to make theming consistent
+  flake.meta.wm = rec {
+    # Needs to be a float for niri, but not for other things that need it
+    windowCornerRadius = 12;
+    # Currently set to niri's default border width
+    borderWidth = 4;
+    # Currently set to niri's default gap width
+    gapWidth = 16;
+    gapMinusBorder = gapWidth - borderWidth;
+    mouseCooldownMs = 150;
+    workspaces = 10;
+  };
+
   unify.modules.general = {
     nixos = {
       imports = [ inputs.niri.nixosModules.niri ];
@@ -36,8 +52,20 @@
             terminal = launch "x-scheme-handler/terminal";
             palette = config.catppuccin.sources.parsedPalette;
             accent = palette.${config.catppuccin.accent}.hex;
-            niriSettings = config.programs.niri.settings;
-            workspaces = 10;
+            radius = wm.windowCornerRadius + 0.0;
+            geometry-corner-radius = {
+              bottom-left = radius;
+              bottom-right = radius;
+              top-left = radius;
+              top-right = radius;
+            };
+            active.gradient = {
+              from = accent;
+              to = accent;
+              angle = 45;
+              relative-to = "workspace-view";
+              in' = "oklch longer hue";
+            };
           in
           {
             # Prefer no client-side decorations to make borders and rounded corners a bit more consistent
@@ -50,18 +78,21 @@
             hotkey-overlay.skip-at-startup = true;
 
             layout = {
+              gaps = wm.gapWidth;
+
               always-center-single-column = true;
 
               # Show backdrop as wallpaper
               background-color = "transparent";
 
-              focus-ring.active.gradient = {
-                from = accent;
-                to = accent;
-                angle = 45;
-                relative-to = "workspace-view";
-                in' = "oklch longer hue";
+              border.width = wm.borderWidth;
+
+              focus-ring = {
+                inherit active;
+                width = wm.borderWidth;
               };
+
+              tab-indicator.width = wm.borderWidth;
 
               shadow = {
                 enable = true;
@@ -73,8 +104,6 @@
 
             window-rules =
               let
-                niriLayout = niriSettings.layout;
-                outerGap = niriLayout.gaps - niriLayout.border.width;
                 # Move to the corner, do not focus, and give a border;
                 notificationLike =
                   pos: rest:
@@ -82,32 +111,23 @@
                   // {
                     focus-ring.enable = false;
                     border = {
+                      inherit active;
                       enable = true;
                       inactive.color = accent;
-                      active = niriLayout.focus-ring.active;
                     };
                     open-focused = false;
                     default-floating-position = {
-                      x = outerGap;
-                      y = outerGap;
+                      x = wm.gapMinusBorder;
+                      y = wm.gapMinusBorder;
                       relative-to = pos;
                     };
                   };
               in
               [
                 {
+                  inherit geometry-corner-radius;
                   # Lets clients without xdg-decoration protocols have transparent backgrounds
                   draw-border-with-background = false;
-                  geometry-corner-radius =
-                    let
-                      radius = 12.0;
-                    in
-                    {
-                      bottom-left = radius;
-                      bottom-right = radius;
-                      top-left = radius;
-                      top-right = radius;
-                    };
                   clip-to-geometry = true;
                   # Open clients to take up maximum space by default
                   open-maximized = true;
@@ -165,14 +185,14 @@
             layer-rules = [
               # Let various UI components have shadows
               {
+                inherit geometry-corner-radius;
+
                 matches = [
                   { namespace = "^launcher$"; }
                   { namespace = "^notifications$"; }
                 ];
 
                 shadow.enable = true;
-                # All of these are configured to use niri's corner radius like this anyways
-                geometry-corner-radius = (builtins.elemAt niriSettings.window-rules 0).geometry-corner-radius;
               }
               # Put wallpapers in overview
               {
@@ -343,7 +363,7 @@
                   action.spawn = [ "wpctl" ] ++ args;
                 };
                 mouse = action: {
-                  cooldown-ms = 150;
+                  cooldown-ms = wm.mouseCooldownMs;
                   inherit action;
                 };
                 sh = actions.spawn "sh" "-c";
@@ -477,14 +497,14 @@
                   x:
                   let
                     workspace = x + 1;
-                    key = toString (lib.trivial.mod workspace workspaces);
+                    key = toString (lib.trivial.mod workspace wm.workspaces);
                   in
                   {
                     "Mod+${key}".action = actions.focus-workspace workspace;
                     # TODO: wait for upstream fix, see sodiboo/niri-flake#1018
                     "Mod+Ctrl+${key}".action.move-column-to-workspace = workspace;
                   }
-                ) workspaces
+                ) wm.workspaces
               );
           };
 
