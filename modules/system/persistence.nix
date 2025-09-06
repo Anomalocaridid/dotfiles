@@ -46,7 +46,6 @@ in
           "exercism" # Exercism
           "Projects" # Misc. programming
           "quickemu" # quickemu VMs
-          "Sync" # Syncthing
           ".tuxpaint" # Tux Paint saves
           # SSH key
           {
@@ -57,7 +56,6 @@ in
           # Non-critical caches and data to persist
           ".config/exercism" # Exercism API key
           ".config/OrcaSlicer" # Bambu Studio login and printer settings
-          ".local/state/syncthing" # Syncthing settings
         ];
       };
     };

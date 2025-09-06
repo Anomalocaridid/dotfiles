@@ -19,12 +19,7 @@
       };
 
     home =
-      {
-        config,
-        pkgs,
-        osConfig,
-        ...
-      }:
+      { config, pkgs, ... }:
       {
         home = {
           homeDirectory = "/home/${config.home.username}";
@@ -42,14 +37,7 @@
           ];
         };
 
-        services = {
-          cliphist.enable = true;
-          syncthing = {
-            enable = true;
-            # TODO: Enable and figure out how to configure declaratively
-            # tray.enable = true;
-          };
-        };
+        services.cliphist.enable = true;
       };
   };
 }
