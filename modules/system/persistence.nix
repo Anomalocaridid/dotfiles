@@ -43,19 +43,12 @@ in
           "Videos"
 
           # Other important stuff
-          "exercism" # Exercism
           "Projects" # Misc. programming
-          "quickemu" # quickemu VMs
-          ".tuxpaint" # Tux Paint saves
           # SSH key
           {
             directory = ".ssh";
             mode = "u=rwx,g=,o=";
           }
-
-          # Non-critical caches and data to persist
-          ".config/exercism" # Exercism API key
-          ".config/OrcaSlicer" # Bambu Studio login and printer settings
         ];
       };
     };

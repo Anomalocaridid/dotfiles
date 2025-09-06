@@ -1,13 +1,9 @@
 {
   unify.modules.general = {
     nixos =
-      { lib, pkgs, ... }:
+      { pkgs, ... }:
       {
-        boot = {
-          kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
-          # Enable KVM nested virtualization
-          extraModprobeConfig = "options kvm_amd nested=1";
-        };
+        boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
 
         time.timeZone = "America/New_York";
 
@@ -24,20 +20,13 @@
         home = {
           homeDirectory = "/home/${config.home.username}";
           packages = with pkgs; [
-            exercism
             itd
             killall
-            orca-slicer # 3D Printer Slicer
             pavucontrol # Graphical audio controller
             qalculate-gtk
-            quickemu # Make and run VMs
             tree
-            tuxpaint
-            wl-clipboard
           ];
         };
-
-        services.cliphist.enable = true;
       };
   };
 }
