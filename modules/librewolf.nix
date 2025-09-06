@@ -5,7 +5,12 @@ in
 {
   unify.modules.general = {
     # Librewolf data
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".librewolf" ];
+    nixos = {
+      # Nix user repository
+      nixpkgs.overlays = [ inputs.nur.overlays.default ];
+
+      environment.persistence.${persistDir}.users.${username}.directories = [ ".librewolf" ];
+    };
 
     home =
       {

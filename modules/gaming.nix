@@ -7,8 +7,6 @@
         inherit (config.flake.meta) username persistDir;
       in
       {
-        imports = [ inputs.nix-gaming.nixosModules.pipewireLowLatency ];
-
         programs = {
           steam = {
             enable = true;

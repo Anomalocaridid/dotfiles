@@ -16,6 +16,7 @@ rec {
     nixos = {
       imports = [
         inputs.disko.nixosModules.disko
+        inputs.nixos-facter-modules.nixosModules.facter
         flake.diskoConfigurations.${hostname}
       ];
       facter.reportPath = facterReportPath;

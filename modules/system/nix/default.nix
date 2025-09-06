@@ -4,10 +4,7 @@
     nixos =
       { lib, ... }:
       {
-        imports = [
-          inputs.lix-module.nixosModules.default
-          inputs.nixos-facter-modules.nixosModules.facter
-        ];
+        imports = [ inputs.lix-module.nixosModules.default ];
 
         nix = {
           settings = {
@@ -35,15 +32,7 @@
             |> (lib.mapAttrs (_: flake: { inherit flake; }));
         };
 
-        nixpkgs = {
-          overlays = [
-            # custom overlay
-            (import ../../../pkgs)
-            # Nix user repository
-            inputs.nur.overlays.default
-          ];
-          config.allowUnfree = true;
-        };
+        nixpkgs.config.allowUnfree = true;
 
         # Ensure that nixos config has proper permissions
         # NOTE: persistence permissions only seem to apply upon creating a bind mount

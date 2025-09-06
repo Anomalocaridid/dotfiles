@@ -25,6 +25,9 @@
           fileSystems.${persistDir}.neededForBoot = true;
         };
 
-      home.home.username = username;
+      home.home = {
+        username = username;
+        homeDirectory = "/home/${username}";
+      };
     };
 }
