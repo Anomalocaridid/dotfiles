@@ -2,14 +2,8 @@
   hostname,
   modules,
   diskoConfig,
-  facterReportPath,
 }:
-{
-  config,
-  lib,
-  inputs,
-  ...
-}:
+{ config, inputs, ... }:
 rec {
   unify.hosts.nixos.${hostname} = {
     inherit modules;
@@ -19,7 +13,7 @@ rec {
         inputs.nixos-facter-modules.nixosModules.facter
         flake.diskoConfigurations.${hostname}
       ];
-      facter.reportPath = facterReportPath;
+      facter.reportPath = ../${hostname}/facter.json;
     };
     users.${config.flake.meta.username}.modules = config.unify.hosts.nixos.${hostname}.modules;
   };
