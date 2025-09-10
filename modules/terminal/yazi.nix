@@ -18,77 +18,37 @@
         programs.yazi = {
           enable = true;
           enableFishIntegration = true;
-          plugins =
-            let
-              writePlugin =
-                text:
-                pkgs.writeTextFile rec {
-                  inherit text;
-                  name = "main.lua";
-                  destination = "/${name}";
-                };
-            in
-            {
-              inherit (pkgs.yaziPlugins)
-                # Previewers
-                exifaudio
-                ouch
-                # UI enhancements
-                yatline
-                yatline-catppuccin
-                yatline-githead
-                ;
-              # Snippets
-              "smart-paste" =
-                writePlugin
-                  # lua
-                  ''
-                    --- @sync entry
-                    return {
-                      entry = function()
-                        local h = cx.active.current.hovered
-                        if h and h.cha.is_dir then
-                          ya.manager_emit("enter", {})
-                          ya.manager_emit("paste", {})
-                          ya.manager_emit("leave", {})
-                        else
-                          ya.manager_emit("paste", {})
-                        end
-                      end,
-                    }
-                  '';
+          plugins = {
+            # Snippets
+            "smart-paste" = pkgs.writeTextFile rec {
+              name = "main.lua";
+              destination = "/${name}";
+              text =
+                # lua
+                ''
+                  --- @sync entry
+                  return {
+                    entry = function()
+                      local h = cx.active.current.hovered
+                      if h and h.cha.is_dir then
+                        ya.manager_emit("enter", {})
+                        ya.manager_emit("paste", {})
+                        ya.manager_emit("leave", {})
+                      else
+                        ya.manager_emit("paste", {})
+                      end
+                    end,
+                  }
+                '';
             };
-          settings = {
-            plugin = {
-              prepend_previewers = [
-                {
-                  mime = "audio/*";
-                  run = "exifaudio";
-                }
-              ]
-              ++ (builtins.map
-                (type: {
-                  mime = "application/${type}";
-                  run = "ouch";
-                })
-                [
-                  "*zip"
-                  "x-tar"
-                  "x-bzip2"
-                  "x-7z-compressed"
-                  "x-rar"
-                  "x-xz"
-                ]
-              );
-            };
-            opener.open = [
-              {
-                run = ''xdg-open "$1"'';
-                desc = "Open";
-                orphan = true; # Ensure it stays open after yazi is closed
-              }
-            ];
           };
+          settings.opener.open = [
+            {
+              run = ''xdg-open "$1"'';
+              desc = "Open";
+              orphan = true; # Ensure it stays open after yazi is closed
+            }
+          ];
           keymap = {
             input.prepend_keymap = [
               {
@@ -134,148 +94,21 @@
               };
               smart-enter.enable = true;
               smart-filter.enable = true;
-            };
-            runtimeDeps = with pkgs; [
-              # Previewers
-              exiftool
-              ouch
-            ];
-            extraConfig =
-              let
-                luaFormat = lib.generators.toLua { };
-              in
-              #lua
-              ''
-                local yatline_theme = require("yatline-catppuccin"):setup("${config.catppuccin.flavor}")
-
-                require("yatline"):setup(${
-                  luaFormat {
-                    theme = lib.generators.mkLuaInline "yatline_theme";
-                    show_background = false;
-
-                    header_line = {
-                      left = {
-                        section_a = [
-                          {
-                            type = "line";
-                            custom = false;
-                            name = "tabs";
-                            params = [ "left" ];
-                          }
-                        ];
-                        section_b = [ ];
-                        section_c = [ ];
-                      };
-                      right = {
-                        section_a = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "date";
-                            params = [ " %a, %b %d, %Y" ];
-                          }
-                        ];
-                        section_b = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "date";
-                            params = [ " %X" ];
-                          }
-                        ];
-                        section_c = [
-                          {
-                            type = "coloreds";
-                            custom = false;
-                            name = "task_states";
-                          }
-                          {
-                            type = "coloreds";
-                            custom = false;
-                            name = "task_workload";
-                          }
-                        ];
-                      };
-                    };
-
-                    status_line = {
-                      left = {
-                        section_a = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "tab_mode";
-                          }
-                        ];
-                        section_b = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "hovered_size";
-                          }
-                        ];
-                        section_c = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "hovered_path";
-                          }
-                          {
-                            type = "coloreds";
-                            custom = false;
-                            name = "githead";
-                          }
-                          {
-                            type = "coloreds";
-                            custom = false;
-                            name = "count";
-                            # Add filter count
-                            params = [ true ];
-                          }
-                        ];
-                      };
-                      right = {
-                        section_a = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "cursor_position";
-                          }
-                        ];
-                        section_b = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "cursor_percentage";
-                          }
-                        ];
-                        section_c = [
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "hovered_file_extension";
-                            params = [ true ];
-                          }
-                          {
-                            type = "coloreds";
-                            custom = false;
-                            name = "permissions";
-                          }
-                          {
-                            type = "string";
-                            custom = false;
-                            name = "hovered_ownership";
-                          }
-                        ];
-                      };
-                    };
-                  }
-                })
-
-                require("yatline-githead"):setup(${
-                  luaFormat {
-                    theme = lib.generators.mkLuaInline "yatline_theme";
-
+              ouch.enable = true;
+              exifaudio = {
+                enable = true;
+                # Provides more accurate metadata
+                mediainfo.enable = true;
+              };
+              yatline = {
+                enable = true;
+                theme = {
+                  name = "catppuccin";
+                  settings = config.catppuccin.flavor;
+                };
+                addons.githead = {
+                  enable = true;
+                  settings = {
                     branch_symbol = "";
                     commit_symbol = "󰜘";
                     behind_symbol = "";
@@ -285,9 +118,128 @@
                     staged_symbol = "󰩍";
                     unstaged_symbol = "";
                     untracked_symbol = "";
-                  }
-                })
-              '';
+                  };
+                };
+                settings = {
+                  show_background = false;
+                  header_line = {
+                    left = {
+                      section_a = [
+                        {
+                          type = "line";
+                          custom = false;
+                          name = "tabs";
+                          params = [ "left" ];
+                        }
+                      ];
+                      section_b = [ ];
+                      section_c = [ ];
+                    };
+                    right = {
+                      section_a = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "date";
+                          params = [ " %a, %b %d, %Y" ];
+                        }
+                      ];
+                      section_b = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "date";
+                          params = [ " %X" ];
+                        }
+                      ];
+                      section_c = [
+                        {
+                          type = "coloreds";
+                          custom = false;
+                          name = "task_states";
+                        }
+                        {
+                          type = "coloreds";
+                          custom = false;
+                          name = "task_workload";
+                        }
+                      ];
+                    };
+                  };
+                  status_line = {
+                    left = {
+                      section_a = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "tab_mode";
+                        }
+                      ];
+                      section_b = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "hovered_size";
+                        }
+                      ];
+                      section_c = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "hovered_path";
+                        }
+                        {
+                          type = "coloreds";
+                          custom = false;
+                          name = "githead";
+                        }
+                        {
+                          type = "coloreds";
+                          custom = false;
+                          name = "count";
+                          # Add filter count
+                          params = [ true ];
+                        }
+                      ];
+                    };
+                    right = {
+                      section_a = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "cursor_position";
+                        }
+                      ];
+                      section_b = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "cursor_percentage";
+                        }
+                      ];
+                      section_c = [
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "hovered_file_extension";
+                          params = [ true ];
+                        }
+                        {
+                          type = "coloreds";
+                          custom = false;
+                          name = "permissions";
+                        }
+                        {
+                          type = "string";
+                          custom = false;
+                          name = "hovered_ownership";
+                        }
+                      ];
+                    };
+                  };
+                };
+              };
+            };
           };
         };
       };
