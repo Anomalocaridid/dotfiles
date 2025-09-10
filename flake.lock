@@ -53,16 +53,15 @@
     "catppuccin-prismlauncher": {
       "flake": false,
       "locked": {
-        "lastModified": 1754592076,
-        "narHash": "sha256-Gt3fkZYBb6i9w3VjNntvRHD8jANdrahnlpIu/BrjMCQ=",
-        "owner": "Anomalocaridid",
+        "lastModified": 1757370993,
+        "narHash": "sha256-RN1VM29OH75GHSHgpu3HW8YSonIEnX7MZzCObJ6BwtQ=",
+        "owner": "catppuccin",
         "repo": "prismlauncher",
-        "rev": "2f419c03336c70b01087b86a756fd9a80b0069c0",
+        "rev": "1ef0e745286ce32750abc3bc5d3ca8073a623b60",
         "type": "github"
       },
       "original": {
-        "owner": "Anomalocaridid",
-        "ref": "whiskers",
+        "owner": "catppuccin",
         "repo": "prismlauncher",
         "type": "github"
       }

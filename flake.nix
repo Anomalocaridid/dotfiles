@@ -94,9 +94,8 @@
       flake = false;
     };
 
-    # Change to official repo when catppuccin/prismlauncher#6 is merged
     catppuccin-prismlauncher = {
-      url = "github:Anomalocaridid/prismlauncher/whiskers";
+      url = "github:catppuccin/prismlauncher";
       flake = false;
     };
 
