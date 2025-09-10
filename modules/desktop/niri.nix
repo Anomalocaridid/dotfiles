@@ -41,6 +41,8 @@ in
         ...
       }:
       {
+        home.packages = with pkgs; [ xwayland-satellite ];
+
         programs.niri.settings =
           let
             launch = mime: [
@@ -70,10 +72,6 @@ in
           {
             # Prefer no client-side decorations to make borders and rounded corners a bit more consistent
             prefer-no-csd = true;
-
-            # Needed for xwayland-satellite
-            # TODO: remove in favor of automatic xwayland-satellite integration after updating to niri v25.08
-            environment.DISPLAY = ":0";
 
             hotkey-overlay.skip-at-startup = true;
 
@@ -207,8 +205,6 @@ in
             spawn-at-startup = [
               # Automatic blue light filter
               { command = [ (lib.getExe pkgs.sunsetr) ]; }
-              # TODO: remove in favor of automatic xwayland-satellite integration after updating to niri v25.08
-              { command = [ (lib.getExe pkgs.xwayland-satellite) ]; }
               {
                 command = [
                   (lib.getExe pkgs.windowtolayer)
