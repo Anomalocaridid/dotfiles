@@ -9,17 +9,16 @@ from time import gmtime, strftime
 import psutil  # Not included by default
 import unicodeit  # Not included by default # pyright: ignore[reportMissingTypeStubs]
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
-
+from ignis import utils, widgets
+from ignis.css_manager import CssInfoPath, CssManager
 from ignis.services.audio import AudioService
 from ignis.services.fetch import FetchService
 from ignis.services.mpris import MprisPlayer, MprisService
 from ignis.services.network import NetworkService, WifiDevice
 from ignis.services.niri import NiriService, NiriWindow, NiriWorkspace
 from ignis.services.system_tray import SystemTrayItem, SystemTrayService
-from ignis import utils
+from ignis.services.upower import UPowerDevice, UPowerService
 from ignis.variable import Variable
-from ignis import widgets
-from ignis.css_manager import CssManager, CssInfoPath
 
 css_manager = CssManager.get_default()
 css_manager.apply_css(
@@ -37,6 +36,7 @@ mpris = MprisService.get_default()
 network = NetworkService.get_default()
 niri = NiriService.get_default()
 system_tray = SystemTrayService.get_default()
+upower = UPowerService.get_default()
 
 # Global constants
 BAR_SPACING = 10
@@ -591,6 +591,38 @@ def clock(monitor_id: int) -> widgets.EventBox:
     )
 
 
+def battery_item(device: UPowerDevice) -> widgets.Box:
+    return widgets.Box(
+        setup=lambda self: device.connect("removed", lambda _: self.unparent()),
+        child=[
+            widgets.Icon(icon_name=device.bind("icon_name", transform=desymbolize)),
+            widgets.Label(
+                label=device.bind("percent", lambda percent: f"{int(percent)}%"),
+            ),
+        ],
+        tooltip_text=device.bind_many(
+            ["time_remaining", "charging", "charged"],
+            lambda time_remaining, charging, charged: "󱟢 Battery is fully charged"
+            if charged
+            else strftime(
+                "󱧥 %H:%M:%S " + ("until fully charged" if charging else "remaining"),
+                gmtime(time_remaining),
+            ),
+        ),
+    )
+
+
+def battery() -> widgets.Box:
+    if upower.is_available:
+        return widgets.Box(
+            setup=lambda self: upower.connect(
+                "battery-added", lambda _, device: self.append(battery_item(device))
+            ),
+        )
+    else:
+        return widgets.Box()
+
+
 def right_arrow() -> widgets.Arrow:
     return widgets.Icon(image="go-next")
 
@@ -643,6 +675,7 @@ def bar(monitor_id: int) -> widgets.Window | None:
                         tray(),
                         left_arrow(),
                         clock(monitor_id),
+                        battery(),
                     ],
                 ),
             ),
