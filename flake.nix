@@ -153,6 +153,7 @@
     inputs@{ nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
+        inputs.disko.flakeModule
         inputs.flake-parts.flakeModules.modules
         inputs.unify.flakeModule
         inputs.devshell.flakeModule
