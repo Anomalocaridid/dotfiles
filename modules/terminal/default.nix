@@ -1,10 +1,20 @@
 {
   unify.modules.general.home =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       programs = {
-        ripgrep.enable = true;
         fd.enable = true;
+        ripgrep.enable = true;
+        vivid = {
+          enable = true;
+          # TODO: remove when catppuccin/nix vivid module is added
+          activeTheme = "catppuccin-${config.catppuccin.flavor}";
+        };
       };
 
       home = {
