@@ -3,6 +3,22 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
+  # Catppuccin userstyles for Stylus
+  flake-file.inputs = {
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        flake-parts.follows = "flake-parts";
+      };
+    };
+
+    catppuccin-userstyles-nix = {
+      url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
   unify.modules.general = {
     # Librewolf data
     nixos = {

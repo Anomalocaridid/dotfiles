@@ -3,6 +3,9 @@ let
   inherit (config.flake.meta) wm;
 in
 {
+  # Provides a binary cache, so do not follow inputs
+  flake-file.inputs.niri.url = "github:sodiboo/niri-flake";
+
   # Needed for various programs to make theming consistent
   flake.meta.wm = rec {
     # Needs to be a float for niri, but not for other things that need it

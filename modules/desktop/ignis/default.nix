@@ -8,6 +8,11 @@ let
   inherit (config.flake.meta) persistDir wm;
 in
 {
+  flake-file.inputs.ignis = {
+    url = "github:linkfrg/ignis";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   unify.modules.general.home =
     { config, pkgs, ... }:
     {

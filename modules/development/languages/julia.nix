@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  # Extra Catppuccin themes
+  flake-file.inputs.catppuccin-ohmyrepl = {
+    url = "github:catppuccin/ohmyrepl";
+    flake = false;
+  };
+
   perSystem =
     { pkgs, ... }:
     {

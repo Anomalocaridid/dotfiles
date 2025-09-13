@@ -3,6 +3,14 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
+  flake-file.inputs.nixcord = {
+    url = "github:KaylorBen/nixcord";
+    inputs = {
+      nixpkgs.follows = "nixpkgs";
+      flake-parts.follows = "flake-parts";
+    };
+  };
+
   unify.modules.general = {
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [
       ".config/vesktop/sessionData" # Vesktop user data

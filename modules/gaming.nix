@@ -1,5 +1,14 @@
 { config, inputs, ... }:
 {
+  flake-file.inputs = {
+    # Provides a binary cache, so do not follow inputs
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    catppuccin-prismlauncher = {
+      url = "github:catppuccin/prismlauncher";
+      flake = false;
+    };
+  };
+
   unify.modules.general = {
     nixos =
       { pkgs, ... }:

@@ -1,5 +1,8 @@
 { inputs, ... }:
 {
+  # Provides a binary cache, so do not follow inputs
+  flake-file.inputs.catppuccin.url = "github:catppuccin/nix";
+
   perSystem =
     { pkgs, ... }:
     {

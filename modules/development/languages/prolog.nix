@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  # Prolog language server
+  flake-file.inputs.swi-lsp-server = {
+    url = "github:jamesnvc/lsp_server";
+    flake = false;
+  };
+
   perSystem =
     { pkgs, ... }:
     {

@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  # Shaders for ghostty terminal
+  flake-file.inputs.ghostty-shaders = {
+    url = "github:hackr-sh/ghostty-shaders";
+    flake = false;
+  };
+
   unify.modules.general = {
     # Needed for swaylock-plugin to unlock
     nixos.security.pam.services.swaylock-plugin = { };

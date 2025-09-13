@@ -3,6 +3,11 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
+  flake-file.inputs.spicetify-nix = {
+    url = "github:Gerg-L/spicetify-nix";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   unify.modules.general = {
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [
       ".cache/spotify" # Spotify cache

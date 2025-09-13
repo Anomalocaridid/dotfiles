@@ -160,6 +160,21 @@
         "url": "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz"
       }
     },
+    "flake-file": {
+      "locked": {
+        "lastModified": 1756540347,
+        "narHash": "sha256-O306WrpZF8o7bNwx3fYZu5Qu6vHsS9k6rx01+e6ALwQ=",
+        "owner": "vic",
+        "repo": "flake-file",
+        "rev": "c04f95b47c8e6a3c961f88f068dbb3d3caad3ad1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vic",
+        "repo": "flake-file",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -955,6 +970,7 @@
         "catppuccin-userstyles-nix": "catppuccin-userstyles-nix",
         "devshell": "devshell",
         "disko": "disko",
+        "flake-file": "flake-file",
         "flake-parts": "flake-parts",
         "ghostty-shaders": "ghostty-shaders",
         "home-manager": "home-manager",

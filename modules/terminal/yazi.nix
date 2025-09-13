@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  # Yazi plugins options module
+  flake-file.inputs.nix-yazi-plugins = {
+    url = "github:lordkekz/nix-yazi-plugins";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   unify.modules.general = {
     nixos.nixpkgs.overlays = [ inputs.nix-yazi-plugins.overlays.default ];
     home =

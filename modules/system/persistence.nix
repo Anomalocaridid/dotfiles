@@ -8,6 +8,8 @@ in
     passwordDir = "${persistDir}/passwords";
   };
 
+  flake-file.inputs.impermanence.url = "github:nix-community/impermanence";
+
   unify.modules.general.nixos =
     { config, ... }:
     {
