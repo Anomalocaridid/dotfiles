@@ -45,12 +45,13 @@
               '';
           })
           # Use handlr as drop-in replacement for xterm
+          # NOTE: extra -e needed for ghostty to work for some reason
           (writeShellApplication {
             name = "xterm";
             runtimeInputs = [ handlr-regex ];
             text = # shell
               ''
-                handlr launch x-scheme-handler/terminal -- "$@"
+                handlr launch x-scheme-handler/terminal -- -e "$@"
               '';
           })
         ];

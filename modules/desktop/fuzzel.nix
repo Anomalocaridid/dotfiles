@@ -12,7 +12,7 @@ in
           main = {
             dpi-aware = "no"; # appears really small otherwise
             icon-theme = config.gtk.iconTheme.name;
-            terminal = "handlr launch x-scheme-handler/terminal --";
+            terminal = "xterm";
             # Match default vertical-pad
             horizontal-pad = 8;
           };
