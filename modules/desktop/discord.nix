@@ -71,6 +71,10 @@ in
                 MoreKaomoji.enabled = true;
                 MutualGroupDMs.enabled = true;
                 NoF1.enabled = true;
+                NoReplyMention = {
+                  enabled = true;
+                  inverseShiftReply = true;
+                };
                 SilentTyping.enabled = true;
                 TypingIndicator.enabled = true;
                 ViewIcons.enabled = true;
