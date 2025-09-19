@@ -1,7 +1,10 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
+let
+  inherit (config.flake.meta) selector;
+in
 {
   unify.modules.general.home =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       xdg = {
         mimeApps.enable = true;
@@ -10,7 +13,7 @@
           (inputs.nixago.lib.${pkgs.system}.make {
             data = {
               enable_selector = false;
-              selector = "fuzzel --dmenu --prompt='Open With: '";
+              selector = selector.stdin config;
               handlers = [
                 {
                   exec = "freetube %u";
