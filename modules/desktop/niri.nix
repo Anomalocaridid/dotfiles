@@ -1,6 +1,6 @@
 { config, inputs, ... }:
 let
-  inherit (config.flake.meta) wm;
+  inherit (config.flake.meta) wm selector;
 in
 {
   # Provides a binary cache, so do not follow inputs
@@ -371,11 +371,11 @@ in
                 "Mod+Shift+Slash".action = actions.show-hotkey-overlay;
 
                 "Mod+T".action.spawn = terminal;
-                "Mod+D".action = sh "pkill fuzzel || fuzzel";
+                "Mod+D".action = sh "pkill ${selector.apps} || ${selector.apps}";
                 "Mod+B".action.spawn = launch "x-scheme-handler/https";
                 "Mod+N".action.spawn = launch "inode/directory";
                 "Super+Alt+L".action = actions.spawn "wlogout" "--show-binds";
-                "Mod+Ctrl+C".action = sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
+                "Mod+Ctrl+C".action = sh "cliphist list | ${selector.stdin config} | wl-copy";
 
                 # Volume keys mappings for PipeWire & WirePlumber.
                 XF86AudioRaiseVolume = wpctl [
