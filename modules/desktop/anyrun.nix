@@ -21,18 +21,13 @@ in
           config = {
             plugins = map (plugin: "${anyrunPkg}/lib/lib${plugin}.so") [
               "applications"
-              "rink"
               "niri_focus"
-              "symbols"
               "nix_run"
-              "dictionary"
             ];
             y.fraction = 0.25;
             showResultsImmediately = true;
             closeOnClick = true;
           };
-          # Default is "", which gets rid of default theming
-          # TODO: remove when this is made default
           extraCss = # css
             ''
               /* Import default style so it is not entirely overwritten */
