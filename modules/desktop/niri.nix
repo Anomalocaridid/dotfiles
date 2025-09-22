@@ -215,9 +215,8 @@ in
                 ++ terminal
                 ++ [
                   "--background-opacity=0"
+                  "--font-size=3"
                   "-e"
-                  "fish"
-                  "-c"
                   "cava"
                 ];
               }
