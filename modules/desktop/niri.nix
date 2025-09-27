@@ -135,8 +135,12 @@ in
                 }
                 {
                   matches = [
+                    # Audio control panel
                     { app-id = "^org\.pulseaudio\.pavucontrol$"; }
+                    # Terminal network manager
                     { app-id = "^com\.terminal\.nmtui$"; }
+                    # Script dialog program
+                    { app-id = "^yad$"; }
                   ];
                   open-floating = true;
                 }
@@ -178,9 +182,6 @@ in
                     }
                   ];
                 })
-                {
-                  matches = [ { is-floating = true; } ];
-                }
               ];
 
             layer-rules = [
