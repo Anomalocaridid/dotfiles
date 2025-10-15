@@ -43,9 +43,9 @@
             grace = 2;
             command-each = lib.getExe (
               pkgs.writeShellApplication {
-                name = "lockman.sh";
+                name = "screensaver.sh";
                 runtimeInputs = with pkgs; [
-                  handlr-regex
+                  ghostty # Heavily relies on ghostty-specific features
                   windowtolayer
                   asciiquarium-transparent
                   cbonsai
@@ -56,17 +56,20 @@
                   sssnake
                   ternimal
                   unimatrix
-                  util-linux # provides script
+                  util-linux # Provides `script`
                 ];
                 text =
                   # bash
                   ''
+                    # TODO: figure out how to get rid of sleep
                     readonly SCREENSAVERS=(
                       "asciiquarium --transparent"
                       "cbonsai --live --infinite"
-                      "lavat -s 10 -c red -k magenta"
+                      # sleep required or lavat will be very slow
+                      "sleep 0.02 && lavat -s 10 -c red -k magenta"
                       "pipes-rs"
-                      "sssnake --mode=screensaver --speed=20 --try-hard=1"
+                      # sleep required or sssnake will instantly terminate
+                      "sleep 0.02 && sssnake --mode=screensaver --speed=20 --try-hard=1"
                       # ternimal needs the terminal dimensions to be explicitly passed
                       # tput calls should only be evaluated by terminal
                       "ternimal width=\$(tput cols) height=\$((\$(tput lines) * 2))"
@@ -90,8 +93,8 @@
 
                     index=$((RANDOM % ''${#SCREENSAVERS[@]}))
 
-                    # sleep for a bit so the terminal has time to set its dimensions
-                    timeout 60 windowtolayer handlr launch x-scheme-handler/terminal -- --custom-shader="${inputs.ghostty-shaders}/''${SHADERS[$index]}.glsl" -e "sleep 0.2 && ''${SCREENSAVERS[$index]}"
+                    # TODO: figure out why using `timeout` to periodically change screensavers tends to fail
+                    windowtolayer ghostty --custom-shader="${inputs.ghostty-shaders}/''${SHADERS[$index]}.glsl" -e sh -c "''${SCREENSAVERS[$index]}"
                   '';
               }
             );
