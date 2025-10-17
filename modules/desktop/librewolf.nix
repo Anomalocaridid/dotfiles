@@ -89,11 +89,23 @@ in
                 # Automatically enable installed extensions
                 extensions.autoDisableScopes = 0;
 
-                # Clear history on shutdown
-                # This should be on by default but is not for some reason
                 privacy = {
+                  # Clear history on shutdown
+                  # This should be on by default but is not for some reason
                   clearOnShutdown.history = true;
-                  clearOnShutdown_v2.historyFormDataAndDownloads = true;
+
+                  # Some of these are set by default, but lock them just in case
+                  clearOnShutdown_v2 = {
+                    browsingHistoryAndDownloads = true;
+                    cache = true;
+                    cookiesAndStorage = true;
+                    formdata = true;
+                    historyFormDataAndDownloads = true;
+                    siteSettings = true;
+                  };
+
+                  # Enable letterboxing to resist fingerprinting
+                  resistFingerprinting.letterboxing = true;
                 };
 
                 browser = {
