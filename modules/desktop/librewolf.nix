@@ -317,40 +317,43 @@ in
                 search =
                   let
                     mkParams = lib.mapAttrsToList lib.nameValuePair;
+                    # Update favicons every day
+                    updateInterval = 24 * 60 * 60 * 1000;
                   in
                   {
                     engines = {
-                      "Nix Packages" = {
+                      "NixOS Packages" = {
+                        inherit updateInterval;
                         urls = [
                           {
                             template = "https://search.nixos.org/packages";
                             params = mkParams {
                               channel = "unstable";
-                              type = "packages";
                               query = "{searchTerms}";
                             };
                           }
                         ];
                         icon = "https://search.nixos.org/favicon.png";
-                        updateInterval = 24 * 60 * 60 * 1000; # every day
                         definedAliases = [ "@np" ];
                       };
 
-                      "NixOS Wiki" = {
+                      "NixOS Options" = {
+                        inherit updateInterval;
                         urls = [
                           {
-                            template = "https://wiki.nixos.org/index.php";
+                            template = "https://search.nixos.org/options";
                             params = mkParams {
-                              search = "{searchTerms}";
+                              channel = "unstable";
+                              query = "{searchTerms}";
                             };
                           }
                         ];
-                        icon = "https://wiki.nixos.org/favicon.ico";
-                        updateInterval = 24 * 60 * 60 * 1000; # every day
-                        definedAliases = [ "@nw" ];
+                        icon = "https://search.nixos.org/favicon.png";
+                        definedAliases = [ "@no" ];
                       };
 
                       "Nix Home Manager" = {
+                        inherit updateInterval;
                         urls = [
                           {
                             template = "https://home-manager-options.extranix.com/";
@@ -361,8 +364,21 @@ in
                           }
                         ];
                         icon = "https://home-manager-options.extranix.com/images/favicon.png";
-                        updateInterval = 24 * 60 * 60 * 1000; # every day
                         definedAliases = [ "@nhm" ];
+                      };
+
+                      "NixOS Wiki" = {
+                        inherit updateInterval;
+                        urls = [
+                          {
+                            template = "https://wiki.nixos.org/index.php";
+                            params = mkParams {
+                              search = "{searchTerms}";
+                            };
+                          }
+                        ];
+                        icon = "https://wiki.nixos.org/favicon.ico";
+                        definedAliases = [ "@nw" ];
                       };
 
                       bing.metaData.hidden = true;
