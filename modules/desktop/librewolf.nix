@@ -181,7 +181,7 @@ in
               };
             };
 
-            profiles = {
+            profiles = rec {
               # Separate profile to enable WebGL because it allows more fingerprinting
               gaming = {
                 id = 1;
@@ -197,7 +197,9 @@ in
                     ublock-origin
                   ];
                 };
+                search.default = default.search.default;
               };
+
               default = {
                 # Needed to make config files
                 preConfig = ''
@@ -314,14 +316,18 @@ in
                       };
                     };
                 };
-                search =
-                  let
-                    mkParams = lib.mapAttrsToList lib.nameValuePair;
-                    # Update favicons every day
-                    updateInterval = 24 * 60 * 60 * 1000;
-                  in
-                  {
-                    engines = {
+                search = {
+                  force = true;
+                  # use built-in StartPage
+                  # id obtained with `mozlz4a -d ~/.librewolf/default/search.json.mozlz4`
+                  default = "policy-StartPage";
+                  engines =
+                    let
+                      mkParams = lib.mapAttrsToList lib.nameValuePair;
+                      # Update favicons every day
+                      updateInterval = 24 * 60 * 60 * 1000;
+                    in
+                    {
                       "NixOS Packages" = {
                         inherit updateInterval;
                         urls = [
@@ -385,9 +391,7 @@ in
                       google.metaData.hidden = true;
                       wikipedia.metaData.alias = "@w";
                     };
-                    force = true;
-                    default = "ddg";
-                  };
+                };
               };
             };
           };
