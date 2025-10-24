@@ -128,17 +128,6 @@
     nixpkgs = {
       url = "github:NixOS/nixpkgs/nixos-unstable";
     };
-    nur = {
-      inputs = {
-        flake-parts = {
-          follows = "flake-parts";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
-      url = "github:nix-community/NUR";
-    };
     spicetify-nix = {
       inputs = {
         nixpkgs = {

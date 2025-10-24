@@ -900,29 +900,6 @@
         "type": "github"
       }
     },
-    "nur": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1760386498,
-        "narHash": "sha256-5kUhIVxgyEPgkZs8MOr3ltq7y0xuG1VYA2Hmn4iiHwg=",
-        "owner": "nix-community",
-        "repo": "NUR",
-        "rev": "4340c7d016b1a71c817f8dcf8c7cb242bc8b4e33",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-community",
-        "repo": "NUR",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -948,7 +925,6 @@
         "nixago": "nixago",
         "nixos-facter-modules": "nixos-facter-modules",
         "nixpkgs": "nixpkgs_4",
-        "nur": "nur",
         "spicetify-nix": "spicetify-nix",
         "swi-lsp-server": "swi-lsp-server",
         "unify": "unify"
