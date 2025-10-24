@@ -20,23 +20,46 @@ in
         pkgs,
         ...
       }:
+      let
+        homePage = "www.startpage.com";
+      in
       {
         # Force Firefox Color settings
         catppuccin.librewolf.force = true;
 
-        xdg.mimeApps.defaultApplications =
-          let
-            desktopFile = "librewolf.desktop";
-          in
-          {
-            "text/html" = desktopFile;
-            "x-scheme-handler/http*" = desktopFile;
-          };
+        xdg = {
+          mimeApps.defaultApplications =
+            let
+              desktopFile = "librewolf.desktop";
+            in
+            {
+              "text/html" = desktopFile;
+              "x-scheme-handler/http*" = desktopFile;
+            };
+
+          # Tridactyl config
+          configFile."tridactyl/tridactylrc".text =
+            let
+              flavor = config.catppuccin.flavor;
+            in
+            ''
+              " Clear commandline history and config not present in config file
+              sanitize commandline tridactylsync tridactyllocal
+
+              " Set colorscheme
+              " TODO: change URL when repo is made official: https://github.com/catppuccin/catppuccin/issues/2799
+              colourscheme --url https://raw.githubusercontent.com/devnullvoid/tridactyl/catppuccin-review-changes/themes/catppuccin-${flavor}.css catppuccin-${flavor}
+
+              " Set new tab page
+              set newtab ${homePage}
+            '';
+        };
 
         programs.librewolf = {
           enable = true;
           nativeMessagingHosts = with pkgs; [
             keepassxc
+            tridactyl-native
           ];
           package = pkgs.librewolf.override {
             # Set preferences not supported in Preferences policy here to ensure they stay set
@@ -112,6 +135,8 @@ in
                 "redirector@einaregilsson.com"
                 # Stylus
                 "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"
+                # Tridactyl
+                "tridactyl.vim@cmcaine.co.uk"
                 # uBlacklist
                 "@ublacklist"
                 # uBlock Origin
@@ -132,6 +157,9 @@ in
               in
               mkPreferences {
                 browser = {
+                  # Set home page so Tridactyl can run on it
+                  startup.homepage = homePage;
+
                   # Use same search engine for private browsing
                   search.separatePrivateDefault = false;
 
@@ -315,6 +343,8 @@ in
               # use built-in StartPage
               # id obtained with `mozlz4a -d ~/.librewolf/default/search.json.mozlz4`
               default = "policy-StartPage";
+
+              # NOTE: For some reason, Tridactyl only detects aliases declared with `metaData.alias`, not `definedAliases`
               engines =
                 let
                   mkParams = lib.mapAttrsToList lib.nameValuePair;
@@ -334,7 +364,7 @@ in
                       }
                     ];
                     icon = "https://search.nixos.org/favicon.png";
-                    definedAliases = [ "@np" ];
+                    metaData.alias = "@np";
                   };
 
                   "NixOS Options" = {
@@ -349,7 +379,7 @@ in
                       }
                     ];
                     icon = "https://search.nixos.org/favicon.png";
-                    definedAliases = [ "@no" ];
+                    metaData.alias = "@no";
                   };
 
                   "Nix Home Manager" = {
@@ -364,21 +394,21 @@ in
                       }
                     ];
                     icon = "https://home-manager-options.extranix.com/images/favicon.png";
-                    definedAliases = [ "@nhm" ];
+                    metaData.alias = "@nhm";
                   };
 
                   "NixOS Wiki" = {
                     inherit updateInterval;
                     urls = [
                       {
-                        template = "https://wiki.nixos.org/index.php";
+                        template = "https://wiki.nixos.org/w/index.php";
                         params = mkParams {
                           search = "{searchTerms}";
                         };
                       }
                     ];
                     icon = "https://wiki.nixos.org/favicon.ico";
-                    definedAliases = [ "@nw" ];
+                    metaData.alias = "@nw";
                   };
 
                   bing.metaData.hidden = true;
