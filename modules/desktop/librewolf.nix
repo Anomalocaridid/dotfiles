@@ -3,10 +3,18 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  # Catppuccin userstyles for Stylus
-  flake-file.inputs.catppuccin-userstyles-nix = {
-    url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
-    inputs.nixpkgs.follows = "nixpkgs";
+  flake-file.inputs = {
+    # Catppuccin userstyles for Stylus
+    catppuccin-userstyles-nix = {
+      url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # Firefox userChrome
+    cascade = {
+      url = "github:cascadefox/cascade";
+      flake = false;
+    };
   };
 
   unify.modules.general = {
@@ -52,6 +60,10 @@ in
 
               " Set new tab page
               set newtab ${homePage}
+
+              " Adjust keybinds to account for vertical tabs
+              bind J tabnext
+              bind K tabprev
             '';
         };
 
@@ -96,6 +108,29 @@ in
 
                 # Enable letterboxing to resist fingerprinting
                 privacy.resistFingerprinting.letterboxing = true;
+
+                sidebar = {
+                  # New style sidebar required for vertical tabs
+                  revamp = true;
+                  # Enable vertical tabs
+                  verticalTabs = true;
+                  # Dismiss "Drag important tabs" window
+                  "verticalTabs.dragToPinPromo".dismissed = true;
+                  # Always show sidebar
+                  visibility = "always-show";
+                  # Set sidebar buttons
+                  main.tools = "history,bookmarks";
+
+                  # Set sidebar layout
+                  # NOTE: needs to be set as a string
+                  backupState = builtins.toJSON {
+                    command = "";
+                    panelOpen = false;
+                    launcherWidth = 55;
+                    launcherExpanded = false;
+                    launcherVisible = true;
+                  };
+                };
               };
           };
 
@@ -156,6 +191,12 @@ in
                   }) prefs;
               in
               mkPreferences {
+                # Enable userChrome
+                toolkit.legacyUserProfileCustomizations.stylesheets = true;
+
+                # Disable Alt key menu (somehow breaks cascade userChrome with persistent effects)
+                ui.key.menuAccessKeyFocuses = false;
+
                 browser = {
                   # Set home page so Tridactyl can run on it
                   startup.homepage = homePage;
@@ -163,13 +204,14 @@ in
                   # Use same search engine for private browsing
                   search.separatePrivateDefault = false;
 
+                  # Hide download button when download history is empty
+                  download.autohideButton = true;
+
                   # Customize toolbar
                   # NOTE: needs to be set as a string
                   uiCustomization.state = builtins.toJSON {
                     placements = {
-                      # Overflow dropdown
                       widget-overflow-fixed-list = [ ];
-                      # Extensions dropdown
                       unified-extensions-area = [
                         "redirector_einaregilsson_com-browser-action"
                         "_bbb880ce-43c9-47ae-b746-c3e0096c5b76_-browser-action"
@@ -177,37 +219,24 @@ in
                         "addon_darkreader_org-browser-action"
                         "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
                         "_cb31ec5d-c49a-4e5a-b240-16c767444f62_-browser-action"
+                        "firefoxcolor_mozilla_com-browser-action"
                       ];
-                      # Toolbar
                       nav-bar = [
                         "back-button"
                         "forward-button"
-                        "stop-reload-button"
-                        "sidebar-button"
-                        "customizableui-special-spring1"
                         "vertical-spacer"
                         "urlbar-container"
-                        "customizableui-special-spring2"
-                        "screenshot-button"
                         "downloads-button"
                         "fxa-toolbar-menu-button"
                         "ublock0_raymondhill_net-browser-action"
                         "keepassxc-browser_keepassxc_org-browser-action"
                         "unified-extensions-button"
-                      ];
-                      toolbar-menubar = [
-                        "menubar-items"
-                      ];
-                      TabsToolbar = [
-                        "firefox-view-button"
-                        "tabbrowser-tabs"
-                        "new-tab-button"
                         "alltabs-button"
                       ];
-                      vertical-tabs = [ ];
-                      PersonalToolbar = [
-                        "personal-bookmarks"
-                      ];
+                      toolbar-menubar = [ "menubar-items" ];
+                      TabsToolbar = [ ];
+                      vertical-tabs = [ "tabbrowser-tabs" ];
+                      PersonalToolbar = [ "personal-bookmarks" ];
                     };
                     seen = [
                       "redirector_einaregilsson_com-browser-action"
@@ -219,14 +248,19 @@ in
                       "_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"
                       "_cb31ec5d-c49a-4e5a-b240-16c767444f62_-browser-action"
                       "developer-button"
+                      "firefoxcolor_mozilla_com-browser-action"
+                      "screenshot-button"
                     ];
                     dirtyAreaCache = [
                       "unified-extensions-area"
                       "nav-bar"
                       "vertical-tabs"
+                      "toolbar-menubar"
+                      "TabsToolbar"
+                      "PersonalToolbar"
                     ];
-                    currentVersion = 21;
-                    newElementCount = 4;
+                    currentVersion = 23;
+                    newElementCount = 5;
                   };
                 };
               };
@@ -237,6 +271,23 @@ in
             preConfig = ''
 
             '';
+
+            userChrome = # css
+              ''
+                /* Default settings */
+                @import "${inputs.cascade}/chrome/includes/cascade-config.css";
+
+                @import "${inputs.cascade}/chrome/includes/cascade-layout.css";
+                @import "${inputs.cascade}/chrome/includes/cascade-responsive.css";
+                @import "${inputs.cascade}/chrome/includes/cascade-floating-panel.css";
+
+                @import "${inputs.cascade}/chrome/includes/cascade-nav-bar.css";
+                @import "${inputs.cascade}/chrome/includes/cascade-tabs.css";
+
+                /* Not default settings */
+                @import "${inputs.cascade}/integrations/catppuccin/cascade-${config.catppuccin.flavor}.css";
+              '';
+
             extensions = {
               # Override extension settings
               # NOTE: Each extension also needs `force = true` to prevent file conflicts

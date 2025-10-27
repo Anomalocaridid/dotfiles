@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "cascade": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1759367139,
+        "narHash": "sha256-uGC+SIRisABvulJcpiHwE4mhhwzMVtpo3RMJEJoCaPU=",
+        "owner": "cascadefox",
+        "repo": "cascade",
+        "rev": "8700d7718d130023815f0b036f3b1c4aaa2d5392",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cascadefox",
+        "repo": "cascade",
+        "type": "github"
+      }
+    },
     "catppuccin": {
       "inputs": {
         "nixpkgs": "nixpkgs"
@@ -902,6 +918,7 @@
     },
     "root": {
       "inputs": {
+        "cascade": "cascade",
         "catppuccin": "catppuccin",
         "catppuccin-fractal-wallpapers": "catppuccin-fractal-wallpapers",
         "catppuccin-ohmyrepl": "catppuccin-ohmyrepl",

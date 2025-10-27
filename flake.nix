@@ -6,6 +6,10 @@
   outputs = inputs: import ./outputs.nix inputs;
 
   inputs = {
+    cascade = {
+      flake = false;
+      url = "github:cascadefox/cascade";
+    };
     catppuccin = {
       url = "github:catppuccin/nix";
     };
