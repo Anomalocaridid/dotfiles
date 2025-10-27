@@ -12,6 +12,7 @@
         core.autocrlf = "input";
         merge.conflictstyle = "diff3";
         diff.colorMoved = "default";
+        fetch.prune = true;
       };
     };
 
