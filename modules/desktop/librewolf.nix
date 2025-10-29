@@ -48,7 +48,7 @@ in
           # Tridactyl config
           configFile."tridactyl/tridactylrc".text =
             let
-              flavor = config.catppuccin.flavor;
+              theme = "catppuccin-${config.catppuccin.flavor}";
             in
             ''
               " Clear commandline history and config not present in config file
@@ -56,10 +56,13 @@ in
 
               " Set colorscheme
               " TODO: change URL when repo is made official: https://github.com/catppuccin/catppuccin/issues/2799
-              colourscheme --url https://raw.githubusercontent.com/devnullvoid/tridactyl/catppuccin-review-changes/themes/catppuccin-${flavor}.css catppuccin-${flavor}
+              colourscheme --url https://raw.githubusercontent.com/devnullvoid/tridactyl/catppuccin-review-changes/themes/${theme}.css ${theme}
 
               " Set new tab page
               set newtab ${homePage}
+
+              " Set text editor for editing text fields
+              set editorcmd handlr launch text/plain --
 
               " Adjust keybinds to account for vertical tabs
               bind J tabnext
