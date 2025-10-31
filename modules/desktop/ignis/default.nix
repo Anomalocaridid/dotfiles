@@ -19,7 +19,7 @@ in
       imports = [ inputs.ignis.homeManagerModules.default ];
       programs.ignis = {
         enable = true;
-        configDir = ./config/ignis;
+        configDir = ./config;
 
         services = {
           audio.enable = true;
