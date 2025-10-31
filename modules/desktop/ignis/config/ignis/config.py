@@ -1,5 +1,6 @@
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
 from audio import volume  # pyright: ignore[reportImplicitRelativeImport]
+from clock import clock  # pyright: ignore[reportImplicitRelativeImport]
 from fetch import statistics  # pyright: ignore[reportImplicitRelativeImport]
 from ignis import utils, widgets
 from ignis.css_manager import CssInfoPath, CssManager
@@ -7,11 +8,10 @@ from ignis.services.mpris import MprisService
 from mpris import media  # pyright: ignore[reportImplicitRelativeImport]
 from network import connections  # pyright: ignore[reportImplicitRelativeImport]
 from niri import (  # pyright: ignore[reportImplicitRelativeImport]
-    active_window,
-    workspaces,
+    ActiveWindow,
+    Workspaces,
 )
 from tray import tray  # pyright: ignore[reportImplicitRelativeImport]
-from clock import clock  # pyright: ignore[reportImplicitRelativeImport]
 from upower import battery  # pyright: ignore[reportImplicitRelativeImport]
 
 css_manager = CssManager.get_default()
@@ -35,11 +35,11 @@ def left_arrow() -> widgets.Arrow:
     return widgets.Icon(image="go-previous")
 
 
-def bar(monitor_id: int) -> widgets.Window | None:
-    monitor_name = utils.get_monitor(monitor_id)
-    if monitor_name:
-        monitor_name = monitor_name.get_connector()
-        return widgets.Window(
+class Bar(widgets.Window):
+    def __init__(self, monitor_id: int):
+        monitor_name = utils.get_monitor(monitor_id).get_connector()
+
+        super().__init__(
             namespace=f"ignis_bar_{monitor_id}",
             monitor=monitor_id,
             exclusivity="exclusive",
@@ -52,9 +52,9 @@ def bar(monitor_id: int) -> widgets.Window | None:
                 start_widget=widgets.Box(
                     css_classes=["left"],
                     child=[
-                        workspaces(monitor_name),
+                        Workspaces(monitor_name),
                         right_arrow(),
-                        active_window(monitor_name),
+                        ActiveWindow(monitor_name),
                         right_arrow(),
                     ],
                 ),
@@ -87,4 +87,4 @@ def bar(monitor_id: int) -> widgets.Window | None:
 
 
 for i in range(utils.get_n_monitors()):
-    _ = bar(i)
+    _ = Bar(i)
