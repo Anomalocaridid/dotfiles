@@ -12,7 +12,7 @@ from ignis.services.network import NetworkService, WifiDevice
 network = NetworkService.get_default()
 
 
-def __format_bitrate(kbits: int) -> str:
+def format_bitrate(kbits: int) -> str:
     prefix = ""
     magnitude = 0
 
@@ -39,37 +39,45 @@ def __format_bitrate(kbits: int) -> str:
     return f"󰓅 {value} {prefix}bit/s"
 
 
-def __connection_name(device: WifiDevice) -> widgets.Box:
-    return widgets.Box(
-        child=[widgets.Label(label=device.ap.bind("ssid"))],
-        tooltip_text=device.ap.bind("max_bitrate", transform=__format_bitrate),
-    )
+class ConnectionName(widgets.Box):
+    def __init__(self, device: WifiDevice):
+        super().__init__(
+            child=[widgets.Label(label=device.ap.bind("ssid"))],
+            tooltip_text=device.ap.bind("max_bitrate", transform=format_bitrate),
+        )
 
 
-def connections() -> widgets.EventBox:
-    ssid_revealer = widgets.Revealer(
-        child=widgets.Box(
-            spacing=WIDGET_SPACING,
-            child=network.wifi.bind(
-                "devices",
-                transform=lambda devices: [__connection_name(d) for d in devices],
+class Connections(widgets.EventBox):
+    def __init__(self):
+        ssid_revealer = widgets.Revealer(
+            child=widgets.Box(
+                spacing=WIDGET_SPACING,
+                child=network.wifi.bind(
+                    "devices",
+                    transform=lambda devices: [ConnectionName(d) for d in devices],
+                ),
             ),
-        ),
-        transition_type="slide_left",
-        reveal_child=False,
-    )
-    return widgets.EventBox(
-        child=[
-            widgets.Icon(image=network.wifi.bind("icon_name", transform=desymbolize)),
-            ssid_revealer,
-            widgets.Icon(image=network.vpn.bind("icon_name", transform=desymbolize)),
-        ],
-        on_right_click=lambda _: [
-            asyncio.create_task(c.toggle_connection()) for c in network.vpn.connections
-        ],
-        on_hover=lambda _: ssid_revealer.set_reveal_child(True),
-        on_hover_lost=lambda _: ssid_revealer.set_reveal_child(False),
-        on_click=lambda _: asyncio.create_task(
-            utils.exec_sh_async(f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui")
-        ),
-    )
+            transition_type="slide_left",
+            reveal_child=False,
+        )
+
+        super().__init__(
+            child=[
+                widgets.Icon(
+                    image=network.wifi.bind("icon_name", transform=desymbolize)
+                ),
+                ssid_revealer,
+                widgets.Icon(
+                    image=network.vpn.bind("icon_name", transform=desymbolize)
+                ),
+            ],
+            on_right_click=lambda _: [
+                asyncio.create_task(c.toggle_connection())
+                for c in network.vpn.connections
+            ],
+            on_hover=lambda _: ssid_revealer.set_reveal_child(True),
+            on_hover_lost=lambda _: ssid_revealer.set_reveal_child(False),
+            on_click=lambda _: asyncio.create_task(
+                utils.exec_sh_async(f"{TERMINAL} --class='com.terminal.nmtui' -e nmtui")
+            ),
+        )

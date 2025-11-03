@@ -10,7 +10,7 @@ TERMINAL = "handlr launch x-scheme-handler/terminal --"
 
 def toggle_window(window: widgets.Window):
     def _inner(_) -> None:
-        window.visible = not window.visible
+        window.set_visible(not window.visible)
 
     return _inner
 

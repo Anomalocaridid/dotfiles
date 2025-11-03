@@ -1,5 +1,7 @@
 from datetime import datetime
+from typing import Any, Callable
 from ignis import utils, widgets
+from ignis.gobject import Binding
 
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
 from common import (  # pyright: ignore[reportImplicitRelativeImport]
@@ -9,48 +11,54 @@ from common import (  # pyright: ignore[reportImplicitRelativeImport]
 from ignis.variable import Variable
 
 
-def __toggle_variable(var: Variable):
-    def _inner(_) -> None:
-        var.value = not var.value
-
-    return _inner
-
-
-def __calendar(monitor_id: int) -> widgets.Window:
-    return widgets.Window(
-        visible=False,
-        namespace=f"ignis_popup_calendar_{monitor_id}",
-        monitor=monitor_id,
-        exclusivity="normal",
-        anchor=["top", "right"],
-        margin_top=wm.GAP_WIDTH,
-        margin_right=wm.GAP_WIDTH,
-        child=widgets.Calendar(),
-    )
-
-
-def clock(monitor_id: int) -> widgets.EventBox:
-    clock_label = widgets.Label()
-    military_time = Variable(value=False)
-
-    def update_clock(*_args) -> None:
-        clock_label.set_label(
-            datetime.now().strftime("%T" if military_time.value else "%r")
+class Calendar(widgets.Window):
+    def __init__(self, monitor_id: int):
+        super().__init__(
+            visible=False,
+            namespace=f"ignis_popup_calendar_{monitor_id}",
+            monitor=monitor_id,
+            exclusivity="normal",
+            anchor=["top", "right"],
+            margin_top=wm.GAP_WIDTH,
+            margin_right=wm.GAP_WIDTH,
+            child=widgets.Calendar(),
         )
 
-    # Update the clock once per second
-    utils.Poll(1000, update_clock)
 
-    # Instantly update the clock when it changes to military time
-    military_time.connect("notify::value", update_clock)
+class Clock(widgets.EventBox):
+    __time = Variable()
+    __24_hour_format = Variable(value=False)
 
-    # Calendar window widget
-    calendar_window = __calendar(monitor_id)
+    def __update_time(self, *_args: Any):  # pyright: ignore[reportAny, reportExplicitAny]
+        self.__time.value = datetime.now()
 
-    return widgets.EventBox(
-        spacing=WIDGET_SPACING,
-        child=[widgets.Icon(image="accessories-clock"), clock_label],
-        on_click=toggle_window(calendar_window),
-        on_right_click=__toggle_variable(military_time),
-        tooltip_text=datetime.now().strftime(" %a, %b %d, %Y"),
-    )
+    def __format_time(self, format: Callable[[], str]) -> Binding:
+        return self.__time.bind(
+            "value", transform=lambda value: value.strftime(format())
+        )
+
+    def __toggle_format(self, _: Any):  # pyright: ignore[reportExplicitAny]
+        self.__24_hour_format.value ^= True
+
+    def __init__(self, monitor_id: int):
+        # Update the clock once per second
+        _ = utils.Poll(1000, self.__update_time)
+
+        # Instantly update the clock when it changes to 24-hour format
+        self.__24_hour_format.connect("notify::value", self.__update_time)
+
+        super().__init__(
+            spacing=WIDGET_SPACING,
+            child=[
+                widgets.Icon(image="accessories-clock"),
+                widgets.Label(
+                    label=self.__format_time(
+                        lambda: "%T" if self.__24_hour_format.value else "%r"
+                    )
+                ),
+            ],
+            # Calendar window widget
+            on_click=toggle_window(Calendar(monitor_id)),
+            on_right_click=self.__toggle_format,
+            tooltip_text=self.__format_time(lambda: " %a, %b %d, %Y"),
+        )
