@@ -5,8 +5,10 @@ import wm  # pyright: ignore[reportMissingImports] # Custom module with constant
 from common import WIDGET_SPACING  # pyright: ignore[reportImplicitRelativeImport]
 from ignis import utils, widgets
 from ignis.services.niri import NiriService, NiriWindow, NiriWorkspace
+from ignis.services.applications import ApplicationsService
 
 niri = NiriService.get_default()
+applications = ApplicationsService.get_default()
 
 
 @utils.debounce(wm.SCROLL_COOLDOWN_MS)
@@ -15,6 +17,23 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
         filter(lambda w: w.is_active and w.output == monitor_name, niri.workspaces)
     )[0].idx
     niri.switch_to_workspace(min(max(current + step, 0), wm.WORKSPACES))
+
+
+# Needed for files with icons with names different from their app icons/desktop files
+def get_icon(app_id: str) -> str:
+    icon_name = utils.get_app_icon_name(app_id)
+
+    if icon_name is not None:
+        return icon_name
+
+    app_results = applications.search(applications.apps, app_id)
+
+    # If there is a desktop file for the open application, return the icon name
+    if app_results:
+        return app_results[0].icon
+    else:
+        # Otherwise, fall back to window's app id
+        return app_id
 
 
 # TODO: Preserve ordering of windows
@@ -37,7 +56,7 @@ class WorkspaceButton(widgets.Button):
                     widgets.Box(
                         child=[
                             widgets.Icon(
-                                image=utils.get_app_icon_name(app_id),
+                                image=get_icon(app_id),
                                 css_classes=["focused"] if is_focused else [],
                             ),
                             # Show count in superscript
@@ -106,9 +125,7 @@ class ActiveWindow(widgets.Box):
                 widgets.Icon(
                     image=niri.bind(
                         "active_window",
-                        transform=lambda active_window: utils.get_app_icon_name(
-                            active_window.app_id
-                        ),
+                        transform=lambda active_window: get_icon(active_window.app_id),
                     )
                 ),
                 widgets.Label(
