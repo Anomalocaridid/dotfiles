@@ -31,10 +31,7 @@ in
           useDartSass = true;
         };
 
-        extraPackages = with pkgs.python313Packages; [
-          psutil
-          unicodeit
-        ];
+        extraPackages = with pkgs.python313Packages; [ psutil ];
       };
 
       xdg.configFile = {

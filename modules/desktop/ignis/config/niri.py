@@ -1,6 +1,5 @@
 from collections import Counter, defaultdict
 
-import unicodeit  # Not included by default # pyright: ignore[reportMissingTypeStubs]
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
 from common import WIDGET_SPACING  # pyright: ignore[reportImplicitRelativeImport]
 from ignis import utils, widgets
@@ -60,9 +59,15 @@ class WorkspaceButton(widgets.Button):
                                 css_classes=["focused"] if is_focused else [],
                             ),
                             # Show count in superscript
-                            widgets.Label(label=unicodeit.replace(f"^{{{count}}}"))
-                            if count > 1
-                            else None,
+                            widgets.Label(
+                                label="".join(
+                                    dict(zip("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")).get(digit, "")
+                                    for digit in str(count)
+                                )
+                                # Do not show count when there is only one
+                                if count > 1
+                                else ""
+                            ),
                         ]
                     )
                     for (app_id, is_focused), count in window_counts.items()

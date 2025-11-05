@@ -7,10 +7,7 @@
           ps: with ps; [
             pytest # Needed for exercism tests
             (inputs'.ignis.packages.ignis.override {
-              extraPackages = with pkgs.python313Packages; [
-                psutil
-                unicodeit
-              ];
+              extraPackages = with pkgs.python313Packages; [ psutil ];
             })
           ]
         ))
