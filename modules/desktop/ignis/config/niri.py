@@ -1,10 +1,10 @@
-from collections import Counter, defaultdict
+from itertools import groupby
 
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
 from common import WIDGET_SPACING  # pyright: ignore[reportImplicitRelativeImport]
 from ignis import utils, widgets
-from ignis.services.niri import NiriService, NiriWindow, NiriWorkspace
 from ignis.services.applications import ApplicationsService
+from ignis.services.niri import NiriService, NiriWindow, NiriWorkspace
 
 niri = NiriService.get_default()
 applications = ApplicationsService.get_default()
@@ -12,9 +12,9 @@ applications = ApplicationsService.get_default()
 
 @utils.debounce(wm.SCROLL_COOLDOWN_MS)
 def scroll_workspaces(monitor_name: str, step: int) -> None:
-    current = list(
-        filter(lambda w: w.is_active and w.output == monitor_name, niri.workspaces)
-    )[0].idx
+    current = [w for w in niri.workspaces if w.is_active and w.output == monitor_name][
+        0
+    ].idx
     niri.switch_to_workspace(min(max(current + step, 0), wm.WORKSPACES))
 
 
@@ -35,13 +35,57 @@ def get_icon(app_id: str) -> str:
         return app_id
 
 
-# TODO: Preserve ordering of windows
+class WindowCount(widgets.Box):
+    def __init__(self, app_id: str, is_focused: bool, count: int):
+        # def __init__(self, workspace_idx: int, app_id: str, is_focused: bool, count: int):
+        #     self.workspace_idx: int = workspace_idx
+        super().__init__(
+            child=[
+                widgets.Icon(
+                    image=get_icon(app_id),
+                    css_classes=["focused"] if is_focused else [],
+                ),
+            ]
+            + (
+                [
+                    # Show count in superscript
+                    widgets.Label(
+                        label="".join(
+                            dict(zip("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")).get(digit, "")
+                            for digit in str(count)
+                        )
+                    ),
+                ]
+                # Do not show count when there is only one
+                if count > 1
+                else []
+            )
+        )
+
+
 class WorkspaceButton(widgets.Button):
     def __init__(
         self,
         workspace: NiriWorkspace,
-        window_counts: dict[tuple[str, bool], int],
+        windows: list[NiriWindow],
     ):
+        sorted_windows = sorted(
+            # TODO: better handle floating windows (currently defaults to beginning of list)
+            windows,
+            key=lambda window: window.layout.pos_in_scrolling_layout or [0, 0],
+        )
+
+        window_counts = [
+            WindowCount(app_id, is_focused, len(list(group)))
+            for (app_id, is_focused), group in groupby(
+                sorted_windows,
+                key=lambda window: (
+                    window.app_id,
+                    window.is_focused,
+                ),
+            )
+        ]
+
         super().__init__(
             css_classes=["flat"] + (["active"] if workspace.is_active else []),
             on_click=lambda _, id=workspace.idx: niri.switch_to_workspace(id),
@@ -51,46 +95,9 @@ class WorkspaceButton(widgets.Button):
                         label=f"{workspace.idx}{':' if window_counts else ''}"
                     )
                 ]
-                + [
-                    widgets.Box(
-                        child=[
-                            widgets.Icon(
-                                image=get_icon(app_id),
-                                css_classes=["focused"] if is_focused else [],
-                            ),
-                            # Show count in superscript
-                            widgets.Label(
-                                label="".join(
-                                    dict(zip("0123456789", "⁰¹²³⁴⁵⁶⁷⁸⁹")).get(digit, "")
-                                    for digit in str(count)
-                                )
-                                # Do not show count when there is only one
-                                if count > 1
-                                else ""
-                            ),
-                        ]
-                    )
-                    for (app_id, is_focused), count in window_counts.items()
-                ]
+                + window_counts
             ),
         )
-
-
-def window_to_workspace_idx(workspaces: list[NiriWorkspace], window: NiriWindow) -> int:
-    return list(filter(lambda ws: ws.id == window.workspace_id, workspaces))[0].idx
-
-
-def format_workspaces(
-    workspaces: list[NiriWorkspace], windows: list[NiriWindow]
-) -> list[widgets.Button]:
-    windows_by_workspace = defaultdict(Counter)
-
-    for window in windows:
-        # Only keep relevant information so that using windows are not counted as unique
-        windows_by_workspace[window_to_workspace_idx(workspaces, window)].update(
-            [(window.app_id, window.is_focused)]
-        )
-    return [WorkspaceButton(ws, windows_by_workspace[ws.idx]) for ws in workspaces]
 
 
 class Workspaces(widgets.Box):
@@ -104,7 +111,18 @@ class Workspaces(widgets.Box):
                     spacing=WIDGET_SPACING,
                     # Bind to active_window also to ensure focused window is up to date
                     child=niri.bind_many(
-                        ["workspaces", "windows"], transform=format_workspaces
+                        ["workspaces", "windows"],
+                        transform=lambda workspaces, windows: [
+                            WorkspaceButton(
+                                workspace,
+                                [
+                                    window
+                                    for window in windows
+                                    if window.workspace_id == workspace.id
+                                ],
+                            )
+                            for workspace in workspaces
+                        ],
                     ),
                 )
             ]
