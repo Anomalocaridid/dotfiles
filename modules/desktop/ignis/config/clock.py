@@ -1,14 +1,14 @@
 from datetime import datetime
 from typing import Any, Callable
-from ignis import utils, widgets
-from ignis.gobject import Binding
 
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
-from common import (  # pyright: ignore[reportImplicitRelativeImport]
-    WIDGET_SPACING,
-    toggle_window,
-)
+from common import WIDGET_SPACING  # pyright: ignore[reportImplicitRelativeImport]
+from ignis import utils, widgets
+from ignis.gobject import Binding
 from ignis.variable import Variable
+from ignis.window_manager import WindowManager
+
+window_manager = WindowManager.get_default()
 
 
 class Calendar(widgets.Window):
@@ -47,6 +47,9 @@ class Clock(widgets.EventBox):
         # Instantly update the clock when it changes to 24-hour format
         self.__24_hour_format.connect("notify::value", self.__update_time)
 
+        # Calendar window widget
+        calendar = Calendar(monitor_id)
+
         super().__init__(
             spacing=WIDGET_SPACING,
             child=[
@@ -58,7 +61,7 @@ class Clock(widgets.EventBox):
                 ),
             ],
             # Calendar window widget
-            on_click=toggle_window(Calendar(monitor_id)),
+            on_click=lambda _: window_manager.toggle_window(calendar.namespace),
             on_right_click=self.__toggle_format,
             tooltip_text=self.__format_time(lambda: " %a, %b %d, %Y"),
         )

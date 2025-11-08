@@ -3,14 +3,13 @@ from collections.abc import Callable
 from time import gmtime, strftime
 
 import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
-from common import (  # pyright: ignore[reportImplicitRelativeImport]
-    WIDGET_SPACING,
-    toggle_window,
-)
+from common import WIDGET_SPACING  # pyright: ignore[reportImplicitRelativeImport]
 from ignis import widgets
 from ignis.services.mpris import MprisPlayer, MprisService
+from ignis.window_manager import WindowManager
 
 mpris = MprisService.get_default()
+window_manager = WindowManager.get_default()
 
 
 def track_progress(player: MprisPlayer):
@@ -64,7 +63,9 @@ class MediaTitle(widgets.EventBox):
             tooltip_text=track_progress(player),
             on_hover=lambda _: artist_revealer.set_reveal_child(True),
             on_hover_lost=lambda _: artist_revealer.set_reveal_child(False),
-            on_click=toggle_window(media_player_window),
+            on_click=lambda _: window_manager.toggle_window(
+                media_player_window.namespace
+            ),
         )
 
 
