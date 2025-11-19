@@ -1,6 +1,6 @@
 from itertools import groupby
 
-import wm  # pyright: ignore[reportMissingImports] # Custom module with constants from window manager config
+import wm  # pyright: ignore[reportmissingImports] # Custom module with constants from window manager config
 from common import WIDGET_SPACING  # pyright: ignore[reportImplicitRelativeImport]
 from ignis import utils, widgets
 from ignis.services.applications import ApplicationsService
@@ -19,7 +19,11 @@ def scroll_workspaces(monitor_name: str, step: int) -> None:
 
 
 # Needed for files with icons with names different from their app icons/desktop files
-def get_icon(app_id: str) -> str:
+def get_icon(app_id: str | None) -> str:
+    # app_id can sometimes be unset
+    if app_id is None:
+        return "missing-image"
+
     icon_name = utils.get_app_icon_name(app_id)
 
     if icon_name is not None:
