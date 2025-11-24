@@ -149,8 +149,8 @@ in
                 mkExtensions =
                   ids:
                   lib.genAttrs ids (id: {
-                    installation_mode = "force_installed";
                     install_url = "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+                    installation_mode = "force_installed";
                     private_browsing = true;
                   });
               in
@@ -179,7 +179,14 @@ in
                 "@ublacklist"
                 # uBlock Origin
                 "uBlock0@raymondhill.net"
-              ]);
+              ])
+              // {
+                # Zotero Connector (not on AMO)
+                "zotero@chnm.gmu.edu" = {
+                  install_url = "https://www.zotero.org/download/connector/dl?browser=firefox";
+                  installation_mode = "force_installed";
+                };
+              };
 
             Preferences =
               let
