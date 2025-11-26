@@ -126,6 +126,17 @@
       };
       url = "github:nix-community/nixago";
     };
+    nixcord = {
+      inputs = {
+        flake-parts = {
+          follows = "flake-parts";
+        };
+        nixpkgs = {
+          follows = "nixpkgs";
+        };
+      };
+      url = "github:kaylorben/nixcord";
+    };
     nixos-facter-modules = {
       url = "github:numtide/nixos-facter-modules";
     };
