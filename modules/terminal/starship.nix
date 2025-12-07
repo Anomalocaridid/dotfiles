@@ -13,6 +13,7 @@
               )
             );
             notLang = [
+              "$schema"
               "aws"
               "directory"
               "docker_context"
@@ -25,6 +26,7 @@
               "os"
               "package"
               "pijul_channel"
+              "status"
             ];
             langNames = builtins.filter (name: !builtins.elem name notLang) (builtins.attrNames nerdFontIcons);
             mkLangSeg = name: {
