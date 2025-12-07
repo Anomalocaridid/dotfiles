@@ -16,6 +16,7 @@ in
         settings = {
           animation = "colormix";
           asterisk = "0x2022"; # •
+          battery_id = "BAT1";
           bigclock = "en";
           clear_password = true;
           colormix_col1 = "0x0006"; # Magenta
