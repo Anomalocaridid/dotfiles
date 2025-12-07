@@ -30,17 +30,10 @@
               command = "systemctl hibernate";
             }
           ];
-          events = [
-            {
-              event = "lock";
-              # NOTE: niri does not support transparency for lock screens
-              command = lib.getExe config.programs.swaylock.package;
-            }
-            {
-              event = "before-sleep";
-              command = lock;
-            }
-          ];
+          events = {
+            lock = lib.getExe config.programs.swaylock.package;
+            before-sleep = lock;
+          };
         };
     };
 }
