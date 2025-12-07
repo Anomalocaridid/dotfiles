@@ -22,7 +22,7 @@
           rd = "rmdir";
           md = "mkdir";
           rm = "rm --interactive";
-          du = lib.getExe pkgs.du-dust;
+          du = lib.getExe pkgs.dust;
           df = lib.getExe pkgs.duf;
         };
 

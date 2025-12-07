@@ -71,7 +71,7 @@
               }
               {
                 on = [ "<C-n>" ];
-                run = ''shell -- ${lib.getExe pkgs.xdragon} --and-exit --all --on-top "$@"'';
+                run = ''shell -- ${lib.getExe pkgs.dragon-drop} --and-exit --all --on-top "$@"'';
                 desc = "Drag and drop selected files with dragon";
               }
             ]
