@@ -480,10 +480,12 @@ in
                 "Mod+V".action = actions.toggle-window-floating;
                 "Mod+Shift+V".action = actions.switch-focus-between-floating-and-tiling;
 
-                "Print".action = actions.screenshot;
+                # TODO: wait for upstream fix, see sodiboo/niri-flake#1380
+                "Print".action.screenshot = [ ];
                 # TODO: wait for upstream fix, see sodiboo/niri-flake#922
                 "Ctrl+Print".action.screenshot-screen = [ ];
-                "Alt+Print".action = actions.screenshot-window;
+                # TODO: wait for upstream fix, see sodiboo/niri-flake#1380
+                "Alt+Print".action.screenshot-window = [ ];
 
                 # The quit action will show a confirmation dialog to avoid accidental exits.
                 "Mod+Shift+E".action = actions.quit;
