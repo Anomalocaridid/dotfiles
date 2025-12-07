@@ -13,7 +13,7 @@
 
         # Scalafmt config (no global location is available)
         devshell.startup.nixago.text =
-          (inputs.nixago.lib.${pkgs.system}.make {
+          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
             data.globalSection = {
               version = pkgs.scalafmt.version;
               "runner.dialect" = "scala3";

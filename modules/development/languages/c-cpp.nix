@@ -19,7 +19,7 @@
     { lib, pkgs, ... }:
     {
       home.file.".clang-format".source =
-        (inputs.nixago.lib.${pkgs.system}.make {
+        (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
           data = {
             BasedOnStyle = "LLVM";
             IndentWidth = indentWidth;

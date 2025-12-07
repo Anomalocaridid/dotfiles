@@ -15,7 +15,7 @@
       home.file = {
         # Yarn config
         ".yarnrc.yml".source =
-          (inputs.nixago.lib.${pkgs.system}.make {
+          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
             # Disable telemetry
             data.enableTelemetry = 0;
             output = ".yarnrc.yml";

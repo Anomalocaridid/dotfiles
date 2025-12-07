@@ -47,7 +47,7 @@
         in
         {
           "${config.xdg.cacheHome}/keepassxc/${filename}".source =
-            (inputs.nixago.lib.${pkgs.system}.make {
+            (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
               output = filename;
               data = {
                 General.LastActiveDatabase = "${config.home.homeDirectory}/Sync/Keepass Databases/Personal.kdbx";

@@ -7,7 +7,7 @@
         mimeApps.enable = true;
 
         configFile."handlr/handlr.toml".source =
-          (inputs.nixago.lib.${pkgs.system}.make {
+          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
             data = {
               enable_selector = false;
               selector = "fuzzel --dmenu --prompt='Open With: '";

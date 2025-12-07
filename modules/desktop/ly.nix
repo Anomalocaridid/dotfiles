@@ -27,7 +27,7 @@ in
 
       # Set default session
       environment.etc."ly/save.ini".source =
-        (inputs.nixago.lib.${pkgs.system}.make {
+        (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
           output = "save.ini";
           data.globalSection = {
             user = username;

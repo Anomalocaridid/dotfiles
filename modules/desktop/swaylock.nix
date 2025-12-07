@@ -103,7 +103,7 @@
 
         # Screensaver config
         xdg.configFile."pipes-rs/config.toml".source =
-          (inputs.nixago.lib.${pkgs.system}.make {
+          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
             data = {
               color_mode = "rgb";
               rainbow = 1;

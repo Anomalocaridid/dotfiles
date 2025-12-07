@@ -6,7 +6,7 @@
       home.packages = with pkgs; [ glow ];
 
       xdg.configFile."glow/glow.yml".source =
-        (inputs.nixago.lib.${pkgs.system}.make {
+        (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
           data = {
             # show local files only; no network (TUI-mode only)
             local = true;

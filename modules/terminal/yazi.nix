@@ -16,7 +16,7 @@
         ...
       }:
       {
-        # For some reason, using ${pkgs.system} for the system causes infinite recursion
+        # For some reason, using ${pkgs.stdenv.hostPlatform.system} for the system causes infinite recursion
         imports = [ inputs.nix-yazi-plugins.legacyPackages.x86_64-linux.homeManagerModules.default ];
 
         xdg.mimeApps.defaultApplications."inode/directory" = "yazi.desktop";
