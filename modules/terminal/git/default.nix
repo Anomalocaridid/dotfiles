@@ -5,9 +5,11 @@
   unify.modules.general.home.programs = {
     git = {
       enable = true;
-      userEmail = "29845794+Anomalocaridid@users.noreply.github.com";
-      userName = config.flake.meta.gitHubUsername;
-      extraConfig = {
+      settings = {
+        user = {
+          email = "29845794+Anomalocaridid@users.noreply.github.com";
+          name = config.flake.meta.gitHubUsername;
+        };
         init.defaultBranch = "main";
         core.autocrlf = "input";
         merge.conflictstyle = "diff3";

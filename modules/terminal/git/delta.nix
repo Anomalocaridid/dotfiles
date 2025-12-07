@@ -1,7 +1,8 @@
 {
   unify.modules.general.home = {
-    programs.git.delta = {
+    programs.delta = {
       enable = true;
+      enableGitIntegration = true;
       options = {
         navigate = true;
         interactive.keep-plus-minus-markers = false;
