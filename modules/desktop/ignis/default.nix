@@ -64,22 +64,22 @@ in
         };
 
         # This lets the Ignis bar count as a tray for programs that rely on tray.target
+        # Loosely based off of waybar's service in home manager
         systemd.user.services.ignis = {
           Unit = {
             Description = "Ignis bar";
             PartOf = [
+              config.wayland.systemd.target
               "tray.target"
             ];
-            # NOTE: will error if wayland compositor is not started first
-            # NOTE: will also cause dependency issues if after graphical-session.target
-            After = "niri.service";
-            BindsTo = "graphical-session.target";
+            After = [ config.wayland.systemd.target ];
           };
           Service = {
             ExecStart = "${lib.getExe config.programs.ignis.finalPackage} init";
             Restart = "on-failure";
           };
-          Install.RequiredBy = [
+          Install.WantedBy = [
+            config.wayland.systemd.target
             "tray.target"
           ];
         };
