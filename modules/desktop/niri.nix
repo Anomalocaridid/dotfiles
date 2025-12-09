@@ -365,17 +365,17 @@ in
                   cooldown-ms = wm.mouseCooldownMs;
                   inherit action;
                 };
-                sh = actions.spawn "sh" "-c";
               in
               {
                 "Mod+Shift+Slash".action = actions.show-hotkey-overlay;
 
                 "Mod+T".action.spawn = terminal;
-                "Mod+D".action = sh "pkill fuzzel || fuzzel";
+                "Mod+D".action = actions.spawn-sh "pkill fuzzel || fuzzel";
                 "Mod+B".action.spawn = launch "x-scheme-handler/https";
                 "Mod+N".action.spawn = launch "inode/directory";
                 "Super+Alt+L".action = actions.spawn "wlogout" "--show-binds";
-                "Mod+Ctrl+C".action = sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
+                "Mod+Ctrl+C".action =
+                  actions.spawn-sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
 
                 # Volume keys mappings for PipeWire & WirePlumber.
                 XF86AudioRaiseVolume = wpctl [
