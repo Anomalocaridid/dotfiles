@@ -10,9 +10,7 @@
       flake = false;
       url = "github:cascadefox/cascade";
     };
-    catppuccin = {
-      url = "github:catppuccin/nix";
-    };
+    catppuccin.url = "github:catppuccin/nix";
     catppuccin-fractal-wallpapers = {
       flake = false;
       url = "github:psylopneunonym/Catppuccin-Fractal-Wallpapers";
@@ -26,129 +24,70 @@
       url = "github:catppuccin/prismlauncher";
     };
     catppuccin-userstyles-nix = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
     };
     devshell = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:numtide/devshell";
     };
     disko = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/disko";
     };
-    flake-file = {
-      url = "github:vic/flake-file";
-    };
-    flake-parts = {
-      url = "github:hercules-ci/flake-parts";
-    };
+    flake-file.url = "github:vic/flake-file";
+    flake-parts.url = "github:hercules-ci/flake-parts";
     ghostty-shaders = {
       flake = false;
       url = "github:hackr-sh/ghostty-shaders";
     };
     home-manager = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
     };
     ignis = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:linkfrg/ignis";
     };
-    impermanence = {
-      url = "github:nix-community/impermanence";
-    };
-    import-tree = {
-      url = "github:vic/import-tree";
-    };
+    impermanence.url = "github:nix-community/impermanence";
+    import-tree.url = "github:vic/import-tree";
     lix = {
       flake = false;
       url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
     };
     lix-module = {
       inputs = {
-        lix = {
-          follows = "lix";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
+        lix.follows = "lix";
+        nixpkgs.follows = "nixpkgs";
       };
       url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
     };
-    niri = {
-      url = "github:sodiboo/niri-flake";
-    };
-    nix-gaming = {
-      url = "github:fufexan/nix-gaming";
-    };
+    niri.url = "github:sodiboo/niri-flake";
+    nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/nix-index-database";
     };
     nix-yazi-plugins = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:lordkekz/nix-yazi-plugins";
     };
     nixago = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixago";
     };
     nixcord = {
       inputs = {
-        flake-parts = {
-          follows = "flake-parts";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
       };
       url = "github:kaylorben/nixcord";
     };
-    nixos-facter-modules = {
-      url = "github:numtide/nixos-facter-modules";
-    };
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-unstable";
-    };
+    nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     spicetify-nix = {
-      inputs = {
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Gerg-L/spicetify-nix";
     };
     swi-lsp-server = {
@@ -157,15 +96,9 @@
     };
     unify = {
       inputs = {
-        flake-parts = {
-          follows = "flake-parts";
-        };
-        home-manager = {
-          follows = "home-manager";
-        };
-        nixpkgs = {
-          follows = "nixpkgs";
-        };
+        flake-parts.follows = "flake-parts";
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
       };
       url = "git+https://codeberg.org/quasigod/unify";
     };
