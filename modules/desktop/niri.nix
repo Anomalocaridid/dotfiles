@@ -76,7 +76,10 @@ in
             # Prefer no client-side decorations to make borders and rounded corners a bit more consistent
             prefer-no-csd = true;
 
-            hotkey-overlay.skip-at-startup = true;
+            hotkey-overlay = {
+              skip-at-startup = true;
+              hide-not-bound = true;
+            };
 
             layout = {
               gaps = wm.gapWidth;
@@ -365,17 +368,32 @@ in
                   cooldown-ms = wm.mouseCooldownMs;
                   inherit action;
                 };
+                launchBind = mime: title: {
+                  action.spawn = launch mime;
+                  hotkey-overlay.title = "Launch ${title}";
+                };
               in
               {
                 "Mod+Shift+Slash".action = actions.show-hotkey-overlay;
 
-                "Mod+T".action.spawn = terminal;
-                "Mod+D".action = actions.spawn-sh "pkill fuzzel || fuzzel";
-                "Mod+B".action.spawn = launch "x-scheme-handler/https";
-                "Mod+N".action.spawn = launch "inode/directory";
-                "Super+Alt+L".action = actions.spawn "wlogout" "--show-binds";
-                "Mod+Ctrl+C".action =
-                  actions.spawn-sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
+                "Mod+T" = {
+                  action.spawn = terminal;
+                  hotkey-overlay.title = "Launch Terminal";
+                };
+                "Mod+D" = {
+                  action = actions.spawn-sh "pkill fuzzel || fuzzel";
+                  hotkey-overlay.title = "Open App Launcher";
+                };
+                "Mod+B" = launchBind "x-scheme-handler/https" "Web Browser";
+                "Mod+N" = launchBind "inode/directory" "File Manager";
+                "Super+Alt+L" = {
+                  action = actions.spawn "wlogout" "--show-binds";
+                  hotkey-overlay.title = "Shut Down";
+                };
+                "Mod+Ctrl+C" = {
+                  action = actions.spawn-sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
+                  hotkey-overlay.title = "View Clipboard History";
+                };
 
                 # Volume keys mappings for PipeWire & WirePlumber.
                 XF86AudioRaiseVolume = wpctl [
