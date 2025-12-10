@@ -10,11 +10,7 @@
       programs = {
         fd.enable = true;
         ripgrep.enable = true;
-        vivid = {
-          enable = true;
-          # TODO: remove when catppuccin/nix vivid module is added
-          activeTheme = "catppuccin-${config.catppuccin.flavor}";
-        };
+        vivid.enable = true;
       };
 
       home = {
