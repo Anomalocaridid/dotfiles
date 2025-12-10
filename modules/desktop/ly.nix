@@ -3,41 +3,44 @@ let
   inherit (config.flake.meta) username;
 in
 {
-  unify.modules.general.nixos =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
-    {
-      services.displayManager.ly = {
-        enable = true;
-        settings = {
-          animation = "colormix";
-          asterisk = "0x2022"; # •
-          battery_id = "BAT1";
-          bigclock = "en";
-          clear_password = true;
-          colormix_col1 = "0x0006"; # Magenta
-          colormix_col2 = "0x0005"; # Blue
-          colormix_col3 = "0x0007"; # Cyan
-          hide_borders = true;
-        };
-      };
+  unify.modules = {
+    laptop.nixos.services.displayManager.ly.settings.battery_id = "BAT1";
 
-      # Set default session
-      environment.etc."ly/save.ini".source =
-        (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-          output = "save.ini";
-          data.globalSection = {
-            user = username;
-            session_index = 2;
+    general.nixos =
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
+      {
+        services.displayManager.ly = {
+          enable = true;
+          settings = {
+            animation = "colormix";
+            asterisk = "0x2022"; # •
+            bigclock = "en";
+            clear_password = true;
+            colormix_col1 = "0x0006"; # Magenta
+            colormix_col2 = "0x0005"; # Blue
+            colormix_col3 = "0x0007"; # Cyan
+            hide_borders = true;
           };
-          format = "iniWithGlobalSection";
-        }).configFile;
+        };
 
-      # Ensure services start properly
-      systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
-    };
+        # Set default session
+        environment.etc."ly/save.ini".source =
+          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
+            output = "save.ini";
+            data.globalSection = {
+              user = username;
+              session_index = 2;
+            };
+            format = "iniWithGlobalSection";
+          }).configFile;
+
+        # Ensure services start properly
+        systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";
+      };
+  };
 }
