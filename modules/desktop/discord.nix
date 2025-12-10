@@ -46,9 +46,6 @@ in
           equibop = {
             enable = true;
             # TODO: remove when fixed
-            # For some reason, default configDir is incorrectly set to ~/.config/Equibop
-            configDir = "${config.xdg.configHome}/equibop";
-            # TODO: remove when fixed
             # Apply Vesktop read-only state patch
             package = pkgs.equibop.overrideAttrs (oldAttrs: {
               patches = (oldAttrs.patches or [ ]) ++ [
