@@ -24,16 +24,7 @@ in
       imports = [ inputs.niri.nixosModules.niri ];
       programs.niri.enable = true;
       # Tell electron apps to use Wayland
-      environment =
-        let
-          inherit (config.flake.meta) persistDir username;
-        in
-        {
-          sessionVariables.NIXOS_OZONE_WL = "1";
-          # sunsetr location info
-          # NOTE: contains private location data
-          persistence.${persistDir}.users.${username}.files = [ ".config/sunsetr/geo.toml" ];
-        };
+      environment.sessionVariables.NIXOS_OZONE_WL = "1";
     };
 
     home =
@@ -393,6 +384,10 @@ in
                 "Mod+Ctrl+C" = {
                   action = actions.spawn-sh "cliphist list | fuzzel --dmenu --prompt='Copy to Clipboard:' | wl-copy";
                   hotkey-overlay.title = "View Clipboard History";
+                };
+                "Mod+S" = {
+                  action = actions.spawn (lib.getExe pkgs.sunsetr) "preset" "day";
+                  hotkey-overlay.title = "Toggle Blue Light Filter";
                 };
 
                 # Volume keys mappings for PipeWire & WirePlumber.
