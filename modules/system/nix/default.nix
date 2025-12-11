@@ -76,7 +76,10 @@
         imports = [ inputs.nix-index-database.homeModules.nix-index ];
 
         # Use nix-index to locate missing commands
-        programs.nix-index.enable = true;
+        programs = {
+          nix-index.enable = true;
+          nix-index-database.comma.enable = true;
+        };
 
         # Link /etc/nixos to home directory
         systemd.user.tmpfiles.rules = [
