@@ -29,9 +29,8 @@
         forwardSearch = {
           executable = "sioyek";
           args = [
-            "--reuse-window"
             "--execute-command"
-            "toggle_synctex"
+            "turn_on_synctex"
             "--inverse-search"
             ''texlab inverse-search --input "%%1" --line %%2''
             "--forward-search-file"
