@@ -23,6 +23,7 @@ in
             check_for_updates_on_startup = "1";
             should_launch_new_window = "1";
             "new_command _print" = "${lib.getExe pkgs.yad} --print --type=RAW --filename=%{file_path}";
+            "new_command _rearrange" = "${lib.getExe pkgs.pdfarranger} %{file_path}";
             "new_command _ocr" = ''${
               lib.getExe (
                 pkgs.writeShellApplication {
@@ -50,6 +51,7 @@ in
           };
           bindings = {
             _print = "<C-p>";
+            _rearrange = "<A-r>";
             _ocr = "<A-o>";
           };
         };
