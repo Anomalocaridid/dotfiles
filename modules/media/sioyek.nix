@@ -25,43 +25,26 @@ in
             "new_command _print" = "${lib.getExe pkgs.yad} --print --type=RAW --filename=%{file_path}";
             "new_command _ocr" = ''${
               lib.getExe (
-                pkgs.writers.writePython3Bin "ocr.py"
-                  {
-                    libraries = with pkgs.python3Packages; [
-                      notify-py
-                      ocrmypdf
-                    ];
-                    makeWrapperArgs = [
-                      "--prefix"
-                      "PATH"
-                      ":"
-                      "${lib.makeBinPath [ config.programs.sioyek.package ]}"
-                    ];
-                  }
-                  ''
-                    import sys
-                    import os
-
-                    from notifypy import Notify
-                    import ocrmypdf
-
-                    if __name__ == '__main__':
-                        file_path = sys.argv[1]
-                        new_path = file_path.split('.')[0] + '_ocr.pdf'
-
-                        # TODO: Have a proper GUI window with a progress bar
-                        # Notify the user that things are happening
-                        notification = Notify()
-                        notification.title = "Sioyek OCRmyPDF Script"
-                        notification.message = f"Started running OCRmyPDF on {file_path}"
-                        notification.send()
-
-                        # Run OCR
-                        ocrmypdf.ocr(file_path, new_path)
-
-                        # Open OCR file in sioyek
-                        os.system(f'sioyek "{new_path}"')
-                  ''
+                pkgs.writeShellApplication {
+                  name = "ocr.sh";
+                  runtimeInputs = with pkgs; [
+                    # handlr-regex
+                    ghostty
+                    ocrmypdf
+                    config.programs.sioyek.package
+                    libnotify
+                  ];
+                  text = ''
+                    readonly file_path="''${1/%.pdf/_ocr.pdf}"
+                    # Run OCR and show output in terminal window
+                    # handlr launch x-scheme-handler/terminal -- --class='com.terminal.ocrmypdf' -e ocrmypdf "$1" "$file_path" && sioyek "$file_path"
+                    # TODO: replace with handlr-regex once blocking flag is added
+                    ghostty --class='com.terminal.ocrmypdf' -e ocrmypdf "$1" "$file_path"
+                    # Open OCR PDF file in sioyek
+                    sioyek --reuse-window "$file_path"
+                    notify-send --icon=document-viewer "Sioyek OCRmyPDF Script" "Finished processing '$1'"
+                  '';
+                }
               )
             } %{file_path}'';
           };

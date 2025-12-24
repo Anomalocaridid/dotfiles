@@ -138,6 +138,15 @@ in
                   ];
                   open-floating = true;
                 }
+                # Non-interactive script dialogues
+                {
+                  matches = [
+                    # Used in sioyek OCRmyPDF script
+                    { app-id = "^com\.terminal\.ocrmypdf$"; }
+                  ];
+                  open-floating = true;
+                  open-focused = false;
+                }
                 # Hide password manager from screencasts
                 {
                   matches = [ { app-id = "^org\.keepassxc\.KeePassXC$"; } ];
