@@ -51,17 +51,6 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     import-tree.url = "github:vic/import-tree";
-    lix = {
-      flake = false;
-      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
-    };
-    lix-module = {
-      inputs = {
-        lix.follows = "lix";
-        nixpkgs.follows = "nixpkgs";
-      };
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
-    };
     niri.url = "github:sodiboo/niri-flake";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database = {

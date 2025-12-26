@@ -3,19 +3,6 @@
   flake-file.inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    lix = {
-      url = "https://git.lix.systems/lix-project/lix/archive/main.tar.gz";
-      flake = false;
-    };
-
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/main.tar.gz";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        lix.follows = "lix";
-      };
-    };
-
     # Use nix-index without having to generate the database locally
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
@@ -25,11 +12,28 @@
 
   unify.modules.general = {
     nixos =
-      { lib, ... }:
+      { lib, pkgs, ... }:
       {
-        imports = [ inputs.lix-module.nixosModules.default ];
+        nixpkgs = {
+          config.allowUnfree = true;
+
+          # Use Lix in supported tools
+          overlays = [
+            (final: prev: {
+              inherit (prev.lixPackageSets.latest)
+                nixpkgs-review
+                nix-direnv
+                nix-eval-jobs
+                nix-fast-build
+                colmena
+                ;
+            })
+          ];
+        };
 
         nix = {
+          # Use Lix
+          package = pkgs.lixPackageSets.latest.lix;
           settings = {
             experimental-features = [
               "nix-command"
@@ -54,8 +58,6 @@
             |> (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
             |> (lib.mapAttrs (_: flake: { inherit flake; }));
         };
-
-        nixpkgs.config.allowUnfree = true;
 
         # Ensure that nixos config has proper permissions
         # NOTE: persistence permissions only seem to apply upon creating a bind mount
