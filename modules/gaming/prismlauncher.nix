@@ -12,6 +12,8 @@
         inherit (config.flake.meta) username persistDir;
       in
       {
+        # Needed for certain mods like VinURL
+        programs.nix-ld.enable = true;
         # Persist Prism Launcher data
         environment.persistence.${persistDir}.users.${username}.directories = [
           ".local/share/PrismLauncher"
@@ -23,7 +25,12 @@
       {
         home.packages = with pkgs; [
           packwiz # minecraft modpack creator
-          prismlauncher
+          (prismlauncher.override (oldAttrs: {
+            # Needed for certain mods like VinURL
+            additionalPrograms = [ ffmpeg ];
+            # Add faster JDK implementation
+            jdks = [ graalvmPackages.graalvm-ce ];
+          }))
         ];
 
         xdg.dataFile = {
