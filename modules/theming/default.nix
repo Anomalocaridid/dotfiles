@@ -10,12 +10,6 @@
     {
       gtk.enable = true;
 
-      qt = rec {
-        enable = true;
-        style.name = "kvantum";
-        platformTheme = style;
-      };
-
       home.pointerCursor =
         let
           palette = config.catppuccin.sources.parsedPalette;
