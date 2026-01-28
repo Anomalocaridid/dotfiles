@@ -20,7 +20,7 @@
         };
 
         # CUPS config
-        environment.persistence.${config.flake.meta.persistDir}.directories = [ "/etc/cups" ];
+        environment.persistence.${config.flake.meta.persistDir}.directories = [ "/var/lib/cups" ];
       };
 
     home =
