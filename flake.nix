@@ -19,10 +19,6 @@
       flake = false;
       url = "github:catppuccin/ohmyrepl";
     };
-    catppuccin-prismlauncher = {
-      flake = false;
-      url = "github:catppuccin/prismlauncher";
-    };
     catppuccin-userstyles-nix = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
