@@ -49,7 +49,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:linkfrg/ignis";
     };
-    impermanence.url = "github:nix-community/impermanence";
+    impermanence = {
+      inputs = {
+        home-manager.follows = "home-manager";
+        nixpkgs.follows = "nixpkgs";
+      };
+      url = "github:nix-community/impermanence";
+    };
     import-tree.url = "github:vic/import-tree";
     niri.url = "github:sodiboo/niri-flake";
     nix-gaming.url = "github:fufexan/nix-gaming";
