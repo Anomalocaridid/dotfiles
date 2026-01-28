@@ -4,7 +4,7 @@
   perSystem =
     { pkgs, ... }:
     {
-      formatter = pkgs.nixfmt-rfc-style;
+      formatter = pkgs.nixfmt;
     };
 
   unify.modules.general.home = moduleWithSystem (
