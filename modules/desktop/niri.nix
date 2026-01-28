@@ -225,21 +225,6 @@ in
                 ];
               }
               {
-                command =
-                  let
-                    noHash = str: "0x${builtins.substring 1 (builtins.stringLength str) str}";
-                  in
-                  [
-                    (lib.getExe pkgs.wayneko)
-                    "--background-colour"
-                    (noHash palette.crust.hex)
-                    "--outline-colour"
-                    (noHash accent)
-                    "--layer"
-                    "top"
-                  ];
-              }
-              {
                 command = [
                   "steam"
                   "-silent"
