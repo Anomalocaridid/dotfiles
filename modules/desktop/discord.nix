@@ -45,13 +45,6 @@ in
           discord.enable = false;
           equibop = {
             enable = true;
-            # TODO: remove when fixed
-            # Apply Vesktop read-only state patch
-            package = pkgs.equibop.overrideAttrs (oldAttrs: {
-              patches = (oldAttrs.patches or [ ]) ++ [
-                "${inputs.nixpkgs}/pkgs/by-name/ve/vesktop/fix_read_only_settings.patch"
-              ];
-            });
             settings =
               let
                 palette = config.catppuccin.sources.parsedPalette;
