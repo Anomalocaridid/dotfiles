@@ -8,7 +8,12 @@
       };
 
     home =
-      { config, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         # fallback icon theme
         home.packages = with pkgs; [ adwaita-icon-theme ];

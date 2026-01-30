@@ -4,7 +4,6 @@
       config,
       lib,
       pkgs,
-      osConfig,
       ...
     }:
     {
@@ -22,7 +21,10 @@
         ];
       }
       // (lib.genAttrs [ "qt5ctSettings" "qt6ctSettings" ] (_: {
-        Appearance.style = "Darkly";
+        Appearance = {
+          style = "Darkly";
+          icon_theme = config.gtk.iconTheme.name;
+        };
       }));
     };
 }
