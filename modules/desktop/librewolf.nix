@@ -403,7 +403,7 @@ in
               force = true;
               # use built-in StartPage
               # id obtained with `mozlz4a -d ~/.librewolf/default/search.json.mozlz4`
-              default = "policy-StartPage";
+              default = "policy-Startpage";
 
               # NOTE: For some reason, Tridactyl only detects aliases declared with `metaData.alias`, not `definedAliases`
               engines =
