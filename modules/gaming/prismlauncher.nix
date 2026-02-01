@@ -20,12 +20,10 @@
       {
         home.packages = with pkgs; [
           packwiz # minecraft modpack creator
-          (prismlauncher.override (oldAttrs: {
+          (prismlauncher.override {
             # Needed for certain mods like VinURL
             additionalPrograms = [ ffmpeg ];
-            # Add faster JDK implementation
-            jdks = [ graalvmPackages.graalvm-ce ];
-          }))
+          })
         ];
 
         xdg.dataFile."PrismLauncher/iconthemes/custom".source =
