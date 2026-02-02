@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  unify.modules.general = {
+  unify.modules.desktop = {
     nixos =
       { pkgs, ... }:
       let
