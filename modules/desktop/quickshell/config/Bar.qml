@@ -28,6 +28,9 @@ Scope {
                     anchors.fill: parent
                     spacing: 0
 
+                    LeftBar {
+                    }
+
                     RightBar {
                     }
                 }
