@@ -1,15 +1,7 @@
 {
   unify.modules.general.home =
+    { config, pkgs, ... }:
     {
-      config,
-      lib,
-      pkgs,
-      osConfig,
-      ...
-    }:
-    {
-      gtk.enable = true;
-
       home.pointerCursor =
         let
           palette = config.catppuccin.sources.parsedPalette;

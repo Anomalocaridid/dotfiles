@@ -30,12 +30,7 @@
         };
       };
     home =
-      {
-        config,
-        pkgs,
-        osConfig,
-        ...
-      }:
+      { osConfig, ... }:
       {
         imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
@@ -48,36 +43,7 @@
             accent
             sources
             ;
-          # Disable Catppuccin icons because I want to use a different theme
-          gtk.icon.enable = false;
         };
-
-        # Manually set up catppuccin GTK theme since it is no longer supported upstream
-        gtk = {
-          theme =
-            let
-              size = "standard";
-            in
-            {
-              name = "catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}-${size}";
-              package = pkgs.catppuccin-gtk.override {
-                accents = [ config.catppuccin.accent ];
-                inherit size;
-                variant = config.catppuccin.flavor;
-              };
-            };
-        };
-
-        # Manually link GTK theme accents
-        xdg.configFile =
-          let
-            gtk4Dir = "${config.gtk.theme.package}/share/themes/${config.gtk.theme.name}/gtk-4.0";
-          in
-          {
-            "gtk-4.0/assets".source = "${gtk4Dir}/assets";
-            "gtk-4.0/gtk.css".source = "${gtk4Dir}/gtk.css";
-            "gtk-4.0/gtk-dark.css".source = "${gtk4Dir}/gtk-dark.css";
-          };
       };
   };
 }

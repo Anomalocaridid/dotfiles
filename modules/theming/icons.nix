@@ -15,6 +15,9 @@
         ...
       }:
       {
+        # Disable Catppuccin icons because I want to use a different theme
+        catppuccin.gtk.icon.enable = false;
+
         # fallback icon theme
         home.packages = with pkgs; [ adwaita-icon-theme ];
 
