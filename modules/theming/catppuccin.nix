@@ -32,6 +32,7 @@
     home =
       {
         config,
+        lib,
         pkgs,
         osConfig,
         ...
@@ -52,20 +53,10 @@
           gtk.icon.enable = false;
         };
 
-        # Manually set up catppuccin GTK theme since it is no longer supported upstream
-        gtk = {
-          theme =
-            let
-              size = "standard";
-            in
-            {
-              name = "catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}-${size}";
-              package = pkgs.catppuccin-gtk.override {
-                accents = [ config.catppuccin.accent ];
-                inherit size;
-                variant = config.catppuccin.flavor;
-              };
-            };
+        # NOTE: this catppuccin gtk theme does not yet use the names of flavors
+        gtk.theme = {
+          name = "Catppuccin-GTK-${lib.toSentenceCase config.catppuccin.accent}-Dark";
+          package = pkgs.magnetic-catppuccin-gtk.override { accent = [ config.catppuccin.accent ]; };
         };
 
         # Manually link GTK theme accents
