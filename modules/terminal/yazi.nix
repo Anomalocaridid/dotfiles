@@ -24,27 +24,7 @@
         programs.yazi = {
           enable = true;
           enableFishIntegration = true;
-          plugins."smart-paste" = pkgs.writeTextFile rec {
-            name = "main.lua";
-            destination = "/${name}";
-            text =
-              # lua
-              ''
-                --- @sync entry
-                return {
-                  entry = function()
-                    local h = cx.active.current.hovered
-                    if h and h.cha.is_dir then
-                      ya.manager_emit("enter", {})
-                      ya.manager_emit("paste", {})
-                      ya.manager_emit("leave", {})
-                    else
-                      ya.manager_emit("paste", {})
-                    end
-                  end,
-                }
-              '';
-          };
+          plugins."smart-paste" = pkgs.yaziPlugins.smart-paste;
           settings.opener.open = [
             {
               run = ''xdg-open "$1"'';
