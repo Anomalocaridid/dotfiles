@@ -24,6 +24,8 @@
         programs.yazi = {
           enable = true;
           enableFishIntegration = true;
+          # Needed because `home.stateVersion` < 26.05
+          shellWrapperName = "y";
           plugins."smart-paste" = pkgs.yaziPlugins.smart-paste;
           settings.opener.open = [
             {
