@@ -19,6 +19,9 @@
     };
 
     # Syntax-aware git merge driver
-    mergiraf.enable = true;
+    mergiraf = {
+      enable = true;
+      enableGitIntegration = true;
+    };
   };
 }
