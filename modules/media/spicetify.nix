@@ -9,10 +9,14 @@ in
   };
 
   unify.modules.general = {
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
-      ".cache/spotify" # Spotify cache
-      ".config/spotify" # Spotify user data
-    ];
+    nixos = {
+      nixpkgs.config.allowUnfreePackages = [ "spotify" ];
+
+      environment.persistence.${persistDir}.users.${username}.directories = [
+        ".cache/spotify" # Spotify cache
+        ".config/spotify" # Spotify user data
+      ];
+    };
 
     home =
       { config, pkgs, ... }:

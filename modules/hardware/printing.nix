@@ -4,6 +4,8 @@
     nixos =
       { pkgs, ... }:
       {
+        nixpkgs.config.allowUnfreePackages = [ "hplip" ];
+
         services = {
           # Enable CUPS to print documents.
           printing = {

@@ -7,6 +7,11 @@
       inherit (config.flake.meta) username persistDir;
     in
     {
+      nixpkgs.config.allowUnfreePackages = [
+        "steam"
+        "steam-unwrapped"
+      ];
+
       programs.steam = {
         enable = true;
         remotePlay.openFirewall = true;
