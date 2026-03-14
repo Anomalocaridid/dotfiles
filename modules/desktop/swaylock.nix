@@ -10,15 +10,7 @@
     # Needed for swaylock-plugin to unlock
     nixos.security.pam.services.swaylock-plugin = { };
     home =
-      {
-        config,
-        lib,
-        pkgs,
-        ...
-      }:
-      let
-        palette = config.catppuccin.sources.parsedPalette;
-      in
+      { lib, pkgs, ... }:
       {
         # Needed for weird technical reasons because `home.stateVersion` < 23.05
         catppuccin.swaylock.enable = true;
@@ -31,13 +23,6 @@
             ignore-empty-password = true;
             show-failed-attempts = true;
             indicator-radius = 115;
-
-            # Make background color in ring opaque
-            inside-color = lib.mkForce "${palette.base.hex}";
-            inside-ver-color = lib.mkForce "${palette.base.hex}";
-            inside-caps-lock-color = lib.mkForce "${palette.base.hex}";
-            inside-wrong-color = lib.mkForce "${palette.base.hex}";
-            inside-clear-color = lib.mkForce "${palette.base.hex}";
 
             # swaylock-plugin-specific settings
             grace = 2;
