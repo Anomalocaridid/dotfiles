@@ -7,92 +7,91 @@
 
   inputs = {
     cascade = {
-      flake = false;
       url = "github:cascadefox/cascade";
+      flake = false;
     };
     catppuccin.url = "github:catppuccin/nix";
     catppuccin-fractal-wallpapers = {
-      flake = false;
       url = "github:psylopneunonym/Catppuccin-Fractal-Wallpapers";
+      flake = false;
     };
     catppuccin-ohmyrepl = {
-      flake = false;
       url = "github:catppuccin/ohmyrepl";
+      flake = false;
     };
     catppuccin-userstyles-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     devshell = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:numtide/devshell";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";
     ghostty-shaders = {
-      flake = false;
       url = "github:hackr-sh/ghostty-shaders";
+      flake = false;
     };
     home-manager = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     ignis = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:linkfrg/ignis";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     impermanence = {
+      url = "github:nix-community/impermanence";
       inputs = {
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:nix-community/impermanence";
     };
     import-tree.url = "github:vic/import-tree";
     niri.url = "github:sodiboo/niri-flake";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Mic92/nix-index-database";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-yazi-plugins = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:lordkekz/nix-yazi-plugins";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixago = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:nix-community/nixago";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     nixcord = {
+      url = "github:kaylorben/nixcord";
       inputs = {
         flake-parts.follows = "flake-parts";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "github:kaylorben/nixcord";
     };
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
     spicetify-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:Gerg-L/spicetify-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     swi-lsp-server = {
-      flake = false;
       url = "github:jamesnvc/lsp_server";
+      flake = false;
     };
     unify = {
+      url = "git+https://codeberg.org/quasigod/unify";
       inputs = {
         flake-parts.follows = "flake-parts";
         home-manager.follows = "home-manager";
         nixpkgs.follows = "nixpkgs";
       };
-      url = "git+https://codeberg.org/quasigod/unify";
     };
   };
-
 }
