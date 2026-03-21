@@ -14,6 +14,7 @@
           confirm-close-surface = false;
           notify-on-command-finish = "unfocused";
           notify-on-command-finish-action = "notify";
+          window-inherit-working-directory = false;
 
           font-family = builtins.head config.fonts.fontconfig.defaultFonts.monospace;
           font-size = 11;
