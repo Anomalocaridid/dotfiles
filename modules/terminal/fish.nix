@@ -83,7 +83,6 @@
               })
               [
                 "autopair"
-                "done"
                 "exercism-cli-fish-wrapper"
                 "fish-bd"
                 "fish-you-should-use"
