@@ -4,13 +4,20 @@ let
 in
 {
   unify.modules.general.nixos = {
-    # Daily btrfs snapshots
-    services.btrbk.instances.daily.settings = {
-      snapshot_preserve = "14d";
-      snapshot_preserve_min = "2d";
-      volume.${persistDir} = {
-        subvolume = ".";
-        snapshot_dir = "btrbk_snapshots";
+    services = {
+      btrfs.autoScrub = {
+        enable = true;
+        fileSystems = [ persistDir ];
+      };
+
+      # Daily btrfs snapshots
+      btrbk.instances.daily.settings = {
+        snapshot_preserve = "14d";
+        snapshot_preserve_min = "2d";
+        volume.${persistDir} = {
+          subvolume = ".";
+          snapshot_dir = "btrbk_snapshots";
+        };
       };
     };
 
