@@ -94,6 +94,9 @@ in
                 # NOTE: DisableFirefoxAccounts policy cannot turn sync on if it is already off by default
                 identity.fxaccounts.enabled = true;
 
+                # Needed for xdg-desktop-portal-termfilechooser
+                widget.use-xdg-desktop-portal.file-picker = 1;
+
                 # Only sync bookmarks and tabs
                 # Some of these are set by default, but they should be locked just in case
                 services.sync.engine = {
