@@ -1,22 +1,8 @@
-{ config, inputs, ... }:
+{ config, ... }:
 let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  flake-file.inputs = {
-    # Catppuccin userstyles for Stylus
-    catppuccin-userstyles-nix = {
-      url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # Firefox userChrome
-    cascade = {
-      url = "github:cascadefox/cascade";
-      flake = false;
-    };
-  };
-
   unify.modules.general = {
     # Librewolf data
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".librewolf" ];
@@ -32,50 +18,17 @@ in
         homePage = "www.startpage.com";
       in
       {
-        # Force Firefox Color settings
-        catppuccin.librewolf.force = true;
-
-        xdg = {
-          mimeApps.defaultApplications =
-            let
-              desktopFile = "librewolf.desktop";
-            in
-            {
-              "text/html" = desktopFile;
-              "x-scheme-handler/http*" = desktopFile;
-            };
-
-          # Tridactyl config
-          configFile."tridactyl/tridactylrc".text =
-            let
-              theme = "catppuccin-${config.catppuccin.flavor}";
-            in
-            ''
-              " Clear commandline history and config not present in config file
-              sanitize commandline tridactylsync tridactyllocal
-
-              " Set colorscheme
-              " TODO: change URL when repo is made official: https://github.com/catppuccin/catppuccin/issues/2799
-              colourscheme --url https://raw.githubusercontent.com/devnullvoid/tridactyl/catppuccin-review-changes/themes/${theme}.css ${theme}
-
-              " Set new tab page
-              set newtab ${homePage}
-
-              " Set text editor for editing text fields
-              set editorcmd handlr launch text/plain --
-
-              " Adjust keybinds to account for vertical tabs
-              bind J tabnext
-              bind K tabprev
-            '';
-        };
+        xdg.mimeApps.defaultApplications =
+          let
+            desktopFile = "librewolf.desktop";
+          in
+          {
+            "text/html" = desktopFile;
+            "x-scheme-handler/http*" = desktopFile;
+          };
 
         programs.librewolf = {
           enable = true;
-          nativeMessagingHosts = with pkgs; [
-            keepassxc
-            tridactyl-native
-          ];
           package = pkgs.librewolf.override {
             # Set preferences not supported in Preferences policy here to ensure they stay set
             extraPrefs =
@@ -162,34 +115,15 @@ in
                 "*".installation_mode = "blocked";
               }
               // (mkExtensions [
-                # Firefox color
-                "FirefoxColor@mozilla.com"
-                # Catppuccin for GitHub File Explorer Icons
-                "{bbb880ce-43c9-47ae-b746-c3e0096c5b76}"
-                # Dark Reader
-                "addon@darkreader.org"
                 # Indie Wiki Buddy
                 "{cb31ec5d-c49a-4e5a-b240-16c767444f62}"
-                # KeepassXC Browser
-                "keepassxc-browser@keepassxc.org"
                 # Redirector
                 "redirector@einaregilsson.com"
-                # Stylus
-                "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"
-                # Tridactyl
-                "tridactyl.vim@cmcaine.co.uk"
                 # uBlacklist
                 "@ublacklist"
                 # uBlock Origin
                 "uBlock0@raymondhill.net"
-              ])
-              // {
-                # Zotero Connector (not on AMO)
-                "zotero@chnm.gmu.edu" = {
-                  install_url = "https://www.zotero.org/download/connector/dl?browser=firefox";
-                  installation_mode = "force_installed";
-                };
-              };
+              ]);
 
             Preferences =
               let
@@ -204,12 +138,6 @@ in
                   }) prefs;
               in
               mkPreferences {
-                # Enable userChrome
-                toolkit.legacyUserProfileCustomizations.stylesheets = true;
-
-                # Disable Alt key menu (somehow breaks cascade userChrome with persistent effects)
-                ui.key.menuAccessKeyFocuses = false;
-
                 browser = {
                   # Set home page so Tridactyl can run on it
                   startup.homepage = homePage;
@@ -285,121 +213,71 @@ in
 
             '';
 
-            userChrome = # css
-              ''
-                /* Default settings */
-                @import "${inputs.cascade}/chrome/includes/cascade-config.css";
-
-                @import "${inputs.cascade}/chrome/includes/cascade-layout.css";
-                @import "${inputs.cascade}/chrome/includes/cascade-responsive.css";
-                @import "${inputs.cascade}/chrome/includes/cascade-floating-panel.css";
-
-                @import "${inputs.cascade}/chrome/includes/cascade-nav-bar.css";
-                @import "${inputs.cascade}/chrome/includes/cascade-tabs.css";
-
-                /* Not default settings */
-                @import "${inputs.cascade}/integrations/catppuccin/cascade-${config.catppuccin.flavor}.css";
-              '';
-
             extensions = {
               # Override extension settings
               # NOTE: Each extension also needs `force = true` to prevent file conflicts
               force = true;
-              settings =
-                let
-                  accent = config.catppuccin.accent;
-                  palette = config.catppuccin.sources.parsedPalette;
-                in
-                {
-                  "addon@darkreader.org" = {
-                    force = true;
-                    settings = {
-                      syncSettings = false;
-                      theme = {
-                        fontFamily = builtins.head config.fonts.fontconfig.defaultFonts.monospace;
-                        darkSchemeBackgroundColor = palette.base.hex;
-                        darkSchemeTextColor = palette.text.hex;
-                        selectionColor = palette.surface2.hex;
-                      };
-                      previewNewDesign = true;
-                    };
-                  };
-
-                  "redirector@einaregilsson.com" = {
-                    force = true;
-                    settings = {
-                      redirects = [
-                        {
-                          description = "FreeTube";
-                          exampleUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                          # Normally automatically generated, but will not be properly generated if missing
-                          # Does not cause serious problems if missing, just mangles example in redirector list
-                          exampleResult = "freetube://https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                          includePattern = "((https://)?(www\\.)?youtu(be\\.com|\\.be)/.*)";
-                          redirectUrl = "freetube://$1";
-                          patternType = "R"; # Regular expression
-                          # Required or redirector will not work
-                          appliesTo = [
-                            "main_frame"
-                          ];
-                        }
-                        {
-                          description = "Steam Client";
-                          exampleUrl = "https://store.steampowered.com/";
-                          # Normally automatically generated, but will not be properly generated if missing
-                          # Does not cause serious problems if missing, just mangles example in redirector list
-                          exampleResult = "steam://openurl/https://store.steampowered.com/";
-                          includePattern = "^(https://(.*\\.)?steam(powered|community).com/)$";
-                          redirectUrl = "steam://openurl/$1";
-                          patternType = "R"; # Regular expression
-                          appliesTo = [
-                            "main_frame"
-                          ];
-                        }
-                        {
-                          description = "[Farside] General Entry";
-                          exampleUrl = "https://m.youtube.com/watch?v=dQw4w9WgXcQ";
-                          # Normally automatically generated, but will not be properly generated if missing
-                          # Does not cause serious problems if missing, just mangles example in redirector list
-                          exampleResult = "https://farside.link/youtube.com/watch?v=dQw4w9WgXcQ";
-                          includePattern = "^(?:https?://)?(?:www\\.)?(?:\\w{2;}\\.)?(?:mobile\\.|m\\.)?((?:imdb|imgur|instagram|medium|odysee|quora|reddit|tiktok|translate\\.google|wikipedia|youtube)\\.(?:com|org|au|de|co|cn).*)$";
-                          redirectUrl = "https://farside.link/$1";
-                          patternType = "R"; # Regular expression
-                          # Required or redirector will not work
-                          appliesTo = [ "main_frame" ];
-                        }
-                      ];
-                    };
-                  };
-
-                  # Stylus
-                  "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}" = {
-                    force = true;
-                    settings = inputs.catppuccin-userstyles-nix.stylusSettings.${pkgs.stdenv.hostPlatform.system} {
-                      global = {
-                        lightFlavor = config.catppuccin.flavor;
-                        darkFlavor = config.catppuccin.flavor;
-                        accentColor = config.catppuccin.accent;
-                      };
-                    };
-                  };
-
-                  "@ublacklist" = {
-                    force = true;
-                    settings = {
-                      subscriptions = {
-                        "0" = {
-                          name = "Main AI blocklist";
-                          url = "https://raw.githubusercontent.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist/main/list_uBlacklist.txt";
-                        };
-                      };
-                      updateInterval = 60;
-                      linkColor = palette.blue.hex;
-                      blockColor = palette.red.hex;
-                      highlightColors = [ palette.${accent}.hex ];
-                    };
+              settings = {
+                "redirector@einaregilsson.com" = {
+                  force = true;
+                  settings = {
+                    redirects = [
+                      {
+                        description = "FreeTube";
+                        exampleUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                        # Normally automatically generated, but will not be properly generated if missing
+                        # Does not cause serious problems if missing, just mangles example in redirector list
+                        exampleResult = "freetube://https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                        includePattern = "((https://)?(www\\.)?youtu(be\\.com|\\.be)/.*)";
+                        redirectUrl = "freetube://$1";
+                        patternType = "R"; # Regular expression
+                        # Required or redirector will not work
+                        appliesTo = [
+                          "main_frame"
+                        ];
+                      }
+                      {
+                        description = "Steam Client";
+                        exampleUrl = "https://store.steampowered.com/";
+                        # Normally automatically generated, but will not be properly generated if missing
+                        # Does not cause serious problems if missing, just mangles example in redirector list
+                        exampleResult = "steam://openurl/https://store.steampowered.com/";
+                        includePattern = "^(https://(.*\\.)?steam(powered|community).com/)$";
+                        redirectUrl = "steam://openurl/$1";
+                        patternType = "R"; # Regular expression
+                        appliesTo = [
+                          "main_frame"
+                        ];
+                      }
+                      {
+                        description = "[Farside] General Entry";
+                        exampleUrl = "https://m.youtube.com/watch?v=dQw4w9WgXcQ";
+                        # Normally automatically generated, but will not be properly generated if missing
+                        # Does not cause serious problems if missing, just mangles example in redirector list
+                        exampleResult = "https://farside.link/youtube.com/watch?v=dQw4w9WgXcQ";
+                        includePattern = "^(?:https?://)?(?:www\\.)?(?:\\w{2;}\\.)?(?:mobile\\.|m\\.)?((?:imdb|imgur|instagram|medium|odysee|quora|reddit|tiktok|translate\\.google|wikipedia|youtube)\\.(?:com|org|au|de|co|cn).*)$";
+                        redirectUrl = "https://farside.link/$1";
+                        patternType = "R"; # Regular expression
+                        # Required or redirector will not work
+                        appliesTo = [ "main_frame" ];
+                      }
+                    ];
                   };
                 };
+
+                "@ublacklist" = {
+                  force = true;
+                  settings = {
+                    subscriptions = {
+                      "0" = {
+                        name = "Main AI blocklist";
+                        url = "https://raw.githubusercontent.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist/main/list_uBlacklist.txt";
+                      };
+                    };
+                    updateInterval = 60;
+                  };
+                };
+              };
             };
 
             search = {

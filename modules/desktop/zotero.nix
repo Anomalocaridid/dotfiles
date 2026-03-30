@@ -13,6 +13,11 @@ in
       { pkgs, ... }:
       {
         home.packages = with pkgs; [ zotero ];
+
+        programs.librewolf.policies.ExtensionSettings."zotero@chnm.gmu.edu" = {
+          install_url = "https://www.zotero.org/download/connector/dl?browser=firefox";
+          installation_mode = "force_installed";
+        };
       };
   };
 }

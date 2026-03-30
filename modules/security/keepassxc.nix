@@ -40,6 +40,21 @@
         };
       };
 
+      programs.librewolf = {
+        nativeMessagingHosts = with pkgs; [ keepassxc ];
+        policies.ExtensionSettings =
+          let
+            id = "keepassxc-browser@keepassxc.org";
+          in
+          {
+            ${id} = {
+              install_url = "https://addons.mozilla.org/firefox/downloads/latest/${id}/latest.xpi";
+              installation_mode = "force_installed";
+              private_browsing = true;
+            };
+          };
+      };
+
       # Ensure password database is always selected
       home.file =
         let
