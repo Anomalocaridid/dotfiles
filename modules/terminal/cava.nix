@@ -1,8 +1,14 @@
 {
   unify.modules.general.home =
-    { lib, pkgs, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     {
       catppuccin.cava.transparent = true;
+
       programs.cava = {
         enable = true;
         settings = {
@@ -17,5 +23,16 @@
           smoothing.monstercat = 1;
         };
       };
+
+      xdg.autostart.entries = lib.singleton (
+        pkgs.makeDesktopItem {
+          name = "cava-wallpaper";
+          desktopName = "Cava Wallpaper";
+          exec = "${lib.getExe pkgs.windowtolayer} handlr launch x-scheme-handler/terminal -- --background-opacity=0 --font-size=3 -e ${lib.getExe config.programs.cava.package}";
+          # Make it more concise to get path to desktop file
+          destination = "/";
+        }
+        + "/cava-wallpaper.desktop"
+      );
     };
 }
