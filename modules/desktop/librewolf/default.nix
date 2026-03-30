@@ -121,8 +121,6 @@ in
                 "redirector@einaregilsson.com"
                 # uBlacklist
                 "@ublacklist"
-                # uBlock Origin
-                "uBlock0@raymondhill.net"
               ]);
 
             Preferences =

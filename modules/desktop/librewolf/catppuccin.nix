@@ -39,7 +39,7 @@
             "{7a7a4a92-a2a0-41d1-9fd7-1e92480d612d}"
           ];
 
-        profiles.default.settings =
+        profiles.default.extensions.settings =
           let
             accent = config.catppuccin.accent;
             palette = config.catppuccin.sources.parsedPalette;
@@ -76,6 +76,16 @@
               linkColor = palette.blue.hex;
               blockColor = palette.red.hex;
               highlightColors = [ palette.${accent}.hex ];
+            };
+
+            # Configure uBlock Origin accent color
+            # NOTE: policies are used for all other configured settings
+            "uBlock0@raymondhill.net".settings = {
+              force = true;
+              uiAccentCustom = true;
+              uiAccentCustom0 = palette.${accent}.hex;
+              # NOTE: Librewolf intentionally does not tell sites to prefer dark theme to prevent fingerprinting
+              uiTheme = "dark";
             };
           };
       };
