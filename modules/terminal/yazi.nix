@@ -26,7 +26,27 @@
           enableFishIntegration = true;
           # Needed because `home.stateVersion` < 26.05
           shellWrapperName = "y";
-          plugins."smart-paste" = pkgs.yaziPlugins.smart-paste;
+          plugins = {
+            "smart-paste" = pkgs.yaziPlugins.smart-paste;
+            "shell-input" = pkgs.writeTextFile rec {
+              name = "main.lua";
+              destination = "/${name}";
+              text = # lua
+                ''
+                  --- @sync entry
+                  return {
+                    entry = function(self, job)
+                      local value, event = ya.input {
+                        pos = { "top-center", y = 3, w = 40 },
+                        title = job.args.title,
+                      }
+                      local formatted = string.format(job.args.cmd, value)
+                      ya.emit("shell", { "--block", "--", formatted  })
+                    end
+                  }
+                '';
+            };
+          };
           settings.opener.open = [
             {
               run = ''xdg-open "$1"'';
@@ -52,6 +72,14 @@
                 on = [ "<C-n>" ];
                 run = ''shell -- ${lib.getExe pkgs.dragon-drop} --and-exit --all --on-top "$@"'';
                 desc = "Drag and drop selected files with dragon";
+              }
+              # zk integration
+              {
+                on = [
+                  "<A-n>"
+                  "a"
+                ];
+                run = ''plugin shell-input -- --title="Create Note:" --cmd="zk new --title=%s" '';
               }
             ];
           };
