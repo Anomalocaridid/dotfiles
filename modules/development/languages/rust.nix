@@ -12,6 +12,9 @@
       ];
     };
 
-  unify.modules.general.home.programs.helix.languages.language-server.rust-analyzer.config.check.command =
-    "clippy";
+  unify.modules.general.home.programs.helix.languages.language-server.rust-analyzer.config = {
+    check.command = "clippy";
+    # Include modules hidden behind feature flags
+    cargo.features = "all";
+  };
 }
