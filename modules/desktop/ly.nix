@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, ... }:
 let
   inherit (config.flake.meta) username;
 in
@@ -29,15 +29,12 @@ in
         };
 
         # Set default session
-        environment.etc."ly/save.ini".source =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            output = "save.ini";
-            data.globalSection = {
-              user = username;
-              session_index = 2;
-            };
-            format = "iniWithGlobalSection";
-          }).configFile;
+        environment.etc."ly/save.ini".source = (pkgs.formats.iniWithGlobalSection { }).generate "save.ini" {
+          globalSection = {
+            user = username;
+            session_index = 2;
+          };
+        };
 
         # Ensure services start properly
         systemd.services.display-manager.environment.XDG_CURRENT_DESKTOP = "X-NIXOS-SYSTEMD-AWARE";

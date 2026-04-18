@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -18,17 +17,12 @@
     in
     { lib, pkgs, ... }:
     {
-      home.file.".clang-format".source =
-        (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-          data = {
-            BasedOnStyle = "LLVM";
-            IndentWidth = indentWidth;
-            IndentCaseLabels = true;
-            AlignConsecutiveDeclarations = true;
-          };
-          output = "clang-format";
-          format = "yaml";
-        }).configFile;
+      home.file.".clang-format".source = pkgs.writers.writeYAML "clang-format" {
+        BasedOnStyle = "LLVM";
+        IndentWidth = indentWidth;
+        IndentCaseLabels = true;
+        AlignConsecutiveDeclarations = true;
+      };
 
       programs.helix.languages.language =
         let

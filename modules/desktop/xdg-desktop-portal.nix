@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   unify.modules.general = {
     nixos =
@@ -36,17 +35,16 @@
         # Assumes yazi is the file manager
         # TODO: For some reason, this does not work when using `handlr launch x-scheme-handler/terminal`
         xdg.configFile."xdg-desktop-portal-termfilechooser/config".source =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            format = "ini";
-            output = "config";
-            data.filechooser = {
-              cmd = "${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh";
-              default_dir = "$HOME";
-              env = ''TERMCMD='ghostty --title="terminal filechooser" -e' '';
-              open_mode = "suggested";
-              save_mode = "last";
+          (pkgs.formats.ini { }).generate "config"
+            {
+              filechooser = {
+                cmd = "${pkgs.xdg-desktop-portal-termfilechooser}/share/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh";
+                default_dir = "$HOME";
+                env = ''TERMCMD='ghostty --title="terminal filechooser" -e' '';
+                open_mode = "suggested";
+                save_mode = "last";
+              };
             };
-          }).configFile;
       };
   };
 }

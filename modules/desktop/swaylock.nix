@@ -87,21 +87,17 @@
         };
 
         # Screensaver config
-        xdg.configFile."pipes-rs/config.toml".source =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            data = {
-              color_mode = "rgb";
-              rainbow = 1;
-              kinds = [
-                "heavy"
-                "light"
-                "curved"
-                "outline"
-              ];
-              num_pipes = 2;
-            };
-            output = "config.toml";
-          }).configFile;
+        xdg.configFile."pipes-rs/config.toml".source = pkgs.writers.writeTOML "config.toml" {
+          color_mode = "rgb";
+          rainbow = 1;
+          kinds = [
+            "heavy"
+            "light"
+            "curved"
+            "outline"
+          ];
+          num_pipes = 2;
+        };
       };
   };
 }

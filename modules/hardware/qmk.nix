@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, ... }:
 {
   unify.modules.general = {
     nixos =
@@ -19,11 +19,9 @@
       {
         home.packages = with pkgs; [ qmk ];
 
-        xdg.configFile."qmk/qmk.ini".source =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            data.user.overlay_dir = "${config.home.homeDirectory}/qmk_userspace";
-            output = "qmk.ini";
-          }).configFile;
+        xdg.configFile."qmk/qmk.ini".source = (pkgs.formats.ini { }).generate "qmk.ini" {
+          user.overlay_dir = "${config.home.homeDirectory}/qmk_userspace";
+        };
       };
   };
 }

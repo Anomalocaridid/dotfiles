@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   unify.modules.general.home =
     { pkgs, ... }:
@@ -6,24 +5,20 @@
       xdg = {
         mimeApps.enable = true;
 
-        configFile."handlr/handlr.toml".source =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            data = {
-              enable_selector = false;
-              selector = "fuzzel --dmenu --prompt='Open With: '";
-              handlers = [
-                {
-                  exec = "freetube %u";
-                  regexes = [ "youtu(be.com|.be)" ];
-                }
-                {
-                  exec = "handlr open steam://openurl/%u";
-                  regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
-                }
-              ];
-            };
-            output = "handlr.toml";
-          }).configFile;
+        configFile."handlr/handlr.toml".source = pkgs.writers.writeTOML "handlr.toml" {
+          enable_selector = false;
+          selector = "fuzzel --dmenu --prompt='Open With: '";
+          handlers = [
+            {
+              exec = "freetube %u";
+              regexes = [ "youtu(be.com|.be)" ];
+            }
+            {
+              exec = "handlr open steam://openurl/%u";
+              regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
+            }
+          ];
+        };
       };
 
       home = {

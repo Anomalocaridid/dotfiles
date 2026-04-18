@@ -28,12 +28,6 @@
 
       import-tree.url = "github:vic/import-tree";
 
-      # Generate configs
-      nixago = {
-        url = "github:nix-community/nixago";
-        inputs.nixpkgs.follows = "nixpkgs";
-      };
-
       # Hardware feature detection
       nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 

@@ -1,5 +1,11 @@
 { inputs, ... }:
 {
+  # Provides shell hook for generating config files
+  flake-file.inputs.nixago = {
+    url = "github:nix-community/nixago";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   perSystem =
     { pkgs, ... }:
     {

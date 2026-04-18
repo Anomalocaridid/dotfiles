@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   unify.modules.general.home =
     { config, pkgs, ... }:
@@ -56,18 +55,10 @@
       };
 
       # Ensure password database is always selected
-      home.file =
-        let
-          filename = "keepassxc.ini";
-        in
-        {
-          "${config.xdg.cacheHome}/keepassxc/${filename}".source =
-            (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-              output = filename;
-              data = {
-                General.LastActiveDatabase = "${config.home.homeDirectory}/Sync/Keepass Databases/Personal.kdbx";
-              };
-            }).configFile;
-        };
+      home.file."${config.xdg.cacheHome}/keepassxc/keepassxc.ini".source =
+        (pkgs.formats.ini { }).generate "keepassxc.ini"
+          {
+            General.LastActiveDatabase = "${config.home.homeDirectory}/Sync/Keepass Databases/Personal.kdbx";
+          };
     };
 }

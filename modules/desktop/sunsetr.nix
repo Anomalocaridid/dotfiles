@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ config, ... }:
 let
   inherit (config.flake.meta) persistDir username;
 in
@@ -25,12 +25,7 @@ in
           shutdown_duration = 0.5;
           adaptive_interval = 1;
         };
-        sunsetrConfig =
-          settings:
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            data = common // settings;
-            output = "sunsetr.toml";
-          }).configFile;
+        sunsetrConfig = settings: pkgs.writers.writeTOML "sunsetr.toml" (common // settings);
       in
       {
         xdg = {

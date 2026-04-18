@@ -1,4 +1,3 @@
-{ inputs, ... }:
 {
   perSystem =
     { pkgs, ... }:
@@ -12,15 +11,10 @@
   unify.modules.general.home =
     { pkgs, ... }:
     {
-      home.file = {
-        # Yarn config
-        ".yarnrc.yml".source =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            # Disable telemetry
-            data.enableTelemetry = 0;
-            output = ".yarnrc.yml";
-            format = "yaml";
-          }).configFile;
+      # Yarn config
+      # Disable telemetry
+      home.file.".yarnrc.yml".source = pkgs.writers.writeYAML ".yarnrc.yml" {
+        enableTelemetry = 0;
       };
 
       programs.helix.languages = {
