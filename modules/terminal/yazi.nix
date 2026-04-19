@@ -58,6 +58,8 @@
 
           yaziPlugins = {
             enable = true;
+            # Update zoxide database when changing directories
+            require."zoxide".update_db = "true";
             plugins = {
               full-border.enable = true;
               glow.enable = true;
