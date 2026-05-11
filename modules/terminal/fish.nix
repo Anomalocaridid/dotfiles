@@ -76,10 +76,10 @@
             expansion = "--help | bat --plain --language=help";
           };
           plugins =
-            map
+            (map
               (name: {
                 inherit name;
-                src = pkgs.fishPlugins."${name}".src;
+                src = pkgs.fishPlugins.${name}.src;
               })
               [
                 "autopair"
@@ -87,16 +87,25 @@
                 "fish-bd"
                 "fish-you-should-use"
                 "fzf-fish"
-                "grc"
                 "plugin-sudope"
-              ];
-        };
+              ]
+            )
+            ++ [
+              # Bundle grc plugin with dependencies without installing them globally
+              {
+                name = "grc";
+                src = pkgs.runCommand "grc.fish" { } ''
+                  cp -r --no-preserve=all ${pkgs.fishPlugins.grc.src} $out
 
-        # Needed for plugins
-        home.packages = with pkgs; [
-          libnotify # Needed for done
-          grc # Needed for grc
-        ];
+                  substituteInPlace $out/conf.d/grc.fish \
+                    --replace-fail "type -q grc" "type -q ${lib.getExe pkgs.grc}"
+
+                  substituteInPlace $out/functions/grc.wrap.fish \
+                    --replace-fail "command grc" "command ${lib.getExe pkgs.grc}"
+                '';
+              }
+            ];
+        };
       };
   };
 }
