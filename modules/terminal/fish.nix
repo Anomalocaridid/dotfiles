@@ -49,7 +49,9 @@
             fish_user_key_bindings = # fish
               ''
                 # Vi keybindings
-                fish_vi_key_bindings
+                # fish_vi_key_bindings
+                # Workaround to make autopair plugin work
+                set -g fish_key_bindings fish_vi_key_bindings
                   
                 # Make Ctrl+Z also bring program to foreground
                 bind \cz --mode insert 'fg 2>/dev/null; commandline -f repaint'
