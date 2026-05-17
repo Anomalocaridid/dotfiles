@@ -15,10 +15,7 @@
       qt = {
         enable = true;
         platformTheme.name = "qtct";
-        style.package = with pkgs; [
-          darkly
-          darkly-qt5
-        ];
+        style.package = with pkgs; [ darkly ];
       }
       // (lib.genAttrs [ "qt5ctSettings" "qt6ctSettings" ] (_: {
         Appearance = {
