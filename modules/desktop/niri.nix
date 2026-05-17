@@ -135,9 +135,9 @@ in
                 {
                   matches = [
                     # Audio control panel
-                    { app-id = "^org\.pulseaudio\.pavucontrol$"; }
+                    { app-id = "^org\\.pulseaudio\\.pavucontrol$"; }
                     # Terminal network manager
-                    { app-id = "^com\.terminal\.nmtui$"; }
+                    { app-id = "^com\\.terminal\\.nmtui$"; }
                     # Script dialog program
                     { app-id = "^yad$"; }
                   ];
@@ -147,14 +147,14 @@ in
                 {
                   matches = [
                     # Used in sioyek OCRmyPDF script
-                    { app-id = "^com\.terminal\.ocrmypdf$"; }
+                    { app-id = "^com\\.terminal\\.ocrmypdf$"; }
                   ];
                   open-floating = true;
                   open-focused = false;
                 }
                 # Hide password manager from screencasts
                 {
-                  matches = [ { app-id = "^org\.keepassxc\.KeePassXC$"; } ];
+                  matches = [ { app-id = "^org\\.keepassxc\\.KeePassXC$"; } ];
                   block-out-from = "screencast";
                 }
                 # Indicate screencasted windows

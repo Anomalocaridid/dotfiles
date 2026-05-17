@@ -15,7 +15,7 @@
             }
             {
               exec = "handlr open steam://openurl/%u";
-              regexes = [ "^https://([[:alpha:]]*\.)?steam(powered|community).com/" ];
+              regexes = [ "^https://([[:alpha:]]*\\.)?steam(powered|community).com/" ];
             }
           ];
         };
