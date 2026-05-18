@@ -50,6 +50,23 @@
         "type": "github"
       }
     },
+    "catppuccin-limine": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778672786,
+        "narHash": "sha256-3B4k3XgCObZHekHNy4sNtvvmgG+Em9HiLAANAMlfxUw=",
+        "owner": "catppuccin",
+        "repo": "limine",
+        "rev": "0e80bb38ac714732b560da4a75f2275c5b88cc6c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "ref": "limine-config-update",
+        "repo": "limine",
+        "type": "github"
+      }
+    },
     "catppuccin-ohmyrepl": {
       "flake": false,
       "locked": {
@@ -973,6 +990,7 @@
         "cascade": "cascade",
         "catppuccin": "catppuccin",
         "catppuccin-fractal-wallpapers": "catppuccin-fractal-wallpapers",
+        "catppuccin-limine": "catppuccin-limine",
         "catppuccin-ohmyrepl": "catppuccin-ohmyrepl",
         "catppuccin-userstyles-nix": "catppuccin-userstyles-nix",
         "devshell": "devshell",
