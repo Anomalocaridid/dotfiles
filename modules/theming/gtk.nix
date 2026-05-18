@@ -16,12 +16,5 @@
         };
         gtk4.theme = config.gtk.theme;
       };
-
-      # Manually link GTK theme accents
-      xdg.configFile."gtk-4.0" = {
-        source = "${config.gtk.gtk4.theme.package}/share/themes/${config.gtk.gtk4.theme.name}/gtk-4.0/";
-        # Do not interfere with other links in the same directory
-        recursive = true;
-      };
     };
 }
