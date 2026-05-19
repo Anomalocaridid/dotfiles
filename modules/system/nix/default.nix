@@ -8,12 +8,20 @@
       url = "github:Mic92/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    # Nix wrapper that pipes output to nix output monitor
+    nix-monitored = {
+      url = "github:ners/nix-monitored";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   unify.modules.general = {
     nixos =
       { lib, pkgs, ... }:
       {
+        imports = [ inputs.nix-monitored.nixosModules.default ];
+
         # Use Lix in supported tools
         nixpkgs.overlays = [
           (final: prev: {
@@ -28,8 +36,14 @@
         ];
 
         nix = {
-          # Use Lix
-          package = pkgs.lixPackageSets.latest.lix;
+          monitored = {
+            enable = true;
+            # Use Lix
+            package = pkgs.nix-monitored.override { nix = pkgs.lixPackageSets.latest.lix; };
+            # Redundant with ghostty's notifications
+            notify = false;
+          };
+
           settings = {
             experimental-features = [
               "nix-command"
@@ -39,6 +53,7 @@
             auto-optimise-store = true;
             repl-overlays = [ ./_repl-overlay.nix ]; # Lix-specific setting
           };
+
           gc = {
             automatic = true;
             dates = "weekly";
