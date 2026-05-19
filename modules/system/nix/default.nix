@@ -1,4 +1,7 @@
 { config, inputs, ... }:
+let
+  inherit (config.flake.meta) username;
+in
 {
   flake-file.inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
@@ -18,13 +21,18 @@
 
   unify.modules.general = {
     nixos =
-      { lib, pkgs, ... }:
+      {
+        config,
+        lib,
+        pkgs,
+        ...
+      }:
       {
         imports = [ inputs.nix-monitored.nixosModules.default ];
 
-        # Use Lix in supported tools
         nixpkgs.overlays = [
-          (final: prev: {
+          (_: prev: {
+            # Use Lix in supported tools
             inherit (prev.lixPackageSets.latest)
               nixpkgs-review
               nix-direnv
@@ -32,6 +40,9 @@
               nix-fast-build
               colmena
               ;
+
+            # Get rid of missing experimental-features warnings
+            comma = prev.comma.override { nix = config.nix.package; };
           })
         ];
 
@@ -72,7 +83,7 @@
 
         # Ensure that nixos config has proper permissions
         # NOTE: persistence permissions only seem to apply upon creating a bind mount
-        systemd.tmpfiles.rules = [ "Z /etc/nixos - ${config.flake.meta.username} users -" ];
+        systemd.tmpfiles.rules = [ "Z /etc/nixos - ${username} users -" ];
 
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
