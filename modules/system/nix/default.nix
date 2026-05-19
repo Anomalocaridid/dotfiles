@@ -79,6 +79,10 @@ in
             inputs
             |> (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
             |> (lib.mapAttrs (_: flake: { inherit flake; }));
+
+          # Do not use channels
+          # Mainly needed to get rid of an annoying warning about channels not existing
+          channel.enable = false;
         };
 
         # Ensure that nixos config has proper permissions
