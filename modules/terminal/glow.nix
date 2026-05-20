@@ -1,10 +1,12 @@
 {
   unify.modules.general.home =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
     {
       home.packages = with pkgs; [ glow ];
 
       xdg.configFile."glow/glow.yml".source = pkgs.writers.writeYAML "glow.yml" {
+        # Set theme
+        style = config.home.sessionVariables.GLAMOUR_STYLE;
         # show local files only; no network (TUI-mode only)
         local = true;
         # mouse support (TUI-mode only)
