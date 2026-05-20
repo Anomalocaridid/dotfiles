@@ -48,9 +48,13 @@
                 command,
                 filetype,
                 header ? "",
+                env ? { },
               }:
               let
                 program = lib.strings.splitString " " command |> builtins.head |> builtins.baseNameOf;
+                env_cmd = lib.optionalString (env != { }) (
+                  (lib.mapAttrsToList (name: value: "${name}=${value}") env |> lib.concatStringsSep " ") + " "
+                );
               in
               #sh
               ''
@@ -65,7 +69,7 @@
 
                 viewer_${program}_process() {
                   ${header}
-                  ${command}
+                  ${env_cmd}${command}
                   return "$?"
                 }
               '';
@@ -88,6 +92,7 @@
             {
               command = ''${lib.getExe pkgs.glow} --style ${config.home.sessionVariables.GLAMOUR_STYLE} "$1"'';
               filetype = "*.md";
+              env.CLICOLOR_FORCE = "1";
             }
             {
               command = ''${lib.getExe pkgs.odt2txt} "$1"'';
