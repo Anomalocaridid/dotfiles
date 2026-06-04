@@ -16,15 +16,39 @@
       };
 
     home =
-      { config, pkgs, ... }:
       {
-        home.packages = with pkgs; [
-          packwiz # minecraft modpack creator
-          (prismlauncher.override {
+        config,
+        pkgs,
+        osConfig,
+        ...
+      }:
+      {
+        # Install Minecraft modpack creator
+        home.packages = with pkgs; [ packwiz ];
+
+        programs.prismlauncher = {
+          enable = true;
+
+          package = pkgs.prismlauncher.override {
             # Needed for certain mods like VinURL
-            additionalPrograms = [ ffmpeg ];
-          })
-        ];
+            additionalPrograms = with pkgs; [ ffmpeg ];
+          };
+
+          settings = {
+            ApplicationTheme = "system"; # Use system Qt theme
+            AutomaticJavaDownload = false;
+            AutomaticJavaSwitch = true;
+            IconTheme = "custom";
+            # Needed to prevent Language wizard from showing up
+            Language = osConfig.i18n.defaultLocale;
+            MaxMemAlloc = "12288"; # 12 GiB
+            MinMemAlloc = "512"; # 512 MiB
+            UserAskedAboutAutomaticJavaDownload = true;
+            EnableFeralGameMode = osConfig.programs.gamemode.enable;
+            # Enable Discord rich presence
+            JvmArgs = "-DAllowMcDiscordDetection=net.minecraft.client.main.Main";
+          };
+        };
 
         xdg.dataFile."PrismLauncher/iconthemes/custom".source =
           pkgs.runCommand "prismlauncher-icons"
