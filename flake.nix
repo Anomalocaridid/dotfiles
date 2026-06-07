@@ -57,7 +57,7 @@
       };
     };
     import-tree.url = "github:vic/import-tree";
-    niri.url = "github:sodiboo/niri-flake";
+    niri-nix.url = "git+https://codeberg.org/BANanaD3V/niri-nix";
     nix-gaming.url = "github:fufexan/nix-gaming";
     nix-index-database = {
       url = "github:Mic92/nix-index-database";
