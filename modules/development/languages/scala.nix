@@ -1,13 +1,6 @@
-{ inputs, ... }:
 {
-  # Provides shell hook for generating config files
-  flake-file.inputs.nixago = {
-    url = "github:nix-community/nixago";
-    inputs.nixpkgs.follows = "nixpkgs";
-  };
-
   perSystem =
-    { pkgs, ... }:
+    { lib, pkgs, ... }:
     {
       devshells.scala = {
         packages = with pkgs; [
@@ -18,15 +11,16 @@
         ];
 
         # Scalafmt config (no global location is available)
-        devshell.startup.nixago.text =
-          (inputs.nixago.lib.${pkgs.stdenv.hostPlatform.system}.make {
-            data.globalSection = {
+        devshell.startup.".scalafmt.conf".text = ''
+          cat << EOF > $PWD/.scalafmt.conf 
+          ${lib.generators.toINIWithGlobalSection { } {
+            globalSection = {
               version = pkgs.scalafmt.version;
               "runner.dialect" = "scala3";
             };
-            output = ".scalafmt.conf";
-            format = "iniWithGlobalSection";
-          }).shellHook;
+          }}
+          EOF
+        '';
       };
     };
 
