@@ -4,10 +4,6 @@ import QtQuick.Layouts
 RowLayout {
     Layout.alignment: Qt.AlignLeft
 
-    Label {
-        font.pixelSize: Global.fontSize
-        text: "Left"
-    }
+    WindowWidget {}
 
-    // NiriWidget {}
 }
