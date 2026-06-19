@@ -18,6 +18,7 @@
     home =
       {
         config,
+        lib,
         pkgs,
         osConfig,
         ...
@@ -26,29 +27,48 @@
         # Install Minecraft modpack creator
         home.packages = with pkgs; [ packwiz ];
 
-        programs.prismlauncher = {
-          enable = true;
+        programs.prismlauncher =
+          let
+            graalvm-ce-21 = pkgs.graalvmPackages.buildGraalvm rec {
+              version = "21.0.2";
+              src = pkgs.fetchurl {
+                url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${version}/graalvm-community-jdk-${version}_linux-x64_bin.tar.gz";
+                hash = "sha256-sEgGmqo6mbhPW5V7FizBgaMqQzDLw1QCdmNjxb52rkg=";
+              };
+            };
+          in
+          {
+            enable = true;
 
-          package = pkgs.prismlauncher.override {
-            # Needed for certain mods like VinURL
-            additionalPrograms = with pkgs; [ ffmpeg ];
-          };
+            package = pkgs.prismlauncher.override {
+              # Needed for certain mods like VinURL
+              additionalPrograms = with pkgs; [ ffmpeg ];
 
-          settings = {
-            ApplicationTheme = "system"; # Use system Qt theme
-            AutomaticJavaDownload = false;
-            AutomaticJavaSwitch = true;
-            IconTheme = "custom";
-            # Needed to prevent Language wizard from showing up
-            Language = osConfig.i18n.defaultLocale;
-            MaxMemAlloc = "12288"; # 12 GiB
-            MinMemAlloc = "512"; # 512 MiB
-            UserAskedAboutAutomaticJavaDownload = true;
-            EnableFeralGameMode = osConfig.programs.gamemode.enable;
-            # Enable Discord rich presence
-            JvmArgs = "-DAllowMcDiscordDetection=net.minecraft.client.main.Main";
+              jdks = with pkgs.graalvmPackages; [
+                # JDK 25
+                graalvm-ce
+                # JDK 21
+                graalvm-ce-21
+              ];
+            };
+
+            settings = {
+              # Set default java path
+              JavaPath = lib.getExe graalvm-ce-21;
+              ApplicationTheme = "system"; # Use system Qt theme
+              AutomaticJavaDownload = false;
+              AutomaticJavaSwitch = true;
+              IconTheme = "custom";
+              # Needed to prevent Language wizard from showing up
+              Language = osConfig.i18n.defaultLocale;
+              MaxMemAlloc = "12288"; # 12 GiB
+              MinMemAlloc = "512"; # 512 MiB
+              UserAskedAboutAutomaticJavaDownload = true;
+              EnableFeralGamemode = osConfig.programs.gamemode.enable;
+              # Enable Discord rich presence
+              JvmArgs = "-DAllowMcDiscordDetection=net.minecraft.client.main.Main";
+            };
           };
-        };
 
         xdg.dataFile."PrismLauncher/iconthemes/custom".source =
           pkgs.runCommand "prismlauncher-icons"
