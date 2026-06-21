@@ -135,13 +135,14 @@ in
               let
                 mkPreferences =
                   prefs:
-                  lib.mergeAttrsList
-                  <| lib.mapAttrsToListRecursive (path: value: {
-                    "${lib.concatStringsSep "." path}" = {
-                      Value = value;
-                      Status = "locked";
-                    };
-                  }) prefs;
+                  lib.mergeAttrsList (
+                    lib.mapAttrsToListRecursive (path: value: {
+                      "${lib.concatStringsSep "." path}" = {
+                        Value = value;
+                        Status = "locked";
+                      };
+                    }) prefs
+                  );
               in
               mkPreferences {
                 # Required for firefox-declarative-extensions

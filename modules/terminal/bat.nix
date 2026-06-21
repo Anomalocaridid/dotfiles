@@ -51,9 +51,13 @@
                 env ? { },
               }:
               let
-                program = lib.strings.splitString " " command |> builtins.head |> builtins.baseNameOf;
+                program = builtins.baseNameOf (builtins.head (lib.strings.splitString " " command));
                 env_cmd = lib.optionalString (env != { }) (
-                  (lib.mapAttrsToList (name: value: "${name}=${value}") env |> lib.concatStringsSep " ") + " "
+                  (lib.pipe env [
+                    (lib.mapAttrsToList (name: value: "${name}=${value}"))
+                    (lib.concatStringsSep " ")
+                  ])
+                  + " "
                 );
               in
               #sh
