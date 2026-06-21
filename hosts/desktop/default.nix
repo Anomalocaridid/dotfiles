@@ -6,7 +6,8 @@ flake-parts-lib.importApply ../_common/host.nix {
     desktop
   ];
   diskoConfig = import ../_common/disko.nix {
-    disk = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_20477T805943";
+    # disk = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_20477T805943";
+    disk = "/dev/vda";
     memory = "32G";
   };
 }
