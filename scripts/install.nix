@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, self, ... }:
 {
   perSystem =
     {
@@ -12,7 +12,6 @@
         name = "install.sh";
         runtimeInputs = with pkgs; [
           git
-          jq
           nix
           nixos-install-tools
           disko
@@ -36,11 +35,11 @@
 
           # Select config from flake to install
           PS3="Select device config to install: "
-          # Dynamically retrieve list of available configs
-          device_list="$(nix --extra-experimental-features "nix-command flakes" flake show --json $FLAKE |
-            jq --raw-output ".nixosConfigurations | keys[]")"
 
-          select device in $device_list "quit"; do
+          # List of available NixOS configurations
+          ${lib.toShellVar "device_list" (lib.attrNames self.nixosConfigurations)}
+
+          select device in "''${device_list[@]}" "quit"; do
           	case $device in
           	"quit")
           		echo "Aborting install"
