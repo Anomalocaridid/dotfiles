@@ -57,10 +57,14 @@
           done
 
           echo "Partitioning disk with disko"
-          disko --flake "$FLAKE#$device" --mode disko
+          # TODO: remove branch
+          # disko --flake "$FLAKE#$device" --mode disko
+          disko --flake "$FLAKE/rework-install-script#$device" --mode disko
 
           echo "Cloning config repo"
-          git clone "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
+          # TODO: remove branch
+          # git clone "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
+          git clone "https://github.com/$CONFIG_REPO.git" --branch "rework-install-script" "$CONFIG_DIR"
           git -C "$CONFIG_DIR" remote set-url origin "git@github.com:$CONFIG_REPO.git"
 
           echo "Setting password (xtrace disabled)"
