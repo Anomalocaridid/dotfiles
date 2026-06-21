@@ -31,7 +31,7 @@
             auto-format = true;
             indent = {
               tab-width = indentWidth;
-              unit = lib.replicate indentWidth " " |> lib.concatStrings;
+              unit = lib.concatStrings (lib.replicate indentWidth " ");
             };
           };
         in

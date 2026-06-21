@@ -220,6 +220,22 @@
       }
     },
     "flake-compat_2": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_3": {
       "locked": {
         "lastModified": 1733328505,
         "narHash": "sha256-NeCCThCEP3eCl2l/+27kNNK7QrwZB1IJCrXfrbv5oqU=",
@@ -413,6 +429,27 @@
         "type": "github"
       }
     },
+    "hpf-passwd": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1785446156,
+        "narHash": "sha256-K1Mp2OGO9W7bbIqZcIrhYMtQVRROi2tdcjJ4V1eExcQ=",
+        "owner": "Anomalocaridid",
+        "repo": "hpf-passwd",
+        "rev": "320c327e3ef551280cca15de2fa370ac16b79836",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Anomalocaridid",
+        "repo": "hpf-passwd",
+        "type": "github"
+      }
+    },
     "ignis": {
       "inputs": {
         "ignis-gvc": "ignis-gvc",
@@ -584,7 +621,7 @@
     },
     "nix-gaming": {
       "inputs": {
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_2",
         "git-hooks": "git-hooks_2",
         "nixpkgs": "nixpkgs_3"
@@ -645,7 +682,7 @@
     },
     "nixcord": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "flake-compat": "flake-compat_3",
         "flake-parts": [
           "flake-parts"
         ],
@@ -833,6 +870,7 @@
         "flake-parts": "flake-parts",
         "ghostty-shaders": "ghostty-shaders",
         "home-manager": "home-manager",
+        "hpf-passwd": "hpf-passwd",
         "ignis": "ignis",
         "impermanence": "impermanence",
         "import-tree": "import-tree",

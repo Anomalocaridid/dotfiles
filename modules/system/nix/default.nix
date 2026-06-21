@@ -59,7 +59,6 @@ in
             experimental-features = [
               "nix-command"
               "flakes"
-              "pipe-operator" # Lix-specific feature
             ];
             auto-optimise-store = true;
             repl-overlays = [ ./_repl-overlay.nix ]; # Lix-specific setting
@@ -75,10 +74,10 @@ in
           # Remove non flake inputs, which cause errors
           # Flakes have an attribute _type, which equals "flake"
           # while non-flakes lack this attribute
-          registry =
-            inputs
-            |> (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
-            |> (lib.mapAttrs (_: flake: { inherit flake; }));
+          registry = lib.pipe inputs [
+            (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
+            (lib.mapAttrs (_: flake: { inherit flake; }))
+          ];
 
           # Do not use channels
           # Mainly needed to get rid of an annoying warning about channels not existing

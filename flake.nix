@@ -50,6 +50,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    hpf-passwd = {
+      url = "github:Anomalocaridid/hpf-passwd";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     ignis = {
       url = "github:linkfrg/ignis";
       inputs.nixpkgs.follows = "nixpkgs";
