@@ -21,34 +21,24 @@
         # fallback icon theme
         home.packages = with pkgs; [ adwaita-icon-theme ];
 
-        gtk.iconTheme =
-          let
-            recolor-icons =
-              pkgs.writers.writePython3 "recolor-icons" { libraries = [ pkgs.custom.color-manager ]; }
-                ''
-                  import sys
-                  from color_manager import utils
-
-                  src = sys.argv[1]
-                  dest = sys.argv[2]
-                  name = "candy-icons"
-                  palettes = "${pkgs.custom.color-manager.src}/palettes/"
-                  palette = palettes + "catppuccin_${config.catppuccin.flavor}.json"
-
-                  utils.recolor(src, dest, name, palette)
-                '';
-          in
-          {
-            name = "candy-icons";
-            # Merge Candy Icons and Sweet Folders into the same package and recolor
-            package = pkgs.runCommand "recolored-icons" { } ''
-              cp --recursive --no-preserve=mode ${pkgs.candy-icons}/share/icons/candy-icons tmp
-              cp --recursive --no-preserve=mode ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/16/* tmp/places/16
-              cp --recursive --no-preserve=mode ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/48/* tmp/places/48
-              mkdir --parents $out/share/icons
-              ${recolor-icons} tmp $out/share/icons
-            '';
-          };
+        gtk.iconTheme = {
+          name = "candy-icons";
+          # Merge Candy Icons and Sweet Folders into the same package and recolor
+          package =
+            pkgs.runCommand "recolored-icons"
+              {
+                nativeBuildInputs = with pkgs; [ lutgen ];
+                OUT_DIR = "${placeholder "out"}/share/icons";
+              }
+              ''
+                mkdir --parents "$OUT_DIR/places"
+                cp --recursive --no-preserve=mode ${pkgs.candy-icons}/share/icons/candy-icons "$OUT_DIR"
+                cp --recursive --no-preserve=mode ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/* "$OUT_DIR/places"
+                # Remove broken symlink
+                rm "$OUT_DIR/candy-icons/places/16/folder-library.svg"
+                lutgen patch --write --no-patch --palette="catppuccin-${config.catppuccin.flavor}" --nearest-neighbor $(find "$OUT_DIR" -name '*.svg')
+              '';
+        };
       };
   };
 }
