@@ -23,9 +23,9 @@
       url = "github:catppuccin/ohmyrepl";
       flake = false;
     };
-    catppuccin-userstyles-nix = {
-      url = "github:different-name/catppuccin-userstyles-nix?rev=b347a087e34ddb4ce645014744b101f217350209";
-      inputs.nixpkgs.follows = "nixpkgs";
+    catppuccin-userstyles = {
+      url = "github:catppuccin/userstyles";
+      flake = false;
     };
     devshell = {
       url = "github:numtide/devshell";
@@ -34,6 +34,14 @@
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    firefox-extensions-declarative = {
+      url = "github:firefox-extensions-declarative/firefox-extensions-declarative";
+      inputs = {
+        flake-file.follows = "flake-file";
+        flake-parts.follows = "flake-parts";
+        import-tree.follows = "import-tree";
+      };
     };
     flake-file.url = "github:vic/flake-file";
     flake-parts.url = "github:hercules-ci/flake-parts";

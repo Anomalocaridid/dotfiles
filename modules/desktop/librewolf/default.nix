@@ -3,6 +3,17 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
+  flake-file.inputs.firefox-extensions-declarative = {
+    url = "github:firefox-extensions-declarative/firefox-extensions-declarative";
+    inputs = {
+      # TODO: uncomment after next update
+      # nixpkgs.follows = "nixpkgs";
+      flake-file.follows = "flake-file";
+      flake-parts.follows = "flake-parts";
+      import-tree.follows = "import-tree";
+    };
+  };
+
   unify.modules.general = {
     # Librewolf data
     nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".librewolf" ];
@@ -117,8 +128,6 @@ in
               // (mkExtensions [
                 # Indie Wiki Buddy
                 "{cb31ec5d-c49a-4e5a-b240-16c767444f62}"
-                # Redirector
-                "redirector@einaregilsson.com"
                 # uBlacklist
                 "@ublacklist"
               ]);
@@ -136,6 +145,10 @@ in
                   }) prefs;
               in
               mkPreferences {
+                # Required for firefox-declarative-extensions
+                # Allows unsigned extensions
+                xpinstall.signatures.required = false;
+
                 browser = {
                   # Set home page so Tridactyl can run on it
                   startup.homepage = homePage;
@@ -215,65 +228,16 @@ in
               # Override extension settings
               # NOTE: Each extension also needs `force = true` to prevent file conflicts
               force = true;
-              settings = {
-                "redirector@einaregilsson.com" = {
-                  force = true;
-                  settings = {
-                    redirects = [
-                      {
-                        description = "FreeTube";
-                        exampleUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                        # Normally automatically generated, but will not be properly generated if missing
-                        # Does not cause serious problems if missing, just mangles example in redirector list
-                        exampleResult = "freetube://https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                        includePattern = "((https://)?(www\\.)?youtu(be\\.com|\\.be)/.*)";
-                        redirectUrl = "freetube://$1";
-                        patternType = "R"; # Regular expression
-                        # Required or redirector will not work
-                        appliesTo = [
-                          "main_frame"
-                        ];
-                      }
-                      {
-                        description = "Steam Client";
-                        exampleUrl = "https://store.steampowered.com/";
-                        # Normally automatically generated, but will not be properly generated if missing
-                        # Does not cause serious problems if missing, just mangles example in redirector list
-                        exampleResult = "steam://openurl/https://store.steampowered.com/";
-                        includePattern = "^(https://(.*\\.)?steam(powered|community).com/)$";
-                        redirectUrl = "steam://openurl/$1";
-                        patternType = "R"; # Regular expression
-                        appliesTo = [
-                          "main_frame"
-                        ];
-                      }
-                      {
-                        description = "[Farside] General Entry";
-                        exampleUrl = "https://m.youtube.com/watch?v=dQw4w9WgXcQ";
-                        # Normally automatically generated, but will not be properly generated if missing
-                        # Does not cause serious problems if missing, just mangles example in redirector list
-                        exampleResult = "https://farside.link/youtube.com/watch?v=dQw4w9WgXcQ";
-                        includePattern = "^(?:https?://)?(?:www\\.)?(?:\\w{2;}\\.)?(?:mobile\\.|m\\.)?((?:imdb|imgur|instagram|medium|odysee|quora|reddit|tiktok|translate\\.google|wikipedia|youtube)\\.(?:com|org|au|de|co|cn).*)$";
-                        redirectUrl = "https://farside.link/$1";
-                        patternType = "R"; # Regular expression
-                        # Required or redirector will not work
-                        appliesTo = [ "main_frame" ];
-                      }
-                    ];
-                  };
-                };
-
-                "@ublacklist" = {
-                  force = true;
-                  settings = {
-                    subscriptions = {
-                      "0" = {
-                        name = "Main AI blocklist";
-                        url = "https://raw.githubusercontent.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist/main/list_uBlacklist.txt";
-                      };
+              settings."@ublacklist" = {
+                force = true;
+                settings = {
+                  subscriptions = {
+                    "0" = {
+                      name = "Main AI blocklist";
+                      url = "https://raw.githubusercontent.com/laylavish/uBlockOrigin-HUGE-AI-Blocklist/main/list_uBlacklist.txt";
                     };
-                    updateInterval = 60;
                   };
+                  updateInterval = 60;
                 };
               };
             };
