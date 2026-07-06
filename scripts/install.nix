@@ -33,27 +33,46 @@
           readonly PERSIST_DIR="${config.flake.meta.persistDir}"              # Persistent partition mount location
           readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"              # Config location in persistant partition
 
-          # Select config from flake to install
-          PS3="Select device config to install: "
-
           # List of available NixOS configurations
           ${lib.toShellVar "device_list" (lib.attrNames self.nixosConfigurations)}
 
+          # Select config from flake to install
+          PS3="Select device config to install: "
+
           select device in "''${device_list[@]}" "quit"; do
           	case $device in
-          	"quit")
-          		echo "Aborting install"
-          		exit
-          		;;
-          	"")
-          		echo "ERROR: Invalid selection '$REPLY'"
-          		REPLY=""
-          		;;
-          	*)
-          		echo "Installing $device config"
-          		break
-          		;;
+            	"quit")
+            		echo "Aborting install"
+            		exit
+            		;;
+            	"")
+            		echo "ERROR: Invalid selection '$REPLY'"
+            		REPLY=""
+            		;;
+            	*)
+            		break
+            		;;
           	esac
+          done
+
+          # Prompt for confirmation
+          PS3="Proceed with formatting drives and installing $device config? "
+
+          select response in "Proceed" "Cancel"; do
+            case $response in
+              "Proceed")
+                echo "Proceeding with installation"
+                break
+                ;;
+              "Cancel")
+                echo "Cancelling installation"
+                exit
+                ;;
+              "")
+                echo "ERROR: Invalid selection '$REPLY'"
+                REPLY=""
+                ;;
+            esac
           done
 
           echo "Partitioning disk with disko"
