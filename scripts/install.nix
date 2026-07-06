@@ -55,8 +55,31 @@
           	esac
           done
 
+          readonly device
+
+          # Select mode to run disko in
+          PS3="Select disko mode: "
+
+          select mode in "destroy,format,mount" "format,mount" "mount" "quit"; do
+            case $mode in
+            	"quit")
+            		echo "Aborting install"
+            		exit
+            		;;
+            	"")
+            		echo "ERROR: Invalid selection '$REPLY'"
+            		REPLY=""
+            		;;
+            	*)
+            		break
+            		;;
+            esac
+          done
+
+          readonly mode
+
           # Prompt for confirmation
-          PS3="Proceed with formatting drives and installing $device config? "
+          PS3="Proceed with running disko in '$mode' mode and installing '$device' config? "
 
           select response in "Proceed" "Cancel"; do
             case $response in
@@ -76,7 +99,7 @@
           done
 
           echo "Partitioning disk with disko"
-          disko --flake "$FLAKE#$device" --mode disko
+          disko --flake "$FLAKE/rework-install-script#$device" --mode "$mode"
 
           echo "Cloning config repo"
           git clone "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
