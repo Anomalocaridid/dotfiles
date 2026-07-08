@@ -40,8 +40,6 @@
           done
 
           mkdir -p "$PASSWORD_HASH_DIR"
-          # Password may be the same, but calling mkpasswd twice ensures each hash has a different salt
-          mkpasswd "$password" --stdin --method=yescrypt >"$PASSWORD_HASH_DIR/root"
           mkpasswd "$password" --stdin --method=yescrypt >"$PASSWORD_HASH_DIR/$USERNAME"
         '';
       };
