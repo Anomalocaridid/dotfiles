@@ -4,7 +4,7 @@
     {
       devshells.javascript.packages = with pkgs; [
         nodejs
-        nodePackages.typescript-language-server
+        typescript-language-server
       ];
     };
 
