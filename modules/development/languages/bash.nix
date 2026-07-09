@@ -13,6 +13,7 @@
   unify.modules.general.home.programs.helix.languages.language = [
     {
       name = "bash";
+      auto-format = true;
       indent = {
         tab-width = 4;
         unit = "    ";
