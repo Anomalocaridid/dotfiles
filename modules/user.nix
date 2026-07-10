@@ -10,11 +10,16 @@
       nixos =
         { pkgs, hostConfig, ... }:
         {
-          users.users.${username} = {
-            isNormalUser = true;
-            # Enable ‘sudo’ for the user
-            extraGroups = [ "wheel" ];
-            hashedPasswordFile = "${passwordDir}/${username}";
+          users = {
+            # Prevent changing users and groups outside of this config
+            mutableUsers = false;
+
+            users.${username} = {
+              isNormalUser = true;
+              # Enable ‘sudo’ for the user
+              extraGroups = [ "wheel" ];
+              hashedPasswordFile = "${passwordDir}/${username}";
+            };
           };
 
           # persistDir is needed for boot because it contains password hashes
