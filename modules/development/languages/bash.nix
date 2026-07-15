@@ -16,7 +16,8 @@
       auto-format = true;
       indent = {
         tab-width = 4;
-        unit = "    ";
+        # Need to use tabs so here-docs work
+        unit = "\t";
       };
     }
   ];
