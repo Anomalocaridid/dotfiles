@@ -19,12 +19,12 @@
           self'.packages.chpasswd
         ];
         text = ''
-          # Sanity options for safety
-          set -o errtrace \
-          	-o errexit \
-          	-o nounset \
-          	-o xtrace \
-          	-o pipefail
+          # Safety options
+          set -o xtrace   # Prints executed commands to the terminal
+          set -o errexit  # Stop executing script when a command fails
+          set -o errtrace # Re-enables ERR trap disabled by errexit
+          set -o nounset  # Stop executing script when an unset variable is accessed
+          set -o pipefail # Propagate non-zero exit codes to the end of a pipeline
 
           # Config constants
           readonly CONFIG_REPO="${config.flake.meta.gitHubUsername}/dotfiles" # Dotfile config repo name
