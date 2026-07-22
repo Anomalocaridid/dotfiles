@@ -413,6 +413,26 @@
         "type": "github"
       }
     },
+    "hpf-passwd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784755711,
+        "narHash": "sha256-hrNFw9rsX4TkdKWTIPHd0ROgdVDsrPD5gNfEbrKadI0=",
+        "owner": "Anomalocaridid",
+        "repo": "hpf-passwd",
+        "rev": "37a6d6ae9482f4bc1788fdd16ccc89329fe76bc2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Anomalocaridid",
+        "repo": "hpf-passwd",
+        "type": "github"
+      }
+    },
     "ignis": {
       "inputs": {
         "ignis-gvc": "ignis-gvc",
@@ -833,6 +853,7 @@
         "flake-parts": "flake-parts",
         "ghostty-shaders": "ghostty-shaders",
         "home-manager": "home-manager",
+        "hpf-passwd": "hpf-passwd",
         "ignis": "ignis",
         "impermanence": "impermanence",
         "import-tree": "import-tree",

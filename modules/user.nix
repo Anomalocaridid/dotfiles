@@ -1,6 +1,11 @@
-{ config, ... }:
+{ config, inputs, ... }:
 {
   flake.meta.username = "anomalocaris";
+
+  flake-file.inputs.hpf-passwd = {
+    url = "github:Anomalocaridid/hpf-passwd";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   unify.modules.general =
     let
@@ -26,9 +31,15 @@
           fileSystems.${persistDir}.neededForBoot = true;
         };
 
-      home.home = {
-        username = username;
-        homeDirectory = "/home/${username}";
-      };
+      home =
+        { pkgs, ... }:
+        {
+          home = {
+            username = username;
+            homeDirectory = "/home/${username}";
+
+            packages = [ inputs.hpf-passwd.packages.${pkgs.stdenv.hostPlatform.system}.hpf-passwd ];
+          };
+        };
     };
 }
