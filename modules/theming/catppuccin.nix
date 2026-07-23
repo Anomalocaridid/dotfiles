@@ -21,6 +21,7 @@
 
         catppuccin = {
           enable = true;
+          autoEnable = true;
           cache.enable = true;
           flavor = "mocha";
           accent = "mauve";
@@ -39,6 +40,7 @@
         catppuccin = {
           inherit (osConfig.catppuccin)
             enable
+            autoEnable
             flavor
             accent
             sources
