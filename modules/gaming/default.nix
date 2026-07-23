@@ -38,9 +38,12 @@ in
           };
 
           environment.persistence.${persistDir}.users.${username}.directories = [
+            ".config/itch" # Itch games and settings
+
             ".cache/lutris" # Lutris banner cache
             ".config/lutris" # Lutris games and settings
             ".local/share/lutris" # Lutris runtime data
+
             ".runelite" # Runelite settings and cache
           ];
 
@@ -59,6 +62,7 @@ in
         {
           home = {
             packages = with pkgs; [
+              itch
               lutris
               runelite
             ];
