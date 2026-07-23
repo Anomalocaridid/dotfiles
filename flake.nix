@@ -15,10 +15,6 @@
       url = "github:psylopneunonym/Catppuccin-Fractal-Wallpapers";
       flake = false;
     };
-    catppuccin-limine = {
-      url = "github:catppuccin/limine/limine-config-update";
-      flake = false;
-    };
     catppuccin-ohmyrepl = {
       url = "github:catppuccin/ohmyrepl";
       flake = false;

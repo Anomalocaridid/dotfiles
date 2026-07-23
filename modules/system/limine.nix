@@ -1,14 +1,8 @@
-{ config, inputs, ... }:
+{ config, ... }:
 let
   inherit (config.flake.meta) wallpaper;
 in
 {
-  # TODO: remove when https://github.com/catppuccin/limine/pull/10 is merged
-  flake-file.inputs.catppuccin-limine = {
-    url = "github:catppuccin/limine/limine-config-update";
-    flake = false;
-  };
-
   unify.modules.general.nixos =
     {
       config,
@@ -29,10 +23,9 @@ in
           extraConfig = builtins.readFile (
             pkgs.runCommand "catppuccin-limine"
               {
-                # TODO: replace with `catppuccin.sources.limine` when https://github.com/catppuccin/limine/pull/10 is merged
                 themeFile =
-                  inputs.catppuccin-limine
-                  + "/themes/${config.catppuccin.flavor}/catppuccin-${config.catppuccin.flavor}-${config.catppuccin.accent}.conf";
+                  with config.catppuccin;
+                  "${sources.limine}/${flavor}/catppuccin-${flavor}-${accent}.conf";
 
                 # 10% transparency (i.e. 90% opacity)
                 transparency = "19";
