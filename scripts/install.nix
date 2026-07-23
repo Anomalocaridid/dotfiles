@@ -105,6 +105,9 @@
           git clone "https://github.com/$CONFIG_REPO.git" "$CONFIG_DIR"
           git -C "$CONFIG_DIR" remote set-url origin "git@github.com:$CONFIG_REPO.git"
 
+          echo "Updating NixOS Facter report"
+          nixos-facter --output "$CONFIG_DIR/hosts/$device/facter.json"
+
           echo "Setting password (xtrace disabled)"
           chpasswd.sh "$MOUNT_DIR"
 
