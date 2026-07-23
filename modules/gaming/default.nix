@@ -46,15 +46,6 @@ in
 
             ".runelite" # Runelite settings and cache
           ];
-
-          # TODO: remove when https://github.com/NixOS/nixpkgs/pull/515956 makes it to nixos-unstable
-          nixpkgs.overlays = [
-            (_: prev: {
-              openldap = prev.openldap.overrideAttrs {
-                doCheck = !prev.stdenv.hostPlatform.isi686;
-              };
-            })
-          ];
         };
 
       home =
