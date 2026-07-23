@@ -108,7 +108,7 @@ in
               homeTyping.enable = true;
               implicitRelationships.enable = true;
               mentionAvatars.enable = true;
-              moreKaomoji.enable = true;
+              moreCommands.enable = true;
               mutualGroupDMs.enable = true;
               noF1.enable = true;
               noNitroUpsell.enable = true;
