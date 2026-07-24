@@ -37,6 +37,7 @@
         flake-file.follows = "flake-file";
         flake-parts.follows = "flake-parts";
         import-tree.follows = "import-tree";
+        nixpkgs.follows = "nixpkgs";
       };
     };
     flake-file.url = "github:vic/flake-file";

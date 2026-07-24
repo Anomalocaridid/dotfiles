@@ -6,8 +6,7 @@ in
   flake-file.inputs.firefox-extensions-declarative = {
     url = "github:firefox-extensions-declarative/firefox-extensions-declarative";
     inputs = {
-      # TODO: uncomment after next update
-      # nixpkgs.follows = "nixpkgs";
+      nixpkgs.follows = "nixpkgs";
       flake-file.follows = "flake-file";
       flake-parts.follows = "flake-parts";
       import-tree.follows = "import-tree";
