@@ -23,9 +23,6 @@ in
       nixos =
         { pkgs, ... }:
         {
-          # On-demand system optimization for gaming
-          programs.gamemode.enable = true;
-
           # Nintendo Pro Controller / Joycon support
           services.joycond.enable = true;
           # Support Direct Rendering for 32-bit applications, like Wine
@@ -39,11 +36,6 @@ in
 
           environment.persistence.${persistDir}.users.${username}.directories = [
             ".config/itch" # Itch games and settings
-
-            ".cache/lutris" # Lutris banner cache
-            ".config/lutris" # Lutris games and settings
-            ".local/share/lutris" # Lutris runtime data
-
             ".runelite" # Runelite settings and cache
           ];
         };
@@ -54,7 +46,6 @@ in
           home = {
             packages = with pkgs; [
               itch
-              lutris
               runelite
             ];
 
