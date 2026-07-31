@@ -1,12 +1,13 @@
 {
   hostname,
   modules,
+  users,
   diskoConfig,
 }:
 { config, inputs, ... }:
 rec {
   unify.hosts.nixos.${hostname} = {
-    inherit modules;
+    inherit modules users;
     nixos = {
       imports = [
         inputs.disko.nixosModules.disko
@@ -15,7 +16,6 @@ rec {
       ];
       facter.reportPath = ../${hostname}/facter.json;
     };
-    users.${config.flake.meta.username}.modules = config.unify.hosts.nixos.${hostname}.modules;
   };
 
   flake.diskoConfigurations.${hostname} = diskoConfig { inherit (config.flake.meta) persistDir; };

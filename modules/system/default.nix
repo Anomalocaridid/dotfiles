@@ -1,12 +1,15 @@
 {
-  unify.modules.general.nixos =
-    { pkgs, ... }:
-    {
+  unify = {
+    modules.general.nixos = { pkgs, ... }: {
       boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
+    };
+
+    nixos = {
       time.timeZone = "America/New_York";
       # Select internationalisation properties.
       i18n.defaultLocale = "en_US.UTF-8";
       # use xkbOptions in tty.
       console.useXkbConfig = true;
     };
+  };
 }
