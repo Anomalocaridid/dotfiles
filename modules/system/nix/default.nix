@@ -1,7 +1,4 @@
-{ config, inputs, ... }:
-let
-  inherit (config.flake.meta) username;
-in
+{ inputs, ... }:
 {
   flake-file.inputs = {
     nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
@@ -19,7 +16,17 @@ in
     };
   };
 
-  unify.modules.general = {
+  unify = {
+    modules.general.home = {
+      imports = [ inputs.nix-index-database.homeModules.nix-index ];
+
+      # Use nix-index to locate missing commands
+      programs = {
+        nix-index.enable = true;
+        nix-index-database.comma.enable = true;
+      };
+    };
+
     nixos =
       {
         config,
@@ -84,10 +91,6 @@ in
           channel.enable = false;
         };
 
-        # Ensure that nixos config has proper permissions
-        # NOTE: persistence permissions only seem to apply upon creating a bind mount
-        systemd.tmpfiles.rules = [ "Z /etc/nixos - ${username} users -" ];
-
         # This value determines the NixOS release from which the default
         # settings for stateful data, like file locations and database versions
         # on your system were taken. It‘s perfectly fine and recommended to leave
@@ -98,27 +101,8 @@ in
       };
 
     home =
-      { config, osConfig, ... }:
+      { osConfig, ... }:
       {
-        imports = [ inputs.nix-index-database.homeModules.nix-index ];
-
-        # Use nix-index to locate missing commands
-        programs = {
-          nix-index.enable = true;
-          nix-index-database.comma.enable = true;
-        };
-
-        # Link /etc/nixos to home directory
-        systemd.user.tmpfiles.rules = [
-          # Create a link to /etc/nixos, where the config is in the home directory
-          "L ${config.home.homeDirectory}/nixos -   -            -     - /etc/nixos"
-          # Ensure SSH keys have proper permissions.
-          # NOTE: persistence permissions only seem to apply upon creating a bind mount
-          # NOTE: Directory and contents need to have permissions set separately or else it gets set to root permissions for some reason
-          "z ${config.home.homeDirectory}/.ssh 0700 ${config.home.username} users - -"
-          "Z ${config.home.homeDirectory}/.ssh/* 0600 ${config.home.username} users - -"
-        ];
-
         # DON'T TOUCH
         # Use system-level stateVersion
         home.stateVersion = osConfig.system.stateVersion;
