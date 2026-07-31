@@ -2,8 +2,8 @@
 {
   flake.meta.gitHubUsername = "Anomalocaridid";
 
-  unify.modules.general.home.programs = {
-    git = {
+  unify = {
+    home.programs.git = {
       enable = true;
       settings = {
         user = {
@@ -19,7 +19,7 @@
     };
 
     # Syntax-aware git merge driver
-    mergiraf = {
+    modules.general.home.programs.mergiraf = {
       enable = true;
       enableGitIntegration = true;
     };

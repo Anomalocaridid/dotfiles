@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) username persistDir;
 in
 {
-  unify.modules.general.nixos =
+  unify.nixos =
     { lib, hostConfig, ... }:
     {
       networking = {

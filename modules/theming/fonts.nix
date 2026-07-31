@@ -1,5 +1,5 @@
 {
-  unify.modules.general = {
+  unify = {
     nixos =
       { pkgs, ... }:
       {

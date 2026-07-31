@@ -1,5 +1,5 @@
 {
-  unify.modules.general.nixos =
+  unify.modules.nixos =
     { lib, pkgs, ... }:
     {
       # Just in case, disable userdb, which can potentially store PII
