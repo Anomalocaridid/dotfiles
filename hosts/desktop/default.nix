@@ -1,10 +1,12 @@
 { config, flake-parts-lib, ... }:
-flake-parts-lib.importApply ../_common/host.nix {
+flake-parts-lib.importApply ../_common/host.nix rec {
   hostname = builtins.baseNameOf ./.;
   modules = with config.unify.modules; [
     general
     desktop
+    primaryUser
   ];
+  users.${config.flake.meta.username}.modules = config.unify.hosts.nixos.${hostname}.modules;
   diskoConfig = import ../_common/disko.nix {
     disk = "/dev/disk/by-id/nvme-WDS100T3X0C-00SJG0_20477T805943";
     memory = "32G";

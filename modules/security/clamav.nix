@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  unify.modules.general.nixos = {
+  unify.nixos = {
     services.clamav = {
       daemon.enable = true;
       updater.enable = true;

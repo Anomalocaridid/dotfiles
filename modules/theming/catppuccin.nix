@@ -13,7 +13,7 @@
       ];
     };
 
-  unify.modules.general = {
+  unify = {
     nixos =
       { config, lib, ... }:
       {

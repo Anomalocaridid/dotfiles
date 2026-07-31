@@ -7,7 +7,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  unify.modules.general =
+  unify =
     let
       inherit (config.flake.meta) username persistDir passwordDir;
     in
@@ -32,7 +32,7 @@
           fileSystems.${persistDir}.neededForBoot = true;
         };
 
-      home =
+      modules.primaryUser.home =
         { pkgs, ... }:
         {
           home.packages = [ inputs.hpf-passwd.packages.${pkgs.stdenv.hostPlatform.system}.hpf-passwd ];
