@@ -21,6 +21,7 @@
 
             users.${username} = {
               isNormalUser = true;
+              home = "/home/${username}";
               # Enable ‘sudo’ for the user
               extraGroups = [ "wheel" ];
               hashedPasswordFile = "${passwordDir}/${username}";
@@ -34,12 +35,7 @@
       home =
         { pkgs, ... }:
         {
-          home = {
-            username = username;
-            homeDirectory = "/home/${username}";
-
-            packages = [ inputs.hpf-passwd.packages.${pkgs.stdenv.hostPlatform.system}.hpf-passwd ];
-          };
+          home.packages = [ inputs.hpf-passwd.packages.${pkgs.stdenv.hostPlatform.system}.hpf-passwd ];
         };
     };
 }
