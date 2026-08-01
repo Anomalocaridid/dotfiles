@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home =
+  unify.home =
     { config, pkgs, ... }:
     {
       home.pointerCursor =
