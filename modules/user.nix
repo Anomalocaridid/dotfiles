@@ -7,7 +7,7 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  unify.modules.general =
+  unify =
     let
       inherit (config.flake.meta) username persistDir passwordDir;
     in
