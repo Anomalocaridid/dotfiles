@@ -16,7 +16,7 @@ in
     };
   };
 
-  unify.modules.general.nixos =
+  unify.modules.nixos =
     { config, ... }:
     {
       imports = [ inputs.impermanence.nixosModules.impermanence ];
