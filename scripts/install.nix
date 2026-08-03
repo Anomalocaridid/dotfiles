@@ -106,7 +106,9 @@
 
           # Clone config repo up front to use as a single source of truth and reduce the risk of TOCTOU bugs
           echo "Cloning config repo into temporary directory"
-          git clone "$CONFIG_REPO" "$temp_dir"
+          # TODO: remove branch
+          # git clone "$CONFIG_REPO" "$temp_dir"
+          git clone "$CONFIG_REPO" "$temp_dir" --branch htpc
           git -C "$temp_dir" remote set-url origin "$CONFIG_REPO"
 
           echo "Updating NixOS Facter report"
