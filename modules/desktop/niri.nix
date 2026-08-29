@@ -311,6 +311,21 @@ in
                 };
               };
 
+              recent-windows = {
+                highlight = {
+                  active-color = accent;
+                  urgent-color = palette.peach.hex;
+                };
+
+                # Ensure that the "Mod+grave" keybind is unset so grave esc still works
+                binds = {
+                  "Alt+Tab".next-window = [ ];
+                  "Alt+Shift+Tab".previous-window = [ ];
+                  "Alt+grave".next-window._props.filter = "app-id";
+                  "Alt+Shift+grave".previous-window._props.filter = "app-id";
+                };
+              };
+
               binds =
                 let
                   wpctl = args: {
