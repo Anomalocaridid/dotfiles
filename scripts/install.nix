@@ -110,7 +110,10 @@
           git -C "$temp_dir" remote set-url origin "$CONFIG_REPO"
 
           echo "Updating NixOS Facter report"
-          nixos-facter --output "$temp_dir/hosts/$device/facter.json"
+          readonly facter_report="$temp_dir/hosts/$device/facter.json"
+          nixos-facter --output "$facter_report"
+          # Stage the report in case it did not previously exist so nix can use it
+          git -C "$temp_dir" add "$facter_report"
 
           echo "Partitioning disk with disko"
           disko --flake "git+file://$temp_dir#$device" --mode "$mode"
