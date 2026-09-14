@@ -29,10 +29,12 @@
 
           # Config constants
           readonly USERNAME="${config.flake.meta.username}"
-          readonly CONFIG_REPO="https://github.com/${config.flake.meta.gitHubUsername}/dotfiles.git" # Dotfile config repo name
-          readonly MOUNT_DIR="/mnt"                                                                  # Where drive is mounted by disko (set by disko, not config)
-          readonly PERSIST_DIR="${config.flake.meta.persistDir}"                                     # Persistent partition mount location
-          readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"                                     # Config location in persistant partition
+          readonly CONFIG_REPO="${config.flake.meta.gitHubUsername}/dotfiles.git" # Config git repo name
+          readonly CONFIG_REPO_CLONE="https://github.com/''${CONFIG_REPO}"        # URL to clone config repo from
+          readonly CONFIG_REPO_REMOTE="git@github.com:''${CONFIG_REPO}"           # URL to set as config repo remote
+          readonly MOUNT_DIR="/mnt"                                               # Where drive is mounted by disko (set by disko, not config)
+          readonly PERSIST_DIR="${config.flake.meta.persistDir}"                  # Persistent partition mount location
+          readonly CONFIG_DIR="$MOUNT_DIR$PERSIST_DIR/etc/nixos"                  # Config location in persistant partition
 
           # List of available NixOS configurations
           ${lib.toShellVar "device_list" (lib.attrNames self.nixosConfigurations)}
@@ -106,8 +108,8 @@
 
           # Clone config repo up front to use as a single source of truth and reduce the risk of TOCTOU bugs
           echo "Cloning config repo into temporary directory"
-          git clone "$CONFIG_REPO" "$temp_dir"
-          git -C "$temp_dir" remote set-url origin "$CONFIG_REPO"
+          git clone "$CONFIG_REPO_CLONE" "$temp_dir"
+          git -C "$temp_dir" remote set-url origin "$CONFIG_REPO_REMOTE"
 
           echo "Updating NixOS Facter report"
           readonly facter_report="$temp_dir/hosts/$device/facter.json"
