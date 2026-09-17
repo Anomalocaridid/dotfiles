@@ -17,14 +17,20 @@
   };
 
   flake.modules = {
-    nixos.default =
-      {
-        config,
-        lib,
-        pkgs,
-        ...
-      }:
-      {
+    nixos = {
+      # Separate to work around issue with registry conflict with 1ksunny
+      general = { lib, ... }: {
+        # Set system registry to flake inputs
+        # Remove non flake inputs, which cause errors
+        # Flakes have an attribute _type, which equals "flake"
+        # while non-flakes lack this attribute
+        nix.registry = lib.pipe inputs [
+          (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
+          (lib.mapAttrs (_: flake: { inherit flake; }))
+        ];
+      };
+
+      default = { config, pkgs, ... }: {
         imports = [ inputs.nix-monitored.nixosModules.default ];
 
         nixpkgs.overlays = [
@@ -67,15 +73,6 @@
             options = "--delete-older-than 14d";
           };
 
-          # Set system registry to flake inputs
-          # Remove non flake inputs, which cause errors
-          # Flakes have an attribute _type, which equals "flake"
-          # while non-flakes lack this attribute
-          registry = lib.pipe inputs [
-            (lib.filterAttrs (_: flake: lib.attrsets.hasAttr "_type" flake))
-            (lib.mapAttrs (_: flake: { inherit flake; }))
-          ];
-
           # Do not use channels
           # Mainly needed to get rid of an annoying warning about channels not existing
           channel.enable = false;
@@ -89,6 +86,7 @@
         # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
         system.stateVersion = "22.11"; # Did you read the comment?
       };
+    };
 
     homeManager = {
       general = {

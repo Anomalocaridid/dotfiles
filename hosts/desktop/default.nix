@@ -1,6 +1,13 @@
-{ config, flake-parts-lib, ... }:
+{
+  config,
+  inputs,
+  flake-parts-lib,
+  ...
+}:
 flake-parts-lib.importApply ../_common/host.nix {
   hostname = builtins.baseNameOf ./.;
+
+  nixosSystem = inputs.nixpkgs.lib.nixosSystem;
 
   modules = with config.flake.modules.nixos; [
     default

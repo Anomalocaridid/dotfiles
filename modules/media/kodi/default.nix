@@ -1,5 +1,5 @@
 # Setup to run Kodi as a standalone appliance
-{ config, ... }:
+{ config, inputs, ... }:
 let
   inherit (config.flake.meta) persistDir username;
 in
@@ -118,10 +118,12 @@ in
             enable = true;
 
             package =
-              (pkgs.kodi-gbm.overrideAttrs (oldAttrs: {
-                # Suppress popup on first boot that prompt to enable addons installed with nix
-                cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DADDONS_CONFIGURE_AT_STARTUP=OFF" ];
-              })).withPackages
+              (inputs.nixos-raspberrypi.packages.${pkgs.stdenv.hostPlatform.system}.kodi-gbm.overrideAttrs
+                (oldAttrs: {
+                  # Suppress popup on first boot that prompt to enable addons installed with nix
+                  cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DADDONS_CONFIGURE_AT_STARTUP=OFF" ];
+                })
+              ).withPackages
                 (kodiPkgs: [
                   # Elementum add-on
                   (kodiPkgs.callPackage ./_pkgs/elementum.nix { })
