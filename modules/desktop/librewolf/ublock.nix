@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home.programs.librewolf.policies =
+  flake.modules.homeManager.general.programs.librewolf.policies =
     let
       id = "uBlock0@raymondhill.net";
     in

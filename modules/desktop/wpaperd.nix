@@ -8,7 +8,7 @@
     flake = false;
   };
 
-  unify.modules.general.home.services.wpaperd = {
+  flake.modules.homeManager.general.services.wpaperd = {
     enable = true;
     settings.any.path = config.flake.meta.wallpaper;
   };

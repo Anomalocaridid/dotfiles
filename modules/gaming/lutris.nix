@@ -3,8 +3,8 @@ let
   inherit (config.flake.meta) username persistDir;
 in
 {
-  unify.modules.desktop = {
-    nixos = {
+  flake.modules = {
+    nixos.desktop = {
       # On-demand system optimization for gaming
       programs.gamemode.enable = true;
 
@@ -15,7 +15,7 @@ in
       ];
     };
 
-    home = { osConfig, ... }: {
+    homeManager.desktop = { osConfig, ... }: {
       programs.lutris = rec {
         enable = true;
         defaultWinePackage = builtins.head protonPackages;

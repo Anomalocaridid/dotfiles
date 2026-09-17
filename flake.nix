@@ -94,13 +94,5 @@
       url = "github:jamesnvc/lsp_server";
       flake = false;
     };
-    unify = {
-      url = "git+https://codeberg.org/quasigod/unify";
-      inputs = {
-        flake-parts.follows = "flake-parts";
-        home-manager.follows = "home-manager";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
   };
 }

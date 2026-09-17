@@ -1,41 +1,38 @@
 { config, inputs, ... }:
+let
+  inherit (config.flake.meta) username persistDir passwordDir;
+in
 {
-  flake.meta.username = "anomalocaris";
-
   flake-file.inputs.hpf-passwd = {
     url = "github:Anomalocaridid/hpf-passwd";
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  unify =
-    let
-      inherit (config.flake.meta) username persistDir passwordDir;
-    in
-    {
-      nixos =
-        { pkgs, hostConfig, ... }:
-        {
-          users = {
-            # Prevent changing users and groups outside of this config
-            mutableUsers = false;
+  flake = {
+    meta.username = "anomalocaris";
 
-            users.${username} = {
-              isNormalUser = true;
-              home = "/home/${username}";
-              # Enable ‘sudo’ for the user
-              extraGroups = [ "wheel" ];
-              hashedPasswordFile = "${passwordDir}/${username}";
-            };
+    modules = {
+      nixos.default = {
+        users = {
+          # Prevent changing users and groups outside of this config
+          mutableUsers = false;
+
+          users.${username} = {
+            isNormalUser = true;
+            home = "/home/${username}";
+            # Enable ‘sudo’ for the user
+            extraGroups = [ "wheel" ];
+            hashedPasswordFile = "${passwordDir}/${username}";
           };
-
-          # persistDir is needed for boot because it contains password hashes
-          fileSystems.${persistDir}.neededForBoot = true;
         };
 
-      modules.primaryUser.home =
-        { pkgs, ... }:
-        {
-          home.packages = [ inputs.hpf-passwd.packages.${pkgs.stdenv.hostPlatform.system}.hpf-passwd ];
-        };
+        # persistDir is needed for boot because it contains password hashes
+        fileSystems.${persistDir}.neededForBoot = true;
+      };
+
+      homeManager.primaryUser = { pkgs, ... }: {
+        home.packages = [ inputs.hpf-passwd.packages.${pkgs.stdenv.hostPlatform.system}.hpf-passwd ];
+      };
     };
+  };
 }

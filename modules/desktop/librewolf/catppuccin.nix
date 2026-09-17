@@ -6,7 +6,7 @@
     flake = false;
   };
 
-  unify.modules.general.home =
+  flake.modules.homeManager.general =
     {
       config,
       lib,

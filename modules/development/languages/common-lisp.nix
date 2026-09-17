@@ -1,25 +1,23 @@
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      devshells.common-lisp = {
-        packages = with pkgs; [
-          roswell # Common Lisp build tool/test runner
-          (sbcl.withPackages (ps: with ps; [ linedit ]))
-        ];
+  perSystem = { pkgs, ... }: {
+    devshells.common-lisp = {
+      packages = with pkgs; [
+        roswell # Common Lisp build tool/test runner
+        (sbcl.withPackages (ps: with ps; [ linedit ]))
+      ];
 
-        # Install necessary dependencies like quicklisp
-        # Rather noisy, so check if they need to be installed first
-        devshell.startup.roswell.text = ''
-          if [[ ! -d ~/.roswell ]]; then
-            ros help
-          fi
-        '';
-      };
+      # Install necessary dependencies like quicklisp
+      # Rather noisy, so check if they need to be installed first
+      devshell.startup.roswell.text = ''
+        if [[ ! -d ~/.roswell ]]; then
+          ros help
+        fi
+      '';
     };
+  };
 
   # Common Lisp repl config
-  unify.modules.general.home.home.file.".sbclrc".text = # scheme
+  flake.modules.homeManager.general.home.file.".sbclrc".text = # scheme
     ''
       ;;; Load included packages without quicklisp 
       (load (sb-ext:posix-getenv "ASDF"))

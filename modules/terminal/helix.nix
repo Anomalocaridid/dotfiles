@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home = {
+  flake.modules.homeManager.general = {
     xdg.mimeApps.defaultApplications =
       let
         desktopFile = "Helix.desktop";

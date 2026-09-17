@@ -5,18 +5,21 @@
   diskoConfig,
 }:
 { config, inputs, ... }:
-rec {
-  unify.hosts.nixos.${hostname} = {
-    inherit modules users;
-    nixos = {
-      imports = [
+{
+  flake = rec {
+    nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
+      modules = modules ++ [
         inputs.disko.nixosModules.disko
         inputs.nixos-facter-modules.nixosModules.facter
-        flake.diskoConfigurations.${hostname}
+        diskoConfigurations.${hostname}
+        {
+          networking.hostName = hostname;
+          facter.reportPath = ../${hostname}/facter.json;
+          home-manager = { inherit users; };
+        }
       ];
-      facter.reportPath = ../${hostname}/facter.json;
     };
-  };
 
-  flake.diskoConfigurations.${hostname} = diskoConfig { inherit (config.flake.meta) persistDir; };
+    diskoConfigurations.${hostname} = diskoConfig { inherit (config.flake.meta) persistDir; };
+  };
 }

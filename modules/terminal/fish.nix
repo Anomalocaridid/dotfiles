@@ -1,21 +1,19 @@
 { config, ... }:
 {
-  unify.modules.general = {
-    nixos =
-      { pkgs, ... }:
-      {
-        programs.fish = {
-          # Need to enable fish at system level to use as shell
-          enable = true;
-          # Translate bash scripts into fish rather than wrapping them with foreign-env, which is slower
-          useBabelfish = true;
-        };
-
-        # Set fish as user shell
-        users.users.${config.flake.meta.username}.shell = pkgs.fish;
+  flake.modules = {
+    nixos.general = { pkgs, ... }: {
+      programs.fish = {
+        # Need to enable fish at system level to use as shell
+        enable = true;
+        # Translate bash scripts into fish rather than wrapping them with foreign-env, which is slower
+        useBabelfish = true;
       };
 
-    home =
+      # Set fish as user shell
+      users.users.${config.flake.meta.username}.shell = pkgs.fish;
+    };
+
+    homeManager.general =
       {
         config,
         lib,

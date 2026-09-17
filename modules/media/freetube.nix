@@ -3,11 +3,13 @@ let
   inherit (config.flake.meta) username persistDir;
 in
 {
-  unify.modules.general = {
-    # Freetube user data
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".config/FreeTube" ];
+  flake.modules = {
+    # Persist Freetube user data
+    nixos.general.environment.persistence.${persistDir}.users.${username}.directories = [
+      ".config/FreeTube"
+    ];
 
-    home.programs.freetube = {
+    homeManager.general.programs.freetube = {
       enable = true;
       settings = {
         # General Settings

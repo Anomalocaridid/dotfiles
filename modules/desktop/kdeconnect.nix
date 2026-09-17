@@ -3,8 +3,8 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.general = {
-    nixos = {
+  flake.modules = {
+    nixos.general = {
       # Persist KDE Connect state
       environment.persistence.${persistDir}.users.${username}.directories = [
         ".config/kdeconnect"
@@ -17,7 +17,7 @@ in
       };
     };
 
-    home.services.kdeconnect = {
+    homeManager.general.services.kdeconnect = {
       enable = true;
       indicator = true;
     };

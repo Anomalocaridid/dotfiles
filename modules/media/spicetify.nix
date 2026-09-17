@@ -8,8 +8,8 @@ in
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  unify.modules.general = {
-    nixos = {
+  flake.modules = {
+    nixos.general = {
       nixpkgs.config.allowUnfreePackages = [ "spotify" ];
 
       environment.persistence.${persistDir}.users.${username}.directories = [
@@ -18,7 +18,7 @@ in
       ];
     };
 
-    home =
+    homeManager.general =
       { config, pkgs, ... }:
       let
         spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};

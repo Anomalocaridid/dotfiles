@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home.programs.eza = {
+  flake.modules.homeManager.general.programs.eza = {
     enable = true;
     git = true;
     icons = "auto";

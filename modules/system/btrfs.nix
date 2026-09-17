@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) persistDir;
 in
 {
-  unify.modules.general.nixos = {
+  flake.modules.nixos.general = {
     services = {
       btrfs.autoScrub = {
         enable = true;

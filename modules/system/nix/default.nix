@@ -16,18 +16,8 @@
     };
   };
 
-  unify = {
-    modules.general.home = {
-      imports = [ inputs.nix-index-database.homeModules.nix-index ];
-
-      # Use nix-index to locate missing commands
-      programs = {
-        nix-index.enable = true;
-        nix-index-database.comma.enable = true;
-      };
-    };
-
-    nixos =
+  flake.modules = {
+    nixos.default =
       {
         config,
         lib,
@@ -100,12 +90,22 @@
         system.stateVersion = "22.11"; # Did you read the comment?
       };
 
-    home =
-      { osConfig, ... }:
-      {
+    homeManager = {
+      general = {
+        imports = [ inputs.nix-index-database.homeModules.nix-index ];
+
+        # Use nix-index to locate missing commands
+        programs = {
+          nix-index.enable = true;
+          nix-index-database.comma.enable = true;
+        };
+      };
+
+      default = { osConfig, ... }: {
         # DON'T TOUCH
         # Use system-level stateVersion
         home.stateVersion = osConfig.system.stateVersion;
       };
+    };
   };
 }

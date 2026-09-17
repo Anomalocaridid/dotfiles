@@ -3,8 +3,8 @@ let
   inherit (config.flake.meta) username persistDir;
 in
 {
-  unify.modules.general = {
-    nixos.environment.persistence.${persistDir}.users.${username} = {
+  flake.modules = {
+    nixos.general.environment.persistence.${persistDir}.users.${username} = {
       directories = [
         "Sync" # Files synced by Syncthing
         ".local/state/syncthing" # Syncthing settings
@@ -14,7 +14,7 @@ in
       ];
     };
 
-    home.services.syncthing = {
+    homeManager.general.services.syncthing = {
       enable = true;
       tray.enable = true;
     };

@@ -3,13 +3,13 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.general = {
+  flake.modules = {
     # Persist sioyek document settings
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
+    nixos.general.environment.persistence.${persistDir}.users.${username}.directories = [
       ".local/share/sioyek"
     ];
 
-    home =
+    homeManager.general =
       {
         config,
         lib,
@@ -24,7 +24,7 @@ in
             should_launch_new_window = "1";
             "new_command _print" = "${lib.getExe pkgs.yad} --print --type=RAW --filename=%{file_path}";
             "new_command _rearrange" = "${lib.getExe pkgs.pdfarranger} %{file_path}";
-            "new_command _ocr" = ''${
+            "new_command _ocr" = "${
               lib.getExe (
                 pkgs.writeShellApplication {
                   name = "ocr.sh";
@@ -47,7 +47,7 @@ in
                   '';
                 }
               )
-            } %{file_path}'';
+            } %{file_path}";
           };
           bindings = {
             _print = "<C-p>";

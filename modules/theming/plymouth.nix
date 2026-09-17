@@ -1,5 +1,5 @@
 {
-  unify.modules.appliance.nixos.boot = {
+  flake.modules.nixos.appliance.boot = {
     plymouth.enable = true;
 
     # Enable "Silent boot"

@@ -3,7 +3,7 @@ let
   inherit (config.flake.meta) wallpaper;
 in
 {
-  unify.modules.general.nixos =
+  flake.modules.nixos.general =
     {
       config,
       lib,

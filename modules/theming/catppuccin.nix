@@ -3,49 +3,44 @@
   # Provides a binary cache, so do not follow inputs
   flake-file.inputs.catppuccin.url = "github:catppuccin/nix";
 
-  perSystem =
-    { pkgs, ... }:
-    {
-      # Tools for making catppuccin ports
-      devshells.catppuccin.packages = with pkgs; [
-        catppuccin-catwalk
-        catppuccin-whiskers
-      ];
+  perSystem = { pkgs, ... }: {
+    # Tools for making catppuccin ports
+    devshells.catppuccin.packages = with pkgs; [
+      catppuccin-catwalk
+      catppuccin-whiskers
+    ];
+  };
+
+  flake.modules = {
+    nixos.default = { config, lib, ... }: {
+      imports = [ inputs.catppuccin.nixosModules.catppuccin ];
+
+      catppuccin = {
+        enable = true;
+        autoEnable = true;
+        cache.enable = true;
+        flavor = "mocha";
+        accent = "mauve";
+        sources.parsedPalette =
+          (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
+          .${config.catppuccin.flavor}.colors;
+      };
     };
 
-  unify = {
-    nixos =
-      { config, lib, ... }:
-      {
-        imports = [ inputs.catppuccin.nixosModules.catppuccin ];
+    homeManager.default = { osConfig, ... }: {
+      imports = [ inputs.catppuccin.homeModules.catppuccin ];
 
-        catppuccin = {
-          enable = true;
-          autoEnable = true;
-          cache.enable = true;
-          flavor = "mocha";
-          accent = "mauve";
-          sources.parsedPalette =
-            (lib.importJSON "${config.catppuccin.sources.palette}/palette.json")
-            .${config.catppuccin.flavor}.colors;
-        };
+      # Inherit system-level settings
+      # Do not inherit cache setting or else the other system-level caches will not be used
+      catppuccin = {
+        inherit (osConfig.catppuccin)
+          enable
+          autoEnable
+          flavor
+          accent
+          sources
+          ;
       };
-    home =
-      { osConfig, ... }:
-      {
-        imports = [ inputs.catppuccin.homeModules.catppuccin ];
-
-        # Inherit system-level settings
-        # Do not inherit cache setting or else the other system-level caches will not be used
-        catppuccin = {
-          inherit (osConfig.catppuccin)
-            enable
-            autoEnable
-            flavor
-            accent
-            sources
-            ;
-        };
-      };
+    };
   };
 }

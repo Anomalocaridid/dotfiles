@@ -1,34 +1,30 @@
 { config, ... }:
 {
-  unify.modules.general = {
-    nixos =
-      { pkgs, ... }:
-      {
-        nixpkgs.config.allowUnfreePackages = [ "hplip" ];
+  flake.modules = {
+    nixos.general = { pkgs, ... }: {
+      nixpkgs.config.allowUnfreePackages = [ "hplip" ];
 
-        services = {
-          # Enable CUPS to print documents.
-          printing = {
-            enable = true;
-            drivers = with pkgs; [ hplipWithPlugin ];
-          };
-
-          # Enable autodiscovery of network printers
-          avahi = {
-            enable = true;
-            nssmdns4 = true;
-            openFirewall = true;
-          };
+      services = {
+        # Enable CUPS to print documents.
+        printing = {
+          enable = true;
+          drivers = with pkgs; [ hplipWithPlugin ];
         };
 
-        # CUPS config
-        environment.persistence.${config.flake.meta.persistDir}.directories = [ "/var/lib/cups" ];
+        # Enable autodiscovery of network printers
+        avahi = {
+          enable = true;
+          nssmdns4 = true;
+          openFirewall = true;
+        };
       };
 
-    home =
-      { pkgs, ... }:
-      {
-        home.packages = with pkgs; [ hplipWithPlugin ];
-      };
+      # CUPS config
+      environment.persistence.${config.flake.meta.persistDir}.directories = [ "/var/lib/cups" ];
+    };
+
+    homeManager.general = { pkgs, ... }: {
+      home.packages = with pkgs; [ hplipWithPlugin ];
+    };
   };
 }

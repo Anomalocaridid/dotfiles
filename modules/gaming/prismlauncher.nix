@@ -1,21 +1,19 @@
 { config, ... }:
+let
+  inherit (config.flake.meta) username persistDir;
+in
 {
-  unify.modules.desktop = {
-    nixos =
-      { pkgs, ... }:
-      let
-        inherit (config.flake.meta) username persistDir;
-      in
-      {
-        # Needed for certain mods like VinURL
-        programs.nix-ld.enable = true;
-        # Persist Prism Launcher data
-        environment.persistence.${persistDir}.users.${username}.directories = [
-          ".local/share/PrismLauncher"
-        ];
-      };
+  flake.modules = {
+    nixos.desktop = { pkgs, ... }: {
+      # Needed for certain mods like VinURL
+      programs.nix-ld.enable = true;
+      # Persist Prism Launcher data
+      environment.persistence.${persistDir}.users.${username}.directories = [
+        ".local/share/PrismLauncher"
+      ];
+    };
 
-    home =
+    homeManager.desktop =
       {
         config,
         lib,

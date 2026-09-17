@@ -13,11 +13,13 @@ in
     };
   };
 
-  unify.modules.general = {
+  flake.modules = {
     # Librewolf data
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [ ".librewolf" ];
+    nixos.general.environment.persistence.${persistDir}.users.${username}.directories = [
+      ".librewolf"
+    ];
 
-    home =
+    homeManager.general =
       {
         config,
         lib,

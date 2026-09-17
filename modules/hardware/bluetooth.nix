@@ -1,5 +1,5 @@
 {
-  unify.modules.general.nixos = {
+  flake.modules.nixos.general = {
     # Enable bluetooth
     hardware.bluetooth.enable = true;
     # Bluetooth manager
