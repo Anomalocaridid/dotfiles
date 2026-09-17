@@ -1,8 +1,8 @@
 {
-  unify.modules.general = {
-    nixos.nixpkgs.config.allowUnfreePackages = [ "unrar" ];
+  flake.modules = {
+    nixos.general.nixpkgs.config.allowUnfreePackages = [ "unrar" ];
 
-    home =
+    homeManager.general =
       {
         config,
         lib,

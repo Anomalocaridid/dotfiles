@@ -1,32 +1,31 @@
 { config, ... }:
+let
+  inherit (config.flake.meta) username persistDir;
+in
 {
-  unify.modules.desktop = {
-    nixos =
-      { pkgs, ... }:
-      let
-        inherit (config.flake.meta) username persistDir;
-      in
-      {
-        nixpkgs.config.allowUnfreePackages = [
-          "steam"
-          "steam-unwrapped"
-        ];
+  flake.modules = {
+    nixos.desktop = { pkgs, ... }: {
+      nixpkgs.config.allowUnfreePackages = [
+        "steam"
+        "steam-unwrapped"
+      ];
 
-        programs.steam = {
-          enable = true;
-          remotePlay.openFirewall = true;
-          dedicatedServer.openFirewall = true;
-          # Add extra compatibility tools to Steam
-          extraCompatPackages = with pkgs; [ proton-ge-bin ];
-        };
-
-        environment.persistence.${persistDir}.users.${username}.directories = [
-          ".config/unity3d" # Needed for some games' settings
-          ".local/share/Steam" # Steam games and save data
-          ".local/share/Tabletop Simulator" # Tabletop Simulator settings
-        ];
+      programs.steam = {
+        enable = true;
+        remotePlay.openFirewall = true;
+        dedicatedServer.openFirewall = true;
+        # Add extra compatibility tools to Steam
+        extraCompatPackages = with pkgs; [ proton-ge-bin ];
       };
-    home =
+
+      environment.persistence.${persistDir}.users.${username}.directories = [
+        ".config/unity3d" # Needed for some games' settings
+        ".local/share/Steam" # Steam games and save data
+        ".local/share/Tabletop Simulator" # Tabletop Simulator settings
+      ];
+    };
+
+    homeManager.desktop =
       {
         lib,
         pkgs,

@@ -1,17 +1,15 @@
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      devshells.c-cpp.packages = with pkgs; [
-        bear # For creating compilation databases for clangd
-        clang-tools # Provides clangd lsp
-        cmake # Needed for exercism C++ tests
-        gcc # Provides cc linker
-        gnumake # Needed for exercism C and C++ tests
-      ];
-    };
+  perSystem = { pkgs, ... }: {
+    devshells.c-cpp.packages = with pkgs; [
+      bear # For creating compilation databases for clangd
+      clang-tools # Provides clangd lsp
+      cmake # Needed for exercism C++ tests
+      gcc # Provides cc linker
+      gnumake # Needed for exercism C and C++ tests
+    ];
+  };
 
-  unify.modules.general.home =
+  flake.modules.homeManager.general =
     let
       indentWidth = 4;
     in

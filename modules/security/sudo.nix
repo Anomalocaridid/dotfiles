@@ -1,10 +1,10 @@
 {
-  unify = {
-    modules.general.nixos = { pkgs, ... }: {
+  flake.modules.nixos = {
+    general = { pkgs, ... }: {
       security.sudo.package = pkgs.sudo.override { withInsults = true; };
     };
 
-    nixos.security.sudo.extraConfig = # sudo
+    default.security.sudo.extraConfig = # sudo
       ''
         # Prevents sudo lecture from appearing after reboot without persisting
         Defaults lecture = never

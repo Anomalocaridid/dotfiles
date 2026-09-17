@@ -1,13 +1,11 @@
 { moduleWithSystem, ... }:
 {
   # Flake formatter
-  perSystem =
-    { pkgs, ... }:
-    {
-      formatter = pkgs.nixfmt;
-    };
+  perSystem = { pkgs, ... }: {
+    formatter = pkgs.nixfmt;
+  };
 
-  unify.modules.general.home = moduleWithSystem (
+  flake.modules.homeManager.general = moduleWithSystem (
     { self', ... }:
     { lib, pkgs, ... }:
     {

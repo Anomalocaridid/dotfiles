@@ -883,8 +883,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
         "spicetify-nix": "spicetify-nix",
-        "swi-lsp-server": "swi-lsp-server",
-        "unify": "unify"
+        "swi-lsp-server": "swi-lsp-server"
       }
     },
     "spicetify-nix": {
@@ -958,32 +957,6 @@
         "owner": "numtide",
         "repo": "treefmt-nix",
         "type": "github"
-      }
-    },
-    "unify": {
-      "inputs": {
-        "flake-parts": [
-          "flake-parts"
-        ],
-        "home-manager": [
-          "home-manager"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1765403820,
-        "narHash": "sha256-3VJMOW8DOFgWerzUmOI5YiGA3auqW4ZbIDHNaqvLp0E=",
-        "ref": "refs/heads/main",
-        "rev": "35824b87edab3df89474b426a8fcbe02cb720504",
-        "revCount": 41,
-        "type": "git",
-        "url": "https://codeberg.org/quasigod/unify"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://codeberg.org/quasigod/unify"
       }
     },
     "xwayland-satellite-unstable": {

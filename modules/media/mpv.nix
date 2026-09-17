@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home = {
+  flake.modules.homeManager.general = {
     xdg.mimeApps.defaultApplications."video/*" = "mpv.desktop";
 
     programs.mpv = {
@@ -9,11 +9,9 @@
         volume = 40;
       };
 
-      profiles = {
-        eye-cancer = {
-          sharpen = 5;
-          osd-font = "Comic Sans MS";
-        };
+      profiles.eye-cancer = {
+        sharpen = 5;
+        osd-font = "Comic Sans MS";
       };
 
       scriptOpts.osc.seekbarstyle = "diamond";

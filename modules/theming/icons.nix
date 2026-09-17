@@ -1,13 +1,11 @@
 {
-  unify.modules.general = {
-    nixos =
-      { pkgs, ... }:
-      {
-        # Allow svg icons in various places like wlogout and xdragon
-        programs.gdk-pixbuf.modulePackages = with pkgs; [ librsvg ];
-      };
+  flake.modules = {
+    nixos.general = { pkgs, ... }: {
+      # Allow svg icons in various places like wlogout and xdragon
+      programs.gdk-pixbuf.modulePackages = with pkgs; [ librsvg ];
+    };
 
-    home =
+    homeManager.general =
       {
         config,
         lib,

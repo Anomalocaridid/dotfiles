@@ -11,12 +11,12 @@ in
     };
   };
 
-  unify.modules.general = {
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
+  flake.modules = {
+    nixos.general.environment.persistence.${persistDir}.users.${username}.directories = [
       ".config/equibop/sessionData" # Equibop user data
     ];
 
-    home =
+    homeManager.general =
       { config, pkgs, ... }:
       let
         themeFile = "catppuccin.theme.css";

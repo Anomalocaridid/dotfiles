@@ -3,14 +3,14 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.general = {
+  flake.modules = {
     # sunsetr location info
     # NOTE: contains private location data
-    nixos.environment.persistence.${persistDir}.users.${username}.files = [
+    nixos.general.environment.persistence.${persistDir}.users.${username}.files = [
       ".config/sunsetr/geo.toml"
     ];
 
-    home =
+    homeManager.general =
       { lib, pkgs, ... }:
       let
         dayTemp = 6500;

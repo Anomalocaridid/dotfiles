@@ -3,12 +3,13 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.general = {
-    nixos.environment.persistence.${persistDir}.users.${username}.directories = [
-      ".local/share/zoxide" # Zoxide history
+  flake.modules = {
+    # Persist Zoxide history
+    nixos.general.environment.persistence.${persistDir}.users.${username}.directories = [
+      ".local/share/zoxide"
     ];
 
-    home.programs.zoxide = {
+    homeManager.general.programs.zoxide = {
       enable = true;
       # Alias as cd
       options = [ "--cmd cd" ];

@@ -1,15 +1,13 @@
 {
-  perSystem =
-    { pkgs, ... }:
-    {
-      devshells.clojure.packages = with pkgs; [
-        clojure
-        clojure-lsp
-        leiningen # Needed for exercism tests
-      ];
-    };
+  perSystem = { pkgs, ... }: {
+    devshells.clojure.packages = with pkgs; [
+      clojure
+      clojure-lsp
+      leiningen # Needed for exercism tests
+    ];
+  };
 
-  unify.modules.general.home.programs.helix.languages.language = [
+  flake.modules.homeManager.general.programs.helix.languages.language = [
     {
       name = "clojure";
       auto-format = true;

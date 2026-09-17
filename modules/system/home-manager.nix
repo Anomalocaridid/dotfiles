@@ -5,20 +5,18 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  unify.modules.general = {
-    nixos =
-      { lib, ... }:
-      {
-        imports = [ inputs.home-manager.nixosModules.home-manager ];
+  flake.modules = {
+    nixos.default = { lib, ... }: {
+      imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          backupFileExtension = "bak";
-        };
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        backupFileExtension = "bak";
       };
+    };
 
     # Lets Home Manager manage itself
-    home.programs.home-manager.enable = true;
+    homeManager.default.programs.home-manager.enable = true;
   };
 }

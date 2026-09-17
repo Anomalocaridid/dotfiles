@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home.programs.btop = {
+  flake.modules.homeManager.general.programs.btop = {
     enable = true;
     settings = {
       #* If the theme set background should be shown, set to false if you want terminal background transparency.

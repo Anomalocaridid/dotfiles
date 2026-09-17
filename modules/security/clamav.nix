@@ -1,6 +1,6 @@
 { config, ... }:
 {
-  unify.nixos = {
+  flake.modules.nixos.default = {
     services.clamav = {
       daemon.enable = true;
       updater.enable = true;

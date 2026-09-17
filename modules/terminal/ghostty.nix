@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home =
+  flake.modules.homeManager.general =
     { config, ... }:
     {
       xdg.mimeApps.defaultApplications."x-scheme-handler/terminal" = "com.mitchellh.ghostty.desktop";

@@ -3,10 +3,10 @@ let
   inherit (config.flake.meta) username;
 in
 {
-  unify.modules = {
-    laptop.nixos.services.displayManager.ly.settings.battery_id = "BAT1";
+  flake.modules.nixos = {
+    laptop.services.displayManager.ly.settings.battery_id = "BAT1";
 
-    general.nixos =
+    general =
       {
         config,
         lib,

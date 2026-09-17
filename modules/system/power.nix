@@ -1,7 +1,6 @@
 {
-  unify.modules.laptop = {
-    nixos.services.upower.enable = true;
-
-    home.services.poweralertd.enable = true;
+  flake.modules = {
+    nixos.laptop.services.upower.enable = true;
+    homeManager.laptop.services.poweralertd.enable = true;
   };
 }

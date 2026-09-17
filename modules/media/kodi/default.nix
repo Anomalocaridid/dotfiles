@@ -4,13 +4,13 @@ let
   inherit (config.flake.meta) persistDir username;
 in
 {
-  unify.modules.kodi =
+  flake.modules =
     let
       # NOTE: Path relative to ~kodi
       kodiDownloadsDir = "Downloads";
     in
     {
-      nixos =
+      nixos.kodi =
         {
           config,
           lib,
@@ -105,7 +105,7 @@ in
           };
         };
 
-      home =
+      homeManager.kodi =
         {
           config,
           lib,

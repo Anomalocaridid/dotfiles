@@ -1,10 +1,10 @@
 {
-  unify = {
-    modules.general.nixos = { pkgs, ... }: {
+  flake.modules.nixos = {
+    general = { pkgs, ... }: {
       boot.kernelPackages = pkgs.linuxKernel.packages.linux_xanmod_latest;
     };
 
-    nixos = {
+    default = {
       time.timeZone = "America/New_York";
       # Select internationalisation properties.
       i18n.defaultLocale = "en_US.UTF-8";

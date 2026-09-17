@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  unify.modules.general.home =
+  flake.modules.homeManager.general =
     { pkgs, ... }:
     let
       id = "redirector@einaregilsson.com";

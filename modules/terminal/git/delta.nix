@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home = {
+  flake.modules.homeManager.general = {
     programs.delta = {
       enable = true;
       enableGitIntegration = true;

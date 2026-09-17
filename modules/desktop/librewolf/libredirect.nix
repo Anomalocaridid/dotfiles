@@ -1,5 +1,5 @@
 {
-  unify.modules.general.home =
+  flake.modules.homeManager.general =
     let
       id = "7esoorv3@alefvanoon.anonaddy.me";
     in
