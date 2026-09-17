@@ -1,5 +1,6 @@
 {
   hostname,
+  nixosSystem,
   modules,
   users,
   diskoConfig,
@@ -7,7 +8,7 @@
 { config, inputs, ... }:
 {
   flake = rec {
-    nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
+    nixosConfigurations.${hostname} = nixosSystem {
       modules = modules ++ [
         inputs.disko.nixosModules.disko
         inputs.nixos-facter-modules.nixosModules.facter
