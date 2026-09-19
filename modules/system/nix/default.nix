@@ -59,6 +59,9 @@
             ];
             auto-optimise-store = true;
             repl-overlays = [ ./_repl-overlay.nix ]; # Lix-specific setting
+            # Suppresses warnings caused by use of `nixConfig`
+            # Assumes substituters will be put in nix config anyways
+            accept-flake-config = false;
           };
 
           gc = {

@@ -1,10 +1,21 @@
 { config, ... }:
 let
   inherit (config.flake.meta) username persistDir;
+
+  # nix-gaming cache
+  cacheSettings = {
+    extra-substituters = [ "https://nix-gaming.cachix.org" ];
+    extra-trusted-public-keys = [
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
+    ];
+  };
 in
 {
-  # Provides a binary cache, so do not follow inputs
-  flake-file.inputs.nix-gaming.url = "github:fufexan/nix-gaming";
+  flake-file = {
+    # Provides a binary cache, so do not follow inputs
+    inputs.nix-gaming.url = "github:fufexan/nix-gaming";
+    nixConfig = cacheSettings;
+  };
 
   flake.modules = {
     nixos = {
@@ -17,12 +28,8 @@ in
         services.joycond.enable = true;
         # Support Direct Rendering for 32-bit applications, like Wine
         hardware.graphics.enable32Bit = true;
-
-        # nix-gaming cache
-        nix.settings = {
-          substituters = [ "https://nix-gaming.cachix.org" ];
-          trusted-public-keys = [ "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4=" ];
-        };
+        # Set nix-gaming cache
+        nix.settings = cacheSettings;
 
         environment.persistence.${persistDir}.users.${username}.directories = [
           ".config/itch" # Itch games and settings

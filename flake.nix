@@ -6,9 +6,15 @@
   outputs = inputs: import ./outputs.nix inputs;
 
   nixConfig = {
-    extra-substituters = [ "https://nixos-raspberrypi.cachix.org" ];
+    extra-substituters = [
+      "https://catppuccin.cachix.org"
+      "https://nixos-raspberrypi.cachix.org"
+      "https://nix-gaming.cachix.org"
+    ];
     extra-trusted-public-keys = [
+      "catppuccin.cachix.org-1:noG/4HkbhJb+lUAdKrph6LaozJvAeEEZj4N732IysmU="
       "nixos-raspberrypi.cachix.org-1:4iMO9LXa8BqhU+Rpg6LQKiGa2lsNh/j2oiYLNOQ5sPI="
+      "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
     ];
   };
 
