@@ -42,65 +42,71 @@ in
             groups.kodi = { };
           };
 
-          services.greetd = {
-            enable = true;
-            settings = {
-              initial_session = {
-                user = "kodi";
+          services = {
+            # Lets Kodi automatically mount and unmount USB drives
+            udisks2.enable = true;
 
-                command = lib.getExe (
-                  pkgs.writeShellApplication {
-                    name = "kodi-wrapper.sh";
+            # Session manager
+            greetd = {
+              enable = true;
+              settings = {
+                initial_session = {
+                  user = "kodi";
 
-                    # Assume that the Kodi package will be in kodi user's `$PATH`
-                    runtimeInputs = with pkgs; [
-                      wait4x
-                      websocat
-                    ];
+                  command = lib.getExe (
+                    pkgs.writeShellApplication {
+                      name = "kodi-wrapper.sh";
 
-                    text =
-                      let
-                        enableAddonJSON =
-                          addonid:
-                          builtins.toJSON {
-                            jsonrpc = "2.0";
-                            id = "startup";
-                            method = "Addons.SetAddonEnabled";
-                            params = {
-                              inherit addonid;
-                              enabled = true;
+                      # Assume that the Kodi package will be in kodi user's `$PATH`
+                      runtimeInputs = with pkgs; [
+                        wait4x
+                        websocat
+                      ];
+
+                      text =
+                        let
+                          enableAddonJSON =
+                            addonid:
+                            builtins.toJSON {
+                              jsonrpc = "2.0";
+                              id = "startup";
+                              method = "Addons.SetAddonEnabled";
+                              params = {
+                                inherit addonid;
+                                enabled = true;
+                              };
                             };
-                          };
-                      in
-                      # shell
-                      ''
-                        # Run Kodi in background
-                        kodi-standalone &
+                        in
+                        # shell
+                        ''
+                          # Run Kodi in background
+                          kodi-standalone &
 
-                        readonly kodi_process_id="$!"
+                          readonly kodi_process_id="$!"
 
-                        # Wait for Kodi's local JSON-RPC port to open
-                        wait4x --quiet tcp 127.0.0.1:9090
+                          # Wait for Kodi's local JSON-RPC port to open
+                          wait4x --quiet tcp 127.0.0.1:9090
 
-                        # Ensure add-ons are enabled
-                        websocat --unidirectional ws://127.0.0.1:9090 << EOF
-                        ${enableAddonJSON "plugin.video.elementum"}
-                        ${enableAddonJSON "script.elementum.burst"}
-                        ${enableAddonJSON "context.elementum"}
-                        ${enableAddonJSON "service.subtitles.a4ksubtitles"}
-                        EOF
+                          # Ensure add-ons are enabled
+                          websocat --unidirectional ws://127.0.0.1:9090 << EOF
+                          ${enableAddonJSON "plugin.video.elementum"}
+                          ${enableAddonJSON "script.elementum.burst"}
+                          ${enableAddonJSON "context.elementum"}
+                          ${enableAddonJSON "service.subtitles.a4ksubtitles"}
+                          EOF
 
-                        # Wait for Kodi to exit so the session does not terminate prematurely
-                        wait "$kodi_process_id"
-                      '';
-                  }
-                );
+                          # Wait for Kodi to exit so the session does not terminate prematurely
+                          wait "$kodi_process_id"
+                        '';
+                    }
+                  );
+                };
+
+                # Add method to access a tty to prevent being locked out if something breaks
+                default_session.command = "${lib.getExe pkgs.tuigreet} --cmd ${
+                  lib.getExe config.users.users.${username}.shell
+                }";
               };
-
-              # Add method to access a tty to prevent being locked out if something breaks
-              default_session.command = "${lib.getExe pkgs.tuigreet} --cmd ${
-                lib.getExe config.users.users.${username}.shell
-              }";
             };
           };
         };
