@@ -26,9 +26,6 @@
       flake-parts.url = "github:hercules-ci/flake-parts";
 
       import-tree.url = "github:vic/import-tree";
-
-      # Hardware feature detection
-      nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
     };
   };
 }
