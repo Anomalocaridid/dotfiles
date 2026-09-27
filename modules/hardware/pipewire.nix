@@ -7,7 +7,7 @@
         services.pipewire.lowLatency.enable = true;
       };
 
-      default = {
+      general = {
         # Needed for pipewire to work in real time
         security.rtkit.enable = true;
 

@@ -46,6 +46,10 @@ in
             # Lets Kodi automatically mount and unmount USB drives
             udisks2.enable = true;
 
+            # Use ALSA, not pipewire
+            # This allows for HDMI passthrough and prevents Kodi from having issues if run for a long time
+            pipewire.enable = false;
+
             # Session manager
             greetd = {
               enable = true;
