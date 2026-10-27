@@ -124,104 +124,117 @@ in
           ...
         }:
         {
-          programs.kodi = {
-            enable = true;
+          programs.kodi =
+            let
+              absKodiDownloadDir = "${config.home.homeDirectory}/${kodiDownloadsDir}/";
+            in
+            {
+              enable = true;
 
-            package =
-              (inputs.nixos-raspberrypi.packages.${pkgs.stdenv.hostPlatform.system}.kodi-gbm.overrideAttrs
-                (oldAttrs: {
-                  # Suppress popup on first boot that prompt to enable addons installed with nix
-                  cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DADDONS_CONFIGURE_AT_STARTUP=OFF" ];
-                })
-              ).withPackages
-                (kodiPkgs: [
-                  # Elementum add-on
-                  (kodiPkgs.callPackage ./_pkgs/elementum.nix { })
-                  # Elementum Burst provider
-                  (kodiPkgs.callPackage ./_pkgs/elementum-burst.nix { })
-                  # Elementum context menu
-                  (kodiPkgs.callPackage ./_pkgs/elementum-context.nix { })
-                  # Subtitle provider
-                  kodiPkgs.a4ksubtitles
-                ]);
+              package =
+                (inputs.nixos-raspberrypi.packages.${pkgs.stdenv.hostPlatform.system}.kodi-gbm.overrideAttrs
+                  (oldAttrs: {
+                    # Suppress popup on first boot that prompt to enable addons installed with nix
+                    cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [ "-DADDONS_CONFIGURE_AT_STARTUP=OFF" ];
+                  })
+                ).withPackages
+                  (kodiPkgs: [
+                    # Elementum add-on
+                    (kodiPkgs.callPackage ./_pkgs/elementum.nix { })
+                    # Elementum Burst provider
+                    (kodiPkgs.callPackage ./_pkgs/elementum-burst.nix { })
+                    # Elementum context menu
+                    (kodiPkgs.callPackage ./_pkgs/elementum-context.nix { })
+                    # Subtitle provider
+                    kodiPkgs.a4ksubtitles
+                  ]);
 
-            settings = {
-              services = {
-                # Set device's name in Kodi
-                devicename = osConfig.networking.hostName;
+              # Add Elementum downloads folder as a source in file manager
+              sources.files.source = [
+                {
+                  name = "Downloads";
+                  path = absKodiDownloadDir;
+                  allowsharing = "false";
+                }
+              ];
 
-                # Ensure that TCP port used for JSON-RPC API is on
-                esenabled = "true";
-                # ...but not open to the network
-                esallinterfaces = "false";
+              settings = {
+                services = {
+                  # Set device's name in Kodi
+                  devicename = osConfig.networking.hostName;
 
-                # Turn off unused network services
-                zeroconf = "false";
-                upnp = "false";
-                airplay = "false";
-                webserver = "false";
+                  # Ensure that TCP port used for JSON-RPC API is on
+                  esenabled = "true";
+                  # ...but not open to the network
+                  esallinterfaces = "false";
+
+                  # Turn off unused network services
+                  zeroconf = "false";
+                  upnp = "false";
+                  airplay = "false";
+                  webserver = "false";
+                };
+
+                # Turn off display after 10 minutes
+                powermanagement.displaysoff = "10";
+
+                # Never check for addon updates to minimize config drift
+                general.addonupdates = "2";
+
+                # Ensure that addons from unknown sources cannot be installed to minimize config drift
+                addons.unknownsources = "false";
+
+                # Subtitle settings
+                subtitles = rec {
+                  languages = "English";
+
+                  # Set default subtitle provider
+                  tv = "services.subtitles.a4ksubtitles";
+                  movie = tv;
+                };
               };
 
-              # Turn off display after 10 minutes
-              powermanagement.displaysoff = "10";
+              # Fake Elementum config, needed for hack to let Elementum config be mutable
+              addonSettings."hm_plugin.video.elementum" = {
+                # Do not bother searching for elementum repository addon
+                skip_repository_search = "true";
 
-              # Never check for addon updates to minimize config drift
-              general.addonupdates = "2";
+                # Download files to disk rather than to RAM
+                download_path = absKodiDownloadDir;
+                download_storage = "0";
+                download_file_strategy = "2";
 
-              # Ensure that addons from unknown sources cannot be installed to minimize config drift
-              addons.unknownsources = "false";
+                # Continuing downloading after play is stopped
+                keep_downloading = "0";
+                # Keep files for not-finished videos
+                keep_files_playing = "0";
+                # Keep files for watched videos
+                keep_files_finished = "0";
 
-              # Subtitle settings
-              subtitles = rec {
-                languages = "English";
+                # Do not move completed downloads
+                # Set by default, but fixed just in case
+                completed_move = "false";
 
-                # Set default subtitle provider
-                tv = "services.subtitles.a4ksubtitles";
-                movie = tv;
+                # Do not automatically respond with yes after timeout
+                autoyes_enabled = "false";
+
+                # Default path, but fix them just in case
+                torrents_path = "special://temp/elementum_torrents/";
+
+                # Disable download status overlay during playback when paused
+                enable_overlay_status = "false";
+
+                # Ensure Trakt integration works
+                # Enable Library integration with Kodi (default)
+                library_enabled = "true";
+                # Enable Kodi library synchronization (default)
+                library_sync_enabled = "true";
+                # Enable synchronization during playback (default)
+                library_sync_playback_enabled = "true";
+                # Trakt scrobble (mark as watched in Trakt when watched)
+                trakt_scrobble = "true";
               };
             };
-
-            # Fake Elementum config, needed for hack to let Elementum config be mutable
-            addonSettings."hm_plugin.video.elementum" = {
-              # Do not bother searching for elementum repository addon
-              skip_repository_search = "true";
-
-              # Download files to disk rather than to RAM
-              download_path = "${config.home.homeDirectory}/${kodiDownloadsDir}/";
-              download_storage = "0";
-              download_file_strategy = "2";
-
-              # Continuing downloading after play is stopped
-              keep_downloading = "0";
-              # Keep files for not-finished videos
-              keep_files_playing = "0";
-              # Keep files for watched videos
-              keep_files_finished = "0";
-
-              # Do not move completed downloads
-              # Set by default, but fixed just in case
-              completed_move = "false";
-
-              # Do not automatically respond with yes after timeout
-              autoyes_enabled = "false";
-
-              # Default path, but fix them just in case
-              torrents_path = "special://temp/elementum_torrents/";
-
-              # Disable download status overlay during playback when paused
-              enable_overlay_status = "false";
-
-              # Ensure Trakt integration works
-              # Enable Library integration with Kodi (default)
-              library_enabled = "true";
-              # Enable Kodi library synchronization (default)
-              library_sync_enabled = "true";
-              # Enable synchronization during playback (default)
-              library_sync_playback_enabled = "true";
-              # Trakt scrobble (mark as watched in Trakt when watched)
-              trakt_scrobble = "true";
-            };
-          };
 
           home = {
             # Hack to allow for certain settings to be mutable since some functionality relies on logging into accounts
