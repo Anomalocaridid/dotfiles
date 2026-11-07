@@ -14,7 +14,7 @@ in
         hunspell # Required for spellcheck
         hunspellDicts.en_US # American English spellcheck dictionary
         languagetool # Spelling, style, and grammer checker
-        libreoffice-fresh
+        libreoffice
       ];
 
       xdg.mimeApps.defaultApplications =
