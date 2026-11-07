@@ -32,8 +32,6 @@
                 mkdir --parents "$OUT_DIR/places"
                 cp --recursive --no-preserve=mode ${pkgs.candy-icons}/share/icons/candy-icons "$OUT_DIR"
                 cp --recursive --no-preserve=mode ${pkgs.sweet-folders}/share/icons/Sweet-Rainbow/Places/* "$OUT_DIR/places"
-                # Remove broken symlink
-                rm "$OUT_DIR/candy-icons/places/16/folder-library.svg"
                 lutgen patch --write --no-patch --palette="catppuccin-${config.catppuccin.flavor}" --nearest-neighbor $(find "$OUT_DIR" -name '*.svg')
               '';
         };
