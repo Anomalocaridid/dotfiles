@@ -453,11 +453,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1785446156,
-        "narHash": "sha256-K1Mp2OGO9W7bbIqZcIrhYMtQVRROi2tdcjJ4V1eExcQ=",
+        "lastModified": 1794090737,
+        "narHash": "sha256-XGBAWgWddH8zi0n+UpaFd2DPEnE6kHJigV0+FGGO1Xc=",
         "owner": "Anomalocaridid",
         "repo": "hpf-passwd",
-        "rev": "320c327e3ef551280cca15de2fa370ac16b79836",
+        "rev": "acd2292aa0da40bbe6164c2b95c07cf42aabc96b",
         "type": "github"
       },
       "original": {
