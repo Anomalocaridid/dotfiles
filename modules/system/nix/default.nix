@@ -1,7 +1,7 @@
 { inputs, ... }:
 {
   flake-file.inputs = {
-    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.xz";
+    nixpkgs.url = "https://channels.nixos.org/nixos-unstable/nixexprs.tar.zst";
 
     # Use nix-index without having to generate the database locally
     nix-index-database = {
