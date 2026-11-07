@@ -26,15 +26,16 @@ in
         home.packages = with pkgs; [ packwiz ];
 
         programs.prismlauncher =
-          let
-            graalvm-ce-21 = pkgs.graalvmPackages.buildGraalvm rec {
-              version = "21.0.2";
-              src = pkgs.fetchurl {
-                url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${version}/graalvm-community-jdk-${version}_linux-x64_bin.tar.gz";
-                hash = "sha256-sEgGmqo6mbhPW5V7FizBgaMqQzDLw1QCdmNjxb52rkg=";
-              };
-            };
-          in
+          # TODO: Uncomment when https://github.com/NixOS/nixpkgs/issues/576888 is resolved
+          # let
+          #   graalvm-ce-21 = pkgs.graalvmPackages.buildGraalvm rec {
+          #     version = "21.0.2";
+          #     src = pkgs.fetchurl {
+          #       url = "https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${version}/graalvm-community-jdk-${version}_linux-x64_bin.tar.gz";
+          #       hash = "sha256-sEgGmqo6mbhPW5V7FizBgaMqQzDLw1QCdmNjxb52rkg=";
+          #     };
+          #   };
+          # in
           {
             enable = true;
 
@@ -46,13 +47,15 @@ in
                 # JDK 25
                 graalvm-ce
                 # JDK 21
-                graalvm-ce-21
+                # TODO: Uncomment when https://github.com/NixOS/nixpkgs/issues/576888 is resolved
+                # graalvm-ce-21
               ];
             };
 
             settings = {
               # Set default java path
-              JavaPath = lib.getExe graalvm-ce-21;
+              # TODO: Uncomment when https://github.com/NixOS/nixpkgs/issues/576888 is resolved
+              # JavaPath = lib.getExe graalvm-ce-21;
               ApplicationTheme = "system"; # Use system Qt theme
               AutomaticJavaDownload = false;
               AutomaticJavaSwitch = true;
