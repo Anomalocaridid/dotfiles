@@ -11,10 +11,10 @@
             logCmd = "git log --color=always";
           in
           {
-            pagers = [
+            diffRenderers = [
               {
                 colorArg = "always";
-                pager = ''DELTA_FEATURES="+" delta --paging=never'';
+                command = ''DELTA_FEATURES="+" delta --paging=never'';
               }
             ];
             branchLogCmd = "${logCmd} {{branchName}}";
